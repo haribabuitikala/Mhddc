@@ -1,30 +1,23 @@
 import {Component, OnInit} from '@angular/core';
+import {NavigateService} from "../shared/navigate.service";
 import {AppComponent} from "../app.component";
 import {Router} from '@angular/router';
 
 @Component({
-    selector: 'app-install',
-    templateUrl: './install.component.html',
-    styleUrls: ['./install.component.less']
+    selector: 'app-install-question',
+    templateUrl: './install-question.component.html',
+    styleUrls: ['./install-question.component.less']
 })
-export class InstallComponent implements OnInit {
+export class InstallQuestionComponent implements OnInit {
 
     constructor(private appComponent:AppComponent
         , private route:Router) {
     }
-
-    
-    navigateTo(path) {
+    goTo(path){
         this.appComponent.currScreen = this.appComponent.navElems.indexOf(path);
         this.route.navigateByUrl(path);
     }
-
     ngOnInit() {
-    }
-
-    checkType(txt){
-        this.appComponent.selectedInstallDiy = txt;
-        
     }
 
 }

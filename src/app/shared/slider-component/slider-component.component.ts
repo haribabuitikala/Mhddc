@@ -14,30 +14,33 @@ export class SliderComponentComponent implements OnInit {
 
   @Input() data:any;
   @Input() count:any;
+  @Input() number:any;
   sliderRows;
+
+
 
   ngOnInit() {
     console.log(this.data);
-
+    if (this.data) {
+      this.sliderRows = _.times(this.data.length, _.constant(null));
+      this.slideCount = this.data ? this.data.length: 0;
+    }
     this.renderSlider();
-    this.sliderRows = _.times(this.data.length, _.constant(null));
-
   }
 
   sliderWidth = 0;
   slideWidth = 0;
-  slideCount = this.data.length;
-  slideIdx = _.times(this.data.length, _.constant(null));
+  slideCount = this.data ? this.data.length: 0;
   sliderLeft = 0;
   touchStart = false;
   touchX = 0;
   oldX = 0;
 
   renderSlider() {
-    this.slideWidth = $('._slider-container').width() / 2;
-    this.sliderWidth = this.slideCount * this.slideWidth;
+    this.slideWidth = $('._slider-container').width();
+    this.sliderWidth = this.data.length * this.slideWidth;
 
-    $('._slide').on('touchstart', (e) => {
+    $('._slider').on('touchstart', (e) => {
       this.touchStart = true;
       this.touchX = e.touches[0].clientX;
       this.oldX = this.sliderLeft;
@@ -54,7 +57,7 @@ export class SliderComponentComponent implements OnInit {
         }
       }
     });
-    $('._slide').on('touchend', (e) => {
+    $('._slider').on('touchend', (e) => {
       this.touchStart = false;
       this.touchX = 0;
       this.setSlide();
@@ -62,7 +65,6 @@ export class SliderComponentComponent implements OnInit {
   }
 
   setSlide() {
-    console.log(this.sliderLeft, this.slideCount, this.slideWidth);
     var sliderIndex = Math.round(Math.abs(this.sliderLeft) / this.slideWidth);
     this.sliderLeft = -(sliderIndex * this.slideWidth);
 
