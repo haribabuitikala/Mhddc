@@ -28,6 +28,7 @@ export class AppComponent implements OnInit {
     "/config/construction",
     "/config/color",
     "/config/topSection",
+    "/config/hardware",
     "/config/glassType",
     "/config/lock",
     "/config/install",

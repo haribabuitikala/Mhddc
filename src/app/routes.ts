@@ -9,6 +9,7 @@ import {DesignComponent} from "./design/design.component";
 import {ConstructionComponent} from "./construction/construction.component";
 import {ColorComponent} from "./color/color.component";
 import {TopSectionComponent} from "./top-section/top-section.component";
+import {HardwareComponent} from "./hardware/hardware.component";
 import {LockComponent} from "./lock/lock.component";
 import {GlassTypeComponent} from "./glass-type/glass-type.component";
 import {InstallComponent} from "./install/install.component";
@@ -33,6 +34,7 @@ export const appRoutes:Routes = [
       {path: 'construction', component: ConstructionComponent},
       {path: 'color', component: ColorComponent},
       {path: 'topSection', component: TopSectionComponent},
+      {path: 'hardware', component: HardwareComponent},
       {path: 'glassType', component: GlassTypeComponent},
       {path: 'lock', component: LockComponent},
       {path: 'install', component: InstallComponent},

@@ -33,6 +33,7 @@ import {DetailsComponent} from './details/details.component';
 import {ConfigComponent} from './config/config.component';
 import { OpenerSelectedComponent } from './opener-selected/opener-selected.component';
 import { SliderComponentComponent } from './shared/slider-component/slider-component.component';
+import { HardwareComponent } from './hardware/hardware.component';
 
 @NgModule({
   declarations: [
@@ -61,7 +62,8 @@ import { SliderComponentComponent } from './shared/slider-component/slider-compo
     DetailsComponent,
     ConfigComponent,
     OpenerSelectedComponent,
-    SliderComponentComponent
+    SliderComponentComponent,
+    HardwareComponent
   ],
   imports: [
     BrowserModule,
