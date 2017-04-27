@@ -1,0 +1,65 @@
+<h4 class="font-size-16 text-orange">Choose Your Construction</h4>
+<div class="tile margin-b-15 ptn-rel">
+  <div id="myCarousel" class="carousel slide padding10 construction-carousel carousel1" data-ride="carousel">
+
+    <!-- Wrapper for slides -->
+    <div role="listbox" class="carousel-inner">
+      <div class="item active">
+        <span class="ptn-rel col-xs-6" style="display: inline-block" (click)="productDetails.open()">
+            <img src="../../assets/images/best.png" class="construction-selectable" alt="" height="160">
+            <span class="selected-icon ptn-abs">
+              <img src="../../assets/images/select.png" alt="" height="15"/>
+            </span>
+        </span>
+        <span class="ptn-rel col-xs-6">
+            <img src="../../assets/images/better.png" height="160" alt="">
+        </span>
+      </div>
+      <div class="item">
+                <span class="ptn-rel">
+                    <img src="../../assets/images/good.png" alt="" height="160">
+                </span>
+                <span class="ptn-rel" style="margin-left: 2px">
+                    <img src="../../assets/images/basic.png" height="160" alt="">
+                </span>
+      </div>
+    </div>
+
+    <!--<div class="_slider" [style.width.px]="sliderWidth" [style.left.px]="sliderLeft">-->
+
+      <!--<div class="_slide" [style.width.px]="slideWidth" *ngFor="let i of _sliderCount; let k = index">-->
+        <!--{{data[k]}}-->
+      <!--</div>-->
+
+    <!--</div>-->
+
+    <app-slider-component [data]="data" [count]="3"></app-slider-component>
+
+
+    <!-- Left and right controls -->
+    <!--    <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+          <span class="helper"></span><img src="../../assets/images/ch-left-arrow.png" alt="" height="30">
+        </a>
+        <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+          <span class="helper"></span><img src="../../assets/images/ch-right-arrow.png" alt="" height="30">
+        </a>
+      </div>-->
+
+  </div>
+</div>
+
+
+<modal #productDetails>
+  <modal-header [show-close]="true">
+  </modal-header>
+  <modal-body>
+    <h4 class="text-orange">BEST (MODEL GR2SU)</h4>
+    <ul>
+      <li>3 Layer Construction (steel + insulation + steel)</li>
+      <li>2″ Intellicore&reg; Insulation.</li>
+      <li>18.4 R-value</li>
+      <li>Tongue-and-Groove Section Joint.</li>
+      <li>Limited Life Paint System Warranty.</li>
+    </ul>
+  </modal-body>
+</modal>

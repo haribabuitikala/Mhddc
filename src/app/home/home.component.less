@@ -1,0 +1,151 @@
+@color_1: #f96302;
+
+.camera-section {
+  padding: 5px;
+  margin: 0px -15px;
+  div {
+    .stock-image {
+      &:last-child {
+        margin-right: 0;
+      }
+    }
+  }
+  .stock-row {
+    .stock-col {
+      display: inline-block;
+      margin-right: 5px;
+      padding:0px;
+    }
+  }
+
+}
+
+.camera-section {
+  div {
+    .stock-image {
+      height: 85px;
+      width: 98px;
+      margin-right: 5px;
+      margin-bottom: 5px;
+      display: inline-block;
+      background-size: cover;
+    }
+  }
+}
+   .stock-image {
+      height: 30px;
+      width: 100px;
+      margin-right: 5px;
+      margin-bottom: 5px;
+      display: inline-block;
+      background-size: cover;
+    }
+.stock-image-1 {
+  background-image: url('../../assets/images/img-1.png');
+}
+
+.stock-image-2 {
+  background-image: url('../../assets/images/img-2.png');
+}
+
+.stock-image-3 {
+  background-image: url('../../assets/images/img-3.png');
+}
+
+.stock-image-4 {
+  background-position: -35px -85px;
+  background-image: url('../../assets/images/img-4.png');
+}
+
+.stock-image-5 {
+  background-image: url('../../assets/images/img-5.png');
+}
+
+.stock-image-6 {
+  background-position: 100px -85px;
+  background-image: url('../../assets/images/img-6.png');
+}
+
+.stock-image-7 {
+  background-image: url('../../assets/images/img-7.png');
+}
+
+.stock-image-8 {
+  background-image: url('../../assets/images/img-8.png');
+}
+
+.stock-image-9 {
+  background-position: 100px -90px;
+  background-image: url('../../assets/images/img-9.png');
+}
+
+.camera-section-selection {
+  margin-top: 30px;
+  img {
+    height: 53px;
+    margin-bottom: 2px;
+  }
+  img.coming-soon {
+    height: 30px;
+    right: 0;
+    bottom: 27px;
+  }
+  input[type=radio] {
+    position: absolute;
+    visibility: hidden;
+    &:checked {
+      & + label {
+        border-bottom: 2px solid #f96302;
+      }
+    }
+  }
+  label {
+    width: 65px;
+    text-align: center;
+    color: @color_1;
+    span {
+      display: block;
+    }
+    .camera, .gallery {
+      z-index: 10;
+      width: 66px;
+      height: 78px;
+      opacity: 0;
+      top: 0;
+      left: 0;
+    }
+  }
+
+}
+
+.camera-section-selection.space-around {
+  > span {
+    width: 26%;
+  }
+}
+
+.camera-section-selection {
+	margin-top: 30px;
+}
+.space-around {
+	justify-content: space-around;
+	display: flex;
+}
+.space-between {
+	display: flex;
+}
+
+.stock-row {
+  input[type=radio] {
+    position: absolute;
+    visibility: hidden;
+  }
+}
+.camera-section {
+	img {
+		width: 170px;
+		height: 90px;
+		margin-bottom: 10px;
+	}
+}
+

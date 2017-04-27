@@ -1,0 +1,123 @@
+<div class="tile">
+  <div class="design-detials--sec">
+    <div class="col-xs-6 padding-r-7  border-white-right font-size-12">
+      <p>$<span id="price-876.95">876.95</span> / Installed</p>
+      <p>$<span id="price-668.95">668.95</span> / DIY</p>
+      <p>
+        <img src="../../assets/images/info.png" (click)="modal.open()" alt="" height="25">
+      </p>
+    </div>
+    <div class="col-xs-6 padding-0-r  font-size-12">
+      <p>
+        Quantity
+        <img src="../../assets/images/substract.png" alt="" class="minus-quantity">
+        <span>1</span>
+        <img src="../../assets/images/add.png" alt="" class="add-quantity">
+      </p>
+      <p class="margin-b-5">&nbsp;</p>
+      <h4 class="pull-right padding-r-7 text-orange" (click)="detailsModal.open()">DETAILS</h4>
+    </div>
+  </div>
+</div>
+<!-- product info modal -->
+<modal #modal>
+  <modal-header [show-close]="true">
+  </modal-header>
+  <modal-body>
+      <h4 class="color-black font-size-16"> Professionally Installed Vs. Do-lt-Yourself </h4>
+   
+    <p class="font-size-12 padding-b-10"> Clopay Building Products and The Home Depot always recommend that you have your new
+        garage door professionally installed. 
+        <span style="color:#808080 !important;">(required on Canyon Ridge. Avante. & Reserve Collection doors)</span>
+    </p>
+    <p class="font-size-12 padding-b-10">
+      It's important to consuder the followung factors when decading on your installation options.
+    </p>
+    <p class="font-size-12 padding-b-10">
+      <strong class="color-black">Time</strong> - To install it yourself. you should plan on a minimum of 9-12 hours of time plus another
+      3-4 hours if installing a new garage door opener.
+      A professional installer, under normal circumstances. can install your door and opener in 2-3 hours.
+    </p>
+    <p class="font-size-12 padding-b-10">
+      <strong class="color-black">Safety</strong> - To protect yourself from injury on Do-lt-Yourself Installations.
+      you must carefully read all safety information contained in the instruction manual
+      before you install or use your new garage door.
+      Removal of old spring system may require professional assistance.
+    </p>
+    <p class="font-size-12 padding-b-10">
+      <strong class="color-black">Weight</strong> - Assistance may be required if you are removing an old door.
+      Unsprung doors can weigh 175-400 pounds- The professional installation program includes take down and
+      removal of old door in most markets (additional haul-away charges apply in most northeast markets).
+    </p>
+    <p class="font-size-12 ">
+      <strong class="color-black">Additional Items Needed</strong> - In some cases additional items will be needed for a
+      Do-It-Yourself Installation that are not included with the door.
+      All of these items are included in the professional installation program. These items include:
+    </p>
+    <ul class="font-size-12 padding-b-10">
+      <li>Light household oil</li>
+      <li>- Punched angle — For rear track hangers. You may be able
+        to use existing rear track hangers if replacing an existing
+        door.
+      </li>
+      <li>- Lag screws and bolts for rear track hangers.</li>
+      <li>- Stop molding - Used to seal top and sides of door against
+        jamb. You may be able to use existing stop molding if
+      </li>
+      <li>replacing an existing door.</li>
+      <li>- Operator Reinforcement Bracket - Used to reinforce and prevent damage to the top section of the door when
+        attaching a garage door opener.
+      </li>
+    </ul>
+    <p class="font-size-12 padding-b-10">
+      <strong class="color-black">Peace of Mind</strong> - With the professional installation program you have the peace of mind
+      knowing that the job is done right. It includes a pre-installation site inspection to
+      verify measurements and ensure the opening is ready for installation. The professional installation
+      program also includes a 1 year workmanship warranty.
+      If anything goes wrong with your door due to an incorrect installation we will come out to ﬁx it at no charge.
+    </p>
+  </modal-body>
+</modal>
+
+<!-- product details sec -->
+<modal #detailsModal class="details-modal">
+  <modal-header [show-close]="true">
+  </modal-header>
+  <modal-body>
+
+    <div class="quantity-view-details">
+
+      <h3>View Details</h3>
+
+     <ul>
+       <li>
+         <span><strong>Zip Code/Location</strong>
+         60123 - ELGIN ,KANE COUNTY</span></li>
+
+       <li>
+         <span><strong>Store</strong>
+          ELGIN</span></li>
+
+       <li>
+         <span><strong>Size</strong>
+          19' 0"(w) x 12' 0"(h)</span></li>
+
+       <li>
+         <span><strong>WindCode </strong>
+          W0</span></li>
+
+       <li>
+         <span><strong> Collection </strong>
+          Coachman® Collection</span></li>
+
+       <li>
+         <span><strong> Design </strong>
+          Design11</span></li>
+
+     </ul>
+
+
+    </div>
+
+  </modal-body>
+</modal>

@@ -1,0 +1,95 @@
+<div class="row tabs fixed-header">
+  <div class="col-xs-6">
+    <input id="r1" type="radio" name="installation-type" checked="checked">
+    <div class="tab">
+      <span class="check"></span>
+      <label for="r1">
+        <div>INSTALL</div>
+        <div>$876.95</div>
+      </label>
+    </div>
+  </div>
+  <div class="col-xs-6">
+    <input id="r2" type="radio" name="installation-type">
+    <div class="tab">
+      <span class="check"></span>
+      <label for="r2">
+        <div>DIY</div>
+        <div>$668.95</div>
+      </label>
+    </div>
+  </div>
+</div>
+<div class="content diy-install margin-b-15">
+  <div class="edit-bar">
+    <button class="btn" (click)="editModal.open()">Edit<span
+      class="glyphicon glyphicon-pencil"></span></button>
+  </div>
+  <dl class="diy-install-table">
+    <dd class="diy-install-table-header">
+      Size
+    </dd>
+    <dd>9' 0"(w) x 7' 0"(h)</dd>
+    <dd class="diy-install-table-header">
+      WindCode
+    </dd>
+    <dd>W0</dd>
+  </dl>
+  <dl class="diy-install-table">
+    <dd class="diy-install-table-header">
+      Collection
+    </dd>
+    <dd>Classic™ Collection - Premium Series</dd>
+    <dd class="diy-install-table-header">
+      Door Design
+    </dd>
+    <dd><span class="door-design-txt text-capitalize">Short</span> Panel</dd>
+    <dd class="diy-install-table-header">
+      Door Model
+    </dd>
+    <dd>HDP20<span class="pull-right">$876.95</span></dd>
+    <dd class="diy-install-table-header">
+      Door Construction
+    </dd>
+    <dd>3-layer 2" Intellicore® Insul. R-Value 18.4</dd>
+  </dl>
+  <dl class="diy-install-table">
+    <dd class="diy-install-table-header">
+      Color
+    </dd>
+    <dd><span class="selected-color text-capitalize">Standard White</span><span class="pull-right">$0.00</span></dd>
+  </dl>
+  <dl class="diy-install-table">
+    <dd class="diy-install-table-header">
+      Top Section
+    </dd>
+    <dd><span>Solid Short Elegant</span></dd>
+    <dd>Placement : 4th Row (TOP)</dd>
+  </dl>
+  <dl class="diy-install-table">
+    <dd class="diy-install-table-header">
+      Hardware
+    </dd>
+    <dd>Lock : Inside Slide Lock (Retail)<span class="pull-right">$0.00</span></dd>
+  </dl>
+</div>
+
+<!-- Edit Modal -->
+
+<modal #editModal>
+  <modal-header [show-close]="true">
+    <h4 class="modal-title">Select The Option You Want To Edit</h4>
+  </modal-header>
+  <modal-body>
+    <dl>
+      <dd (click)="navigateTo('/doorSize')"><img src="../../assets/images/left-nav/size-O.png" alt=""/>Size</dd>
+      <dd (click)="navigateTo('/collection')"><img src="../../assets/images/left-nav/collection-O.png" alt=""/>Collection</dd>
+      <dd (click)="navigateTo('/config')"><img src="../../assets/images/designr-O.png" alt=""/>Design</dd>
+      <dd (click)="navigateTo('/config/construction')"><img src="../../assets/images/left-nav/construction-O.png" alt=""/>Construction</dd>
+      <dd (click)="navigateTo('/config/color')"><img src="../../assets/images/left-nav/color-O.png" alt=""/>Color</dd>
+      <dd (click)="navigateTo('/config/topSection')"><img src="../../assets/images/left-nav/topsection-O.png" alt=""/>Top Section</dd>
+      <!--<dd (click)="navigateTo('/config/hardware')"><img src="../../assets/images/left-nav/hardware-O.png" alt=""/>Hardware</dd>-->
+    </dl>
+
+  </modal-body>
+</modal>

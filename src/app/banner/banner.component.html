@@ -1,0 +1,47 @@
+<!-- Begin Header -->
+<div class="row banner-image ptn-rel margin-b-10">
+  <div class="ad-sec margin-t-10">
+    <img src="../../assets/images/AdBannerMobile.png" alt="">
+  </div>
+  <!-- Begin Header form -->
+  <div class="row bg-orange padding-t-7 form-inline ptn-abs zip-search-form">
+    <form novalidate #form="ngForm" (ngSubmit)="save(form)" class="col-xs-10 form-group banner-zip-search ptn-rel">
+      <div class="col-xs-10 pad-r-0">
+        <div class="form-control"></div>
+        <!--<input-->
+          <!--type="number"-->
+          <!--id="zipCode"-->
+          <!--name="zip"-->
+          <!--[(ngModel)]="zip"-->
+          <!--#zipCode="ngModel"-->
+          <!--required-->
+          <!--minlength="5"-->
+          <!--class="zip-code ptn-abs roboto-regular"-->
+          <!--placeholder="Enter Zip Code">-->
+
+        <input
+          type="text"
+          placeholder="Enter Zip Code"
+          name="zip"
+          ngModel
+          #zipCode="ngModel"
+          minlength="5"
+          maxlength="6"
+          class="zip-code ptn-abs roboto-regular"
+          required autocomplete="off">
+        <span *ngIf="zipCode.errors?.required && zipCode.touched" class="error">
+         Please Enter Valid ZipCode
+        </span>
+        <span *ngIf="zipCode.errors?.minlength && zipCode.touched" class="error">
+          Please Enter Valid ZipCode
+        </span>
+
+      </div>
+      <div class="col-xs-2 padding-l-3">
+        <button class="btn btn-sm border-white text-white show-zip-results go-btn" routerLink="/zipResults" (click)="addressList()" [disabled]="form.invalid" type="submit">GO</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<app-trending-now></app-trending-now>
