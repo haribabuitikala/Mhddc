@@ -1,0 +1,50 @@
+<div class="category-sec clearfix">
+  <div class="col-xs-6 padding-r-7 show-category">
+    <div class="bg-white box-shadow" routerLink="/doorSize">
+      <div class="image-sec text-center padding-t-10">
+        <span class="helper"></span>
+        <img src="../../assets/images/IconResidentialdoor.png" class="margin-b-15 residential-garrage-icon"
+             alt="">
+      </div>
+      <p class="category-type residential-garrage text-center">Residential Garage Door</p>
+    </div>
+  </div>
+
+  <div class="col-xs-6 padding-l-7">
+    <div class="bg-white box-shadow" routerLink="/doorSize">
+      <div class="../../assets/image-sec text-center padding-t-10 ptn-rel">
+        <!--<img src="../../assets/images/coming-soon.png" class="ptn-abs category-coming-soon" alt="">-->
+        <img src="../../assets/images/IconGDO.png" class="margin-b-15 margin-r-25 garage-opener-icon"
+             alt="" width="80">
+      </div>
+      <p class="category-type text-center">Garage Door Opener</p>
+    </div>
+  </div>
+  <div class="col-xs-6 padding-r-7" (click)="showModal()">
+    <div class="bg-white box-shadow">
+      <div class="../../assets/image-sec text-center padding-t-10 ptn-rel category-height">
+        <!--<img src="../../assets/images/coming-soon.png" class="ptn-abs category-coming-soon" alt="">-->
+        <img src="../../assets/images/IconRepair.png" class="margin-b-15 margin-r-25 service-repair-icon"
+             alt="">
+      </div>
+      <p class="category-type text-center">Service and Repair</p>
+    </div>
+  </div>
+</div>
+<app-trending-now></app-trending-now>
+<modal #modal>
+  <modal-header [show-close]="true">
+  </modal-header>
+  <modal-body>
+    <p>You will now be directed to The Home Depot's Service and Repair site. From this site, you
+      can request a call from a service technician to assist you in service or repair.
+    </p>
+    <div>
+      <button class="btn btn-default box-shadow text-orange margin-r-10 bold margin-b-10" (click)="serviceRepair()">
+        Proceed
+      </button>
+      <button class="btn btn-default box-shadow text-orange bold" (click)="modal.close()">Stay on Current site
+      </button>
+    </div>
+  </modal-body>
+</modal>

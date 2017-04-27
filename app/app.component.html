@@ -1,0 +1,21 @@
+<div class="col-xs-12">
+  <app-header [count]="currScreen"></app-header>
+</div>
+
+  <app-nav *ngIf="currScreen > 2" [screen]="currScreen">
+
+  </app-nav>
+<div class="router-wrapper" [class.col-xs-10]="currScreen > 2" [class.col-xs-12]="currScreen < 2">
+  <router-outlet></router-outlet>
+</div>
+<div id="footer" class="col-xs-12 padding-t-10 padding-b-10" *ngIf="currScreen > 2">
+  <a href="javascript:void(0)" class="pull-left previous-btn" (click)="prevBtn(currScreen)" data-id="currScreen">
+    <img src="../../assets/images/back-48-thick.png" height="15px">
+    {{prev}}
+  </a>
+
+  <a href="javascript:void(0)" class="pull-right nextBtn" (click)="nextBtn(currScreen)" data-id="currScreen">
+    {{next}}
+    <img src="../../assets/images/Forward-48-thick.png" height="15px">
+  </a>
+</div>

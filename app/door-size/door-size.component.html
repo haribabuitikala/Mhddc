@@ -1,0 +1,93 @@
+<h4 class="text-orange font-size-16 door-size margin-t-0">
+  <img src="../../assets/images/Info-64.png" height="20" class="pull-right" (click)="measure.open()" alt="">
+  Select your door size</h4>
+<!-- Tiles section -->
+<div class="row margin-b-15">
+  <div class="col-xs-6 padding-r-7">
+    <div class="tile text-center padding-t-10 ptn-rel select-door">
+      <div class="padding-b-10">
+        Single Car Door
+      </div>
+      <div class="padding-b-10">
+        <img src="../../assets/images/select.png" alt="" class="selected-icon ptn-abs"/>
+        <img src="../../assets/images/IconSingledoor.png" alt="" height="60">
+      </div>
+      <div class="padding-b-10">
+        Door up to 10' wide
+      </div>
+    </div>
+  </div>
+  <!-- section ends -->
+  <div class="col-xs-6 padding-l-7">
+    <div class="tile text-center padding-t-10 ptn-rel select-door ptn-rel">
+      <div class="padding-b-10">
+        Double Car Door
+      </div>
+      <div class="padding-b-10">
+        <img src="../../assets/images/IconDoubledoor.png" alt="" height="60">
+      </div>
+      <div class="padding-b-10">
+        Door over 10' wide
+      </div>
+    </div>
+  </div>
+  <!-- section ends -->
+</div>
+
+
+<!-- button -->
+<button id="select-size-btn" class="btn btn-default margin-b-15">
+  Know your exact door size ?
+  <img src="../../assets/images/Forward-50.png" alt="" height="10" class="margin-l-15 transform-rotate-90">
+</button>
+
+<modal #measure>
+  <modal-header [show-close]="true">
+  </modal-header>
+  <modal-body>
+    <h4 class="bold font-size-16">General Size Guidelines:</h4>
+    <ul>
+      <li>Replacement-Measure existing door, or framed opening
+        New Construction-Measure framed opening
+      </li>
+      <li> New Construction-Measure framed opening</li>
+    </ul>
+    <h5 class="bold">Common Sizes:</h5>
+    <ul>
+      <li>Garage Doors are generally categorized as Single or Double doors
+      </li>
+      <li class="bold">Common Single door sizes: 8' wide by 7' tall or 9'wide by 7' tall</li>
+      <li>Common Double door sizes: 16' wide by 7' tall</li>
+    </ul>
+    <h4 class="text-orange roboto-medium font-size-16 text-uppercase padding-t-7">How To Measure</h4>
+    <hr>
+    <p>Please use the drawing and instructions below to measure your garage door</p>
+    
+    <img src="../../assets/images/how_to_measure-drawing.png" class="img-rounded measure" alt=" " width="304" height="236">
+    <div>
+      <p>Step:1</p>
+      <p>Please use the drawing and instructions below to measure your garage door</p>
+    </div>
+    <div>
+      <p>Step:2</p>
+      <p>Measure for sideroom 3-3/4" is required on each side for installation of vertical track for standard extension
+        spring,
+        standard torsion spring and EZ-Set Torsion Spring System, 5-1/2“ for EZ-SET Extension Spring</p>
+      <p>Step:3</p>
+      <p>'Measure area labeled “Headroom“ - distance between the top of the door opening (‘jamb header")
+        and the ceiling (or floor joist). 10" is required for the standard extension spring or EZ-SET
+        Extension Spring System.'12" is required for standard torsion spring and EZ-SET Torsion Spring System.
+        If you have restricted headroom, special hardware is available.
+        Additional headroom is required for installation of an automatic garage door opener.
+        NOTE: if door height extends above the opening, the head-room measurement should be adjusted proportionately.
+      </p>
+      <p>
+        Step:4
+      </p>
+      <p>
+        Measure area labeled “Backroom” - distance is measured from thegarage door opening toward the back wall of the
+        garage. Door Heightplus 18" is required. Additional back room may be required for installation of an automatic
+        garage door opener.</p>
+    </div>
+  </modal-body>
+</modal>

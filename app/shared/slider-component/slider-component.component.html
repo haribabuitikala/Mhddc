@@ -1,0 +1,10 @@
+<div class="_slider-container m20-top">
+  <div class="_slider-wrapper">
+    <div class="_slider" [style.width.px]="sliderWidth" [style.left.px]="sliderLeft">
+      <div class="_slide col-xs-6" [style.width.px]="slideWidth" *ngFor="let i of sliderRows; let k = index">
+        {{data[k]}}
+      </div>
+    </div>
+  </div>
+</div>
+
