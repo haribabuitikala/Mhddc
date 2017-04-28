@@ -20,6 +20,7 @@ import {ConfigComponent} from "./config/config.component";
 import {OpenerSelectedComponent} from "./opener-selected/opener-selected.component";
 import {InstallQuestionComponent} from "./install-question/install-question.component";
 import {InstallAnswerComponent} from "./install-answer/install-answer.component";
+import {NonClassicComponent} from "./non-classic/non-classic.component";
 
 export const appRoutes:Routes = [
   {path: 'banner', component: BannerComponent},
@@ -36,6 +37,7 @@ export const appRoutes:Routes = [
       {path: 'color', component: ColorComponent},
       {path: 'topSection', component: TopSectionComponent},
       {path: 'glassType', component: GlassTypeComponent},
+      {path: 'nonClassic', component: NonClassicComponent},
       {path: 'lock', component: LockComponent},
       {path: 'install', component: InstallComponent},
       {path: 'opener', component: OpenerComponent},

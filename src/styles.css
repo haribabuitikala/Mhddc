@@ -468,16 +468,6 @@ img {
   height: 200px;
 }
 
-.top-section-carousel .item div > span {
-  width: 49%;
-  margin: 0 2% 2% 0;
-}
-
-.top-section-carousel .item > div {
-  width: 100%;
-  float: left;
-  margin-bottom: 5px;
-}
 
 .select-img {
   right: 5px;
@@ -804,12 +794,6 @@ img {
 }
 
 /* hardware */
-.lock-comingsoon, .lock-select {
-  height: 25px;
-  right: 6px;
-  top: 5px;
-}
-
 .lock-comingsoon {
   top: 20px;
   right: 1px;
@@ -833,22 +817,6 @@ img {
 
 .opener-carousel .coming-soon {
   top: 15px;
-}
-
-/* glass door */
-.glass-carousel .item > span {
-  border: 1px solid #ccc;
-  padding: 5px;
-  float: left;
-  width: 31.4%;
-  font-size: 7px;
-  margin-right: 5px;
-}
-.glass-carousel .item > span:last-child {
-  margin-right: 0;
-}
-.glass-carousel .item > span:first-child {
-  margin-left: 3px;
 }
 
 .window-location > span {

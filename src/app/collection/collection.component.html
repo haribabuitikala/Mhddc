@@ -1,78 +1,223 @@
 <h3 class="font-size-16 text-orange margin-t-10">Choose Your Collection</h3>
 <!-- Begin Tile 1 -->
 <div class="tile">
-  <div class="collection-img" *ngIf="!showVideo">
-    <img src="../../assets/images/1.png" alt="">
-  </div>
-  <div class="collection-img" *ngIf="showVideo">
-    <iframe src="https://www.youtube.com/embed/m5L_x1OU4s0?autoplay=1"></iframe>
-  </div>
-  <div class="collection-btn-sec">
-    <img src="../../assets/images/play.png" (click)="playVideo()" alt="" height="20">
-    <img src="../../assets/images/expand-g.png" height="20" class="margin-l-15" alt="">
-    <div class="pull-right">
-      <span class="coming-soon"><button>Info</button></span>
-      <button class="collection-select">Select</button>
+    <div class="collection-img" *ngIf="!showVideo">
+        <img src="../../assets/images/1.png" alt="">
     </div>
-  </div>
+    <div class="collection-img" *ngIf="showVideo">
+        <iframe src="https://www.youtube.com/embed/m5L_x1OU4s0?autoplay=1"></iframe>
+    </div>
+    <div class="collection-btn-sec">
+        <img src="../../assets/images/play.png" (click)="playVideo()" alt="" height="20">
+        <img src="../../assets/images/expand-O.png" (click)="productExpand.open()" height="20" class="margin-l-15" alt="">
+        <div class="pull-right">
+            <span><button (click)="productDetails.open()">Info</button></span>
+            <button class="collection-select">Select</button>
+        </div>
+    </div>
 </div>
 <!-- Begin Tile 2 -->
 <div class="tile margin-t-10">
-  <div class="collection-img">
-    <img src="../../assets/images/2.png" alt="">
-  </div>
-  <div class="collection-btn-sec coming-soon">
-    <img src="../../assets/images/play_g.png" alt="" height="20">
-    <img src="../../assets/images/expand-g.png" height="20" class="margin-l-15" alt="">
-    <div class="btns pull-right">
-      <button>Info</button>
-      <button>Select</button>
+    <div class="collection-img">
+        <img src="../../assets/images/2.png" alt="">
     </div>
-  </div>
+    <div class="collection-btn-sec coming-soon">
+        <img src="../../assets/images/play_g.png" alt="" height="20">
+        <img src="../../assets/images/expand-g.png" height="20" class="margin-l-15" alt="">
+        <div class="btns pull-right">
+            <button>Info</button>
+            <button>Select</button>
+        </div>
+    </div>
 </div>
 <!-- Begin Tile 3 -->
 <div class="tile margin-t-10">
-  <div class="collection-img">
-    <img src="../../assets/images/3.png" alt="">
-  </div>
-  <div class="collection-btn-sec coming-soon">
-    <img src="../../assets/images/play_g.png" alt="" height="20">
-    <img src="../../assets/images/expand-g.png" height="20" class="margin-l-15" alt="">
-    <div class="btns pull-right">
-      <button>Info</button>
-      <button>Select</button>
+    <div class="collection-img">
+        <img src="../../assets/images/3.png" alt="">
     </div>
-  </div>
+    <div class="collection-btn-sec coming-soon">
+        <img src="../../assets/images/play_g.png" alt="" height="20">
+        <img src="../../assets/images/expand-g.png" height="20" class="margin-l-15" alt="">
+        <div class="btns pull-right">
+            <button>Info</button>
+            <button>Select</button>
+        </div>
+    </div>
 </div>
 <!-- Begin Tile 2 -->
 <div class="tile margin-t-10">
-  <div class="collection-img">
-    <img src="../../assets/images/4.png" alt="">
-  </div>
-  <div class="collection-btn-sec coming-soon">
-    <img src="../../assets/images/play.png" alt="" height="20">
-    <img src="../../assets/images/expand-g.png" height="20" class="margin-l-15" alt="">
-    <div class="btns pull-right">
-      <button>Info</button>
-      <button>Select</button>
+    <div class="collection-img">
+        <img src="../../assets/images/4.png" alt="">
     </div>
-  </div>
+    <div class="collection-btn-sec coming-soon">
+        <img src="../../assets/images/play.png" alt="" height="20">
+        <img src="../../assets/images/expand-g.png" height="20" class="margin-l-15" alt="">
+        <div class="btns pull-right">
+            <button>Info</button>
+            <button>Select</button>
+        </div>
+    </div>
 </div>
 <!-- Begin Tile 3 -->
 <div class="tile margin-t-10 margin-b-15">
-  <div class="collection-img">
-    <img src="../../assets/images/5.png" alt="">
-  </div>
-  <div class="collection-btn-sec coming-soon">
-    <img src="../../assets/images/play_g.png" alt="" height="20">
-    <img src="../../assets/images/expand-g.png" height="20" class="margin-l-15" alt="">
-    <div class="btns pull-right">
-      <button>Info</button>
-      <button>Select</button>
+    <div class="collection-img">
+        <img src="../../assets/images/5.png" alt="">
     </div>
-  </div>
+    <div class="collection-btn-sec coming-soon">
+        <img src="../../assets/images/play_g.png" alt="" height="20">
+        <img src="../../assets/images/expand-g.png" height="20" class="margin-l-15" alt="">
+        <div class="btns pull-right">
+            <button>Info</button>
+            <button>Select</button>
+        </div>
+    </div>
 </div>
 <div class="text-center button-margin">
-  <button class="btn btn-default text-uppercase btn-big box-shadow bold">TAP TO SEE QUICKSHIP DOORS</button>
+    <button class="btn btn-default text-uppercase btn-big box-shadow bold">TAP TO SEE QUICKSHIP DOORS</button>
 </div>
 <div class="clearfix margin-b-15 inline-block"></div>
+
+<!-- product details popup -->
+<modal #productDetails>
+    <modal-header [show-close]="true">
+    </modal-header>
+    <modal-body class="products-details">
+        <h4>
+            <p class="small">CLASSIC Line of steel</p>
+            PREMIUM <span class="small">Series</span>
+        </h4>
+        <div>
+            <h5 class="text-uppercase">Door designs</h5>
+            <div class="col-xs-4 pad-l-0">
+                <div><img src="../../assets/images/collection/short-elegant.png" alt=""></div>
+                <p>Short Elegant</p>
+            </div>
+            <div class="col-xs-4">
+                <div><img src="../../assets/images/collection/long-elegant.png" alt=""></div>
+                <p>Long Elegant</p>
+            </div>
+            <div class="col-xs-4">
+                <div><img src="../../assets/images/collection/flash.png" alt=""></div>
+                <p>Flush</p>
+            </div>
+        </div>
+        <div class="clearfix"></div>
+        <div class="color-sec">
+            <h5 class="text-uppercase">colors</h5>
+            <div class="col-xs-3 pad-l-0">
+                <div class="white">
+                </div>
+                <p>White</p>
+            </div>
+            <div class="col-xs-3 pad-l-0">
+                <div class="almond">
+                </div>
+                <p>Almond</p>
+            </div>
+            <div class="col-xs-3 pad-l-0">
+                <div class="desert-tan">
+                </div>
+                <p>Desert Tan</p>
+            </div>
+            <div class="col-xs-3 pad-l-0">
+                <div class="sand-stone">
+                </div>
+                <p>Sandtone</p>
+            </div>
+            <div class="col-xs-3 pad-l-0">
+                <div class="bronze">
+                </div>
+                <p>Bronze <sup>*</sup></p>
+            </div>
+            <div class="col-xs-3 pad-l-0">
+                <div class="chocolate">
+                </div>
+                <p>Chocolate</p>
+            </div>
+            <div class="col-xs-3 pad-l-0">
+                <div class="gray">
+                </div>
+                <p>Grey <sup>*</sup></p>
+            </div>
+            <div class="col-xs-3 pad-l-0">
+                <div class="gray">
+                </div>
+                <p>Hunter Green <sup>*</sup></p>
+            </div>
+
+        </div>
+
+        <!-- detail -->
+        <div>
+            <h5 class="text-uppercase">Detail</h5>
+            <img src="../../assets/images/collection/Details.png" class="details-img pull-left" alt="">
+            <p class="text-uppercase">Decorative panel edging and natural embossed woodgrain texture improve appearance
+                close-up and from the curb.</p>
+        </div>
+
+        <!-- ultra-grain  -->
+        <div>
+            <h5 class="text-uppercase">ULTRA-GRAIN&reg; PAINT OPTION</h5>
+            <div class="col-xs-5">
+                <div>
+                    <img src="../../assets/images/collection/Medium-finish.png" alt="">
+                    Medium Finish
+                </div>
+                <div>
+                    <img src="../../assets/images/collection/cheery-finish.png" alt="">
+                    Cherry Finish
+                </div>
+            </div>
+            <div class="col-xs-7 pad-l-0">
+                <ul>
+                    <li>Painted steel surface simulates a real stained door without the ongoing maintenance of wood.
+                    </li>
+                    <li>Woodgrain runs horizontal on stiles and vertical on panels.</li>
+                    <li>Exterior steel surface has a stucco texture to create a more natural woodgrain appearance
+                        Decorative
+                        panel edging and natural embossed woodgrain
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div>
+            <h5 class="text-uppercase">Warranties</h5>
+            <img src="../../assets/images/collection/warrenties.png" alt="">
+            <h5 class="text-uppercase">windows</h5>
+            <img src="../../assets/images/collection/windows.png" alt="">
+            <p>Add one of our many window options for that custom touch Classic or decorative, Clopay has a Window
+                option to complement your home.You can choose from classic windows in single pane glass, Plexiglas or
+                obscureglass for extra privacy. Or you can customize your residential garage door byadding a designer
+                touch from our line of decorative windows and inserts.</p>
+            <h5 class="text-uppercase">construction</h5>
+            <img src="../../assets/images/collection/construction.png" class="margin-b-15" alt="">
+            <ol>
+                <li>2‘ or 1-3/8' insulation provides superior R-values.</li>
+                <li>Patented Safe-T-Bracket helps prevent serious injury that could occur if the bottom bracket were
+                    removed
+                    with the garage door closed and under tension.
+                </li>
+                <li>Bottom weatherseal in a rust-proof aluminum retainer helps prevent elements from entering garage.
+                </li>
+                Weather-tight tongue-and-groove section joints help seal out wind, rain and snow.
+                <li>Galvanized steel hinges attached to backup plates are durable, reliable and secure.</li>
+                <li>Nylon rollers are smooth and quiet.</li>
+                <li>Prepainted white end stiles and interior steel backing create a clean, finished appearance.</li>
+                <li>Inside/outside step plates and grip handles make doors easy and safe to operate.</li>
+            </ol>
+        </div>
+
+
+    </modal-body>
+</modal>
+<!-- product details popup -->
+<modal #productExpand>
+    <modal-header [show-close]="true">
+    </modal-header>
+    <modal-body>
+
+        <p><img src="../../assets/images/collection/btnCollectionClassic-1.png" alt=""></p>
+        <img src="../../assets/images/collection/Collapse-50-3.png" (click)="productExpand.close()" alt="">
+
+    </modal-body>
+</modal>
