@@ -31,52 +31,49 @@ import {DoorConfigurationComponent} from './door-configuration/door-configuratio
 import {ThankyouComponent} from './thankyou/thankyou.component';
 import {DetailsComponent} from './details/details.component';
 import {ConfigComponent} from './config/config.component';
-import {OpenerSelectedComponent} from './opener-selected/opener-selected.component';
-import {SliderComponentComponent} from './shared/slider-component/slider-component.component';
-import {InstallQuestionComponent} from './install-question/install-question.component';
-import {InstallAnswerComponent} from './install-answer/install-answer.component';
-import {NavigateService} from "./shared/navigate.service";
+import { OpenerSelectedComponent } from './opener-selected/opener-selected.component';
+import { SliderComponentComponent } from './shared/slider-component/slider-component.component';
+import { HardwareComponent } from './hardware/hardware.component';
 
 @NgModule({
-    declarations: [
-        AppComponent,
-        NavComponent,
-        HeaderComponent,
-        BannerComponent,
-        TrendingNowComponent,
-        ZipResultsComponent,
-        CategoryComponent,
-        ServiceRepairComponent,
-        DoorSizeComponent,
-        CollectionComponent,
-        HomeComponent,
-        DesignComponent,
-        ConstructionComponent,
-        ColorComponent,
-        TopSectionComponent,
-        LockComponent,
-        GlassTypeComponent,
-        InstallComponent,
-        OpenerComponent,
-        AdditionalOptionsComponent,
-        DoorConfigurationComponent,
-        ThankyouComponent,
-        DetailsComponent,
-        ConfigComponent,
-        OpenerSelectedComponent,
-        SliderComponentComponent,
-        InstallQuestionComponent,
-        InstallAnswerComponent
-    ],
-    imports: [
-        BrowserModule,
-        FormsModule,
-        HttpModule,
-        Ng2Bs3ModalModule,
-        RouterModule.forRoot(appRoutes)
-    ],
-    providers: [ApiStoreService,NavigateService],
-    bootstrap: [AppComponent]
+  declarations: [
+    AppComponent,
+    NavComponent,
+    HeaderComponent,
+    BannerComponent,
+    TrendingNowComponent,
+    ZipResultsComponent,
+    CategoryComponent,
+    ServiceRepairComponent,
+    DoorSizeComponent,
+    CollectionComponent,
+    HomeComponent,
+    DesignComponent,
+    ConstructionComponent,
+    ColorComponent,
+    TopSectionComponent,
+    LockComponent,
+    GlassTypeComponent,
+    InstallComponent,
+    OpenerComponent,
+    AdditionalOptionsComponent,
+    DoorConfigurationComponent,
+    ThankyouComponent,
+    DetailsComponent,
+    ConfigComponent,
+    OpenerSelectedComponent,
+    SliderComponentComponent,
+    HardwareComponent
+  ],
+  imports: [
+    BrowserModule,
+    FormsModule,
+    HttpModule,
+    Ng2Bs3ModalModule,
+    RouterModule.forRoot(appRoutes)
+  ],
+  providers: [ApiStoreService],
+  bootstrap: [AppComponent]
 })
 export class AppModule {
 }
