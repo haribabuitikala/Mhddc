@@ -37,6 +37,7 @@ import {InstallQuestionComponent} from './install-question/install-question.comp
 import {InstallAnswerComponent} from './install-answer/install-answer.component';
 import {NavigateService} from "./shared/navigate.service";
 import { NonClassicComponent } from './non-classic/non-classic.component';
+import {HardwareComponent} from "./hardware/hardware.component";
 
 @NgModule({
     declarations: [
@@ -68,7 +69,8 @@ import { NonClassicComponent } from './non-classic/non-classic.component';
         SliderComponentComponent,
         InstallQuestionComponent,
         InstallAnswerComponent,
-        NonClassicComponent
+        NonClassicComponent,
+        HardwareComponent
     ],
     imports: [
         BrowserModule,
