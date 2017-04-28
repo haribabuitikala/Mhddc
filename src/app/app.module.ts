@@ -36,6 +36,7 @@ import {SliderComponentComponent} from './shared/slider-component/slider-compone
 import {InstallQuestionComponent} from './install-question/install-question.component';
 import {InstallAnswerComponent} from './install-answer/install-answer.component';
 import {NavigateService} from "./shared/navigate.service";
+import { DiyComponent } from './diy/diy.component';
 
 @NgModule({
     declarations: [
@@ -66,7 +67,8 @@ import {NavigateService} from "./shared/navigate.service";
         OpenerSelectedComponent,
         SliderComponentComponent,
         InstallQuestionComponent,
-        InstallAnswerComponent
+        InstallAnswerComponent,
+        DiyComponent
     ],
     imports: [
         BrowserModule,

@@ -20,6 +20,7 @@ import {ConfigComponent} from "./config/config.component";
 import {OpenerSelectedComponent} from "./opener-selected/opener-selected.component";
 import {InstallQuestionComponent} from "./install-question/install-question.component";
 import {InstallAnswerComponent} from "./install-answer/install-answer.component";
+import {DiyComponent} from "./diy/diy.component";
 
 export const appRoutes:Routes = [
   {path: 'banner', component: BannerComponent},
@@ -47,6 +48,7 @@ export const appRoutes:Routes = [
   },
   {path: 'installQuestion', component: InstallQuestionComponent},
   {path: 'installAnswer', component: InstallAnswerComponent},
+  {path: 'diy', component: DiyComponent},
   {path: 'thankyou', component: ThankyouComponent},
   {path: '', redirectTo: '/banner', pathMatch: 'full'}
 ];

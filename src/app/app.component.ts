@@ -34,15 +34,14 @@ export class AppComponent implements OnInit {
         "/config/install",
         "/installQuestion",
         "/installAnswer",
-        "/config/diy",
+        "/diy",
         "/config/opener",
         "/config/openerSelected",
         "/config/additionalOptions",
         "/config/doorConfiguration",
         "/thankyou"
     ];
-    
-    
+
 
     // this is for checking whether Install or Diy selected for routing to appropriate screen
     selectedInstallDiy:string;
@@ -53,18 +52,15 @@ export class AppComponent implements OnInit {
 
     nextBtn(id):void {
         if (this.navElems[id + 1] !== undefined) {
-            this.currScreen = id + 1;
-            if (this.selectedInstallDiy === 'diy') {
-                this.currScreen = id + 2
-            }
-            this.toRoute(this.currScreen)
+            this.selectedInstallDiy === 'diy' ? this.currScreen = this.navElems.indexOf('/diy') : this.currScreen = id + 1;
+            this.toRoute(this.currScreen);
         }
     }
 
     prevBtn(id):void {
 
         this.currScreen = id - 1;
-        if(this.location.path() === '/config/opener'){
+        if (this.location.path() === '/config/opener') {
             this.currScreen = this.navElems.indexOf('/config/install');
         }
         this.toRoute(this.currScreen)
