@@ -1,21 +1,10 @@
 
-<div class="row logo-header row-inner">
-    <div class="col-xs-5 padding-0">
-        <a routerLink="/banner"> <img src="./assets/images/clopay-logo_s.png" class="logo" alt=""></a>
-    </div>
-    <div class="col-xs-4 pull-right padding-0">
-        <img src="./assets/images/TheHomeDepot.png" alt="" height="40" class="pull-right">
-        <img src="./assets/images/shopping-cart.png" alt="" height="30" class="pull-right cart-icon">
-        <span class="shop-count">30</span>
-    </div>
-</div>
-
 <div class="logo-header row-inner">
   <div class="padding-0" *ngIf="count > 2">
     <img src="../../assets/images/humburger_icon.png" alt="" height="40" class="pull-left hamburger_icon">
   </div>
   <div class="col-xs-5 padding-0">
-    <a routerLink="/banner"> <img src="./assets/images/clopay-logo_s.png" class="logo" alt=""></a>
+    <a href="javascript:void(0)"> <img src="./assets/images/clopay-logo_s.png" (click)="homePage('/banner')" class="logo" alt=""></a>
   </div>
 
   <div class="col-xs-4 pull-right padding-0">

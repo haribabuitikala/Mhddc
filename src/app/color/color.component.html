@@ -1,12 +1,10 @@
-<div class="row">
-    <div class="col-xs-9 pull-left" >
-        <h4 class="font-size-16 text-orange">Choose Your Color</h4></div>
-    <div class="col-xs-3 pull-right behr-pad">  
-        <img  src="../../assets/images/Behar-icon-small-2.png" class="img-behr"  alt=""/>
-        <img src="../../assets/images/Info-64.png" height="26" class="pull-right" (click)="behr.open()" alt="">
-    </div> 
+<div class="col-xs-8 pull-left pad-l-0">
+    <h4 class="font-size-16 text-orange clear-b">Choose Your Color</h4></div>
+<div class="col-xs-4 pull-right behr-pad" (click)="behr.open()">
+    <img src="../../assets/images/Info-64.png" height="26" class="pull-right" alt="">
+    <img src="../../assets/images/color/Behar-icon-small-2.png" class="img-behr pull-right" alt=""/>
 </div>
-<div class="tile margin-b-15 ptn-rel">
+<div class="tile margin-b-15 ptn-rel clear-b">
     <div id="colorCarousel" class="carousel slide padding10 color-carousel carousel1" data-ride="carousel">
         <!-- Wrapper for slides -->
         <div role="listbox" class="carousel-inner">
@@ -73,10 +71,10 @@
         </div>
         <!-- Left and right controls -->
         <a class="left carousel-control" href="#colorCarousel" role="button" data-slide="prev">
-            <span class="helper"></span><img class="left-arrow" src="../../assets/images/ch-left-arrow.png" alt="" >
+            <span class="helper"></span><img class="left-arrow" src="../../assets/images/ch-left-arrow.png" alt="">
         </a>
         <a class="right carousel-control" href="#colorCarousel" role="button" data-slide="next">
-            <span class="helper"></span><img class="right-arrow" src="../../assets/images/ch-right-arrow.png" alt=""  >
+            <span class="helper"></span><img class="right-arrow" src="../../assets/images/ch-right-arrow.png" alt="">
         </a>
     </div>
 </div>
@@ -84,49 +82,50 @@
     <modal-header [show-close]="true">
     </modal-header>
     <modal-body>
-        <div class="col-xs-12" >
+        <div class="col-xs-12">
             <div class="col-xs-5">
-                <img src="../../assets/images/Behar-icon.png" alt=""/>
+                <img src="../../assets/images/color/Behar-icon.png" alt=""/>
             </div>
             <div class="col-xs-7 font-size-16 bold  ">
-                <p>Paint Color Codes for  Clopay Garage Doors <p>
+                <p>Paint Color Codes for Clopay Garage Doors
+                <p>
             </div>
         </div>
         <div class="text-center font-size-12 padding-b-10">
-            <strong>The BEHR paint color codes below are exact matches to Clopay steel garage door color offerings. 
-                Take this color code to The Home Depot Paint Desk to get an exact paint match to paint your home’s 
+            <strong>The BEHR paint color codes below are exact matches to Clopay steel garage door color offerings.
+                Take this color code to The Home Depot Paint Desk to get an exact paint match to paint your home’s
                 exterior trim to match your Clopay garage door. </strong></div>
         <div class="col-xs-12 bher-color-sec">
             <div class="col-xs-6 text-center font-size-11">
-                <span class="color-sec white"></span>
+                <span class="color-sec white-pannel"></span>
                 <p>Clopay Color : White BEHR® Color Code:CBP-l</p>
-            </div> 
+            </div>
             <div class="col-xs-6 text-center font-size-11">
-                <span class="color-sec almond"></span>
+                <span class="color-sec almond-pannel"></span>
                 <p>Clopay Color : Almond BEHR® Color Code:CBP-2&nbsp;</p>
-            </div> 
+            </div>
             <div class="col-xs-6 text-center font-size-11">
-                <span class="color-sec grey"></span>
+                <span class="color-sec grey-pannel"></span>
                 <p>Clopay Color : Grey BEHR® Color Code:CBP-7</p>
-            </div> 
+            </div>
             <div class="col-xs-6 text-center font-size-11">
-                <span class="color-sec desertTan"></span>
+                <span class="color-sec desert-tan"></span>
                 <p>Clopay Color : Desert Tan BEHR® Color Code:CBP-3</p>
-            </div> 
+            </div>
             <div class="col-xs-6 text-center font-size-11">
-                <span class="color-sec sandtone"></span>
+                <span class="color-sec sandStone"></span>
                 <p>Clopay Color : Sandtone BEHR® Color Code:CBP-4</p>
-            </div> 
+            </div>
             <div class="col-xs-6 text-center font-size-11">
                 <span class="color-sec chocolate"></span>
                 <p>Clopay Color : Chocolate BEHR® Color Code:CBP-5 **&nbsp;</p>
-            </div> 
+            </div>
             <div class="col-xs-6 text-center font-size-11">
                 <span class="color-sec hunterGreen"></span>
                 <p>Clopay Color : Hunter Green BEHR® Color Code:CBP-7</p>
-            </div> 
+            </div>
         </div>
         <div class="text-center font-size-12">
-   <p>* Color Available only on&nbsp;Clopay classic Collection<br>Premium Series Garage Doors</p></div>
+            <p>* Color Available only on&nbsp;Clopay classic Collection<br>Premium Series Garage Doors</p></div>
     </modal-body>
 </modal>

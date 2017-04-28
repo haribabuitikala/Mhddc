@@ -1,4 +1,6 @@
 import {Component, OnInit, Input} from '@angular/core';
+import {AppComponent} from "../app.component";
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -10,12 +12,15 @@ export class HeaderComponent implements OnInit {
 
   @Input() count:any;
 
-
-  constructor() {
+  constructor(private appComponent:AppComponent
+      , private route:Router) {
   }
-
+  homePage(path){
+    this.appComponent.currScreen = 0;
+    this.route.navigateByUrl(path);
+  }
   ngOnInit() {
-    console.log('Screen:' + this.count);
+
   }
 
 }
