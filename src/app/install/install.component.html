@@ -3,7 +3,7 @@
     <input id="r1" type="radio" name="installation-type" checked="checked">
     <div class="tab">
       <span class="check"></span>
-      <label for="r1">
+      <label for="r1" (click)="checkType('install')">
         <div>INSTALL</div>
         <div>$876.95</div>
       </label>
@@ -13,7 +13,7 @@
     <input id="r2" type="radio" name="installation-type">
     <div class="tab">
       <span class="check"></span>
-      <label for="r2">
+      <label for="r2" (click)="checkType('diy')">
         <div>DIY</div>
         <div>$668.95</div>
       </label>
