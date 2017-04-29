@@ -20,6 +20,7 @@ import {CollectionComponent} from './collection/collection.component';
 import {HomeComponent} from './home/home.component';
 import {NavigateService} from "./shared/navigate.service";
 import {ConfigModule} from "./config/config.module";
+import {ZipResults} from "./shared/zipresults";
 
 @NgModule({
     declarations: [
@@ -43,7 +44,7 @@ import {ConfigModule} from "./config/config.module";
         RouterModule.forRoot(appRoutes),
         ConfigModule
     ],
-    providers: [ApiStoreService, NavigateService],
+    providers: [ApiStoreService, NavigateService, ZipResults],
     bootstrap: [AppComponent]
 })
 export class AppModule {
