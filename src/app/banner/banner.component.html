@@ -5,19 +5,9 @@
   </div>
   <!-- Begin Header form -->
   <div class="row bg-orange padding-t-7 form-inline ptn-abs zip-search-form">
-    <form novalidate #form="ngForm" (ngSubmit)="save(form)" class="form-group banner-zip-search ptn-rel">
+    <form novalidate #form="ngForm" (ngSubmit)="save(form, $event)" class="form-group banner-zip-search ptn-rel">
       <div class="col-xs-10 pad-r-0">
         <div class="form-control"></div>
-        <!--<input-->
-          <!--type="number"-->
-          <!--id="zipCode"-->
-          <!--name="zip"-->
-          <!--[(ngModel)]="zip"-->
-          <!--#zipCode="ngModel"-->
-          <!--required-->
-          <!--minlength="5"-->
-          <!--class="zip-code ptn-abs roboto-regular"-->
-          <!--placeholder="Enter Zip Code">-->
 
         <input
           type="text"
@@ -38,7 +28,8 @@
 
       </div>
       <div class="col-xs-2 btn-sec">
-        <button class="btn btn-sm border-white text-white show-zip-results go-btn" routerLink="/zipResults" (click)="addressList()" [disabled]="form.invalid" type="submit">GO</button>
+        <button class="btn btn-sm border-white text-white show-zip-results go-btn"
+                [disabled]="form.invalid">GO</button>
       </div>
     </form>
   </div>

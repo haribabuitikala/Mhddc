@@ -9,7 +9,7 @@ import {ThankyouComponent} from "./thankyou/thankyou.component";
 
 export const appRoutes:Routes = [
   {path: 'banner', component: BannerComponent},
-  {path: 'zipResults', component: ZipResultsComponent},
+  {path: 'zipResults/:zip', component: ZipResultsComponent},
   {path: 'category', component: CategoryComponent},
   {path: 'doorSize', component: DoorSizeComponent},
   {path: 'collection', component: CollectionComponent},
