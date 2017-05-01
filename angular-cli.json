@@ -20,7 +20,8 @@
       "styles": [
         "styles.css",
         "main.less",
-        "../node_modules/bootstrap/dist/css/bootstrap.min.css"
+        "../node_modules/bootstrap/dist/css/bootstrap.min.css",
+        "../node_modules/toastr-ng2/toastr.css"
       ],
       "scripts": [
         "../node_modules/jquery/dist/jquery.js",

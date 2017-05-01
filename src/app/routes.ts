@@ -6,14 +6,19 @@ import {DoorSizeComponent} from "./door-size/door-size.component";
 import {CollectionComponent} from "./collection/collection.component";
 import {HomeComponent} from "./home/home.component";
 import {ThankyouComponent} from "./thankyou/thankyou.component";
+import {ZipResolver} from "./zip-results/zip-resolver.service";
 
 export const appRoutes:Routes = [
-  {path: 'banner', component: BannerComponent},
-  {path: 'zipResults/:zip', component: ZipResultsComponent},
-  {path: 'category', component: CategoryComponent},
-  {path: 'doorSize', component: DoorSizeComponent},
-  {path: 'collection', component: CollectionComponent},
-  {path: 'home', component: HomeComponent},
-  {path: 'thankyou', component: ThankyouComponent},
-  {path: '', redirectTo: '/banner', pathMatch: 'full'}
+    {path: 'banner', component: BannerComponent},
+    {
+        path: 'zipResults/:zip',
+        component: ZipResultsComponent,
+        resolve: {results: ZipResolver}
+    },
+    {path: 'category', component: CategoryComponent},
+    {path: 'doorSize', component: DoorSizeComponent},
+    {path: 'collection', component: CollectionComponent},
+    {path: 'home', component: HomeComponent},
+    {path: 'thankyou', component: ThankyouComponent},
+    {path: '', redirectTo: '/banner', pathMatch: 'full'}
 ];
