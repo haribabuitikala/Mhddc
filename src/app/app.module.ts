@@ -22,6 +22,7 @@ import {HomeComponent} from './home/home.component';
 import {NavigateService} from "./shared/navigate.service";
 import {ConfigModule} from "./config/config.module";
 import {ZipResults} from "./shared/zipresults";
+import {AppUtilities} from "./shared/appUtilities";
 import {ZipResolver} from "./zip-results/zip-resolver.service";
 
 @NgModule({
@@ -47,7 +48,7 @@ import {ZipResolver} from "./zip-results/zip-resolver.service";
         ConfigModule,
         ToastrModule.forRoot()
     ],
-    providers: [ApiStoreService, NavigateService, ZipResults, ZipResolver],
+    providers: [ApiStoreService, NavigateService, ZipResults, AppUtilities, ZipResolver],
     bootstrap: [AppComponent]
 })
 export class AppModule {
