@@ -6,20 +6,15 @@
 </div> 
 <div class="tile ptn-rel margin-b-15" (click)="offset.open()" >
     <img src="../../assets/images/BTN-Lockkeyed1.png" alt="">
+</div>
+<modal #offset>
+    <modal-header [show-close]="true">
+    </modal-header>
+    <modal-body>
 
-    <div class="tile ptn-rel margin-b-15">
-        <img src="../../assets/images/BTN-Lockkeyed1.png" alt="">
-        <div class="text-orange" (click)="offset.open()">offset</div>
-
-    </div>
-    <modal #offset>
-        <modal-header [show-close]="true">
-        </modal-header>
-        <modal-body>
-
-            <div class="col-xs-12" >
-                <img src="../../assets/images/lock/popup_offset-1.png" alt=""/>
-            </div>
-        </modal-body>
-    </modal>
+        <div class="col-xs-12" >
+            <img src="../../assets/images/lock/popup_offset-1.png" alt=""/>
+        </div>
+    </modal-body>
+</modal>
 
