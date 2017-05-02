@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ZipResults} from "../shared/zipresults";
 import {ActivatedRoute} from '@angular/router';
+import {Izip} from "./Izip";
 
 @Component({
     selector: 'app-zip-results',
@@ -9,18 +10,12 @@ import {ActivatedRoute} from '@angular/router';
 })
 export class ZipResultsComponent implements OnInit {
 
-    constructor(private zip:ZipResults
-        , private route:ActivatedRoute) {
+    constructor(private route:ActivatedRoute) {
     }
-    results:any;
+    results:Izip;
 
     ngOnInit() {
-        let zip = this.route.snapshot.params['zip'];
-        this.getNearest(zip);
-    }
-
-    getNearest(zipCode){
-        this.results = this.zip.getZip(zipCode);
+        this.results = this.route.snapshot.data['results']
     }
 
 

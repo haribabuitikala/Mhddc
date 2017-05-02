@@ -1,9 +1,10 @@
 import {BrowserModule} from '@angular/platform-browser';
-import {NgModule} from '@angular/core';
+import {NgModule, animate} from '@angular/core';
 import {FormsModule} from '@angular/forms';
 import {HttpModule} from '@angular/http';
 import {RouterModule} from '@angular/router';
 import {Ng2Bs3ModalModule} from 'ng2-bs3-modal/ng2-bs3-modal';
+import {ToastrModule} from 'toastr-ng2';
 
 import {AppComponent} from './app.component';
 import {appRoutes} from './routes';
@@ -22,6 +23,7 @@ import {NavigateService} from "./shared/navigate.service";
 import {ConfigModule} from "./config/config.module";
 import {ZipResults} from "./shared/zipresults";
 import {AppUtilities} from "./shared/appUtilities";
+import {ZipResolver} from "./zip-results/zip-resolver.service";
 
 @NgModule({
     declarations: [
@@ -43,9 +45,10 @@ import {AppUtilities} from "./shared/appUtilities";
         HttpModule,
         Ng2Bs3ModalModule,
         RouterModule.forRoot(appRoutes),
-        ConfigModule
+        ConfigModule,
+        ToastrModule.forRoot()
     ],
-    providers: [ApiStoreService, NavigateService, ZipResults, AppUtilities],
+    providers: [ApiStoreService, NavigateService, ZipResults, AppUtilities, ZipResolver],
     bootstrap: [AppComponent]
 })
 export class AppModule {
