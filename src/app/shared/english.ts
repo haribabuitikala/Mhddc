@@ -17,6 +17,9 @@ export class LangEnglishService {
         return this.getData('trendingNow');
  
     }
+    getCategory(){
+         return this.getData('category');
+    }
     getData(itm){
         let data = _.get(ENG, itm);
         return data[0];
