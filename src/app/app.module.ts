@@ -24,6 +24,7 @@ import {ConfigModule} from "./config/config.module";
 import {ZipResults} from "./shared/zipresults";
 import {AppUtilities} from "./shared/appUtilities";
 import {ZipResolver} from "./zip-results/zip-resolver.service";
+import {LangEnglishService} from "./shared/english";
 
 @NgModule({
     declarations: [
@@ -37,7 +38,7 @@ import {ZipResolver} from "./zip-results/zip-resolver.service";
         ServiceRepairComponent,
         DoorSizeComponent,
         CollectionComponent,
-        HomeComponent,
+        HomeComponent
     ],
     imports: [
         BrowserModule,
@@ -48,7 +49,14 @@ import {ZipResolver} from "./zip-results/zip-resolver.service";
         ConfigModule,
         ToastrModule.forRoot()
     ],
-    providers: [ApiStoreService, NavigateService, ZipResults, AppUtilities, ZipResolver],
+    providers: [
+        ApiStoreService,
+        NavigateService,
+        ZipResults,
+        AppUtilities,
+        ZipResolver,
+        LangEnglishService
+    ],
     bootstrap: [AppComponent]
 })
 export class AppModule {

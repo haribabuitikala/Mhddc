@@ -5,7 +5,7 @@
   <app-nav *ngIf="currScreen > 2" [screen]="currScreen">
 
   </app-nav>
-<div class="router-wrapper" [class.col-xs-10]="currScreen > 2" [class.col-xs-offset-2]="currScreen > 2" [class.col-xs-12]="currScreen < 2">
+<div class="router-wrapper" [ngClass]="{'col-xs-offset-2 col-xs-10' : currScreen > 2}" [class.col-xs-12]="currScreen < 2">
   <router-outlet></router-outlet>
 </div>
 <div id="footer" class="col-xs-12 padding-t-10 padding-b-10" *ngIf="currScreen > 2">

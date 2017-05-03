@@ -1,8 +1,7 @@
 <span routerLink="/banner" class="ptn-abs zip-results-close">
         <img src="../../assets/images/close.png" alt="">
 </span>
-<h5 class="text-orange roboto-regular margin-b-15 store-heading bold font-size-16">Please select the store you would
-    like to shop with</h5>
+<h5 class="text-orange roboto-regular margin-b-15 store-heading bold font-size-16">{{lang.pageHeader}}</h5>
 <div class="tile search-results-tile margin-b-10 ptn-rel"
      *ngFor="let result of results"
      routerLink="/category">
@@ -15,6 +14,6 @@
 </div>
 <div class="text-center">
     <button routerLink="/banner"
-            class="btn btn-default text-uppercase text-orange btn-big box-shadow bold change-zip-code">Change zip code
+            class="btn btn-default text-uppercase text-orange btn-big box-shadow bold change-zip-code">{{lang.ChangeZipCode}}
     </button>
 </div>
