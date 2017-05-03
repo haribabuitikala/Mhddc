@@ -88,14 +88,6 @@ li {
   font-weight: bold;
 }
 
-.logo-header {
-  background: #333;
-  position: fixed;
-  left: 0;
-  right: 0;
-  top: 0;
-  z-index: 5;
-}
 
 #body-content {
   /*margin-top: 12%;*/
@@ -807,52 +799,6 @@ img {
 }
 
 /* category section */
-.category-sec > div {
-  /*height: 150px;*/
-  margin-bottom: 9px;
-}
-
-.category-type {
-  border-top: 1px solid #ccc;
-  padding: 11px 0 11px 6px;
-  color: #304a90;
-  font-family: Roboto-regular;
-  font-size: 10px;
-}
-
-.padding-l-1 {
-  padding-left: 1px;
-}
-
-.category-sec img {
-  height: 60px;
-}
-
-.category-sec img.category-coming-soon, .comingSoon {
-  height: 25px;
-  right: 0;
-  top: 5px;
-  width: auto;
-  margin: 0;
-}
-
-.residential-garrage {
-  font-size: 9px;
-  padding-bottom: 14px;
-}
-
-.hamburger_icon {
-  margin: 0 8px 0 5px;
-}
-
-.disabled {
-  opacity: 0.4;
-}
-
-.category-sec {
-  margin-top: 65px;
-}
-
 /* collection screen */
 .collection-img {
   padding: 5px;

@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
+import {LangEnglishService} from "../shared/english";
 
 @Component({
     selector: 'app-banner',
@@ -10,8 +11,10 @@ export class BannerComponent implements OnInit {
     zip:any;
 
     zipCode:any;
+    lang:any;
 
-    constructor(private route:Router) {
+    constructor(private route:Router
+        , private localize:LangEnglishService) {
     }
 
     save(form, event) {
@@ -20,6 +23,7 @@ export class BannerComponent implements OnInit {
     }
 
     ngOnInit() {
+        this.lang = this.localize.getBanner();
     }
 
 }

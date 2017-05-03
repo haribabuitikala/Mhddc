@@ -1,4 +1,4 @@
-<h3 class="font-size-16 text-orange margin-t-10">Choose Your Collection</h3>
+<h3 class="font-size-16 text-orange margin-t-10">3 Choose Your Collection</h3>
 <!-- Begin Tile 1 -->
 <div class="tile">
     <div class="collection-img" *ngIf="!showVideo">
@@ -9,9 +9,9 @@
     </div>
     <div class="collection-btn-sec">
         <img src="../../assets/images/play.png" (click)="playVideo()" alt="" height="20">
-        <img src="../../assets/images/expand-O.png" (click)="productExpand.open()" height="20" class="margin-l-15" alt="">
+        <span><button (click)="productDetails.open()">Info</button></span>
+        <!--<img src="../../assets/images/expand-O.png" (click)="productExpand.open()" height="20" class="margin-l-15" alt="">-->
         <div class="pull-right">
-            <span><button (click)="productDetails.open()">Info</button></span>
             <button class="collection-select">Select</button>
         </div>
     </div>
