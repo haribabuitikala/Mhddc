@@ -9,6 +9,9 @@ export class LangEnglishService {
     getBanner() {
        return this.getData('banner');
     }
+    getzipResults() {
+       return this.getData('zipResults');
+    }
     getData(itm){
         let data = _.get(ENG, itm);
         return data[0];

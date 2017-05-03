@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {ZipResults} from "../shared/zipresults";
 import {ActivatedRoute} from '@angular/router';
 import {Izip} from "./Izip";
+ import {LangEnglishService} from "../shared/english";
 
 @Component({
     selector: 'app-zip-results',
@@ -10,12 +11,14 @@ import {Izip} from "./Izip";
 })
 export class ZipResultsComponent implements OnInit {
 
-    constructor(private route:ActivatedRoute) {
+lang;
+    constructor(private route:ActivatedRoute,private language:LangEnglishService) {
     }
     results:Izip;
 
     ngOnInit() {
         this.results = this.route.snapshot.data['results']
+        this.lang=this.language.getzipResults();
     }
 
 
