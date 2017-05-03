@@ -38,7 +38,7 @@ import {LangEnglishService} from "./shared/english";
         ServiceRepairComponent,
         DoorSizeComponent,
         CollectionComponent,
-        HomeComponent,
+        HomeComponent
     ],
     imports: [
         BrowserModule,

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {LangEnglishService} from "../shared/english";
 
 declare var $:any;
 @Component({
@@ -8,10 +9,12 @@ declare var $:any;
 })
 export class TrendingNowComponent implements OnInit {
 
-  constructor() { }
+  lang;
+  constructor(private language:LangEnglishService) { } 
 
   ngOnInit() {
     this.renderSlider();
+    this.lang = this.language.getTrending();
   }
   sliderWidth = 0;
   slideWidth = 0;
