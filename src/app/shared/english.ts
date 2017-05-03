@@ -9,8 +9,13 @@ export class LangEnglishService {
     getBanner() {
        return this.getData('banner');
     }
+ 
     getzipResults() {
        return this.getData('zipResults');
+    }
+    getTrending(){
+        return this.getData('trendingNow');
+ 
     }
     getData(itm){
         let data = _.get(ENG, itm);
@@ -28,7 +33,7 @@ const ENG =
         "zipcodeMessage": "Enter valid zipcode",
         "Go": "GO"
     }],
-    "trending-now": [{
+    "trendingNow": [{
         "title": "Trending Now",
         "pageHeader": ""
     }],
