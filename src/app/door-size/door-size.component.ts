@@ -2,6 +2,7 @@ import {Component, OnInit, ViewChild} from '@angular/core';
 import {AppComponent} from "../app.component";
 import {Router} from '@angular/router';
 import {ModalComponent} from "ng2-bs3-modal/ng2-bs3-modal";
+import {LangEnglishService} from "../shared/english";
 // import {NavComponent} from "../nav/nav.component";
 
 @Component({
@@ -11,16 +12,18 @@ import {ModalComponent} from "ng2-bs3-modal/ng2-bs3-modal";
 })
 export class DoorSizeComponent implements OnInit {
 
-    @ViewChild('florida') modal1:ModalComponent;
-    showMeasure:boolean = false;
+    @ViewChild('florida') modal1: ModalComponent;
+    showMeasure: boolean = false;
+    lang;
 
-    constructor(private appComponent:AppComponent, private route:Router) {
+    constructor(private appComponent: AppComponent, private route: Router, private language: LangEnglishService) {
     }
 
     // private navComponent:NavComponent
     ngOnInit() {
-        this.appComponent.currScreen = 3;
-        // this.navComponent.screen = 3;
+        this.appComponent.currScreen = 3; 
+        this.lang = this.language.getDoorSize();
+
     }
 
     navigateTo(path) {
