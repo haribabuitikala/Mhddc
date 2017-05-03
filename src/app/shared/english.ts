@@ -9,8 +9,13 @@ export class LangEnglishService {
     getBanner() {
        return this.getData('banner');
     }
+ 
+    getzipResults() {
+       return this.getData('zipResults');
+    }
     getTrending(){
         return this.getData('trendingNow');
+ 
     }
     getData(itm){
         let data = _.get(ENG, itm);
