@@ -57,6 +57,7 @@ export class AppComponent implements OnInit {
 
     ngOnInit() {
         this.currScreen = this.navElems.indexOf(this.location.path());
+        this.location.path() === '/thankyou' ? this.currScreen = 2 : this.currScreen = this.navElems.indexOf(this.location.path());
     }
 
     nextBtn(id):void {
