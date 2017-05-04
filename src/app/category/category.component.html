@@ -1,51 +1,81 @@
 <div class="category-sec clearfix">
-  <div class="col-xs-6 padding-r-7 show-category">
-    <div class="bg-white box-shadow" routerLink="/doorSize">
-      <div class="image-sec text-center padding-t-10">
-        <span class="helper"></span>
-        <img src="../../assets/images/IconResidentialdoor.png" class="margin-b-15 residential-garrage-icon"
-             alt="">
-      </div>
-      <p class="category-type residential-garrage text-center">{{lang.categoryOne}}</p>
+    <div class="col-xs-6 padding-r-7 show-category">
+        <div class="bg-white box-shadow" routerLink="/doorSize">
+            <div class="image-sec text-center padding-t-10">
+                <span class="helper"></span>
+                <img src="../../assets/images/IconResidentialdoor.png" class="margin-b-15 residential-garrage-icon"
+                     alt="">
+            </div>
+            <p class="category-type residential-garrage text-center">{{lang.categoryOne}}</p>
+        </div>
     </div>
-  </div>
 
-  <div class="col-xs-6 padding-l-7">
-    <div class="bg-white box-shadow" routerLink="/doorSize">
-      <div class="../../assets/image-sec text-center padding-t-10 ptn-rel">
-        <!--<img src="../../assets/images/coming-soon.png" class="ptn-abs category-coming-soon" alt="">-->
-        <img src="../../assets/images/IconGDO.png" class="margin-b-15 margin-r-25 garage-opener-icon"
-             alt="" width="80">
-      </div>
-      <p class="category-type text-center">{{lang.categoryTwo}}</p>
+    <div class="col-xs-6 padding-l-7" (click)="gdo.open()">
+        <div class="bg-white box-shadow" >
+            <!--        routerLink="/doorSize"-->
+            <div class="../../assets/image-sec text-center padding-t-10 ptn-rel">
+                <!--<img src="../../assets/images/coming-soon.png" class="ptn-abs category-coming-soon" alt="">-->
+                <img src="../../assets/images/IconGDO.png" class="margin-b-15 margin-r-25 garage-opener-icon"
+                     alt="" width="80">
+            </div>
+            <p class="category-type text-center">{{lang.categoryTwo}}</p>
+        </div>
     </div>
-  </div>
-  <div class="col-xs-6 padding-r-7" (click)="showModal()">
-    <div class="bg-white box-shadow">
-      <div class="../../assets/image-sec text-center padding-t-10 ptn-rel category-height">
-        <!--<img src="../../assets/images/coming-soon.png" class="ptn-abs category-coming-soon" alt="">-->
-        <img src="../../assets/images/IconRepair.png" class="margin-b-15 margin-r-25 service-repair-icon"
-             alt="">
-      </div>
-      <p class="category-type text-center">{{lang.categoryThree}}</p>
+    <div class="col-xs-6 padding-r-7" (click)="showModal()">
+        <div class="bg-white box-shadow">
+            <div class="../../assets/image-sec text-center padding-t-10 ptn-rel category-height">
+                <!--<img src="../../assets/images/coming-soon.png" class="ptn-abs category-coming-soon" alt="">-->
+                <img src="../../assets/images/IconRepair.png" class="margin-b-15 margin-r-25 service-repair-icon"
+                     alt="">
+            </div>
+            <p class="category-type text-center">{{lang.categoryThree}}</p>
+        </div>
     </div>
-  </div>
 </div>
 <app-trending-now></app-trending-now>
 <modal #modal>
-  <modal-header [show-close]="true">
-  </modal-header>
-  <modal-body>
-      <p>{{lang.modal.modalContent}}
-    </p>
-   
-    <div>
-      <button class="btn btn-default box-shadow text-orange margin-r-10 bold margin-b-10" (click)="serviceRepair()">
-        {{lang.modal.Proceed}}
-      </button>
-      <button class="btn btn-default box-shadow text-orange bold" (click)="modal.close()">
-         {{lang.modal.StayOnCurrentSite}}
-      </button>
-    </div>
-  </modal-body>
+    <modal-header [show-close]="true">
+    </modal-header>
+    <modal-body>
+        <p>{{lang.modal.modalContent}}
+        </p>
+
+        <div>
+            <button class="btn btn-default box-shadow text-orange margin-r-10 bold margin-b-10" (click)="serviceRepair()">
+                {{lang.modal.Proceed}}
+            </button>
+            <button class="btn btn-default box-shadow text-orange bold" (click)="modal.close()">
+                {{lang.modal.StayOnCurrentSite}}
+            </button>
+        </div>
+    </modal-body>
+</modal>
+
+<modal #gdo>
+    <modal-header [show-close]="true">
+    </modal-header>
+    <modal-body>
+        <div class="col-xs-12 margin-b-10 ">
+            <div  class="margin-top-10 text-center div-border div-border-radius box-shadow"  >
+                <p class="margin-b-10 margin-top-10 margin-r-10 padding-t-10 margin-b-15"  > Are you shopping for a NEW Delivered and Installed Garage Door Opener?</p>
+
+                <button   routerLink="/doorSize" class="btn btn-default box-shadow text-orange   bold margin-b-10 margin-t-10 margin-b-20 margin-top-15" (click)="serviceRepair()" >
+                    NEXT >
+                </button>
+
+
+            </div>
+
+            <div class="div-border div-border-radius  text-center box-shadow margin-top-15">
+                <p class="margin-b-10 margin-top-10 padding-t-10 margin-b-15"  > Already have a Garage Door Opener purchased from Home Depot that needs to be installed ?</p>
+
+                <button   routerLink="/doorSize" class="btn btn-default btn-big box-shadow text-orange   bold margin-b-20 margin-t-15" (click)="serviceRepair()" >
+                    NEXT >
+                </button>
+
+
+            </div>
+        </div>
+
+    </modal-body>
 </modal>
