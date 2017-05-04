@@ -1,4 +1,18 @@
 <div class="col-xs-2 padding-0 nav-component">
+    <nav class="hide">
+        <!-- loading dynamically based on the count -->
+        <ul class="padding-0">
+            <li (click)="visited(0)">
+                <img src="../../assets/images/left-nav/home-O.png" alt="">
+                <span>Home</span>
+            </li>
+            <li (click)="visited(1)" *ngFor="let itm of menuArray">
+                <img src="../../assets/images/left-nav/leftnav0{{itm}}iconNVP.png" alt="">
+                <span>Size</span>
+            </li>
+
+        </ul>
+    </nav>
     <nav>
         <ul class="padding-0">
             <li (click)="visited(0)">
