@@ -1,118 +1,140 @@
 <div class="row fixed-header">
-  <h4>Your Door Configuration <span class="pull-right">$876.95</span></h4>
-  <div class="space-around">
-    <button onclick="showToast()" class="btn">SHARE<span class="glyphicon glyphicon-share"></span></button>
-    <button onclick="showToast()" class="btn">EMAIL QUOTE<span class="glyphicon glyphicon-envelope"></span></button>
-  </div>
+    <h4>Your Door Configuration <span class="pull-right">$876.95</span></h4>
+    <div class="space-around">
+        <button (click)="share.open()" class="btn">SHARE<span class="glyphicon glyphicon-share padding-l-3"></span></button>
+        <button (click)="email.open()" class="btn">EMAIL QUOTE<span class="glyphicon glyphicon-envelope  padding-l-3"></span></button>
+    </div>
 </div>
 <div class="content door-configuration">
-  <p>Classic™ Collection -Premium Series (Installed)</p>
-  <dl class="door-configuration-table">
-    <dd class="door-configuration-table-header">
-      Door Model
-    </dd>
-    <dd>
-      <p>HDP20</p><span class="pull-right">$876.95</span>
-    </dd>
-  </dl>
-  <dl class="door-configuration-table">
-    <dd class="door-configuration-table-header">
-      Size
-    </dd>
-    <dd>
-      <p>9'0"(w) x 7'0"(h)</p>
-    </dd>
-  </dl>
-  <dl class="door-configuration-table">
-    <dd class="door-configuration-table-header">
-      WindCode
-    </dd>
-    <dd>
-      <p>W0</p>
-    </dd>
-  </dl>
-  <dl class="door-configuration-table">
-    <dd class="door-configuration-table-header">
-      Door Design
-    </dd>
-    <dd>
-      <p>Short Panel</p>
-    </dd>
-  </dl>
-  <dl class="door-configuration-table">
-    <dd class="door-configuration-table-header">
-      Door Construction
-    </dd>
-    <dd>
-      <p>3-layer 2" Intellicore® Insul. R-Value 18.4</p>
-    </dd>
-  </dl>
-  <dl class="door-configuration-table">
-    <dd class="door-configuration-table-header">
-      Color
-    </dd>
-    <dd>
-      <p>Standard White</p>
-    </dd>
-  </dl>
-  <dl class="door-configuration-table">
-    <dd class="door-configuration-table-header">
-      Top Section
-    </dd>
-    <dd>
-      <p>Solid Short Elegant</p>
-    </dd>
-    <dd>
-      <p>Placement : 4th Row (TOP)</p>
-    </dd>
-  </dl>
-  <dl class="door-configuration-table">
-    <dd class="door-configuration-table-header">
-      Hardware
-    </dd>
-    <dd>
-      <p>Lock : Inside Slide Lock (Retail)</p>
-    </dd>
-  </dl>
-  <dl class="door-configuration-table">
-    <dd class="door-configuration-table-header">
-      Opener
-    </dd>
-    <dd>
-      <p>Elite Series 8550W 12v DC Motor with Integrated Battery Backup, Belt Drive,
-        and MyQ with 7' Rail</p><span class="pull-right">$484.00</span>
-    </dd>
-  </dl>
-  <dl class="door-configuration-table">
-    <dd class="door-configuration-table-header">
-      Opener Accessories
-    </dd>
-    <dd>
-      <p>Liftmaster Premium 3-Button Remote (x1)</p><span class="pull-right">$39.95</span>
-    </dd>
-  </dl>
-  <dl class="door-configuration-table">
-    <dd class="door-configuration-table-header">
-      Additional Options
-    </dd>
-    <dd>
-      <p>Medallion Hardware Upgrade</p><span class="pull-right">$59.00</span>
-    </dd>
-  </dl>
-  <dl class="door-configuration-table">
-    <dd class="door-configuration-table-header">
-      Quantity
-    </dd>
-    <dd>
-      <div class="row">
-        <div class="col-xs-4">Openers</div>
-        <div class="col-xs-8">
-          <img src="images/substract.png">
-          <span>1</span>
-          <img src="images/add.png">
-        </div>
-      </div>
-    </dd>
-  </dl>
+    <p>Classic™ Collection -Premium Series (Installed)</p>
+    <dl class="door-configuration-table">
+        <dd class="door-configuration-table-header">
+            Door Model
+        </dd>
+        <dd>
+            <p>HDP20</p><span class="pull-right">$876.95</span>
+        </dd>
+    </dl>
+    <dl class="door-configuration-table">
+        <dd class="door-configuration-table-header">
+            Size
+        </dd>
+        <dd>
+            <p>9'0"(w) x 7'0"(h)</p>
+        </dd>
+    </dl>
+    <dl class="door-configuration-table">
+        <dd class="door-configuration-table-header">
+            WindCode
+        </dd>
+        <dd>
+            <p>W0</p>
+        </dd>
+    </dl>
+    <dl class="door-configuration-table">
+        <dd class="door-configuration-table-header">
+            Door Design
+        </dd>
+        <dd>
+            <p>Short Panel</p>
+        </dd>
+    </dl>
+    <dl class="door-configuration-table">
+        <dd class="door-configuration-table-header">
+            Door Construction
+        </dd>
+        <dd>
+            <p>3-layer 2" Intellicore® Insul. R-Value 18.4</p>
+        </dd>
+    </dl>
+    <dl class="door-configuration-table">
+        <dd class="door-configuration-table-header">
+            Color
+        </dd>
+        <dd>
+            <p>Standard White</p>
+        </dd>
+    </dl>
+    <dl class="door-configuration-table">
+        <dd class="door-configuration-table-header">
+            Top Section
+        </dd>
+        <dd>
+            <p>Solid Short Elegant</p>
+        </dd>
+        <dd>
+            <p>Placement : 4th Row (TOP)</p>
+        </dd>
+    </dl>
+    <dl class="door-configuration-table">
+        <dd class="door-configuration-table-header">
+            Hardware
+        </dd>
+        <dd>
+            <p>Lock : Inside Slide Lock (Retail)</p>
+        </dd>
+    </dl>
+    <dl class="door-configuration-table">
+        <dd class="door-configuration-table-header">
+            Opener
+        </dd>
+        <dd>
+            <p>Elite Series 8550W 12v DC Motor with Integrated Battery Backup, Belt Drive,
+                and MyQ with 7' Rail</p><span class="pull-right">$484.00</span>
+        </dd>
+    </dl>
+    <dl class="door-configuration-table">
+        <dd class="door-configuration-table-header">
+            Opener Accessories
+        </dd>
+        <dd>
+            <p>Liftmaster Premium 3-Button Remote (x1)</p><span class="pull-right">$39.95</span>
+        </dd>
+    </dl>
+    <dl class="door-configuration-table">
+        <dd class="door-configuration-table-header">
+            Additional Options
+        </dd>
+        <dd>
+            <p>Medallion Hardware Upgrade</p><span class="pull-right">$59.00</span>
+        </dd>
+    </dl>
+    <dl class="door-configuration-table">
+        <dd class="door-configuration-table-header">
+            Quantity
+        </dd>
+        <dd>
+            <div class="row">
+                <div class="col-xs-4">Openers</div>
+                <div class="col-xs-8 pull-right">
+                    <img src="../../assets/images/substract.png" alt="" height="22" width="22" class="minus-quantity pull-left">
+                    <span>1</span>
+                    <img src="../../assets/images/add.png" alt="" height="22" width="22" class="add-quantity ">
+                </div>
+            </div>
+        </dd>
+    </dl>
 </div>
-<div id="snackbar">Coming Soon..</div>
+
+<modal #email>
+    <modal-header [show-close]="true">
+    </modal-header>
+    <modal-body>
+        <form class="form-horizontal col-sm-12">
+           <div class="form-group"><label>E-Mail</label><input class="form-control email" placeholder="email@example.com" data-placement="top" data-trigger="manual" data-content="Must be a valid e-mail address (user@gmail.com)" type="text"></div>
+            <div class="form-group">
+                <button type="submit"  class="btn btn-default box-shadow text-orange margin-r-10 bold margin-b-10 pull-right" (click)="email.close()">Send</button> 
+                <button type="submit"  class="btn btn-default box-shadow text-orange margin-r-10 bold margin-b-10 pull-left" (click)="email.close()">Cancel</button> 
+                <p class="help-block pull-left text-danger hide" id="form-error">&nbsp; The form is not valid. </p></div>
+        </form>
+
+    </modal-body>
+</modal>
+<modal #share>
+    <modal-header [show-close]="true">
+    </modal-header>
+    <modal-body>
+        share
+
+    </modal-body>
+</modal>
