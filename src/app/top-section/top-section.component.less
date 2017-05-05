@@ -103,13 +103,12 @@
 
 .top-section-carousel {
   .item {
-    > div {
-      width: 100%;
+    > span {
+      width: 47%;
+      margin: 0 1.5% 2%;
       float: left;
-      margin-bottom: 5px;
-      > span{
-        width: 48%;
-        margin: 0 2% 2% 0;
+      img {
+        width: 100%;
       }
     }
   }
@@ -132,8 +131,15 @@
     .carousel-control.left {
       left: -29px;
     }
-    .carousel-control.right{
-       right: -30px;
-     }
+    .carousel-control.right {
+      right: -30px;
+    }
+  }
+  .top-section-carousel {
+    .item {
+      > span {
+        width: 30%;
+      }
+    }
   }
 }
