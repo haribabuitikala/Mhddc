@@ -1,4 +1,4 @@
-import {Component, OnInit, AfterViewInit, OnChanges} from '@angular/core';
+import {Component, Input, OnInit, AfterViewInit, OnChanges} from '@angular/core';
 import {Location} from '@angular/common';
 import {Router} from '@angular/router';
 import {AppUtilities} from "./shared/appUtilities";
@@ -21,47 +21,22 @@ export class AppComponent implements OnInit {
     prev:string = 'Prev';
     next:string = 'Next';
 
-    ngOnChanges(){
-        this.currScreen = this.app.utilities.currScreen;
-    }
-
+    flow:string = this.app.utilities.flow;
     currScreen;
-    navElems = [
-        "/banner",
-        "/zipResults",
-        "/category",
-        "/doorSize",
-        "/collection",
-        "/home",
-        "/config",
-        "/config/construction",
-        "/config/color",
-        "/config/topSection",
-        "/config/glassType",
-        "/config/nonClassic",
-        "/config/lock",
-        "/config/install",
-        "/installQuestion",
-        "/installAnswer",
-        "/config/diy",
-        "/config/opener",
-        "/config/openerSelected",
-        "/config/additionalOptions",
-        "/config/doorConfiguration",
-        "/thankyou"
-    ];
-
-
     // this is for checking whether Install or Diy selected for routing to appropriate screen
     selectedInstallDiy:string;
 
+    ngOnChanges() {
+        this.currScreen = this.app.utilities.currScreen;
+    }
+
     ngOnInit() {
-        this.currScreen = this.navElems.indexOf(this.location.path());
-        this.location.path() === '/thankyou' ? this.currScreen = 2 : this.currScreen = this.navElems.indexOf(this.location.path());
+        this.currScreen = this.app.utilities.residentialNavElems.indexOf(this.location.path());
+        this.location.path() === '/thankyou' ? this.currScreen = 2 : this.currScreen = this.app.utilities[this.flow].indexOf(this.location.path());
     }
 
     nextBtn(id):void {
-        if (this.navElems[id + 1] !== undefined) {
+        if (this.app.utilities[this.flow][id + 1] !== undefined) {
             this.currScreen = id + 1;
             if (this.selectedInstallDiy === 'diy') {
                 this.currScreen = id + 2
@@ -76,17 +51,25 @@ export class AppComponent implements OnInit {
     prevBtn(id):void {
 
         this.currScreen = id - 1;
-        if (this.location.path() === '/config/opener') {
-            this.currScreen = this.navElems.indexOf('/config/install');
+        let path = this.location.path();
+        switch (path) {
+            case "/config/opener":
+                // this.currScreen = this.app.utilities.residentialNavElems.indexOf('/config/install');
+                break;
+            default:
+                this.app.utilities.currPage = this.app.utilities.currPage - 1;
         }
-        this.app.utilities.currPage = this.app.utilities.currPage -1;
+        // if (this.location.path() === '/config/opener') {
+        //     // this.currScreen = this.app.utilities.residentialNavElems.indexOf('/config/install');
+        // }
+
         this.app.utilities.currScreen = this.currScreen;
         this.app.utilities.clicked = 0;
         this.toRoute(this.currScreen)
     }
 
     toRoute(path) {
-        let link:any = this.navElems[path];
+        let link:any = this.app.utilities[this.app.utilities.flow][path];
         this.route.navigateByUrl(link);
     }
 

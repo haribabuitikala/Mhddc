@@ -17,7 +17,7 @@ export class HardwareComponent implements OnInit {
   ngOnInit() {
   }
   navigateTo(path) {
-    this.appComponent.currScreen = this.appComponent.navElems.indexOf(path);
+    // this.appComponent.currScreen = this.appComponent.navElems.indexOf(path);
     this.route.navigateByUrl(path);
   }
 }

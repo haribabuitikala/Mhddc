@@ -17,8 +17,6 @@ export class SliderComponentComponent implements OnInit {
   @Input() number:any;
   sliderRows;
 
-
-
   ngOnInit() {
     console.log(this.data);
     if (this.data) {
