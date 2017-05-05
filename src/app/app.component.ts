@@ -32,6 +32,7 @@ export class AppComponent implements OnInit {
 
     ngOnInit() {
         this.currScreen = this.app.utilities.residentialNavElems.indexOf(this.location.path());
+        this.location.path() === '/thankyou' ? this.currScreen = 2 : this.currScreen = this.app.utilities[this.flow].indexOf(this.location.path());
     }
 
     nextBtn(id):void {

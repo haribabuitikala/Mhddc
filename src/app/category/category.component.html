@@ -40,13 +40,41 @@
         </p>
 
         <div>
-            <button class="btn btn-default box-shadow text-orange margin-r-10 bold margin-b-10"
-                    (click)="serviceRepair()">
+            <button class="btn btn-default box-shadow text-orange margin-r-10 bold margin-b-10" (click)="serviceRepair()">
                 {{lang.modal.Proceed}}
             </button>
             <button class="btn btn-default box-shadow text-orange bold" (click)="modal.close()">
                 {{lang.modal.StayOnCurrentSite}}
             </button>
         </div>
+    </modal-body>
+</modal>
+
+<modal #gdo>
+    <modal-header [show-close]="true">
+    </modal-header>
+    <modal-body>
+        <div class="col-xs-12 margin-b-10 ">
+            <div  class="margin-top-10 text-center div-border div-border-radius box-shadow"  >
+                <p class="margin-b-10 margin-top-10 margin-r-10 padding-t-10 margin-b-15"  > Are you shopping for a NEW Delivered and Installed Garage Door Opener?</p>
+
+                <button   routerLink="/doorSize" class="btn btn-default box-shadow text-orange   bold margin-b-10 margin-t-10 margin-b-20 margin-top-15" (click)="serviceRepair()" >
+                    NEXT >
+                </button>
+
+
+            </div>
+
+            <div class="div-border div-border-radius  text-center box-shadow margin-t-15">
+                <p class="margin-b-10 margin-top-10 padding-t-10 margin-b-15"  > Already have a Garage Door Opener purchased from Home Depot that needs to be installed ?</p>
+
+                <button   routerLink="/doorSize" class="btn btn-default box-shadow text-orange   bold margin-b-10 margin-t-10 margin-b-20 margin-top-15"(click)="serviceRepair()" >
+                    NEXT >
+                </button>
+
+
+            </div>
+        </div>
+
     </modal-body>
 </modal>

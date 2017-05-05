@@ -23,6 +23,7 @@ export class NavComponent implements OnInit {
     VP; // visited page
     NVP; // non visited page
     current:string = 'current';
+    menuCount = 8;
 
     ngOnChanges() {
         this.activateIcon();
@@ -83,6 +84,10 @@ export class NavComponent implements OnInit {
     ngOnInit() {
         $('li span').hide();
         this.screen > 2 ? this.showNav = true : this.showNav = false;
+        this.menuArray = _.times(this.menuCount, _.constant(null));
+        this.menuArray = this.menuArray.map(function (x, i) {
+            return i + 1
+        });
     }
 
 }
