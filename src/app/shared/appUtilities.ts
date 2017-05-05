@@ -6,7 +6,9 @@ export class AppUtilities {
         currPage: 1,
         clicked: 1,
         currScreen: 1,
-        navElems: [
+        navCount:13,
+        flow: 'residentialNavElems',
+        residentialNavElems: [
             "/banner",
             "/zipResults",
             "/category",
@@ -29,6 +31,15 @@ export class AppUtilities {
             "/config/additionalOptions",
             "/config/doorConfiguration",
             "/thankyou"
+        ],
+        gdoNavElems: [
+            "/banner",
+            "/doorSize",
+            "/config/opener",
+            "/config/doorConfiguration"
+            // "/shoppingCart"
         ]
+
+        // flow of GDO: Home, Size , Openers, Order Details, Shopping Cart
     }
 }

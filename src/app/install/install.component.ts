@@ -15,7 +15,7 @@ export class InstallComponent implements OnInit {
 
     
     navigateTo(path) {
-        this.appComponent.currScreen = this.appComponent.navElems.indexOf(path);
+        // this.appComponent.currScreen = this.appComponent.navElems.indexOf(path);
         this.route.navigateByUrl(path);
     }
 
