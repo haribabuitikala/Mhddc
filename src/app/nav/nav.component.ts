@@ -13,6 +13,7 @@ export class NavComponent implements OnInit {
     @Input() screen:number;
     showNav:boolean = false;
     currElem:any;
+    menuArray;
 
     constructor(private app:AppUtilities
         , private route:Router) {
@@ -25,8 +26,15 @@ export class NavComponent implements OnInit {
 
     ngOnChanges() {
         this.activateIcon();
+        this.menuArray = this.buildMenu();
     }
 
+    buildMenu() {
+        let t = _.times(this.app.utilities.navCount, _.constant(null));
+        return t.map(function (x, i) {
+            return i + 1
+        });
+    }
 
     activateIcon() {
         $("li").removeClass('current');
@@ -67,17 +75,14 @@ export class NavComponent implements OnInit {
                 });
             this.app.utilities.currPage = id;
             let path = this.app.utilities.currScreen - (id + 1);
-            this.route.navigateByUrl(this.app.utilities.navElems[path]);
+            // this.route.navigateByUrl(this.app.utilities.[path]);
             this.app.utilities.currScreen = path;
         }
     }
 
     ngOnInit() {
         $('li span').hide();
-        if (this.screen > 2) {
-            this.showNav = true;
-        }
-
+        this.screen > 2 ? this.showNav = true : this.showNav = false;
     }
 
 }

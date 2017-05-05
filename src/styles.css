@@ -655,9 +655,6 @@ img {
 }
 
 /* top section  */
-.top-selectable-img {
-  height: 35px;
-}
 
 #topSectionCarousel .coming-soon, .color-carousel .coming-soon {
   right: 1px;

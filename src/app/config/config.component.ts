@@ -18,7 +18,7 @@ export class ConfigComponent implements OnInit {
     // set the curr screen
     let path = this.location.path();
     path === "/config/design" ? path = "/config" : path = this.location.path();
-    this.appComponent.currScreen = this.appComponent.navElems.indexOf(path);
+    // this.appComponent.currScreen = this.appComponent.navElems.indexOf(path);
     console.log(this.appComponent.currScreen);
 
     $('.switcher-box').on('click tap', function () {
