@@ -23,7 +23,7 @@ export class NavComponent implements OnInit {
     VP; // visited page
     NVP; // non visited page
     current:string = 'current';
-    menuCount = 8;
+    menuCount = this.app.utilities.navCount;
 
     ngOnChanges() {
         this.activateIcon();
