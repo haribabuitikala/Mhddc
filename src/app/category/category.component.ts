@@ -12,6 +12,7 @@ import {AppUtilities} from "../shared/appUtilities";
 export class CategoryComponent implements OnInit {
     @ViewChild('modal') modal:ModalComponent;
     lang;
+    isService:boolean;
 
     constructor(private language:LangEnglishService
         , private route:Router
@@ -20,6 +21,7 @@ export class CategoryComponent implements OnInit {
 
     ngOnInit() {
         this.lang = this.language.getCategory();
+        this.isService = this.utilities.utilities.isService;
     }
 
     navigateTo(path, flow, count) {
