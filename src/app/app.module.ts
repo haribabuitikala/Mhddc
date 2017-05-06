@@ -25,6 +25,7 @@ import {ZipResults} from "./shared/zipresults";
 import {AppUtilities} from "./shared/appUtilities";
 import {ZipResolver} from "./zip-results/zip-resolver.service";
 import {LangEnglishService} from "./shared/english";
+import {SizeList} from "./door-size/sizesList";
 
 @NgModule({
     declarations: [
@@ -55,7 +56,8 @@ import {LangEnglishService} from "./shared/english";
         ZipResults,
         AppUtilities,
         ZipResolver,
-        LangEnglishService
+        LangEnglishService,
+        SizeList
     ],
     bootstrap: [AppComponent]
 })

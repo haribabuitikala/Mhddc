@@ -6,7 +6,8 @@ export class AppUtilities {
         currPage: 1,
         clicked: 1,
         currScreen: 1,
-        navCount:13,
+        navCount: 13,
+        isService: false,
         flow: 'residentialNavElems',
         residentialNavElems: [
             "/banner",
