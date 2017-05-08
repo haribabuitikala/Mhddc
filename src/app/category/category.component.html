@@ -40,12 +40,13 @@
     <modal-header [show-close]="true">
     </modal-header>
     <modal-body>
-        <p>{{lang.modal.modalContent}}</p>
-        <div>
-            <button class="btn btn-default box-shadow text-orange margin-r-10 bold margin-b-10" (click)="serviceRepair()">
+        <p class="padding20">{{lang.modal.modalContent}}</p>
+        <div class="text-center">
+            <button class="btn btn-default box-shadow text-orange  bold margin-b-30 text-uppercase" (click)="serviceRepair()">
                 {{lang.modal.Proceed}}
-            </button>
-            <button class="btn btn-default box-shadow text-orange bold" (click)="modal.close()">
+            </button> 
+            <br>
+            <button class="btn btn-default box-shadow text-orange bold text-uppercase" (click)="modal.close()">
                 {{lang.modal.StayOnCurrentSite}}
             </button>
         </div>
