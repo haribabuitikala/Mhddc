@@ -4,7 +4,7 @@
 <h5 class="text-orange roboto-regular margin-b-15 store-heading bold font-size-16">{{lang.pageHeader}}</h5>
 <div class="tile search-results-tile margin-b-10 ptn-rel"
      *ngFor="let result of results"
-     routerLink="/category">
+     (click)="navigateTo(result, '/category')">
     <img src="../../assets/images/Forward.png" height="30" class="pull-right valign-middle right-10" alt="">
     <span>{{result.storename}}</span>
     <span>{{result.address1}}</span>

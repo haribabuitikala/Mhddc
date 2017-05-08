@@ -14,7 +14,7 @@ export class InstallQuestionComponent implements OnInit {
         , private route:Router) {
     }
     goTo(path){
-        this.appComponent.currScreen = this.appComponent.navElems.indexOf(path);
+        // this.appComponent.currScreen = this.appComponent.navElems.indexOf(path);
         this.route.navigateByUrl(path);
     }
     ngOnInit() {

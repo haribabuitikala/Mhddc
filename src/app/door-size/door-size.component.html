@@ -9,7 +9,6 @@
                 {{lang.singleDoor.singleDoorTitle}}
             </div>
             <div class="padding-b-10">
-                <img src="../../assets/images/select.png" alt="" height="15" class="selected-icon ptn-abs"/>
                 <img src="../../assets/images/IconSingledoor.png" alt="" height="60">
             </div>
             <div class="padding-b-10">
@@ -51,20 +50,16 @@
             <div class="col-xs-6 padding-r-7 pad-l-0">
                 <div>   {{lang.sizes.feet}}</div>
                 <div>
-                    <select name="" id="size-width" class="form-control">
-                        <option value="">9'0'</option>
-                        <option value="">8'0'</option>
-                        <option value="">7'0'</option>
+                    <select name="" [(ngModel)]="selectedWidthFeet" class="form-control" (change)="getWidthInches('width')">
+                        <option *ngFor="let widthFeet of widthFeets">{{widthFeet}}</option>
                     </select>
                 </div>
             </div>
             <div class="col-xs-6  padding-r-7 pad-l-0">
                 <div>{{lang.sizes.inches}}</div>
                 <div>
-                    <select name="" id="size-height" class="form-control">
-                        <option value="">9'0'</option>
-                        <option value="">8'0'</option>
-                        <option value="">7'0'</option>
+                    <select name="" [(ngModel)]="selectedWidthInches" class="form-control" (change)="selectedWidth()">
+                        <option  *ngFor="let widthHgt of widthInches">{{widthHgt}}</option>
                     </select>
                 </div>
             </div>
@@ -78,20 +73,17 @@
             <div class="col-xs-6 padding-r-7 pad-l-0">
                 <div>  {{lang.sizes.feet}}</div>
                 <div>
-                    <select name="" id="height-size-width" class="form-control">
-                        <option value="">6'0'</option>
-                        <option value="">5'0'</option>
-                        <option value="">4'0'</option>
+
+                    <select  [(ngModel)]="selectedHeightFeet" class="form-control" (change)="getHeightInches('height')">
+                        <option *ngFor="let heightFeet of heightFeets">{{heightFeet}}</option>
                     </select>
                 </div>
             </div>
             <div class="col-xs-6  padding-r-7 pad-l-0">
                 <div>  {{lang.sizes.inches}}</div>
                 <div>
-                    <select name="" id="height-size-height" class="form-control">
-                        <option value="">6'0'</option>
-                        <option value="">5'0'</option>
-                        <option value="">4'0'</option>
+                    <select  [(ngModel)]="selectedHeightInches" class="form-control" (change)="selectedHeight()">
+                        <option  *ngFor="let hgtInch of heightInches">{{hgtInch}}</option>
                     </select>
                 </div>
             </div>

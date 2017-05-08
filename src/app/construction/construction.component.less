@@ -14,21 +14,22 @@ li {
     right: 13px;
   }
 }
+
 @background_color_1: rgb(34, 34, 34);
 @border_color_1: rgb(200, 200, 200);
 
 .promo-offer {
-	opacity: 1;
-	padding: 0px;
-	border-width: 0px;
-	border-radius: 0px;
-	border-color: @border_color_1;
-	border-style: solid;
-	background-color: @background_color_1;
-	background-image: none;
-	background-size: auto;
-	background-repeat: repeat;
-	background-position: center center; 
-        color: white;
+  border: 1px solid @border_color_1;
+  background-color: @background_color_1;
+  color: white;
+}
+
+@media only screen and (min-width: 568px) {
+  .col6 {
+    width: 50%;
+  }
+  .col-xs-8{
+    width: 100%;
+  }
 }
 
