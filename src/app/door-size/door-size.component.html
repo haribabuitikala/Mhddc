@@ -58,7 +58,7 @@
             <div class="col-xs-6  padding-r-7 pad-l-0">
                 <div>{{lang.sizes.inches}}</div>
                 <div>
-                    <select name="" [(ngModel)]="selectedWidthInches" class="form-control" (change)="selectedWidth()">
+                    <select name="" [(ngModel)]="selectedWidthInches" class="form-control" (change)="getWidth()">
                         <option  *ngFor="let widthHgt of widthInches">{{widthHgt}}</option>
                     </select>
                 </div>
@@ -82,7 +82,7 @@
             <div class="col-xs-6  padding-r-7 pad-l-0">
                 <div>  {{lang.sizes.inches}}</div>
                 <div>
-                    <select  [(ngModel)]="selectedHeightInches" class="form-control" (change)="selectedHeight()">
+                    <select  [(ngModel)]="selectedHeightInches" class="form-control" (change)="getHeight()">
                         <option  *ngFor="let hgtInch of heightInches">{{hgtInch}}</option>
                     </select>
                 </div>

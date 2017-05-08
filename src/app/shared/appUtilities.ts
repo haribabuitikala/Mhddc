@@ -8,6 +8,8 @@ export class AppUtilities {
         currScreen: 1,
         navCount: 13,
         isService: false,
+        width: "",
+        height: "",
         flow: 'residentialNavElems',
         residentialNavElems: [
             "/banner",
@@ -40,7 +42,6 @@ export class AppUtilities {
             "/config/doorConfiguration"
             // "/shoppingCart"
         ]
-
         // flow of GDO: Home, Size , Openers, Order Details, Shopping Cart
     }
 }
