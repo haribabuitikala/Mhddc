@@ -5,15 +5,12 @@
         <dd>
             <div class="clearfix">
                 <p class="col-xs-11"> Medallion Hardware Upgrade for <span class="text-orange">$59.00</span>?
-
                 </p>
                 <img  (click)="resFlowMed.open()" class="pull-right " alt="" height="25" src="../../assets/images/info.png">
             </div>
-
             <div id="upgrade"> 
                 <img src="../../assets/images/Medallionlogo.png" alt=""/>
                 <img src="../../assets/images/MedallionUpgrades_warranties.png" alt=""/>
-
             </div>
             <div class="flex-right">
                 <span class="text-orange">Yes</span>
@@ -44,7 +41,22 @@
         <dd>
             <div class="clearfix">
                 <p class="col-xs-11">Do you need Double Track Low Head Room Conversion Kit <span class="text-orange">$59.00</span>?</p>
-                <img  class="pull-right" alt="" height="25" src="../../assets/images/info.png">
+                <img  (click)="resFlowHeadRoom.open()" class="pull-right" alt="" height="25" src="../../assets/images/info.png">
+            </div>
+            <div class="flex-right">
+                <span class="text-orange">Yes</span>
+                <label class="switch">
+                    <input type="checkbox">
+                    <div class="slider round"></div>
+                </label>
+                <span class="text-orange">No</span>
+            </div>
+        </dd>
+        <dd>
+            <div class="clearfix">
+
+                <p class="col-xs-11">Do you need an  <strong>Emergency Release Kit</strong>? <span class="text-orange">$35.00</span>?</p>
+                <img  (click)="resFlowReleaseKit.open()" class="pull-right" alt="" height="25" src="../../assets/images/info.png">
             </div>
             <div class="flex-right">
                 <span class="text-orange">Yes</span>
@@ -58,85 +70,101 @@
     </dl>
 </div>
 <div class="content additional-options" id="gdoFlow">
- 
-<h4 class="text-orange font-size-16">13 Additional Options</h4>
-<div class="content additional-options">
- 
-    <dl>
-        <dd>
-            <div class="clearfix">
-                <p class="col-xs-11"> Medallion Hardware Upgrade for <span class="text-orange">$59.00</span>?
+    <h4 class="text-orange font-size-16">13 Additional Options</h4>
+    <div class="content additional-options">
+        <dl>
+            <dd>
+                <div class="clearfix">
+                    <p class="col-xs-11"> Medallion Hardware Upgrade for <span class="text-orange">$59.00</span>?
 
-                </p>
-                <img  class="pull-right " alt="" height="25" src="../../assets/images/info.png">
-            </div>
-
-            <div id="upgrade"> 
-                <img src="../../assets/images/Medallionlogo.png" alt=""/>
-                <img src="../../assets/images/MedallionUpgrades_warranties.png" alt=""/>
-
-            </div>
-            <div class="flex-right">
-                <span class="text-orange">Yes</span>
-                <label class="switch">
-                    <input type="checkbox" checked="checked">
-                    <div class="slider round"></div>
-                </label>
-                <span class="text-orange">No</span>
-            </div>
-        </dd>
-        <dd>
-            <div class="clearfix">
-                <p class="col-xs-11">Is this job site within 30 drive miles of this store?    </p>
-                <img  class="pull-right" alt="" height="25" src="../../assets/images/info.png">
-            </div>
-            <div class="flex-right">
-                <span class="text-orange">Yes</span>
-                <label class="switch">
-                    <input type="checkbox" checked="checked">
-                    <div class="slider round"></div>
-                </label>
-                <span class="text-orange">No</span>
-            </div>
-            <div class="align-right ">
-                <p id="distance">Distance of job site is <input type="text" /> drive miles from store</p>
-            </div>
-        </dd>
-        <dd>
-            <div class="clearfix">
-                <p class="col-xs-11">Do you need Double Track Low Head Room Conversion Kit <span class="text-orange">$59.00</span>?</p>
-                <img  class="pull-right" alt="" height="25" src="../../assets/images/info.png">
-            </div>
-            <div class="flex-right">
-                <span class="text-orange">Yes</span>
-                <label class="switch">
-                    <input type="checkbox">
-                    <div class="slider round"></div>
-                </label>
-                <span class="text-orange">No</span>
-            </div>
-        </dd>
-    </dl>
-</div>
-<modal #resFlowMed>
-  <modal-header [show-close]="true">
-  </modal-header>
-  <modal-body>
-      <img src="../../assets/images/additionalOptions/R_med.png" alt=""/>
-  </modal-body>
-</modal>
-
-<modal #resFlowMiles>
-  <modal-header [show-close]="true">
-  </modal-header>
-  <modal-body>
-      <p>Distance From Store? </p>
-      
-  <p>Prices INCLUDE Home Delivery withIn a 30 mile driving distance from the store.if job site location is greater than 30 drive miles from store then the following mileage fees apply:</p>
-  <ul>
-      <li><span>31 - 50 miles from store - flat rate of $51</span></li>
-        <li><span>Greater than 50 miles from store - ﬂat rate of $51 + $3.00 for every drive mile over50</span></li>
-  </ul>
-  </modal-body>
-</modal>
-  
+                    </p>
+                    <img  class="pull-right " alt="" height="25" src="../../assets/images/info.png">
+                </div>
+                <div id="upgrade"> 
+                    <img src="../../assets/images/Medallionlogo.png" alt=""/>
+                    <img src="../../assets/images/MedallionUpgrades_warranties.png" alt=""/>
+                </div>
+                <div class="flex-right">
+                    <span class="text-orange">Yes</span>
+                    <label class="switch">
+                        <input type="checkbox" checked="checked">
+                        <div class="slider round"></div>
+                    </label>
+                    <span class="text-orange">No</span>
+                </div>
+            </dd>
+            <dd>
+                <div class="clearfix">
+                    <p class="col-xs-11">Is this job site within 30 drive miles of this store?    </p>
+                    <img  class="pull-right" alt="" height="25" src="../../assets/images/info.png">
+                </div>
+                <div class="flex-right">
+                    <span class="text-orange">Yes</span>
+                    <label class="switch">
+                        <input type="checkbox" checked="checked">
+                        <div class="slider round"></div>
+                    </label>
+                    <span class="text-orange">No</span>
+                </div>
+                <div class="align-right ">
+                    <p id="distance">Distance of job site is <input type="text" /> drive miles from store</p>
+                </div>
+            </dd>
+            <dd>
+                <div class="clearfix">
+                    <p class="col-xs-11">Do you need Double Track Low Head Room Conversion Kit <span class="text-orange">$59.00</span>?</p>
+                    <img  class="pull-right" alt="" height="25" src="../../assets/images/info.png">
+                </div>
+                <div class="flex-right">
+                    <span class="text-orange">Yes</span>
+                    <label class="switch">
+                        <input type="checkbox">
+                        <div class="slider round"></div>
+                    </label>
+                    <span class="text-orange">No</span>
+                </div>
+            </dd>
+        </dl>
+    </div>
+    <modal #resFlowMed>
+        <modal-header [show-close]="true">
+        </modal-header>
+        <modal-body>
+            <img src="../../assets/images/additionalOptions/R_med.png" alt=""/>
+        </modal-body>
+    </modal>
+    <modal #resFlowMiles>
+        <modal-header [show-close]="true">
+        </modal-header>
+        <modal-body class="bold text-left padding10">
+            <p>Distance From Store? </p>     
+            <p>Prices INCLUDE Home Delivery withIn a 30 mile driving distance from the store.if job site location is greater than 30 drive miles from store then the following mileage fees apply:</p>
+            <ul>
+                <li><span>31 - 50 miles from store - flat rate of $51</span></li>
+                <li><span>Greater than 50 miles from store - ﬂat rate of $51 + $3.00 for every drive mile over50</span></li>
+            </ul>
+        </modal-body>
+    </modal>
+    <modal #resFlowHeadRoom>
+        <modal-header [show-close]="true">
+        </modal-header>
+        <modal-body  class="text-left padding10">
+            <h4 class="margin-b-10 bold">What is a Low Headroom Conversion Kit? </h4> 
+            <p class="margin-b-10">Low Headroom track reduces the amount of headroom required 0 Backroom Ceiling for a normal installation Headroom is the space needed above the top of the door upwards to the first obstruction within the path of the door inside the garage.</p>
+  <img src="../../assets/images/how_to_measure-drawing.png" class="img-rounded measure margin-r-10" alt=" " width="304"
+                 height="236">
+        </modal-body>
+    </modal>
+    <modal #resFlowReleaseKit>
+        <modal-header [show-close]="true">
+        </modal-header>
+        <modal-body  class="text-left padding10">
+            <p class="margin-b-10 margin-t-20">The Clopay Emergency Release Kit allows you to disengage the Garage Door Opener. from the outside of the garage. This allows you to
+                open the door in the event of a power outage or opener failure. The Clopay Emergency Release Kit may be required if the Garage Door is the
+                only am to the stmcture. Please check local building codes for clarification.
+           
+               
+            </p>
+             <span class="padding10">Installation required for DIY orders  </span>
+        </modal-body>
+    </modal>
