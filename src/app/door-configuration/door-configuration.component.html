@@ -114,33 +114,35 @@
             </div>
         </dd>
     </dl>
-
     <div id="GdoDoorConfig" class="fixed-header">
         <h4 class="text-orange">Your Door Configuration</h4>
         <div class="space-around"> 
             <button (click)="share.open()" class="btn">SHARE<span class="glyphicon glyphicon-share padding-l-3"></span></button>
             <button (click)="email.open()" class="btn">EMAIL QUOTE<span class="glyphicon glyphicon-envelope  padding-l-3"></span></button>
         </div>
-        <address class="padding10 ">
-
-            <p>
-                <span><span class="bold">SOUTH ELGIN Home Depot (6923)</span>
-                    <br>955 N RANDALL RD&nbsp;<br>ELGIN , IL 60123&nbsp;<br>
-                    (847)622-9441</span>
-            </p>
-
+        <address class="padding10 margin-b-10">
+            <span><span class="bold">SOUTH ELGIN Home Depot (6923)</span>
+                <br>955 N RANDALL RD&nbsp;<br>ELGIN , IL 60123&nbsp;<br>
+                (847)622-9441</span>
         </address>
         <p class="bold">
             Chamberlain HD950WF Wi-Fi Connected MyQ Belt Drive with Battery Back-up with 7' rail
         </p>
-        <p>
+        <p class="margin-b-20">
             <span class="bold">Opener Accessories</span><br>
             2 - Chamberlain Wireless Keypad ($30.00 each) <br>
             1 - Chamberlain 3 Button Remote ($25.00 each)<br>
         </p>
+        <div class="margin-b-10  padding10 shopping-cart-info margin-b-20">
+            <span  class="padding-l-10" > Quantity
+                <img class="minus-quantity" src="../../assets/images/substract.png"  alt="">
+                <span class="accessory-quantity">2</span>
+                <img class="add-quantity" src="../../assets/images/add.png"   alt="">
+            </span>  
+            <span class="pull-right padding-r-7">Sub-Total<span> $450.00</span> </span>
+        </div>
     </div>
 </div>
-
 <button (click)="discardDetails.open()" class="btn">discardDetails<span class="glyphicon glyphicon-share padding-l-3"></span></button>
 <button (click)="paymentBilling.open()" class="btn">Payment Billing<span class="glyphicon glyphicon-share padding-l-3"></span></button>
 <button (click)="shoppingCart.open()" class="btn">Shopping cart <span class="glyphicon glyphicon-share padding-l-3"></span></button>
@@ -159,7 +161,6 @@
                 <button type="submit"  class="btn btn-default box-shadow text-orange margin-r-10 bold margin-b-10   text-uppercase" (click)="email.close()">Send Email</button> 
             </div>
         </form>
-
     </modal-body>
 </modal>
 <modal #share>
@@ -173,9 +174,7 @@
             <div class="col-xs-4"><img src="https://uc.uxpin.com/files/646658/640526/google-300x300-1.png"/></div>
             <div class="col-xs-4"><img style="width:66px;height:65px;" src="https://uc.uxpin.com/files/646658/640526/pintrest-icon.png"/></div>
             <div class="col-xs-4"><img style="width:76px;height:72px;" src="https://uc.uxpin.com/files/646658/640526/instagram.png"/></div>
-
         </div>
-
     </modal-body>
 </modal>
 <modal #checkoutPopup>
@@ -195,14 +194,11 @@
                 <hr class="hr-radius">
                 <div> <span>Total:</span> <span class="pull-right">1040.35</span></div>
             </div>
-
         </div>
-
     </modal-body>
 </modal>
 <modal #shoppingCartTerms>
     <modal-header [show-close]="true">
-
     </modal-header>
     <modal-body>
         <div class="col-xs-12 font-size-14  pull-left pad-l-4" >
@@ -232,19 +228,14 @@
             </ul>
             <strong><p>WHAT TO EXPECT ONCE WE RECEIVE YOUR ORDER</p></strong>
             <p>Your built to order Do-It-Yourself door will be manufactured No changes or cancellations to a Do-It-Yourself order after three business days from the date purchased. You will be contacted within three to four weeks to schedule your FREE HOME DELIVERY</p>
-
-
         </div>
-
         <div class="bold margin-t-20 text-center" >
             <p class="aggrement-text ">HOME IMPROVEMENT AGREEMENT <br>PLEASE READ THIS </p>
             <div class="form-group margin-b-20">
                 <button type="submit"  class="btn btn-default box-shadow text-orange margin-r-10 bold margin-b-10 pull-right" (click)="email.close()">DECLINE</button> 
                 <button type="submit"  class="btn btn-default box-shadow text-orange margin-r-10 bold margin-b-10 pull-left" (click)="email.close()">ACCEPT</button> 
             </div>
-
         </div>
-
     </modal-body>
 
 </modal> 
@@ -305,7 +296,6 @@
                 <label for="inputPassword">Country:</label>
                 <input type="text" class="form-control" id="inputPassword" placeholder="">
             </div>
-
             <div class="form-group col-xs-6 padding-0-l"  >
                 <label for="inputPassword">Primary Phone No:</label>
                 <input type="number" class="form-control" id="inputPassword" placeholder="">
@@ -314,12 +304,10 @@
                 <label for="inputPassword">Secondary Phone No:</label>
                 <input type="number" class="form-control" id="inputPassword" placeholder="">
             </div>
-
             <div class="form-group">
                 <label for="inputEmail">Email Address: (Used for order confirmation only)</label>
                 <input type="text" class="form-control" id="inputEmail" placeholder="">
             </div>
-
         </form>
     </modal-body>
 </modal>
@@ -373,7 +361,6 @@
                 <label for="inputPassword">Secondary Phone No:</label>
                 <input type="number" class="form-control" id="inputPassword" placeholder="">
             </div>
-
             <div class="form-group margin-b-20 text-center"> 
                 <button type="submit"  class="btn btn-default box-shadow text-orange margin-r-10 bold margin-b-10  text-uppercase"  >Submit customer information</button> 
             </div>
@@ -445,7 +432,6 @@
                     <dd>Lock : Inside Slide Lock (Retail)<span class="pull-right">$0.00</span></dd>
                 </dl>
             </div>
-
         </div>
         <div class="clearfix margin-b-40">
             <button type="submit"  class= " font-size-16 pull-left btn btn-default box-shadow text-orange margin-r-10 bold margin-b-10  text-uppercase"  >REMOVE ITEM</button> 
@@ -455,11 +441,10 @@
                 <span>1</span>
                 <img src="../../assets/images/add.png" alt="" class="add-quantity">
             </span>
-
-
         </div>
         <div class="text-center">
-            <button type="submit"  class="btn btn-default box-shadow text-orange bold   text-uppercase text-center"  >CHECKOUT NOW</button>                  
+            <button type="submit"  class="btn btn-default box-shadow text-orange bold   text-uppercase text-center margin-b-10"  > <img src="../../assets/images/add.png" alt="" class="add-quantity padding-r-7">Add Another Door</button>   <br>
+             <button type="submit"  class="btn btn-default box-shadow text-orange bold   text-uppercase text-center"  >Checkout ></button>                  
         </div>
         <div class="content">
             <h4  class="text-orange"> 4.Your Shopping Cart </h4>
@@ -488,8 +473,6 @@
                     <span>1</span>
                     <img src="../../assets/images/add.png" alt="" class="add-quantity">
                 </span>
-
-
             </div> 
             <div class="text-center">
                 <button type="submit"  class="btn btn-default box-shadow text-orange bold   text-uppercase "  >CHECKOUT NOW</button>                
@@ -499,7 +482,7 @@
 </modal>
 <modal #paymentBilling>
     <modal-header [show-close]="true">
-        <p class="text-orange font-size-16 padding-l-20" >Payment $ Billing </p>
+        <p class="text-orange font-size-16 padding-l-15 bold" >Payment $ Billing </p>
     </modal-header>
     <modal-body>
         <p class="bold  font-size-16 ">Credit Card</p>
@@ -549,7 +532,7 @@
                 <label for="inputPassword">Postal Code/Zip:</label>
                 <input type="text" class="form-control" id="inputPassword" placeholder="">
             </div>  
-            <div class="bold padding10 div-border col-xs-12 margin-b-20 tile" >
+            <div class="bold padding10 div-border col-xs-12  margin-b-40 tile" >
                 <p class="text-orange "> Order Summary</p>
                 <div> <span>Sub Total:</span> <span class="pull-right">961.35</span></div>
                 <div> <span>Estimated Tax</span> <span class="pull-right">79.31</span></div>
