@@ -21,13 +21,12 @@
 </div>
 <modal #modal>
     <modal-header [show-close]="true">
+        <h4 class="padding-l-20"> Your Shopping Cart is Empty </h4>
     </modal-header>
-    <modal-body class="text-center">
-        <p>Your Shopping Cart is Empty</p>
-        <div>
+    <modal-body class="text-center"> 
+        <div class="margin-t-100">
             <button class="btn btn-default box-shadow text-orange bold" (click)="modal.close()">Continue Shopping
             </button>
         </div>
     </modal-body>
 </modal>
-
