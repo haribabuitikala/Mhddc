@@ -141,13 +141,14 @@
     </div>
 </div>
 
+<button (click)="discardDetails.open()" class="btn">discardDetails<span class="glyphicon glyphicon-share padding-l-3"></span></button>
 <button (click)="paymentBilling.open()" class="btn">Payment Billing<span class="glyphicon glyphicon-share padding-l-3"></span></button>
 <button (click)="shoppingCart.open()" class="btn">Shopping cart <span class="glyphicon glyphicon-share padding-l-3"></span></button>
 <button (click)="customerInfo.open()" class="btn">customer Info <span class="glyphicon glyphicon-share padding-l-3"></span></button>
 <button (click)="customerInfoSoldTo.open()" class="btn">customer Info Sold to<span class="glyphicon glyphicon-share padding-l-3"></span></button>
 <button (click)="openingHeight.open()" class="btn">Opening Height<span class="glyphicon glyphicon-share padding-l-3"></span></button>
 <button (click)="checkoutPopup.open()" class="btn">Checkout<span class="glyphicon glyphicon-share padding-l-3"></span></button>
-<button (click)="shoppingCartTerms.open()" class="btn">Shopping cart tearms and conditions<span class="glyphicon glyphicon-share padding-l-3"></span></button>
+<button (click)="shoppingCartTerms.open()" class="btn">Shopping cart terms and conditions<span class="glyphicon glyphicon-share padding-l-3"></span></button>
 <modal #email>
     <modal-header [show-close]="true">
     </modal-header>
@@ -559,5 +560,27 @@
                 <button type="submit"  class="btn btn-default box-shadow text-orange margin-r-10 bold margin-b-10  text-uppercase">Submit</button> 
             </div>
         </form>
+    </modal-body>
+</modal>
+<modal #discardDetails>
+    <modal-header [show-close]="true">
+    </modal-header>
+    <modal-body class="text-center">
+        <img class="margin-b-20 alert-image" src="../../assets/images/alert-1.png" alt=""/>
+        <p class=" margin-t-20 bold">
+            <span class="margin-b-20 margin-t-20" >Navigating to Home Page will discard<br>all available Cart Items.</span> <br>
+
+        </p>
+        <p class="margin-b-40 margin-t-10 bold">
+            <span >Do you want to continue ?</span>
+        </p>
+        <div class="text-center">
+            <button class="btn btn-default btn-lg box-shadow text-orange bold text-uppercase margin-r-25" routerLink="/installQuestion">
+                YES
+            </button>
+            <button class="btn btn-default btn-lg box-shadow text-orange bold text-uppercase" routerLink="/config/opener">
+                NO
+            </button>
+        </div>
     </modal-body>
 </modal>
