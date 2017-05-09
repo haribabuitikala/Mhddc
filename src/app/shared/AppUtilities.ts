@@ -21,7 +21,6 @@ export class AppUtilities {
             "/config/color",
             "/config/topSection",
             "/config/glassType",
-            "/config/nonClassic",
             "/config/lock",
             "/config/install",
             "/installQuestion",
