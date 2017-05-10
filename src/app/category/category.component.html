@@ -4,7 +4,7 @@
 </div>
 <div class="category-sec clearfix">
     <div class="col-xs-6 padding-r-7 show-category">
-        <div class="bg-white box-shadow" routerLink="/doorSize">
+        <div class="bg-white box-shadow"  (click)="navigateTo('/doorSize','residentialNavElems',12)">
             <div class="image-sec text-center padding-t-10">
                 <span class="helper"></span>
                 <img src="../../assets/images/IconResidentialdoor.png" class="margin-b-15 residential-garrage-icon"
@@ -13,8 +13,8 @@
             <p class="category-type residential-garrage text-center">{{lang.categoryOne}}</p>
         </div>
     </div>
-    <div class="col-xs-6 padding-l-7" (click)="gdo.open()">
-        <div class="bg-white box-shadow" >
+    <div class="col-xs-6 padding-l-7">
+        <div class="bg-white box-shadow" (click)="navigateTo('/doorSize','gdoNavElems',4)">
             <!--        routerLink="/doorSize"-->
             <div class="../../assets/image-sec text-center padding-t-10 ptn-rel">
                 <!--<img src="../../assets/images/coming-soon.png" class="ptn-abs category-coming-soon" alt="">-->
@@ -24,7 +24,7 @@
             <p class="category-type text-center">{{lang.categoryTwo}}</p>
         </div>
     </div>
-    <div class="col-xs-6 padding-r-7" (click)="showModal()">
+    <div class="col-xs-6 padding-r-7" (click)="showModal()" *ngIf="isService">
         <div class="bg-white box-shadow">
             <div class="../../assets/image-sec text-center padding-t-10 ptn-rel category-height">
                 <!--<img src="../../assets/images/coming-soon.png" class="ptn-abs category-coming-soon" alt="">-->
