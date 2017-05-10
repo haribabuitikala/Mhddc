@@ -1,4 +1,15 @@
 <h4 class="text-orange roboto-regular margin-b-15 store-heading bold font-size-16">{{lang.pageHeader}}</h4>
+<div class="tile hide search-results-tile margin-b-10 ptn-rel"
+     *ngFor="let result of results"
+     (click)="navigateTo(result, '/category')">
+    <img src="../../assets/images/Forward.png" height="30" class="pull-right valign-middle right-10" alt="">
+    <span>{{result.storename}}</span>
+    <span>{{result.address1}}</span>
+    <span>{{result.city}}, {{result.state}} {{result.zip}}</span>
+    <span>Phone: {{result.storephonenumber}}</span>
+    <span>Distance: {{result.zipdistance}}</span>
+</div>
+
 <div class="tile search-results-tile margin-b-10 ptn-rel"
      *ngFor="let result of results"
      (click)="navigateTo(result, '/category')">
@@ -9,6 +20,7 @@
     <span>Phone: {{result.storephonenumber}}</span>
     <span>Distance: {{result.zipdistance}}</span>
 </div>
+
 <div class="text-center">
     <button routerLink="/banner"
             class="btn btn-default text-uppercase text-orange btn-big box-shadow bold change-zip-code">{{lang.ChangeZipCode}}
