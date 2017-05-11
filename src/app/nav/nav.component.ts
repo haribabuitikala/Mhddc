@@ -1,6 +1,7 @@
-import {Component, OnInit, Input, OnChanges, Output, EventEmitter} from '@angular/core';
+import {Component, OnInit, Input, OnChanges, Output, EventEmitter, ViewChild} from '@angular/core';
 import {AppUtilities} from "../shared/appUtilities";
 import {Router} from '@angular/router';
+import {ModalComponent} from "ng2-bs3-modal/ng2-bs3-modal";
 declare var $:any;
 declare var _:any;
 
@@ -10,6 +11,7 @@ declare var _:any;
     styleUrls: ['./nav.component.less']
 })
 export class NavComponent implements OnInit {
+    @ViewChild('home') modal:ModalComponent;
     @Input() screen:number;
     showNav:boolean = false;
     currElem:any;
@@ -35,6 +37,11 @@ export class NavComponent implements OnInit {
         return t.map(function (x, i) {
             return i + 1
         });
+    }
+
+    home() {
+        this.modal.close();
+        this.route.navigateByUrl('/banner');
     }
 
     activateIcon() {
