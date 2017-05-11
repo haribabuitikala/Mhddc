@@ -19,11 +19,11 @@ export class ZipResolver implements Resolve<Izip> {
     resolve(route:ActivatedRouteSnapshot, stateRoute:RouterStateSnapshot):Observable<Izip> {
         let zipCode = route.params['zip'];
         let results = this.zip.getZip(zipCode);
-        if (results.Stores.length != 0) {
-            return results;
+        if (results === undefined) {
+            $('.zip-code').val('');
+            this.toastr.error(`${zipCode} is not correct, try with another one`);
+            this.route.navigateByUrl('/banner');
         }
-        $('.zip-code').val('');
-        this.toastr.error(`${zipCode} is not correct, try with another one`);
-        this.route.navigateByUrl('/banner');
+        return results;
     }
 }
