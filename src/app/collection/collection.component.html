@@ -8,7 +8,8 @@
         <iframe src="https://www.youtube.com/embed/m5L_x1OU4s0?autoplay=1"></iframe>
     </div>
     <div class="collection-btn-sec">
-        <img src="../../assets/images/collection/play.png" (click)="playVideo()" alt="" height="20">
+        <img src="../../assets/images/collection/play.png" *ngIf="showPlayIcon" (click)="playVideo()" alt="" height="20">
+        <img src="../../assets/images/collection/gallery.png" (click)="showGallery()" *ngIf="showImageIcon" alt="" height="20"/>
         <span><button (click)="productDetails.open()">Info</button></span> 
         <div class="pull-right">
             <button class="collection-select">Select</button>
@@ -21,7 +22,8 @@
         <img src="../../assets/images/collection/btnCollectionCoachman.png" alt=""/> 
     </div>
     <div class="collection-btn-sec  ">
-        <img src="../../assets/images/collection/play.png" alt="" height="20">
+         <img src="../../assets/images/collection/play.png" *ngIf="showPlayIcon" (click)="playVideo()" alt="" height="20">
+        <img src="../../assets/images/collection/gallery.png" (click)="showGallery()" *ngIf="showImageIcon" alt="" height="20"/>
         <span><button (click)="productDetails.open()">Info</button></span> 
         <div class="btns pull-right"> 
             <button>Select</button>
@@ -34,7 +36,8 @@
         <img src="../../assets/images/collection/btnCollectionGallery.png" alt=""/> 
     </div>
     <div class="collection-btn-sec  ">
-        <img src="../../assets/images/collection/play.png" alt="" height="20">
+  <img src="../../assets/images/collection/play.png" *ngIf="showPlayIcon" (click)="playVideo()" alt="" height="20">
+        <img src="../../assets/images/collection/gallery.png" (click)="showGallery()" *ngIf="showImageIcon" alt="" height="20"/>
         <span><button (click)="productDetails.open()">Info</button></span> 
         <div class="btns pull-right"> 
             <button>Select</button>
@@ -47,7 +50,8 @@
         <img src="../../assets/images/collection/btnCollectionCanyonRidgeUG.png" alt=""/> 
     </div>
     <div class="collection-btn-sec ">
-        <img src="../../assets/images/collection/play.png" alt="" height="20">
+  <img src="../../assets/images/collection/play.png" *ngIf="showPlayIcon" (click)="playVideo()" alt="" height="20">
+        <img src="../../assets/images/collection/gallery.png" (click)="showGallery()" *ngIf="showImageIcon" alt="" height="20"/>
         <span><button (click)="productDetails.open()">Info</button></span> 
         <div class="btns pull-right"> 
             <button>Select</button>
@@ -60,7 +64,8 @@
         <img src="../../assets/images/collection/btnCollectionSpeciality.png" alt=""/>
     </div>
     <div class="collection-btn-sec ">
-        <img src="../../assets/images/collection/play.png" alt="" height="20">
+      <img src="../../assets/images/collection/play.png" *ngIf="showPlayIcon" (click)="playVideo()" alt="" height="20">
+        <img src="../../assets/images/collection/gallery.png" (click)="showGallery()" *ngIf="showImageIcon" alt="" height="20"/>
         <span><button (click)="productDetails.open()">Info</button></span> 
         <div class="btns pull-right"> 
             <button>Select</button>
@@ -210,9 +215,7 @@
     <modal-header [show-close]="true">
     </modal-header>
     <modal-body>
-
         <p><img src="../../assets/images/collection/btnCollectionClassic-1.png" alt=""></p>
         <img src="../../assets/images/collection/Collapse-50-3.png" (click)="productExpand.close()" alt="">
-
     </modal-body>
 </modal>
