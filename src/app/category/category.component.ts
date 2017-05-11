@@ -13,33 +13,6 @@ export class CategoryComponent implements OnInit {
     @ViewChild('modal') modal:ModalComponent;
     lang;
     isService:boolean;
-    dataParams={
-        dtype:'',
-        wincode:'',
-        wf:null, // width feet
-        wi:null, // width inches
-        hf:null, // height feet
-        hi:null, // height inches
-        natmarketid:null,
-        localmarketid:null, // we are not getting
-        productlayout:true //
-    };
-
-    // if user did'nt selected door size
-    // single door--sample
-    //
-    // wf:8
-    // wi:0
-    // hf:7
-    // hi:0
-
-
-    // Double door Sample
-    //
-    // wf:16
-    // wi:0
-    // hf:7
-    // hi:0
 
     constructor(private language:LangEnglishService
         , private route:Router
