@@ -23,11 +23,25 @@ export class ZipResultsComponent implements OnInit {
 
     navigateTo(item, path) {
         this.utils.utilities.isService = item.isService;
+        this.utils.utilities.productlayout = item.productlayout;
+        this.utils.utilities.natmarketid = item.natmarketid;
+
+        // setting double door height and width
+        this.utils.utilities.doubleDoorHeight = item.DoubleDoorHeight;
+        this.utils.utilities.doubleDoorWidth = item.DoubleDoorWidth;
+
+        // setting single door height and width
+        this.utils.utilities.singleDoorHeight = item.SingleDoorHeight;
+        this.utils.utilities.singleDoorWidth = item.SingleDoorWidth;
+
+
         this.router.navigateByUrl(path);
     }
 
     ngOnInit() {
-        this.results = this.route.snapshot.data['results'];
+        let stores = this.route.snapshot.data['results'];
+        this.results = stores.Stores;
+        this.utils.utilities.winCode = stores.windcode;
         this.lang = this.language.getzipResults();
     }
 
