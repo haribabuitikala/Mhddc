@@ -6,6 +6,7 @@ import {LangEnglishService} from "../shared/english";
 import {SizeList} from "./sizesList";
 import {AppUtilities} from "../shared/appUtilities";
 // import {NavComponent} from "../nav/nav.component";
+declare var $:any;
 
 @Component({
     selector: 'app-door-size',
@@ -30,6 +31,9 @@ export class DoorSizeComponent implements OnInit {
     selectedHeightInches;
     selectedHeight;
 
+    // if user did'nt selected door size the default widths should be singleDoorWidth, singleDoorHeight, doubleDoorWidth and doubleDoorHeight
+    // based on the selection either single car door or double car door
+
     constructor(private appComponent:AppComponent
         , private route:Router
         , private language:LangEnglishService
@@ -44,29 +48,48 @@ export class DoorSizeComponent implements OnInit {
         this.widthFeets = this.sizes.getWidthFeets();
     }
 
+    // set door
+    setDoor(door, event) {
+        $('.select-door').removeClass('current');
+        this.utils.utilities.singleDoor = false;
+        this.utils.utilities.doubleDoor = false;
+        this.utils.utilities[door] = true;
+        event.currentTarget.classList.add('current');
+    }
+
     getWidthInches(itm) {
         this.widthInches = this.sizes.getInches(itm, this.selectedWidthFeet);
-        this.selectedwidth = "width_" + this.selectedWidthFeet + "_0";
+        this.selectedwidth = "width_"+this.selectedWidthFeet+"_0";
         this.heightFeets = this.sizes.getHeightFeets(this.selectedwidth);
         this.heightInches = this.sizes.getInches('height', this.heightFeets[0]);
-        this.utils.utilities.width = this.selectedwidth;
+        this.utils.utilities.wi = this.widthInches[0];
+        this.utils.utilities.wf = this.selectedWidthFeet;
+        this.utils.utilities.hf = this.heightFeets[0];
+        this.utils.utilities.hi = this.heightInches[0];
     }
 
     getHeightInches(itm) {
         this.heightInches = this.sizes.getInches(itm, this.selectedHeightFeet);
         // this.selectedHeight = "height_" + this.selectedHeightFeet + "_0";
-        this.utils.utilities.height = "height_" + this.selectedHeightFeet + "_0";
+        this.utils.utilities.hi = this.selectedHeightFeet;
     }
 
     getWidth() {
-        this.selectedwidth = "width_" + this.selectedWidthFeet + "_" + this.selectedWidthInches;
         this.heightFeets = this.sizes.getHeightFeets(this.selectedwidth);
-        this.utils.utilities.width = this.selectedwidth;
+        this.utils.utilities.wf = this.selectedWidthFeet;
     }
 
     getHeight() {
-        this.selectedHeight = "height_" + this.selectedHeightFeet + "_" + this.selectedHeightInches;
-        this.utils.utilities.height = this.selectedHeight;
+        this.utils.utilities.hf = this.selectedHeightFeet;
+    }
+
+    //  check for florida to open the popup
+    checkFlorida() {
+        let winCode = +this.utils.utilities.winCode.slice(1);
+        if (winCode >= 6) {
+            this.modal1.open();
+        }
+        this.showMeasure = true;
     }
 
     navigateTo(path) {
@@ -79,5 +102,17 @@ export class DoorSizeComponent implements OnInit {
         this.showMeasure = true;
         this.modal1.close();
     }
+
+    dataParams = {
+        dtype: '',
+        wincode: this.utils.utilities.winCode,
+        wf: this.utils.utilities.wf, // width feet
+        wi: this.utils.utilities.wi, // width inches
+        hf: this.utils.utilities.hf, // height feet
+        hi: this.utils.utilities.hi, // height inches
+        natmarketid: this.utils.utilities.natmarketid,
+        localmarketid: null, // we are not getting
+        productlayout: this.utils.utilities.productlayout //
+    };
 
 }

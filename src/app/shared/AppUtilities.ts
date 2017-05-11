@@ -8,8 +8,10 @@ export class AppUtilities {
         currScreen: 1,
         navCount: 13,
         isService: false,
-        width: "",
-        height: "",
+        wf: null, // width feet
+        wi: null, // width inches
+        hf: null, // height feet
+        hi: null, // height inches
         winCode: "",
         doubleDoorHeight: "",
         doubleDoorWidth: "",
