@@ -435,19 +435,7 @@ img {
   vertical-align: middle;
 }
 
-.text-sec {
-  /*  padding: 7px;*/
-  padding: 7px 5px;
-  border-top: 1px solid #ccc;
-  font-size: 10px;
-  font-family: Roboto-regular;
-  line-height: 14px;
-}
 
-.text-sec .text {
-  float: right;
-  /*width: 80%;*/
-}
 
 /* flow1 page */
 .navbar-toggle .icon-bar {
@@ -995,9 +983,9 @@ input:not(:checked) + .slider:before {
     /*height: 330px;*/
   }
 
-  .text-sec {
+/*  .text-sec {
     font-size: 12px;
-  }
+  }*/
 
   /*.text-sec .text {*/
   /*width: 85%;*/
