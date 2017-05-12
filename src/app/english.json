@@ -31,7 +31,7 @@
         },
         "doorSize": {
         "title": " ",
-                "header": "Select your door size",
+                "header": "1.Select your door size",
                 "submit": "",
                 "singleDoor": {
                 "singleDoorTitle": "Single Car Door",
