@@ -11,6 +11,7 @@ import {AppUtilities} from "../shared/appUtilities";
 })
 export class CategoryComponent implements OnInit {
     @ViewChild('modal') modal:ModalComponent;
+    @ViewChild('gdo') gdo:ModalComponent;
     lang;
     isService:boolean;
 
@@ -26,9 +27,15 @@ export class CategoryComponent implements OnInit {
 
     navigateTo(path, flow, count) {
         this.utilities.utilities.flow = flow;
-        this.utilities.utilities.navCount = count;
-        this.utilities.utilities.currPage = 1;
-        this.route.navigateByUrl(path);
+        flow === 'residentialNavElems' ? this.utilities.utilities.dtype = 'res' : this.utilities.utilities.dtype = 'gdo';
+        if(flow === 'residentialNavElems') {
+            this.utilities.utilities.navCount = count;
+            this.utilities.utilities.currPage = 1;
+            this.utilities.utilities.currScreen += 1;
+            this.route.navigateByUrl(path);
+        } else {
+            this.gdo.open();
+        }
     }
 
     serviceRepair() {
@@ -37,6 +44,12 @@ export class CategoryComponent implements OnInit {
 
     showModal() {
         this.modal.open();
+    }
+
+    gdoGoTo(path){
+        this.utilities.utilities.currPage = 2;
+        this.utilities.utilities.showNav = true;
+        this.route.navigateByUrl(path);
     }
 
 

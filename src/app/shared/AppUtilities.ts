@@ -53,7 +53,8 @@ export class AppUtilities {
             "/config/opener",
             "/config/doorConfiguration"
             // "/shoppingCart"
-        ]
+        ],
+        showNav:false
         // flow of GDO: Home, Size , Openers, Order Details, Shopping Cart
     }
 }
