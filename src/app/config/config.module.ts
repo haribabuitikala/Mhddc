@@ -51,7 +51,8 @@ import {GdoConfigComponent} from "../gdo-config/gdo-config.component";
             {
                 path: 'gdoConfig', component: GdoConfigComponent,
                 children: [
-                    {path: 'opener', component: OpenerComponent}
+                    {path: 'opener', component: OpenerComponent},
+                    {path: 'additionalOptions', component: AdditionalOptionsComponent}
                 ]
             },
             {path: 'installQuestion', component: InstallQuestionComponent},
