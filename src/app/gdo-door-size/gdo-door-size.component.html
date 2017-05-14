@@ -1,0 +1,18 @@
+<div class="margin-t-20">
+    <p>Select a garage door height range below. If you do not know the height of your garage door, simply select "DO NOT
+        KNOW HEIGHT".</p>
+    <div class="tile col-xs-12">
+        <h4>Door or Opening Height:</h4>
+        <p>
+        <select name="" [(ngModel)]="garageDoorHgt" class="form-control">
+            <option value='0' selected="selected" style="display: none">Select Garage Door Height</option>
+            <option value='7'>Do Not Know Height</option>
+            <option value='7'>6' - 7'</option>
+            <option value='8'>7' 1" - 8'</option>
+        </select>
+        </p>
+        <p class="text-center">
+            <button class="btn btn-default btn-lg text-orange text-uppercase" (click)="goTo()">Enter</button>
+        </p>
+    </div>
+</div>

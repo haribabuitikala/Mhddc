@@ -22,7 +22,7 @@ import {InstallQuestionComponent} from "../install-question/install-question.com
 import {InstallAnswerComponent} from "../install-answer/install-answer.component";
 import {NonClassicComponent} from "../non-classic/non-classic.component";
 import {HardwareComponent} from "../hardware/hardware.component";
-
+import {GdoConfigComponent} from "../gdo-config/gdo-config.component";
 
 @NgModule({
     imports: [
@@ -46,6 +46,13 @@ import {HardwareComponent} from "../hardware/hardware.component";
                     {path: 'additionalOptions', component: AdditionalOptionsComponent},
                     {path: 'doorConfiguration', component: DoorConfigurationComponent},
                     {path: '', redirectTo: 'design', pathMatch: 'full'}
+                ]
+            },
+            {
+                path: 'gdoConfig', component: GdoConfigComponent,
+                children: [
+                    {path: 'opener', component: OpenerComponent},
+                    {path: 'additionalOptions', component: AdditionalOptionsComponent}
                 ]
             },
             {path: 'installQuestion', component: InstallQuestionComponent},

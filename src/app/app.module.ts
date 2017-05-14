@@ -26,6 +26,8 @@ import {AppUtilities} from "./shared/appUtilities";
 import {ZipResolver} from "./zip-results/zip-resolver.service";
 import {LangEnglishService} from "./shared/english";
 import {SizeList} from "./door-size/sizesList";
+import { GdoDoorSizeComponent } from './gdo-door-size/gdo-door-size.component';
+import { GdoConfigComponent } from './gdo-config/gdo-config.component';
 
 @NgModule({
     declarations: [
@@ -39,7 +41,9 @@ import {SizeList} from "./door-size/sizesList";
         ServiceRepairComponent,
         DoorSizeComponent,
         CollectionComponent,
-        HomeComponent
+        HomeComponent,
+        GdoDoorSizeComponent,
+        GdoConfigComponent
     ],
     imports: [
         BrowserModule,

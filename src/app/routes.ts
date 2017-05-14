@@ -7,6 +7,7 @@ import {CollectionComponent} from "./collection/collection.component";
 import {HomeComponent} from "./home/home.component";
 import {ThankyouComponent} from "./thankyou/thankyou.component";
 import {ZipResolver} from "./zip-results/zip-resolver.service";
+import {GdoDoorSizeComponent} from "./gdo-door-size/gdo-door-size.component";
 
 export const appRoutes:Routes = [
     {path: 'banner', component: BannerComponent},
@@ -20,5 +21,7 @@ export const appRoutes:Routes = [
     {path: 'collection', component: CollectionComponent},
     {path: 'home', component: HomeComponent},
     {path: 'thankyou', component: ThankyouComponent},
+    // gdo flow
+    {path: 'gdoDoorSize', component: GdoDoorSizeComponent},
     {path: '', redirectTo: '/banner', pathMatch: 'full'}
 ];
