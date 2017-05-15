@@ -1,4 +1,4 @@
-import {Component, OnInit, Output, EventEmitter} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {AppUtilities} from "../shared/appUtilities";
 import {NavService} from "../nav/nav-service";
@@ -28,12 +28,9 @@ export class OpenerComponent implements OnInit {
         this.pageNo = this.utils.utilities.currPage;
         this.navComp.activateIcon();
         this.data = this.dataStrorage.gdoOpener;
-        this.utils.utilities.item_price = this.data[0].item_price;
-        this.data = _.chunk(this.data, 4);
-        this.number = 2;
+        this.data = _.chunk(this.data, 2);
+        this.number = 6;
     }
-
-    @Output() 
 
     nextBtn(path) {
         if (this.utils.utilities.flow === 'gdoNavElems') {

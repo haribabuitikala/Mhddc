@@ -17,5 +17,8 @@ export class CollectionData {
     gdoOpener = {
         
     };
-    zip = {}
+    zip = {};
+    gdoAdditional= {
+        
+    }
 }
