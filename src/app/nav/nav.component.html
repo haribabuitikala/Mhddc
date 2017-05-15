@@ -24,13 +24,13 @@
 <modal #home>
     <modal-header [show-close]="true">
     </modal-header>
-    <modal-body>
+    <modal-body class="text-center">
 
-        <div>Navigating to Home Page will discard all available Cart Items.</div>
-        <p>Do you want to Continue</p>
+        <p class="margin-b-10">Navigating to Home Page will discard all available Cart Items.</p>
+        <p class="margin-b-30">Do you want to Continue ?</p>
         <div class="text-center">
-            <button class="btn btn-default text-orange bold text-center" (click)="goToHome()">Ok</button>
-            <button class="btn btn-default text-orange bold text-center" (click)="home.close()">Cancel</button>
+            <button class="btn btn-default text-orange bold text-center text-uppercase" (click)="goToHome()">Yes</button>
+            <button class="btn btn-default text-orange bold text-center text-uppercase" (click)="home.close()">No</button>
         </div>
 
     </modal-body>
