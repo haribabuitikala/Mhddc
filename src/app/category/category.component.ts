@@ -54,6 +54,8 @@ export class CategoryComponent implements OnInit {
         this.utilities.utilities.currPage = 3;
         this.utilities.utilities.clicked = null;
         this.utilities.utilities.showNav = true;
+        this.utilities.utilities.isGDO = true;
+        this.utilities.utilities.ProductType = 'gdo';
         this.route.navigateByUrl(path);
     }
 

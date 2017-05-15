@@ -33,6 +33,7 @@ import {GdoDoorSizeComponent} from './gdo-door-size/gdo-door-size.component';
 import {GdoConfigComponent} from './gdo-config/gdo-config.component';
 import {NavService} from "./nav/nav-service";
 import {ShoppingCartComponent} from './shopping-cart/shopping-cart.component';
+import {ApiConstants} from "./shared/api-constants";
 
 @NgModule({
     declarations: [
@@ -71,7 +72,8 @@ import {ShoppingCartComponent} from './shopping-cart/shopping-cart.component';
         SizeList,
         CollectionService,
         CollectionData,
-        NavService
+        NavService,
+        ApiConstants
     ],
     bootstrap: [AppComponent]
 })

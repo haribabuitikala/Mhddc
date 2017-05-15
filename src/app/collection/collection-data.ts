@@ -14,5 +14,8 @@ export class CollectionData {
         "dtpremium.jpg": 'btnCollectionClassic.png'
         // "dtCanyonRidge.jpg": 'btnCollectionCanyonRidgeLE.png'
     };
+    gdoOpener = {
+        
+    };
     zip = {}
 }
