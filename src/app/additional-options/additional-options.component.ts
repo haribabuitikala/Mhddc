@@ -3,6 +3,7 @@ import {Router} from '@angular/router';
 import {AppComponent} from "../app.component";
 import {AppUtilities} from "../shared/appUtilities";
 import {NavService} from "../nav/nav-service";
+import {CollectionData} from "../collection/collection-data";
 
 @Component({
     selector: 'app-additional-options',
@@ -12,6 +13,7 @@ import {NavService} from "../nav/nav-service";
 export class AdditionalOptionsComponent implements OnInit {
     pageNo;
     showMenu;
+    data;
 
     // for gdo the pageNo will be 3
     // for residential the pageNo will be
@@ -19,7 +21,8 @@ export class AdditionalOptionsComponent implements OnInit {
     constructor(private appComponent:AppComponent
         , private utils:AppUtilities
         , private route:Router
-        , private navComp:NavService) {
+        , private navComp:NavService
+        , private dataService:CollectionData) {
     }
 
     ngOnInit() {
@@ -27,6 +30,7 @@ export class AdditionalOptionsComponent implements OnInit {
         this.pageNo = this.utils.utilities.currPage;
         this.showMenu = this.utils.utilities.showNav;
         this.navComp.activateIcon();
+        this.data = this.dataService.gdoAdditional;
     }
 
     nextBtn(path) {

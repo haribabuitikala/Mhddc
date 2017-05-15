@@ -3,7 +3,7 @@
 @background_color_1: #ee7e05;
 .banner-image {
   background: url("../../assets/images/BeautyShotMobile.png") 0 -20px;
-  min-height: 426px;
+  min-height: 325px;
   background-size: cover;
   .zip-search-form {
     bottom: 0;
@@ -14,6 +14,11 @@
   .ad-sec {
     margin-top: 10px;
   }
+  .ad-sec {
+	img {
+		width: 100% !important;
+	}
+}
 }
 
 .form-control {
@@ -81,5 +86,16 @@
 		font-weight: normal;
 		font-size: 14px;
 		background-color: @background_color_1;
+	}
+}
+
+input[type=number] {
+	&::-webkit-inner-spin-button {
+		-webkit-appearance: none;
+		margin: 0;
+	}
+	&::-webkit-outer-spin-button {
+		-webkit-appearance: none;
+		margin: 0;
 	}
 }

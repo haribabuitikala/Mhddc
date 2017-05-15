@@ -2,9 +2,9 @@
   <div class="_slider-wrapper">
     <div class="_slider" [style.width.px]="sliderWidth" [style.left.px]="sliderLeft">
       <div class="_slide" [style.width.px]="slideWidth" *ngFor="let slide of data; let k = index">
-        <div class="_slide-items" >
+        <div class="_slide-items">
           <div class="inner-item col-xs-{{number}}" *ngFor="let slideitem of slide">
-            {{ slideitem}}
+            <img src="../../../assets/images/openers/{{slideitem.item_thumbnail}}" (click)="openerSelected(slideitem)" alt="">
           </div>
         </div>
       </div>

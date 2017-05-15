@@ -33,4 +33,10 @@ export class CollectionService {
         return this.http.post(this.url + 'Opener', obj)
             .map(res => res.json())
     }
+
+    getGdoAdditional(obj){
+        return this.http.post(this.url + 'OpenerItem', obj)
+            .map(res => res.json())
+
+    }
 }

@@ -64,7 +64,8 @@ export class AppUtilities {
         stockgroupid:null,
         laborcode:null,
         ProductType:'',
-        item_price:null
+        item_price:null,
+        openerid:null
         // flow of GDO: Home, Size , Openers, Order Details, Shopping Cart
     };
     setUtils(curr, clicked){

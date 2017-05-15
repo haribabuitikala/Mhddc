@@ -8,7 +8,6 @@
     <form novalidate #form="ngForm" (ngSubmit)="save(form, $event)" class="form-group banner-zip-search ptn-rel">
       <div class="col-xs-10 pad-r-0">
         <div class="form-control"></div>
-
         <input
           type="text"
           placeholder="{{lang.placeholder}}"
@@ -16,7 +15,7 @@
           ngModel
           #zipCode="ngModel"
           minlength="5"
-          maxlength="6"
+          maxlength="5" 
           class="zip-code ptn-abs roboto-regular"
           required autocomplete="off">
         <span *ngIf="zipCode.errors?.required && zipCode.touched" class="error">

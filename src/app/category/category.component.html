@@ -37,10 +37,10 @@
 </div>
 <app-trending-now></app-trending-now>
 <modal #modal>
-    <modal-header [show-close]="true">
+    <modal-header  >
     </modal-header>
     <modal-body>
-        <p class="padding20">{{lang.modal.modalContent}}</p>
+        <p class="padding20">You will now be directed to The Home Depot's Service and Repair's page. From this site, you can request a call from a service technician to assist you with service or repair.</p>
         <div class="text-center">
             <button class="btn btn-default box-shadow text-orange  bold margin-b-30 text-uppercase" (click)="serviceRepair()">
                 {{lang.modal.Proceed}}
@@ -59,13 +59,13 @@
         <div class="col-xs-12 margin-b-10 ">
             <div  class="margin-b-30 text-center div-border div-border-radius box-shadow tile box-shadow"  >
                 <p class="margin-b-10 margin-top-10 margin-r-10 padding-t-10  margin-b-30"  > Are you shopping for a NEW Delivered and Installed Garage Door Opener?</p>
-                <button (click)="gdoGoTo('/gdoDoorSize')" class="btn btn-default text-orange bold margin-b-30"   >
+                <button (click)="gdoGoTo('/gdoDoorSize', 'size')" class="btn btn-default text-orange bold margin-b-30"   >
                     NEXT >
                 </button>
             </div>
             <div class="div-border div-border-radius  text-center box-shadow margin-b-10 tile box-shadow">
                 <p class="margin-b-10 margin-top-10 padding-t-10 margin-b-30"> Already have a Garage Door Opener purchased from Home Depot that needs to be installed ?</p>
-                <button (click)="gdoGoTo('/gdoConfig/additionalOptions')" class="btn btn-default text-orange bold margin-b-30" >
+                <button (click)="gdoGoTo('/gdoConfig/additionalOptions','add')" class="btn btn-default text-orange bold margin-b-30" >
                     NEXT >
                 </button>
             </div>

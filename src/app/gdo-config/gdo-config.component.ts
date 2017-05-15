@@ -16,15 +16,10 @@ export class GdoConfigComponent implements OnInit {
     data;
     itemPrice;
 
-    ngOnChanges(){
-        this.itemPrice = this.utils.utilities.item_price;
-    }
-
-
     ngOnInit() {
         this.appComponent.currScreen = 3;
+        this.itemPrice = this.utils.utilities.item_price;
     }
-
 
 
 }
