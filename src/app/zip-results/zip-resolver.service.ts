@@ -7,23 +7,33 @@ declare var $:any;
 
 import 'rxjs/Rx';
 import {Observable} from "rxjs/Observable";
+import {CollectionService} from "../shared/data.service";
 
 @Injectable()
 export class ZipResolver implements Resolve<Izip> {
 
+    results;
+
     constructor(private zip:ZipResults
         , private route:Router
-        , public toastr:ToastrService) {
+        , private toastr:ToastrService
+        , private dataService:CollectionService) {
     }
 
     resolve(route:ActivatedRouteSnapshot, stateRoute:RouterStateSnapshot):Observable<Izip> {
         let zipCode = route.params['zip'];
-        let results = this.zip.getZip(zipCode);
-        if (results === undefined) {
-            $('.zip-code').val('');
-            this.toastr.error(`${zipCode} is not correct, try with another one`);
-            this.route.navigateByUrl('/banner');
-        }
-        return results;
+        this.dataService.getZipResults(zipCode)
+            .subscribe(
+                res => {
+                    this.results = res;
+                }
+            );
+        // if (this.results === undefined) {
+        //     $('.zip-code').val('');
+        //     this.toastr.error(`${zipCode} is not correct, try with another one`);
+        //     this.route.navigateByUrl('/banner');
+        // }
+        return this.results;
+
     }
 }

@@ -1,0 +1,37 @@
+export interface Icollection {
+
+    Columns:number,
+    Rows:number,
+    designs:any,
+    doubleinstallcode:string,
+    doubleinstallcodew:string,
+    item_description:string,
+    item_id:number,
+    item_name:string,
+    item_thumbnail:string,
+    productdefault:{
+        DIYDoubleLock:string,
+        DIYDoublePackaging:string,
+        DIYDoubleSpring:string,
+        DIYDoubleTrackSize:string,
+        DIYSingleLock:string,
+        DIYSinglePackaging:string,
+        DIYSingleSpring:string,
+        DIYSingleTrackSize:string,
+        DIYTrackRadius:null,
+        DoubleLock:string,
+        DoublePackaging:string,
+        DoubleSpring:string,
+        DoubleTrackSize:string,
+        SingleLock:string,
+        SinglePackaging:string,
+        SingleSpring:string,
+        SingleTrackSize:string,
+        TrackRadius:string
+    },
+    productline:string,
+    singleinstallcode:string,
+    singleinstallcodew:string,
+    windcode:string,
+    windowsections:string
+}

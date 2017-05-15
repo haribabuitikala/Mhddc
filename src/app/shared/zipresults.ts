@@ -1,8 +1,16 @@
 import {Injectable} from '@angular/core';
+
+import {Observable} from 'rxjs/Rx';
+import {Http, Response} from '@angular/http';
+import 'rxjs/add/operator/map';
 declare var _:any;
 
 @Injectable()
 export class ZipResults {
+
+    constructor(private http:Http) {
+    }
+
     getEvents() {
         return ZIPCODES;
     }
@@ -10,6 +18,11 @@ export class ZipResults {
     getZip(id) {
         return _.get(ZIPCODES, id)
     }
+
+    // getZip(id) {
+    //     return this.http.get('http://dev-mhddcapi.clopay.com/api/zip/'+id)
+    //         .map(res => res.json());
+    // }
 }
 const ZIPCODES = {
     "00501": {
@@ -241,5 +254,191 @@ const ZIPCODES = {
         "countytax": 0,
         "statetax": 7.5,
         "Stores": []
+    },
+    "60123": {
+        "city": "PLATO CTR",
+        "county": "KANE",
+        "state": "IL",
+        "windcode": "W0",
+        "zip": "60123",
+        "citytax": 0.0,
+        "countytax": 0.0,
+        "statetax": 7.0,
+        "Stores": [
+            {
+                "storenumber": "1934",
+                "storename": "ELGIN                   ",
+                "address1": "955 N RANDALL RD        ",
+                "address2": "                        ",
+                "city": "ELGIN             ",
+                "state": "IL",
+                "zip": "60123",
+                "storephonenumber": "8476229441",
+                "zipdistance": "0",
+                "marketid": "75",
+                "comminstall": "False",
+                "natmarketid": "6000",
+                "gdo": "CG",
+                "storegdo": "CG",
+                "isResidential": true,
+                "isCommercial": true,
+                "isService": false,
+                "storetax": "7.75000",
+                "active": "True",
+                "productlayout": "True",
+                "DoubleDoorHeight": "7",
+                "DoubleDoorWidth": "16",
+                "SingleDoorHeight": "7",
+                "SingleDoorWidth": "8",
+                "URLVersion": "version2"
+            },
+            {
+                "storenumber": "6923",
+                "storename": "SOUTH ELGIN             ",
+                "address1": "440 RANDALL ROAD        ",
+                "address2": "                        ",
+                "city": "SOUTH ELGIN       ",
+                "state": "IL",
+                "zip": "60177",
+                "storephonenumber": "8472148718",
+                "zipdistance": "3.556287",
+                "marketid": "75",
+                "comminstall": "False",
+                "natmarketid": "6000",
+                "gdo": "CG",
+                "storegdo": "CG",
+                "isResidential": true,
+                "isCommercial": true,
+                "isService": false,
+                "storetax": "7.50000",
+                "active": "True",
+                "productlayout": "True",
+                "DoubleDoorHeight": "7",
+                "DoubleDoorWidth": "16",
+                "SingleDoorHeight": "7",
+                "SingleDoorWidth": "8",
+                "URLVersion": "version2"
+            },
+            {
+                "storenumber": "1948",
+                "storename": "W DUNDEE/CARPENTERSVILLE",
+                "address1": "251 SPRING HILL ROAD    ",
+                "address2": "                        ",
+                "city": "CARPENTERSVILLE   ",
+                "state": "IL",
+                "zip": "60110",
+                "storephonenumber": "8477830766",
+                "zipdistance": "5.697083",
+                "marketid": "75",
+                "comminstall": "False",
+                "natmarketid": "6000",
+                "gdo": "CG",
+                "storegdo": "CG",
+                "isResidential": true,
+                "isCommercial": true,
+                "isService": true,
+                "storetax": "8.50000",
+                "active": "True",
+                "productlayout": "True",
+                "DoubleDoorHeight": "7",
+                "DoubleDoorWidth": "16",
+                "SingleDoorHeight": "7",
+                "SingleDoorWidth": "8",
+                "URLVersion": "version2"
+            }
+        ]
+    },
+    "30033": {
+        "city": "DECATUR",
+        "county": "DEKALB",
+        "state": "GA",
+        "windcode": "W0",
+        "zip": "30033",
+        "citytax": 0.0,
+        "countytax": 0.0,
+        "statetax": 7.0,
+        "Stores": [
+            {
+                "storenumber": "117",
+                "storename": "WAGES DRIVE             ",
+                "address1": "2295 LAWRENCEVILLE HWY  ",
+                "address2": "                        ",
+                "city": "DECATUR           ",
+                "state": "GA",
+                "zip": "30033",
+                "storephonenumber": "4043150015",
+                "zipdistance": "0",
+                "marketid": "1",
+                "comminstall": "False",
+                "natmarketid": "8000",
+                "gdo": "CG",
+                "storegdo": "CG",
+                "isResidential": true,
+                "isCommercial": true,
+                "isService": true,
+                "storetax": "7.00000",
+                "active": "True",
+                "productlayout": "False",
+                "DoubleDoorHeight": "7",
+                "DoubleDoorWidth": "16",
+                "SingleDoorHeight": "7",
+                "SingleDoorWidth": "9",
+                "URLVersion": "version2"
+            },
+            {
+                "storenumber": "6986",
+                "storename": "BUCKHEAD-RELO           ",
+                "address1": "2525 PIEDMONT ROAD NE   ",
+                "address2": "                        ",
+                "city": "ATLANTA           ",
+                "state": "GA",
+                "zip": "30324",
+                "storephonenumber": "4048415608",
+                "zipdistance": "4.380116",
+                "marketid": "1",
+                "comminstall": "False",
+                "natmarketid": "8000",
+                "gdo": "CG",
+                "storegdo": "CG",
+                "isResidential": true,
+                "isCommercial": true,
+                "isService": true,
+                "storetax": "8.00000",
+                "active": "True",
+                "productlayout": "False",
+                "DoubleDoorHeight": "7",
+                "DoubleDoorWidth": "16",
+                "SingleDoorHeight": "7",
+                "SingleDoorWidth": "9",
+                "URLVersion": "version2"
+            },
+            {
+                "storenumber": "159",
+                "storename": "MIDTOWN                 ",
+                "address1": "650 PONCE DE LEON       ",
+                "address2": "                        ",
+                "city": "ATLANTA           ",
+                "state": "GA",
+                "zip": "30308",
+                "storephonenumber": "4048928042",
+                "zipdistance": "5.873665",
+                "marketid": "1",
+                "comminstall": "False",
+                "natmarketid": "8000",
+                "gdo": "CG",
+                "storegdo": "CG",
+                "isResidential": true,
+                "isCommercial": true,
+                "isService": true,
+                "storetax": "8.00000",
+                "active": "True",
+                "productlayout": "False",
+                "DoubleDoorHeight": "7",
+                "DoubleDoorWidth": "16",
+                "SingleDoorHeight": "7",
+                "SingleDoorWidth": "9",
+                "URLVersion": "version2"
+            }
+        ]
     }
-}
+};

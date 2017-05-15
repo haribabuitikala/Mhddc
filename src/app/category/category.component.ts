@@ -3,6 +3,7 @@ import {ModalComponent} from "ng2-bs3-modal/ng2-bs3-modal";
 import {Router} from '@angular/router';
 import {LangEnglishService} from "../shared/english";
 import {AppUtilities} from "../shared/appUtilities";
+import {AppComponent} from "../app.component";
 
 @Component({
     selector: 'app-category',
@@ -17,19 +18,22 @@ export class CategoryComponent implements OnInit {
 
     constructor(private language:LangEnglishService
         , private route:Router
-        , private utilities:AppUtilities) {
+        , private utilities:AppUtilities
+        , private appComponent:AppComponent) {
     }
 
     ngOnInit() {
         this.lang = this.language.getCategory();
         this.isService = this.utilities.utilities.isService;
+        this.appComponent.currScreen = 2;
+
     }
 
     navigateTo(path, flow, count) {
         this.utilities.utilities.flow = flow;
         flow === 'residentialNavElems' ? this.utilities.utilities.dtype = 'res' : this.utilities.utilities.dtype = 'gdo';
+        this.utilities.utilities.navCount = count;
         if(flow === 'residentialNavElems') {
-            this.utilities.utilities.navCount = count;
             this.utilities.utilities.currPage = 1;
             this.utilities.utilities.currScreen += 1;
             this.route.navigateByUrl(path);
@@ -47,8 +51,11 @@ export class CategoryComponent implements OnInit {
     }
 
     gdoGoTo(path){
-        this.utilities.utilities.currPage = 2;
+        this.utilities.utilities.currPage = 3;
+        this.utilities.utilities.clicked = null;
         this.utilities.utilities.showNav = true;
+        this.utilities.utilities.isGDO = true;
+        this.utilities.utilities.ProductType = 'gdo';
         this.route.navigateByUrl(path);
     }
 

@@ -2,7 +2,8 @@
 .category-type {
   border-top: 1px solid #ccc;
   padding: 11px 0 11px 6px;
-  color: #304a90; 
+  color: #304a90;
+  font-size: 14px;
 }
 
 .padding-l-1 {
@@ -80,4 +81,16 @@
 .margin-t-20 {
      margin-top: 20px !important
 }
- 
+
+@media only screen and (max-width: 320px) {
+  .category-type {
+    font-size: 11px;
+    padding-left: 0!important;
+  }
+}
+
+@media only screen and (min-width: 375px) and (max-width: 413px) {
+  .category-type {
+    font-size: 13px;
+  }
+}
