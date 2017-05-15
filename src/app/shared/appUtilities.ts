@@ -20,8 +20,9 @@ export class AppUtilities {
         doubleDoor: false,
         singleDoor: false,
         natmarketid: null,
+        localmarketid:null,
         productlayout: true,
-        localmarketid: null,
+        lang:null,
         dtype: null,
         flow: 'residentialNavElems',
         residentialNavElems: [
@@ -45,16 +46,26 @@ export class AppUtilities {
             "/config/openerSelected",
             "/config/additionalOptions",
             "/config/doorConfiguration",
+            "/shoppingCart",
             "/thankyou"
         ],
         gdoNavElems: [
             "/banner",
             "/doorSize",
             "/config/opener",
-            "/config/doorConfiguration"
-            // "/shoppingCart"
+            "/config/doorConfiguration",
+            "/shoppingCart"
         ],
-        showNav:false
+        showNav:false,
+        productid:null,
+        dealerid:null,
+        doorsize:null,
+        stockgroupid:null,
+        laborcode:null
         // flow of GDO: Home, Size , Openers, Order Details, Shopping Cart
+    };
+    setUtils(curr, clicked){
+        this.utilities.currPage = curr;
+        this.utilities.clicked = clicked;
     }
 }

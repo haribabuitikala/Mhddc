@@ -1,81 +1,62 @@
-<h3 class="font-size-16 text-orange margin-t-10">2.Choose Your Collection</h3>
-<!-- Begin Tile 1 -->
-<div class="tile">
-    <div class="collection-img" *ngIf="!showVideo">
-        <img src="../../assets/images/collection/Collection-1.png" alt=""/> 
-    </div>
-    <div class="collection-img" *ngIf="showVideo">
-        <iframe src="https://www.youtube.com/embed/m5L_x1OU4s0?autoplay=1"></iframe>
-    </div>
-    <div class="collection-btn-sec">
-        <img src="../../assets/images/collection/play.png" *ngIf="showPlayIcon" (click)="playVideo()" alt="" height="20">
-        <img src="../../assets/images/collection/gallery.png" (click)="showGallery()" *ngIf="showImageIcon" alt="" height="20"/>
-        <span><button (click)="productDetails.open()">Info</button></span> 
-        <div class="pull-right">
-            <button class="collection-select">Select</button>
-        </div>
-    </div>
-</div>
+<h3 class="font-size-16 text-orange margin-t-10">{{pageNo}}.Choose Your Collection</h3>
+
 <!-- Begin Tile 2 -->
-<div class="tile margin-t-10">
-    <div class="collection-img">
-        <img src="../../assets/images/collection/btnCollectionCoachman.png" alt=""/> 
-    </div>
-    <div class="collection-btn-sec  ">
-         <img src="../../assets/images/collection/play.png" *ngIf="showPlayIcon" (click)="playVideo()" alt="" height="20">
-        <img src="../../assets/images/collection/gallery.png" (click)="showGallery()" *ngIf="showImageIcon" alt="" height="20"/>
-        <span><button (click)="productDetails.open()">Info</button></span> 
-        <div class="btns pull-right"> 
-            <button>Select</button>
+<div *ngIf="popular">
+    <div class="tile margin-t-10" *ngFor="let popular of popularCollections">
+        <div class="collection-img">
+            <img routerLink="/home" src="../../assets/images/collection/{{popular.imageUrl}}" alt=""/>
+        </div>
+        <div class="collection-btn-sec ">
+            <collection-popup [popup]="popular"></collection-popup>
+            <div class="btns pull-right" routerLink="/home">
+                <button>Select</button>
+            </div>
         </div>
     </div>
 </div>
+<div *ngIf="speciality">
+    <div class="tile margin-t-10" *ngFor="let speciality of specialCollections">
+        <div class="collection-img">
+            <img routerLink="/home" src="../../assets/images/collection/{{speciality.imageUrl}}" alt=""/>
+        </div>
+        <div class="collection-btn-sec ">
+            <collection-popup [popup]="speciality"></collection-popup>
+            <div class="btns pull-right" routerLink="/home">
+                <button>Select</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <!-- Begin Tile 3 -->
-<div class="tile margin-t-10">
+<div class="tile margin-t-10 margin-b-15" *ngIf="specialityBtn" (click)="showSpeciality()">
     <div class="collection-img">
-        <img src="../../assets/images/collection/btnCollectionGallery.png" alt=""/> 
-    </div>
-    <div class="collection-btn-sec  ">
-  <img src="../../assets/images/collection/play.png" *ngIf="showPlayIcon" (click)="playVideo()" alt="" height="20">
-        <img src="../../assets/images/collection/gallery.png" (click)="showGallery()" *ngIf="showImageIcon" alt="" height="20"/>
-        <span><button (click)="productDetails.open()">Info</button></span> 
-        <div class="btns pull-right"> 
-            <button>Select</button>
-        </div>
-    </div>
-</div>
-<!-- Begin Tile 2 -->
-<div class="tile margin-t-10">
-    <div class="collection-img">
-        <img src="../../assets/images/collection/btnCollectionCanyonRidgeUG.png" alt=""/> 
-    </div>
-    <div class="collection-btn-sec ">
-  <img src="../../assets/images/collection/play.png" *ngIf="showPlayIcon" (click)="playVideo()" alt="" height="20">
-        <img src="../../assets/images/collection/gallery.png" (click)="showGallery()" *ngIf="showImageIcon" alt="" height="20"/>
-        <span><button (click)="productDetails.open()">Info</button></span> 
-        <div class="btns pull-right"> 
-            <button>Select</button>
-        </div>
-    </div>
-</div>
-<!-- Begin Tile 3 -->
-<div class="tile margin-t-10 margin-b-15">
-    <div class="collection-img"> 
         <img src="../../assets/images/collection/btnCollectionSpeciality.png" alt=""/>
     </div>
-    <div class="collection-btn-sec ">
-      <img src="../../assets/images/collection/play.png" *ngIf="showPlayIcon" (click)="playVideo()" alt="" height="20">
-        <img src="../../assets/images/collection/gallery.png" (click)="showGallery()" *ngIf="showImageIcon" alt="" height="20"/>
-        <span><button (click)="productDetails.open()">Info</button></span> 
-        <div class="btns pull-right"> 
-            <button>Select</button>
-        </div>
+</div>
+<div class="tile margin-t-10 margin-b-15" *ngIf="popularBtn" (click)="showPopular()">
+    <div class="collection-img">
+        <img src="../../assets/images/collection/btnCollectionPopular.png" alt=""/>
     </div>
 </div>
 <div class="text-center button-margin">
-    <button class="btn btn-default text-uppercase btn-big box-shadow bold text-orange">TAP TO SEE QUICKSHIP DOORS</button>
+    <button (click)="quickShip()" class="btn btn-default text-uppercase btn-big box-shadow bold text-orange">TAP TO SEE
+        QUICKSHIP DOORS
+    </button>
 </div>
 <div class="clearfix margin-b-15 inline-block"></div>
+
+<div id="footer" class="col-xs-12 padding-t-10 padding-b-10">
+    <a href="javascript:void(0)" class="pull-left previous-btn" (click)="prevBtn(currScreen, '/doorSize')" data-id="currScreen">
+        <img src="../../assets/images/back-48-thick.png" height="15px">
+        Prev
+    </a>
+
+    <a href="javascript:void(0)" class="pull-right nextBtn" (click)="nextBtn(currScreen,'/home')" data-id="currScreen">
+        Next
+        <img src="../../assets/images/Forward-48-thick.png" height="15px">
+    </a>
+</div>
 
 <!-- product details popup -->
 <modal #productDetails>

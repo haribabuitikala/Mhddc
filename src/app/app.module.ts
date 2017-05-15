@@ -26,8 +26,13 @@ import {AppUtilities} from "./shared/appUtilities";
 import {ZipResolver} from "./zip-results/zip-resolver.service";
 import {LangEnglishService} from "./shared/english";
 import {SizeList} from "./door-size/sizesList";
-import { GdoDoorSizeComponent } from './gdo-door-size/gdo-door-size.component';
-import { GdoConfigComponent } from './gdo-config/gdo-config.component';
+import {CollectionService} from "./shared/data.service";
+import {CollectionData} from "./collection/collection-data";
+import {CollectionPopup} from "./collection/collection-popup";
+import {GdoDoorSizeComponent} from './gdo-door-size/gdo-door-size.component';
+import {GdoConfigComponent} from './gdo-config/gdo-config.component';
+import {NavService} from "./nav/nav-service";
+import {ShoppingCartComponent} from './shopping-cart/shopping-cart.component';
 
 @NgModule({
     declarations: [
@@ -42,8 +47,10 @@ import { GdoConfigComponent } from './gdo-config/gdo-config.component';
         DoorSizeComponent,
         CollectionComponent,
         HomeComponent,
+        CollectionPopup,
         GdoDoorSizeComponent,
-        GdoConfigComponent
+        GdoConfigComponent,
+        ShoppingCartComponent
     ],
     imports: [
         BrowserModule,
@@ -61,7 +68,10 @@ import { GdoConfigComponent } from './gdo-config/gdo-config.component';
         AppUtilities,
         ZipResolver,
         LangEnglishService,
-        SizeList
+        SizeList,
+        CollectionService,
+        CollectionData,
+        NavService
     ],
     bootstrap: [AppComponent]
 })

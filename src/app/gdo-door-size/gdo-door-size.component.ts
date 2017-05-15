@@ -14,7 +14,7 @@ export class GdoDoorSizeComponent implements OnInit {
 
     constructor(private appComponent:AppComponent
         , private route:Router
-    ,private utils: AppUtilities) {
+        , private utils:AppUtilities) {
     }
 
     ngOnInit() {
@@ -22,7 +22,8 @@ export class GdoDoorSizeComponent implements OnInit {
     }
 
     goTo(itm) {
-        this.utils.utilities.currPage = 1;
+        this.utils.utilities.currPage = 2;
+        this.utils.utilities.clicked = 1;
         this.route.navigateByUrl('/gdoConfig/opener')
     }
 

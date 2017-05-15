@@ -77,6 +77,7 @@
                 <div>
 
                     <select  [(ngModel)]="selectedHeightFeet" class="form-control" (change)="getHeightInches('height')">
+                        <option value=""></option>
                         <option *ngFor="let heightFeet of heightFeets">{{heightFeet}}</option>
                     </select>
                 </div>
@@ -92,7 +93,17 @@
         </div>
     </div>
 </div>
+<div id="footer" class="col-xs-12 padding-t-10 padding-b-10">
+    <a href="javascript:void(0)" class="pull-left previous-btn" (click)="prevBtn(currScreen, '/category')" data-id="currScreen">
+        <img src="../../assets/images/back-48-thick.png" height="15px">
+        Prev
+    </a>
 
+    <a href="javascript:void(0)" class="pull-right nextBtn" (click)="nextBtn(currScreen,'/collection')" data-id="currScreen">
+        Next
+        <img src="../../assets/images/Forward-48-thick.png" height="15px">
+    </a>
+</div>
 <modal #measure>
     <modal-header [show-close]="true">
     </modal-header>
@@ -165,3 +176,5 @@
 
     </modal-body>
 </modal>
+
+
