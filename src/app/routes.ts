@@ -8,18 +8,19 @@ import {HomeComponent} from "./home/home.component";
 import {ThankyouComponent} from "./thankyou/thankyou.component";
 import {ZipResolver} from "./zip-results/zip-resolver.service";
 import {GdoDoorSizeComponent} from "./gdo-door-size/gdo-door-size.component";
+import {ShoppingCartComponent} from "./shopping-cart/shopping-cart.component";
 
 export const appRoutes:Routes = [
     {path: 'banner', component: BannerComponent},
     {
         path: 'zipResults/:zip',
-        component: ZipResultsComponent,
-        resolve: {results: ZipResolver}
+        component: ZipResultsComponent
     },
     {path: 'category', component: CategoryComponent},
     {path: 'doorSize', component: DoorSizeComponent},
     {path: 'collection', component: CollectionComponent},
     {path: 'home', component: HomeComponent},
+    {path: 'shoppingCart', component:ShoppingCartComponent},
     {path: 'thankyou', component: ThankyouComponent},
     // gdo flow
     {path: 'gdoDoorSize', component: GdoDoorSizeComponent},

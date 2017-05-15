@@ -1,5 +1,5 @@
 <div class="row fixed-header">
-    <h4>Your Door Configuration <span class="pull-right">$876.95</span></h4>
+    <h4>{{pageNo}}.Your Door Configuration <span class="pull-right">$876.95</span></h4>
     <div class="space-around"> 
         <button (click)="share.open()" class="btn">SHARE<span class="glyphicon glyphicon-share padding-l-3"></span></button>
         <button (click)="email.open()" class="btn">EMAIL QUOTE<span class="glyphicon glyphicon-envelope  padding-l-3"></span></button>
@@ -674,3 +674,14 @@
         </div>
     </modal-body>
 </modal>
+<div id="footer" class="col-xs-12 padding-t-10 padding-b-10">
+    <a href="javascript:void(0)" class="pull-left previous-btn" (click)="prevBtn('/additionalOptions')" data-id="currScreen">
+        <img src="../../assets/images/back-48-thick.png" height="15px">
+        Prev
+    </a>
+
+    <a href="javascript:void(0)" class="pull-right nextBtn" (click)="nextBtn('/shoppingCart')" data-id="currScreen">
+        Next
+        <img src="../../assets/images/Forward-48-thick.png" height="15px">
+    </a>
+</div>

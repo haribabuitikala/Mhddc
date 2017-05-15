@@ -2,6 +2,7 @@ import {Component, OnInit, Input, OnChanges, Output, EventEmitter, ViewChild} fr
 import {AppUtilities} from "../shared/appUtilities";
 import {Router} from '@angular/router';
 import {ModalComponent} from "ng2-bs3-modal/ng2-bs3-modal";
+import {NavService} from "./nav-service";
 declare var $:any;
 declare var _:any;
 
@@ -18,7 +19,8 @@ export class NavComponent implements OnInit {
     menuArray;
 
     constructor(private app:AppUtilities
-        , private route:Router) {
+        , private route:Router
+        , private navComp:NavService) {
     }
 
     CP; // cuurent page
@@ -26,9 +28,9 @@ export class NavComponent implements OnInit {
     NVP; // non visited page
     current:string = 'current';
     menuCount = this.app.utilities.navCount;
+    pathName;
 
     ngOnChanges() {
-        this.activateIcon();
         this.menuArray = this.buildMenu();
     }
 
@@ -39,34 +41,9 @@ export class NavComponent implements OnInit {
         });
     }
 
-    home() {
+    goToHome() {
         this.modal.close();
         this.route.navigateByUrl('/banner');
-    }
-
-    activateIcon() {
-        $("li").removeClass('current');
-        let li = $("li:eq(" + this.app.utilities.currPage + ")");
-        let src = li.find('img').attr('src');
-
-        let clicked = this.app.utilities.clicked;
-
-        // case 0 = prev
-        // case 1 = next
-
-        switch (clicked) {
-            case 0:
-                this.CP = _.replace(src, "VP", "CP");
-                this.VP = _.replace(li.next().find('img').attr('src'), "CP", "NVP");
-                li.next().find('img').attr('src', this.VP);
-                break;
-            case 1:
-                this.CP = _.replace(src, "NVP", "CP");
-                this.VP = _.replace(li.prev().find('img').attr('src'), "CP", "VP");
-                li.prev().addClass('visited').find('img').attr('src', this.VP);
-                break;
-        }
-        li.removeClass('visited').addClass('current').find('img').attr('src', this.CP);
     }
 
     visited(id) {
@@ -83,8 +60,13 @@ export class NavComponent implements OnInit {
                 });
             this.app.utilities.currPage = id;
             let path = this.app.utilities.currScreen - (id + 1);
-            // this.route.navigateByUrl(this.app.utilities.[path]);
             this.app.utilities.currScreen = path;
+
+            let t = this.app.utilities.flow;
+            if (this.app.utilities.flow === 'residentialNavElems')
+                this.pathName = this.app.utilities[t][id + 2];
+
+            this.route.navigateByUrl(this.pathName);
         }
     }
 
@@ -95,6 +77,7 @@ export class NavComponent implements OnInit {
         this.menuArray = this.menuArray.map(function (x, i) {
             return i + 1
         });
+        // this.navComp.activateIcon();
     }
 
 }

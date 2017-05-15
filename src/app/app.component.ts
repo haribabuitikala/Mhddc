@@ -49,7 +49,6 @@ export class AppComponent implements OnInit {
     }
 
     prevBtn(id):void {
-
         this.currScreen = id - 1;
         let path = this.location.path();
         switch (path) {
