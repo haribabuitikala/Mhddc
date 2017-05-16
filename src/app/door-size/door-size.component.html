@@ -38,9 +38,10 @@
 
 
 <!-- button -->
-<button id="select-size-btn" class="btn btn-default margin-b-15" (click)="checkFlorida()">
-    {{lang.sizes.sizeTitle}}
-    <img src="../../assets/images/Forward-50.png" alt="" height="13" class="margin-l-15 transform-rotate-90">
+<button id="select-size-btn" class="btn btn-default margin-b-15" (click)="checkFlorida(isValid)">
+    {{lang.sizes.sizeTitle}} 
+  <img src="../../assets/images/Forward-50.png" *ngIf="isValid" alt="" height="13" class="margin-l-15 transform-rotate-90">  
+  <img src="../../assets/images/Forward-50.png"  *ngIf="!isValid" alt="" height="13" class="margin-l-15 transform-rotate-minus-90"> 
 </button>
 
 <div class="tile col-xs-12 padding10" *ngIf="showMeasure">
