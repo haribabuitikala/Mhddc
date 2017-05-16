@@ -43,6 +43,7 @@ export class GdoDoorSizeComponent implements OnInit {
                 res => {
                     this.dataStorage.gdoOpener = res;
                     this.utils.utilities.item_price = res[0].item_price;
+                    this.utils.utilities.gdoBanner = res[0].item_thumbnail;
                     this.route.navigateByUrl('/gdoConfig/opener');
                 }
             );

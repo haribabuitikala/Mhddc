@@ -28,7 +28,9 @@
             <!--</a>-->
         <!--</div>-->
 
-        <app-slider-component [data]="data" [number]="number"></app-slider-component>
+        <app-slider-component [data]="data" [number]="number"
+        (notify)="getOpenerId($event)"
+        ></app-slider-component>
 
 
     </div>

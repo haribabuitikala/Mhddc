@@ -3,8 +3,11 @@
     <div class="_slider" [style.width.px]="sliderWidth" [style.left.px]="sliderLeft">
       <div class="_slide" [style.width.px]="slideWidth" *ngFor="let slide of data; let k = index">
         <div class="_slide-items">
-          <div class="inner-item col-xs-{{number}}" *ngFor="let slideitem of slide">
-            <img src="../../../assets/images/openers/{{slideitem.item_thumbnail}}" (click)="openerSelected(slideitem)" alt="">
+          <div class="inner-item col-xs-{{number}}" *ngFor="let slideitem of slide; let i=index">
+            <img src="../../../assets/images/openers/{{slideitem.item_thumbnail}}"
+                 (click)="openerSelected(slideitem, $event)"
+                 [attr.data-id]="slideitem.item_id"
+                 alt="">
           </div>
         </div>
       </div>

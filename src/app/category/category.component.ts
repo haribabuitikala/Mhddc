@@ -17,7 +17,6 @@ export class CategoryComponent implements OnInit {
     @ViewChild('gdo') gdo:ModalComponent;
     lang;
     isService:boolean;
-    dataParams;
 
     constructor(private language:LangEnglishService
         , private route:Router
@@ -43,7 +42,10 @@ export class CategoryComponent implements OnInit {
             this.utilities.utilities.currScreen += 1;
             this.route.navigateByUrl(path);
         } else {
-            this.gdo.open();
+            let zipCode = this.utilities.utilities.zipCode;
+            let storeNum = this.utilities.utilities.storenumber;
+            let arr = this.utilities.gdoCheck;
+            arr.indexOf(zipCode) !== -1 || arr.indexOf(storeNum) !== -1 ? this.gdoGoTo('/gdoDoorSize', 'size') : this.gdo.open();
         }
     }
 
@@ -64,19 +66,8 @@ export class CategoryComponent implements OnInit {
             this.utilities.utilities.ProductType = 'gdo';
             this.route.navigateByUrl(path);
         } else {
-            this.dataParams = {
-                NatMarketID: +this.utilities.utilities.natmarketid,
-                openerid: this.utilities.utilities.openerid = 2,
-                lang: this.utilities.utilities.lang
-            };
-
-            this.dataService.getGdoAdditional(this.dataParams)
-                .subscribe(
-                    res => {
-                        this.dataStore.gdoAdditional = res;
-                        this.route.navigateByUrl(path);
-                    }
-                )
+// this is for additional options screen
+            this.route.navigateByUrl(path);
 
         }
     }

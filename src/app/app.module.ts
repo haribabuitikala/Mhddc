@@ -34,6 +34,7 @@ import {GdoConfigComponent} from './gdo-config/gdo-config.component';
 import {NavService} from "./nav/nav-service";
 import {ShoppingCartComponent} from './shopping-cart/shopping-cart.component';
 import {ApiConstants} from "./shared/api-constants";
+import {GdoOpener} from "./opener/gdoOpener";
 
 @NgModule({
     declarations: [
@@ -73,7 +74,8 @@ import {ApiConstants} from "./shared/api-constants";
         CollectionService,
         CollectionData,
         NavService,
-        ApiConstants
+        ApiConstants,
+        GdoOpener
     ],
     bootstrap: [AppComponent]
 })

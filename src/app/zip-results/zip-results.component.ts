@@ -33,6 +33,7 @@ export class ZipResultsComponent implements OnInit {
         this.utils.utilities.productlayout = item.productlayout;
         this.utils.utilities.natmarketid = item.natmarketid;
         this.utils.utilities.localmarketid = item.marketid;
+        this.utils.utilities.storenumber = +item.storenumber;
 
         // setting double door height and width
         this.utils.utilities.doubleDoorHeight = item.DoubleDoorHeight;

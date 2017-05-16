@@ -34,9 +34,13 @@ export class CollectionService {
             .map(res => res.json())
     }
 
-    getGdoAdditional(obj){
+    getGdoAdditional(obj) {
         return this.http.post(this.url + 'OpenerItem', obj)
             .map(res => res.json())
-
     }
+
+    // getJsonData(path) {
+    //     return this.http.get('http://' + window.location.host + '/app/additional-options/' + path + '.json')
+    //         .map(res => res.json())
+    // }
 }

@@ -6,6 +6,7 @@ import {CollectionService} from "../shared/data.service";
 import {CollectionData} from "../collection/collection-data";
 
 import {ToastrService} from 'toastr-ng2';
+import {AppUtilities} from "../shared/appUtilities";
 declare var $:any;
 @Component({
     selector: 'app-banner',
@@ -22,12 +23,14 @@ export class BannerComponent implements OnInit {
         , private route:Router
         , private localize:LangEnglishService
         , private dataService:CollectionService
-        , private data:CollectionData) {
+        , private data:CollectionData
+        , private utils:AppUtilities) {
     }
 
     save(form, event) {
         event.preventDefault();
         $('body').addClass('loader');
+        this.utils.utilities.zipCode = form.value.zip;
         this.route.navigate(['/zipResults', form.value.zip])
     }
 

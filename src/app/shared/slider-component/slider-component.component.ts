@@ -1,5 +1,7 @@
-import {Component, OnInit, Input} from '@angular/core';
+import {Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
 import {GdoConfigComponent} from "../../gdo-config/gdo-config.component";
+import {GdoOpener} from "../../opener/gdoOpener";
+import {AppUtilities} from "../appUtilities";
 declare var $:any;
 declare var _:any;
 
@@ -10,7 +12,8 @@ declare var _:any;
 })
 export class SliderComponentComponent implements OnInit {
 
-    constructor(private gdoConfig:GdoConfigComponent) {
+    constructor(private gdoConfig:GdoConfigComponent
+        , private utils:AppUtilities) {
     }
 
     @Input() data:any;
@@ -19,6 +22,8 @@ export class SliderComponentComponent implements OnInit {
 
     sliderRows;
 
+    @Output() notify = new EventEmitter<GdoOpener>();
+
     ngOnInit() {
         console.log(this.data);
         if (this.data) {
@@ -26,6 +31,9 @@ export class SliderComponentComponent implements OnInit {
             this.slideCount = this.data ? this.data.length : 0;
         }
         this.renderSlider();
+        if(this.utils.utilities.gdoOpenerSelectedItm !== null){
+            // $('img').attr('data-id').addClass('current');
+        }
     }
 
     sliderWidth = 0;
@@ -71,7 +79,13 @@ export class SliderComponentComponent implements OnInit {
         this.sliderLeft = -(sliderIndex * this.slideWidth);
     }
 
-    openerSelected(obj) {
+    openerSelected(obj, event) {
+        $('._slide-items img').removeClass('current');
         this.gdoConfig.itemPrice = obj.item_price;
-    }
+        this.gdoConfig.gdoBanner = obj.item_thumbnail;
+        event.currentTarget.classList.add('current');
+        this.utils.utilities.gdoOpenerSelectedItm = obj.item_id;
+        this.notify.emit(obj);
+
+    };
 }
