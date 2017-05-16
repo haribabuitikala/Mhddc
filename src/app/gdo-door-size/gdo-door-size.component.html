@@ -3,15 +3,15 @@
         KNOW HEIGHT".</p>
     <div class="tile col-xs-12">
         <p class="font-size-16 color-black margin-t-10">Door or Opening Height: <p>
-        <select  class="form-control"  [(ngModel)]="garageDoorHgt">
+        <select  class="form-control"  #garageDoorHgt >
             <option value='0' selected="selected" >Select Garage Door Height</option>
             <option value='7'>Do Not Know Height</option>
             <option value='7'>6' - 7'</option>
             <option value='8'>7' 1" - 8'</option>
-        </select>
+        zzz</select>
         </p>
         <p class="text-center">
-            <button class="btn btn-default btn text-orange text-uppercase font-size-14" (click)="goTo()">Enter</button>
+            <button class="btn btn-default btn text-orange text-uppercase font-size-14" (click)="goTo(garageDoorHgt.value)">Enter</button>
         </p>
     </div>
 </div>
