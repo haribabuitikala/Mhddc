@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import{Router} from '@angular/router';
+import {Router} from '@angular/router';
 import {AppComponent} from "../app.component";
 import {AppUtilities} from "../shared/appUtilities";
 import {CollectionService} from "../shared/data.service";
@@ -14,11 +14,11 @@ export class GdoDoorSizeComponent implements OnInit {
 
     garageDoorHgt;
 
-    constructor(private appComponent:AppComponent
-        , private route:Router
-        , private utils:AppUtilities
-        , private dataService:CollectionService
-        , private dataStorage:CollectionData) {
+    constructor(private appComponent: AppComponent
+        , private route: Router
+        , private utils: AppUtilities
+        , private dataService: CollectionService
+        , private dataStorage: CollectionData) {
     }
 
     ngOnInit() {
@@ -35,18 +35,22 @@ export class GdoDoorSizeComponent implements OnInit {
     }
 
     goTo(itm) {
-        this.utils.utilities.currPage = 2;
-        this.utils.utilities.clicked = 1;
-        this.dataParams.dheightFt = +this.garageDoorHgt;
-        this.dataService.getGdoOpener(this.dataParams)
-            .subscribe(
+        if (!itm ==  null) {
+            this.utils.utilities.currPage = 2;
+            this.utils.utilities.clicked = 1;
+
+            this.dataParams.dheightFt = +itm;
+
+            this.dataService.getGdoOpener(this.dataParams)
+                .subscribe(
                 res => {
                     this.dataStorage.gdoOpener = res;
                     this.utils.utilities.item_price = res[0].item_price;
                     this.utils.utilities.gdoBanner = res[0].item_thumbnail;
                     this.route.navigateByUrl('/gdoConfig/opener');
                 }
-            );
+                );
+        }
     }
 
 

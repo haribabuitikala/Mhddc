@@ -23,6 +23,8 @@ export class DoorSizeComponent implements OnInit {
     lang;
 
     collectionData;
+   isValid = true;
+   
 
     widthFeets;
     widthInches;
@@ -76,7 +78,7 @@ export class DoorSizeComponent implements OnInit {
         this.navigateTo(this.dataParams);
     }
 
-    navigateTo(data) {
+    navigateTo(data) { 
         $('body').addClass('loader');
         this.collection.getCollection(data).subscribe(
             res => {
@@ -89,6 +91,7 @@ export class DoorSizeComponent implements OnInit {
             },
             error => {
                 this.toastr.error(error.statusText);
+                
             }
         );
     }
@@ -121,12 +124,22 @@ export class DoorSizeComponent implements OnInit {
     }
 
     //  check for florida to open the popup
-    checkFlorida() {
-        let winCode = +this.utils.utilities.winCode.slice(1);
+    checkFlorida(isValid) {
+
+        this.showMeasure = true;
+        if (isValid == true) {
+            this.isValid = false;
+
+        } else {
+            this.isValid = true;
+            this.showMeasure = false;
+
+        }
+  let winCode = +this.utils.utilities.winCode.slice(1);
         if (winCode >= 6) {
             this.modal1.open();
         }
-        this.showMeasure = true;
+
     }
 
     floridaClose() {
@@ -148,11 +161,7 @@ export class DoorSizeComponent implements OnInit {
     };
 
     nextBtn(curr, path) {
-        if (this.utils.utilities.wf != null ||
-            this.utils.utilities.wi != null ||
-            this.utils.utilities.hf != null ||
-            this.utils.utilities.hi != null) {
-
+        if (this.utils.utilities.wf != null &&  this.utils.utilities.wi != null && this.utils.utilities.hf != null && this.utils.utilities.hi != null) {
             this.dataParams.dwidthFt = this.utils.utilities.wf;
             this.dataParams.dwidthIn = this.utils.utilities.wi;
             this.dataParams.dheightFt = this.utils.utilities.hf;

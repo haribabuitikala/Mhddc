@@ -536,11 +536,22 @@ li {
             padding-left: 41%;
         }
     }
+    .modal-open {
+	.modal {
+		overflow-x: hidden;
+		overflow-y: auto;
+		top: 55px !important;
+	}
+}
+
      .modal {
         top: 14% !important;
     }
-    .banner-zip-search.error {
-    margin-right: 100px;
+ 
+.banner-zip-search {
+	.error {
+		margin-right: 105px !important;
+	}
 }
  
 
@@ -572,13 +583,28 @@ li {
 		top: 15% !important;
 	}
 }
+.modal  {
+    top: 15% !important;
+}
+ 
+.banner-zip-search {
+	.error {
+		margin-right: 84px;
+	}
+}
+
 
 }
 //360
 @media only screen and (min-width: 360px) {
-  .modal {
+/*  .modal {
         top: 8% !important;
-    }
+    }*/
+.modal-open {
+	.modal {
+		top: 56px !important;
+	}
+}
 
 } 
  
@@ -662,3 +688,9 @@ body.loader{
 .inline-block{
     display: inline-block;
 }
+
+.transform-rotate-minus-90 {
+    -webkit-transform: rotate(-90deg);
+    transform: rotate(-90deg);
+}
+
