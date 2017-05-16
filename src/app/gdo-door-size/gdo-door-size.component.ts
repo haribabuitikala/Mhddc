@@ -35,7 +35,7 @@ export class GdoDoorSizeComponent implements OnInit {
     }
 
     goTo(itm) {
-        if (itm == 7 || itm == 8) {
+        if (!itm ==  null) {
             this.utils.utilities.currPage = 2;
             this.utils.utilities.clicked = 1;
 
