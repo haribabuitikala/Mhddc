@@ -78,7 +78,7 @@ export class DoorSizeComponent implements OnInit {
         this.navigateTo(this.dataParams);
     }
 
-    navigateTo(data) {
+    navigateTo(data) { 
         $('body').addClass('loader');
         this.collection.getCollection(data).subscribe(
             res => {
@@ -91,6 +91,7 @@ export class DoorSizeComponent implements OnInit {
             },
             error => {
                 this.toastr.error(error.statusText);
+                
             }
         );
     }
@@ -160,11 +161,7 @@ export class DoorSizeComponent implements OnInit {
     };
 
     nextBtn(curr, path) {
-        if (this.utils.utilities.wf != null ||
-            this.utils.utilities.wi != null ||
-            this.utils.utilities.hf != null ||
-            this.utils.utilities.hi != null) {
-
+        if (this.utils.utilities.wf != null &&  this.utils.utilities.wi != null && this.utils.utilities.hf != null && this.utils.utilities.hi != null) {
             this.dataParams.dwidthFt = this.utils.utilities.wf;
             this.dataParams.dwidthIn = this.utils.utilities.wi;
             this.dataParams.dheightFt = this.utils.utilities.hf;

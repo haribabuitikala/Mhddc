@@ -35,9 +35,12 @@ export class GdoDoorSizeComponent implements OnInit {
     }
 
     goTo(itm) {
+          if(this.garageDoorHgt == 7 || this.garageDoorHgt == 8) {
         this.utils.utilities.currPage = 2;
         this.utils.utilities.clicked = 1;
+     
         this.dataParams.dheightFt = +this.garageDoorHgt;
+       
         this.dataService.getGdoOpener(this.dataParams)
             .subscribe(
                 res => {
@@ -46,6 +49,7 @@ export class GdoDoorSizeComponent implements OnInit {
                     this.route.navigateByUrl('/gdoConfig/opener');
                 }
             );
+    }
     }
 
 
