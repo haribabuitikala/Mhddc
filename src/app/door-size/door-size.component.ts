@@ -23,6 +23,8 @@ export class DoorSizeComponent implements OnInit {
     lang;
 
     collectionData;
+   isValid = true;
+   
 
     widthFeets;
     widthInches;
@@ -121,12 +123,22 @@ export class DoorSizeComponent implements OnInit {
     }
 
     //  check for florida to open the popup
-    checkFlorida() {
-        let winCode = +this.utils.utilities.winCode.slice(1);
+    checkFlorida(isValid) {
+
+        this.showMeasure = true;
+        if (isValid == true) {
+            this.isValid = false;
+
+        } else {
+            this.isValid = true;
+            this.showMeasure = false;
+
+        }
+  let winCode = +this.utils.utilities.winCode.slice(1);
         if (winCode >= 6) {
             this.modal1.open();
         }
-        this.showMeasure = true;
+
     }
 
     floridaClose() {
