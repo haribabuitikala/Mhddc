@@ -1,29 +1,32 @@
 <!-- Begin Header -->
 <div class="row banner-image ptn-rel margin-b-10">
-    <div class="ad-sec margin-t-10">
-        <img src="../../assets/images/AdBannerMobile.png" alt="">
-    </div>
-    <!-- Begin Header form -->
-    <div class="row bg-orange padding-t-7 form-inline ptn-abs zip-search-form">
-        <form novalidate #form="ngForm" (ngSubmit)="save(form, $event)" class="form-group banner-zip-search ptn-rel">
-              <div class="col-xs-10 pad-r-0">
-                <div class="form-control"></div>
-                <input
-                    type="text"
-                    placeholder="{{lang.placeholder}}"
-                    name="zip"
-                    ngModel
-                    minlength="5"
-                    maxlength="5" 
-                    style="text-decoration: none;"
-                    #zipCode="ngModel" 
-                    class="zip-code ptn-abs " 
-                    required autocomplete="off"  >
-                <span *ngIf="zipCode.errors?.required && zipCode.touched" class="error">
-                    {{lang.zipcodeMessage}}
-            </span>
-            <span *ngIf="zipCode.errors?.minlength && zipCode.touched" class="error">
-                {{lang.zipcodeMessage}}
+   <div class="ad-sec margin-t-10">
+    <img src="../../assets/images/AdBannerMobile.png" alt="">
+  </div>
+    
+  <!-- Begin Header form -->
+  <div class="row bg-orange padding-t-7 form-inline ptn-abs zip-search-form">
+    <form novalidate #form="ngForm" (ngSubmit)="save(form, $event)" class="form-group banner-zip-search ptn-rel">
+      <div class="col-xs-10 pad-r-0">
+        <div class="form-control"></div>
+        <input
+          type="text"
+          placeholder="{{lang.placeholder}}"
+          minlength="5"
+          maxlength="5" 
+          name="zip"
+          style="text-decoration: none;"
+           class="zip-code ptn-abs"
+           autocomplete="off" 
+          ngModel
+          #zipCode="ngModel"  
+          required>
+        <span *ngIf="zipCode.errors?.required && zipCode.touched" class="error">
+         {{lang.zipcodeMessage}}
+        </span>
+        <span *ngIf="zipCode.errors?.minlength && zipCode.touched" class="error">
+          {{lang.zipcodeMessage}}
+>>>>>>> develop
         </span>
 
     </div>
