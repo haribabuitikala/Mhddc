@@ -37,9 +37,11 @@
     height: 45px;
     padding-right: 7px;
     input {
-        border: none;
+        border: none !important;
+        outline: none !important;
+        text-decoration:none !important;
         top: 6px;
-        background: none;
+        background: none !important;
         left: 0;
         font-size: 14px;
         padding-left: 34%;
@@ -112,4 +114,9 @@ input {
         -webkit-appearance: none;
         margin: 0;
     }
+}
+input  {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
 }

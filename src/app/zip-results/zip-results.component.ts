@@ -25,7 +25,7 @@ export class ZipResultsComponent implements OnInit {
         , private router:Router
         , private utils:AppUtilities
         , private dataService:CollectionService
-        , private toastr:ToastrService) {
+        , private toastr:ToastrService,private dataStore:CollectionData) {
     }
 
     navigateTo(item, path) {
@@ -48,30 +48,32 @@ export class ZipResultsComponent implements OnInit {
 
     ngOnInit() {
         this.zip = location.pathname.split('/')[2];
-        this.getData();
+         //this.getData();
         this.lang = this.language.getzipResults();
+        this.results=this.dataStore.zipResults;
+        
     }
 
 
-    getData() {
-        return this.dataService.getZipResults(this.zip)
-            .subscribe(
-                res => {
-                    res = res;
-                    this.utils.utilities.winCode = res.windcode;
-                    this.results = res.Stores;
-                    $('body').removeClass('loader');
-                },
-                error => {
-                    this.toastr.error(`${this.zip} is not correct, try with another one`);
-                    this.router.navigateByUrl('/banner');
-                    $('body').removeClass('loader');
-                }
-            );
-
-
-        // this.utils.utilities.winCode = this.results.windcode;
-    }
+//    getData() {
+//        return this.dataService.getZipResults(this.zip)
+//            .subscribe(
+//                res => {
+//                    res = res;
+//                    this.utils.utilities.winCode = res.windcode;
+//                    this.results = res.Stores;
+//                    $('body').removeClass('loader');
+//                },
+//                error => {
+//                    this.toastr.error(`${this.zip} is not correct, try with another one`);
+//                    this.router.navigateByUrl('/banner');
+//                    $('body').removeClass('loader');
+//                }
+//            );
+//
+//
+//        // this.utils.utilities.winCode = this.results.windcode;
+//    }
 
 
 }
