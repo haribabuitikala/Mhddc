@@ -12,6 +12,9 @@ import {ApiConstants} from "./api-constants";
 @Injectable()
 export class CollectionService {
 
+    //  example to get the local json file
+    // 'http://' + window.location.host + '/app/additional-options/' + path + '.json'
+
     constructor(private http:Http,
                 private api:ApiConstants) {
     }
@@ -39,8 +42,8 @@ export class CollectionService {
             .map(res => res.json())
     }
 
-    // getJsonData(path) {
-    //     return this.http.get('http://' + window.location.host + '/app/additional-options/' + path + '.json')
-    //         .map(res => res.json())
-    // }
+    getGdoAdditionalDirect(obj) {
+        return this.http.post(this.url + 'Opener',obj)
+            .map(res => res.json())
+    }
 }

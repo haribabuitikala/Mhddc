@@ -32,10 +32,10 @@ export class GdoDoorSizeComponent implements OnInit {
         localmarketid: this.utils.utilities.localmarketid,
         NatMarketID: this.utils.utilities.natmarketid,
         ProductType: this.utils.utilities.ProductType
-    }
+    };
 
     goTo(itm) {
-        if (!itm ==  null) {
+        if (itm) {
             this.utils.utilities.currPage = 2;
             this.utils.utilities.clicked = 1;
 

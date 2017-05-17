@@ -30,7 +30,7 @@ export class CategoryComponent implements OnInit {
         this.lang = this.language.getCategory();
         this.isService = this.utilities.utilities.isService;
         this.appComponent.currScreen = 2;
-
+        let utils = this.utilities.utilities;
     }
 
     navigateTo(path, flow, count) {
@@ -67,7 +67,22 @@ export class CategoryComponent implements OnInit {
             this.route.navigateByUrl(path);
         } else {
 // this is for additional options screen
-            this.route.navigateByUrl(path);
+            let utils = this.utilities.utilities;
+            let dataparams = {
+                lang: utils.lang,
+                localmarketid: utils.localmarketid,
+                NatMarketID: utils.natmarketid,
+                isGDO: true,
+                ProductType: 'gdo',
+                isinstall: false
+            };
+            this.dataService.getGdoAdditionalDirect(dataparams)
+                .subscribe(
+                    res => {
+                        this.dataStore.gdoAdditionalDirect = res;
+                        this.route.navigateByUrl(path);
+                    }
+                );
 
         }
     }
