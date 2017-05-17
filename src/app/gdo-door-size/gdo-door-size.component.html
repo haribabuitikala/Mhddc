@@ -1,17 +1,17 @@
 <div class="margin-t-20">
-    <p>Select a garage door height range below. If you do not know the height of your garage door, simply select "DO NOT
+    <p class="margin-b-20">Select a garage door height range below. If you do not know the height of your garage door, simply select "DO NOT
         KNOW HEIGHT".</p>
-    <div class="tile col-xs-12">
-        <p class="font-size-16 color-black margin-t-10">Door or Opening Height: <p>
-        <select  class="form-control"  #garageDoorHgt >
-            <option value='0' selected="selected" >Select Garage Door Height</option>
-            <option value='7'>Do Not Know Height</option>
-            <option value='7'>6' - 7'</option>
-            <option value='8'>7' 1" - 8'</option>
-         </select>
+    <div class="tile col-xs-12 box-shadow">
+        <p class="font-size-16 color-black margin-b-10 margin-t-20">Door or Opening Height: <p>
+            <select  class="form-control margin-b-10 "  #garageDoorHgt>
+                <option value='0' selected="selected" >Select Garage Door Height</option>
+                <option value='7'>Do Not Know Height</option>
+                <option value='7'>6' - 7'</option>
+                <option value='8'>7' 1" - 8'</option>
+            </select>
         </p>
-        <p class="text-center">
-            <button class="btn btn-default btn text-orange text-uppercase font-size-14" (click)="goTo(garageDoorHgt.value)">Enter</button>
+        <p class="text-center  ">
+            <button class="btn btn-default  text-orange text-uppercase font-size-14 margin-t-20" (click)="goTo(garageDoorHgt.value)"> Enter </button>
         </p>
     </div>
 </div>
