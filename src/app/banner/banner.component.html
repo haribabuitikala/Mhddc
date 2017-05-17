@@ -11,13 +11,15 @@
         <input
           type="text"
           placeholder="{{lang.placeholder}}"
-          name="zip"
-          ngModel
-          #zipCode="ngModel"
           minlength="5"
           maxlength="5" 
-          class="zip-code ptn-abs roboto-regular"
-          required autocomplete="off"  style="text-decoration: none;">
+          name="zip"
+          style="text-decoration: none;"
+           class="zip-code ptn-abs"
+           autocomplete="off" 
+          ngModel
+          #zipCode="ngModel"  
+          required>
         <span *ngIf="zipCode.errors?.required && zipCode.touched" class="error">
          {{lang.zipcodeMessage}}
         </span>
