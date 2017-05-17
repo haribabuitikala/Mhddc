@@ -5,6 +5,8 @@ import {AppUtilities} from "../shared/appUtilities";
 import {CollectionService} from "../shared/data.service";
 import {CollectionData} from "../collection/collection-data";
 
+
+
 @Component({
     selector: 'app-gdo-door-size',
     templateUrl: './gdo-door-size.component.html',
@@ -24,7 +26,6 @@ export class GdoDoorSizeComponent implements OnInit {
     ngOnInit() {
         this.appComponent.currScreen = 3;
     }
-
     dataParams = {
         dheightFt: null,
         lang: this.utils.utilities.lang,
@@ -35,10 +36,10 @@ export class GdoDoorSizeComponent implements OnInit {
     }
 
     goTo(itm) {
-        if (itm == 7 || itm == 8) {
+ 
+        if (itm > 0) { 
             this.utils.utilities.currPage = 2;
             this.utils.utilities.clicked = 1;
-
             this.dataParams.dheightFt = +itm;
 
             this.dataService.getGdoOpener(this.dataParams)
