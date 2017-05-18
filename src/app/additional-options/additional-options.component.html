@@ -118,7 +118,7 @@
                 <div class="flex-right">
                     <span class="text-orange">Yes</span>
                     <label class="switch">
-                        <input type="checkbox" checked="checked" (change)="showDistance($event)">
+                        <input type="checkbox" checked="checked" (change)="showDistance($event,null)">
                         <div class="slider round"></div>
                     </label>
                     <span class="text-orange">No</span>
@@ -127,7 +127,7 @@
                     <div>
                         Distance of job site is
                         <form class="inline-block">
-                            <input type="text" (change)="updateDistance($event)"
+                            <input type="text" (keypress)="updateDistance($event,null)"
                                    name="gdoDistance" [(ngModel)]="distance"/>
                         </form>
                         drive miles from store
@@ -147,12 +147,17 @@
                     <p class="col-xs-11">Single Door New Opener Installation Kit. This is required when no Opener is
                         currently installed on door less than 10' wide.
                     </p>
+                    <select name="" (change)="directDoor($event,0)" *ngIf="singleDrop">
+                        <option>1</option>
+                        <option>2</option>
+                        <option>3</option>
+                    </select>
                 </div>
 
                 <div class="flex-right">
                     <span class="text-orange">Yes</span>
                     <label class="switch">
-                        <input type="checkbox">
+                        <input type="checkbox" (change)="showSingle($event)">
                         <div class="slider round"></div>
                     </label>
                     <span class="text-orange">No</span>
@@ -162,10 +167,15 @@
                 <div class="clearfix">
                     <p class="col-xs-11">Double Door New Opener Installation Kit. This is required when no Opener is
                         currently installed on door less than 10' wide.</p>
+                    <select name="" (change)="directDoor($event,1)" *ngIf="doubleDrop">
+                        <option>1</option>
+                        <option>2</option>
+                        <option>3</option>
+                    </select>
                 </div>
                 <div class="flex-right">
                     <span class="text-orange">Yes</span>
-                    <label class="switch">
+                    <label class="switch" (change)="showDouble($event)">
                         <input type="checkbox">
                         <div class="slider round"></div>
                     </label>
@@ -179,7 +189,7 @@
                 <div class="flex-right">
                     <span class="text-orange">Yes</span>
                     <label class="switch">
-                        <input type="checkbox" checked="checked" (change)="showDistance($event,null)">
+                        <input type="checkbox" checked="checked" (change)="showDistance($event,'direct')">
                         <div class="slider round"></div>
                     </label>
                     <span class="text-orange">No</span>
@@ -188,7 +198,7 @@
                     <div>
                         Distance of job site is
                         <form class="inline-block">
-                            <input type="text" (change)="updateDistance($event,'direct')"
+                            <input type="text" (keyup)="updateDistance($event,'direct')"
                                    name="gdoDistance" [(ngModel)]="distance"/>
                         </form>
                         drive miles from store

@@ -23,6 +23,8 @@ export class ShoppingCartComponent implements OnInit {
     distance = this.utils.utilities.distance;
     distancePrice = this.utils.utilities.distancePrice;
     accessories;
+    showDirect;
+    directItm = this.dataStore.gdoDirectQuestions;
 
     constructor(private appComp:AppComponent
         , private navComp:NavService
@@ -37,6 +39,8 @@ export class ShoppingCartComponent implements OnInit {
         this.appComp.currScreen = 0;
         this.distancePrice > 0 ? this.showDistancePrice = true : this.showDistancePrice = false;
         this.gdoOpenerSelected.length ? this.accessories = true : this.accessories = false;
+        let directObj = Object.keys(this.directItm);
+        directObj.length ? this.showDirect = true : this.showDirect = false;
     }
 
     removeItem() {

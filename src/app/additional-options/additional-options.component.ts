@@ -5,6 +5,7 @@ import {AppUtilities} from "../shared/appUtilities";
 import {NavService} from "../nav/nav-service";
 import {CollectionData} from "../collection/collection-data";
 import {CollectionService} from "../shared/data.service";
+import {GdoConfigComponent} from "../gdo-config/gdo-config.component";
 
 @Component({
     selector: 'app-additional-options',
@@ -21,6 +22,8 @@ export class AdditionalOptionsComponent implements OnInit {
     distancePrice;
     showDistancePrice;
     directFlow = this.utils.utilities.directFlow;
+    singleDrop = false;
+    doubleDrop = false;
 
     // for gdo the pageNo will be 3
     // for residential the pageNo will be
@@ -30,7 +33,8 @@ export class AdditionalOptionsComponent implements OnInit {
         , private route:Router
         , private navComp:NavService
         , private dataStore:CollectionData
-        , private dataService:CollectionService) {
+        , private dataService:CollectionService
+        , private gdoConfig:GdoConfigComponent) {
     }
 
     ngOnInit() {
@@ -38,13 +42,9 @@ export class AdditionalOptionsComponent implements OnInit {
         this.pageNo = this.utils.utilities.currPage;
         this.showMenu = this.utils.utilities.showNav;
         this.navComp.activateIcon();
-        this.data = this.dataStore.gdoAdditional;
-        // this.dataService.getJsonData(this.utils.utilities.openerType)
-        //     .subscribe(
-        //         res => {
-        //             console.log(res)
-        //         }
-        //     )
+        this.data = this.dataStore.gdoAdditionalDirect;
+        this.gdoConfig.itemPrice = this.data.item_price;
+        this.gdoConfig.itmPrice = this.data.item_price;
     }
 
     nextBtn(path) {
@@ -69,30 +69,73 @@ export class AdditionalOptionsComponent implements OnInit {
         this.route.navigateByUrl(path)
     }
 
-    showDistance(itm) {
+    showDistance(itm, flow) {
         if (itm.srcElement.checked === false) {
             this.distance = 31;
             this.utils.utilities.distance = 31;
-            this.utils.utilities.distancePrice = 51;
-            this.distancePrice = 51;
+            if (flow === 'direct') {
+                this.utils.utilities.distancePrice = 2.5;
+                this.distancePrice = 2.5;
+            }
+            else {
+                this.utils.utilities.distancePrice = 51;
+                this.distancePrice = 51;
+            }
+            this.showDistancePrice = true;
         } else {
             this.distance = '';
+            this.showDistancePrice = false;
         }
-        this.showDistancePrice = true;
+    }
+
+    showSingle(itm) {
+        if (itm.srcElement.checked === true) {
+            this.singleDrop = true;
+        } else {
+            this.singleDrop = false;
+        }
+    }
+
+    showDouble(itm) {
+        if (itm.srcElement.checked === true) {
+            this.doubleDrop = true;
+        } else {
+            this.doubleDrop = false;
+        }
+    }
+
+    directDoor(event, flow) {
+        let val = +event.target.value;
+        let k = flow;
+        if (flow === 0) {
+            k = {
+                name: "Single Door New Opener Installation Kit. This is required when no Opener is currently installed on door less than 10' wide.",
+                price: 50 * val,
+                count: val
+            };
+        } else {
+            k = {
+                name: "Double Door New Opener Installation Kit. This is required when no Opener is currently installed on door less than 10' wide.",
+                price: 65 * val,
+                count: val
+            };
+        }
+        this.dataStore.gdoDirectQuestions.splice(flow, 1);
+        this.dataStore.gdoDirectQuestions.push(k);
     }
 
     updateDistance(itm, flow) {
         this.utils.utilities.distance = +itm.target.value;
         let miles = +itm.target.value;
-        if(flow === 'direct'){
-            if (miles > 31) {
+        if (flow === 'direct') {
+            if (miles >= 31) {
                 let t = miles - 31;
-                this.distancePrice = (t * 2.50) + 2.50;
+                t === 0 ? this.distancePrice = 2.5 : this.distancePrice = (t * 2.50) + 2.50;
             }
         } else {
-            if (miles > 50) {
+            if (miles >= 51) {
                 let t = miles - 50;
-                this.distancePrice = (t * 3) + 50;
+                t === 0 ? this.distancePrice = 50 : this.distancePrice = (t * 3) + 50;
             }
             this.utils.utilities.distancePrice = this.distancePrice;
         }

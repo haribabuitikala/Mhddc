@@ -12,10 +12,22 @@
     <p>{{gdoOpenerTxt}}</p>
     <div *ngIf="accessories">
         Opener Accessories
-        <ul class="">
+        <ul>
             <li *ngFor="let opener of gdoOpenerSelected">
                 <p>{{opener.name}} <br>
-                    (x{{opener.count}} {{opener.price | currency:'USD':true:'1.2-2'}} each)</p>
+                    (x{{opener.count}} {{opener.price | currency:'USD':true:'1.2-2'}} )</p>
+            </li>
+        </ul>
+    </div>
+    <div *ngIf="showDirect">
+        <ul class="">
+            <li *ngFor="let opener of directItm">
+                <div class="col-xs10">{{opener.name}} <br>
+                    {{opener.count}}
+                </div>
+                <div class="col-xs-2">
+                    {{opener.price | currency:'USD':true:'1.2-2'}}
+                </div>
             </li>
         </ul>
     </div>

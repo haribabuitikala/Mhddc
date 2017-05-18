@@ -137,6 +137,11 @@
             {{opener.count}} - {{opener.name}} ({{opener.price | currency:'USD':true:'1.2-2'}} each)
         </p>
     </div>
+    <div class="margin-b-20" *ngIf="gdodirect">
+        <p *ngFor="let opener of gdodirectquestions">
+            {{opener.count}} - {{opener.name}} ({{opener.price | currency:'USD':true:'1.2-2'}})
+        </p>
+    </div>
     <p *ngIf="showDistancePrice">
         {{distance}} miles from store ({{distancePrice | currency:'USD':true:'1.2-2'}})
     </p>

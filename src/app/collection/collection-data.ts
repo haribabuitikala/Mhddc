@@ -20,4 +20,5 @@ export class CollectionData {
     gdoAdditionalDirect = {};
     gdoOpenerAccessories = []; // this is for the popup
     store={};// this is for stroing the store data
+    gdoDirectQuestions = [];
 }

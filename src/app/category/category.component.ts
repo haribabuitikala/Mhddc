@@ -6,6 +6,7 @@ import {AppUtilities} from "../shared/appUtilities";
 import {AppComponent} from "../app.component";
 import {CollectionService} from "../shared/data.service";
 import {CollectionData} from "../collection/collection-data";
+declare var $:any;
 
 @Component({
     selector: 'app-category',
@@ -58,14 +59,15 @@ export class CategoryComponent implements OnInit {
     }
 
     gdoGoTo(path, id) {
+        this.utilities.utilities.isGDO = true;
         if (id === 'size') {
             this.utilities.utilities.currPage = 3;
             this.utilities.utilities.clicked = null;
             this.utilities.utilities.showNav = true;
-            this.utilities.utilities.isGDO = true;
             this.utilities.utilities.ProductType = 'gdo';
             this.utilities.utilities.visualizeHeader = true;
             this.utilities.utilities.directFlow = false;
+            $('.inner-router').removeAttr('style');
             this.route.navigateByUrl(path);
         } else {
 // this is for additional options screen
@@ -78,12 +80,13 @@ export class CategoryComponent implements OnInit {
                 NatMarketID: utils.natmarketid,
                 isGDO: true,
                 ProductType: 'gdo',
-                isinstall: false
+                isinstall: true
             };
             this.dataService.getGdoAdditionalDirect(dataparams)
                 .subscribe(
                     res => {
                         this.dataStore.gdoAdditionalDirect = res;
+                        $('.inner-router').css({'margin-top':0});
                         this.route.navigateByUrl(path);
                     }
                 );

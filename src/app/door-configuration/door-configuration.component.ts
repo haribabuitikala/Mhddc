@@ -26,6 +26,8 @@ export class DoorConfigurationComponent implements OnInit {
     distance = this.utils.utilities.distance;
     distancePrice = this.utils.utilities.distancePrice;
     accessories;
+    gdodirectquestions = this.dataStore.gdoDirectQuestions;
+    gdodirect;
 
 
     // for gdo the pageNo will be 4
@@ -46,6 +48,7 @@ export class DoorConfigurationComponent implements OnInit {
         this.gdoConfig.showDetails = false;
         this.distancePrice > 0 ? this.showDistancePrice = true : this.showDistancePrice = false;
         this.gdoOpenerSelected.length ? this.accessories = true : this.accessories = false;
+        this.gdodirectquestions.length ? this.gdodirect = true : this.gdodirect = false;
     }
 
     updateQuantity(flow) {
