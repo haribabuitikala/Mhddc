@@ -6,6 +6,7 @@ import {NavService} from "../nav/nav-service";
 import {CollectionData} from "../collection/collection-data";
 import {GdoConfigComponent} from "../gdo-config/gdo-config.component";
 declare var $:any;
+declare var _:any;
 
 @Component({
     selector: 'app-door-configuration',
@@ -19,7 +20,10 @@ export class DoorConfigurationComponent implements OnInit {
     store = this.dataStore.store;
     gdoOpenerTxt = this.utils.utilities.gdoOpenerText;
     gdoOpenerSelected = this.dataStore.gdoOpenerAccessories;
-    itemPrice = this.utils.utilities.item_price + this.utils.utilities.distancePrice;
+
+    t = _.sumBy(this.gdoOpenerSelected, function(o){ return o.price * o.count });
+
+    itemPrice = this.utils.utilities.item_price + this.utils.utilities.distancePrice + this.t;
     qty = this.utils.utilities.gdoOpenerQty;
     itmPrice = this.utils.utilities.itmPrice;
     showDistancePrice = false;
@@ -29,6 +33,8 @@ export class DoorConfigurationComponent implements OnInit {
     gdodirectquestions = this.dataStore.gdoDirectQuestions;
     gdodirect;
     showDirectText = this.utils.utilities.directFlow;
+
+
 
     // for gdo the pageNo will be 4
     // for residential the pageNo will be 
@@ -58,7 +64,7 @@ export class DoorConfigurationComponent implements OnInit {
         else if (flow === 0 && this.qty > 1) {
             this.qty--;
         }
-        this.itemPrice = (this.itmPrice * this.qty) + this.utils.utilities.distancePrice;
+        this.itemPrice = (this.itmPrice * this.qty) + this.utils.utilities.distancePrice + this.t;
         this.utils.utilities.item_price = this.itemPrice;
         this.utils.utilities.gdoOpenerQty = this.qty;
     }

@@ -78,10 +78,12 @@ export class OpenerComponent implements OnInit {
 
     selectedGdoCount(obj, event, i) {
         let k = i;
+        let t = [];
         k = {
             name: obj.item_name,
             price: obj.item_price,
-            count: +event.srcElement.value
+            count: +event.srcElement.value,
+            totalPrice: obj.item_price * +event.srcElement.value
         };
         this.dataStrorage.gdoOpenerAccessories.splice(i, 1);
         this.dataStrorage.gdoOpenerAccessories.push(k);

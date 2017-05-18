@@ -6,6 +6,7 @@ import {NavService} from "../nav/nav-service";
 import {AppUtilities} from "../shared/appUtilities";
 import {CollectionData} from "../collection/collection-data";
 declare var $:any;
+declare var _:any;
 
 @Component({
     selector: 'app-shopping-cart',
@@ -17,8 +18,6 @@ export class ShoppingCartComponent implements OnInit {
     pageNo;
     gdoOpenerTxt = this.utils.utilities.gdoOpenerText;
     gdoOpenerSelected = this.dataStore.gdoOpenerAccessories;
-    itemPrice = this.utils.utilities.item_price;
-    itmPrice = this.utils.utilities.itmPrice;
     openerType = this.utils.utilities.openerType;
     qty = this.utils.utilities.gdoOpenerQty;
     showDistancePrice = false;
@@ -27,6 +26,11 @@ export class ShoppingCartComponent implements OnInit {
     accessories;
     showDirect;
     directItm = this.dataStore.gdoDirectQuestions;
+
+    t = _.sumBy(this.gdoOpenerSelected, function(o){ return o.price * o.count });
+
+    itemPrice = this.utils.utilities.item_price + this.utils.utilities.distancePrice + this.t;
+    itmPrice = this.utils.utilities.itmPrice;
 
     constructor(private appComp:AppComponent
         , private navComp:NavService
@@ -68,7 +72,7 @@ export class ShoppingCartComponent implements OnInit {
         else if (flow === 0 && this.qty > 1) {
             this.qty--;
         }
-        this.itemPrice = (this.itmPrice * this.qty) + this.utils.utilities.distancePrice;
+        this.itemPrice = (this.itmPrice * this.qty) + this.utils.utilities.distancePrice + this.t;
         this.utils.utilities.item_price = this.itemPrice;
         this.utils.utilities.gdoOpenerQty = this.qty;
     }

@@ -7,6 +7,8 @@ import {CollectionData} from "../collection/collection-data";
 import {CollectionService} from "../shared/data.service";
 import {GdoConfigComponent} from "../gdo-config/gdo-config.component";
 
+declare var _:any;
+
 @Component({
     selector: 'app-additional-options',
     templateUrl: './additional-options.component.html',
@@ -24,6 +26,9 @@ export class AdditionalOptionsComponent implements OnInit {
     directFlow = this.utils.utilities.directFlow;
     singleDrop = false;
     doubleDrop = false;
+    gdoOpenerSelected = this.dataStore.gdoOpenerAccessories;
+
+    t = _.sumBy(this.gdoOpenerSelected, function(o){ return o.price * o.count });
 
     // for gdo the pageNo will be 3
     // for residential the pageNo will be
@@ -42,11 +47,16 @@ export class AdditionalOptionsComponent implements OnInit {
         this.pageNo = this.utils.utilities.currPage;
         this.showMenu = this.utils.utilities.showNav;
         this.navComp.activateIcon();
-        this.data = this.dataStore.gdoAdditionalDirect;
-        this.gdoConfig.itemPrice = this.data.item_price;
-        this.gdoConfig.itmPrice = this.data.item_price;
-        this.utils.utilities.item_price = this.data.item_price;
-        this.utils.utilities.itmPrice = this.data.item_price;
+        if(this.utils.utilities.directFlow) {
+            this.data = this.dataStore.gdoAdditionalDirect;
+            this.gdoConfig.itemPrice = this.data.item_price;
+            this.gdoConfig.itmPrice = this.data.item_price;
+            this.utils.utilities.item_price = this.data.item_price;
+            this.utils.utilities.itmPrice = this.data.item_price;
+        } else {
+            this.gdoConfig.itemPrice = this.utils.utilities.item_price + this.utils.utilities.distancePrice + this.t;
+        }
+
     }
 
     nextBtn(path) {
@@ -134,16 +144,17 @@ export class AdditionalOptionsComponent implements OnInit {
         let miles = +itm.target.value;
         if (flow === 'direct') {
             if (miles >= 31) {
-                let t = miles - 31;
-                t === 0 ? this.distancePrice = 2.5 : this.distancePrice = (t * 2.50) + 2.50;
-                this.gdoConfig.itemPrice += this.distancePrice;
+                let k = miles - 31;
+                k === 0 ? this.distancePrice = 2.5 : this.distancePrice = (k * 2.50) + 2.50;
+                this.gdoConfig.itemPrice += this.distancePrice +this.t;
             }
         } else {
             if (miles >= 51) {
-                let t = miles - 50;
-                t === 0 ? this.distancePrice = 50 : this.distancePrice = (t * 3) + 50;
+                let k = miles - 50;
+                k === 0 ? this.distancePrice = 50 : this.distancePrice = (k * 3) + 50;
+                this.gdoConfig.itemPrice += this.distancePrice +this.t;
             }
-            this.utils.utilities.distancePrice = this.distancePrice;
+            this.utils.utilities.distancePrice = this.distancePrice + this.t;
         }
         this.utils.utilities.distancePrice = this.distancePrice;
     }
