@@ -18,7 +18,9 @@ export class BannerComponent implements OnInit {
     zipCode: any;
     lang: any;
 
-
+onlyNumberKey(event) {
+    return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57;
+}
     constructor(private appComponent: AppComponent
         , private route: Router
         , private toastr: ToastrService

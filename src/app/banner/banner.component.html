@@ -18,6 +18,7 @@
          class="zip-code ptn-abs"
            autocomplete="off" 
           ngModel
+          (keypress)="onlyNumberKey($event)"
           #zipCode="ngModel"  
           required>
         <span *ngIf="zipCode.errors?.required && zipCode.touched" class="error">
