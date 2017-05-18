@@ -45,6 +45,8 @@ export class AdditionalOptionsComponent implements OnInit {
         this.data = this.dataStore.gdoAdditionalDirect;
         this.gdoConfig.itemPrice = this.data.item_price;
         this.gdoConfig.itmPrice = this.data.item_price;
+        this.utils.utilities.item_price = this.data.item_price;
+        this.utils.utilities.itmPrice = this.data.item_price;
     }
 
     nextBtn(path) {
@@ -81,7 +83,7 @@ export class AdditionalOptionsComponent implements OnInit {
                 this.utils.utilities.distancePrice = 51;
                 this.distancePrice = 51;
             }
-            this.showDistancePrice = true;
+            this.showDistancePrice = false;
         } else {
             this.distance = '';
             this.showDistancePrice = false;
@@ -113,13 +115,16 @@ export class AdditionalOptionsComponent implements OnInit {
                 price: 50 * val,
                 count: val
             };
+            this.utils.utilities.gdoSingleDoor = k.price;
         } else {
             k = {
                 name: "Double Door New Opener Installation Kit. This is required when no Opener is currently installed on door less than 10' wide.",
                 price: 65 * val,
                 count: val
             };
+            this.utils.utilities.gdoDoubleDoor = k.price;
         }
+        this.gdoConfig.itemPrice += k.price;
         this.dataStore.gdoDirectQuestions.splice(flow, 1);
         this.dataStore.gdoDirectQuestions.push(k);
     }
@@ -131,6 +136,7 @@ export class AdditionalOptionsComponent implements OnInit {
             if (miles >= 31) {
                 let t = miles - 31;
                 t === 0 ? this.distancePrice = 2.5 : this.distancePrice = (t * 2.50) + 2.50;
+                this.gdoConfig.itemPrice += this.distancePrice;
             }
         } else {
             if (miles >= 51) {
@@ -139,6 +145,7 @@ export class AdditionalOptionsComponent implements OnInit {
             }
             this.utils.utilities.distancePrice = this.distancePrice;
         }
+        this.utils.utilities.distancePrice = this.distancePrice;
     }
 
 }

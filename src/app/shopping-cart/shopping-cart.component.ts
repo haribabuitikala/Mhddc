@@ -1,4 +1,5 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
+import {ModalComponent} from "ng2-bs3-modal/ng2-bs3-modal";
 import {AppComponent} from "../app.component";
 import {Router} from '@angular/router';
 import {NavService} from "../nav/nav-service";
@@ -12,6 +13,7 @@ declare var $:any;
     styleUrls: ['./shopping-cart.component.less']
 })
 export class ShoppingCartComponent implements OnInit {
+    @ViewChild('continue') continue:ModalComponent;
     pageNo;
     gdoOpenerTxt = this.utils.utilities.gdoOpenerText;
     gdoOpenerSelected = this.dataStore.gdoOpenerAccessories;
@@ -53,6 +55,7 @@ export class ShoppingCartComponent implements OnInit {
         this.utils.utilities.distancePrice = null;
         $('.shop-count').text('0');
         this.dataStore.gdoOpenerAccessories = [];
+        this.continue.close();
 
         this.route.navigateByUrl('/category');
 
@@ -65,7 +68,7 @@ export class ShoppingCartComponent implements OnInit {
         else if (flow === 0 && this.qty > 1) {
             this.qty--;
         }
-        this.itemPrice = this.itmPrice * this.qty;
+        this.itemPrice = (this.itmPrice * this.qty) + this.utils.utilities.distancePrice;
         this.utils.utilities.item_price = this.itemPrice;
         this.utils.utilities.gdoOpenerQty = this.qty;
     }

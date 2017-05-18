@@ -20,11 +20,13 @@ export class GdoConfigComponent implements OnInit {
     quantity = 1;
     showDetails = true;
     visualizeHeader;
+    calulateAmt;
 
 
     ngOnInit() {
         this.appComponent.currScreen = 3;
-        this.itemPrice = this.utils.utilities.item_price;
+        this.calulateAmt = this.utils.utilities.gdoSingleDoor + this.utils.utilities.gdoDoubleDoor + this.utils.utilities.distance;
+        this.itemPrice = this.utils.utilities.item_price + this.calulateAmt;
         this.itmPrice = this.utils.utilities.item_price;
         this.utils.utilities.itmPrice = this.itmPrice;
         this.gdoBanner = this.utils.utilities.gdoBanner;
@@ -40,7 +42,8 @@ export class GdoConfigComponent implements OnInit {
         else if (flow === 0 && this.quantity > 1) {
             this.quantity--;
         }
-        this.itemPrice = this.itmPrice * this.quantity;
+        this.itemPrice = (this.itmPrice * this.quantity) +
+            (this.utils.utilities.gdoDoubleDoor + this.utils.utilities.gdoSingleDoor + this.utils.utilities.distancePrice);
         this.utils.utilities.item_price = this.itemPrice;
         this.utils.utilities.gdoOpenerQty = this.quantity;
     }

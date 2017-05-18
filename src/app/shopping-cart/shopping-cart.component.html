@@ -19,6 +19,9 @@
             </li>
         </ul>
     </div>
+    <div *ngIf="showDirectText">
+        Install of Purchased Opener (Installed)
+    </div>
     <div *ngIf="showDirect">
         <ul class="">
             <li *ngFor="let opener of directItm">
@@ -37,7 +40,7 @@
 </div>
 <div class="clearfix  margin-b-40">
     <button type="submit"
-            (click)="removeItem()"
+            (click)="continue.open()"
             class=" font-size-16 pull-left btn btn-default box-shadow text-orange margin-r-10 bold margin-b-10 text-uppercase">
         REMOVE ITEM
     </button>
@@ -58,5 +61,14 @@
     </modal-header>
     <modal-body>
         Total Price will be calculated on payment screen
+    </modal-body>
+</modal>
+
+<modal #continue>
+    <modal-body class="inner-router">
+        Your Shopping Cart is Empty
+        <div>
+            <button class="btn btn-default text-orange text-uppercase" (click)="removeItem()">continue shopping</button>
+        </div>
     </modal-body>
 </modal>

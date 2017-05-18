@@ -142,9 +142,12 @@
             {{opener.count}} - {{opener.name}} ({{opener.price | currency:'USD':true:'1.2-2'}})
         </p>
     </div>
-    <p *ngIf="showDistancePrice">
-        {{distance}} miles from store ({{distancePrice | currency:'USD':true:'1.2-2'}})
+    <p>
+        Install of Purchased Opener (Installed)
     </p>
+    <!--<p *ngIf="showDistancePrice">-->
+    <!--{{distance}} miles from store ({{distancePrice | currency:'USD':true:'1.2-2'}})-->
+    <!--</p>-->
     <div class="margin-b-10  padding10 shopping-cart-info margin-b-20">
             <span class="padding-l-10"> Quantity
                 <img class="minus-quantity" src="../../assets/images/substract.png" alt="" (click)="updateQuantity(0)">

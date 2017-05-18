@@ -19,7 +19,7 @@ export class DoorConfigurationComponent implements OnInit {
     store = this.dataStore.store;
     gdoOpenerTxt = this.utils.utilities.gdoOpenerText;
     gdoOpenerSelected = this.dataStore.gdoOpenerAccessories;
-    itemPrice = this.utils.utilities.item_price;
+    itemPrice = this.utils.utilities.item_price + this.utils.utilities.distancePrice;
     qty = this.utils.utilities.gdoOpenerQty;
     itmPrice = this.utils.utilities.itmPrice;
     showDistancePrice = false;
@@ -28,7 +28,7 @@ export class DoorConfigurationComponent implements OnInit {
     accessories;
     gdodirectquestions = this.dataStore.gdoDirectQuestions;
     gdodirect;
-
+    showDirectText = this.utils.utilities.directFlow;
 
     // for gdo the pageNo will be 4
     // for residential the pageNo will be 
@@ -58,7 +58,7 @@ export class DoorConfigurationComponent implements OnInit {
         else if (flow === 0 && this.qty > 1) {
             this.qty--;
         }
-        this.itemPrice = this.itmPrice * this.qty;
+        this.itemPrice = (this.itmPrice * this.qty) + this.utils.utilities.distancePrice;
         this.utils.utilities.item_price = this.itemPrice;
         this.utils.utilities.gdoOpenerQty = this.qty;
     }
