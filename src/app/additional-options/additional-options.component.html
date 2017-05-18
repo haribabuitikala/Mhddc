@@ -1,5 +1,5 @@
 <h4 class="text-orange font-size-16">{{pageNo}} Additional Options</h4>
-<div class="content additional-options" id="resFlow">
+<div class="content additional-options" id="resFlow" *ngIf="!gdoFlow">
     <dl>
         <dd>
             <div class="clearfix">
@@ -73,13 +73,12 @@
         </dd>
     </dl>
 </div>
-<div class="content additional-options" id="gdoFlow">
-    <h4 class="text-orange font-size-16">13 Additional Options</h4>
-    <div class="content additional-options">
+<div class="content additional-options" id="gdoFlow" *ngIf="gdoFlow">
+    <div *ngIf="!directFlow" class="content additional-options">
         <dl>
             <dd>
                 <div class="clearfix">
-                    <p class="col-xs-11"> Does your current door work manually without a garage door opener attached?
+                    <p class="col-xs-11">Does your current door work manually without a garage door opener attached?
                     </p>
                     <img (click)="gdoFlowManualDoor.open()" class="pull-right " alt="" height="25"
                          src="../../assets/images/info.png">
@@ -119,13 +118,95 @@
                 <div class="flex-right">
                     <span class="text-orange">Yes</span>
                     <label class="switch">
-                        <input type="checkbox" checked="checked">
+                        <input type="checkbox" checked="checked" (change)="showDistance($event,null)">
                         <div class="slider round"></div>
                     </label>
                     <span class="text-orange">No</span>
                 </div>
                 <div class="align-right ">
-                    <p id="distance">Distance of job site is <input type="text"/> drive miles from store</p>
+                    <div>
+                        Distance of job site is
+                        <form class="inline-block">
+                            <input type="text" (keypress)="updateDistance($event,null)"
+                                   name="gdoDistance" [(ngModel)]="distance"/>
+                        </form>
+                        drive miles from store
+                    </div>
+
+                    <p *ngIf="showDistancePrice">{{distance}} miles from store ({{distancePrice |
+                        currency:'USD':true:'1.2-2'}})</p>
+
+                </div>
+            </dd>
+        </dl>
+    </div>
+    <div *ngIf="directFlow" class="content additional-options">
+        <dl>
+            <dd>
+                <div class="clearfix">
+                    <p class="col-xs-11">Single Door New Opener Installation Kit. This is required when no Opener is
+                        currently installed on door less than 10' wide.
+                    </p>
+                    <select name="" (change)="directDoor($event,0)" *ngIf="singleDrop">
+                        <option>1</option>
+                        <option>2</option>
+                        <option>3</option>
+                    </select>
+                </div>
+
+                <div class="flex-right">
+                    <span class="text-orange">Yes</span>
+                    <label class="switch">
+                        <input type="checkbox" (change)="showSingle($event)">
+                        <div class="slider round"></div>
+                    </label>
+                    <span class="text-orange">No</span>
+                </div>
+            </dd>
+            <dd>
+                <div class="clearfix">
+                    <p class="col-xs-11">Double Door New Opener Installation Kit. This is required when no Opener is
+                        currently installed on door less than 10' wide.</p>
+                    <select name="" (change)="directDoor($event,1)" *ngIf="doubleDrop">
+                        <option>1</option>
+                        <option>2</option>
+                        <option>3</option>
+                    </select>
+                </div>
+                <div class="flex-right">
+                    <span class="text-orange">Yes</span>
+                    <label class="switch" (change)="showDouble($event)">
+                        <input type="checkbox">
+                        <div class="slider round"></div>
+                    </label>
+                    <span class="text-orange">No</span>
+                </div>
+            </dd>
+            <dd>
+                <div class="clearfix">
+                    <p class="col-xs-11">Is this job site within 30 drive miles of this store? </p>
+                </div>
+                <div class="flex-right">
+                    <span class="text-orange">Yes</span>
+                    <label class="switch">
+                        <input type="checkbox" checked="checked" (change)="showDistance($event,'direct')">
+                        <div class="slider round"></div>
+                    </label>
+                    <span class="text-orange">No</span>
+                </div>
+                <div class="align-right ">
+                    <div>
+                        Distance of job site is
+                        <form class="inline-block">
+                            <input type="text" (keyup)="updateDistance($event,'direct')"
+                                   name="gdoDistance" [(ngModel)]="distance"/>
+                        </form>
+                        drive miles from store
+                    </div>
+
+                    <p *ngIf="showDistancePrice">{{distance}} miles from store ({{distancePrice |
+                        currency:'USD':true:'1.2-2'}})</p>
+
                 </div>
             </dd>
         </dl>
@@ -138,7 +219,8 @@
         Prev
     </a>
 
-    <a href="javascript:void(0)" class="pull-right nextBtn" (click)="nextBtn('/doorConfiguration')" data-id="currScreen">
+    <a href="javascript:void(0)" class="pull-right nextBtn" (click)="nextBtn('/doorConfiguration')"
+       data-id="currScreen">
         Next
         <img src="../../assets/images/Forward-48-thick.png" height="15px">
     </a>

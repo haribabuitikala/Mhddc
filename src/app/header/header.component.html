@@ -6,8 +6,8 @@
              class="collapse-humberger hide pull-left hamburger_icon">
     </div>
     <div class="col-xs-5 padding-0">
-        <a href="https://www.clopaydoor.com/">
-            <img src="./assets/images/clopay-logo_s.png"  
+        <a href="javascript:void(0)">
+            <img src="./assets/images/clopay-logo_s.png" (click)="homePage('/banner')"
                  [ngClass]="{'padding-l-7':count < 2}" class="logo" alt="">
         </a>
     </div>
@@ -17,7 +17,7 @@
                                                  class="pull-right"></a>
         <img src="./assets/images/shopping-cart.png" (click)="modal.open()" alt="" height="30"
              class="pull-right cart-icon">
-        <span class="shop-count">0</span>
+        <span class="shop-count">{{itemsCount}}</span>
     </div>
 </div>
 <modal #modal>

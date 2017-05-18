@@ -24,7 +24,8 @@ export class BannerComponent implements OnInit {
         , private toastr: ToastrService
         , private localize: LangEnglishService
         , private dataService: CollectionService
-        , private dataStore: CollectionData, ) {
+        , private dataStore: CollectionData
+        , private utils:AppUtilities) {
     }
     save(form, event) {
         event.preventDefault();
@@ -34,6 +35,7 @@ export class BannerComponent implements OnInit {
             res => {
                 this.dataStore.zipResults = res;
                 $('body').removeClass('loader');
+                this.utils.utilities.zipCode = form.value.zip;
                 this.route.navigate(['/zipResults', form.value.zip])
             },
             error => {

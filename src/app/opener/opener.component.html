@@ -1,34 +1,9 @@
 <div class="" (notify)="onNotify($event)">
     <h4 class="text-orange font-size-16">{{pageNo}} Choose Your Opener</h4>
     <div class="tile margin-b-15 ptn-rel">
-        <!--<div id="openerCarousel" class="carousel slide padding10 opener-carousel carousel1" data-ride="carousel">-->
-            <!--&lt;!&ndash; Wrapper for slides &ndash;&gt;-->
-            <!--<div role="listbox" class="carousel-inner">-->
-                <!--<div class="item active">-->
-                    <!--<span class="ptn-rel">-->
-                        <!--<img src="../../assets/images/btn8550WMobile.png" alt="">-->
-                    <!--</span>-->
-                    <!--<span class="ptn-rel pull-right">-->
-                        <!--<img src="../../assets/images/btnHD950WFMobile.png" alt="">-->
-                    <!--</span>-->
-                <!--</div>-->
-                <!--<div class="item">-->
-                    <!--<span class="ptn-rel margin-l-10">-->
-                        <!--<img src="../../assets/images/btnHD420EVMobile.png" alt="">-->
-                    <!--</span>-->
-                <!--</div>-->
-            <!--</div>-->
 
-            <!--&lt;!&ndash; Left and right controls &ndash;&gt;-->
-            <!--<a class="left carousel-control" href="#openerCarousel" role="button" data-slide="prev">-->
-                <!--<span class="helper"></span><img class="left-arrow" src="../../assets/images/ch-left-arrow.png" alt="" height="30">-->
-            <!--</a>-->
-            <!--<a class="right carousel-control" href="#openerCarousel" role="button" data-slide="next">-->
-                <!--<span class="helper"></span><img class="right-arrow" src="../../assets/images/ch-right-arrow.png" alt="" height="30">-->
-            <!--</a>-->
-        <!--</div>-->
-
-        <app-slider-component [data]="data" [number]="number"></app-slider-component>
+        <app-slider-component [data]="data" [number]="number"
+                              (notify)="getOpenerId($event)"></app-slider-component>
 
 
     </div>
@@ -40,8 +15,48 @@
         Prev
     </a>
 
-    <a href="javascript:void(0)" class="pull-right nextBtn" (click)="nextBtn('/additionalOptions')" data-id="currScreen">
+    <a href="javascript:void(0)" class="pull-right nextBtn" (click)="nextBtn()" data-id="currScreen">
         Next
         <img src="../../assets/images/Forward-48-thick.png" height="15px">
+        <!--(click)="nextBtn('/additionalOptions')"-->
     </a>
 </div>
+
+
+<modal #gdoOponerAccessories>
+    <modal-body>
+        <div>
+            <h4>Selected Opener:</h4>
+            {{gdoOpenertext}}
+        </div>
+        Optional Opener Accessories:
+        <div class="tile col-xs-12">
+            <div *ngFor="let obj of gdoOpenerObj; let k = index">
+                <div class="col-xs-10 padding-0">
+                    {{obj.item_name}}
+                    <span class="text-right">{{obj.item_price}}</span>
+                </div>
+                <div class="col-xs-2">
+                    <select (change)="selectedGdoCount(obj, $event, k)">
+                        <option value="">0</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                    </select>
+                </div>
+            </div>
+
+            <div>
+                <button class="btn btn-lg btn-default text-uppercase" (click)="accessoriesModalClose()">
+                    select other
+                    opener
+                </button>
+                <button class="btn btn-lg btn-default text-uppercase" (click)="accessoriesModalNext()">Next Step
+                </button>
+            </div>
+        </div>
+    </modal-body>
+</modal>
