@@ -25,7 +25,8 @@ export class ZipResultsComponent implements OnInit {
         , private router:Router
         , private utils:AppUtilities
         , private dataService:CollectionService
-        , private toastr:ToastrService) {
+        , private toastr:ToastrService
+        , private dataStore:CollectionData) {
     }
 
     navigateTo(item, path) {
@@ -43,6 +44,7 @@ export class ZipResultsComponent implements OnInit {
         this.utils.utilities.singleDoorHeight = item.SingleDoorHeight;
         this.utils.utilities.singleDoorWidth = item.SingleDoorWidth;
 
+        this.dataStore.store = item;
 
         this.router.navigateByUrl(path);
     }

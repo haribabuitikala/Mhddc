@@ -103,7 +103,7 @@
                 <div class="flex-right">
                     <span class="text-orange">Yes</span>
                     <label class="switch">
-                        <input type="checkbox">
+                        <input type="checkbox" checked="checked">
                         <div class="slider round"></div>
                     </label>
                     <span class="text-orange">No</span>
@@ -118,15 +118,23 @@
                 <div class="flex-right">
                     <span class="text-orange">Yes</span>
                     <label class="switch">
-                        <input type="checkbox" (change)="showDistance($event)">
+                        <input type="checkbox" checked="checked" (change)="showDistance($event)">
                         <div class="slider round"></div>
                     </label>
                     <span class="text-orange">No</span>
                 </div>
                 <div class="align-right ">
                     <div>
-                        Distance of job site is <form class="inline-block"><input type="text" (change)="updateDistance($event)" name="gdoDistance" [(ngModel)]="distance" /> </form>
-                        drive miles from store</div>
+                        Distance of job site is
+                        <form class="inline-block">
+                            <input type="text" (change)="updateDistance($event)"
+                                   name="gdoDistance" [(ngModel)]="distance"/>
+                        </form>
+                        drive miles from store
+                    </div>
+
+                    <p *ngIf="showDistancePrice">{{distance}} miles from store ({{distancePrice | currency:'USD':true:'1.2-2'}})</p>
+
                 </div>
             </dd>
         </dl>
@@ -139,7 +147,8 @@
         Prev
     </a>
 
-    <a href="javascript:void(0)" class="pull-right nextBtn" (click)="nextBtn('/doorConfiguration')" data-id="currScreen">
+    <a href="javascript:void(0)" class="pull-right nextBtn" (click)="nextBtn('/doorConfiguration')"
+       data-id="currScreen">
         Next
         <img src="../../assets/images/Forward-48-thick.png" height="15px">
     </a>

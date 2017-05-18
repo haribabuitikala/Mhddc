@@ -1,4 +1,4 @@
-import {Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
+import {Component, OnInit, Input, Output, EventEmitter, AfterViewInit} from '@angular/core';
 import {GdoConfigComponent} from "../../gdo-config/gdo-config.component";
 import {GdoOpener} from "../../opener/gdoOpener";
 import {AppUtilities} from "../appUtilities";
@@ -31,8 +31,12 @@ export class SliderComponentComponent implements OnInit {
             this.slideCount = this.data ? this.data.length : 0;
         }
         this.renderSlider();
-        if(this.utils.utilities.gdoOpenerSelectedItm !== null){
-            // $('img').attr('data-id').addClass('current');
+        
+    }
+
+    ngAfterViewInit() {
+        if (this.utils.utilities.gdoOpenerSelectedItm === null) {
+            $('._slide-items:eq(0) .inner-item:eq(0) img').addClass('current');
         }
     }
 
@@ -86,6 +90,5 @@ export class SliderComponentComponent implements OnInit {
         event.currentTarget.classList.add('current');
         this.utils.utilities.gdoOpenerSelectedItm = obj.item_id;
         this.notify.emit(obj);
-
     };
 }

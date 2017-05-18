@@ -18,6 +18,8 @@ export class AdditionalOptionsComponent implements OnInit {
     questions;
     gdoFlow = this.utils.utilities.isGDO;
     distance:any;
+    distancePrice;
+    showDistancePrice;
 
     // for gdo the pageNo will be 3
     // for residential the pageNo will be
@@ -67,15 +69,25 @@ export class AdditionalOptionsComponent implements OnInit {
     }
 
     showDistance(itm) {
-        if(itm.srcElement.checked === true) {
+        if (itm.srcElement.checked === false) {
             this.distance = 31;
             this.utils.utilities.distance = 31;
+            this.utils.utilities.distancePrice = 51;
+            this.distancePrice = 51;
         } else {
             this.distance = '';
         }
+        this.showDistancePrice = true;
     }
-    updateDistance(itm){
+
+    updateDistance(itm) {
         this.utils.utilities.distance = +itm.target.value;
+        let miles = +itm.target.value;
+        if (miles > 50) {
+            let t = miles - 50;
+            this.distancePrice = (t * 3) + 50;
+        }
+        this.utils.utilities.distancePrice = this.distancePrice;
     }
 
 }

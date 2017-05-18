@@ -3,7 +3,7 @@ import {Injectable} from '@angular/core';
 @Injectable()
 export class ApiConstants {
     constants = {
-        url: 'http://dev-mhddcapi.clopay.com/api/'
+        url: 'http://test-mhddcapi.clopay.com/api/'
     };
     // text = {
     //     'Door work manually': 'Does your current door work manually without a garage door opener attached?',

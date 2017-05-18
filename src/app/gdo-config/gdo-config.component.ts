@@ -17,26 +17,29 @@ export class GdoConfigComponent implements OnInit {
     itemPrice;
     itmPrice; // this is for holding the single quantity price
     gdoBanner;
-    quantity=1;
-    
+    quantity = 1;
+    showDetails = true;
+
 
     ngOnInit() {
         this.appComponent.currScreen = 3;
         this.itemPrice = this.utils.utilities.item_price;
         this.itmPrice = this.utils.utilities.item_price;
+        this.utils.utilities.itmPrice = this.itmPrice;
         this.gdoBanner = this.utils.utilities.gdoBanner;
-        
+        this.utils.utilities.gdoOpenerQty = this.quantity;
     }
 
-    updateQuantity(flow){
-        if(flow === 1 && this.quantity < 6){
+    updateQuantity(flow) {
+        if (flow === 1 && this.quantity < 6) {
             this.quantity++
         }
-        else if(flow === 0 && this.quantity > 1) {
+        else if (flow === 0 && this.quantity > 1) {
             this.quantity--;
         }
-
         this.itemPrice = this.itmPrice * this.quantity;
+        this.utils.utilities.item_price = this.itemPrice;
+        this.utils.utilities.gdoOpenerQty = this.quantity;
     }
 
 

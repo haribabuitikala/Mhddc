@@ -1,6 +1,6 @@
 <div class="linear-bg">
     <h3 class="font-size-16 margin-t-10 visualize-header"></h3>
-    <div class="text-center switcher-image-sec col-xs-12">
+    <div class="text-center switcher-image-sec gdo">
         <img src="../../assets/images/openers/{{gdoBanner}}" class="switcher-image" alt="">
     </div>
 </div>
@@ -9,7 +9,7 @@
 
     </router-outlet>
 </div>
-<div class="tile">
+<div class="tile" *ngIf="showDetails">
     <div class="design-detials--sec">
         <div class="col-xs-6 padding-r-7  border-white-right font-size-12">
             <p>{{itemPrice | currency:'USD':true:'1.2-2'}} / Opener</p>

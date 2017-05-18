@@ -71,7 +71,12 @@ export class AppUtilities {
         gdoBanner: null,
         gdoOpenerSelectedItm: null,
         zipCode: null,
-        storenumber: null
+        storenumber: null,
+        gdoOpenerText: null,
+        gdoOpenerQty: null,
+        itmPrice: null,
+        distancePrice: null,
+        itemsCount: 0
         // flow of GDO: Home, Size , Openers, Order Details, Shopping Cart
     };
 

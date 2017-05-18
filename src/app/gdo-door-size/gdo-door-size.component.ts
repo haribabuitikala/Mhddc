@@ -14,11 +14,11 @@ export class GdoDoorSizeComponent implements OnInit {
 
     garageDoorHgt;
 
-    constructor(private appComponent: AppComponent
-        , private route: Router
-        , private utils: AppUtilities
-        , private dataService: CollectionService
-        , private dataStorage: CollectionData) {
+    constructor(private appComponent:AppComponent
+        , private route:Router
+        , private utils:AppUtilities
+        , private dataService:CollectionService
+        , private dataStorage:CollectionData) {
     }
 
     ngOnInit() {
@@ -35,7 +35,7 @@ export class GdoDoorSizeComponent implements OnInit {
     };
 
     goTo(itm) {
-        if (itm) {
+        if (itm > 0) {
             this.utils.utilities.currPage = 2;
             this.utils.utilities.clicked = 1;
 
@@ -43,12 +43,27 @@ export class GdoDoorSizeComponent implements OnInit {
 
             this.dataService.getGdoOpener(this.dataParams)
                 .subscribe(
-                res => {
-                    this.dataStorage.gdoOpener = res;
-                    this.utils.utilities.item_price = res[0].item_price;
-                    this.utils.utilities.gdoBanner = res[0].item_thumbnail;
-                    this.route.navigateByUrl('/gdoConfig/opener');
-                }
+                    res => {
+                        this.dataStorage.gdoOpener = res;
+                        this.utils.utilities.item_price = res[0].item_price;
+                        this.utils.utilities.gdoBanner = res[0].item_thumbnail;
+                        // this is for getting the details of the first opener itm
+                        let params = {
+                            NatMarketID: this.utils.utilities.natmarketid,
+                            lang: this.utils.utilities.lang,
+                            openerid: res[0].item_id
+                        };
+                        this.dataService.getGdoAdditional(params)
+                            .subscribe(
+                                res => {
+                                    // this.route.navigateByUrl(path);
+                                    console.log(res);
+                                    this.dataStorage.gdoAdditional = res;
+                                    this.route.navigateByUrl('/gdoConfig/opener');
+                                }
+                                // this.goTo('gdoConfig' + path)
+                            )
+                    }
                 );
         }
     }

@@ -17,5 +17,7 @@ export class CollectionData {
     gdoOpener = {};
     zip = {};
     gdoAdditional = {};
-    gdoAdditionalDirect = {}
+    gdoAdditionalDirect = {};
+    gdoOpenerAccessories = []; // this is for the popup
+    store={};// this is for stroing the store data
 }
