@@ -9,13 +9,16 @@
 </p>
 <div class="div-border div-border-radius tile padding10 margin-b-10">
     <p class="shopping-cart-gallery-info ">{{openerType}} Door Operator (Installed)</p>
-    <p>{{gdoOpenerTxt}} (x1)</p>
-    <ul class="">Opener Accessories (x1)
-        <li *ngFor="let opener of gdoOpenerSelected">
-            <p>{{opener.name}} <br>
-                (x{{opener.count}} {{opener.price | currency:'USD':true:'1.2-2'}} each)</p>
-        </li>
-    </ul>
+    <p>{{gdoOpenerTxt}}</p>
+    <div *ngIf="accessories">
+        Opener Accessories
+        <ul class="">
+            <li *ngFor="let opener of gdoOpenerSelected">
+                <p>{{opener.name}} <br>
+                    (x{{opener.count}} {{opener.price | currency:'USD':true:'1.2-2'}} each)</p>
+            </li>
+        </ul>
+    </div>
     <p *ngIf="showDistancePrice">
         {{distance}} miles from store ({{distancePrice | currency:'USD':true:'1.2-2'}})
     </p>
@@ -28,7 +31,8 @@
     </button>
     <span class="pull-right margin-b-10 font-size-16">
         Quantity
-        <img src="../../assets/images/substract.png" alt="" height="20" class="minus-quantity" (click)="updateQuantity(0)">
+        <img src="../../assets/images/substract.png" alt="" height="20" class="minus-quantity"
+             (click)="updateQuantity(0)">
         <span>{{qty}}</span>
         <img src="../../assets/images/add.png" alt="" height="20" class="add-quantity" (click)="updateQuantity(1)">
     </span>

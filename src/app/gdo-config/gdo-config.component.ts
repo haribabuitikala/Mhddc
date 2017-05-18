@@ -19,6 +19,7 @@ export class GdoConfigComponent implements OnInit {
     gdoBanner;
     quantity = 1;
     showDetails = true;
+    visualizeHeader;
 
 
     ngOnInit() {
@@ -28,6 +29,8 @@ export class GdoConfigComponent implements OnInit {
         this.utils.utilities.itmPrice = this.itmPrice;
         this.gdoBanner = this.utils.utilities.gdoBanner;
         this.utils.utilities.gdoOpenerQty = this.quantity;
+        this.visualizeHeader = this.utils.utilities.visualizeHeader;
+
     }
 
     updateQuantity(flow) {

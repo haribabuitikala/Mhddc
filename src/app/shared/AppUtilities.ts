@@ -76,7 +76,9 @@ export class AppUtilities {
         gdoOpenerQty: null,
         itmPrice: null,
         distancePrice: null,
-        itemsCount: 0
+        itemsCount: 0,
+        visualizeHeader:true,
+        directFlow:null
         // flow of GDO: Home, Size , Openers, Order Details, Shopping Cart
     };
 

@@ -20,6 +20,7 @@ export class AdditionalOptionsComponent implements OnInit {
     distance:any;
     distancePrice;
     showDistancePrice;
+    directFlow = this.utils.utilities.directFlow;
 
     // for gdo the pageNo will be 3
     // for residential the pageNo will be
@@ -80,14 +81,21 @@ export class AdditionalOptionsComponent implements OnInit {
         this.showDistancePrice = true;
     }
 
-    updateDistance(itm) {
+    updateDistance(itm, flow) {
         this.utils.utilities.distance = +itm.target.value;
         let miles = +itm.target.value;
-        if (miles > 50) {
-            let t = miles - 50;
-            this.distancePrice = (t * 3) + 50;
+        if(flow === 'direct'){
+            if (miles > 31) {
+                let t = miles - 31;
+                this.distancePrice = (t * 2.50) + 2.50;
+            }
+        } else {
+            if (miles > 50) {
+                let t = miles - 50;
+                this.distancePrice = (t * 3) + 50;
+            }
+            this.utils.utilities.distancePrice = this.distancePrice;
         }
-        this.utils.utilities.distancePrice = this.distancePrice;
     }
 
 }

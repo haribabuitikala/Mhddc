@@ -25,6 +25,7 @@ export class DoorConfigurationComponent implements OnInit {
     showDistancePrice = false;
     distance = this.utils.utilities.distance;
     distancePrice = this.utils.utilities.distancePrice;
+    accessories;
 
 
     // for gdo the pageNo will be 4
@@ -44,6 +45,7 @@ export class DoorConfigurationComponent implements OnInit {
         this.navComp.activateIcon();
         this.gdoConfig.showDetails = false;
         this.distancePrice > 0 ? this.showDistancePrice = true : this.showDistancePrice = false;
+        this.gdoOpenerSelected.length ? this.accessories = true : this.accessories = false;
     }
 
     updateQuantity(flow) {

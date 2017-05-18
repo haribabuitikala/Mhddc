@@ -64,10 +64,14 @@ export class CategoryComponent implements OnInit {
             this.utilities.utilities.showNav = true;
             this.utilities.utilities.isGDO = true;
             this.utilities.utilities.ProductType = 'gdo';
+            this.utilities.utilities.visualizeHeader = true;
+            this.utilities.utilities.directFlow = false;
             this.route.navigateByUrl(path);
         } else {
 // this is for additional options screen
             let utils = this.utilities.utilities;
+            this.utilities.utilities.visualizeHeader = false;
+            this.utilities.utilities.directFlow = true;
             let dataparams = {
                 lang: utils.lang,
                 localmarketid: utils.localmarketid,

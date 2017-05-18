@@ -131,7 +131,7 @@
     <p class="bold">
         {{gdoOpenerTxt}}
     </p>
-    <div class="margin-b-20">
+    <div class="margin-b-20" *ngIf="accessories">
         <span class="bold">Opener Accessories</span><br>
         <p *ngFor="let opener of gdoOpenerSelected">
             {{opener.count}} - {{opener.name}} ({{opener.price | currency:'USD':true:'1.2-2'}} each)

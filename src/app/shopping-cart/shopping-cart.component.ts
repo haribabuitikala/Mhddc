@@ -22,6 +22,7 @@ export class ShoppingCartComponent implements OnInit {
     showDistancePrice = false;
     distance = this.utils.utilities.distance;
     distancePrice = this.utils.utilities.distancePrice;
+    accessories;
 
     constructor(private appComp:AppComponent
         , private navComp:NavService
@@ -35,6 +36,7 @@ export class ShoppingCartComponent implements OnInit {
         this.pageNo = this.utils.utilities.currPage;
         this.appComp.currScreen = 0;
         this.distancePrice > 0 ? this.showDistancePrice = true : this.showDistancePrice = false;
+        this.gdoOpenerSelected.length ? this.accessories = true : this.accessories = false;
     }
 
     removeItem() {
@@ -46,6 +48,7 @@ export class ShoppingCartComponent implements OnInit {
         this.utils.utilities.distance = null;
         this.utils.utilities.distancePrice = null;
         $('.shop-count').text('0');
+        this.dataStore.gdoOpenerAccessories = [];
 
         this.route.navigateByUrl('/category');
 
