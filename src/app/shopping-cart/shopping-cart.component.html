@@ -1,34 +1,74 @@
 <h4 class="text-orange"> {{pageNo}}.Your Shopping Cart </h4>
-<p><img src="../../assets/images/Info-64.png" height="26" alt="">
+<p><img src="../../assets/images/Info-64.png" height="26" alt="" (click)="totalPrice.open()">
                 <span class="bold">
                     Estimated Pre Tax Sub-Total :
                 </span>
                 <span class="pull-right bold">
-                    $475.00
+                    {{itemPrice | currency:'USD':true:'1.2-2'}}
                 </span>
 </p>
 <div class="div-border div-border-radius tile padding10 margin-b-10">
-    <p class="shopping-cart-gallery-info ">Chamberlain Door Operator (Installed)</p>
-    <p>Chamberlain HD950WF Wi-Fi Connected MyQ Belt Drive with Battery Back-up with 7' rail (x1)</p>
-    <ul class="">Opener Accessories (x1)
-        <li><p>Chamberlain Wireless Keypad <br>
-            (x1 $30.00 each)</p></li>
-        <li><p> Chamberlain 3 Button Remote <br>($25.00 each)</p></li>
-    </ul>
+    <p class="shopping-cart-gallery-info ">{{openerType}} Door Operator (Installed)</p>
+    <p>{{gdoOpenerTxt}}</p>
+    <div *ngIf="accessories">
+        Opener Accessories
+        <ul>
+            <li *ngFor="let opener of gdoOpenerSelected">
+                <p>{{opener.name}} <br>
+                    (x{{opener.count}} {{opener.price | currency:'USD':true:'1.2-2'}} )</p>
+            </li>
+        </ul>
+    </div>
+    <div *ngIf="showDirectText">
+        Install of Purchased Opener (Installed)
+    </div>
+    <div *ngIf="showDirect">
+        <ul class="">
+            <li *ngFor="let opener of directItm">
+                <div class="col-xs10">{{opener.name}} <br>
+                    {{opener.count}}
+                </div>
+                <div class="col-xs-2">
+                    {{opener.price | currency:'USD':true:'1.2-2'}}
+                </div>
+            </li>
+        </ul>
+    </div>
+    <p *ngIf="showDistancePrice">
+        {{distance}} miles from store ({{distancePrice | currency:'USD':true:'1.2-2'}})
+    </p>
 </div>
 <div class="clearfix  margin-b-40">
     <button type="submit"
-            class=" font-size-16 pull-left btn btn-default box-shadow text-orange margin-r-10 bold margin-b-10  text-uppercase">
+            (click)="continue.open()"
+            class=" font-size-16 pull-left btn btn-default box-shadow text-orange margin-r-10 bold margin-b-10 text-uppercase">
         REMOVE ITEM
     </button>
-                <span class="pull-right margin-b-10 font-size-16">
-                    Quantity
-                    <img src="../../assets/images/substract.png" alt="" height="20" class="minus-quantity">
-                    <span>1</span>
-                    <img src="../../assets/images/add.png" alt="" height="20" class="add-quantity">
-                </span>
+    <span class="pull-right margin-b-10 font-size-16">
+        Quantity
+        <img src="../../assets/images/substract.png" alt="" height="20" class="minus-quantity"
+             (click)="updateQuantity(0)">
+        <span>{{qty}}</span>
+        <img src="../../assets/images/add.png" alt="" height="20" class="add-quantity" (click)="updateQuantity(1)">
+    </span>
 </div>
 <div class="text-center">
     <button type="submit" class="btn btn-default box-shadow text-orange bold   text-uppercase ">CHECKOUT NOW
     </button>
 </div>
+<modal #totalPrice>
+    <modal-header [show-close]="true">
+    </modal-header>
+    <modal-body>
+        Total Price will be calculated on payment screen
+    </modal-body>
+</modal>
+
+<modal #continue>
+    <modal-body class="inner-router">
+        Your Shopping Cart is Empty
+        <div>
+            <button class="btn btn-default text-orange text-uppercase" (click)="removeItem()">continue shopping</button>
+        </div>
+    </modal-body>
+</modal>
