@@ -14,7 +14,7 @@
     </div>
     <!-- Left and right controls -->
     <a class="left carousel-control" *ngIf="slideIndex > 0" id="prev" (click)="moveSlider()" href="javascript:void(0)" role="button" data-slide="prev">
-      <span class="helper"></span><img class="left-arrow" src="../../assets/images/ch-left-arrow.png" alt="">
+      <span class="helper"></span><img style=" transform: rotate(-180deg);" class="left-arrow" src="../../assets/images/ch-left-arrow.png" alt="">
     </a>
     <a class="right carousel-control" *ngIf="slideIndex < slideCount - 1" id="next" (click)="moveSlider(true)" href="javascript:void(0)" role="button" data-slide="next">
       <span class="helper"></span><img class="right-arrow" src="../../assets/images/ch-right-arrow.png" alt="">
