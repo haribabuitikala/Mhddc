@@ -40,11 +40,12 @@ export class SliderComponentComponent implements OnInit {
         }
     }
 
-    sliderWidth = 0;
+   sliderWidth = 0;
     slideWidth = 0;
     slideCount = this.data ? this.data.length : 0;
     sliderLeft = 0;
     touchStart = false;
+    slideIndex = 0;
     touchX = 0;
     oldX = 0;
 
@@ -78,17 +79,24 @@ export class SliderComponentComponent implements OnInit {
         });
     }
 
-    setSlide() {
-        var sliderIndex = Math.round(Math.abs(this.sliderLeft) / this.slideWidth);
-        this.sliderLeft = -(sliderIndex * this.slideWidth);
+    
+   setSlide() {
+        this.slideIndex = Math.round(Math.abs(this.sliderLeft) / this.slideWidth);
+        this.sliderLeft = -(this.slideIndex * this.slideWidth);
     }
 
-    openerSelected(obj, event) {
-        $('._slide-items img').removeClass('current');
+    openerSelected(obj) {
         this.gdoConfig.itemPrice = obj.item_price;
-        this.gdoConfig.gdoBanner = obj.item_thumbnail;
-        event.currentTarget.classList.add('current');
-        this.utils.utilities.gdoOpenerSelectedItm = obj.item_id;
-        this.notify.emit(obj);
-    };
+    }
+    moveSlider(isNext){
+        if (isNext){
+            this.slideIndex = this.slideIndex + 1;
+        } else {
+            this.slideIndex = this.slideIndex - 1;
+        }
+        this.sliderLeft = -(this.slideIndex * this.slideWidth);
+    } 
+    
+    
+    
 }
