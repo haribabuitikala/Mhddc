@@ -149,12 +149,12 @@
     <!--{{distance}} miles from store ({{distancePrice | currency:'USD':true:'1.2-2'}})-->
     <!--</p>-->
     <div class="margin-b-10  padding10 shopping-cart-info margin-b-20">
-            <span class="padding-l-10"> Quantity
+            <span class="padding-l-10 bold"> Quantity
                 <img class="minus-quantity" src="../../assets/images/substract.png" alt="" (click)="updateQuantity(0)">
                 <span class="accessory-quantity">{{qty}}</span>
                 <img class="add-quantity" src="../../assets/images/add.png" alt="" (click)="updateQuantity(1)">
             </span>
-        <span class="pull-right padding-r-7">Sub-Total<span> {{itemPrice | currency:'USD':true:'1.2-2'}}</span> </span>
+        <span class="pull-right padding-r-7 bold">Sub-Total<span> {{itemPrice | currency:'USD':true:'1.2-2'}}</span> </span>
     </div>
 </div>
 <div class="hide">

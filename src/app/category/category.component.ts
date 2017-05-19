@@ -79,7 +79,8 @@ export class CategoryComponent implements OnInit {
                 NatMarketID: utils.natmarketid,
                 isGDO: true,
                 ProductType: 'gdo',
-                isinstall: true
+                isinstall: true,
+                openertype: utils.gdoStore
             };
             this.dataService.getGdoAdditionalDirect(dataparams)
                 .subscribe(

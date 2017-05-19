@@ -91,10 +91,12 @@ export class AdditionalOptionsComponent implements OnInit {
             if (flow === 'direct') {
                 this.utils.utilities.distancePrice = 2.5;
                 this.distancePrice = 2.5;
+                this.gdoConfig.itemPrice = this.utils.utilities.item_price + 2.50;
             }
             else {
                 this.utils.utilities.distancePrice = 51;
                 this.distancePrice = 51;
+                this.gdoConfig.itemPrice = this.utils.utilities.item_price + 3;
             }
             this.showDistancePrice = false;
         } else {
@@ -104,19 +106,26 @@ export class AdditionalOptionsComponent implements OnInit {
         }
     }
 
+    singleOpener;
+    doubleOpener;
+
     showSingle(itm) {
         if (itm.srcElement.checked === true) {
             this.singleDrop = true;
+            this.gdoConfig.itemPrice = this.calculatePrice(this.gdoConfig.itemPrice, 50)
         } else {
             this.singleDrop = false;
+            this.gdoConfig.itemPrice = this.calculatePrice(this.utils.utilities.item_price, 0)
         }
     }
 
     showDouble(itm) {
         if (itm.srcElement.checked === true) {
             this.doubleDrop = true;
+            this.gdoConfig.itemPrice = this.calculatePrice(this.utils.utilities.item_price, 65)
         } else {
             this.doubleDrop = false;
+            this.gdoConfig.itemPrice = this.calculatePrice(this.utils.utilities.item_price, 0)
         }
     }
 
@@ -138,9 +147,29 @@ export class AdditionalOptionsComponent implements OnInit {
             };
             this.utils.utilities.gdoDoubleDoor = k.price;
         }
-        this.gdoConfig.itemPrice += k.price;
+        // this.gdoConfig.itemPrice += k.price;
         this.dataStore.gdoDirectQuestions.splice(flow, 1);
         this.dataStore.gdoDirectQuestions.push(k);
+        let kPrice = _.sumBy(this.dataStore.gdoDirectQuestions, function (o) {
+            return o.price;
+        });
+        this.gdoConfig.itemPrice = this.calculatePrice(kPrice, this.utils.utilities.item_price);
+        // this.localPrice = this.gdoConfig.itemPrice + kPrice;
+    }
+
+    singleDropVal;
+    doubleDropVal;
+
+    calculatePrice(amt, itmPrice) {
+        if (this.singleDrop) {
+            return itmPrice + amt;
+        }
+        if (this.singleDrop && this.doubleDrop) {
+            return itmPrice + amt;
+        }
+        if (this.doubleDrop) {
+            return itmPrice + amt;
+        }
     }
 
     updateDistance(itm, flow) {
