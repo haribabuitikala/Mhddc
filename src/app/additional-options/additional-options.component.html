@@ -78,10 +78,13 @@
         <dl>
             <dd>
                 <div class="clearfix">
-                    <p class="col-xs-11">Does your current door work manually without a garage door opener attached?
-                    </p>
-                    <img (click)="gdoFlowManualDoor.open()" class="pull-right " alt="" height="25"
-                         src="../../assets/images/info.png">
+                    <div class="col-xs-10">
+                        Does your current door work manually without a garage door opener attached?
+                    </div>
+                    <div class="col-xs-2 padding-0">
+                        <img (click)="gdoFlowManualDoor.open()" class="pull-right " alt="" height="25"
+                             src="../../assets/images/info.png">
+                    </div>
                 </div>
 
                 <div class="flex-right">
@@ -95,10 +98,14 @@
             </dd>
             <dd>
                 <div class="clearfix">
-                    <p class="col-xs-11">Is there an outlet in the celing approx. 10' back-center of the door or within
-                        3' of where the opener powerhead will be installed?</p>
-                    <img (click)="gdoFlowPowerHead.open()" class="pull-right" alt="" height="25"
-                         src="../../assets/images/info.png">
+                    <div class="col-xs-10">Is there an outlet in the celing approx. 10' back-center of the door or
+                        within
+                        3' of where the opener powerhead will be installed?
+                    </div>
+                    <div class="col-xs-2 padding-0">
+                        <img (click)="gdoFlowPowerHead.open()" class="pull-right" alt="" height="25"
+                             src="../../assets/images/info.png">
+                    </div>
                 </div>
                 <div class="flex-right">
                     <span class="text-orange">Yes</span>
@@ -111,9 +118,11 @@
             </dd>
             <dd>
                 <div class="clearfix">
-                    <p class="col-xs-11">Is this job site within 30 drive miles of this store? </p>
-                    <img (click)="gdoFlowMiles.open()" class="pull-right" alt="" height="25"
-                         src="../../assets/images/info.png">
+                    <div class="col-xs-10">Is this job site within 30 drive miles of this store?</div>
+                    <div class="col-xs-2 padding-0">
+                        <img (click)="gdoFlowMiles.open()" class="pull-right" alt="" height="25"
+                             src="../../assets/images/info.png">
+                    </div>
                 </div>
                 <div class="flex-right">
                     <span class="text-orange">Yes</span>
@@ -123,11 +132,11 @@
                     </label>
                     <span class="text-orange">No</span>
                 </div>
-                <div class="align-right ">
+                <div class="align-right">
                     <div>
                         Distance of job site is
                         <form class="inline-block">
-                            <input type="text" (keypress)="updateDistance($event,null)"
+                            <input type="text" (keyup)="updateDistance($event,null)"
                                    name="gdoDistance" [(ngModel)]="distance"/>
                         </form>
                         drive miles from store
@@ -310,3 +319,4 @@
         </p>
     </modal-body>
 </modal>
+

@@ -25,38 +25,45 @@
 
 <modal #gdoOponerAccessories>
     <modal-body>
-        <div>
-            <h4>Selected Opener:</h4>
-            {{gdoOpenertext}}
-        </div>
-        Optional Opener Accessories:
-        <div class="tile col-xs-12">
-            <div *ngFor="let obj of gdoOpenerObj; let k = index">
-                <div class="col-xs-10 padding-0">
-                    {{obj.item_name}}
-                    <span class="text-right">{{obj.item_price}}</span>
-                </div>
-                <div class="col-xs-2">
-                    <select (change)="selectedGdoCount(obj, $event, k)">
-                        <option value="">0</option>
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                        <option value="5">5</option>
-                        <option value="6">6</option>
-                    </select>
-                </div>
-            </div>
 
-            <div>
-                <button class="btn btn-lg btn-default text-uppercase" (click)="accessoriesModalClose()">
-                    select other
-                    opener
-                </button>
-                <button class="btn btn-lg btn-default text-uppercase" (click)="accessoriesModalNext()">Next Step
-                </button>
+        <div class="opener-accessories   margin-b-10">
+            <h4 class="text-orange font-size-16">Selected Opener</h4>
+            <p class="lead margin-b-20">{{gdoOpenertext}}</p>
+            <h4 class="text-orange font-size-16  margin-b-10">Optional Opener Accessories</h4>
+            <div class="accessory-sec margin-b-20" *ngFor="let obj of gdoOpenerObj; let k = index">
+                {{obj.item_name}}
+                <p class="margin-b-0">
+                    <gdo-update-qty [data]="obj"></gdo-update-qty>
+                    + <span class="text-orange">{{obj.item_price | currency:'USD':true:'1.2-2'}} Each</span>
+                </p>
+            </div>
+            <div class="text-center button-margin margin-b-20 margin-t-20">
+                <button class="btn btn-default box-shadow text-orange bold text-uppercase" (click)="accessoriesModalClose()">SELECT OTHER OPENER</button>
+            </div>
+            <div class="text-center button-margin margin-b-20 margin-t-20">
+                <button class="btn btn-default  box-shadow text-orange bold text-uppercase" (click)="accessoriesModalNext()">Next Step</button>
             </div>
         </div>
+        <!--<div class="tile col-xs-12">-->
+            <!--<div *ngFor="let obj of gdoOpenerObj; let k = index">-->
+                <!--<div class="col-xs-10 padding-0">-->
+                    <!--{{obj.item_name}}-->
+                    <!--<span class="text-right">{{obj.item_price}}</span>-->
+                <!--</div>-->
+                <!--<div class="col-xs-2">-->
+                    <!--<select (change)="selectedGdoCount(obj, $event, k)">-->
+                        <!--<option value="">0</option>-->
+                        <!--<option value="1">1</option>-->
+                        <!--<option value="2">2</option>-->
+                        <!--<option value="3">3</option>-->
+                        <!--<option value="4">4</option>-->
+                        <!--<option value="5">5</option>-->
+                        <!--<option value="6">6</option>-->
+                    <!--</select>-->
+                <!--</div>-->
+            <!--</div>-->
+
+           <!---->
+        <!--</div>-->
     </modal-body>
 </modal>

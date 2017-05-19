@@ -21,10 +21,52 @@
                 <span>{{quantity}}</span>
                 <img src="../../assets/images/add.png" alt="" (click)="updateQuantity(1)" class="add-quantity">
             </p>
-            <p class="margin-b-5">&nbsp;</p>
+            <h4 class="pull-right padding-r-7 text-orange clearfix" (click)="detailsModal.open()">DETAILS</h4>
         </div>
         <h4 class="text-center text-orange gdo-details-txt">Prices Include All Applicable Discounts</h4>
     </div>
 </div>
 
 <div class="row margin-b-15"></div>
+<!-- product details sec -->
+<modal #detailsModal class="details-modal">
+    <modal-header [show-close]="true">
+    </modal-header>
+    <modal-body>
+
+        <div class="quantity-view-details">
+
+            <h3>View Details</h3>
+
+            <ul>
+                <li>
+         <span><strong>Zip Code/Location</strong>
+         60123 - ELGIN ,KANE COUNTY</span></li>
+
+                <li>
+         <span><strong>Store</strong>
+          ELGIN</span></li>
+
+                <li>
+         <span><strong>Size</strong>
+          19' 0"(w) x 12' 0"(h)</span></li>
+
+                <li>
+         <span><strong>WindCode </strong>
+          W0</span></li>
+
+                <li>
+         <span><strong> Collection </strong>
+          Coachman® Collection</span></li>
+
+                <li>
+         <span><strong> Design </strong>
+          Design11</span></li>
+
+            </ul>
+
+
+        </div>
+
+    </modal-body>
+</modal>

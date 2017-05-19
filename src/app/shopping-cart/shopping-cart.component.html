@@ -65,10 +65,13 @@
 </modal>
 
 <modal #continue>
-    <modal-body class="inner-router">
-        Your Shopping Cart is Empty
-        <div>
-            <button class="btn btn-default text-orange text-uppercase" (click)="removeItem()">continue shopping</button>
+    <modal-body>
+        <div class="inner-router text-center">
+            <p>Your Shopping Cart is Empty</p>
+            <div class="text-center">
+                <button class="btn btn-default text-orange text-uppercase" (click)="removeItem()">continue shopping
+                </button>
+            </div>
         </div>
     </modal-body>
 </modal>

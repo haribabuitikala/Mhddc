@@ -24,6 +24,7 @@ import {InstallAnswerComponent} from "../install-answer/install-answer.component
 import {NonClassicComponent} from "../non-classic/non-classic.component";
 import {HardwareComponent} from "../hardware/hardware.component";
 import {GdoConfigComponent} from "../gdo-config/gdo-config.component";
+import {GdoUpdateComponent} from "../opener/gdoUpdateQty";
 
 @NgModule({
     imports: [
@@ -82,7 +83,8 @@ import {GdoConfigComponent} from "../gdo-config/gdo-config.component";
         InstallQuestionComponent,
         InstallAnswerComponent,
         NonClassicComponent,
-        HardwareComponent
+        HardwareComponent,
+        GdoUpdateComponent
     ]
 })
 export class ConfigModule {

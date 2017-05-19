@@ -142,7 +142,7 @@
             {{opener.count}} - {{opener.name}} ({{opener.price | currency:'USD':true:'1.2-2'}})
         </p>
     </div>
-    <p>
+    <p *ngIf="gdodirect">
         Install of Purchased Opener (Installed)
     </p>
     <!--<p *ngIf="showDistancePrice">-->

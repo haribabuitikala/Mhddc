@@ -67,7 +67,6 @@ export class CategoryComponent implements OnInit {
             this.utilities.utilities.ProductType = 'gdo';
             this.utilities.utilities.visualizeHeader = true;
             this.utilities.utilities.directFlow = false;
-            $('.inner-router').removeAttr('style');
             this.route.navigateByUrl(path);
         } else {
 // this is for additional options screen
@@ -86,7 +85,6 @@ export class CategoryComponent implements OnInit {
                 .subscribe(
                     res => {
                         this.dataStore.gdoAdditionalDirect = res;
-                        $('.inner-router').css({'margin-top':0});
                         this.route.navigateByUrl(path);
                     }
                 );
