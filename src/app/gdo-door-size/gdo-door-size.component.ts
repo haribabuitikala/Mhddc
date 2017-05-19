@@ -1,4 +1,3 @@
-
 import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {AppComponent} from "../app.component";
@@ -32,7 +31,8 @@ export class GdoDoorSizeComponent implements OnInit {
         isGDO: this.utils.utilities.isGDO,
         localmarketid: this.utils.utilities.localmarketid,
         NatMarketID: this.utils.utilities.natmarketid,
-        ProductType: this.utils.utilities.ProductType
+        ProductType: this.utils.utilities.ProductType,
+        openertype: this.utils.utilities.gdoStore
     };
 
     goTo(itm) {

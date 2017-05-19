@@ -1,4 +1,4 @@
-<h4 class="text-orange font-size-16">{{pageNo}} Additional Options</h4>
+<h4 class="text-orange font-size-16">{{pageNo}}. Additional Options</h4>
 <div class="content additional-options" id="resFlow" *ngIf="!gdoFlow">
     <dl>
         <dd>
@@ -90,7 +90,7 @@
                 <div class="flex-right">
                     <span class="text-orange">Yes</span>
                     <label class="switch">
-                        <input type="checkbox" checked="checked">
+                        <input type="checkbox" checked="checked" >
                         <div class="slider round"></div>
                     </label>
                     <span class="text-orange">No</span>
@@ -132,7 +132,8 @@
                     </label>
                     <span class="text-orange">No</span>
                 </div>
-                <div class="align-right">
+                <div class="clearfix margin-b-10"></div>
+                <div class="align-right padding-l-15">
                     <div>
                         Distance of job site is
                         <form class="inline-block">
@@ -154,14 +155,16 @@
         <dl>
             <dd>
                 <div class="clearfix">
-                    <p class="col-xs-11">Single Door New Opener Installation Kit. This is required when no Opener is
+                    <div class="col-xs-10">Single Door New Opener Installation Kit. This is required when no Opener is
                         currently installed on door less than 10' wide.
-                    </p>
-                    <select name="" (change)="directDoor($event,0)" *ngIf="singleDrop">
-                        <option>1</option>
-                        <option>2</option>
-                        <option>3</option>
-                    </select>
+                    </div>
+                    <div class="col-xs-2">
+                        <select name="" (change)="directDoor($event,0)" *ngIf="singleDrop">
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                        </select>
+                    </div>
                 </div>
 
                 <div class="flex-right">
@@ -175,13 +178,15 @@
             </dd>
             <dd>
                 <div class="clearfix">
-                    <p class="col-xs-11">Double Door New Opener Installation Kit. This is required when no Opener is
+                    <p class="col-xs-10">Double Door New Opener Installation Kit. This is required when no Opener is
                         currently installed on door less than 10' wide.</p>
-                    <select name="" (change)="directDoor($event,1)" *ngIf="doubleDrop">
-                        <option>1</option>
-                        <option>2</option>
-                        <option>3</option>
-                    </select>
+                    <div class="col-xs-2">
+                        <select name="" (change)="directDoor($event,1)" *ngIf="doubleDrop">
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                        </select>
+                    </div>
                 </div>
                 <div class="flex-right">
                     <span class="text-orange">Yes</span>
@@ -204,7 +209,8 @@
                     </label>
                     <span class="text-orange">No</span>
                 </div>
-                <div class="align-right ">
+                <div class="clearfix margin-b-10"></div>
+                <div class="align-right padding-l-15">
                     <div>
                         Distance of job site is
                         <form class="inline-block">
