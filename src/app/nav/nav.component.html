@@ -22,15 +22,25 @@
     </nav>
 </div>
 <modal #home>
- 
-    <modal-body class="text-center ">
-
-        <p class="margin-b-10 margin-t-20">Navigating to Home Page will discard all available Cart Items.</p>
-        <p class="margin-b-30">Do you want to Continue ?</p>
+    <modal-body class="text-center">
+        <img class="margin-b-20 alert-image margin-t-20" src="../../assets/images/alert-1.png" alt=""/>
+        <p class=" margin-t-20 bold">
+            <span class="margin-b-20 margin-t-20">Navigating to Home Page will discard<br>all available Cart Items.</span>
+            <br>
+        </p>
+        <p class="margin-b-40 margin-t-10 bold">
+            <span>Do you want to continue ?</span>
+        </p>
         <div class="text-center">
-            <button class="btn btn-default text-orange bold text-center text-uppercase" (click)="goToHome()">Yes</button>
-            <button class="btn btn-default text-orange bold text-center text-uppercase" (click)="home.close()">No</button>
+            <button class="btn btn-default btn-lg box-shadow text-orange bold text-uppercase margin-r-25"
+                    (click)="goToHome()">
+                YES
+            </button>
+            <button class="btn btn-default btn-lg box-shadow text-orange bold text-uppercase"
+                    (click)="home.close()">
+                NO
+            </button>
         </div>
-
     </modal-body>
+
 </modal>
