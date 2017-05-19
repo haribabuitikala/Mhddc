@@ -1,11 +1,11 @@
 <h4 class="text-orange"> {{pageNo}}.Your Shopping Cart </h4>
 <p><img src="../../assets/images/Info-64.png" height="26" alt="" (click)="totalPrice.open()">
-                <span class="bold">
-                    Estimated Pre Tax Sub-Total :
-                </span>
-                <span class="pull-right bold">
-                    {{itemPrice | currency:'USD':true:'1.2-2'}}
-                </span>
+    <span class="bold">
+        Estimated Pre Tax Sub-Total :
+    </span>
+    <span class="pull-right bold">
+        {{itemPrice | currency:'USD':true:'1.2-2'}}
+    </span>
 </p>
 <div class="div-border div-border-radius tile padding10 margin-b-10">
     <p class="shopping-cart-gallery-info ">{{openerType}} Door Operator (Installed)</p>
@@ -59,19 +59,19 @@
 <modal #totalPrice>
     <modal-header [show-close]="true">
     </modal-header>
-    <modal-body>
-        Total Price will be calculated on payment screen
+ <modal-body>
+        <p class="bold"> Total Price will be calculated on payment screen </p>
     </modal-body>
 </modal>
 
-<modal #continue>
-    <modal-body>
-        <div class="inner-router text-center">
-            <p>Your Shopping Cart is Empty</p>
-            <div class="text-center">
-                <button class="btn btn-default text-orange text-uppercase" (click)="removeItem()">continue shopping
-                </button>
-            </div>
+<modal #continue> 
+    <modal-header >
+        <h4 class="padding-l-20">Your Shopping Cart is Empty </h4>
+    </modal-header>
+    <modal-body class="text-center"> 
+        <div class="margin-t-100">
+            <button class="btn btn-default box-shadow text-orange bold" (click)="removeItem()"  >Continue Shopping
+            </button>
         </div>
     </modal-body>
 </modal>
