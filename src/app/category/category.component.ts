@@ -6,6 +6,7 @@ import {AppUtilities} from "../shared/appUtilities";
 import {AppComponent} from "../app.component";
 import {CollectionService} from "../shared/data.service";
 import {CollectionData} from "../collection/collection-data";
+declare var $:any;
 
 @Component({
     selector: 'app-category',
@@ -17,7 +18,6 @@ export class CategoryComponent implements OnInit {
     @ViewChild('gdo') gdo:ModalComponent;
     lang;
     isService:boolean;
-    dataParams;
 
     constructor(private language:LangEnglishService
         , private route:Router
@@ -31,7 +31,7 @@ export class CategoryComponent implements OnInit {
         this.lang = this.language.getCategory();
         this.isService = this.utilities.utilities.isService;
         this.appComponent.currScreen = 2;
-
+        let utils = this.utilities.utilities;
     }
 
     navigateTo(path, flow, count) {
@@ -43,7 +43,10 @@ export class CategoryComponent implements OnInit {
             this.utilities.utilities.currScreen += 1;
             this.route.navigateByUrl(path);
         } else {
-            this.gdo.open();
+            let zipCode = this.utilities.utilities.zipCode;
+            let storeNum = this.utilities.utilities.storenumber;
+            let arr = this.utilities.gdoCheck;
+            arr.indexOf(zipCode) !== -1 || arr.indexOf(storeNum) !== -1 ? this.gdoGoTo('/gdoDoorSize', 'size') : this.gdo.open();
         }
     }
 
@@ -56,27 +59,35 @@ export class CategoryComponent implements OnInit {
     }
 
     gdoGoTo(path, id) {
+        this.utilities.utilities.isGDO = true;
         if (id === 'size') {
             this.utilities.utilities.currPage = 3;
             this.utilities.utilities.clicked = null;
             this.utilities.utilities.showNav = true;
-            this.utilities.utilities.isGDO = true;
             this.utilities.utilities.ProductType = 'gdo';
+            this.utilities.utilities.visualizeHeader = true;
+            this.utilities.utilities.directFlow = false;
             this.route.navigateByUrl(path);
         } else {
-            this.dataParams = {
-                NatMarketID: +this.utilities.utilities.natmarketid,
-                openerid: this.utilities.utilities.openerid = 2,
-                lang: this.utilities.utilities.lang
+// this is for additional options screen
+            let utils = this.utilities.utilities;
+            this.utilities.utilities.visualizeHeader = false;
+            this.utilities.utilities.directFlow = true;
+            let dataparams = {
+                lang: utils.lang,
+                localmarketid: utils.localmarketid,
+                NatMarketID: utils.natmarketid,
+                isGDO: true,
+                ProductType: 'gdo',
+                isinstall: true
             };
-
-            this.dataService.getGdoAdditional(this.dataParams)
+            this.dataService.getGdoAdditionalDirect(dataparams)
                 .subscribe(
                     res => {
-                        this.dataStore.gdoAdditional = res;
+                        this.dataStore.gdoAdditionalDirect = res;
                         this.route.navigateByUrl(path);
                     }
-                )
+                );
 
         }
     }

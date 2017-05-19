@@ -2,6 +2,7 @@ import {NgModule} from '@angular/core';
 import {RouterModule} from '@angular/router';
 import {CommonModule} from '@angular/common';
 import {Ng2Bs3ModalModule} from "ng2-bs3-modal/ng2-bs3-modal";
+import {FormsModule} from '@angular/forms';
 
 import {DesignComponent} from "../design/design.component";
 import {ConstructionComponent} from "../construction/construction.component";
@@ -23,10 +24,12 @@ import {InstallAnswerComponent} from "../install-answer/install-answer.component
 import {NonClassicComponent} from "../non-classic/non-classic.component";
 import {HardwareComponent} from "../hardware/hardware.component";
 import {GdoConfigComponent} from "../gdo-config/gdo-config.component";
+import {GdoUpdateComponent} from "../opener/gdoUpdateQty";
 
 @NgModule({
     imports: [
         CommonModule,
+        FormsModule,
         Ng2Bs3ModalModule,
         RouterModule.forChild([
             {
@@ -80,7 +83,8 @@ import {GdoConfigComponent} from "../gdo-config/gdo-config.component";
         InstallQuestionComponent,
         InstallAnswerComponent,
         NonClassicComponent,
-        HardwareComponent
+        HardwareComponent,
+        GdoUpdateComponent
     ]
 })
 export class ConfigModule {

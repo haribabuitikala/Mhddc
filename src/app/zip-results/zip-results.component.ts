@@ -25,7 +25,8 @@ export class ZipResultsComponent implements OnInit {
         , private router:Router
         , private utils:AppUtilities
         , private dataService:CollectionService
-        , private toastr:ToastrService,private dataStore:CollectionData) {
+        , private toastr:ToastrService
+        , private dataStore:CollectionData) {
     }
 
     navigateTo(item, path) {
@@ -33,6 +34,7 @@ export class ZipResultsComponent implements OnInit {
         this.utils.utilities.productlayout = item.productlayout;
         this.utils.utilities.natmarketid = item.natmarketid;
         this.utils.utilities.localmarketid = item.marketid;
+        this.utils.utilities.storenumber = +item.storenumber;
 
         // setting double door height and width
         this.utils.utilities.doubleDoorHeight = item.DoubleDoorHeight;
@@ -42,6 +44,7 @@ export class ZipResultsComponent implements OnInit {
         this.utils.utilities.singleDoorHeight = item.SingleDoorHeight;
         this.utils.utilities.singleDoorWidth = item.SingleDoorWidth;
 
+        this.dataStore.store = item;
 
         this.router.navigateByUrl(path);
     }

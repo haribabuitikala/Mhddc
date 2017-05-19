@@ -8,6 +8,7 @@ import {CollectionService} from "../shared/data.service";
 import {CollectionData} from "../collection/collection-data";
 
 declare var $: any;
+
 @Component({
     selector: 'app-banner',
     templateUrl: './banner.component.html',
@@ -24,7 +25,8 @@ export class BannerComponent implements OnInit {
         , private toastr: ToastrService
         , private localize: LangEnglishService
         , private dataService: CollectionService
-        , private dataStore: CollectionData, ) {
+        , private dataStore: CollectionData
+        , private utils:AppUtilities) {
     }
     save(form, event) {
         event.preventDefault();
@@ -34,13 +36,13 @@ export class BannerComponent implements OnInit {
             res => {
                 this.dataStore.zipResults = res;
                 $('body').removeClass('loader');
-                this.route.navigate(['/zipResults', form.value.zip])
+                this.route.navigate(['/zipResults', form.value.zip]);
+                this.utils.utilities.zipCode = form.value.zip;
             },
             error => {
                 this.toastr.error(`${form.value.zip} is not correct, try with another one`);
                 $('body').removeClass('loader');
             });
-
     }
     ngOnChanges() {
         console.log('changed');
