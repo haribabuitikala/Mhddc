@@ -1,7 +1,9 @@
 import {Injectable} from '@angular/core';
+declare var _:any;
 
 @Injectable()
 export class AppUtilities {
+
     utilities = {
         currPage: 1,
         clicked: 1,
@@ -81,14 +83,58 @@ export class AppUtilities {
         directFlow: null,
         gdoSingleDoor: 0,
         gdoDoubleDoor: 0,
-        gdoStore: ''
-        // flow of GDO: Home, Size , Openers, Order Details, Shopping Cart
-    };
+        gdoStore: '',
+        totalPrice: 0,
+        kPrice: 0,
+        singlep: 0,
+        doublep: 0,
+        milesp: 0,
+        item_name: ''
+    // flow of GDO: Home, Size , Openers, Order Details, Shopping Cart
+}
+;
 
-    setUtils(curr, clicked) {
-        this.utilities.currPage = curr;
-        this.utilities.clicked = clicked;
+setUtils(curr, clicked)
+{
+    this.utilities.currPage = curr;
+    this.utilities.clicked = clicked;
+}
+
+gdoCheck = ['66502', '2217', '77840', '6559', '66604', '2207'];
+
+calculateTotalPrice()
+{
+
+    let basep = this.utilities.item_price;
+    let qty = this.utilities.gdoOpenerQty;
+    let singlep = this.utilities.singlep;
+    let doublep = this.utilities.doublep;
+    let milesp = this.utilities.milesp;
+    let kPrice = this.utilities.kPrice;
+    let distancePrice = this.utilities.distancePrice;
+
+    return (basep * qty) + singlep + doublep + milesp + kPrice + distancePrice;
+}
+
+updateQty(flow, qty)
+{
+    if (flow === 1 && qty < 6) {
+        qty++
     }
+    else if (flow === 0 && qty > 1) {
+        qty--;
+    }
+    this.utilities.gdoOpenerQty = qty;
 
-    gdoCheck = ['66502', '2217', '77840', '6559', '66604', '2207']
+    return this.calculateTotalPrice()
+}
+
+sumBy(obj)
+{
+    let t = _.sumBy(obj, function (o) {
+        return o.price * o.count;
+    });
+    return t;
+}
+
 }

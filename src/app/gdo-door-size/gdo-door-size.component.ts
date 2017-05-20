@@ -4,6 +4,7 @@ import {AppComponent} from "../app.component";
 import {AppUtilities} from "../shared/appUtilities";
 import {CollectionService} from "../shared/data.service";
 import {CollectionData} from "../collection/collection-data";
+import {NavService} from "../nav/nav-service";
 
 @Component({
     selector: 'app-gdo-door-size',
@@ -18,11 +19,13 @@ export class GdoDoorSizeComponent implements OnInit {
         , private route:Router
         , private utils:AppUtilities
         , private dataService:CollectionService
-        , private dataStorage:CollectionData) {
+        , private dataStorage:CollectionData
+        , private navComp:NavService) {
     }
 
     ngOnInit() {
         this.appComponent.currScreen = 3;
+        this.navComp.activateIcon();
     }
 
     dataParams = {
@@ -48,6 +51,7 @@ export class GdoDoorSizeComponent implements OnInit {
                         this.dataStorage.gdoOpener = res;
                         this.utils.utilities.item_price = res[0].item_price;
                         this.utils.utilities.gdoBanner = res[0].item_thumbnail;
+                        this.utils.utilities.item_name = res[0].item_name;
                         // this is for getting the details of the first opener itm
                         let params = {
                             NatMarketID: this.utils.utilities.natmarketid,

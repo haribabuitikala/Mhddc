@@ -5,6 +5,7 @@ import {AppUtilities} from "../shared/appUtilities";
 import {NavService} from "../nav/nav-service";
 import {CollectionData} from "../collection/collection-data";
 import {CollectionService} from "../shared/data.service";
+import {GdoConfigComponent} from "../gdo-config/gdo-config.component";
 declare var _:any;
 
 @Component({
@@ -19,7 +20,8 @@ export class OpenerComponent implements OnInit {
         , private navComp:NavService
         , private route:Router
         , private dataStrorage:CollectionData
-        , private dataService:CollectionService) {
+        , private dataService:CollectionService
+        , private gdoConfig:GdoConfigComponent) {
     }
 
     pageNo;
@@ -109,6 +111,9 @@ export class OpenerComponent implements OnInit {
         };
         this.dataStrorage.gdoOpenerAccessories.splice(flow, 1);
         this.dataStrorage.gdoOpenerAccessories.push(k);
+        // let kPrice = this.utils.sumBy(this.dataStrorage.gdoOpenerAccessories);
+        // this.gdoConfig.itemPrice = this.utils.updateQty(flow, 1, 0, 0, 0, 0, kPrice);
+
 
         // this.itemPrice = (this.itmPrice * this.quantity) +
         //     (this.utils.utilities.gdoDoubleDoor + this.utils.utilities.gdoSingleDoor + this.utils.utilities.distancePrice);
@@ -120,16 +125,20 @@ export class OpenerComponent implements OnInit {
         this.dataParams.openerid = data.item_id;
         this.utils.utilities.openerType = data.brand;
         this.gdoOpenertext = data.item_name;
+        this.gdoConfig.openerTxt = data.item_name;
         // this.gdoOpenerObj = null;
         // this.gdoOpenerObj = data;
     }
 
     prevBtn(path) {
+
+
         if (this.utils.utilities.flow === 'gdoNavElems') {
+
             this.utils.setUtils(1, 0);
-            this.goTo('gdoConfig' + path)
+            this.goTo(path)
         } else {
-            this.goTo('config' + path)
+            this.goTo('/config' + path)
         }
     }
 

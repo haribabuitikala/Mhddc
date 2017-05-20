@@ -27,10 +27,9 @@ export class ShoppingCartComponent implements OnInit {
     showDirect;
     directItm = this.dataStore.gdoDirectQuestions;
 
-    t = _.sumBy(this.gdoOpenerSelected, function(o){ return o.price * o.count });
-
-    itemPrice = this.utils.utilities.item_price + this.utils.utilities.distancePrice + this.t;
+    itemPrice = this.utils.calculateTotalPrice();
     itmPrice = this.utils.utilities.itmPrice;
+    baseItmPrice = this.utils.utilities.item_price * this.utils.utilities.gdoOpenerQty;
 
     constructor(private appComp:AppComponent
         , private navComp:NavService
@@ -50,13 +49,13 @@ export class ShoppingCartComponent implements OnInit {
     }
 
     removeItem() {
-        this.utils.utilities.gdoOpenerText = null;
-        this.dataStore.gdoOpenerAccessories = null;
-        this.utils.utilities.item_price = null;
+        this.utils.utilities.gdoOpenerText = '';
+        this.dataStore.gdoOpenerAccessories = [];
+        this.utils.utilities.item_price = 0;
         this.utils.utilities.openerType = null;
-        this.utils.utilities.gdoOpenerQty = null;
-        this.utils.utilities.distance = null;
-        this.utils.utilities.distancePrice = null;
+        this.utils.utilities.gdoOpenerQty = 1;
+        this.utils.utilities.distance = 0;
+        this.utils.utilities.distancePrice = 0;
         $('.shop-count').text('0');
         this.dataStore.gdoOpenerAccessories = [];
         this.continue.close();
@@ -66,15 +65,9 @@ export class ShoppingCartComponent implements OnInit {
     }
 
     updateQuantity(flow) {
-        if (flow === 1 && this.qty < 6) {
-            this.qty++
-        }
-        else if (flow === 0 && this.qty > 1) {
-            this.qty--;
-        }
-        this.itemPrice = (this.itmPrice * this.qty) + this.utils.utilities.distancePrice + this.t;
-        this.utils.utilities.item_price = this.itemPrice;
-        this.utils.utilities.gdoOpenerQty = this.qty;
+        this.itemPrice = this.utils.updateQty(flow, this.utils.utilities.gdoOpenerQty);
+        this.qty = this.utils.utilities.gdoOpenerQty;
+        this.baseItmPrice = this.utils.utilities.item_price * this.utils.utilities.gdoOpenerQty;
     }
 
 }

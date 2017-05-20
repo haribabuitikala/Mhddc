@@ -57,7 +57,7 @@ export class AdditionalOptionsComponent implements OnInit {
             this.utils.utilities.itmPrice = this.data.item_price;
             $('.inner-router').css({'margin-top': 0});
         } else {
-            this.gdoConfig.itemPrice = this.utils.utilities.item_price + this.utils.utilities.distancePrice + this.t;
+            this.gdoConfig.itemPrice = this.utils.calculateTotalPrice();
         }
 
     }
@@ -84,66 +84,88 @@ export class AdditionalOptionsComponent implements OnInit {
         this.route.navigateByUrl(path)
     }
 
+    flow = 'non-direct';
+
     showDistance(itm, flow) {
+
         if (itm.srcElement.checked === false) {
             this.distance = 31;
             this.utils.utilities.distance = 31;
             if (flow === 'direct') {
+                this.flow = 'direct';
                 this.utils.utilities.distancePrice = 2.5;
                 this.distancePrice = 2.5;
-                this.gdoConfig.itemPrice = this.utils.utilities.item_price + 2.50;
+                // this.gdoConfig.itemPrice = this.gdoConfig.itemPrice + 2.50;
             }
             else {
+                this.flow = 'non-direct';
                 this.utils.utilities.distancePrice = 51;
                 this.distancePrice = 51;
-                this.gdoConfig.itemPrice = this.utils.utilities.item_price + 3;
+                // this.gdoConfig.itemPrice = this.gdoConfig.itemPrice + 51;
             }
+            $('.gdoDistance').removeAttr('disabled');
             this.showDistancePrice = false;
         } else {
             this.distance = '';
+            this.utils.utilities.distancePrice = 0;
             this.showDistancePrice = false;
-            this.gdoConfig.itemPrice = this.utils.utilities.item_price;
+            this.mileOpenPr = 0;
+            $('.gdoDistance').prop('disabled', 'disabled');
         }
+        this.gdoConfig.itemPrice = this.utils.calculateTotalPrice(); //this.calculateTotalPrice(this.utils.utilities.item_price, this.singleOpener, this.doubleOpener, this.mileOpenPr, this.qty);
     }
 
-    singleOpener;
-    doubleOpener;
+    singleOpener = 0;
+    doubleOpener = 0;
+    mileOpenPr = 0;
+    qty = this.utils.utilities.gdoOpenerQty;
 
     showSingle(itm) {
         if (itm.srcElement.checked === true) {
             this.singleDrop = true;
-            this.gdoConfig.itemPrice = this.calculatePrice(this.gdoConfig.itemPrice, 50)
+            this.singleOpener = 50;
+            this.gdoConfig.itemPrice = this.calculateTotalPrice(this.utils.utilities.item_price, this.singleOpener, this.doubleOpener, this.mileOpenPr, this.qty);
         } else {
             this.singleDrop = false;
-            this.gdoConfig.itemPrice = this.calculatePrice(this.utils.utilities.item_price, 0)
+            this.singleOpener = 0;
+            this.gdoConfig.itemPrice = this.calculateTotalPrice(this.utils.utilities.item_price, this.singleOpener, this.doubleOpener, this.mileOpenPr, this.qty);
         }
     }
 
     showDouble(itm) {
         if (itm.srcElement.checked === true) {
             this.doubleDrop = true;
-            this.gdoConfig.itemPrice = this.calculatePrice(this.utils.utilities.item_price, 65)
+            this.doubleOpener = 65;
+            this.gdoConfig.itemPrice = this.calculateTotalPrice(this.utils.utilities.item_price, this.singleOpener, this.doubleOpener, this.mileOpenPr, 1);
         } else {
             this.doubleDrop = false;
-            this.gdoConfig.itemPrice = this.calculatePrice(this.utils.utilities.item_price, 0)
+            this.doubleOpener = 0;
+            this.gdoConfig.itemPrice = this.calculateTotalPrice(this.utils.utilities.item_price, this.singleOpener, this.doubleOpener, this.mileOpenPr, 1);
         }
     }
 
+    directDoorVal = 1;
+
     directDoor(event, flow) {
         let val = +event.target.value;
+        this.directDoorVal = +event.target.value;
         let k = flow;
         if (flow === 0) {
+            this.singleOpener = 0;
+            this.singleOpener = 50 * (val);
             k = {
                 name: "Single Door New Opener Installation Kit. This is required when no Opener is currently installed on door less than 10' wide.",
-                price: 50 * val,
-                count: val
+                price: this.singleOpener,
+                count: val //=== 1 ? val = 1 : val - 1
             };
             this.utils.utilities.gdoSingleDoor = k.price;
         } else {
+            this.doubleOpener = 0;
+            this.doubleOpener = 65 * (val);
             k = {
                 name: "Double Door New Opener Installation Kit. This is required when no Opener is currently installed on door less than 10' wide.",
-                price: 65 * val,
-                count: val
+                price: this.doubleOpener,
+                count: val //=== 1 ? val = 1 : val - 1
             };
             this.utils.utilities.gdoDoubleDoor = k.price;
         }
@@ -153,23 +175,22 @@ export class AdditionalOptionsComponent implements OnInit {
         let kPrice = _.sumBy(this.dataStore.gdoDirectQuestions, function (o) {
             return o.price;
         });
-        this.gdoConfig.itemPrice = this.calculatePrice(kPrice, this.utils.utilities.item_price);
+        this.utils.utilities.kPrice = kPrice;
+        this.gdoConfig.itemPrice = this.calculateTotalPrice(this.utils.utilities.item_price, this.singleOpener, this.doubleOpener, this.mileOpenPr, 1);
         // this.localPrice = this.gdoConfig.itemPrice + kPrice;
     }
 
     singleDropVal;
     doubleDropVal;
 
-    calculatePrice(amt, itmPrice) {
-        if (this.singleDrop) {
-            return itmPrice + amt;
-        }
-        if (this.singleDrop && this.doubleDrop) {
-            return itmPrice + amt;
-        }
-        if (this.doubleDrop) {
-            return itmPrice + amt;
-        }
+
+    globalPrice = 0;
+
+    calculateTotalPrice(basep, singlep, doublep, milep, qty) {
+        this.gdoConfig.singlep = singlep;
+        this.gdoConfig.doublep = doublep;
+        this.gdoConfig.milep = milep;
+        return ((basep * this.utils.utilities.gdoOpenerQty) + singlep + doublep + milep );
     }
 
     updateDistance(itm, flow) {
@@ -180,25 +201,28 @@ export class AdditionalOptionsComponent implements OnInit {
             let k = miles - 31;
             if (k >= 0) {
                 this.distancePrice = (k * 2.50) + 2.50;
-                this.gdoConfig.itemPrice = this.utils.utilities.item_price + this.distancePrice;
+                // this.mileOpenPr = this.distancePrice;
             }
             else {
                 this.distancePrice = 0;
-                this.gdoConfig.itemPrice = this.utils.utilities.item_price;
             }
+
+            // this.gdoConfig.itemPrice = this.calculateTotalPrice(this.utils.utilities.item_price, this.singleOpener, this.doubleOpener, this.mileOpenPr, this.qty);
         } else {
             let k = miles - 50;
 
             if (k >= 0) {
-                this.distancePrice = (k * 3) + 50;
-                this.gdoConfig.itemPrice = this.utils.utilities.item_price + this.distancePrice;
-                this.utils.utilities.distancePrice = this.distancePrice;
+                this.distancePrice = (k * 3) + 51;
+                // this.mileOpenPr = this.distancePrice;
             } else {
                 this.distancePrice = 0;
-                this.gdoConfig.itemPrice = this.utils.utilities.item_price;
+                // this.mileOpenPr = this.distancePrice;
             }
+
         }
+        this.mileOpenPr = this.distancePrice;
         this.utils.utilities.distancePrice = this.distancePrice;
+        this.gdoConfig.itemPrice = this.utils.calculateTotalPrice();
     }
 
 }

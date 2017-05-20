@@ -127,7 +127,7 @@
                 <div class="flex-right">
                     <span class="text-orange">Yes</span>
                     <label class="switch">
-                        <input type="checkbox" checked="checked" (change)="showDistance($event,null)">
+                        <input type="checkbox" checked="checked" (change)="showDistance($event,'non-direct')">
                         <div class="slider round"></div>
                     </label>
                     <span class="text-orange">No</span>
@@ -138,7 +138,7 @@
                         Distance of job site is
                         <form class="inline-block">
                             <input type="text" (keyup)="updateDistance($event,null)"
-                                   name="gdoDistance" [(ngModel)]="distance"/>
+                                   name="gdoDistance" class="gdoDistance" [(ngModel)]="distance" disabled/>
                         </form>
                         drive miles from store
                     </div>

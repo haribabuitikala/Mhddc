@@ -21,9 +21,9 @@ export class DoorConfigurationComponent implements OnInit {
     gdoOpenerTxt = this.utils.utilities.gdoOpenerText;
     gdoOpenerSelected = this.dataStore.gdoOpenerAccessories;
 
-    t = _.sumBy(this.gdoOpenerSelected, function(o){ return o.price * o.count });
+    // t = _.sumBy(this.gdoOpenerSelected, function(o){ return o.price * o.count });
 
-    itemPrice = this.utils.utilities.item_price + this.utils.utilities.distancePrice + this.t;
+    itemPrice = this.utils.calculateTotalPrice();
     qty = this.utils.utilities.gdoOpenerQty;
     itmPrice = this.utils.utilities.itmPrice;
     showDistancePrice = false;
@@ -55,18 +55,13 @@ export class DoorConfigurationComponent implements OnInit {
         this.distancePrice > 0 ? this.showDistancePrice = true : this.showDistancePrice = false;
         this.gdoOpenerSelected.length ? this.accessories = true : this.accessories = false;
         this.gdodirectquestions.length ? this.gdodirect = true : this.gdodirect = false;
+        this.gdoConfig.showDetails = false;
+        $('.gdoCofigDetails').hide();
     }
-
     updateQuantity(flow) {
-        if (flow === 1 && this.qty < 6) {
-            this.qty++
-        }
-        else if (flow === 0 && this.qty > 1) {
-            this.qty--;
-        }
-        this.itemPrice = (this.itmPrice * this.qty) + this.utils.utilities.distancePrice + this.t;
-        this.utils.utilities.item_price = this.itemPrice;
-        this.utils.utilities.gdoOpenerQty = this.qty;
+        // this.utils.updateQty will call calculate total amount internally
+        this.itemPrice = this.utils.updateQty(flow, this.utils.utilities.gdoOpenerQty);
+        this.qty = this.utils.utilities.gdoOpenerQty;
     }
 
     nextBtn(path) {
