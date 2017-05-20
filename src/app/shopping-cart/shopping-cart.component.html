@@ -9,13 +9,18 @@
 </p>
 <div class="div-border div-border-radius tile padding10 margin-b-10">
     <p class="shopping-cart-gallery-info ">{{openerType}} Door Operator (Installed)</p>
-    <p>{{gdoOpenerTxt}}</p>
+    <div class="clearfix">
+        <span class="col-xs-9">{{gdoOpenerTxt}}</span>
+        <span class="col-xs-3 padding-0 text-right">{{baseItmPrice | currency:'USD':true:'1.2-2'}}</span></div>
     <div *ngIf="accessories">
         Opener Accessories
         <ul>
             <li *ngFor="let opener of gdoOpenerSelected">
                 <p>{{opener.name}} <br>
-                    (x{{opener.count}} {{opener.price | currency:'USD':true:'1.2-2'}} )</p>
+                    (x{{opener.count}} {{opener.price | currency:'USD':true:'1.2-2'}} )
+
+                <span class="pull-right">{{opener.count * opener.price | currency:'USD':true:'1.2-2'}}</span>
+                </p>
             </li>
         </ul>
     </div>
@@ -35,7 +40,7 @@
         </ul>
     </div>
     <p *ngIf="showDistancePrice">
-        {{distance}} miles from store ({{distancePrice | currency:'USD':true:'1.2-2'}})
+        {{distance}} miles from store <span class="pull-right">{{distancePrice | currency:'USD':true:'1.2-2'}}</span>
     </p>
 </div>
 <div class="clearfix  margin-b-40">

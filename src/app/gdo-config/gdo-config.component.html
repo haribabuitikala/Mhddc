@@ -1,7 +1,7 @@
 <div class="linear-bg" *ngIf="visualizeHeader">
     <h3 class="font-size-16 margin-t-10 visualize-header"></h3>
     <div class="text-center switcher-image-sec gdo">
-        <img src="../../assets/images/openers/{{gdoBanner}}" class="switcher-image" alt="">
+        <img src="../../assets/images/openers/banner{{gdoBanner}}" class="switcher-image" alt="">
     </div>
 </div>
 <div class="inner-router">
@@ -9,7 +9,7 @@
 
     </router-outlet>
 </div>
-<div class="tile" *ngIf="showDetails">
+<div class="tile gdoCofigDetails" *ngIf="showDetails">
     <div class="design-detials--sec">
         <div class="col-xs-6 padding-r-7  border-white-right font-size-12">
             <p>{{itemPrice | currency:'USD':true:'1.2-2'}} / Opener</p>
@@ -21,10 +21,42 @@
                 <span>{{quantity}}</span>
                 <img src="../../assets/images/add.png" alt="" (click)="updateQuantity(1)" class="add-quantity">
             </p>
+            <h4 class="pull-right padding-r-7 text-orange" *ngIf="showDetails" (click)="showDetails.open()">DETAILS</h4>
         </div>
         <h4 class="text-center text-orange gdo-details-txt font-size-14">Prices Include All Applicable Discounts</h4>
     </div>
 </div>
 
 <div class="row margin-b-15"></div>
+
+<modal #showDetails>
+    <modal-header [show-close]="true">
+    </modal-header>
+    <modal-body>
+        <p>
+            <span class="col-xs-4 bold">Zip Code :</span>
+            <span class="col-xs-8 padding-0">
+                {{detailObj.zip}} - {{detailObj.city}} <br>
+            </span>
+        </p>
+        <p>
+            <span class="col-xs-4 bold">Location :</span>
+            <span class="col-xs-8 padding-0">
+                {{detailObj.county}} COUNTY
+            </span>
+        </p>
+        <p>
+            <span class="col-xs-4 bold">Store :</span>
+            <span class="col-xs-8 padding-0">
+                {{storeName.storename}}
+            </span>
+        </p>
+        <p>
+            <span class="col-xs-4 bold">Opener :</span>
+            <span class="col-xs-8 padding-0">
+                {{openerTxt}}
+            </span>
+        </p>
+    </modal-body>
+</modal>
 

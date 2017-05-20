@@ -141,15 +141,17 @@
     </div>
     <div class="margin-b-20" *ngIf="gdodirect">
         <p *ngFor="let opener of gdodirectquestions">
-            {{opener.count}} - {{opener.name}} ({{opener.price | currency:'USD':true:'1.2-2'}})
+            {{opener.count}} - {{opener.name}}
+            <br>
+            <span class="padding-l-15">({{opener.price | currency:'USD':true:'1.2-2'}})</span>
         </p>
     </div>
     <p *ngIf="gdodirect">
         Install of Purchased Opener (Installed)
     </p>
-    <!--<p *ngIf="showDistancePrice">-->
-    <!--{{distance}} miles from store ({{distancePrice | currency:'USD':true:'1.2-2'}})-->
-    <!--</p>-->
+    <p *ngIf="showDistancePrice">
+    {{distance}} miles from store ({{distancePrice | currency:'USD':true:'1.2-2'}})
+    </p>
     <div class="margin-b-10  padding10 shopping-cart-info margin-b-20">
             <span class="padding-l-10 bold"> Quantity
                 <img class="minus-quantity" src="../../assets/images/substract.png" alt="" (click)="updateQuantity(0)">

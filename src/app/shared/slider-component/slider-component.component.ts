@@ -85,8 +85,15 @@ export class SliderComponentComponent implements OnInit {
         this.sliderLeft = -(this.slideIndex * this.slideWidth);
     }
 
-    openerSelected(obj) {
-        this.gdoConfig.itemPrice = obj.item_price;
+    openerSelected(obj, event) {
+        $('._slide-items img').removeClass('current');
+        this.gdoConfig.itemPrice = obj.item_price * this.utils.utilities.gdoOpenerQty;
+        this.utils.utilities.item_price = obj.item_price;
+        let t = obj.item_thumbnail.split('.')[0];
+        this.gdoConfig.gdoBanner = t + '.png';
+        event.currentTarget.classList.add('current');
+        this.utils.utilities.gdoOpenerSelectedItm = obj.item_id;
+        this.notify.emit(obj);
     }
     moveSlider(isNext){
         if (isNext){

@@ -1,6 +1,7 @@
 import {Component, OnInit, Input} from '@angular/core';
 import {AppUtilities} from "../shared/appUtilities";
 import {CollectionData} from "../collection/collection-data";
+import {GdoConfigComponent} from "../gdo-config/gdo-config.component";
 declare var _:any;
 
 @Component({
@@ -17,11 +18,12 @@ declare var _:any;
 export class GdoUpdateComponent implements OnInit {
 
     constructor(private utils:AppUtilities
-        , private dataStrorage:CollectionData) {
+        , private dataStrorage:CollectionData
+    ,private gdoConfig: GdoConfigComponent) {
     }
     
     @Input() data;
-    quantity = 1;
+    quantity = 0;
     ngOnInit() {
     }
 
@@ -44,5 +46,13 @@ export class GdoUpdateComponent implements OnInit {
         };
         this.dataStrorage.gdoOpenerAccessories.splice(id, 1);
         this.dataStrorage.gdoOpenerAccessories.push(k);
+
+        let kPrice = _.sumBy(this.dataStrorage.gdoOpenerAccessories, function (o) {
+            return o.price;
+        });
+
+        this.utils.utilities.kPrice = kPrice;
+
+        this.gdoConfig.itemPrice = this.utils.calculateTotalPrice();
     }
 }
