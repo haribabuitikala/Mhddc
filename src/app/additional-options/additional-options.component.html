@@ -1,4 +1,4 @@
-<h4 class="text-orange font-size-16">{{pageNo}} Additional Options</h4>
+<h4 class="text-orange font-size-16">{{pageNo}}. Additional Options</h4>
 <div class="content additional-options" id="resFlow" *ngIf="!gdoFlow">
     <dl>
         <dd>
@@ -6,7 +6,7 @@
                 <p class="col-xs-11"> Medallion Hardware Upgrade for <span class="text-orange">$59.00</span>?
                 </p>
                 <img (click)="resFlowMed.open()" class="pull-right " alt="" height="25"
-                     src="../../assets/images/info.png">
+                    src="../../assets/images/info.png">
             </div>
             <div id="upgrade">
                 <img src="../../assets/images/Medallionlogo.png" alt=""/>
@@ -44,7 +44,7 @@
                 <p class="col-xs-11">Do you need Double Track Low Head Room Conversion Kit <span class="text-orange">$59.00</span>?
                 </p>
                 <img (click)="resFlowHeadRoom.open()" class="pull-right" alt="" height="25"
-                     src="../../assets/images/info.png">
+                    src="../../assets/images/info.png">
             </div>
             <div class="flex-right">
                 <span class="text-orange">Yes</span>
@@ -60,7 +60,7 @@
                 <p class="col-xs-11">Do you need an <strong>Emergency Release Kit</strong>? <span class="text-orange">$35.00</span>?
                 </p>
                 <img (click)="resFlowReleaseKit.open()" class="pull-right" alt="" height="25"
-                     src="../../assets/images/info.png">
+                    src="../../assets/images/info.png">
             </div>
             <div class="flex-right">
                 <span class="text-orange">Yes</span>
@@ -83,14 +83,14 @@
                     </div>
                     <div class="col-xs-2 padding-0">
                         <img (click)="gdoFlowManualDoor.open()" class="pull-right " alt="" height="25"
-                             src="../../assets/images/info.png">
+                            src="../../assets/images/info.png">
                     </div>
                 </div>
 
                 <div class="flex-right">
                     <span class="text-orange">Yes</span>
                     <label class="switch">
-                        <input type="checkbox" checked="checked">
+                        <input type="checkbox" checked="checked" >
                         <div class="slider round"></div>
                     </label>
                     <span class="text-orange">No</span>
@@ -104,7 +104,7 @@
                     </div>
                     <div class="col-xs-2 padding-0">
                         <img (click)="gdoFlowPowerHead.open()" class="pull-right" alt="" height="25"
-                             src="../../assets/images/info.png">
+                            src="../../assets/images/info.png">
                     </div>
                 </div>
                 <div class="flex-right">
@@ -121,7 +121,7 @@
                     <div class="col-xs-10">Is this job site within 30 drive miles of this store?</div>
                     <div class="col-xs-2 padding-0">
                         <img (click)="gdoFlowMiles.open()" class="pull-right" alt="" height="25"
-                             src="../../assets/images/info.png">
+                            src="../../assets/images/info.png">
                     </div>
                 </div>
                 <div class="flex-right">
@@ -147,7 +147,7 @@
                         currency:'USD':true:'1.2-2'}})</p>
 
                 </div>
-            
+
             </dd>
         </dl>
     </div>
@@ -224,7 +224,7 @@
                         currency:'USD':true:'1.2-2'}})</p>
 
                 </div>
-                    <p class="additionl-note">
+                <p class="additionl-note">
                     Please Note: Is your Garage Door over 7' Tall? If yes, you must purchase the appropriate extension kit from the store or on homedepot.com and have it on site at time of installation
                 </p>
             </dd>
@@ -234,14 +234,14 @@
 
 <div id="footer" class="col-xs-12 padding-t-10 padding-b-10">
     <a href="javascript:void(0)" class="pull-left previous-btn" (click)="prevBtn('/opener')" data-id="currScreen">
-        <img src="../../assets/images/back-48-thick.png" height="15px">
+       <img src="../../assets/images/back-48-thick.png" height="15px">
         Prev
     </a>
 
     <a href="javascript:void(0)" class="pull-right nextBtn" (click)="nextBtn('/doorConfiguration')"
        data-id="currScreen">
-        Next
-        <img src="../../assets/images/Forward-48-thick.png" height="15px">
+       Next
+       <img src="../../assets/images/Forward-48-thick.png" height="15px">
     </a>
 </div>
 
@@ -319,14 +319,12 @@
     <modal-header [show-close]="true">
     </modal-header>
     <modal-body class="text-left padding10">
-        <p class="margin-b-10  ">
-            Prices INCLUDE Home Delivery within a 30 mile driving distance from the store.<br>
+        <p class="margin-b-10  " style=" padding-top: 0px;margin-top:0px;"> Prices INCLUDE Home Delivery within a 30 mile driving distance from the store. <br>
+        If job site location is greater than 30 drive miles from store then the following mileage fees apply: </p> 
+        <p class="padding-l-15" style=" padding-top: 0px;margin-top:0px;"> 31 - 50 mil% from store - flat rate of $51</p>
+        <p class="padding-l-15" style=" padding-top: 0px;margin-top:0px;"> Greater than 50 miles from store - flat rate of $51 + $3.00 for every drive mile over 50</p>
 
-            If job site location is greater than 30 drive miles from store then the following mileage fees apply:
-            31 - 50 mil% from store - flat rate of $51
-            Greater than 50 miles from store - flat rate of $51 + $3.00 for every drive mile over 50
-
-        </p>
+         
     </modal-body>
 </modal>
 
