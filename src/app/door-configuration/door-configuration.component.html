@@ -133,6 +133,9 @@
     <p class="bold">
         {{gdoOpenerTxt}}
     </p>
+     <p *ngIf="gdodirect">
+        Install of Purchased Opener (Installed)
+    </p>
     <div class="margin-b-20" *ngIf="accessories">
         <span class="bold">Opener Accessories</span><br>
         <p *ngFor="let opener of gdoOpenerSelected">
@@ -145,10 +148,7 @@
             <br>
             <span class="padding-l-15">({{opener.price | currency:'USD':true:'1.2-2'}})</span>
         </p>
-    </div>
-    <p *ngIf="gdodirect">
-        Install of Purchased Opener (Installed)
-    </p>
+    </div>   
     <p *ngIf="showDistancePrice">
     {{distance}} miles from store ({{distancePrice | currency:'USD':true:'1.2-2'}})
     </p>

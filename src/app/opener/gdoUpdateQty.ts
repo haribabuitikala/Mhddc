@@ -8,9 +8,9 @@ declare var _:any;
     selector: 'gdo-update-qty',
     template: `
             <span class="pull-right" data-id="">
-                <img class="minus-quantity" src="../../assets/images/substract.png" (click)="updateQuantity(data,0,0)" alt="">
+                <img class="minus-quantity" src="../../assets/images/substract.png" (click)="updateQuantity(data,0,data.item_id)" alt="">
                 <span class="accessory-quantity text-orange">{{quantity}}</span>
-                <img class="add-quantity" src="../../assets/images/add.png" (click)="updateQuantity(data,1,1)" alt="">
+                <img class="add-quantity" src="../../assets/images/add.png" (click)="updateQuantity(data,1,data.item_id)" alt="">
             </span>
     `,
     styleUrls: ['./opener.component.less']
@@ -19,12 +19,15 @@ export class GdoUpdateComponent implements OnInit {
 
     constructor(private utils:AppUtilities
         , private dataStrorage:CollectionData
-    ,private gdoConfig: GdoConfigComponent) {
+        , private gdoConfig:GdoConfigComponent) {
     }
-    
+
     @Input() data;
+    @Input() index;
     quantity = 0;
+
     ngOnInit() {
+        this.dataStrorage.gdoOpenerAccessories = [];
     }
 
 
