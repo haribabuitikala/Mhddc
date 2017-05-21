@@ -72,7 +72,6 @@ export class CategoryComponent implements OnInit {
 // this is for additional options screen
             let utils = this.utilities.utilities;
             this.utilities.utilities.visualizeHeader = false;
-            this.utilities.utilities.directFlow = true;
             let dataparams = {
                 lang: utils.lang,
                 localmarketid: utils.localmarketid,
@@ -85,6 +84,7 @@ export class CategoryComponent implements OnInit {
             this.dataService.getGdoAdditionalDirect(dataparams)
                 .subscribe(
                     res => {
+                        this.utilities.utilities.directFlow = true;
                         this.dataStore.gdoAdditionalDirect = res;
                         this.route.navigateByUrl(path);
                     }

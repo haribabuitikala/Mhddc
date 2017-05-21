@@ -38,7 +38,8 @@ export class GdoConfigComponent implements OnInit, OnChanges {
         this.itemPrice = this.utils.utilities.item_price + this.calulateAmt;
         this.itmPrice = this.utils.utilities.item_price;
         this.utils.utilities.itmPrice = this.itmPrice;
-        this.gdoBanner = this.toPng(this.utils.utilities.gdoBanner);
+        if(this.utils.utilities.directFlow === false)
+            this.gdoBanner = this.toPng(this.utils.utilities.gdoBanner);
         this.utils.utilities.gdoOpenerQty = this.quantity;
         this.visualizeHeader = this.utils.utilities.visualizeHeader;
 
