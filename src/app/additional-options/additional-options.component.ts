@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {Router} from '@angular/router';
 import {AppComponent} from "../app.component";
 import {AppUtilities} from "../shared/appUtilities";
@@ -6,8 +6,9 @@ import {NavService} from "../nav/nav-service";
 import {CollectionData} from "../collection/collection-data";
 import {CollectionService} from "../shared/data.service";
 import {GdoConfigComponent} from "../gdo-config/gdo-config.component";
-declare var $:any;
-declare var _:any;
+import {ModalComponent} from "ng2-bs3-modal/ng2-bs3-modal";
+declare var $: any;
+declare var _: any;
 
 @Component({
     selector: 'app-additional-options',
@@ -15,17 +16,22 @@ declare var _:any;
     styleUrls: ['./additional-options.component.less']
 })
 export class AdditionalOptionsComponent implements OnInit {
+    @ViewChild('gdoFlowManualDoor') gdoFlowManualDoor: ModalComponent;
+    @ViewChild('gdoFlowPowerHead') gdoFlowPowerHead: ModalComponent;
+
     pageNo;
     showMenu;
     data;
     questions;
     gdoFlow = this.utils.utilities.isGDO;
-    distance:any;
+    distance: any;
     distancePrice;
     showDistancePrice;
     directFlow = this.utils.utilities.directFlow;
     singleDrop = false;
     doubleDrop = false;
+    gdoFlowManualDoorInfo = false;
+    gdoFlowPowerHeadInfo = false;
     gdoOpenerSelected = this.dataStore.gdoOpenerAccessories;
 
     t = _.sumBy(this.gdoOpenerSelected, function (o) {
@@ -35,13 +41,13 @@ export class AdditionalOptionsComponent implements OnInit {
     // for gdo the pageNo will be 3
     // for residential the pageNo will be
 
-    constructor(private appComponent:AppComponent
-        , private utils:AppUtilities
-        , private route:Router
-        , private navComp:NavService
-        , private dataStore:CollectionData
-        , private dataService:CollectionService
-        , private gdoConfig:GdoConfigComponent) {
+    constructor(private appComponent: AppComponent
+        , private utils: AppUtilities
+        , private route: Router
+        , private navComp: NavService
+        , private dataStore: CollectionData
+        , private dataService: CollectionService
+        , private gdoConfig: GdoConfigComponent) {
     }
 
     ngOnInit() {
@@ -56,8 +62,11 @@ export class AdditionalOptionsComponent implements OnInit {
             this.utils.utilities.item_price = this.data.item_price;
             this.utils.utilities.itmPrice = this.data.item_price;
             $('.inner-router').css({'margin-top': 0});
+            $('.showDetails').hide();
+
         } else {
             this.gdoConfig.itemPrice = this.utils.calculateTotalPrice();
+            $('.showDetails').hide();
         }
 
     }
@@ -143,7 +152,22 @@ export class AdditionalOptionsComponent implements OnInit {
             this.gdoConfig.itemPrice = this.calculateTotalPrice(this.utils.utilities.item_price, this.singleOpener, this.doubleOpener, this.mileOpenPr, 1);
         }
     }
+    showManual(itm) {
+        if (itm.srcElement.checked === true) {
+            this.gdoFlowManualDoorInfo = false;
 
+        } else {
+            this.gdoFlowManualDoorInfo = true;
+        }
+    }
+    showPowerHead(itm) {
+        if (itm.srcElement.checked === true) {
+            this.gdoFlowPowerHeadInfo = false;
+        } else {
+
+            this.gdoFlowPowerHeadInfo = true;
+        }
+    }
     directDoorVal = 1;
 
     directDoor(event, flow) {
@@ -190,7 +214,7 @@ export class AdditionalOptionsComponent implements OnInit {
         this.gdoConfig.singlep = singlep;
         this.gdoConfig.doublep = doublep;
         this.gdoConfig.milep = milep;
-        return ((basep * this.utils.utilities.gdoOpenerQty) + singlep + doublep + milep );
+        return ((basep * this.utils.utilities.gdoOpenerQty) + singlep + doublep + milep);
     }
 
     updateDistance(itm, flow) {

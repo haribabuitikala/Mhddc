@@ -53,7 +53,7 @@ export class SliderComponentComponent implements OnInit {
 
     renderSlider() {
         this.slideWidth = $('._slider-container').width();
-        this.sliderWidth = this.data.length * this.slideWidth;
+        this.sliderWidth = (this.data.length * this.slideWidth) + this.slideWidth;
 
         $('._slider').on('touchstart', (e) => {
             this.touchStart = true;

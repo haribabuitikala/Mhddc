@@ -45,9 +45,19 @@ export class OpenerComponent implements OnInit {
         this.data = this.dataStrorage.gdoOpener;
         this.gdoOpenertext = this.data[0].item_description;
         this.dataParams.openerid = this.data[0].item_id;
+        this.utils.utilities.openerType = this.data[0].brand;
         this.data = _.chunk(this.data, 2);
         this.number = 6;
         this.gdoOpenerObj = this.dataStrorage.gdoAdditional;
+
+        //  reseting the values
+        this.utils.utilities.distancePrice = 0;
+        this.utils.utilities.singlep = 0;
+        this.utils.utilities.doublep = 0;
+        this.utils.utilities.milesp = 0;
+        this.utils.utilities.kPrice = 0;
+        this.utils.utilities.distancePrice = 0;
+
     }
 
     nextBtn(path) {

@@ -122,7 +122,7 @@
     </dl>
 </div>
 <div id="GdoDoorConfig" *ngIf="isGdo" class="fixed-header">
-    <address class="padding10 margin-b-10">
+    <address class="margin20tb">
             <span>
                 <span class="bold">{{store.storename}} ({{store.storenumber}})</span>
                 <br>{{store.address1}}
@@ -132,6 +132,9 @@
     </address>
     <p class="bold">
         {{gdoOpenerTxt}}
+    </p>
+     <p *ngIf="gdodirect">
+        Install of Purchased Opener (Installed)
     </p>
     <div class="margin-b-20" *ngIf="accessories">
         <span class="bold">Opener Accessories</span><br>
@@ -145,10 +148,7 @@
             <br>
             <span class="padding-l-15">({{opener.price | currency:'USD':true:'1.2-2'}})</span>
         </p>
-    </div>
-    <p *ngIf="gdodirect">
-        Install of Purchased Opener (Installed)
-    </p>
+    </div>   
     <p *ngIf="showDistancePrice">
     {{distance}} miles from store ({{distancePrice | currency:'USD':true:'1.2-2'}})
     </p>

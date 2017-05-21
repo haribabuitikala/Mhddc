@@ -9,10 +9,13 @@
 </p>
 <div class="div-border div-border-radius tile padding10 margin-b-10">
     <p class="shopping-cart-gallery-info ">{{openerType}} Door Operator (Installed)</p>
-    <div class="clearfix">
+    <div class="clearfix clearfix margin-b-10">
         <span class="col-xs-9">{{gdoOpenerTxt}}</span>
+        <div *ngIf="showDirect" class="clearfix margin-b-10 col-xs-9">
+            Install of Purchased Opener (Installed)
+        </div>
         <span class="col-xs-3 padding-0 text-right">{{baseItmPrice | currency:'USD':true:'1.2-2'}}</span></div>
-    <div *ngIf="accessories">
+    <div *ngIf="accessories" class="clearfix margin-b-10">
         Opener Accessories
         <ul>
             <li *ngFor="let opener of gdoOpenerSelected">
@@ -24,26 +27,22 @@
             </li>
         </ul>
     </div>
-    <div *ngIf="showDirectText">
-        Install of Purchased Opener (Installed)
-    </div>
+
     <div *ngIf="showDirect">
-        <ul class="">
-            <li *ngFor="let opener of directItm">
-                <div class="col-xs10">{{opener.name}} <br>
-                    {{opener.count}}
+ 
+            <div *ngFor="let opener of directItm">
+                <div class="clearfix">
+                    <p class="col-xs-10 pull-left">{{opener.count}}-{{opener.name}} </p>
+                    <span class="col-xs-2 padding-0 pull-right">   {{opener.price | currency:'USD':true:'1.2-2'}}</span>
                 </div>
-                <div class="col-xs-2">
-                    {{opener.price | currency:'USD':true:'1.2-2'}}
-                </div>
-            </li>
-        </ul>
+           
+            </div>
     </div>
-    <p *ngIf="showDistancePrice">
+    <p class="clearfix margin-b-10" *ngIf="showDistancePrice">
         {{distance}} miles from store <span class="pull-right">{{distancePrice | currency:'USD':true:'1.2-2'}}</span>
     </p>
 </div>
-<div class="clearfix  margin-b-40">
+<div class="clearfix margin-b-40">
     <button type="submit"
             (click)="continue.open()"
             class=" font-size-16 pull-left btn btn-default box-shadow text-orange margin-r-10 bold margin-b-10 text-uppercase">
@@ -51,10 +50,10 @@
     </button>
     <span class="pull-right margin-b-10 font-size-16">
         Quantity
-        <img src="../../assets/images/substract.png" alt="" height="20" class="minus-quantity"
+        <img src="../../assets/images/substract.png" alt="" height="30" class="minus-quantity"
              (click)="updateQuantity(0)">
         <span>{{qty}}</span>
-        <img src="../../assets/images/add.png" alt="" height="20" class="add-quantity" (click)="updateQuantity(1)">
+        <img src="../../assets/images/add.png" alt="" height="30" class="add-quantity" (click)="updateQuantity(1)">
     </span>
 </div>
 <div class="text-center">
@@ -75,7 +74,7 @@
     </modal-header>
     <modal-body class="text-center"> 
         <div class="margin-t-100">
-            <button class="btn btn-default box-shadow text-orange bold" (click)="removeItem()"  >Continue Shopping
+            <button class="btn btn-default btn-lg box-shadow text-orange bold text-uppercase" (click)="removeItem()">Continue Shopping
             </button>
         </div>
     </modal-body>

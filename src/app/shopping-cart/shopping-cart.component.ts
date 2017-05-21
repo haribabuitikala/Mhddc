@@ -45,7 +45,7 @@ export class ShoppingCartComponent implements OnInit {
         this.distancePrice > 0 ? this.showDistancePrice = true : this.showDistancePrice = false;
         this.gdoOpenerSelected.length ? this.accessories = true : this.accessories = false;
         let directObj = Object.keys(this.directItm);
-        directObj.length ? this.showDirect = true : this.showDirect = false;
+        this.showDirect = this.utils.utilities.directFlow;
     }
 
     removeItem() {

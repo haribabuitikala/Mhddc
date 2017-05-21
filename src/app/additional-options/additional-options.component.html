@@ -1,5 +1,6 @@
-<h4 class="text-orange font-size-16">{{pageNo}}. Additional Options</h4>
+
 <div class="content additional-options" id="resFlow" *ngIf="!gdoFlow">
+    <h4 class="text-orange font-size-16">{{pageNo}}. Additional Options</h4>
     <dl>
         <dd>
             <div class="clearfix">
@@ -75,6 +76,7 @@
 </div>
 <div class="content additional-options" id="gdoFlow" *ngIf="gdoFlow">
     <div *ngIf="!directFlow" class="content additional-options">
+        <h4 class="text-orange font-size-16">{{pageNo}}. Additional Options</h4>
         <dl>
             <dd>
                 <div class="clearfix">
@@ -90,11 +92,19 @@
                 <div class="flex-right">
                     <span class="text-orange">Yes</span>
                     <label class="switch">
-                        <input type="checkbox" checked="checked" >
+                        <input  type="checkbox" checked="checked"  (change)="showManual($event)">
                         <div class="slider round"></div>
                     </label>
                     <span class="text-orange">No</span>
+          
                 </div>
+                           <p  class="margin-b-10 additionl-openers-note " *ngIf="gdoFlowManualDoorInfo">
+            If door does not operate manually without opener attached then a new opener may not be able to
+            operate the door. You should be able to open and close door manually without the opener attached.
+            If it does not operate manually then you may need to consider spring replacement or purchasing a
+            new Garage Door.
+
+        </p>
             </dd>
             <dd>
                 <div class="clearfix">
@@ -110,11 +120,16 @@
                 <div class="flex-right">
                     <span class="text-orange">Yes</span>
                     <label class="switch">
-                        <input type="checkbox" checked="checked">
+                        <input type="checkbox" checked="checked" (change)="showPowerHead($event)">
                         <div class="slider round"></div>
                     </label>
                     <span class="text-orange">No</span>
                 </div>
+                <p class="margin-b-10  additionl-openers-note" *ngIf="gdoFlowPowerHeadInfo">For a complete installation. there should be an approved 110 volt electrical
+            outlet within 3' of the power head of the opener. If no outlet is in place, but power is
+            available through an extension cord, the installer will test and adjust the opener but will not leave the
+            extension cord in place.
+        </p>
             </dd>
             <dd>
                 <div class="clearfix">
@@ -152,6 +167,7 @@
         </dl>
     </div>
     <div *ngIf="directFlow" class="content additional-options">
+        <h4 class="text-orange font-size-16">1. Additional Options</h4>
         <dl>
             <dd>
                 <div class="clearfix">
@@ -215,7 +231,7 @@
                         Distance of job site is
                         <form class="inline-block">
                             <input type="text" (keyup)="updateDistance($event,'direct')"
-                                   name="gdoDistance" [(ngModel)]="distance"/>
+                                   name="gdoDistance" [(ngModel)]="distance" disabled class="gdoDistance"/>
                         </form>
                         drive miles from store
                     </div>
@@ -296,8 +312,8 @@
     </modal-header>
     <modal-body class="text-left padding10">
         <p class="margin-b-10 ">
-            If it door does not operate manually without opener attached then a new opener may not be able to
-            operate the door. You should be able to open and dose door manually without the opener attached.
+            If door does not operate manually without opener attached then a new opener may not be able to
+            operate the door. You should be able to open and close door manually without the opener attached.
             If it does not operate manually then you may need to consider spring replacement or purchasing a
             new Garage Door.
 
@@ -309,7 +325,7 @@
     </modal-header>
     <modal-body class="text-left padding10">
         <p class="margin-b-10  ">For a complete installation. there should be an approved 110 volt electrical
-            outlet within 3' of the power head of the opener. If no outlet is in place. but power is
+            outlet within 3' of the power head of the opener. If no outlet is in place, but power is
             available through an extension cord, the installer will test and adjust the opener but will not leave the
             extension cord in place.
         </p>
