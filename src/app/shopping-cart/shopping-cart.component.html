@@ -33,12 +33,12 @@
             <div *ngFor="let opener of directItm">
                 <div class="clearfix">
                     <p class="col-xs-10 pull-left">{{opener.count}}-{{opener.name}} </p>
-                    <span class="col-xs-2 padding-0 pull-right">   {{opener.price | currency:'USD':true:'1.2-2'}}</span>
+                    <span class="col-xs-2 padding-0 text-right">   {{opener.price | currency:'USD':true:'1.2-2'}}</span>
                 </div>
            
             </div>
     </div>
-    <p class="clearfix margin-b-10" *ngIf="showDistancePrice">
+    <p class="clearfix margin-b-10 padding-l-15" *ngIf="showDistancePrice">
         {{distance}} miles from store <span class="pull-right">{{distancePrice | currency:'USD':true:'1.2-2'}}</span>
     </p>
 </div>

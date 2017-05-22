@@ -50,7 +50,6 @@ export class ShoppingCartComponent implements OnInit {
 
     removeItem() {
         this.utils.utilities.gdoOpenerText = '';
-        this.dataStore.gdoOpenerAccessories = [];
         this.utils.utilities.item_price = 0;
         this.utils.utilities.openerType = null;
         this.utils.utilities.gdoOpenerQty = 1;
@@ -58,6 +57,7 @@ export class ShoppingCartComponent implements OnInit {
         this.utils.utilities.distancePrice = 0;
         $('.shop-count').text('0');
         this.dataStore.gdoOpenerAccessories = [];
+        this.dataStore.gdoDirectQuestions = [];
         this.continue.close();
 
         this.route.navigateByUrl('/category');
