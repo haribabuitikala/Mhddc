@@ -79,7 +79,7 @@ export class DoorSizeComponent implements OnInit {
     }
 
     navigateTo(data) { 
-        $('body').addClass('loader');
+        $('body').addClass('loader'); 
         this.collection.getCollection(data).subscribe(
             res => {
                 this.data.data = res;
