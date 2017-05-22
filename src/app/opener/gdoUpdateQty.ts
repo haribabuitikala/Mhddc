@@ -32,6 +32,7 @@ export class GdoUpdateComponent implements OnInit {
 
 
     updateQuantity(obj, flow, id) {
+       
         if (flow === 1 && this.quantity < 6) {
             this.quantity++
         }
@@ -47,7 +48,7 @@ export class GdoUpdateComponent implements OnInit {
             count: this.quantity,
             totalPrice: obj.item_price * this.quantity
         };
-        this.dataStrorage.gdoOpenerAccessories.splice(id, 1);
+        //this.dataStrorage.gdoOpenerAccessories.splice(id, 1);
         this.dataStrorage.gdoOpenerAccessories.push(k);
 
         let kPrice = _.sumBy(this.dataStrorage.gdoOpenerAccessories, function (o) {

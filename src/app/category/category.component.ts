@@ -31,7 +31,7 @@ export class CategoryComponent implements OnInit {
         this.lang = this.language.getCategory();
         this.isService = this.utilities.utilities.isService;
         this.appComponent.currScreen = 2;
-        let utils = this.utilities.utilities;
+        let utils = this.utilities.utilities; 
     }
 
     navigateTo(path, flow, count) {
@@ -45,8 +45,8 @@ export class CategoryComponent implements OnInit {
         } else {
             let zipCode = this.utilities.utilities.zipCode;
             let storeNum = this.utilities.utilities.storenumber;
-            let arr = this.utilities.gdoCheck;
-            arr.indexOf(zipCode) !== -1 || arr.indexOf(storeNum) !== -1 ? this.gdoGoTo('/gdoDoorSize', 'size') : this.gdo.open();
+            let arr = JSON.stringify(this.utilities.gdoCheck);
+         arr.indexOf(zipCode) !== -1 || arr.indexOf(storeNum) !== -1 ? this.gdoGoTo('/gdoDoorSize', 'size') : this.gdo.open();
         }
     }
 

@@ -138,7 +138,7 @@
     </p>
     <div class="margin-b-20" *ngIf="accessories">
         <span class="bold">Opener Accessories</span><br>
-        <p *ngFor="let opener of gdoOpenerSelected">
+        <p *ngFor="let opener of gdoOpeners">
             {{opener.count}} - {{opener.name}} ({{opener.price | currency:'USD':true:'1.2-2'}} each)
         </p>
     </div>
@@ -802,9 +802,8 @@
     </modal-body>
 </modal>
 <div id="footer" class="col-xs-12 padding-t-10 padding-b-10">
-    <a href="javascript:void(0)" class="pull-left previous-btn" (click)="prevBtn('/additionalOptions')"
-       data-id="currScreen">
-        <img src="../../assets/images/back-48-thick.png" height="15px">
+    <a href="javascript:void(0)" class="pull-left previous-btn" (click)="prevBtn('/additionalOptions')" data-id="currScreen">
+       <img src="../../assets/images/back-48-thick.png" height="15px">
         Prev
     </a>
 

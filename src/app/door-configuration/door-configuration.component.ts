@@ -33,6 +33,8 @@ export class DoorConfigurationComponent implements OnInit {
     gdodirect;
     showDirectText = this.utils.utilities.directFlow;
 
+    gdoOpeners = [];
+
 
 
     // for gdo the pageNo will be 4
@@ -58,6 +60,22 @@ export class DoorConfigurationComponent implements OnInit {
         this.gdodirect = this.utils.utilities.directFlow;
         this.gdoConfig.showDetails = false;
         $('.gdoCofigDetails').hide();
+
+
+        this.gdoOpenerSelected.forEach((gdoItem) => {
+            var addedItems = this.gdoOpeners.filter(g => { return g.name === gdoItem.name;});
+            if (addedItems.length > 0) {
+                if (addedItems[0].count < gdoItem.count){
+                    addedItems[0].count = gdoItem.count;
+                }
+                if (addedItems[0].totalPrice < gdoItem.totalPrice){
+                    addedItems[0].totalPrice = gdoItem.totalPrice;
+                }
+            } else {
+                this.gdoOpeners.push(gdoItem);
+            }
+        });
+
     }
     updateQuantity(flow) {
         // this.utils.updateQty will call calculate total amount internally

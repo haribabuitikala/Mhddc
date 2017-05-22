@@ -5,8 +5,8 @@ import {Router} from '@angular/router';
 import {NavService} from "../nav/nav-service";
 import {AppUtilities} from "../shared/appUtilities";
 import {CollectionData} from "../collection/collection-data";
-declare var $:any;
-declare var _:any;
+declare var $: any;
+declare var _: any;
 
 @Component({
     selector: 'app-shopping-cart',
@@ -14,7 +14,7 @@ declare var _:any;
     styleUrls: ['./shopping-cart.component.less']
 })
 export class ShoppingCartComponent implements OnInit {
-    @ViewChild('continue') continue:ModalComponent;
+    @ViewChild('continue') continue: ModalComponent;
     pageNo;
     gdoOpenerTxt = this.utils.utilities.gdoOpenerText;
     gdoOpenerSelected = this.dataStore.gdoOpenerAccessories;
@@ -31,11 +31,11 @@ export class ShoppingCartComponent implements OnInit {
     itmPrice = this.utils.utilities.itmPrice;
     baseItmPrice = this.utils.utilities.item_price * this.utils.utilities.gdoOpenerQty;
 
-    constructor(private appComp:AppComponent
-        , private navComp:NavService
-        , private utils:AppUtilities
-        , private dataStore:CollectionData
-        , private route:Router) {
+    constructor(private appComp: AppComponent
+        , private navComp: NavService
+        , private utils: AppUtilities
+        , private dataStore: CollectionData
+        , private route: Router) {
     }
 
     ngOnInit() {
@@ -55,6 +55,11 @@ export class ShoppingCartComponent implements OnInit {
         this.utils.utilities.gdoOpenerQty = 1;
         this.utils.utilities.distance = 0;
         this.utils.utilities.distancePrice = 0;
+
+        this.utils.utilities.singlep = 0;
+        this.utils.utilities.doublep = 0;
+        this.utils.utilities.kPrice = 0;
+
         $('.shop-count').text('0');
         this.dataStore.gdoOpenerAccessories = [];
         this.dataStore.gdoDirectQuestions = [];
@@ -63,7 +68,22 @@ export class ShoppingCartComponent implements OnInit {
         this.route.navigateByUrl('/category');
 
     }
+    cartEmpty() {
+        this.utils.utilities.gdoOpenerText = '';
+        this.utils.utilities.item_price = 0;
+        this.utils.utilities.openerType = null;
+        this.utils.utilities.gdoOpenerQty = 1;
+        this.utils.utilities.distance = 0;
+        this.utils.utilities.distancePrice = 0;
+        this.utils.utilities.singlep = 0;
+        this.utils.utilities.doublep = 0;
+        this.utils.utilities.kPrice = 0;
+        $('.shop-count').text('0');
+        this.dataStore.gdoOpenerAccessories = [];
+        this.dataStore.gdoDirectQuestions = [];
+        this.continue.open(); 
 
+    }
     updateQuantity(flow) {
         this.itemPrice = this.utils.updateQty(flow, this.utils.utilities.gdoOpenerQty);
         this.qty = this.utils.utilities.gdoOpenerQty;
