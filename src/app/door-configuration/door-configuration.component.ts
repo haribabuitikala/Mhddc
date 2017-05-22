@@ -22,8 +22,7 @@ export class DoorConfigurationComponent implements OnInit {
     gdoOpenerSelected = this.dataStore.gdoOpenerAccessories;
 
     // t = _.sumBy(this.gdoOpenerSelected, function(o){ return o.price * o.count });
-
-    itemPrice = this.utils.calculateTotalPrice();
+    itemPrice;
     qty = this.utils.utilities.gdoOpenerQty;
     itmPrice = this.utils.utilities.itmPrice;
     showDistancePrice = false;
@@ -48,6 +47,7 @@ export class DoorConfigurationComponent implements OnInit {
     }
 
     ngOnInit() {
+        this.itemPrice = this.utils.calculateTotalPrice();
         this.pageNo = this.utils.utilities.currPage;
         // this.appComponent.next = 'Add To Cart';
         this.navComp.activateIcon();

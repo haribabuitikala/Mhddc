@@ -7,8 +7,8 @@ import {CollectionData} from "../collection/collection-data";
 import {CollectionService} from "../shared/data.service";
 import {GdoConfigComponent} from "../gdo-config/gdo-config.component";
 import {ModalComponent} from "ng2-bs3-modal/ng2-bs3-modal";
-declare var $: any;
-declare var _: any;
+declare var $:any;
+declare var _:any;
 
 @Component({
     selector: 'app-additional-options',
@@ -16,15 +16,15 @@ declare var _: any;
     styleUrls: ['./additional-options.component.less']
 })
 export class AdditionalOptionsComponent implements OnInit {
-    @ViewChild('gdoFlowManualDoor') gdoFlowManualDoor: ModalComponent;
-    @ViewChild('gdoFlowPowerHead') gdoFlowPowerHead: ModalComponent;
+    @ViewChild('gdoFlowManualDoor') gdoFlowManualDoor:ModalComponent;
+    @ViewChild('gdoFlowPowerHead') gdoFlowPowerHead:ModalComponent;
 
     pageNo;
     showMenu;
     data;
     questions;
     gdoFlow = this.utils.utilities.isGDO;
-    distance: any;
+    distance:any;
     distancePrice;
     showDistancePrice;
     directFlow = this.utils.utilities.directFlow;
@@ -41,13 +41,13 @@ export class AdditionalOptionsComponent implements OnInit {
     // for gdo the pageNo will be 3
     // for residential the pageNo will be
 
-    constructor(private appComponent: AppComponent
-        , private utils: AppUtilities
-        , private route: Router
-        , private navComp: NavService
-        , private dataStore: CollectionData
-        , private dataService: CollectionService
-        , private gdoConfig: GdoConfigComponent) {
+    constructor(private appComponent:AppComponent
+        , private utils:AppUtilities
+        , private route:Router
+        , private navComp:NavService
+        , private dataStore:CollectionData
+        , private dataService:CollectionService
+        , private gdoConfig:GdoConfigComponent) {
     }
 
     ngOnInit() {
@@ -133,25 +133,49 @@ export class AdditionalOptionsComponent implements OnInit {
         if (itm.srcElement.checked === true) {
             this.singleDrop = true;
             this.singleOpener = 50;
-            this.gdoConfig.itemPrice = this.calculateTotalPrice(this.utils.utilities.item_price, this.singleOpener, this.doubleOpener, this.mileOpenPr, this.qty);
+            this.utils.utilities.singlep = 50;
+
+            let k = {
+                name: "Single Door New Opener Installation Kit. This is required when no Opener is currently installed on door less than 10' wide.",
+                price: this.singleOpener,
+                id: 0,
+                count: 1 //=== 1 ? val = 1 : val - 1
+            };
+            this.dataStore.gdoDirectQuestions.push(k);
+            // this.gdoConfig.itemPrice = this.calculateTotalPrice(this.utils.utilities.item_price, this.singleOpener, this.doubleOpener, this.mileOpenPr, this.qty);
         } else {
             this.singleDrop = false;
             this.singleOpener = 0;
-            this.gdoConfig.itemPrice = this.calculateTotalPrice(this.utils.utilities.item_price, this.singleOpener, this.doubleOpener, this.mileOpenPr, this.qty);
+            this.utils.utilities.kPrice = this.removeItm(0);
+            this.utils.utilities.singlep = 0;
+
         }
+        this.gdoConfig.itemPrice = this.utils.calculateTotalPrice();
     }
 
     showDouble(itm) {
         if (itm.srcElement.checked === true) {
             this.doubleDrop = true;
             this.doubleOpener = 65;
-            this.gdoConfig.itemPrice = this.calculateTotalPrice(this.utils.utilities.item_price, this.singleOpener, this.doubleOpener, this.mileOpenPr, 1);
+            this.utils.utilities.doublep = 65;
+            // this.gdoConfig.itemPrice = this.calculateTotalPrice(this.utils.utilities.item_price, this.singleOpener, this.doubleOpener, this.mileOpenPr, 1);
+            let k = {
+                name: "Double Door New Opener Installation Kit. This is required when no Opener is currently installed on door less than 10' wide.",
+                price: this.doubleOpener,
+                id: 1,
+                count: 1 //=== 1 ? val = 1 : val - 1
+            };
+            this.dataStore.gdoDirectQuestions.push(k);
+
         } else {
             this.doubleDrop = false;
             this.doubleOpener = 0;
-            this.gdoConfig.itemPrice = this.calculateTotalPrice(this.utils.utilities.item_price, this.singleOpener, this.doubleOpener, this.mileOpenPr, 1);
+            this.utils.utilities.kPrice = this.removeItm(1);
+            this.utils.utilities.doublep = 0;
         }
+        this.gdoConfig.itemPrice = this.utils.calculateTotalPrice();
     }
+
     showManual(itm) {
         if (itm.srcElement.checked === true) {
             this.gdoFlowManualDoorInfo = false;
@@ -160,6 +184,7 @@ export class AdditionalOptionsComponent implements OnInit {
             this.gdoFlowManualDoorInfo = true;
         }
     }
+
     showPowerHead(itm) {
         if (itm.srcElement.checked === true) {
             this.gdoFlowPowerHeadInfo = false;
@@ -168,6 +193,7 @@ export class AdditionalOptionsComponent implements OnInit {
             this.gdoFlowPowerHeadInfo = true;
         }
     }
+
     directDoorVal = 1;
 
     directDoor(event, flow) {
@@ -180,28 +206,48 @@ export class AdditionalOptionsComponent implements OnInit {
             k = {
                 name: "Single Door New Opener Installation Kit. This is required when no Opener is currently installed on door less than 10' wide.",
                 price: this.singleOpener,
+                id: 0,
                 count: val //=== 1 ? val = 1 : val - 1
             };
             this.utils.utilities.gdoSingleDoor = k.price;
+            this.utils.utilities.singlep = 0;
         } else {
             this.doubleOpener = 0;
             this.doubleOpener = 65 * (val);
             k = {
                 name: "Double Door New Opener Installation Kit. This is required when no Opener is currently installed on door less than 10' wide.",
                 price: this.doubleOpener,
+                id: 1,
                 count: val //=== 1 ? val = 1 : val - 1
             };
             this.utils.utilities.gdoDoubleDoor = k.price;
+            this.utils.utilities.doublep = 0;
         }
         // this.gdoConfig.itemPrice += k.price;
-        this.dataStore.gdoDirectQuestions.splice(flow, 1);
+        // this.dataStore.gdoDirectQuestions.splice(flow, 1);
+        this.dataStore.gdoDirectQuestions = this.dataStore.gdoDirectQuestions.filter(function (el) {
+            return el.id != flow;
+        });
         this.dataStore.gdoDirectQuestions.push(k);
         let kPrice = _.sumBy(this.dataStore.gdoDirectQuestions, function (o) {
             return o.price;
         });
         this.utils.utilities.kPrice = kPrice;
-        this.gdoConfig.itemPrice = this.calculateTotalPrice(this.utils.utilities.item_price, this.singleOpener, this.doubleOpener, this.mileOpenPr, 1);
+        this.gdoConfig.itemPrice = this.utils.calculateTotalPrice();
         // this.localPrice = this.gdoConfig.itemPrice + kPrice;
+    }
+
+    removeItm(flow) {
+        // flow = 0 ? this.utils.utilities.singlep = 0 : this.utils.utilities.doublep = 0;
+        this.dataStore.gdoDirectQuestions = this.dataStore.gdoDirectQuestions.filter(function (el) {
+            return el.id != flow;
+        });
+        this.utils.utilities.doublep = 0;
+        this.utils.utilities.singlep = 0;
+        let kPrice = _.sumBy(this.dataStore.gdoDirectQuestions, function (o) {
+            return o.price;
+        });
+        return kPrice;
     }
 
     singleDropVal;
