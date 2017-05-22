@@ -66,7 +66,7 @@ export class AdditionalOptionsComponent implements OnInit {
 
         } else {
             this.gdoConfig.itemPrice = this.utils.calculateTotalPrice();
-            $('.showDetails').hide();
+           $('.showDetails').show();
         }
 
     }
@@ -237,7 +237,7 @@ export class AdditionalOptionsComponent implements OnInit {
         // this.localPrice = this.gdoConfig.itemPrice + kPrice;
     }
 
-    removeItm(flow) {
+    removeItm(flow) { 
         // flow = 0 ? this.utils.utilities.singlep = 0 : this.utils.utilities.doublep = 0;
         this.dataStore.gdoDirectQuestions = this.dataStore.gdoDirectQuestions.filter(function (el) {
             return el.id != flow;

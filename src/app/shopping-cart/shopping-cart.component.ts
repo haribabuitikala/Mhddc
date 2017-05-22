@@ -55,6 +55,11 @@ export class ShoppingCartComponent implements OnInit {
         this.utils.utilities.gdoOpenerQty = 1;
         this.utils.utilities.distance = 0;
         this.utils.utilities.distancePrice = 0;
+        
+        this.utils.utilities.singlep = 0;
+        this.utils.utilities.doublep =0;
+        this.utils.utilities.kPrice = 0;
+        
         $('.shop-count').text('0');
         this.dataStore.gdoOpenerAccessories = [];
         this.dataStore.gdoDirectQuestions = [];

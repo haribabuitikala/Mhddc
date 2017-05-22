@@ -1,8 +1,8 @@
-import {Component, OnInit, OnChanges} from '@angular/core';
-import {AppComponent} from "../app.component";
-import {AppUtilities} from "../shared/appUtilities";
-import {ModalComponent} from "ng2-bs3-modal/ng2-bs3-modal";
-import {CollectionData} from "../collection/collection-data";
+import { Component, OnInit, OnChanges } from '@angular/core';
+import { AppComponent } from "../app.component";
+import { AppUtilities } from "../shared/appUtilities";
+import { ModalComponent } from "ng2-bs3-modal/ng2-bs3-modal";
+import { CollectionData } from "../collection/collection-data";
 
 @Component({
     selector: 'app-gdo-config',
@@ -11,9 +11,9 @@ import {CollectionData} from "../collection/collection-data";
 })
 export class GdoConfigComponent implements OnInit, OnChanges {
 
-    constructor(private appComponent:AppComponent
-        , private utils:AppUtilities
-        , private dataStore:CollectionData) {
+    constructor(private appComponent: AppComponent
+        , private utils: AppUtilities
+        , private dataStore: CollectionData) {
     }
 
     data;
@@ -26,7 +26,12 @@ export class GdoConfigComponent implements OnInit, OnChanges {
     calulateAmt;
     openerTxt = this.utils.utilities.item_name;
     detailObj = this.dataStore.zipResults;
-    storeName= this.dataStore.store;
+    storeName = this.dataStore.store;
+
+    gdoOpenerSelected = this.dataStore.gdoOpenerAccessories;
+    gdoOpeners = [];
+    gdoOpenersTxt = 'teststes';
+    gdoLoaded = false
 
     ngOnChanges() {
         console.log('changed');
@@ -38,18 +43,60 @@ export class GdoConfigComponent implements OnInit, OnChanges {
         this.itemPrice = this.utils.utilities.item_price + this.calulateAmt;
         this.itmPrice = this.utils.utilities.item_price;
         this.utils.utilities.itmPrice = this.itmPrice;
-        if(this.utils.utilities.directFlow === false)
+        if (this.utils.utilities.directFlow === false)
             this.gdoBanner = this.toPng(this.utils.utilities.gdoBanner);
         this.utils.utilities.gdoOpenerQty = this.quantity;
         this.visualizeHeader = this.utils.utilities.visualizeHeader;
 
         this.utils.utilities.directFlow === false ? this.showDetails = true : this.showDetails = false;
 
+        var opnerAddedString = '';
+        this.gdoOpenerSelected.forEach((gdoItem) => {
+            var addedItems = this.gdoOpeners.filter(g => { return g.name === gdoItem.name; });
+            if (addedItems.length > 0) {
+                if (addedItems[0].count < gdoItem.count) {
+                    addedItems[0].count = gdoItem.count;
+                }
+                if (addedItems[0].totalPrice < gdoItem.totalPrice) {
+                    addedItems[0].totalPrice = gdoItem.totalPrice;
+                }
+            } else {
+                this.gdoOpeners.push(gdoItem);
+            }
+        });
+        var strtt = [];
+        this.gdoOpeners.forEach(g => {
+            console.log('gdo ', g);
+            strtt.push(` ${g.count} - ${g.name} (${g.price} each)`);
+        });
+
+        this.gdoOpenersTxt = strtt.join('');
+        this.gdoLoaded = true;
     }
 
     toPng(itm) {
         let t = itm.split('.')[0];
         return t + '.png';
+    }
+
+    openShowDetailsmodal(showDetails) {
+        var opnerAddedString = '';
+        this.gdoOpenerSelected = this.dataStore.gdoOpenerAccessories;
+        this.gdoOpenerSelected.forEach((gdoItem) => {
+            var addedItems = this.gdoOpeners.filter(g => { return g.name === gdoItem.name; });
+            if (addedItems.length > 0) {
+                if (addedItems[0].count < gdoItem.count) {
+                    addedItems[0].count = gdoItem.count;
+                }
+                if (addedItems[0].totalPrice < gdoItem.totalPrice) {
+                    addedItems[0].totalPrice = gdoItem.totalPrice;
+                }
+            } else {
+                this.gdoOpeners.push(gdoItem);
+            }
+        });
+       this.dataStore.gdoOpenerAccessories=this.gdoOpeners;
+        showDetails.open()
     }
 
 
