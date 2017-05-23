@@ -3,6 +3,7 @@ import {ModalComponent} from "ng2-bs3-modal/ng2-bs3-modal";
 import {AppComponent} from "../app.component";
 import {Router} from '@angular/router';
 import {NavService} from "../nav/nav-service";
+import {NavComponent} from "../nav/nav.component";
 import {AppUtilities} from "../shared/appUtilities";
 import {CollectionData} from "../collection/collection-data";
 declare var $: any;
@@ -34,6 +35,7 @@ export class ShoppingCartComponent implements OnInit {
     constructor(private appComp: AppComponent
         , private navComp: NavService
         , private utils: AppUtilities
+        , private navComponent: NavComponent
         , private dataStore: CollectionData
         , private route: Router) {
     }
@@ -46,6 +48,13 @@ export class ShoppingCartComponent implements OnInit {
         this.gdoOpenerSelected.length ? this.accessories = true : this.accessories = false;
         let directObj = Object.keys(this.directItm);
         this.showDirect = this.utils.utilities.directFlow;
+
+        this.navComponent.resetNav({
+            flowType: 'gdo',
+            flowActiveStep: -1,
+            showStepIndicator: false,
+            resetNav: true
+        });
     }
 
     removeItem() {

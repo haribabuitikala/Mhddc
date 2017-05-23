@@ -1,12 +1,13 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
-import {ModalComponent} from "ng2-bs3-modal/ng2-bs3-modal";
-import {Router} from '@angular/router';
-import {AppUtilities} from "../shared/appUtilities";
-import {NavService} from "../nav/nav-service";
-import {CollectionData} from "../collection/collection-data";
-import {CollectionService} from "../shared/data.service";
-import {GdoConfigComponent} from "../gdo-config/gdo-config.component";
-declare var _:any;
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { ModalComponent } from "ng2-bs3-modal/ng2-bs3-modal";
+import { Router } from '@angular/router';
+import { AppUtilities } from "../shared/appUtilities";
+import { NavService } from "../nav/nav-service";
+import { CollectionData } from "../collection/collection-data";
+import { CollectionService } from "../shared/data.service";
+import { GdoConfigComponent } from "../gdo-config/gdo-config.component";
+import { NavComponent } from '../nav/nav.component'
+declare var _: any;
 
 @Component({
     selector: 'app-opener',
@@ -14,19 +15,20 @@ declare var _:any;
     styleUrls: ['./opener.component.less']
 })
 export class OpenerComponent implements OnInit {
-    @ViewChild('gdoOponerAccessories') gdoOponerAccessories:ModalComponent;
+    @ViewChild('gdoOponerAccessories') gdoOponerAccessories: ModalComponent;
 
-    constructor(private utils:AppUtilities
-        , private navComp:NavService
-        , private route:Router
-        , private dataStrorage:CollectionData
-        , private dataService:CollectionService
-        , private gdoConfig:GdoConfigComponent) {
+    constructor(private utils: AppUtilities
+        , private navComp: NavService
+        , private navComponent: NavComponent
+        , private route: Router
+        , private dataStrorage: CollectionData
+        , private dataService: CollectionService
+        , private gdoConfig: GdoConfigComponent) {
     }
 
     pageNo;
     data;
-    number:number;
+    number: number;
     gdoOpenertext;
     gdoOpenerObj;
     quantity = 0;
@@ -37,7 +39,20 @@ export class OpenerComponent implements OnInit {
         openerid: null
     };
 
-// for gdo flow the pageNo will be 2
+    // for gdo flow the pageNo will be 2
+
+
+    setNavComponent() {
+        this.navComponent.resetNav({
+            flowType: 'gdo',
+            flowActiveStep: 2,
+            currentStepUrl: '/gdoConfig/opener',
+            nextStepFn: () => {
+                this.nextBtn('');
+            },
+            showStepIndicator: true
+        });
+    }
 
     ngOnInit() {
         this.pageNo = this.utils.utilities.currPage;
@@ -58,6 +73,9 @@ export class OpenerComponent implements OnInit {
         this.utils.utilities.kPrice = 0;
         this.utils.utilities.distancePrice = 0;
 
+
+
+        this.setNavComponent();
     }
 
     nextBtn(path) {
@@ -66,12 +84,12 @@ export class OpenerComponent implements OnInit {
             this.utils.utilities.gdoOpenerText = this.gdoOpenertext;
             this.dataService.getGdoAdditional(this.dataParams)
                 .subscribe(
-                    res => {
-                        // this.route.navigateByUrl(path);
-                        this.gdoOpenerObj = res;
-                        this.gdoOponerAccessories.open();
-                        // this.goTo('gdoConfig' + path)
-                    }
+                res => {
+                    // this.route.navigateByUrl(path);
+                    this.gdoOpenerObj = res;
+                    this.gdoOponerAccessories.open();
+                    // this.goTo('gdoConfig' + path)
+                }
                 )
 
 
@@ -140,7 +158,7 @@ export class OpenerComponent implements OnInit {
         // this.gdoOpenerObj = data;
     }
 
-    prevBtn(path) { 
+    prevBtn(path) {
         if (this.utils.utilities.flow === 'gdoNavElems') {
 
             this.utils.setUtils(1, 0);
@@ -151,6 +169,7 @@ export class OpenerComponent implements OnInit {
     }
 
     goTo(path) {
+        console.log('path ', path);
         this.route.navigateByUrl(path);
 
 

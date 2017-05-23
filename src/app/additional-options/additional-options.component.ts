@@ -3,6 +3,7 @@ import {Router} from '@angular/router';
 import {AppComponent} from "../app.component";
 import {AppUtilities} from "../shared/appUtilities";
 import {NavService} from "../nav/nav-service";
+import {NavComponent} from "../nav/nav.component";
 import {CollectionData} from "../collection/collection-data";
 import {CollectionService} from "../shared/data.service";
 import {GdoConfigComponent} from "../gdo-config/gdo-config.component";
@@ -46,10 +47,20 @@ export class AdditionalOptionsComponent implements OnInit {
         , private route:Router
         , private navComp:NavService
         , private dataStore:CollectionData
+        , private navComponent:NavComponent
         , private dataService:CollectionService
         , private gdoConfig:GdoConfigComponent) {
     }
 
+
+    setNavComponent() {
+        this.navComponent.resetNav({
+            flowType: 'gdo',
+            flowActiveStep: 3,
+            currentStepUrl: '/gdoConfig/additionalOptions',
+            showStepIndicator: true
+        });
+    }
     ngOnInit() {
         this.appComponent.next = 'Next';
         this.pageNo = this.utils.utilities.currPage;
@@ -69,6 +80,8 @@ export class AdditionalOptionsComponent implements OnInit {
            $('.showDetails').show();
         }
 
+
+        this.setNavComponent();
     }
 
     nextBtn(path) {

@@ -1,8 +1,8 @@
-import {Component, Input, OnInit, AfterViewInit, OnChanges} from '@angular/core';
-import {Location} from '@angular/common';
-import {Router} from '@angular/router';
-import {AppUtilities} from "./shared/appUtilities";
-import {NavComponent} from "./nav/nav.component";
+import { Component, Input, OnInit, AfterViewInit, OnChanges } from '@angular/core';
+import { Location } from '@angular/common';
+import { Router } from '@angular/router';
+import { AppUtilities } from "./shared/appUtilities";
+import { NavComponent } from "./nav/nav.component";
 
 @Component({
     selector: 'app-root',
@@ -12,30 +12,46 @@ import {NavComponent} from "./nav/nav.component";
 })
 export class AppComponent implements OnInit {
 
-    constructor(private route:Router
-        , private location:Location
-        , private app:AppUtilities
-        , private nav:NavComponent) {
+    showStepIndicator = false;
+    steps = [];
+    activeStep = -1;
+    
+
+    constructor(private route: Router
+        , private location: Location
+        , private app: AppUtilities
+        , private nav: NavComponent) {
+
     }
 
-    prev:string = 'Prev';
-    next:string = 'Next';
+    prev: string = 'Prev';
+    next: string = 'Next';
 
-    flow:string = this.app.utilities.flow;
+    flow: string = this.app.utilities.flow;
     currScreen;
     // this is for checking whether Install or Diy selected for routing to appropriate screen
-    selectedInstallDiy:string;
+    selectedInstallDiy: string;
+
+
 
     ngOnChanges() {
         this.currScreen = this.app.utilities.currScreen;
     }
 
+
     ngOnInit() {
         this.currScreen = this.app.utilities[this.flow].indexOf(this.location.path());
         this.location.path() === '/thankyou' ? this.currScreen = 2 : this.currScreen = this.app.utilities[this.flow].indexOf(this.location.path());
+
+        this.nav.subscribeMe((obj) => {
+            this.showStepIndicator = obj.showStepIndicator;
+            this.steps = obj.steps;
+            this.activeStep = obj.activeStep;
+            console.log('step Indicator ', obj.showStepIndicator);
+        }, this);
     }
 
-    nextBtn(id):void {
+    nextBtn(id): void {
         if (this.app.utilities[this.flow][id + 1] !== undefined) {
             this.currScreen = id + 1;
             if (this.selectedInstallDiy === 'diy') {
@@ -48,7 +64,7 @@ export class AppComponent implements OnInit {
         }
     }
 
-    prevBtn(id):void {
+    prevBtn(id): void {
         this.currScreen = id - 1;
         let path = this.location.path();
         switch (path) {
@@ -68,7 +84,7 @@ export class AppComponent implements OnInit {
     }
 
     toRoute(path) {
-        let link:any = this.app.utilities[this.app.utilities.flow][path];
+        let link: any = this.app.utilities[this.app.utilities.flow][path];
         this.route.navigateByUrl(link);
     }
 
