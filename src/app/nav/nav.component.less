@@ -10,6 +10,7 @@
     ul {
       padding: 0;
       li {
+        position: relative;
         list-style-type: none;
         padding: 9px 0;
         background-color: #222;
@@ -29,6 +30,22 @@
         }
         &.current {
           background-color: #f96302;
+        }
+
+        .mask {
+          display: none;
+          position:absolute;
+          height: 0;
+          top: 0;
+          left: 0;
+        }
+        &.disabled {
+          .mask {
+            display: block;
+            height: 100%;
+            background-color: black;
+            opacity: 0.5;
+          }
         }
       }
     }

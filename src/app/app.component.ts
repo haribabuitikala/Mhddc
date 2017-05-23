@@ -1,6 +1,6 @@
 import { Component, Input, OnInit, AfterViewInit, OnChanges } from '@angular/core';
 import { Location } from '@angular/common';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute, NavigationEnd } from '@angular/router';
 import { AppUtilities } from "./shared/appUtilities";
 import { NavComponent } from "./nav/nav.component";
 
@@ -15,13 +15,22 @@ export class AppComponent implements OnInit {
     showStepIndicator = false;
     steps = [];
     activeStep = -1;
-    
+    flowType;
+
 
     constructor(private route: Router
         , private location: Location
         , private app: AppUtilities
-        , private nav: NavComponent) {
+        , private nav: NavComponent
+        , private activeRoute: ActivatedRoute) {
 
+        route.events.subscribe(r => {
+            if (r instanceof NavigationEnd) {
+                if (r.url.indexOf('gdo') < 0) {
+                    this.showStepIndicator = false;
+                }
+            }
+        });
     }
 
     prev: string = 'Prev';
@@ -47,7 +56,7 @@ export class AppComponent implements OnInit {
             this.showStepIndicator = obj.showStepIndicator;
             this.steps = obj.steps;
             this.activeStep = obj.activeStep;
-            console.log('step Indicator ', obj.showStepIndicator);
+            this.flowType = obj.flowType;
         }, this);
     }
 

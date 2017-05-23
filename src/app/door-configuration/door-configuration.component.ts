@@ -51,11 +51,14 @@ export class DoorConfigurationComponent implements OnInit {
     }
 
     setNavComponent() {
-        this.navComponent.resetNav({
+        this.navComponent.renderNav({
             flowType: 'gdo',
             flowActiveStep: 4,
             currentStepUrl: '/gdoConfig/doorConfiguration',
-            showStepIndicator: true
+            showStepIndicator: true,
+            nextStepFn: () => {
+                this.nextBtn('/shoppingCart');
+            }
         });
     }
     ngOnInit() {

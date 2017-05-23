@@ -2,7 +2,7 @@
     <app-header [count]="currScreen"></app-header>
 </div>
 
-<app-nav *ngIf="showStepIndicator" [steps]="steps" [activeStep]="activeStep" [screen]="currScreen">
+<app-nav *ngIf="showStepIndicator" [steps]="steps" [flowType]="flowType" [activeStep]="activeStep" [screen]="currScreen">
 
 </app-nav>
 <div class="router-wrapper" [ngClass]="{'col-xs-offset-2 col-xs-10' : currScreen > 2}" [class.col-xs-12]="currScreen < 2">

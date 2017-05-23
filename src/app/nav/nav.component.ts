@@ -2,7 +2,7 @@ import { Component, OnInit, Input, OnChanges, Output, EventEmitter, ViewChild } 
 import { AppUtilities } from "../shared/appUtilities";
 import { Router } from '@angular/router';
 import { ModalComponent } from "ng2-bs3-modal/ng2-bs3-modal";
-import { NavService } from "./nav-service";
+import { NavService, Step } from "./nav-service";
 declare var $: any;
 declare var _: any;
 
@@ -17,13 +17,17 @@ export class NavComponent implements OnInit {
 
     @Input() steps = [];
     @Input() activeStep;
+    @Input() flowType;
+
     showNav: boolean = false;
     currElem: any;
     menuArray;
 
+    gdoFlowSteps: Array<Step> = [];
     constructor(private app: AppUtilities
         , private route: Router
         , private navComp: NavService) {
+        this.gdoFlowSteps = navComp.gdoFlowSteps;
     }
 
     CP; // cuurent page
@@ -94,56 +98,9 @@ export class NavComponent implements OnInit {
     }
 
 
-    flowType;
-    gdoFlowSteps = [
-        {
-            No: 0,
-            Name: 'Home',
-            active: false,
-            visited: false,
-            callFn: null
-        },
-        {
-            No: 1,
-            Name: 'Size',
-            active: false,
-            visited: false,
-            url: '',
-            callFn: null
-        },
-        {
-            No: 2,
-            Name: 'Step 2',
-            active: false,
-            visited: false,
-            url: '',
-            callFn: null
-        },
-        {
-            No: 3,
-            Name: 'Step 3',
-            active: false,
-            visited: false,
-            url: '',
-            callFn: null
-        },
-        {
-            No: 4,
-            Name: 'Step 4',
-            active: false,
-            visited: false,
-            url: '',
-            callFn: null
-        },
-        {
-            No: 5,
-            Name: 'Step 5',
-            active: false,
-            visited: false,
-            url: '',
-            callFn: null
-        }
-    ];
+
+
+
     flowActiveStep = -1;
     changeSubscribers;
     appContext;
@@ -153,51 +110,67 @@ export class NavComponent implements OnInit {
     }
     gdoVisistedSteps = [];
 
-    goToStep(step) {
-        if (step.callFn) {
-            step.callFn();
-        } else if (step.url) {
-            this.route.navigateByUrl(step.url);
+    goToStep(step, checkNextStep) {
+        if (checkNextStep) {
+            let currentStep = this.steps.filter(s => { return s.active === true; });
+            if (currentStep.length > 0) {
+                if (step.No === currentStep[0].No + 1) {
+                    if (currentStep[0].callFn) {
+                        currentStep[0].callFn();
+                    }
+                }
+            }
+        } else {
+            let currentStep = this.steps.filter(s => { return s.active === true; });
+            if (currentStep.length > 0) {
+                if (step.No === currentStep[0].No + 1) {
+                    if (currentStep[0].callFn) {
+                        currentStep[0].callFn();
+                    }
+                } else {
+                    this.route.navigateByUrl(step.url);
+                }
+            } else {
+                this.route.navigateByUrl(step.url);
+            }
         }
     }
-    resetNav(obj) {
+
+    subFlow = false;
+    setNavFlow(flowType, subFlow?) {
+        this.gdoVisistedSteps = [];
+        this.subFlow = subFlow ? true : false;
+    }
+
+    renderNav(obj) {
         var showStepIndicator = false;
         if (obj.flowType === 'gdo') {
             showStepIndicator = true;
             this.gdoFlowSteps.forEach((s, i) => {
                 s.visited = false;
-                s.callFn = null;
-                if (obj.resetNav) {
-                    this.gdoVisistedSteps = [];
-                    if (s.No == obj.flowActiveStep) {
-                        s.active = true;
-                        s['url'] = obj.currentStepUrl;
-                    } else {
-                        s.active = false;
+                s.disabled = false;
+                if (s.No == obj.flowActiveStep) {
+                    s.active = true;
+                    s['url'] = obj.currentStepUrl;
+                    if (obj.nextStepFn) {
+                        s.callFn = obj.nextStepFn;
                     }
-                    s.visited = false;
                 } else {
-                    if (s.No == obj.flowActiveStep) {
-                        s.active = true;
-                        s['url'] = obj.currentStepUrl;
-                        if (obj.nextStepFn) {
-                            this.gdoFlowSteps[i + 1].callFn = obj.nextStepFn;
-                        }
-                    } else {
-                        s.active = false;
-                    }
-                    if (this.gdoVisistedSteps.indexOf(s.No) >= 0 && s.No != obj.flowActiveStep) {
-                        s.visited = true;
-                    }
+                    s.active = false;
+                }
+                if (this.gdoVisistedSteps.indexOf(s.No) >= 0 && s.No != obj.flowActiveStep) {
+                    s.visited = true;
                 }
                 if (this.gdoVisistedSteps.indexOf(obj.flowActiveStep) < 0) {
                     this.gdoVisistedSteps.push(obj.flowActiveStep);
                 }
+
+                if (this.subFlow && (s.No === 1 || s.No === 2)) {
+                    s.disabled = true;
+                }
             });
 
-            console.log('gdo ', this.gdoFlowSteps);
         }
-        this.changeSubscribers({ showStepIndicator: obj.showStepIndicator, steps: this.gdoFlowSteps, activeStep: obj.flowActiveStep });
+        this.changeSubscribers({ showStepIndicator: obj.showStepIndicator, flowType: obj.flowType, steps: this.gdoFlowSteps, activeStep: obj.flowActiveStep });
     }
-
 }

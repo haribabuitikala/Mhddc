@@ -49,7 +49,7 @@ export class ShoppingCartComponent implements OnInit {
         let directObj = Object.keys(this.directItm);
         this.showDirect = this.utils.utilities.directFlow;
 
-        this.navComponent.resetNav({
+        this.navComponent.renderNav({
             flowType: 'gdo',
             flowActiveStep: -1,
             showStepIndicator: false,

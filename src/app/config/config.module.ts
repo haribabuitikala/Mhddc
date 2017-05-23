@@ -56,6 +56,7 @@ import {GdoUpdateComponent} from "../opener/gdoUpdateQty";
                 children: [
                     {path: 'opener', component: OpenerComponent},
                     {path: 'additionalOptions', component: AdditionalOptionsComponent},
+                    {path: 'additionalOptions/:havingdooropener', component: AdditionalOptionsComponent},
                     {path: 'doorConfiguration', component: DoorConfigurationComponent}
                 ]
             },

@@ -26,13 +26,12 @@ export class GdoDoorSizeComponent implements OnInit {
 
 
     setNavComponent() {
-        this.navComponent.resetNav({
+        this.navComponent.setNavFlow('gdo');
+        this.navComponent.renderNav({
             flowType: 'gdo',
             flowActiveStep: 1,
             currentStepUrl: '/gdoDoorSize',
-            showStepIndicator: true,
-          
-            resetNav: true
+            showStepIndicator: true
         });
     }
 

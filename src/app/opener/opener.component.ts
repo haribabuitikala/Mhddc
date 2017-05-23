@@ -43,7 +43,7 @@ export class OpenerComponent implements OnInit {
 
 
     setNavComponent() {
-        this.navComponent.resetNav({
+        this.navComponent.renderNav({
             flowType: 'gdo',
             flowActiveStep: 2,
             currentStepUrl: '/gdoConfig/opener',
