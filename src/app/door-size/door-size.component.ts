@@ -24,8 +24,8 @@ export class DoorSizeComponent implements OnInit {
     lang;
 
     collectionData;
-   isValid = true;
-   
+    isValid = true;
+
 
     widthFeets;
     widthInches;
@@ -71,12 +71,19 @@ export class DoorSizeComponent implements OnInit {
         });
     }
 
+    homeSize = "0";
     // set door
     setDoor(door, event) {
         $('.select-door').removeClass('current');
         this.utils.utilities.singleDoor = false;
         this.utils.utilities.doubleDoor = false;
         this.utils.utilities[door] = true;
+
+        // this if for getting the home screen from the json
+
+        this.utils.utilities.singleDoor ? this.homeSize = "1" : this.homeSize = "2";
+        this.utils.utilities.homeSize = this.homeSize;
+        
         event.currentTarget.classList.add('current');
         this.utils.utilities.currScreen += 1;
 
@@ -88,20 +95,20 @@ export class DoorSizeComponent implements OnInit {
         this.navigateTo(this.dataParams);
     }
 
-    navigateTo(data) { 
-        $('body').addClass('loader'); 
+    navigateTo(data) {
+        $('body').addClass('loader');
         this.collection.getCollection(data).subscribe(
             res => {
                 this.data.data = res;
                 // this.utils.utilities.currPage = 2;
                 // this.utils.utilities.clicked = 1;
-                this.utils.setUtils(2,1);
+                this.utils.setUtils(2, 1);
                 this.route.navigateByUrl('/collection');
                 $('body').removeClass('loader');
             },
             error => {
                 this.toastr.error(error.statusText);
-                
+
             }
         );
     }
@@ -145,7 +152,7 @@ export class DoorSizeComponent implements OnInit {
             this.showMeasure = false;
 
         }
-  let winCode = +this.utils.utilities.winCode.slice(1);
+        let winCode = +this.utils.utilities.winCode.slice(1);
         if (winCode >= 6) {
             this.modal1.open();
         }
@@ -171,11 +178,16 @@ export class DoorSizeComponent implements OnInit {
     };
 
     nextBtn(curr, path) {
-        if (this.utils.utilities.wf != null &&  this.utils.utilities.wi != null && this.utils.utilities.hf != null && this.utils.utilities.hi != null) {
+        if (this.utils.utilities.wf != null && this.utils.utilities.wi != null && this.utils.utilities.hf != null && this.utils.utilities.hi != null) {
             this.dataParams.dwidthFt = this.utils.utilities.wf;
             this.dataParams.dwidthIn = this.utils.utilities.wi;
             this.dataParams.dheightFt = this.utils.utilities.hf;
             this.dataParams.dheightIn = this.utils.utilities.hi;
+
+            let dimension = (this.utils.utilities.wf * 12) + this.utils.utilities.wi;
+
+            dimension > 120 ? this.homeSize = "2" : this.homeSize = "1";
+            this.utils.utilities.homeSize = this.homeSize;
 
             this.navigateTo(this.dataParams);
         }
@@ -185,7 +197,7 @@ export class DoorSizeComponent implements OnInit {
         this.makeNull();
         // this.utils.utilities.currPage = 1;
         // this.utils.utilities.clicked = 0;
-        this.utils.setUtils(1,0);
+        this.utils.setUtils(1, 0);
         this.route.navigateByUrl(path);
     }
 
