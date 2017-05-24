@@ -173,6 +173,10 @@ export class NavComponent implements OnInit {
                     s.disabled = true;
                 }
 
+                if (s.No > obj.flowActiveStep) {
+                    s.visited = false;
+                }
+
                 steps.push(s);
             });
 
