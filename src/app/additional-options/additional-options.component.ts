@@ -48,7 +48,7 @@ export class AdditionalOptionsComponent implements OnInit {
         , private route:Router
         , private navComp:NavService
         , private dataStore:CollectionData
-        , private activeRoute: ActivatedRoute
+        , private activeRoute:ActivatedRoute
         , private navComponent:NavComponent
         , private dataService:CollectionService
         , private gdoConfig:GdoConfigComponent) {
@@ -72,7 +72,7 @@ export class AdditionalOptionsComponent implements OnInit {
         });
     }
 
-    
+
     ngOnInit() {
         this.appComponent.next = 'Next';
         this.pageNo = this.utils.utilities.currPage;
@@ -88,11 +88,11 @@ export class AdditionalOptionsComponent implements OnInit {
             $('.showDetails').hide();
         } else {
             this.gdoConfig.itemPrice = this.utils.calculateTotalPrice();
-           $('.showDetails').show();
+            $('.showDetails').show();
         }
         this.hidePrev = this.navComponent.subFlow ? true : false;
         if (this.appComponent)
-        this.setNavComponent();
+            this.setNavComponent();
     }
 
     nextBtn(path) {
@@ -269,7 +269,7 @@ export class AdditionalOptionsComponent implements OnInit {
         // this.localPrice = this.gdoConfig.itemPrice + kPrice;
     }
 
-    removeItm(flow) { 
+    removeItm(flow) {
         // flow = 0 ? this.utils.utilities.singlep = 0 : this.utils.utilities.doublep = 0;
         this.dataStore.gdoDirectQuestions = this.dataStore.gdoDirectQuestions.filter(function (el) {
             return el.id != flow;

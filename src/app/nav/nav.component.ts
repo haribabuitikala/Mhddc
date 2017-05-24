@@ -49,14 +49,16 @@ export class NavComponent implements OnInit {
         });
     }
 
+    openModal() {
+        this.modal.open();
+    }
+
     goToHome() {
         this.modal.close();
         if (this.changeSubscribers) {
             this.changeSubscribers({ showStepIndicator: false });
         }
         this.route.navigateByUrl('/banner');
-
-
     }
 
     visited(id) {
