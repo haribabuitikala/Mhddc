@@ -24,6 +24,7 @@ export class NavComponent implements OnInit {
     menuArray;
 
     gdoFlowSteps: Array<Step> = [];
+    resFlowSteps: Array<Step> = [];
     constructor(private app: AppUtilities
         , private route: Router
         , private navComp: NavService) {
@@ -50,7 +51,12 @@ export class NavComponent implements OnInit {
 
     goToHome() {
         this.modal.close();
+        if (this.changeSubscribers) {
+            this.changeSubscribers({ showStepIndicator: false });
+        }
         this.route.navigateByUrl('/banner');
+
+
     }
 
     visited(id) {
@@ -94,7 +100,6 @@ export class NavComponent implements OnInit {
         });
         // this.navComp.activateIcon();
 
-        console.log('stesp ', this.steps, this.flowType);
     }
 
 
@@ -143,9 +148,8 @@ export class NavComponent implements OnInit {
     }
 
     renderNav(obj) {
-        var showStepIndicator = false;
+        let steps = [];
         if (obj.flowType === 'gdo') {
-            showStepIndicator = true;
             this.gdoFlowSteps.forEach((s, i) => {
                 s.visited = false;
                 s.disabled = false;
@@ -168,9 +172,17 @@ export class NavComponent implements OnInit {
                 if (this.subFlow && (s.No === 1 || s.No === 2)) {
                     s.disabled = true;
                 }
+
+                steps.push(s);
             });
 
+        } else if (obj.flowType === 'res') {
+            this.navComp.resFlowSteps.forEach(r => {
+                steps.push(r);
+            })
         }
-        this.changeSubscribers({ showStepIndicator: obj.showStepIndicator, flowType: obj.flowType, steps: this.gdoFlowSteps, activeStep: obj.flowActiveStep });
+        if (this.changeSubscribers) {
+            this.changeSubscribers({ showStepIndicator: obj.showStepIndicator, flowType: obj.flowType, steps: steps, activeStep: obj.flowActiveStep });
+        }
     }
 }

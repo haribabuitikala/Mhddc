@@ -9,7 +9,30 @@ declare var _: any;
 
 export class NavService {
 
+    gdoStepNames = ['Home', 'Size', 'Openers', 'Additional Options', 'Order Details', 'Shopping Cart'];
+    resStepNames = ['Home', 'Size', 'Collection', 'Design', 'Construction', 'Color', 'Top Section', 'Hardware', 'Track & Springs', 'DIY/Install', 'Opener', 'Summary'];
+    resFlowSteps: Array<Step> = [];
+    gdoFlowSteps: Array<Step> = [];
     constructor(private utils: AppUtilities) {
+        this.resStepNames.forEach((r, i) => {
+            this.resFlowSteps.push(new Step({
+                No: i,
+                Name: r,
+                active: false,
+                visited: false,
+                callFn: null
+            }));
+        });
+
+        this.gdoStepNames.forEach((g, i) => {
+            this.gdoFlowSteps.push(new Step({
+                No: i,
+                Name: g,
+                active: false,
+                visited: false,
+                callFn: null
+            }));
+        })
     }
     CP; // cuurent page
     VP; // visited page
@@ -46,59 +69,7 @@ export class NavService {
         // }
         // li.removeClass('visited').addClass('current').find('img').attr('src', this.CP);
     }
-
-    gdoFlowSteps = [
-        new Step({
-            No: 0,
-            Name: 'Home',
-            active: false,
-            visited: false,
-            callFn: null
-        }),
-        new Step({
-            No: 1,
-            Name: 'Size',
-            active: false,
-            visited: false,
-            url: '',
-            callFn: null
-        }),
-        new Step({
-            No: 2,
-            Name: 'Step 2',
-            active: false,
-            visited: false,
-            url: '',
-            callFn: null
-        }),
-        new Step({
-            No: 3,
-            Name: 'Step 3',
-            active: false,
-            visited: false,
-            url: '',
-            callFn: null
-        }),
-        new Step({
-            No: 4,
-            Name: 'Step 4',
-            active: false,
-            visited: false,
-            url: '',
-            callFn: null
-        }),
-        new Step({
-            No: 5,
-            Name: 'Step 5',
-            active: false,
-            visited: false,
-            url: '',
-            callFn: null
-        })
-    ];
-    subscribeChange() {
-
-    }
+    
 }
 
 

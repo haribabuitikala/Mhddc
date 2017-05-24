@@ -43,6 +43,7 @@ export class CategoryComponent implements OnInit {
         if (flow === 'residentialNavElems') {
             this.utilities.utilities.currPage = 1;
             this.utilities.utilities.currScreen += 1;
+            this.navComp.setNavFlow('res');
             this.route.navigateByUrl(path);
         } else {
             let zipCode = this.utilities.utilities.zipCode;

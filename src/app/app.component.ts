@@ -24,13 +24,6 @@ export class AppComponent implements OnInit {
         , private nav: NavComponent
         , private activeRoute: ActivatedRoute) {
 
-        route.events.subscribe(r => {
-            if (r instanceof NavigationEnd) {
-                if (r.url.indexOf('gdo') < 0) {
-                    this.showStepIndicator = false;
-                }
-            }
-        });
     }
 
     prev: string = 'Prev';
