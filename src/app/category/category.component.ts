@@ -6,6 +6,7 @@ import {AppUtilities} from "../shared/appUtilities";
 import {AppComponent} from "../app.component";
 import {CollectionService} from "../shared/data.service";
 import {CollectionData} from "../collection/collection-data";
+import { NavComponent } from "../nav/nav.component";
 declare var $:any;
 
 @Component({
@@ -23,6 +24,7 @@ export class CategoryComponent implements OnInit {
         , private route:Router
         , private utilities:AppUtilities
         , private appComponent:AppComponent
+        , private navComp:NavComponent
         , private dataService:CollectionService
         , private dataStore:CollectionData) {
     }
@@ -41,6 +43,7 @@ export class CategoryComponent implements OnInit {
         if (flow === 'residentialNavElems') {
             this.utilities.utilities.currPage = 1;
             this.utilities.utilities.currScreen += 1;
+            this.navComp.setNavFlow('res');
             this.route.navigateByUrl(path);
         } else {
             let zipCode = this.utilities.utilities.zipCode;
@@ -67,6 +70,7 @@ export class CategoryComponent implements OnInit {
             this.utilities.utilities.ProductType = 'gdo';
             this.utilities.utilities.visualizeHeader = true;
             this.utilities.utilities.directFlow = false;
+            this.navComp.setNavFlow('gdo');
             this.route.navigateByUrl(path);
         } else {
 // this is for additional options screen
@@ -86,6 +90,7 @@ export class CategoryComponent implements OnInit {
                     res => {
                         this.utilities.utilities.directFlow = true;
                         this.dataStore.gdoAdditionalDirect = res;
+                        this.navComp.setNavFlow('gdo', true);
                         this.route.navigateByUrl(path);
                     }
                 );
