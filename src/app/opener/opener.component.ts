@@ -52,6 +52,16 @@ export class OpenerComponent implements OnInit {
             },
             showStepIndicator: true
         });
+
+        // this.navComponent.renderNav({
+        //     flowType: 'res',
+        //     flowActiveStep: 2,
+        //     currentStepUrl: '/gdoConfig/opener',
+        //     nextStepFn: () => {
+        //         this.nextBtn('/');
+        //     },
+        //     showStepIndicator: true
+        // });
     }
 
     ngOnInit() {
