@@ -1,8 +1,9 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {Router} from '@angular/router';
+import {Router, ActivatedRoute} from '@angular/router';
 import {AppComponent} from "../app.component";
 import {AppUtilities} from "../shared/appUtilities";
 import {NavService} from "../nav/nav-service";
+import {NavComponent} from "../nav/nav.component";
 import {CollectionData} from "../collection/collection-data";
 import {CollectionService} from "../shared/data.service";
 import {GdoConfigComponent} from "../gdo-config/gdo-config.component";
@@ -46,10 +47,29 @@ export class AdditionalOptionsComponent implements OnInit {
         , private route:Router
         , private navComp:NavService
         , private dataStore:CollectionData
+        , private activeRoute: ActivatedRoute
+        , private navComponent:NavComponent
         , private dataService:CollectionService
         , private gdoConfig:GdoConfigComponent) {
     }
 
+
+    setNavComponent() {
+        let currentStepUrl = '/gdoConfig/additionalOptions';
+        if (this.activeRoute.params['value'].havingdooropener) {
+            currentStepUrl = currentStepUrl + '/' + this.activeRoute.params['value'].havingdooropener;
+        }
+
+        this.navComponent.renderNav({
+            flowType: 'gdo',
+            flowActiveStep: 3,
+            currentStepUrl: currentStepUrl,
+            showStepIndicator: true,
+            nextStepFn: () => {
+                this.nextBtn('/doorConfiguration');
+            }
+        });
+    }
     ngOnInit() {
         this.appComponent.next = 'Next';
         this.pageNo = this.utils.utilities.currPage;
@@ -69,6 +89,8 @@ export class AdditionalOptionsComponent implements OnInit {
            $('.showDetails').show();
         }
 
+
+        this.setNavComponent();
     }
 
     nextBtn(path) {

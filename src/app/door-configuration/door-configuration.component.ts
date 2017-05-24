@@ -1,12 +1,13 @@
-import {Component, OnInit} from '@angular/core';
-import {Router} from '@angular/router';
-import {AppUtilities} from "../shared/appUtilities";
-import {AppComponent} from "../app.component";
-import {NavService} from "../nav/nav-service";
-import {CollectionData} from "../collection/collection-data";
-import {GdoConfigComponent} from "../gdo-config/gdo-config.component";
-declare var $:any;
-declare var _:any;
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { AppUtilities } from "../shared/appUtilities";
+import { AppComponent } from "../app.component";
+import { NavService } from "../nav/nav-service";
+import { NavComponent } from "../nav/nav.component";
+import { CollectionData } from "../collection/collection-data";
+import { GdoConfigComponent } from "../gdo-config/gdo-config.component";
+declare var $: any;
+declare var _: any;
 
 @Component({
     selector: 'app-door-configuration',
@@ -40,14 +41,26 @@ export class DoorConfigurationComponent implements OnInit {
     // for gdo the pageNo will be 4
     // for residential the pageNo will be 
 
-    constructor(private utils:AppUtilities
-        , private route:Router
-        , private appComp:AppComponent
-        , private navComp:NavService
-        , private dataStore:CollectionData
-        , private gdoConfig:GdoConfigComponent) {
+    constructor(private utils: AppUtilities
+        , private route: Router
+        , private appComp: AppComponent
+        , private navComp: NavService
+        , private navComponent: NavComponent
+        , private dataStore: CollectionData
+        , private gdoConfig: GdoConfigComponent) {
     }
 
+    setNavComponent() {
+        this.navComponent.renderNav({
+            flowType: 'gdo',
+            flowActiveStep: 4,
+            currentStepUrl: '/gdoConfig/doorConfiguration',
+            showStepIndicator: true,
+            nextStepFn: () => {
+                this.nextBtn('/shoppingCart');
+            }
+        });
+    }
     ngOnInit() {
         this.itemPrice = this.utils.calculateTotalPrice();
         this.pageNo = this.utils.utilities.currPage;
@@ -63,12 +76,12 @@ export class DoorConfigurationComponent implements OnInit {
 
 
         this.gdoOpenerSelected.forEach((gdoItem) => {
-            var addedItems = this.gdoOpeners.filter(g => { return g.name === gdoItem.name;});
+            var addedItems = this.gdoOpeners.filter(g => { return g.name === gdoItem.name; });
             if (addedItems.length > 0) {
-                if (addedItems[0].count < gdoItem.count){
+                if (addedItems[0].count < gdoItem.count) {
                     addedItems[0].count = gdoItem.count;
                 }
-                if (addedItems[0].totalPrice < gdoItem.totalPrice){
+                if (addedItems[0].totalPrice < gdoItem.totalPrice) {
                     addedItems[0].totalPrice = gdoItem.totalPrice;
                 }
             } else {
@@ -76,6 +89,8 @@ export class DoorConfigurationComponent implements OnInit {
             }
         });
 
+
+        this.setNavComponent();
     }
     updateQuantity(flow) {
         // this.utils.updateQty will call calculate total amount internally
@@ -97,7 +112,8 @@ export class DoorConfigurationComponent implements OnInit {
         if (this.utils.utilities.flow === 'gdoNavElems') {
             this.utils.setUtils(3, 0);
             this.utils.utilities.itemsCount = 1;
-            this.goTo(path);
+            console.log('door ', path);
+            this.goTo('/gdoConfig' + path);
 
         } else {
             this.goTo(path)

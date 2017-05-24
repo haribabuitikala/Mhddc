@@ -1,29 +1,29 @@
 <div class="col-xs-2 padding-0 nav-component">
     <nav class="numbers">
         <ul class="padding-0">
-            <li>
-                <div (click)="home.open()">
-                    <img src="../../assets/images/left-nav/leftnavHMiconVP.png" alt="">
-                    <span>Home</span>
+            <li *ngFor="let step of steps" [ngClass]="{'current': step.No == activeStep, 'visited': step.visited, 'disabled': step.disabled }">
+                <div *ngIf="step.No > 0 && !step.visited" (click)="goToStep(step, true)">
+                    <img *ngIf="  step.No != activeStep" src="../../assets/images/left-nav/leftnav{{step.No}}iconNVP.png" alt="" />
+                    <img *ngIf=" step.No == activeStep" src="../../assets/images/left-nav/leftnav{{step.No}}iconCP.png" alt="" />
+                    <span class="hide">{{ step.Name }}</span>
                 </div>
-            </li>
-            <li (click)="visited(1)" class="current">
-                <img src="../../assets/images/left-nav/leftnav1iconCP.png" alt="">
-                <span>Size</span>
-            </li>
-
-            <li *ngFor="let menu of menuArray">
-                <div (click)='visited(menu)'>
-                    <img src="../../assets/images/left-nav/leftnav{{menu+1}}iconNVP.png" alt="">
-                    <span class="hide">Size</span>
+                <div *ngIf="step.No > 0 && step.visited" (click)="goToStep(step)">
+                    <img *ngIf="step.No != activeStep" src="../../assets/images/left-nav/leftnav{{step.No}}iconVP.png" alt="" />
+                    <img *ngIf=" step.No == activeStep" src="../../assets/images/left-nav/leftnav{{step.No}}iconCP.png" alt="" />
+                    <span class="hide">{{ step.Name }}</span>
                 </div>
+                <div *ngIf="step.No == 0" (click)="home.open()">
+                    <img src="../../assets/images/left-nav/leftnavHMiconVP.png" alt="" />
+                    <span class="hide">{{ step.Name }}</span>
+                </div>
+                <div class="mask"></div>
             </li>
         </ul>
     </nav>
 </div>
 <modal #home>
     <modal-body class="text-center">
-        <img class="margin-b-20 alert-image margin-t-20" src="../../assets/images/alert-1.png" alt=""/>
+        <img class="margin-b-20 alert-image margin-t-20" src="../../assets/images/alert-1.png" alt="" />
         <p class=" margin-t-20 bold">
             <span class="margin-b-20 margin-t-20">Navigating to Home Page will discard<br>all available Cart Items.</span>
             <br>
@@ -32,12 +32,10 @@
             <span>Do you want to continue ?</span>
         </p>
         <div class="text-center">
-            <button class="btn btn-default btn-lg box-shadow text-orange bold text-uppercase margin-r-25"
-                    (click)="goToHome()">
+            <button class="btn btn-default btn-lg box-shadow text-orange bold text-uppercase margin-r-25" (click)="goToHome()">
                 YES
             </button>
-            <button class="btn btn-default btn-lg box-shadow text-orange bold text-uppercase"
-                    (click)="home.close()">
+            <button class="btn btn-default btn-lg box-shadow text-orange bold text-uppercase" (click)="home.close()">
                 NO
             </button>
         </div>

@@ -9,6 +9,7 @@ import {CollectionService} from "../shared/data.service";
 import {CollectionData} from "../collection/collection-data";
 import {ToastrService} from "toastr-ng2/toastr-service";
 import {NavService} from "../nav/nav-service";
+import {NavComponent} from "../nav/nav.component";
 declare var $:any;
 
 @Component({
@@ -48,6 +49,7 @@ export class DoorSizeComponent implements OnInit {
         , private utils:AppUtilities
         , private collection:CollectionService
         , private data:CollectionData
+        , private navComponent:NavComponent
         , private toastr:ToastrService
         , private navComp:NavService) {
     }
@@ -59,6 +61,14 @@ export class DoorSizeComponent implements OnInit {
         this.widthFeets = this.sizes.getWidthFeets();
         this.makeNull();
         this.navComp.activateIcon();
+
+        this.navComponent.setNavFlow('res');
+        this.navComponent.renderNav({
+            flowType: 'res',
+            flowActiveStep: 1,
+            currentStepUrl: '/doorSize',
+            showStepIndicator: true
+        });
     }
 
     // set door
