@@ -29,6 +29,7 @@ export class AdditionalOptionsComponent implements OnInit {
     distancePrice;
     showDistancePrice;
     directFlow = this.utils.utilities.directFlow;
+    hidePrev = false;
     singleDrop = false;
     doubleDrop = false;
     gdoFlowManualDoorInfo = false;
@@ -70,6 +71,8 @@ export class AdditionalOptionsComponent implements OnInit {
             }
         });
     }
+
+    
     ngOnInit() {
         this.appComponent.next = 'Next';
         this.pageNo = this.utils.utilities.currPage;
@@ -83,13 +86,12 @@ export class AdditionalOptionsComponent implements OnInit {
             this.utils.utilities.itmPrice = this.data.item_price;
             $('.inner-router').css({'margin-top': 0});
             $('.showDetails').hide();
-
         } else {
             this.gdoConfig.itemPrice = this.utils.calculateTotalPrice();
            $('.showDetails').show();
         }
-
-
+        this.hidePrev = this.navComponent.subFlow ? true : false;
+        if (this.appComponent)
         this.setNavComponent();
     }
 
