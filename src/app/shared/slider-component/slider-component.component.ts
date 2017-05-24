@@ -1,9 +1,9 @@
-import {Component, OnInit, Input, Output, EventEmitter, AfterViewInit} from '@angular/core';
-import {GdoConfigComponent} from "../../gdo-config/gdo-config.component";
-import {GdoOpener} from "../../opener/gdoOpener";
-import {AppUtilities} from "../appUtilities";
-declare var $:any;
-declare var _:any;
+import { Component, OnInit, Input, Output, EventEmitter, AfterViewInit } from '@angular/core';
+import { GdoConfigComponent } from "../../gdo-config/gdo-config.component";
+import { GdoOpener } from "../../opener/gdoOpener";
+import { AppUtilities } from "../appUtilities";
+declare var $: any;
+declare var _: any;
 
 @Component({
     selector: 'app-slider-component',
@@ -12,13 +12,13 @@ declare var _:any;
 })
 export class SliderComponentComponent implements OnInit {
 
-    constructor(private gdoConfig:GdoConfigComponent
-        , private utils:AppUtilities) {
+    constructor(private gdoConfig: GdoConfigComponent
+        , private utils: AppUtilities) {
     }
 
-    @Input() data:any;
-    @Input() count:any;
-    @Input() number:any;
+    @Input() data: any;
+    @Input() count: any;
+    @Input() number: any;
 
     sliderRows;
 
@@ -31,16 +31,30 @@ export class SliderComponentComponent implements OnInit {
             this.slideCount = this.data ? this.data.length : 0;
         }
         this.renderSlider();
-        
-    }
 
-    ngAfterViewInit() {
-        if (this.utils.utilities.gdoOpenerSelectedItm === null) {
-            $('._slide-items:eq(0) .inner-item:eq(0) img').addClass('current');
+        let selectedIndex = 0, itemIndex = 0;
+        for (let i = 0, len = this.data.length; i < len; i++) {
+            var innerItems = this.data[i];
+            for (let j = 0, jlen = innerItems.length; j < jlen; j++) {
+                if (innerItems[j].item_id == this.utils.utilities.gdoOpenerSelectedItm) {
+                    selectedIndex = i;
+                    itemIndex = j;
+                }
+            }
         }
+        this.slideIndex = selectedIndex;
+        this.sliderLeft = -(this.slideIndex * this.slideWidth);
+    }
+    isSeleted(opener, index, itemIndex) {
+        if (this.utils.utilities.gdoOpenerSelectedItm && opener.item_id == this.utils.utilities.gdoOpenerSelectedItm) {
+            return true;
+        } else if (this.utils.utilities.gdoOpenerSelectedItm === null && index === 0 && itemIndex === 0) {
+            return true;
+        }
+        return false;
     }
 
-   sliderWidth = 0;
+    sliderWidth = 0;
     slideWidth = 0;
     slideCount = this.data ? this.data.length : 0;
     sliderLeft = 0;
@@ -79,8 +93,8 @@ export class SliderComponentComponent implements OnInit {
         });
     }
 
-    
-   setSlide() {
+
+    setSlide() {
         this.slideIndex = Math.round(Math.abs(this.sliderLeft) / this.slideWidth);
         this.sliderLeft = -(this.slideIndex * this.slideWidth);
     }
@@ -95,15 +109,15 @@ export class SliderComponentComponent implements OnInit {
         this.utils.utilities.gdoOpenerSelectedItm = obj.item_id;
         this.notify.emit(obj);
     }
-    moveSlider(isNext){
-        if (isNext){
+    moveSlider(isNext) {
+        if (isNext) {
             this.slideIndex = this.slideIndex + 1;
         } else {
             this.slideIndex = this.slideIndex - 1;
         }
         this.sliderLeft = -(this.slideIndex * this.slideWidth);
-    } 
-    
-    
-    
+    }
+
+
+
 }

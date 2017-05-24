@@ -39,6 +39,7 @@ export class GdoDoorSizeComponent implements OnInit {
         this.appComponent.currScreen = 3;
         this.navComp.activateIcon();
 
+        this.utils.utilities.gdoOpenerSelectedItm = null;
         this.setNavComponent();
     }
 
