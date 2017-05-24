@@ -42,7 +42,8 @@ export class AppComponent implements OnInit {
 
 
     ngOnInit() {
-        if(!this.app.utilities.zipCode && this.location.path() !== '/banner') {
+
+        if (!this.app.utilities.zipCode && this.location.path() !== '/banner') {
             this.route.navigateByUrl('/banner');
         }
         this.currScreen = this.app.utilities[this.flow].indexOf(this.location.path());
