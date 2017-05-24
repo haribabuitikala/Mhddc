@@ -43,7 +43,14 @@ export class CollectionService {
     }
 
     getGdoAdditionalDirect(obj) {
-        return this.http.post(this.url + 'Opener',obj)
+        return this.http.post(this.url + 'Opener', obj)
             .map(res => res.json())
+    }
+
+    getHomes() {
+        return this.http.get('http://' + window.location.host + '/app/shared/homes.json')
+            .map(res =>
+                res.json()
+            )
     }
 }

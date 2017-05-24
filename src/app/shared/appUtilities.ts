@@ -89,53 +89,51 @@ export class AppUtilities {
         singlep: 0,
         doublep: 0,
         milesp: 0,
-        item_name: ''
-    // flow of GDO: Home, Size , Openers, Order Details, Shopping Cart
-}
-;
+        item_name: '',
+        homeSize: "",
+        // flow of GDO: Home, Size , Openers, Order Details, Shopping Cart
+    }
+        ;
 
-setUtils(curr, clicked)
-{
-    this.utilities.currPage = curr;
-    this.utilities.clicked = clicked;
-}
+    setUtils(curr, clicked) {
+        this.utilities.currPage = curr;
+        this.utilities.clicked = clicked;
+    }
+
 //3703,2217,2207,6559
 //gdoCheck = ['66502', '2217', '77840', '6559', '66604', '2207', '3703'];
-gdoCheck = [ '2217','6559','2207','3703'];
+    gdoCheck = ['2217', '6559', '2207', '3703'];
 
-calculateTotalPrice()
-{
+    calculateTotalPrice() {
 
-    let basep = this.utilities.item_price;
-    let qty = this.utilities.gdoOpenerQty;
-    let singlep = this.utilities.singlep;
-    let doublep = this.utilities.doublep;
-    let milesp = this.utilities.milesp;
-    let kPrice = this.utilities.kPrice;
-    let distancePrice = this.utilities.distancePrice;
+        let basep = this.utilities.item_price;
+        let qty = this.utilities.gdoOpenerQty;
+        let singlep = this.utilities.singlep;
+        let doublep = this.utilities.doublep;
+        let milesp = this.utilities.milesp;
+        let kPrice = this.utilities.kPrice;
+        let distancePrice = this.utilities.distancePrice;
 
-    return (basep * qty) + singlep + doublep + milesp + kPrice + distancePrice;
-}
-
-updateQty(flow, qty)
-{
-    if (flow === 1 && qty < 6) {
-        qty++
+        return (basep * qty) + singlep + doublep + milesp + kPrice + distancePrice;
     }
-    else if (flow === 0 && qty > 1) {
-        qty--;
+
+    updateQty(flow, qty) {
+        if (flow === 1 && qty < 6) {
+            qty++
+        }
+        else if (flow === 0 && qty > 1) {
+            qty--;
+        }
+        this.utilities.gdoOpenerQty = qty;
+
+        return this.calculateTotalPrice()
     }
-    this.utilities.gdoOpenerQty = qty;
 
-    return this.calculateTotalPrice()
-}
-
-sumBy(obj)
-{
-    let t = _.sumBy(obj, function (o) {
-        return o.price * o.count;
-    });
-    return t;
-}
+    sumBy(obj) {
+        let t = _.sumBy(obj, function (o) {
+            return o.price * o.count;
+        });
+        return t;
+    }
 
 }

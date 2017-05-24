@@ -16,10 +16,11 @@ export class CollectionData {
     };
     gdoOpener = {};
     zip = {};
-    zipResults = {} 
+    zipResults = {};
     gdoAdditional = {};
     gdoAdditionalDirect = {};
     gdoOpenerAccessories = []; // this is for the popup
-    store={};// this is for stroing the store data
+    store = {};// this is for stroing the store data
     gdoDirectQuestions = [];
+    homeImages = [];
 }

@@ -3,6 +3,7 @@ import {CollectionData} from "./collection-data";
 import {Router} from '@angular/router';
 import {AppUtilities} from "../shared/appUtilities";
 import {NavService} from "../nav/nav-service";
+import {CollectionService} from "../shared/data.service";
 declare var $:any;
 declare var _:any;
 @Component({
@@ -40,7 +41,8 @@ export class CollectionComponent implements OnInit {
     constructor(private data:CollectionData
         , private route:Router
         , private utils:AppUtilities
-        , private navComp:NavService) {
+        , private navComp:NavService
+        , private dataService:CollectionService) {
     }
 
     collections;
@@ -91,6 +93,16 @@ export class CollectionComponent implements OnInit {
         this.navComp.activateIcon();
     }
 
+    goToHome(speciality) {
+        this.dataService.getHomes()
+            .subscribe(res=> {
+                let result = res.homes.home;
+                result = _.filter(result, ['_size', this.utils.utilities.homeSize]);
+                this.data.homeImages = result;
+                this.route.navigateByUrl('/home');
+            })
+    }
+
     quickShip() {
         //   user should be redirected to design page
         console.log('hi');
@@ -128,13 +140,13 @@ export class CollectionComponent implements OnInit {
     }
 
     nextBtn(curr, path) {
-        this.utils.setUtils(3,1);
+        this.utils.setUtils(3, 1);
         this.route.navigateByUrl(path)
     }
 
     prevBtn(curr, path) {
         this.makeNull();
-        this.utils.setUtils(1,0);
+        this.utils.setUtils(1, 0);
         this.route.navigateByUrl(path)
     }
 
