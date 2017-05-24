@@ -15,7 +15,7 @@ export class AppUtilities {
         wi: null, // width inches
         hf: null, // height feet
         hi: null, // height inches
-        winCode: "",
+        winCode: "W0",
         doubleDoorHeight: "",
         doubleDoorWidth: "",
         singleDoorHeight: "",
@@ -99,8 +99,9 @@ setUtils(curr, clicked)
     this.utilities.currPage = curr;
     this.utilities.clicked = clicked;
 }
-
-gdoCheck = ['66502', '2217', '77840', '6559', '66604', '2207'];
+//3703,2217,2207,6559
+//gdoCheck = ['66502', '2217', '77840', '6559', '66604', '2207', '3703'];
+gdoCheck = [ '2217','6559','2207','3703'];
 
 calculateTotalPrice()
 {
