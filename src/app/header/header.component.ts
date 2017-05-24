@@ -23,6 +23,7 @@ export class HeaderComponent implements OnInit {
 
     homePage(path) {
         this.appComponent.currScreen = 0;
+        this.appComponent.showStepIndicator = false;
         this.route.navigateByUrl(path);
     }
 
@@ -34,14 +35,14 @@ export class HeaderComponent implements OnInit {
 
     humberger() {
         $('.nav-component').animate({width: '185px'}, function () {
-            $('li span').show();
+            $('.nav-component li span').removeClass('hide');
             $('.collapse-humberger').removeClass('hide');
             $('.hamburger').addClass('hide');
         });
     }
 
     humbergerCollapse() {
-        $('li span').hide();
+        $('.nav-component li span').addClass('hide');
         $('.nav-component').animate({width: '16.66666667%'}, function () {
             $('.collapse-humberger').addClass('hide');
             $('.hamburger').removeClass('hide');
