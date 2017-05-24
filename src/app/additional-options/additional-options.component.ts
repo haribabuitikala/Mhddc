@@ -91,8 +91,11 @@ export class AdditionalOptionsComponent implements OnInit {
             $('.showDetails').show();
         }
         this.hidePrev = this.navComponent.subFlow ? true : false;
-        if (this.appComponent)
+        if (this.appComponent) {
             this.setNavComponent();
+        }
+
+        this.dataStore.gdoDirectQuestions = [];
     }
 
     nextBtn(path) {

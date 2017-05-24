@@ -53,6 +53,8 @@ export class BannerComponent implements OnInit {
     ngOnInit() {
         this.appComponent.currScreen = 0;
         this.lang = this.localize.getBanner();
+
+        this.appComponent.showStepIndicator = false;
     }
     onlyNumberKey(event) {
         return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57;
