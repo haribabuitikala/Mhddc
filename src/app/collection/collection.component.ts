@@ -4,6 +4,8 @@ import {Router} from '@angular/router';
 import {AppUtilities} from "../shared/appUtilities";
 import {NavService} from "../nav/nav-service";
 import {CollectionService} from "../shared/data.service";
+import {NavComponent} from "../nav/nav.component";
+import {AppComponent} from "../app.component";
 declare var $:any;
 declare var _:any;
 @Component({
@@ -42,7 +44,9 @@ export class CollectionComponent implements OnInit {
         , private route:Router
         , private utils:AppUtilities
         , private navComp:NavService
-        , private dataService:CollectionService) {
+        , private dataService:CollectionService
+        , private navComponent:NavComponent
+        , private appComponent:AppComponent) {
     }
 
     collections;
@@ -99,8 +103,20 @@ export class CollectionComponent implements OnInit {
                 let result = res.homes.home;
                 result = _.filter(result, ['_size', this.utils.utilities.homeSize]);
                 this.data.homeImages = result;
+                // this.setFlow();
                 this.route.navigateByUrl('/home');
             })
+    }
+
+    setFlow() {
+        this.navComponent.setNavFlow('res');
+
+        this.navComponent.renderNav({
+            flowType: 'res',
+            flowActiveStep: 5,
+            currentStepUrl: '/collection',
+            showStepIndicator: true
+        });
     }
 
     quickShip() {
