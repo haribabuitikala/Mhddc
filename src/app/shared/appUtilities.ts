@@ -15,7 +15,7 @@ export class AppUtilities {
         wi: null, // width inches
         hf: null, // height feet
         hi: null, // height inches
-        winCode: "W0",
+        winCode: "",
         doubleDoorHeight: "",
         doubleDoorWidth: "",
         singleDoorHeight: "",
