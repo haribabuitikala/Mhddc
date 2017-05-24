@@ -14,7 +14,7 @@
 					}
 				},
 				"_homeid": "10",
-				"_btnimage": "DIShomeSngl09_btn.png",
+				"_btnimage": "DIShomeSngl09.png",
 				"_imagelg": "DIShomeSngl09.png",
 				"_window": "lights",
 				"_imgwidth": "700",
@@ -36,7 +36,7 @@
 					}
 				},
 				"_homeid": "10",
-				"_btnimage": "DIShomeSngl06_btn.png",
+				"_btnimage": "DIShomeSngl06.png",
 				"_imagelg": "DIShomeSngl06.png",
 				"_window": "reflect",
 				"_imgwidth": "700",
@@ -58,7 +58,7 @@
 					}
 				},
 				"_homeid": "10",
-				"_btnimage": "DIShomeSngl08_btn.png",
+				"_btnimage": "DIShomeSngl08.png",
 				"_imagelg": "DIShomeSngl08.png",
 				"_window": "reflect",
 				"_imgwidth": "700",
@@ -80,7 +80,7 @@
 					}
 				},
 				"_homeid": "10",
-				"_btnimage": "DIShomeDbl01_btn.png",
+				"_btnimage": "DIShomeDbl01.png",
 				"_imagelg": "DIShomeDbl01.png",
 				"_window": "reflect",
 				"_imgwidth": "700",
@@ -102,7 +102,7 @@
 					}
 				},
 				"_homeid": "10",
-				"_btnimage": "DIShomeDbl02_btn.png",
+				"_btnimage": "DIShomeDbl02.png",
 				"_imagelg": "DIShomeDbl02.png",
 				"_window": "reflect",
 				"_imgwidth": "700",
@@ -124,7 +124,7 @@
 					}
 				},
 				"_homeid": "10",
-				"_btnimage": "DIShomeDbl03_btn.png",
+				"_btnimage": "DIShomeDbl03.png",
 				"_imagelg": "DIShomeDbl03.png",
 				"_window": "lights",
 				"_imgwidth": "700",
@@ -146,7 +146,7 @@
 					}
 				},
 				"_homeid": "10",
-				"_btnimage": "DIShomeDbl04_btn.png",
+				"_btnimage": "DIShomeDbl04.png",
 				"_imagelg": "DIShomeDbl04.png",
 				"_window": "lights",
 				"_imgwidth": "700",
@@ -168,7 +168,7 @@
 					}
 				},
 				"_homeid": "10",
-				"_btnimage": "DIShomeDbl05_btn.png",
+				"_btnimage": "DIShomeDbl05.png",
 				"_imagelg": "DIShomeDbl05.png",
 				"_window": "lights",
 				"_imgwidth": "700",
@@ -190,7 +190,7 @@
 					}
 				},
 				"_homeid": "10",
-				"_btnimage": "DIShomeDbl06_btn.png",
+				"_btnimage": "DIShomeDbl06.png",
 				"_imagelg": "DIShomeDbl06.png",
 				"_window": "reflect",
 				"_imgwidth": "700",
@@ -212,7 +212,7 @@
 					}
 				},
 				"_homeid": "10",
-				"_btnimage": "DIShomeDbl07_btn.png",
+				"_btnimage": "DIShomeDbl07.png",
 				"_imagelg": "DIShomeDbl07.png",
 				"_window": "reflect",
 				"_imgwidth": "700",
@@ -234,7 +234,7 @@
 					}
 				},
 				"_homeid": "10",
-				"_btnimage": "DIShomeDbl08_btn.png",
+				"_btnimage": "DIShomeDbl08.png",
 				"_imagelg": "DIShomeDbl08.png",
 				"_window": "reflect",
 				"_imgwidth": "700",
@@ -256,7 +256,7 @@
 					}
 				},
 				"_homeid": "10",
-				"_btnimage": "DIShomeDbl09_btn.png",
+				"_btnimage": "DIShomeDbl09.png",
 				"_imagelg": "DIShomeDbl09.png",
 				"_window": "reflect",
 				"_imgwidth": "700",
@@ -278,7 +278,7 @@
 					}
 				},
 				"_homeid": "10",
-				"_btnimage": "DIShomeDbl11_btn.png",
+				"_btnimage": "DIShomeDbl11.png",
 				"_imagelg": "DIShomeDbl11.png",
 				"_window": "reflect",
 				"_imgwidth": "700",
@@ -300,7 +300,7 @@
 					}
 				},
 				"_homeid": "10",
-				"_btnimage": "DIShomeSngl14_btn.png",
+				"_btnimage": "DIShomeSngl14.png",
 				"_imagelg": "DIShomeSngl14.png",
 				"_window": "reflect",
 				"_imgwidth": "700",
@@ -333,7 +333,7 @@
 					]
 				},
 				"_homeid": "10",
-				"_btnimage": "DIShomeSngl07_btn.png",
+				"_btnimage": "DIShomeSngl07.png",
 				"_imagelg": "DIShomeSngl07.png",
 				"_window": "reflect",
 				"_imgwidth": "700",
@@ -366,7 +366,7 @@
 					]
 				},
 				"_homeid": "10",
-				"_btnimage": "DIShomeSngl10_btn.png",
+				"_btnimage": "DIShomeSngl10.png",
 				"_imagelg": "DIShomeSngl10.png",
 				"_window": "reflect",
 				"_imgwidth": "700",
@@ -399,7 +399,7 @@
 					]
 				},
 				"_homeid": "10",
-				"_btnimage": "DIShomeSngl11_btn.png",
+				"_btnimage": "DIShomeSngl11.png",
 				"_imagelg": "DIShomeSngl11.png",
 				"_window": "reflect",
 				"_imgwidth": "700",
@@ -432,7 +432,7 @@
 					]
 				},
 				"_homeid": "10",
-				"_btnimage": "DIShomeSngl15_btn.png",
+				"_btnimage": "DIShomeSngl15.png",
 				"_imagelg": "DIShomeSngl15.png",
 				"_window": "reflect",
 				"_imgwidth": "700",
@@ -465,7 +465,7 @@
 					]
 				},
 				"_homeid": "10",
-				"_btnimage": "DIShomeSngl16_btn.png",
+				"_btnimage": "DIShomeSngl16.png",
 				"_imagelg": "DIShomeSngl16.png",
 				"_window": "reflect",
 				"_imgwidth": "700",
@@ -498,7 +498,7 @@
 					]
 				},
 				"_homeid": "10",
-				"_btnimage": "DIShomeSngl11_btn.png",
+				"_btnimage": "DIShomeSngl11.png",
 				"_imagelg": "DIShomeSngl11.png",
 				"_window": "lights",
 				"_imgwidth": "700",
@@ -531,7 +531,7 @@
 					]
 				},
 				"_homeid": "10",
-				"_btnimage": "DIShomeDblSngl01_btn.png",
+				"_btnimage": "DIShomeDblSngl01.png",
 				"_imagelg": "DIShomeDblSngl01.png",
 				"_window": "reflect",
 				"_imgwidth": "700",
@@ -564,7 +564,7 @@
 					]
 				},
 				"_homeid": "10",
-				"_btnimage": "DIShomeDblSngl02_btn.png",
+				"_btnimage": "DIShomeDblSngl02.png",
 				"_imagelg": "DIShomeDblSngl02.png",
 				"_window": "reflect",
 				"_imgwidth": "700",
@@ -597,7 +597,7 @@
 					]
 				},
 				"_homeid": "10",
-				"_btnimage": "DIShomeDblSngl03_btn.png",
+				"_btnimage": "DIShomeDblSngl03.png",
 				"_imagelg": "DIShomeDblSngl03.png",
 				"_window": "reflect",
 				"_imgwidth": "700",
@@ -630,7 +630,7 @@
 					]
 				},
 				"_homeid": "10",
-				"_btnimage": "DIShomeDblSngl04_btn.png",
+				"_btnimage": "DIShomeDblSngl04.png",
 				"_imagelg": "DIShomeDblSngl04.png",
 				"_window": "reflect",
 				"_imgwidth": "700",
@@ -663,7 +663,7 @@
 					]
 				},
 				"_homeid": "10",
-				"_btnimage": "DIShomeDblSngl05_btn.png",
+				"_btnimage": "DIShomeDblSngl05.png",
 				"_imagelg": "DIShomeDblSngl05.png",
 				"_window": "reflect",
 				"_imgwidth": "700",
@@ -696,7 +696,7 @@
 					]
 				},
 				"_homeid": "10",
-				"_btnimage": "DIShomeSngl01_btn.png",
+				"_btnimage": "DIShomeSngl01.png",
 				"_imagelg": "DIShomeSngl01.png",
 				"_window": "reflect",
 				"_imgwidth": "700",
@@ -729,7 +729,7 @@
 					]
 				},
 				"_homeid": "10",
-				"_btnimage": "DIShomeSngl02_btn.png",
+				"_btnimage": "DIShomeSngl02.png",
 				"_imagelg": "DIShomeSngl02.png",
 				"_window": "reflect",
 				"_imgwidth": "700",
@@ -771,7 +771,7 @@
 					]
 				},
 				"_homeid": "10",
-				"_btnimage": "DIShomeSngl04_btn.png",
+				"_btnimage": "DIShomeSngl04.png",
 				"_imagelg": "DIShomeSngl04.png",
 				"_window": "reflect",
 				"_imgwidth": "700",
@@ -813,7 +813,7 @@
 					]
 				},
 				"_homeid": "10",
-				"_btnimage": "DIShomeSngl05_btn.png",
+				"_btnimage": "DIShomeSngl05.png",
 				"_imagelg": "DIShomeSngl05.png",
 				"_window": "reflect",
 				"_imgwidth": "700",
