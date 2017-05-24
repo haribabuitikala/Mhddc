@@ -59,7 +59,7 @@ import {GdoOpener} from "./opener/gdoOpener";
         FormsModule,
         HttpModule,
         Ng2Bs3ModalModule,
-        RouterModule.forRoot(appRoutes,{ useHash: true }),
+        RouterModule.forRoot(appRoutes),
         ConfigModule,
         ToastrModule.forRoot()
     ],
