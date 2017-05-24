@@ -9,7 +9,7 @@ declare var _: any;
 
 export class NavService {
 
-    gdoStepNames = ['Home', 'Size', 'Openers', 'Additional Options', 'Order Details', 'Shopping Cart'];
+    gdoStepNames = ['Home', 'Size', 'Openers', 'Additional options', 'Opener configuration'];
     resStepNames = ['Home', 'Size', 'Collection', 'Design', 'Construction', 'Color', 'Top Section', 'Hardware', 'Track & Springs', 'DIY/Install', 'Opener', 'Summary'];
     resFlowSteps: Array<Step> = [];
     gdoFlowSteps: Array<Step> = [];

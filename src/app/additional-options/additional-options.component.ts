@@ -105,7 +105,15 @@ export class AdditionalOptionsComponent implements OnInit {
     prevBtn(path) {
         if (this.utils.utilities.flow === 'gdoNavElems') {
             this.utils.setUtils(2, 0);
-            this.goTo('/gdoConfig' + path);
+            if (this.navComponent.subFlow) {
+                this.navComponent.setNavFlow('');
+                this.navComponent.renderNav({
+                    showStepIndicator: false
+                });
+                this.route.navigateByUrl('/banner');
+            } else {
+                this.goTo('/gdoConfig' + path);
+            }
         } else {
             this.goTo('/config' + path)
         }

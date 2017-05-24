@@ -14,6 +14,7 @@ export class HeaderComponent implements OnInit {
     showhamburger:boolean = false;
 
     @Input() count:any;
+    @Input() showHamburger:boolean = false;
     itemsCount = this.utils.utilities.itemsCount;
 
     constructor(private appComponent:AppComponent
