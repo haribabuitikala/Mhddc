@@ -36,7 +36,7 @@ export class GdoUpdateComponent implements OnInit {
         if (flow === 1 && this.quantity < 6) {
             this.quantity++
         }
-        else if (flow === 0 && this.quantity > 1) {
+        else if (flow === 0 && this.quantity >= 1) {
             this.quantity--;
         }
 
