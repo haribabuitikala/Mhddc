@@ -1,12 +1,14 @@
-<div class="col-xs-12">
+<div>
     <app-header [count]="currScreen" [showHamburger]="showStepIndicator"></app-header>
 </div>
 
-<app-nav *ngIf="showStepIndicator" [steps]="steps" [flowType]="flowType" [activeStep]="activeStep" [screen]="currScreen">
+<div class="content">
+    <app-nav class="app-nav" *ngIf="showStepIndicator" [steps]="steps" [flowType]="flowType" [activeStep]="activeStep" [screen]="currScreen">
 
-</app-nav>
-<div class="router-wrapper" [ngClass]="{'col-xs-offset-2 col-xs-10' : showStepIndicator}" [class.col-xs-12]="currScreen < 2">
-     <router-outlet></router-outlet>
+    </app-nav>
+    <div class="router-wrapper" [ngClass]="{'main-content' : showStepIndicator}" [class.col-xs-12]="currScreen < 2">
+        <router-outlet></router-outlet>
+    </div>
 </div>
 
 <div class="spinner">

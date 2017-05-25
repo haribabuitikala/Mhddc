@@ -51,7 +51,7 @@ export class HeaderComponent implements OnInit {
     humbergerCollapse() {
         if ($('.menu-collapse').is(":visible")) {
             $('.nav-component li span').addClass('hide');
-            $('.nav-component').animate({ width: '16.66666667%' }, function () {
+            $('.nav-component').animate({ width: '60px' }, function () {
                 $('.collapse-humberger').addClass('hide');
                 $('.hamburger').removeClass('hide');
                 $('body').removeClass('menu-open');

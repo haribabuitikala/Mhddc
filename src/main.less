@@ -129,9 +129,17 @@ img {
   max-width: 100%;
 }
 
-.router-wrapper {
-  margin-top: 53px;
-  padding-bottom: 60px;
+.no-p-l {
+  padding-left: 0 !important;
+}
+.no-p-r {
+  padding-right: 0 !important;
+}
+
+.app-nav + .router-wrapper {
+  padding: 0 10px 60px 70px;
+  width: 100vh;
+  overflow: hidden;
 }
 
 .tile {
@@ -699,10 +707,6 @@ li {
     margin-left: 8.33333333% !important;
   }
 
-  .router-wrapper {
-    padding-bottom: 60px;
-  }
-
   .landscape-img {
     display: block;
   }
@@ -718,12 +722,6 @@ li {
   .modal-open {
     .modal {
       top: 17%;
-    }
-  }
-
-  .nav-component {
-    nav {
-      height: 316px !important;
     }
   }
 
