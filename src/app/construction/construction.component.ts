@@ -1,4 +1,5 @@
 import {Component, OnInit} from '@angular/core';
+import {CollectionData} from "../collection/collection-data";
 declare var _:any;
 @Component({
     selector: 'app-construction',
@@ -7,20 +8,20 @@ declare var _:any;
 })
 export class ConstructionComponent implements OnInit {
 
-    slideWidth;
-    sliderLeft;
-    sliderWidth;
-
-    constructor() {
+    constructor(private dataStore:CollectionData) {
     }
 
-    data:any;
     number:number = 6;
+    folder = 'construction';
+    // category = 'colors';
 
     ngOnInit() {
-        this.data = ["a1", "a2", "a3", "a4", "a5", "a6", "a7", "a8", "a9", "a10", "a11", "a12", "a13"];
-        this.data = _.chunk(this.data, 4);
-        // this.sliderCount = _.times(this.data.length, _.constant(null));
+        this.startProcess();
+    }
+
+    startProcess() {
+        let data = this.dataStore.constructions;
+        data = _.chunk(data, 2)
     }
 
 }

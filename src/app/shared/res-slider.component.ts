@@ -13,11 +13,10 @@ declare var _:any;
           <div class="_slide" [style.width.px]="slideWidth" *ngFor="let slide of data; let k = index">
             <div class="_slide-items">
               <div class="inner-item col-xs-{{number}}" *ngFor="let slideitem of slide; let i=index">
-                <img src="../../../assets/images/{{folder}}/{{slideitem.item_thumbnail}}"
+                <img src="../../../assets/images/{{folder}}/{{slideitem.item_thumbnail.replace('.jpg', '.png')}}"
                      (click)="openerSelected(slideitem, $event)"
                      [ngClass]="{ 'current' : isSeleted(slideitem, k, i)}"
-                     [attr.data-id]="slideitem.item_id"
-                     alt="">
+                     [attr.data-id]="slideitem.item_id">
               </div>
             </div>
           </div>
@@ -48,7 +47,6 @@ export class ResSliderComponent implements OnInit {
     @Input() selectedIdx;
     @Input() selectedVal;
     @Input() folder:any;
-    @Input() category:any;
 
     sliderRows;
 
@@ -138,7 +136,8 @@ export class ResSliderComponent implements OnInit {
         event.currentTarget.classList.add('current');
         let utils = this.utils;
         utils.resFlow.selectedImg = obj.item_id;
-        this.dataStore[this.category] = obj[this.category];
+        this.dataStore.constructions = obj.constructions;
+        this.dataStore.colors = obj.colors;
         // this.utils.utilities.gdoOpenerSelectedItm = obj.item_id;
         // this.notify.emit(obj);
     }
