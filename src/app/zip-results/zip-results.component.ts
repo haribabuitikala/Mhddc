@@ -32,7 +32,7 @@ export class ZipResultsComponent implements OnInit {
     navigateTo(item, path) {
         this.utils.utilities.isService = item.isService;
         this.utils.utilities.productlayout = item.productlayout;
-        this.utils.utilities.natmarketid = item.natmarketid;
+        this.utils.utilities.natmarketid = +item.natmarketid;
         this.utils.utilities.localmarketid = item.marketid;
         this.utils.utilities.storenumber = +item.storenumber;
         this.utils.utilities.gdoStore = item.gdo;

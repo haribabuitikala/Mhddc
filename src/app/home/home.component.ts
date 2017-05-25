@@ -3,6 +3,7 @@ import {Router} from '@angular/router';
 import {AppUtilities} from "../shared/appUtilities";
 import {NavService} from "../nav/nav-service";
 import {CollectionData} from "../collection/collection-data";
+import {ConfigComponent} from "../config/config.component";
 
 @Component({
     selector: 'app-home',
@@ -25,8 +26,10 @@ export class HomeComponent implements OnInit {
         this.homes = this.dataStore.homeImages;
     }
 
-    selectHome(itm){
+    selectHome(itm) {
         console.log(itm);
+        this.utils.resFlow.selectedHome = itm._imagelg;
+
     }
 
     prevBtn(curr, path) {
@@ -36,7 +39,7 @@ export class HomeComponent implements OnInit {
 
     nextBtn(curr, path) {
         this.utils.setUtils(4, 1);
-        this.route.navigateByUrl(path)
+        this.route.navigateByUrl(path);
     }
 
 }

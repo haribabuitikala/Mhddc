@@ -104,8 +104,36 @@ export class CollectionComponent implements OnInit {
                 result = _.filter(result, ['_size', this.utils.utilities.homeSize]);
                 this.data.homeImages = result;
                 // this.setFlow();
+                let params = this.setParams(speciality);
+                this.dataService.getDesign(params)
+                    .subscribe(
+                        res => {
+                            console.log(res);
+                            this.data.designs = res;
+                            this.route.navigateByUrl('/home');
+                        }
+                    );
                 this.route.navigateByUrl('/home');
             })
+    }
+
+    setParams(obj) {
+        let dataParams;
+        let utils = this.utils.utilities;
+        this.utils.checkDoor();
+        return dataParams = {
+            "productid": obj.item_id,
+            "dtype": utils.dtype,
+            "windcode": utils.winCode,
+            "natmarketid": +utils.natmarketid,
+            "wf": utils.wf,
+            "wi": utils.wi,
+            "hf": utils.hf,
+            "hi": utils.hi,
+            "lang": "en",
+            "localmarketid": +utils.localmarketid,
+            "doorsize": +utils.homeSize
+        };
     }
 
     setFlow() {
@@ -145,7 +173,7 @@ export class CollectionComponent implements OnInit {
     makeNull() {
         this.utils.utilities.productid = null;
         this.utils.utilities.dealerid = null;
-        this.utils.utilities.natmarketid = null;
+        // this.utils.utilities.natmarketid = null;
         this.utils.utilities.wf = null;
         this.utils.utilities.wi = null;
         this.utils.utilities.hf = null;
