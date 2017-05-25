@@ -1,4 +1,5 @@
 import {Component, OnInit} from '@angular/core';
+import {Router} from '@angular/router';
 import {CollectionData} from "../collection/collection-data";
 declare var _:any;
 @Component({
@@ -8,20 +9,26 @@ declare var _:any;
 })
 export class ConstructionComponent implements OnInit {
 
-    constructor(private dataStore:CollectionData) {
+    constructor(private dataStore:CollectionData
+        , private route:Router) {
     }
 
     number:number = 6;
     folder = 'construction';
-    // category = 'colors';
+    category = 'colors';
+    data;
 
     ngOnInit() {
         this.startProcess();
     }
 
     startProcess() {
-        let data = this.dataStore.constructions;
-        data = _.chunk(data, 2)
+        let res = this.dataStore.constructions;
+        this.data = _.chunk(res, 2)
+    }
+
+    nextBtn(path) {
+        this.route.navigateByUrl(path);
     }
 
 }
