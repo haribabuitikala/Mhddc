@@ -24,4 +24,7 @@ export class CollectionData {
     gdoDirectQuestions = [];
     homeImages = [];
     designs=[];
+    constructions=[];
+    colors=[];
+    topSection=[];
 }

@@ -11,15 +11,15 @@ export class AppUtilities {
         navCount: 13,
         isService: false,
         isGDO: false,
-        wf: null, // width feet
-        wi: null, // width inches
-        hf: null, // height feet
-        hi: null, // height inches
+        wf: 0, // width feet
+        wi: 0, // width inches
+        hf: 0, // height feet
+        hi: 0, // height inches
         winCode: "W0",
         doubleDoorHeight: "",
         doubleDoorWidth: "",
-        singleDoorHeight: "",
-        singleDoorWidth: "",
+        singleDoorHeight: 0,
+        singleDoorWidth: 0,
         doubleDoor: false,
         singleDoor: false,
         natmarketid: null,
@@ -90,10 +90,14 @@ export class AppUtilities {
         doublep: 0,
         milesp: 0,
         item_name: '',
-        homeSize: "",
+        homeSize: ""
         // flow of GDO: Home, Size , Openers, Order Details, Shopping Cart
-    }
-        ;
+    };
+    
+    resFlow = {
+        selectedHome : '',
+        selectedImg : null
+    };
 
     setUtils(curr, clicked) {
         this.utilities.currPage = curr;
@@ -134,6 +138,14 @@ export class AppUtilities {
             return o.price * o.count;
         });
         return t;
+    }
+
+    checkDoor() {
+        let utils = this.utilities;
+        if (utils.singleDoor) {
+            utils.wf = +utils.singleDoorWidth;
+            utils.hf = +utils.singleDoorHeight;
+        }
     }
 
 }
