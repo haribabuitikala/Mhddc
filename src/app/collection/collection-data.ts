@@ -23,4 +23,5 @@ export class CollectionData {
     store = {};// this is for stroing the store data
     gdoDirectQuestions = [];
     homeImages = [];
+    designs=[];
 }

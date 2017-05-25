@@ -53,4 +53,9 @@ export class CollectionService {
                 res.json()
             )
     }
+
+    getDesign(obj) {
+        return this.http.post(this.url + 'DesignConstruction', obj)
+            .map(res => res.json())
+    }
 }

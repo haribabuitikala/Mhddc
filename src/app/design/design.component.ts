@@ -14,4 +14,8 @@ export class DesignComponent implements OnInit {
   ngOnInit() {
   }
 
+  getDesignImgs() {
+    
+  }
+
 }

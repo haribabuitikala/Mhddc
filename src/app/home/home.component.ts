@@ -36,7 +36,7 @@ export class HomeComponent implements OnInit {
 
     nextBtn(curr, path) {
         this.utils.setUtils(4, 1);
-        this.route.navigateByUrl(path)
+        this.route.navigateByUrl(path);
     }
 
 }

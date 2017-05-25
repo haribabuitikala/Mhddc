@@ -8,7 +8,10 @@ declare var $:any;
 @Component({
     selector: 'app-header',
     templateUrl: './header.component.html',
-    styleUrls: ['./header.component.less']
+    styleUrls: ['./header.component.less'],
+    host: {
+        '(document:click)': 'humbergerCollapse($event)',
+    }
 })
 export class HeaderComponent implements OnInit {
     showhamburger:boolean = false;
@@ -34,20 +37,31 @@ export class HeaderComponent implements OnInit {
         this.humbergerCollapse();
     }
 
-    humberger() {
-        $('.nav-component').animate({width: '185px'}, function () {
-            $('.nav-component li span').removeClass('hide');
-            $('.collapse-humberger').removeClass('hide');
-            $('.hamburger').addClass('hide');
-        });
+    humberger(event?: MouseEvent) {
+        if(event){
+            if(!$(event.target).hasClass('menu-collapse')){
+                $('.nav-component').animate({width: '185px'}, function () {
+                    $('.nav-component li span').removeClass('hide');
+                    $('.collapse-humberger').removeClass('hide');
+                    $('.hamburger').addClass('hide');
+                    $('body').addClass('menu-open');
+                });
+            }
+        }
+        
     }
 
-    humbergerCollapse() {
-        $('.nav-component li span').addClass('hide');
-        $('.nav-component').animate({width: '16.66666667%'}, function () {
-            $('.collapse-humberger').addClass('hide');
-            $('.hamburger').removeClass('hide');
-        });
+    humbergerCollapse(event?: MouseEvent) {
+        if(event) {
+            if($(event.target).hasClass('menu-collapse') || $(event.target).hasClass('menu-open')) {
+                $('.nav-component li span').addClass('hide');
+                $('.nav-component').animate({width: '16.66666667%'}, function () {
+                    $('.collapse-humberger').addClass('hide');
+                    $('.hamburger').removeClass('hide');
+                    $('body').removeClass('menu-open');
+                });
+            }  
+        }              
     }
 
 }
