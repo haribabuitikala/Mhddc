@@ -27,11 +27,12 @@
       "../node_modules/bootstrap/js/modal.js",
       "../node_modules/lodash/lodash.min.js"
     ],
+    "environmentSource": "environments/environment.ts",
     "environments": {
-      "source": "environments/environment.ts",
       "dev": "environments/environment.ts",
       "prod": "environments/environment.prod.ts"
     }
+
   }],
   "e2e": {
     "protractor": {
@@ -39,9 +40,9 @@
     }
   },
   "lint": [{
-    "files": "src/**/*.ts",
-    "project": "src/tsconfig.json"
-  },
+      "files": "src/**/*.ts",
+      "project": "src/tsconfig.json"
+    },
     {
       "files": "e2e/**/*.ts",
       "project": "e2e/tsconfig.json"

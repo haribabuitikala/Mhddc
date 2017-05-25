@@ -3,6 +3,7 @@ import { AppComponent } from "../app.component";
 import { AppUtilities } from "../shared/appUtilities";
 import { ModalComponent } from "ng2-bs3-modal/ng2-bs3-modal";
 import { CollectionData } from "../collection/collection-data";
+import { Router, NavigationEnd } from '@angular/router';
 
 @Component({
     selector: 'app-gdo-config',
@@ -13,7 +14,13 @@ export class GdoConfigComponent implements OnInit, OnChanges {
 
     constructor(private appComponent: AppComponent
         , private utils: AppUtilities
+        , private router: Router
         , private dataStore: CollectionData) {
+            router.events.subscribe(n => {
+                if (n instanceof NavigationEnd) {
+                    this.showDetails = true;
+                }
+            });
     }
 
     data;

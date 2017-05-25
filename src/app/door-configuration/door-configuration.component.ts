@@ -66,13 +66,12 @@ export class DoorConfigurationComponent implements OnInit {
         this.pageNo = this.utils.utilities.currPage;
         // this.appComponent.next = 'Add To Cart';
         this.navComp.activateIcon();
-        this.gdoConfig.showDetails = false;
         this.distancePrice > 0 ? this.showDistancePrice = true : this.showDistancePrice = false;
         this.gdoOpenerSelected.length ? this.accessories = true : this.accessories = false;
         // this.gdodirectquestions.length ? this.gdodirect = true : this.gdodirect = false;
         this.gdodirect = this.utils.utilities.directFlow;
         this.gdoConfig.showDetails = false;
-        $('.gdoCofigDetails').hide();
+        // $('.gdoCofigDetails').hide();
 
 
         this.gdoOpenerSelected.forEach((gdoItem) => {
