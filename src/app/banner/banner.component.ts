@@ -41,7 +41,7 @@ export class BannerComponent implements OnInit {
                 this.utils.utilities.zipCode = form.value.zip;
             },
             error => {
-                alert("No Stores Found,Please Check Your Zip Code & Try Again");
+                alert("No Stores Found, Please Check Your Zip Code & Try Again");
                 //this.toastr.error(`${form.value.zip} is not correct, try with another one`);
                 $('body').removeClass('loader');
             });
