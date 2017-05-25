@@ -47,7 +47,6 @@ export class ResSliderComponent implements OnInit {
     @Input() selectedIdx;
     @Input() selectedVal;
     @Input() folder:any;
-    @Input() category:any;
 
     sliderRows;
 
@@ -137,7 +136,8 @@ export class ResSliderComponent implements OnInit {
         event.currentTarget.classList.add('current');
         let utils = this.utils;
         utils.resFlow.selectedImg = obj.item_id;
-        this.dataStore[this.category] = obj[this.category];
+        this.dataStore.constructions = obj.constructions;
+        this.dataStore.colors = obj.colors;
         // this.utils.utilities.gdoOpenerSelectedItm = obj.item_id;
         // this.notify.emit(obj);
     }
