@@ -29,8 +29,8 @@ export class DesignComponent implements OnInit {
 
     startProcess() {
         let utils = this.utils;
-        this.data = this.dataStore.designs;
-        this.data = _.chunk(this.data, 6);
+        let data = this.dataStore.designs;
+        this.data = _.chunk(data, 6);
     }
 
     nextBtn(path) {
