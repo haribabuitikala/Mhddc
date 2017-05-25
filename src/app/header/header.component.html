@@ -1,9 +1,9 @@
 <div class="logo-header row-inner">
     <div class="col-xs-2" *ngIf="showHamburger">
-        <img src="../../assets/images/humburger_icon.png" (click)="humberger()" alt="" height="40"
+        <img src="../../assets/images/humburger_icon.png" (click)="humberger($event)" alt="" height="40"
              class="pull-left hamburger hamburger_icon">
-        <img src="../../assets/images/humburger_icon.png" (click)="humbergerCollapse()" alt="" height="40"
-             class="collapse-humberger hide pull-left hamburger_icon">
+        <img src="../../assets/images/humburger_icon.png" (click)="humbergerCollapse($event)" alt="" height="40"
+             class="collapse-humberger hide pull-left hamburger_icon menu-collapse">
     </div>
     <div class="col-xs-5 padding-0">
         <a href="javascript:void(0)">
