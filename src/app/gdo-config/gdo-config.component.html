@@ -9,7 +9,7 @@
 
     </router-outlet>
 </div>
-<div class="tile gdoCofigDetails">
+<div class="tile gdoCofigDetails" *ngIf="showDetails">
     <div class="design-detials--sec">
         <div class="col-xs-6 padding-r-7  border-white-right font-size-12">
             <p>{{itemPrice | currency:'USD':true:'1.2-2'}} / Opener</p>

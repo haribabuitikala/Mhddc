@@ -16,11 +16,11 @@ export class GdoConfigComponent implements OnInit, OnChanges {
         , private utils: AppUtilities
         , private router: Router
         , private dataStore: CollectionData) {
-            router.events.subscribe(n => {
-                if (n instanceof NavigationEnd) {
-                    this.showDetails = true;
+            router.events.subscribe(s => {
+                if (s instanceof NavigationEnd) {
+                    console.log('navigation end : ', this.showDetails);
                 }
-            });
+            })
     }
 
     data;
@@ -41,7 +41,7 @@ export class GdoConfigComponent implements OnInit, OnChanges {
     gdoLoaded = false
 
     ngOnChanges() {
-        console.log('changed');
+        console.log('changed', this.showDetails);
     }
 
     ngOnInit() {
@@ -56,7 +56,7 @@ export class GdoConfigComponent implements OnInit, OnChanges {
         this.visualizeHeader = this.utils.utilities.visualizeHeader;
 
         this.utils.utilities.directFlow === false ? this.showDetails = true : this.showDetails = false;
-
+        console.log('showDetails ', this.showDetails);
         var opnerAddedString = '';
         this.gdoOpenerSelected.forEach((gdoItem) => {
             var addedItems = this.gdoOpeners.filter(g => { return g.name === gdoItem.name; });

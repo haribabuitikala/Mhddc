@@ -71,7 +71,7 @@ export class DoorConfigurationComponent implements OnInit {
         // this.gdodirectquestions.length ? this.gdodirect = true : this.gdodirect = false;
         this.gdodirect = this.utils.utilities.directFlow;
         this.gdoConfig.showDetails = false;
-        // $('.gdoCofigDetails').hide();
+         $('.gdoCofigDetails').hide();
 
 
         this.gdoOpenerSelected.forEach((gdoItem) => {
