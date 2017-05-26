@@ -67,7 +67,10 @@ export class DoorSizeComponent implements OnInit {
             flowType: 'res',
             flowActiveStep: 1,
             currentStepUrl: '/doorSize',
-            showStepIndicator: true
+            showStepIndicator: true,
+            nextStepFn: () => {
+                
+            }
         });
     }
 

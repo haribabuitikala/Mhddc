@@ -184,8 +184,7 @@ export class NavComponent implements OnInit {
             });
 
         } else if (obj.flowType === 'res') {
-            this.navComp.resFlowSteps.forEach(r => {
-                this.navComp.resFlowSteps.forEach(s => {
+            this.navComp.resFlowSteps.forEach(s => {
                 s.visited = false;
                 s.disabled = false;
                 if (s.No == obj.flowActiveStep) {
@@ -207,9 +206,9 @@ export class NavComponent implements OnInit {
                 if (s.No > obj.flowActiveStep) {
                     s.visited = false;
                 }
-                
+
                 steps.push(s);
-            })
+            });
         }
         if (this.changeSubscribers) {
             this.changeSubscribers({ showStepIndicator: obj.showStepIndicator, flowType: obj.flowType, steps: steps, activeStep: obj.flowActiveStep });
