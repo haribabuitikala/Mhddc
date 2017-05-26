@@ -1,18 +1,23 @@
 @color_1: #f96302;
 
-.stock{
-  .col-xs-4{
+.stock {
+  .col-xs-4 {
     padding: 0 4px;
     margin-bottom: 10px;
-    img{
+    img {
       height: 65px;
       width: 100%;
+      border: 1px solid #fff;
+    }
+    img.selected {
+      border: 1px solid @color_1;
     }
   }
 }
-.camera-section-selection{
+
+.camera-section-selection {
   color: @color_1;
-  img{
+  img {
     width: 53px;
   }
   .camera, .gallery {
@@ -23,19 +28,22 @@
     top: 0;
     left: 0;
   }
-  label.current{
+  label.current {
     border-bottom: 2px solid @color_1;
   }
 }
+
 @media only screen and (min-width: 568px) {
-  .stock{
-    .col-xs-4{
-      img{
+  .stock {
+    .col-xs-4 {
+      img {
         height: 115px;
       }
     }
   }
-  .col-xs-3{
+
+  .col-xs-3 {
     width: 16.66666667%;
   }
 }
+

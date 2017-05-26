@@ -1,6 +1,7 @@
 import {Component, OnInit, Input, Output, EventEmitter, AfterViewInit} from '@angular/core';
 import {AppUtilities} from "./appUtilities";
 import {CollectionData} from "../collection/collection-data";
+import {ConfigComponent} from "../config/config.component";
 declare var $:any;
 declare var _:any;
 
@@ -38,7 +39,8 @@ declare var _:any;
 export class ResSliderComponent implements OnInit {
 
     constructor(private utils:AppUtilities
-        , private dataStore:CollectionData) {
+        , private dataStore:CollectionData
+        , private config:ConfigComponent) {
     }
 
     @Input() data:any;
@@ -136,8 +138,9 @@ export class ResSliderComponent implements OnInit {
         // this.gdoConfig.gdoBanner = t + '.png';
         event.currentTarget.classList.add('current');
         let utils = this.utils;
+        this.config.homeImage = obj.item_thumbnail;
         utils.resFlow.selectedImg = obj.item_id;
-        if(this.category === 'color')
+        if (this.category === 'color')
             this.utils.resFlow.colorconfig = obj.colorconfig;
         this.dataStore[this.category] = obj[this.category];
         // this.utils.utilities.gdoOpenerSelectedItm = obj.item_id;

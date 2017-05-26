@@ -30,11 +30,15 @@ export class DesignComponent implements OnInit {
     startProcess() {
         let utils = this.utils;
         let data = this.dataStore.designs;
-        this.data = _.chunk(data, 6);
+        this.config.homeImage = data[0].item_thumbnail;
+        this.data = _.chunk(data, 4);
     }
 
     nextBtn(path) {
-        this.route.navigateByUrl(path)
+        this.route.navigateByUrl(path);
+    }
+    prevBtn(path){
+        this.route.navigateByUrl(path);
     }
 
     getDesignImgs() {

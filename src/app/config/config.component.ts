@@ -16,27 +16,26 @@ export class ConfigComponent implements OnInit {
 
     }
 
-    homeImage = this.utils.resFlow.selectedHome;
+    homeImage;
 
     ngOnInit() {
         // set the curr screen
         let path = this.location.path();
         path === "/config/design" ? path = "/config" : path = this.location.path();
         // this.appComponent.currScreen = this.appComponent.navElems.indexOf(path);
-        console.log(this.appComponent.currScreen);
 
+        $('.switcher-box').css({right: 64});
+
+        this.homeImage = this.utils.resFlow.selectedHome;
         $('.switcher-box').on('click tap', function () {
             $(this).hide();
             $('.switcher-box-home').show().removeClass('hide').animate({right: 93});
-            // $('.switcher-image-sec img').attr('src', '../../assets/images/home-1/white-short.png');
-            this.homeImage = '../../assets/images/home-1/white-short.png';
             $('.switcher-image').addClass('homeImage');
         });
 
         $('.switcher-box-home').on('click tap', function () {
             $(this).hide();
             $('.switcher-box').show().removeClass('hide').animate({right: 64});
-            this.homeImage = '../../assets/images/white-short.png';
             $('.switcher-image').removeClass('homeImage');
         });
     }
