@@ -88,6 +88,9 @@ export class DoorConfigurationComponent implements OnInit {
             }
         });
 
+        var k = this.pageNo + '.Your Opener Configuration';
+        $('#visualize-header').html(k);
+
 
         this.setNavComponent();
     }

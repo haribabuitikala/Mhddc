@@ -83,7 +83,8 @@ export class OpenerComponent implements OnInit {
         this.utils.utilities.kPrice = 0;
         this.utils.utilities.distancePrice = 0;
 
-
+        var k = this.pageNo + '.Choose an Opener';
+        $('#visualize-header').html(k);
 
         this.setNavComponent();
     }

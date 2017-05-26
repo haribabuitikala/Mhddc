@@ -27,6 +27,7 @@ export class DesignComponent implements OnInit {
 
     ngOnInit() {
         this.startProcess();
+        $('#visualize-header').html('5 Choose Your Design');
     }
 
     startProcess() {
