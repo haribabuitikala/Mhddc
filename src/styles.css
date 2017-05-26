@@ -281,15 +281,6 @@ img {
     margin-top: 10px;
 }
 
-.carousel-control.left {
-    left: -7%;
-    transform: scale(-1);
-}
-
-.carousel-control.right {
-    right: -7%;
-}
-
 .carousel-inner > .item {
     padding: 10px 0;
 }
@@ -357,17 +348,9 @@ img {
     opacity: 0.8;
 }
 
-.carousel1 .carousel-control.left {
-    left: -7px;
-}
-
 .carousel1 .carousel-control.left img {
     transform: rotate(180deg);
 
-}
-
-.carousel1 .carousel-control.right {
-    right: -7px;
 }
 
 .carousel1 .coming-soon {
