@@ -3,6 +3,7 @@ import {Router} from '@angular/router';
 import {AppUtilities} from "../shared/appUtilities";
 import {CollectionData} from "../collection/collection-data";
 import {ConfigComponent} from "../config/config.component";
+import {NavComponent} from "../nav/nav.component";
 declare var _:any;
 
 @Component({
@@ -14,6 +15,7 @@ export class DesignComponent implements OnInit {
 
     constructor(private utils:AppUtilities
         , private dataStore:CollectionData
+        , private navComponent:NavComponent
         , private config:ConfigComponent
         , private route:Router) {
     }
@@ -32,6 +34,16 @@ export class DesignComponent implements OnInit {
         let data = this.dataStore.designs;
         this.config.homeImage = data[0].item_thumbnail;
         this.data = _.chunk(data, 4);
+
+        this.navComponent.renderNav({
+            flowType: 'res',
+            flowActiveStep: 4,
+            currentStepUrl: '/config/design',
+            showStepIndicator: true,
+            nextStepFn: () => {
+
+            }
+        });
     }
 
     nextBtn(path) {

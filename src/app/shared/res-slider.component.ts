@@ -2,6 +2,7 @@ import {Component, OnInit, Input, Output, EventEmitter, AfterViewInit} from '@an
 import {AppUtilities} from "./appUtilities";
 import {CollectionData} from "../collection/collection-data";
 import {ConfigComponent} from "../config/config.component";
+import {DetailsComponent} from "../details/details.component";
 declare var $:any;
 declare var _:any;
 
@@ -138,10 +139,13 @@ export class ResSliderComponent implements OnInit {
         // this.gdoConfig.gdoBanner = t + '.png';
         event.currentTarget.classList.add('current');
         let utils = this.utils;
-        this.config.homeImage = obj.item_thumbnail;
         utils.resFlow.selectedImg = obj.item_id;
-        if (this.category === 'color')
+        // this.details.itemPrice = obj.item_price;
+        if (this.category === 'color') {
             this.utils.resFlow.colorconfig = obj.colorconfig;
+        }
+        if (this.category === 'color' || this.category === 'constructions' || this.category === undefined)
+            this.config.homeImage = obj.item_thumbnail;
         this.dataStore[this.category] = obj[this.category];
         // this.utils.utilities.gdoOpenerSelectedItm = obj.item_id;
         // this.notify.emit(obj);

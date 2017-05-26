@@ -24,15 +24,15 @@ export class ConstructionComponent implements OnInit {
     ngOnInit() {
         this.startProcess();
 
-        // this.navComponent.renderNav({
-        //     flowType: 'res',
-        //     flowActiveStep: 1,
-        //     currentStepUrl: '/doorSize',
-        //     showStepIndicator: true,
-        //     nextStepFn: () => {
+        this.navComponent.renderNav({
+            flowType: 'res',
+            flowActiveStep: 5,
+            currentStepUrl: '/config/construction',
+            showStepIndicator: true,
+            nextStepFn: () => {
                 
-        //     }
-        // });
+            }
+        });
     }
 
     startProcess() {
