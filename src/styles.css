@@ -191,15 +191,9 @@ img {
     margin-bottom: 7px;
 }
 
-.banner-zip-search {
-    padding-right: 7px;
-}
-
 .banner-zip-search input {
     border: none;
-    top: 6px;
     background: none;
-    left: 38%;
     font-size: 14px;
 }
 
