@@ -116,6 +116,7 @@ export class NavComponent implements OnInit {
         this.appContext = context;
     }
     gdoVisistedSteps = [];
+    resVisistedSteps = [];
 
     goToStep(step, checkNextStep) {
         if (checkNextStep) {
@@ -184,7 +185,30 @@ export class NavComponent implements OnInit {
 
         } else if (obj.flowType === 'res') {
             this.navComp.resFlowSteps.forEach(r => {
-                steps.push(r);
+                this.navComp.resFlowSteps.forEach(s => {
+                s.visited = false;
+                s.disabled = false;
+                if (s.No == obj.flowActiveStep) {
+                    s.active = true;
+                    s['url'] = obj.currentStepUrl;
+                    if (obj.nextStepFn) {
+                        s.callFn = obj.nextStepFn;
+                    }
+                } else {
+                    s.active = false;
+                }
+                if (this.resVisistedSteps.indexOf(s.No) >= 0 && s.No != obj.flowActiveStep) {
+                    s.visited = true;
+                }
+                if (this.resVisistedSteps.indexOf(obj.flowActiveStep) < 0) {
+                    this.resVisistedSteps.push(obj.flowActiveStep);
+                }
+
+                if (s.No > obj.flowActiveStep) {
+                    s.visited = false;
+                }
+                
+                steps.push(s);
             })
         }
         if (this.changeSubscribers) {
