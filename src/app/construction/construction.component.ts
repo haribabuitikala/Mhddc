@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {CollectionData} from "../collection/collection-data";
+import {NavComponent} from "../nav/nav.component";
 declare var _:any;
 @Component({
     selector: 'app-construction',
@@ -10,7 +11,9 @@ declare var _:any;
 export class ConstructionComponent implements OnInit {
 
     constructor(private dataStore:CollectionData
-        , private route:Router) {
+        , private route:Router
+        , private navComponent:NavComponent) {
+
     }
 
     number:number = 6;
@@ -20,6 +23,16 @@ export class ConstructionComponent implements OnInit {
 
     ngOnInit() {
         this.startProcess();
+
+        // this.navComponent.renderNav({
+        //     flowType: 'res',
+        //     flowActiveStep: 1,
+        //     currentStepUrl: '/doorSize',
+        //     showStepIndicator: true,
+        //     nextStepFn: () => {
+                
+        //     }
+        // });
     }
 
     startProcess() {

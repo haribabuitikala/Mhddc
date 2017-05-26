@@ -2,6 +2,7 @@ import {Component, OnInit, AfterViewInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {AppUtilities} from "../shared/appUtilities";
 import {NavService} from "../nav/nav-service";
+import {NavComponent} from "../nav/nav.component";
 import {CollectionData} from "../collection/collection-data";
 import {ConfigComponent} from "../config/config.component";
 declare var $:any;
@@ -18,6 +19,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
     constructor(private utils:AppUtilities
         , private navComp:NavService
         , private route:Router
+        , private navComponent: NavComponent
         , private dataStore:CollectionData) {
     }
 
@@ -25,6 +27,16 @@ export class HomeComponent implements OnInit, AfterViewInit {
         this.pageNo = this.utils.utilities.currPage;
         this.navComp.activateIcon();
         this.homes = this.dataStore.homeImages;
+
+        this.navComponent.renderNav({
+            flowType: 'res',
+            flowActiveStep: 3,
+            currentStepUrl: '/home',
+            showStepIndicator: true,
+            nextStepFn: () => {
+                this.nextBtn(null, '/config/design');
+            }
+        });
     }
 
     ngAfterViewInit(){

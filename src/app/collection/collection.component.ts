@@ -96,6 +96,16 @@ export class CollectionComponent implements OnInit {
         this.popularCollections = _.filter(this.collections, ['productline', 'popular']);
 
         this.navComp.activateIcon();
+
+        this.navComponent.renderNav({
+            flowType: 'res',
+            flowActiveStep: 2,
+            currentStepUrl: '/collection',
+            showStepIndicator: true,
+            nextStepFn: () => {
+                
+            }
+        });
     }
 
     isSelected(itm){
