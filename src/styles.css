@@ -122,10 +122,6 @@ img {
     position: absolute;
 }
 
-.ptn-rel {
-    position: relative;
-}
-
 /* margins */
 .margin-b-15 {
     margin-bottom: 15px;
@@ -187,10 +183,6 @@ img {
     margin: 0 -15px 0 -15px;
 }
 
-.form-group {
-    margin-bottom: 7px;
-}
-
 .banner-zip-search input {
     border: none;
     background: none;
@@ -226,8 +218,9 @@ img {
     bottom: 0;
     left: 15px;
     width: 100%;
-    padding: 8px 5px 2px 5px;
+    padding: 16px 5px;
 }
+
 
 .ad-banner {
     background-image: url("./assets/images/Advertisment_25jan.png");

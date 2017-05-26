@@ -78,6 +78,7 @@ export class AdditionalOptionsComponent implements OnInit {
         this.pageNo = this.utils.utilities.currPage;
         this.showMenu = this.utils.utilities.showNav;
         this.navComp.activateIcon();
+        $('body').removeClass('loader');
         if (this.utils.utilities.directFlow) {
             this.data = this.dataStore.gdoAdditionalDirect;
             this.gdoConfig.itemPrice = this.data.item_price;
@@ -103,15 +104,18 @@ export class AdditionalOptionsComponent implements OnInit {
     }
 
     nextBtn(path) {
+            $('body').addClass('loader');
         if (this.utils.utilities.flow === 'gdoNavElems') {
             this.utils.setUtils(4, 1);
             this.goTo('/gdoConfig' + path)
         } else {
+            //$('body').addClass('loader');
             this.goTo('/config' + path)
         }
     }
 
     prevBtn(path) {
+            $('body').addClass('loader');
         if (this.utils.utilities.flow === 'gdoNavElems') {
             this.utils.setUtils(2, 0);
             if (this.navComponent.subFlow) {
@@ -119,11 +123,13 @@ export class AdditionalOptionsComponent implements OnInit {
                 this.navComponent.renderNav({
                     showStepIndicator: false
                 });
+            $('body').removeClass('loader');
                 this.route.navigateByUrl('/banner');
             } else {
                 this.goTo('/gdoConfig' + path);
             }
         } else {
+            $('body').removeClass('loader');
             this.goTo('/config' + path)
         }
     }

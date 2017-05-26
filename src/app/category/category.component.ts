@@ -63,6 +63,7 @@ export class CategoryComponent implements OnInit {
 
     gdoGoTo(path, id) {
         this.utilities.utilities.isGDO = true;
+$('body').addClass('loader');
         if (id === 'size') {
             this.utilities.utilities.currPage = 3;
             this.utilities.utilities.clicked = null;
@@ -71,7 +72,7 @@ export class CategoryComponent implements OnInit {
             this.utilities.utilities.visualizeHeader = true;
             this.utilities.utilities.directFlow = false;
             this.navComp.setNavFlow('gdo');
-$('body').addClass('loader');
+$('body').removeClass('loader');
             this.route.navigateByUrl(path);
         } else {
 // this is for additional options screen
@@ -92,7 +93,7 @@ $('body').addClass('loader');
                         this.utilities.utilities.directFlow = true;
                         this.dataStore.gdoAdditionalDirect = res;
                         this.navComp.setNavFlow('gdo', true);
-                        $('body').addClass('loader');
+                        $('body').removeClass('loader');
                         this.route.navigateByUrl(path);
                     }
                 );

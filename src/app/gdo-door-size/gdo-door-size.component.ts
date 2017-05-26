@@ -61,6 +61,7 @@ export class GdoDoorSizeComponent implements OnInit {
 
             this.dataParams.dheightFt = +itm;
 
+                            $('body').addClass('loader');
             this.dataService.getGdoOpener(this.dataParams)
                 .subscribe(
                 res => {
@@ -79,6 +80,7 @@ export class GdoDoorSizeComponent implements OnInit {
                         res => {
                             // this.route.navigateByUrl(path);
                             console.log(res);
+                            $('body').removeClass('loader');
                             this.dataStorage.gdoAdditional = res;
                             this.route.navigateByUrl('/gdoConfig/opener');
                         }
