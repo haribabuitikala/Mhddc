@@ -52,6 +52,7 @@ export class CollectionComponent implements OnInit {
     collections;
     specialCollections;
     popularCollections;
+    selected;
 
     ngOnInit() {
         this.makeNull();
@@ -105,6 +106,10 @@ export class CollectionComponent implements OnInit {
                 
             }
         });
+    }
+
+    isSelected(itm){
+        return this.selected === itm.item_id ? true : false;
     }
 
     goToHome(speciality) {

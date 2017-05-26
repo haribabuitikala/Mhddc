@@ -58,4 +58,9 @@ export class CollectionService {
         return this.http.post(this.url + 'DesignConstruction', obj)
             .map(res => res.json())
     }
+
+    getTopSection(obj) {
+        return this.http.post(this.url + 'Windows', obj)
+            .map(res => res.json())
+    }
 }

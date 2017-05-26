@@ -96,7 +96,8 @@ export class AppUtilities {
     
     resFlow = {
         selectedHome : '',
-        selectedImg : null
+        selectedImg : null,
+        colorconfig: ''
     };
 
     setUtils(curr, clicked) {

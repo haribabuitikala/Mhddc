@@ -1,19 +1,20 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, AfterViewInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {AppUtilities} from "../shared/appUtilities";
 import {NavService} from "../nav/nav-service";
 import {NavComponent} from "../nav/nav.component";
 import {CollectionData} from "../collection/collection-data";
 import {ConfigComponent} from "../config/config.component";
-
+declare var $:any;
 @Component({
     selector: 'app-home',
     templateUrl: './home.component.html',
     styleUrls: ['./home.component.less']
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent implements OnInit, AfterViewInit {
     pageNo;
     homes;
+    selected;
 
     constructor(private utils:AppUtilities
         , private navComp:NavService
@@ -38,8 +39,15 @@ export class HomeComponent implements OnInit {
         });
     }
 
-    selectHome(itm) {
+    ngAfterViewInit(){
+        $('.stock div:first-child img').addClass('selected');
+        this.utils.resFlow.selectedHome = this.homes[0]._imagelg;
+    }
+    
+    selectHome(itm, evt) {
         console.log(itm);
+        $('.stock img').removeClass('selected');
+        evt.target.classList = 'selected';
         this.utils.resFlow.selectedHome = itm._imagelg;
 
     }
