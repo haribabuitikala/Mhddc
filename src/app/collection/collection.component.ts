@@ -114,8 +114,8 @@ export class CollectionComponent implements OnInit {
 
     goToHome(speciality) {
         this.dataService.getHomes()
-            .subscribe(res=> {
-                let result = res.homes.home;
+            .then(res=> {
+                let result = res['homes'].home;
                 result = _.filter(result, ['_size', this.utils.utilities.homeSize]);
                 this.data.homeImages = result;
                 // this.setFlow();
