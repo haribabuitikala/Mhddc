@@ -27,6 +27,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
         this.pageNo = this.utils.utilities.currPage;
         this.navComp.activateIcon();
         this.homes = this.dataStore.homeImages;
+        $('body').removeClass('loader');
 
         this.navComponent.renderNav({
             flowType: 'res',

@@ -9,6 +9,7 @@ import {AppComponent} from "../app.component";
 export class DetailsComponent implements OnInit {
 
   constructor(private appComponent:AppComponent) { }
+  itemPrice;
 
   ngOnInit() {
     // this.appComponent.currScreen = 0;

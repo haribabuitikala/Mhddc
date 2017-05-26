@@ -6,6 +6,7 @@ import { CollectionService } from "../shared/data.service";
 import { CollectionData } from "../collection/collection-data";
 import { NavComponent } from '../nav/nav.component'
 import { NavService } from "../nav/nav-service";
+declare var $:any;
 
 @Component({
     selector: 'app-gdo-door-size',
@@ -38,7 +39,7 @@ export class GdoDoorSizeComponent implements OnInit {
     ngOnInit() {
         this.appComponent.currScreen = 3;
         this.navComp.activateIcon();
-
+        $('body').removeClass('loader');
         this.utils.utilities.gdoOpenerSelectedItm = null;
         this.setNavComponent();
     }
@@ -60,6 +61,7 @@ export class GdoDoorSizeComponent implements OnInit {
 
             this.dataParams.dheightFt = +itm;
 
+                            $('body').addClass('loader');
             this.dataService.getGdoOpener(this.dataParams)
                 .subscribe(
                 res => {
@@ -78,6 +80,7 @@ export class GdoDoorSizeComponent implements OnInit {
                         res => {
                             // this.route.navigateByUrl(path);
                             console.log(res);
+                            $('body').removeClass('loader');
                             this.dataStorage.gdoAdditional = res;
                             this.route.navigateByUrl('/gdoConfig/opener');
                         }

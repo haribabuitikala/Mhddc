@@ -10,8 +10,8 @@ declare var $:any;
 })
 export class ConfigComponent implements OnInit {
 
-    constructor(private appComponent:AppComponent,
-                private location:Location
+    constructor(private appComponent:AppComponent
+        , private location:Location
         , private utils:AppUtilities) {
 
     }

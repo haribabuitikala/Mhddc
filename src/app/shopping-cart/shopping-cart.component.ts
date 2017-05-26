@@ -55,6 +55,7 @@ export class ShoppingCartComponent implements OnInit {
             showStepIndicator: false,
             resetNav: true
         });
+        $('body').removeClass('loader');
     }
 
     removeItem() {

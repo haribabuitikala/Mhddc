@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {CollectionData} from "../collection/collection-data";
 import {Router} from '@angular/router';
 import {CollectionService} from "../shared/data.service";
+import {NavComponent} from "../nav/nav.component";
 
 declare var _:any;
 
@@ -14,6 +15,7 @@ export class ColorComponent implements OnInit {
 
     constructor(private dataStore:CollectionData
         , private route:Router
+        , private navComponent:NavComponent
         , private dataService:CollectionService) {
     }
 
@@ -28,6 +30,16 @@ export class ColorComponent implements OnInit {
     startProcess() {
         let res = this.dataStore.colors;
         this.data = _.chunk(res, 6);
+
+        this.navComponent.renderNav({
+            flowType: 'res',
+            flowActiveStep: 6,
+            currentStepUrl: '/config/color',
+            showStepIndicator: true,
+            nextStepFn: () => {
+
+            }
+        });
     }
 
     setParams() {

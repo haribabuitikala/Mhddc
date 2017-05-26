@@ -8,6 +8,7 @@ import { CollectionService } from "../shared/data.service";
 import { GdoConfigComponent } from "../gdo-config/gdo-config.component";
 import { NavComponent } from '../nav/nav.component'
 declare var _: any;
+declare var $:any;
 
 @Component({
     selector: 'app-opener',
@@ -64,6 +65,7 @@ export class OpenerComponent implements OnInit {
         // });
     }
 
+    
     ngOnInit() {
         this.pageNo = this.utils.utilities.currPage;
         this.navComp.activateIcon();
@@ -75,6 +77,7 @@ export class OpenerComponent implements OnInit {
         this.number = 6;
         this.gdoOpenerObj = this.dataStrorage.gdoAdditional;
 
+
         //  reseting the values
         this.utils.utilities.distancePrice = 0;
         this.utils.utilities.singlep = 0;
@@ -85,11 +88,13 @@ export class OpenerComponent implements OnInit {
 
         var k = this.pageNo + '.Choose an Opener';
         $('#visualize-header').html(k);
-
+        $('body').removeClass('loader');
         this.setNavComponent();
     }
 
     nextBtn(path) {
+        
+                            $('body').addClass('loader');
         if (this.utils.utilities.flow === 'gdoNavElems') {
             this.utils.setUtils(3, 1);
             this.utils.utilities.gdoOpenerText = this.gdoOpenertext;
@@ -98,6 +103,7 @@ export class OpenerComponent implements OnInit {
                 res => {
                     // this.route.navigateByUrl(path);
                     this.gdoOpenerObj = res;
+                            $('body').removeClass('loader');
                     this.gdoOponerAccessories.open();
                     // this.goTo('gdoConfig' + path)
                 }
@@ -105,6 +111,7 @@ export class OpenerComponent implements OnInit {
 
 
         } else {
+                            $('body').removeClass('loader');
             this.goTo('config' + path)
         }
     }
@@ -116,6 +123,7 @@ export class OpenerComponent implements OnInit {
     }
 
     accessoriesModalNext() {
+        $('body').addClass('loader');
         this.route.navigateByUrl('/gdoConfig/additionalOptions');
     }
 
@@ -180,10 +188,7 @@ export class OpenerComponent implements OnInit {
     }
 
     goTo(path) {
-        console.log('path ', path);
         this.route.navigateByUrl(path);
-
-
     }
 
 }

@@ -1,9 +1,9 @@
-import { Component, OnInit, Input, Output, EventEmitter, AfterViewInit } from '@angular/core';
-import { GdoConfigComponent } from "../../gdo-config/gdo-config.component";
-import { GdoOpener } from "../../opener/gdoOpener";
-import { AppUtilities } from "../appUtilities";
-declare var $: any;
-declare var _: any;
+import {Component, OnInit, Input, Output, EventEmitter, AfterViewInit} from '@angular/core';
+import {GdoConfigComponent} from "../../gdo-config/gdo-config.component";
+import {GdoOpener} from "../../opener/gdoOpener";
+import {AppUtilities} from "../appUtilities";
+declare var $:any;
+declare var _:any;
 
 @Component({
     selector: 'app-slider-component',
@@ -12,13 +12,13 @@ declare var _: any;
 })
 export class SliderComponentComponent implements OnInit {
 
-    constructor(private gdoConfig: GdoConfigComponent
-        , private utils: AppUtilities) {
+    constructor(private gdoConfig:GdoConfigComponent
+        , private utils:AppUtilities) {
     }
 
-    @Input() data: any;
-    @Input() count: any;
-    @Input() number: any;
+    @Input() data:any;
+    @Input() count:any;
+    @Input() number:any;
 
     sliderRows;
 
@@ -45,6 +45,7 @@ export class SliderComponentComponent implements OnInit {
         this.slideIndex = selectedIndex;
         this.sliderLeft = -(this.slideIndex * this.slideWidth);
     }
+
     isSeleted(opener, index, itemIndex) {
         if (this.utils.utilities.gdoOpenerSelectedItm && opener.item_id == this.utils.utilities.gdoOpenerSelectedItm) {
             return true;
@@ -109,6 +110,7 @@ export class SliderComponentComponent implements OnInit {
         this.utils.utilities.gdoOpenerSelectedItm = obj.item_id;
         this.notify.emit(obj);
     }
+
     moveSlider(isNext) {
         if (isNext) {
             this.slideIndex = this.slideIndex + 1;
@@ -117,7 +119,6 @@ export class SliderComponentComponent implements OnInit {
         }
         this.sliderLeft = -(this.slideIndex * this.slideWidth);
     }
-
 
 
 }

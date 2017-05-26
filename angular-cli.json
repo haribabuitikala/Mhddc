@@ -28,11 +28,12 @@
       "../node_modules/lodash/lodash.min.js",
       "../src/app/jquery.visualize.js"
     ],
-    "environmentSource": "environments/environment.ts",
     "environments": {
+      "source": "environments/environment.ts",
       "dev": "environments/environment.ts",
       "prod": "environments/environment.prod.ts"
     }
+
   }],
   "e2e": {
     "protractor": {
