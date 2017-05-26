@@ -144,7 +144,7 @@ export class ResSliderComponent implements OnInit {
         if (this.category === 'color') {
             this.utils.resFlow.colorconfig = obj.colorconfig;
         }
-        if (this.category === 'color' || this.category === 'constructions' || this.category === undefined)
+        if (this.category === 'constructions')
             this.config.homeImage = obj.item_thumbnail;
         this.dataStore[this.category] = obj[this.category];
         // this.utils.utilities.gdoOpenerSelectedItm = obj.item_id;
