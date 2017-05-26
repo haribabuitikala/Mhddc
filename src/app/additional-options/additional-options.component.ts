@@ -98,7 +98,7 @@ export class AdditionalOptionsComponent implements OnInit {
         this.dataStore.gdoDirectQuestions = [];
         this.utils.utilities.distancePrice = 0;
         
-        var k = this.pageNo + '.Choose an Opener';
+        var k = this.pageNo + '.Additional Options';
         $('#visualize-header').html(k);
     }
 

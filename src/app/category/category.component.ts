@@ -71,6 +71,7 @@ export class CategoryComponent implements OnInit {
             this.utilities.utilities.visualizeHeader = true;
             this.utilities.utilities.directFlow = false;
             this.navComp.setNavFlow('gdo');
+$('body').addClass('loader');
             this.route.navigateByUrl(path);
         } else {
 // this is for additional options screen
@@ -91,6 +92,7 @@ export class CategoryComponent implements OnInit {
                         this.utilities.utilities.directFlow = true;
                         this.dataStore.gdoAdditionalDirect = res;
                         this.navComp.setNavFlow('gdo', true);
+                        $('body').addClass('loader');
                         this.route.navigateByUrl(path);
                     }
                 );

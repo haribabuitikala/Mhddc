@@ -15,6 +15,7 @@ declare var _: any;
     styleUrls: ['./door-configuration.component.less']
 })
 export class DoorConfigurationComponent implements OnInit {
+    directFlow = false;
 
     pageNo;
     isGdo = this.utils.utilities.isGDO;
@@ -62,6 +63,7 @@ export class DoorConfigurationComponent implements OnInit {
         });
     }
     ngOnInit() {
+        this.directFlow = this.utils.utilities.directFlow;
         this.itemPrice = this.utils.calculateTotalPrice();
         this.pageNo = this.utils.utilities.currPage;
         // this.appComponent.next = 'Add To Cart';

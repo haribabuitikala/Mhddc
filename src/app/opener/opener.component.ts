@@ -64,6 +64,7 @@ export class OpenerComponent implements OnInit {
         // });
     }
 
+    
     ngOnInit() {
         this.pageNo = this.utils.utilities.currPage;
         this.navComp.activateIcon();
@@ -74,6 +75,7 @@ export class OpenerComponent implements OnInit {
         this.data = _.chunk(this.data, 2);
         this.number = 6;
         this.gdoOpenerObj = this.dataStrorage.gdoAdditional;
+
 
         //  reseting the values
         this.utils.utilities.distancePrice = 0;

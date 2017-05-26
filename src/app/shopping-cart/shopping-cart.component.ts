@@ -42,6 +42,7 @@ export class ShoppingCartComponent implements OnInit {
 
     ngOnInit() {
         this.navComp.activateIcon();
+        $('body').removeClass('loader');
         this.pageNo = this.utils.utilities.currPage;
         this.appComp.currScreen = 0;
         this.distancePrice > 0 ? this.showDistancePrice = true : this.showDistancePrice = false;
