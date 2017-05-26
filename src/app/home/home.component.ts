@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {AppUtilities} from "../shared/appUtilities";
 import {NavService} from "../nav/nav-service";
+import {NavComponent} from "../nav/nav.component";
 import {CollectionData} from "../collection/collection-data";
 import {ConfigComponent} from "../config/config.component";
 
@@ -17,6 +18,7 @@ export class HomeComponent implements OnInit {
     constructor(private utils:AppUtilities
         , private navComp:NavService
         , private route:Router
+        , private navComponent: NavComponent
         , private dataStore:CollectionData) {
     }
 
@@ -24,6 +26,16 @@ export class HomeComponent implements OnInit {
         this.pageNo = this.utils.utilities.currPage;
         this.navComp.activateIcon();
         this.homes = this.dataStore.homeImages;
+
+        this.navComponent.renderNav({
+            flowType: 'res',
+            flowActiveStep: 3,
+            currentStepUrl: '/home',
+            showStepIndicator: true,
+            nextStepFn: () => {
+                this.nextBtn(null, '/config/design');
+            }
+        });
     }
 
     selectHome(itm) {
