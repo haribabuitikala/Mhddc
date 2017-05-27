@@ -61,7 +61,8 @@ export class DoorSizeComponent implements OnInit {
         this.widthFeets = this.sizes.getWidthFeets();
         this.makeNull();
         this.navComp.activateIcon();
-
+        this.utils.utilities.homeSize = '';
+this.utils.resFlow.quickShip = 0;
         this.navComponent.setNavFlow('res');
         this.navComponent.renderNav({
             flowType: 'res',
@@ -86,6 +87,7 @@ export class DoorSizeComponent implements OnInit {
 
         this.utils.utilities.singleDoor ? this.homeSize = "1" : this.homeSize = "2";
         this.utils.utilities.homeSize = this.homeSize;
+        this.utils.resFlow.quickShip = 1;
         
         event.currentTarget.classList.add('current');
         this.utils.utilities.currScreen += 1;

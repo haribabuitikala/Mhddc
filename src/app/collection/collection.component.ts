@@ -24,6 +24,7 @@ export class CollectionComponent implements OnInit {
     speciality = false;
     popular = true;
     pageNo;
+    quickShip;
 
     showSpeciality() {
         this.specialityBtn = false;
@@ -53,12 +54,18 @@ export class CollectionComponent implements OnInit {
     specialCollections;
     popularCollections;
     selected;
+    quickShipObj;
 
     ngOnInit() {
+        this.startProcess();
+    }
+
+    startProcess() {
         this.makeNull();
         this.collections = this.data.data;
         this.pageNo = this.utils.utilities.currPage;
 
+        this.quickShipObj = this.collections[0];
         $.each(this.data.data, function (idx, value) {
             switch (value.item_thumbnail) {
                 case "dtreserve.jpg":
@@ -94,7 +101,18 @@ export class CollectionComponent implements OnInit {
 
         this.specialCollections = _.filter(this.collections, ['productline', 'speciality']);
         this.popularCollections = _.filter(this.collections, ['productline', 'popular']);
-
+        let utils = this.utils.utilities;
+        if(
+            this.utils.resFlow.quickShip > 0 ||
+            utils.wf === 9 &&
+            utils.wi === 0 &&
+            utils.hf === 7 &&
+            utils.hi === 0
+        ){
+            
+            this.quickShip = this.utils.resFlow.quickShip;
+        }
+        
         this.navComp.activateIcon();
 
         this.navComponent.renderNav({
@@ -106,6 +124,7 @@ export class CollectionComponent implements OnInit {
                 
             }
         });
+
     }
 
     isSelected(itm){
@@ -113,6 +132,7 @@ export class CollectionComponent implements OnInit {
     }
 
     goToHome(speciality) {
+        $('body').addClass('loader');
         this.dataService.getHomes()
             .then(res=> {
                 let result = res['homes'].home;
@@ -125,10 +145,10 @@ export class CollectionComponent implements OnInit {
                         res => {
                             console.log(res);
                             this.data.designs = res;
-                            this.route.navigateByUrl('/home');
+                            $('body').removeClass('loader');
+                            this.utils.resFlow.quickShip === 1 ? this.route.navigateByUrl('/config') : this.route.navigateByUrl('/home');                            
                         }
                     );
-                this.route.navigateByUrl('/home');
             })
     }
 
@@ -162,9 +182,11 @@ export class CollectionComponent implements OnInit {
         });
     }
 
-    quickShip() {
+    btnquickShip() {
         //   user should be redirected to design page
-        console.log('hi');
+        //console.log('hi');
+        this.goToHome(this.quickShipObj);
+
     }
 
     dataModel = {

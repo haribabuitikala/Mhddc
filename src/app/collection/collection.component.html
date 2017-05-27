@@ -39,8 +39,8 @@
         <img src="../../assets/images/collection/btnCollectionPopular.png" alt=""/>
     </div>
 </div>
-<div class="text-center button-margin">
-    <button (click)="quickShip()" class="btn btn-default text-uppercase btn-big box-shadow bold text-orange">TAP TO SEE
+<div class="text-center button-margin" *ngIf="quickShip">
+    <button (click)="btnquickShip()" class="btn btn-default text-uppercase btn-big box-shadow bold text-orange">TAP TO SEE
         QUICKSHIP DOORS
     </button>
 </div>
