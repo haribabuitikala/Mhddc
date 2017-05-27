@@ -2,7 +2,7 @@
 
 <!-- Begin Tile 2 -->
 <div *ngIf="popular">
-    <div class="tile margin-t-10" *ngFor="let popular of popularCollections">
+    <div class="tile margin-t-10" *ngFor="let popular of popularCollections" [ngClass]="{ 'selected': isSelected(popular)}">
         <div class="collection-img" (click)="goToHome(popular)">
             <img src="../../assets/images/collection/{{popular.imageUrl}}" alt=""/>
         </div>
@@ -15,7 +15,7 @@
     </div>
 </div>
 <div *ngIf="speciality">
-    <div class="tile margin-t-10" *ngFor="let speciality of specialCollections">
+    <div class="tile margin-t-10" *ngFor="let speciality of specialCollections" [ngClass]="{ 'selected': isSelected(speciality)}">
         <div class="collection-img" (click)="goToHome(speciality)">
             <img src="../../assets/images/collection/{{speciality.imageUrl}}" alt=""/>
         </div>

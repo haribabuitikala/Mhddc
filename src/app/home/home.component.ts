@@ -45,10 +45,12 @@ export class HomeComponent implements OnInit, AfterViewInit {
     }
     
     selectHome(itm, evt) {
-        console.log(itm);
         $('.stock img').removeClass('selected');
         evt.target.classList = 'selected';
         this.utils.resFlow.selectedHome = itm._imagelg;
+
+        this.utils.resFlowSession.home['selectedHomeImg'] = itm._imagelg;
+        this.utils.resFlowSession.home['selectedHome'] = itm;
 
     }
 

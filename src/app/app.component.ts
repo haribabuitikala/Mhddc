@@ -23,6 +23,11 @@ export class AppComponent implements OnInit {
         , private app: AppUtilities
         , private nav: NavComponent
         , private activeRoute: ActivatedRoute) {
+        route.events.subscribe(r => {
+            if (r instanceof NavigationEnd) {
+                console.log('flow Data ', app.resFlowSession);
+            }
+        })
 
     }
 
@@ -42,7 +47,7 @@ export class AppComponent implements OnInit {
 
 
     ngOnInit() {
-
+        $('body').removeClass('loader');
         if (!this.app.utilities.zipCode && this.location.path() !== '/banner') {
             this.route.navigateByUrl('/');
         }
@@ -93,5 +98,22 @@ export class AppComponent implements OnInit {
         let link: any = this.app.utilities[this.app.utilities.flow][path];
         this.route.navigateByUrl(link);
     }
+
+
+    isDev = true;
+    devData = {
+        doorSize: {
+            "dtype": "res",
+            "windcode": "W0",
+            "dwidthFt": 8,
+            "dwidthIn": 0,
+            "dheightFt": 7,
+            "dheightIn": 0,
+            "lang": "en",
+            "NatMarketID": 6000,
+            "localmarketid": "75",
+            "productlayout": true
+        }
+    };
 
 }

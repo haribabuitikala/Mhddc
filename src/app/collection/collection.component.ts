@@ -90,6 +90,7 @@ export class CollectionComponent implements OnInit {
                     value.popupImg = "collectionpopuppremium.png";
                     break;
             }
+
         });
 
         this.specialCollections = _.filter(this.collections, ['productline', 'speciality']);
@@ -103,16 +104,21 @@ export class CollectionComponent implements OnInit {
             currentStepUrl: '/collection',
             showStepIndicator: true,
             nextStepFn: () => {
-                
+                if (this.selected) {
+                    this.goToHome(this.selected);
+                }
             }
         });
+
+        this.selected = this.popular ? this.popularCollections[0] : this.specialCollections[0];
     }
 
     isSelected(itm){
-        return this.selected === itm.item_id ? true : false;
+        return this.selected.item_id === itm.item_id ? true : false;
     }
 
     goToHome(speciality) {
+        this.utils.resFlowSession.resDoorObj.product.product = speciality;
         this.dataService.getHomes()
             .then(res=> {
                 let result = res['homes'].home;
@@ -123,12 +129,19 @@ export class CollectionComponent implements OnInit {
                 this.dataService.getDesign(params)
                     .subscribe(
                         res => {
-                            console.log(res);
                             this.data.designs = res;
+
+                            this.utils.resFlowSession.collection.selectedCollection = speciality;
+                            this.utils.resFlowSession.collection['params'] = params;
+                            this.utils.resFlowSession.collection['homeImages'] = result;
+                            this.utils.resFlowSession.collection['designs'] = res;
+                            
                             this.route.navigateByUrl('/home');
+                        },
+                        err => {
+
                         }
                     );
-                this.route.navigateByUrl('/home');
             })
     }
 
@@ -149,17 +162,6 @@ export class CollectionComponent implements OnInit {
             "localmarketid": +utils.localmarketid,
             "doorsize": +utils.homeSize
         };
-    }
-
-    setFlow() {
-        this.navComponent.setNavFlow('res');
-
-        this.navComponent.renderNav({
-            flowType: 'res',
-            flowActiveStep: 5,
-            currentStepUrl: '/collection',
-            showStepIndicator: true
-        });
     }
 
     quickShip() {

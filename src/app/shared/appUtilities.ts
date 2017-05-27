@@ -1,5 +1,5 @@
-import {Injectable} from '@angular/core';
-declare var _:any;
+import { Injectable } from '@angular/core';
+declare var _: any;
 
 @Injectable()
 export class AppUtilities {
@@ -93,10 +93,10 @@ export class AppUtilities {
         homeSize: ""
         // flow of GDO: Home, Size , Openers, Order Details, Shopping Cart
     };
-    
+
     resFlow = {
-        selectedHome : '',
-        selectedImg : null,
+        selectedHome: '',
+        selectedImg: null,
         colorconfig: ''
     };
 
@@ -105,8 +105,8 @@ export class AppUtilities {
         this.utilities.clicked = clicked;
     }
 
-//3703,2217,2207,6559
-//gdoCheck = ['66502', '2217', '77840', '6559', '66604', '2207', '3703'];
+    //3703,2217,2207,6559
+    //gdoCheck = ['66502', '2217', '77840', '6559', '66604', '2207', '3703'];
     gdoCheck = ['2217', '6559', '2207', '3703'];
 
     calculateTotalPrice() {
@@ -149,4 +149,112 @@ export class AppUtilities {
         }
     }
 
+
+    resFlowSession: ResidentialFlowSession = new ResidentialFlowSession();
+
+    clearResFlow() {
+
+    }
+
+
+}
+
+class ResidentialFlowSession {
+    doorSize = {
+        door: null,
+        doorDimensions: {}
+    };
+    collections: any = null;
+
+    collection = {
+        selectedCollection: null
+    };
+
+    home = {
+
+    };
+
+    resDoorObj = {
+        "QTY": 1,
+        "TYPE": 'RES',
+        "INSTALLTYPE": 'NA',
+        "VISIMG": null,
+        "LEADTEST": false,
+        "JAMBTYPE": 'Wood',
+        "size": {
+            "width": {
+                "wf": " - ",
+                "wi": "0"
+            },
+            "height": {
+                "hf": " - ",
+                "hi": "0"
+            },
+            "apiData": {}
+        },
+        "product": {
+            "product": "",
+            "sourcing": "clopay",
+            "apiData": ""
+        },
+        "design": {
+            "columns": "",
+            "rows": "",
+            "dsgn": "",
+            "apiData": ""
+        },
+        "construction": {
+            "construction": "",
+            "cladding": "",
+            "groove": "",
+            "vinyl": "",
+            "apiData": ""
+        },
+        "color": {
+            "base": "",
+            "overlay": "",
+            "apiData": ""
+        },
+        "windows": {
+            "topsection": "",
+            "placement": "",
+            "glasstype": "",
+            "apiData": ""
+        },
+        "hardware": {
+            "handle": "",
+            "stepplate": "",
+            "hinge": "",
+            "lock": "",
+            "lockoptions": "",
+            "other": [],
+            "strut": "",
+            "apiData": ""
+        },
+        "springs": {
+            "springtype": "",
+            "tracksize": "",
+            "trackmount": "",
+            "trackradius": "",
+            "lifttype": "",
+            "roofpitch": "",
+            "apiData": ""
+        },
+        "opener": {
+            "QTY": 1,
+            "opener": "",
+            "items": [],
+            "apiData": ""
+        },
+        "additional": {
+            "items": []
+        },
+        "stopMold": {
+            "items": []
+        }
+    }
+
+    constructor() {
+
+    }
 }

@@ -3,6 +3,8 @@ import {CollectionData} from "../collection/collection-data";
 import {Router} from '@angular/router';
 import {CollectionService} from "../shared/data.service";
 import {NavComponent} from "../nav/nav.component";
+import {ConfigComponent} from "../config/config.component";
+
 
 declare var _:any;
 
@@ -15,6 +17,7 @@ export class TopSectionComponent implements OnInit {
 
   constructor(private dataStore:CollectionData
       , private route:Router
+      , private config:ConfigComponent
       , private navComponent:NavComponent
       , private dataService:CollectionService) {
   }
@@ -40,6 +43,8 @@ export class TopSectionComponent implements OnInit {
 
       }
     });
+
+    this.config.pageTitle = '7.Choose Your Top Section';
   }
 
   nextBtn(path) {

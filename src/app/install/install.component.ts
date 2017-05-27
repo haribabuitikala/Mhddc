@@ -1,6 +1,8 @@
-import {Component, OnInit} from '@angular/core';
-import {AppComponent} from "../app.component";
-import {Router} from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { AppComponent } from "../app.component";
+import { Router } from '@angular/router';
+import { ConfigComponent } from "../config/config.component";
+import { NavComponent } from "../nav/nav.component";
 
 @Component({
     selector: 'app-install',
@@ -9,11 +11,11 @@ import {Router} from '@angular/router';
 })
 export class InstallComponent implements OnInit {
 
-    constructor(private appComponent:AppComponent
-        , private route:Router) {
+    constructor(private appComponent: AppComponent
+        , private route: Router) {
     }
 
-    
+
     navigateTo(path) {
         // this.appComponent.currScreen = this.appComponent.navElems.indexOf(path);
         this.route.navigateByUrl(path);
@@ -22,9 +24,9 @@ export class InstallComponent implements OnInit {
     ngOnInit() {
     }
 
-    checkType(txt){
+    checkType(txt) {
         this.appComponent.selectedInstallDiy = txt;
-        
+
     }
 
 }

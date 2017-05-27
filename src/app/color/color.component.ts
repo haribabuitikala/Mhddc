@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {CollectionData} from "../collection/collection-data";
 import {Router} from '@angular/router';
 import {CollectionService} from "../shared/data.service";
+import {ConfigComponent} from "../config/config.component";
 import {NavComponent} from "../nav/nav.component";
 
 declare var _:any;
@@ -16,6 +17,7 @@ export class ColorComponent implements OnInit {
     constructor(private dataStore:CollectionData
         , private route:Router
         , private navComponent:NavComponent
+        , private config:ConfigComponent
         , private dataService:CollectionService) {
     }
 
@@ -40,6 +42,8 @@ export class ColorComponent implements OnInit {
 
             }
         });
+
+        this.config.pageTitle = '6.Choose Your Color';
     }
 
     setParams() {

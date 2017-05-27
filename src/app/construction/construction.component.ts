@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {CollectionData} from "../collection/collection-data";
+import {ConfigComponent} from "../config/config.component";
 import {NavComponent} from "../nav/nav.component";
 declare var _:any;
 @Component({
@@ -12,6 +13,7 @@ export class ConstructionComponent implements OnInit {
 
     constructor(private dataStore:CollectionData
         , private route:Router
+        , private config:ConfigComponent
         , private navComponent:NavComponent) {
 
     }
@@ -33,6 +35,8 @@ export class ConstructionComponent implements OnInit {
                 
             }
         });
+
+        this.config.pageTitle = '5.Choose Your Construction';
     }
 
     startProcess() {

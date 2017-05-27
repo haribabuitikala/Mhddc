@@ -1,52 +1,8 @@
 <h4 class="font-size-16 text-orange">8 Choose Your Top Section</h4>
 <div class="tile margin-b-15 ptn-rel">
-    <!--<div id="topSectionCarousel" class="carousel slide padding10 top-section-carousel carousel1"-->
-         <!--data-ride="carousel">-->
-        <!--&lt;!&ndash; Wrapper for slides &ndash;&gt;-->
-        <!--<div role="listbox" class="carousel-inner">-->
-            <!--<div class="item active">-->
-                <!--<span class="col-xs-6">-->
-                    <!--<img src="../../assets/images/top-section/slider/btnARC3A-6C.png" alt=""-->
-                         <!--class="top-selectable-img" id="normal">-->
-                    <!--<span class="display-block">Solid Short Elegant</span>-->
-                <!--</span>-->
-                <!--<span class="margin-r-0 col-xs-6">-->
-                    <!--<img src="../../assets/images/top-section/slider/btnARC4A-6C.png" alt=""-->
-                         <!--class="top-selectable-img">-->
-                    <!--<span class="display-block">Plain Short</span>-->
-                <!--</span>-->
-                <!--<span class="col-xs-6" (click)="longPanel.open()">-->
-                    <!--<img src="../../assets/images/top-section/slider/btnARC1A-6C.png" alt="" class="">-->
-                    <!--<span class="display-block">Plain Long</span>-->
-                <!--</span>-->
-                <!--<span class="margin-r-0 col-xs-6">-->
-                    <!--<img src="../../assets/images/top-section/slider/btnarch31-6c.png" alt="" class="">-->
-                    <!--<span class="display-block">Cathedral 507</span>-->
-                <!--</span>-->
-                <!--<span class="col-xs-6">-->
-                    <!--<img src="../../assets/images/top-section/slider/btnARCH3-6C.png" alt="" class="">-->
-                    <!--<span class="display-block">Charleston 508</span>-->
-                <!--</span>-->
-                <!--<span class="col-xs-6 margin-r-0">-->
-                    <!--<img src="../../assets/images/top-section/slider/btnARCH4-6C.png" alt="" class="">-->
-                    <!--<span class="display-block">Sunset 501</span>-->
-                <!--</span>-->
-            <!--</div>-->
-        <!--</div>-->
-
-        <!--&lt;!&ndash; Left and right controls &ndash;&gt;-->
-        <!--<a class="left carousel-control" href="#topSectionCarousel" role="button" data-slide="prev">-->
-            <!--<span class="helper"></span><img class="left-arrow" src="../../assets/images/ch-left-arrow.png" alt="">-->
-        <!--</a>-->
-        <!--<a class="right carousel-control" href="#topSectionCarousel" role="button" data-slide="next">-->
-            <!--<span class="helper"></span><img class="right-arrow" src="../../assets/images/ch-right-arrow.png" alt="">-->
-        <!--</a>-->
-    <!--</div>-->
-
     <app-res-slider [data]="data"
                     [number]="number"
                     [folder]="folder">
-
     </app-res-slider>
 
 </div>
@@ -79,10 +35,9 @@
         Prev
     </a>
 
-    <!--<a href="javascript:void(0)" class="pull-right nextBtn" (click)="nextBtn('config/topSection')"-->
-       <!--data-id="currScreen">-->
-        <!--Next-->
-        <!--<img src="../../assets/images/Forward-48-thick.png" height="15px">-->
-        <!--&lt;!&ndash;(click)="nextBtn('/additionalOptions')"&ndash;&gt;-->
-    <!--</a>-->
+    <a href="javascript:void(0)" class="pull-right nextBtn" (click)="nextBtn('config/glassType')"
+       data-id="currScreen">
+        Next
+        <img src="../../assets/images/Forward-48-thick.png" height="15px">
+    </a>
 </div>

@@ -44,6 +44,8 @@ export class DesignComponent implements OnInit {
 
             }
         });
+
+        this.config.pageTitle = '4.Choose Your Door Design';
     }
 
     nextBtn(path) {
