@@ -1,13 +1,13 @@
-import {Component, OnInit} from '@angular/core';
-import {CollectionData} from "./collection-data";
-import {Router} from '@angular/router';
-import {AppUtilities} from "../shared/appUtilities";
-import {NavService} from "../nav/nav-service";
-import {CollectionService} from "../shared/data.service";
-import {NavComponent} from "../nav/nav.component";
-import {AppComponent} from "../app.component";
-declare var $:any;
-declare var _:any;
+import { Component, OnInit } from '@angular/core';
+import { CollectionData } from "./collection-data";
+import { Router } from '@angular/router';
+import { AppUtilities } from "../shared/appUtilities";
+import { NavService } from "../nav/nav-service";
+import { CollectionService } from "../shared/data.service";
+import { NavComponent } from "../nav/nav.component";
+import { AppComponent } from "../app.component";
+declare var $: any;
+declare var _: any;
 @Component({
     selector: 'app-collection',
     templateUrl: './collection.component.html',
@@ -40,13 +40,13 @@ export class CollectionComponent implements OnInit {
     }
 
 
-    constructor(private data:CollectionData
-        , private route:Router
-        , private utils:AppUtilities
-        , private navComp:NavService
-        , private dataService:CollectionService
-        , private navComponent:NavComponent
-        , private appComponent:AppComponent) {
+    constructor(private data: CollectionData
+        , private route: Router
+        , private utils: AppUtilities
+        , private navComp: NavService
+        , private dataService: CollectionService
+        , private navComponent: NavComponent
+        , private appComponent: AppComponent) {
     }
 
     collections;
@@ -113,14 +113,14 @@ export class CollectionComponent implements OnInit {
         this.selected = this.popular ? this.popularCollections[0] : this.specialCollections[0];
     }
 
-    isSelected(itm){
+    isSelected(itm) {
         return this.selected.item_id === itm.item_id ? true : false;
     }
 
     goToHome(speciality) {
         this.utils.resFlowSession.resDoorObj.product.product = speciality;
         this.dataService.getHomes()
-            .then(res=> {
+            .then(res => {
                 let result = res['homes'].home;
                 result = _.filter(result, ['_size', this.utils.utilities.homeSize]);
                 this.data.homeImages = result;
@@ -128,19 +128,22 @@ export class CollectionComponent implements OnInit {
                 let params = this.setParams(speciality);
                 this.dataService.getDesign(params)
                     .subscribe(
-                        res => {
-                            this.data.designs = res;
+                    res => {
+                        this.data.designs = res;
 
-                            this.utils.resFlowSession.collection.selectedCollection = speciality;
-                            this.utils.resFlowSession.collection['params'] = params;
-                            this.utils.resFlowSession.collection['homeImages'] = result;
-                            this.utils.resFlowSession.collection['designs'] = res;
-                            
-                            this.route.navigateByUrl('/home');
-                        },
-                        err => {
+                        this.utils.resFlowSession.collection.selectedCollection = speciality;
+                        this.utils.resFlowSession.collection['params'] = params;
+                        this.utils.resFlowSession.collection['homeImages'] = result;
+                        this.utils.resFlowSession.collection['designs'] = res;
 
-                        }
+                        this.utils.resFlowSession.resDoorObj.design.apiData = res;
+                        this.utils.resFlowSession.resDoorObj.design.rows = speciality.Rows;
+                        this.utils.resFlowSession.resDoorObj.design.columns = speciality.Columns;
+                        this.route.navigateByUrl('/home');
+                    },
+                    err => {
+
+                    }
                     );
             })
     }
@@ -149,18 +152,37 @@ export class CollectionComponent implements OnInit {
         let dataParams;
         let utils = this.utils.utilities;
         this.utils.checkDoor();
+        // return dataParams = {
+        //     "productid": obj.item_id,
+        //     "dtype": utils.dtype,
+        //     "windcode": utils.winCode,
+        //     "natmarketid": +utils.natmarketid,
+        //     "wf": utils.wf,
+        //     "wi": utils.wi,
+        //     "hf": utils.hf,
+        //     "hi": utils.hi,
+        //     "lang": "en",
+        //     "localmarketid": +utils.localmarketid,
+        //     "doorsize": +utils.homeSize
+        // };
+
+        // utils.productid = obj.item_id;
+        
         return dataParams = {
             "productid": obj.item_id,
             "dtype": utils.dtype,
             "windcode": utils.winCode,
             "natmarketid": +utils.natmarketid,
             "wf": utils.wf,
-            "wi": utils.wi,
+            "wi": utils.wi || 0,
             "hf": utils.hf,
-            "hi": utils.hi,
+            "hi": utils.hi || 0,
             "lang": "en",
             "localmarketid": +utils.localmarketid,
-            "doorsize": +utils.homeSize
+            "doorsize": +utils.homeSize,
+            "laborcode": obj.singleinstallcode,
+            "isCRLE": false,
+            "productlayout": true
         };
     }
 

@@ -12,21 +12,42 @@ import { NavComponent } from "../nav/nav.component";
 export class InstallComponent implements OnInit {
 
     constructor(private appComponent: AppComponent
+        , private navComponent: NavComponent
+        , private config: ConfigComponent
         , private route: Router) {
     }
 
+
+
+
+    ngOnInit() {
+
+        this.navComponent.renderNav({
+            flowType: 'res',
+            flowActiveStep: 10,
+            currentStepUrl: '/config/install',
+            showStepIndicator: true,
+            nextStepFn: () => {
+
+            }
+        });
+        this.config.pageTitle = '10.Choose Installed vs. DIY';
+    }
+
+    checkType(txt) {
+        this.appComponent.selectedInstallDiy = txt;
+    }
 
     navigateTo(path) {
         // this.appComponent.currScreen = this.appComponent.navElems.indexOf(path);
         this.route.navigateByUrl(path);
     }
-
-    ngOnInit() {
+    nextBtn(path) {
+        this.navigateTo('/config/opener');
     }
 
-    checkType(txt) {
-        this.appComponent.selectedInstallDiy = txt;
-
+    prevBtn() {
+        this.navigateTo('/config/hardware');
     }
 
 }

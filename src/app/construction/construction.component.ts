@@ -3,6 +3,8 @@ import {Router} from '@angular/router';
 import {CollectionData} from "../collection/collection-data";
 import {ConfigComponent} from "../config/config.component";
 import {NavComponent} from "../nav/nav.component";
+import { AppUtilities } from "../shared/appUtilities";
+
 declare var _:any;
 @Component({
     selector: 'app-construction',
@@ -13,6 +15,7 @@ export class ConstructionComponent implements OnInit {
 
     constructor(private dataStore:CollectionData
         , private route:Router
+        , private utils:AppUtilities
         , private config:ConfigComponent
         , private navComponent:NavComponent) {
 
@@ -36,12 +39,18 @@ export class ConstructionComponent implements OnInit {
             }
         });
 
+
         this.config.pageTitle = '5.Choose Your Construction';
+
+       
     }
 
     startProcess() {
         let res = this.dataStore.constructions;
-        this.data = _.chunk(res, 2)
+        this.data = _.chunk(res, 2);
+
+        this.utils.resFlowSession.resDoorObj.construction.construction = res[0];
+        
     }
 
     nextBtn(path) {

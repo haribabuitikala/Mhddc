@@ -177,7 +177,7 @@ class ResidentialFlowSession {
     resDoorObj = {
         "QTY": 1,
         "TYPE": 'RES',
-        "INSTALLTYPE": 'NA',
+        "INSTALLTYPE": '',
         "VISIMG": null,
         "LEADTEST": false,
         "JAMBTYPE": 'Wood',
@@ -211,9 +211,9 @@ class ResidentialFlowSession {
             "apiData": ""
         },
         "color": {
-            "base": "",
-            "overlay": "",
-            "apiData": ""
+            "base": {},
+            "overlay": {},
+            "apiData": {}
         },
         "windows": {
             "topsection": "",

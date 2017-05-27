@@ -1,17 +1,17 @@
-import {Component, OnInit, Input, Output, EventEmitter, AfterViewInit} from '@angular/core';
-import {AppUtilities} from "./appUtilities";
-import {CollectionData} from "../collection/collection-data";
-import {ConfigComponent} from "../config/config.component";
-import {DetailsComponent} from "../details/details.component";
-declare var $:any;
-declare var _:any;
+import { Component, OnInit, Input, Output, EventEmitter, AfterViewInit, ElementRef } from '@angular/core';
+import { AppUtilities } from "./appUtilities";
+import { CollectionData } from "../collection/collection-data";
+import { ConfigComponent } from "../config/config.component";
+import { DetailsComponent } from "../details/details.component";
+declare var $: any;
+declare var _: any;
 
 @Component({
     selector: 'app-res-slider',
     template: `
     <div class="_slider-container m20-top">
       <div class="_slider-wrapper">
-        <div class="_slider" [style.width.px]="sliderWidth" [style.left.px]="sliderLeft">
+        <div class="_slider unique-{{uniqueId}}" [style.width.px]="sliderWidth" [style.left.px]="sliderLeft">
           <div class="_slide" [style.width.px]="slideWidth" *ngFor="let slide of data; let k = index">
             <div class="_slide-items">
               <div class="inner-item col-xs-{{number}}" *ngFor="let slideitem of slide; let i=index">
@@ -40,18 +40,22 @@ declare var _:any;
 })
 export class ResSliderComponent implements OnInit {
 
-    constructor(private utils:AppUtilities
-        , private dataStore:CollectionData
-        , private config:ConfigComponent) {
+    myElement;
+    constructor(private utils: AppUtilities
+        , private dataStore: CollectionData
+        , private myElem: ElementRef
+        , private config: ConfigComponent) {
+        this.myElement = myElem;
     }
 
-    @Input() data:any;
-    @Input() count:any;
-    @Input() number:any;
+    @Input() data: any;
+    @Input() count: any;
+    @Input() number: any;
     @Input() selectedIdx;
     @Input() selectedVal;
-    @Input() folder:any;
-    @Input() category:any;
+    @Input() folder: any;
+    @Input() category: any;
+    @Input() uniqueId: number;
 
     sliderRows;
 
@@ -101,8 +105,7 @@ export class ResSliderComponent implements OnInit {
     renderSlider() {
         this.slideWidth = $('._slider-container').width();
         this.sliderWidth = (this.data.length * this.slideWidth) + this.slideWidth;
-
-        $('._slider').on('touchstart', (e) => {
+        $('._slider', this.myElem.nativeElement).on('touchstart', (e) => {
             this.touchStart = true;
             this.touchX = e.touches[0].clientX;
             this.oldX = this.sliderLeft;
@@ -119,7 +122,7 @@ export class ResSliderComponent implements OnInit {
                 }
             }
         });
-        $('._slider').on('touchend', (e) => {
+        $('._slider', this.myElem.nativeElement).on('touchend', (e) => {
             this.touchStart = false;
             this.touchX = 0;
             this.setSlide();
@@ -133,7 +136,7 @@ export class ResSliderComponent implements OnInit {
     }
 
     openerSelected(obj, event) {
-        $('._slide-items img').removeClass('current');
+        $('._slide-items img', this.myElem.nativeElement).removeClass('current');
         // this.gdoConfig.itemPrice = obj.item_price * this.utils.utilities.gdoOpenerQty;
         // this.utils.utilities.item_price = obj.item_price;
         // let t = obj.item_thumbnail.split('.')[0];
@@ -150,6 +153,24 @@ export class ResSliderComponent implements OnInit {
         this.dataStore[this.category] = obj[this.category];
         // this.utils.utilities.gdoOpenerSelectedItm = obj.item_id;
         // this.notify.emit(obj);
+        switch (this.category) {
+            case 'topsection':
+                this.utils.resFlowSession.resDoorObj.windows.topsection = obj;
+                break;
+            case 'handles':
+                this.utils.resFlowSession.resDoorObj.hardware.handle = obj;
+                break;
+            case 'stepplates':
+                this.utils.resFlowSession.resDoorObj.hardware.stepplate = obj;
+                break;
+            case 'stephinges':
+                this.utils.resFlowSession.resDoorObj.hardware.hinge = obj;
+                break;
+            default:
+                break;
+        }
+
+        console.log('selected slider item ', obj);
     }
 
 
@@ -163,7 +184,7 @@ export class ResSliderComponent implements OnInit {
     }
 
 
-    onImageLoadError(item, folder){
+    onImageLoadError(item, folder) {
         console.log('item, folder');
     }
 

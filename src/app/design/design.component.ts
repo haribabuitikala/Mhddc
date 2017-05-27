@@ -29,6 +29,7 @@ export class DesignComponent implements OnInit {
         this.startProcess();
     }
 
+
     startProcess() {
         let utils = this.utils;
         let data = this.dataStore.designs;
@@ -46,6 +47,9 @@ export class DesignComponent implements OnInit {
         });
 
         this.config.pageTitle = '4.Choose Your Door Design';
+
+        this.utils.resFlowSession.resDoorObj.design.dsgn = data[0];
+        this.utils.resFlowSession.resDoorObj.construction.apiData = data[0].constructions;
     }
 
     nextBtn(path) {
@@ -53,11 +57,6 @@ export class DesignComponent implements OnInit {
     }
     prevBtn(path){
         this.route.navigateByUrl(path);
-    }
-
-    getDesignImgs() {
-
-
     }
 
 }

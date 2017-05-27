@@ -888,4 +888,10 @@ export class CollectionService {
         return this.http.post(this.url + 'Windows', obj)
             .map(res => res.json())
     }
+
+    getHardware(obj) {
+        return this.http.post(this.url + 'Hardware', obj).map(
+            res => res.json()
+        );
+    }
 }

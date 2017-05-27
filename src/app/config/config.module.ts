@@ -13,6 +13,7 @@ import {LockComponent} from "../lock/lock.component";
 import {ConfigComponent} from "./config.component";
 import {InstallComponent} from "../install/install.component";
 import {OpenerComponent} from "../opener/opener.component";
+import { ResOpenerComponent } from "../res-opener/res-opener.component";
 import {AdditionalOptionsComponent} from "../additional-options/additional-options.component";
 import {DoorConfigurationComponent} from "../door-configuration/door-configuration.component";
 import {ThankyouComponent} from "../thankyou/thankyou.component";
@@ -45,7 +46,7 @@ import {ResSliderComponent} from "../shared/res-slider.component";
                     {path: 'nonClassic', component: NonClassicComponent},
                     {path: 'lock', component: LockComponent},
                     {path: 'install', component: InstallComponent},
-                    {path: 'opener', component: OpenerComponent},
+                    {path: 'opener', component: ResOpenerComponent},
                     {path: 'openerSelected', component: OpenerSelectedComponent},
                     {path: 'additionalOptions', component: AdditionalOptionsComponent},
                     {path: 'doorConfiguration', component: DoorConfigurationComponent},
@@ -75,6 +76,7 @@ import {ResSliderComponent} from "../shared/res-slider.component";
         GlassTypeComponent,
         InstallComponent,
         OpenerComponent,
+        ResOpenerComponent,
         AdditionalOptionsComponent,
         DoorConfigurationComponent,
         ThankyouComponent,

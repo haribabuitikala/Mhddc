@@ -25,7 +25,7 @@ export class AppComponent implements OnInit {
         , private activeRoute: ActivatedRoute) {
         route.events.subscribe(r => {
             if (r instanceof NavigationEnd) {
-                console.log('flow Data ', app.resFlowSession);
+                console.log('flow Data ', app.resFlowSession.resDoorObj);
             }
         })
 
