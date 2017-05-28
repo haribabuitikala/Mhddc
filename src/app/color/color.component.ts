@@ -1,12 +1,12 @@
-import {Component, OnInit} from '@angular/core';
-import {CollectionData} from "../collection/collection-data";
-import {Router} from '@angular/router';
-import {CollectionService} from "../shared/data.service";
-import {ConfigComponent} from "../config/config.component";
-import {NavComponent} from "../nav/nav.component";
+import { Component, OnInit } from '@angular/core';
+import { CollectionData } from "../collection/collection-data";
+import { Router } from '@angular/router';
+import { CollectionService } from "../shared/data.service";
+import { ConfigComponent } from "../config/config.component";
+import { NavComponent } from "../nav/nav.component";
 import { AppUtilities } from "../shared/appUtilities";
 
-declare var _:any;
+declare var _: any;
 
 @Component({
     selector: 'app-color',
@@ -15,12 +15,12 @@ declare var _:any;
 })
 export class ColorComponent implements OnInit {
 
-    constructor(private dataStore:CollectionData
-        , private route:Router
-        , private navComponent:NavComponent
-        , private utils:AppUtilities
-        , private config:ConfigComponent
-        , private dataService:CollectionService) {
+    constructor(private dataStore: CollectionData
+        , private route: Router
+        , private navComponent: NavComponent
+        , private utils: AppUtilities
+        , private config: ConfigComponent
+        , private dataService: CollectionService) {
     }
 
     data;
@@ -53,20 +53,6 @@ export class ColorComponent implements OnInit {
     }
 
     setParams() {
-        // return {
-        //     "NatMarketID": 6000,
-        //     "marketID": 75,
-        //     "productid": 12,
-        //     "dheightFt": 7,
-        //     "dheightIn": 0,
-        //     "dwidthFt": 16,
-        //     "dwidthIn": 0,
-        //     "dtype": "res",
-        //     "windcode": "w0",
-        //     "lang": "en",
-        //     "clopaymodelnumber": "GR2LU",
-        //     "colorconfig": "COLR-DO"
-        // };
 
         let utils = this.utils.utilities;
         var resDoorObj = this.utils.resFlowSession.resDoorObj;
@@ -82,7 +68,7 @@ export class ColorComponent implements OnInit {
             "dwidthIn": utils.wi || 0,
             "dheightFt": utils.hf,
             "dheightIn": utils.hi || 0,
-            "lang":"en",
+            "lang": "en",
             "marketID": +utils.localmarketid,
             "doorsize": +utils.homeSize
         };
@@ -90,14 +76,10 @@ export class ColorComponent implements OnInit {
 
     nextBtn(path) {
         let params = this.setParams();
-        this.dataService.getTopSection(params)
-            .subscribe(
-                res => {
-                    this.dataStore.topSection = res;
-                    this.utils.resFlowSession.resDoorObj.windows.apiData = res;
-                    this.route.navigateByUrl(path);
-                }
-            )
+        this.dataService.getTopSection(params).subscribe(res => {
+            this.dataStore.topSection = res;
+            this.utils.resFlowSession.resDoorObj.windows.apiData = res;
+            this.route.navigateByUrl(path);
+        });
     }
-
 }

@@ -5,7 +5,6 @@ import { AppUtilities } from "../shared/appUtilities";
 import { NavService } from "../nav/nav-service";
 import { CollectionData } from "../collection/collection-data";
 import { CollectionService } from "../shared/data.service";
-import { GdoConfigComponent } from "../gdo-config/gdo-config.component";
 import { NavComponent } from '../nav/nav.component'
 import { ConfigComponent } from "../config/config.component";
 declare var _: any;
@@ -30,6 +29,9 @@ export class ResOpenerComponent implements OnInit {
     isLoaded = false;
     openers;
     number = 6;
+    dataParams: any;
+
+    selectedOpener;
     ngOnInit() {
         this.navComponent.renderNav({
             flowType: 'res',
@@ -41,36 +43,24 @@ export class ResOpenerComponent implements OnInit {
             }
         });
         this.config.pageTitle = '11.Choose Your Opener';
-        // let dataParams = {
-        //     dheightFt: this.utils.utilities.hf,
-        //     lang: this.utils.utilities.lang,
-        //     isGDO: this.utils.utilities.isGDO,
-        //     localmarketid: this.utils.utilities.localmarketid,
-        //     NatMarketID: this.utils.utilities.natmarketid,
-        //     ProductType: 'RES',
-        //     openertype: this.utils.utilities.gdoStore
-        // };
-
-        let dataParams = {
-            natmarketid: 6000,
-            wf: 8,
-            wi: 0,
-            hf: 7,
-            hi: 0,
+        this.dataParams = {
+            natmarketid: +this.utils.utilities.natmarketid,
+            wf: this.utils.utilities.wf,
+            wi: this.utils.utilities.wi,
+            hf: this.utils.utilities.hf,
+            hi: this.utils.utilities.hi,
             lang: 'en',
             isgdo: 0,
-            localmarketid: 75,
-            constructionid: 83,
+            localmarketid: +this.utils.utilities.localmarketid,
+            constructionid: +this.utils.resFlowSession.resDoorObj.construction.construction['item_id'],
             producttype: 'RES',
-            windcode: 'W0',
-            doorsize: 1,
+            windcode: this.utils.resFlowSession.resDoorObj.product.product['windcode'],
+            doorsize: +this.utils.utilities.homeSize,
         }
-        console.log('params ', dataParams);
 
-        this.dataService.getGdoOpener(dataParams)
+        this.dataService.getResOpener(this.dataParams)
             .subscribe(
             res => {
-                console.log('openers', res);
                 let data = res;
                 this.openers = _.chunk(data, 2);
                 this.utils.resFlowSession.resDoorObj.opener.apiData = res;
@@ -78,26 +68,42 @@ export class ResOpenerComponent implements OnInit {
             });
     }
 
+    additionalItems = [];
     nextBtn(path) {
-
+        let openerParams = {
+            natmarketid: +this.utils.utilities.natmarketid,
+            lang: 'en',
+            localmarketid: +this.utils.utilities.localmarketid,
+            openerid: +this.utils.resFlowSession.resDoorObj.opener.opener['item_id']
+        };
+        this.selectedOpener = this.utils.resFlowSession.resDoorObj.opener.opener;
+        this.dataService.getOpenerAdditional(openerParams)
+            .subscribe(
+            res => {
+                this.additionalItems = res;
+                this.gdoOponerAccessories.open();
+            });
     }
 
 
 
-
-    getOpenerId(data) {
-
-    }
+    resopenerText;
+    resConfig = {
+        openerText: ''
+    };
 
     prevBtn(path) {
 
     }
 
-    goTo(path) {
-        console.log('path ', path);
-        this.route.navigateByUrl(path);
-
-
+    accessoriesModalClose() {
+        this.additionalItems = [];
+        this.gdoOponerAccessories.close();
     }
+
+    accessoriesModalNext() {
+        this.route.navigateByUrl('/config/additionalOptions');
+    }
+
 
 }

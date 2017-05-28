@@ -15,7 +15,9 @@ import {InstallComponent} from "../install/install.component";
 import {OpenerComponent} from "../opener/opener.component";
 import { ResOpenerComponent } from "../res-opener/res-opener.component";
 import {AdditionalOptionsComponent} from "../additional-options/additional-options.component";
+import { ResAdditionalOptionsComponent } from "../additional-options/res-additional-options-comp";
 import {DoorConfigurationComponent} from "../door-configuration/door-configuration.component";
+import {ResDoorConfigurationComponent} from "../door-configuration/res-door-configuration.comp";
 import {ThankyouComponent} from "../thankyou/thankyou.component";
 import {DetailsComponent} from "../details/details.component";
 import {OpenerSelectedComponent} from "../opener-selected/opener-selected.component";
@@ -48,8 +50,8 @@ import {ResSliderComponent} from "../shared/res-slider.component";
                     {path: 'install', component: InstallComponent},
                     {path: 'opener', component: ResOpenerComponent},
                     {path: 'openerSelected', component: OpenerSelectedComponent},
-                    {path: 'additionalOptions', component: AdditionalOptionsComponent},
-                    {path: 'doorConfiguration', component: DoorConfigurationComponent},
+                    {path: 'additionalOptions', component: ResAdditionalOptionsComponent},
+                    {path: 'doorConfiguration', component: ResDoorConfigurationComponent},
                     {path: '', redirectTo: 'design', pathMatch: 'full'}
                 ]
             },
@@ -69,6 +71,7 @@ import {ResSliderComponent} from "../shared/res-slider.component";
     declarations: [
         DesignComponent,
         ConstructionComponent,
+        ResAdditionalOptionsComponent,
         ColorComponent,
         TopSectionComponent,
         GlassTypeComponent,
@@ -79,6 +82,7 @@ import {ResSliderComponent} from "../shared/res-slider.component";
         ResOpenerComponent,
         AdditionalOptionsComponent,
         DoorConfigurationComponent,
+        ResDoorConfigurationComponent,
         ThankyouComponent,
         DetailsComponent,
         ConfigComponent,

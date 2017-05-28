@@ -103,7 +103,6 @@ export class DoorSizeComponent implements OnInit {
 
     navigateTo(data) {
         $('body').addClass('loader');
-        var data = this.appComponent.isDev ? this.appComponent.devData.doorSize : data;
         this.collection.getCollection(data).subscribe(
             res => {
                 this.data.data = res;

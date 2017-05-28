@@ -2,6 +2,7 @@ import { Component, OnInit, Input, Output, EventEmitter, AfterViewInit, ElementR
 import { AppUtilities } from "./appUtilities";
 import { CollectionData } from "../collection/collection-data";
 import { ConfigComponent } from "../config/config.component";
+import { AppComponent } from "../app.component";
 import { DetailsComponent } from "../details/details.component";
 declare var $: any;
 declare var _: any;
@@ -14,11 +15,12 @@ declare var _: any;
         <div class="_slider unique-{{uniqueId}}" [style.width.px]="sliderWidth" [style.left.px]="sliderLeft">
           <div class="_slide" [style.width.px]="slideWidth" *ngFor="let slide of data; let k = index">
             <div class="_slide-items">
-              <div class="inner-item col-xs-{{number}}" *ngFor="let slideitem of slide; let i=index">
+              <div class="inner-item col-xs-{{number}}" 
+                *ngFor="let slideitem of slide; let i=index" 
+                [ngClass]="{ 'current' : isSeleted(slideitem, k, i)}"
+                (click)="openerSelected(slideitem, $event)">
                 <img (error)="onImageLoadError(slideitem, folder)" 
                     src="http://hddchtml.clopay.com/Content/en/images/{{slideitem.item_thumbnail.replace('.jpg', '.png')}}"
-                     (click)="openerSelected(slideitem, $event)"
-                     [ngClass]="{ 'current' : isSeleted(slideitem, k, i)}"
                      [attr.data-id]="slideitem.item_id">
               </div>
             </div>
@@ -44,6 +46,7 @@ export class ResSliderComponent implements OnInit {
     constructor(private utils: AppUtilities
         , private dataStore: CollectionData
         , private myElem: ElementRef
+        , private app: AppComponent
         , private config: ConfigComponent) {
         this.myElement = myElem;
     }
@@ -56,6 +59,7 @@ export class ResSliderComponent implements OnInit {
     @Input() folder: any;
     @Input() category: any;
     @Input() uniqueId: number;
+    @Input() cname:string;
 
     sliderRows;
 
@@ -136,12 +140,12 @@ export class ResSliderComponent implements OnInit {
     }
 
     openerSelected(obj, event) {
-        $('._slide-items img', this.myElem.nativeElement).removeClass('current');
+        //$('._slide-items img', this.myElem.nativeElement).removeClass('current');
         // this.gdoConfig.itemPrice = obj.item_price * this.utils.utilities.gdoOpenerQty;
         // this.utils.utilities.item_price = obj.item_price;
         // let t = obj.item_thumbnail.split('.')[0];
         // this.gdoConfig.gdoBanner = t + '.png';
-        event.currentTarget.classList.add('current');
+        //event.currentTarget.classList.add('current');
         let utils = this.utils;
         utils.resFlow.selectedImg = obj.item_id;
         // this.details.itemPrice = obj.item_price;
@@ -153,7 +157,7 @@ export class ResSliderComponent implements OnInit {
         this.dataStore[this.category] = obj[this.category];
         // this.utils.utilities.gdoOpenerSelectedItm = obj.item_id;
         // this.notify.emit(obj);
-        switch (this.category) {
+        switch (this.cname) {
             case 'topsection':
                 this.utils.resFlowSession.resDoorObj.windows.topsection = obj;
                 break;
@@ -166,11 +170,19 @@ export class ResSliderComponent implements OnInit {
             case 'stephinges':
                 this.utils.resFlowSession.resDoorObj.hardware.hinge = obj;
                 break;
+            case 'openers':
+                this.utils.resFlowSession.resDoorObj.opener.opener = obj;
+                break;
+            case 'design':
+                this.utils.resFlowSession.resDoorObj.design.dsgn = obj;
+                this.utils.resFlowSession.resDoorObj.construction.construction = obj['constructions'][0];
+                break;
             default:
                 break;
         }
 
-        console.log('selected slider item ', obj);
+        this.app.updatePrice();
+
     }
 
 

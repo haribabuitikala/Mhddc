@@ -26,6 +26,7 @@ export class AppComponent implements OnInit {
         route.events.subscribe(r => {
             if (r instanceof NavigationEnd) {
                 console.log('flow Data ', app.resFlowSession.resDoorObj);
+                window['cObj'] = app.resFlowSession.resDoorObj;
             }
         })
 
@@ -100,20 +101,15 @@ export class AppComponent implements OnInit {
     }
 
 
-    isDev = true;
-    devData = {
-        doorSize: {
-            "dtype": "res",
-            "windcode": "W0",
-            "dwidthFt": 8,
-            "dwidthIn": 0,
-            "dheightFt": 7,
-            "dheightIn": 0,
-            "lang": "en",
-            "NatMarketID": 6000,
-            "localmarketid": "75",
-            "productlayout": true
+
+    priceListener;
+    updatePrice() {
+        if (this.priceListener) {
+            this.priceListener();
         }
-    };
+    }
+    subscribeToPrice(fn) {
+        this.priceListener = fn;
+    }
 
 }
