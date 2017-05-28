@@ -26,6 +26,7 @@ export class DesignComponent implements OnInit {
     number = 6;
     folder = 'design';
     category = 'constructions';
+    loaded = false;
 
     ngOnInit() {
         this.startProcess();
@@ -63,13 +64,15 @@ export class DesignComponent implements OnInit {
             }
             
         }
+
+        this.loaded = true;
     }
 
     nextBtn(path) {
         this.route.navigateByUrl(path);
     }
     prevBtn(path){
-        this.route.navigateByUrl(path);
+        this.route.navigateByUrl('/home');
     }
 
 }

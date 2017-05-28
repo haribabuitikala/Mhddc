@@ -26,6 +26,8 @@ export class ConstructionComponent implements OnInit {
     category = 'colors';
     data;
 
+    loaded = false;
+
     ngOnInit() {
         this.startProcess();
 
@@ -46,15 +48,21 @@ export class ConstructionComponent implements OnInit {
     }
 
     startProcess() {
-        let res = this.dataStore.constructions;
+        // let res = this.dataStore.constructions;
+        let res = this.utils.resFlowSession.resDoorObj.construction.apiData;
         this.data = _.chunk(res, 2);
 
         this.utils.resFlowSession.resDoorObj.construction.construction = res[0];
         
+        this.loaded = true;
     }
 
     nextBtn(path) {
         this.route.navigateByUrl(path);
+    }
+
+    prevBtn() {
+        this.route.navigateByUrl('/config/design');
     }
 
 }

@@ -21,14 +21,14 @@ import {ResDoorConfigurationComponent} from "../door-configuration/res-door-conf
 import {ThankyouComponent} from "../thankyou/thankyou.component";
 import {DetailsComponent} from "../details/details.component";
 import {OpenerSelectedComponent} from "../opener-selected/opener-selected.component";
-import {SliderComponentComponent} from "../shared/slider-component/slider-component.component";
+import {SliderComponentComponent} from "../slider-component/slider-component.component";
 import {InstallQuestionComponent} from "../install-question/install-question.component";
 import {InstallAnswerComponent} from "../install-answer/install-answer.component";
 import {NonClassicComponent} from "../non-classic/non-classic.component";
 import {HardwareComponent} from "../hardware/hardware.component";
 import {GdoConfigComponent} from "../gdo-config/gdo-config.component";
 import {GdoUpdateComponent} from "../opener/gdoUpdateQty";
-import {ResSliderComponent} from "../shared/res-slider.component";
+import {ResSliderComponent} from "../slider-component/res-slider.component";
 
 @NgModule({
     imports: [

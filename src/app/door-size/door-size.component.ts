@@ -203,11 +203,7 @@ export class DoorSizeComponent implements OnInit {
     }
 
     prevBtn(curr, path) {
-        this.makeNull();
-        // this.utils.utilities.currPage = 1;
-        // this.utils.utilities.clicked = 0;
-        this.utils.setUtils(1, 0);
-        this.route.navigateByUrl(path);
+        this.navComponent.openModal();
     }
 
     makeNull() {

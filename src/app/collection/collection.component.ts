@@ -53,7 +53,7 @@ export class CollectionComponent implements OnInit {
     specialCollections;
     popularCollections;
     selected;
-
+    loaded = false;
     ngOnInit() {
         this.makeNull();
         this.collections = this.data.data;
@@ -111,6 +111,8 @@ export class CollectionComponent implements OnInit {
         });
 
         this.selected = this.popular ? this.popularCollections[0] : this.specialCollections[0];
+
+        this.loaded = true;
     }
 
     isSelected(itm) {
@@ -143,8 +145,7 @@ export class CollectionComponent implements OnInit {
                     },
                     err => {
 
-                    }
-                    );
+                    });
             })
     }
 
@@ -167,7 +168,7 @@ export class CollectionComponent implements OnInit {
         // };
 
         // utils.productid = obj.item_id;
-        
+
         return dataParams = {
             "productid": obj.item_id,
             "dtype": utils.dtype,
@@ -224,13 +225,15 @@ export class CollectionComponent implements OnInit {
 
     nextBtn(curr, path) {
         this.utils.setUtils(3, 1);
-        this.route.navigateByUrl(path)
+        if (this.selected) {
+            this.goToHome(this.selected);
+        }
     }
 
     prevBtn(curr, path) {
         this.makeNull();
         this.utils.setUtils(1, 0);
-        this.route.navigateByUrl(path)
+        this.route.navigateByUrl('/doorSize');
     }
 
 }

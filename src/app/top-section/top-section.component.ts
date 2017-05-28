@@ -51,7 +51,7 @@ export class TopSectionComponent implements OnInit {
     this.utils.resFlowSession.resDoorObj.windows.topsection = res[0];
   }
 
-  nextBtn(path) {
+  nextBtn(path?) {
     this.navComponent.setNavFlow('res', '');
     var topsection = this.utils.resFlowSession.resDoorObj.windows.topsection;
     if (topsection && topsection['glasstypes']) {
@@ -64,5 +64,9 @@ export class TopSectionComponent implements OnInit {
     } else {
       this.route.navigateByUrl('/config/nonClassic');
     }
+  }
+
+  prevBtn() {
+    this.route.navigateByUrl('/config/color');
   }
 }

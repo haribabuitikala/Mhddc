@@ -48,10 +48,11 @@ export class HomeComponent implements OnInit, AfterViewInit {
         $('.stock img').removeClass('selected');
         evt.target.classList = 'selected';
         this.utils.resFlow.selectedHome = itm._imagelg;
+        this.selected = itm;
 
         this.utils.resFlowSession.home['selectedHomeImg'] = itm._imagelg;
         this.utils.resFlowSession.home['selectedHome'] = itm;
-
+        
     }
 
     prevBtn(curr, path) {

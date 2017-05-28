@@ -27,12 +27,14 @@ export class ColorComponent implements OnInit {
     number = 6;
     folder = 'color';
 
+    loaded = false;
+
     ngOnInit() {
         this.startProcess();
     }
 
     startProcess() {
-        let res = this.dataStore.colors;
+        let res = this.utils.resFlowSession.resDoorObj.construction.construction['colors'];
         this.data = _.chunk(res, 6);
 
         this.navComponent.renderNav({
@@ -50,6 +52,8 @@ export class ColorComponent implements OnInit {
         this.utils.resFlowSession.resDoorObj.color.apiData = res;
         this.utils.resFlowSession.resDoorObj.color.base = res[0];
         this.utils.resFlowSession.resDoorObj.color.overlay = res[0];
+
+        this.loaded = true;
     }
 
     setParams() {
@@ -81,5 +85,9 @@ export class ColorComponent implements OnInit {
             this.utils.resFlowSession.resDoorObj.windows.apiData = res;
             this.route.navigateByUrl(path);
         });
+    }
+
+    prevBtn() {
+        this.route.navigateByUrl('/config/construction');
     }
 }
