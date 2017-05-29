@@ -1,11 +1,12 @@
-import {Component, OnInit} from '@angular/core';
-import {Router} from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { AppComponent } from "../app.component";
-import {AppUtilities} from "../shared/appUtilities";
-import {CollectionData} from "../collection/collection-data";
-import {ConfigComponent} from "../config/config.component";
-import {NavComponent} from "../nav/nav.component";
-declare var _:any;
+import { AppUtilities } from "../shared/appUtilities";
+import { CollectionService } from "../shared/data.service";
+import { CollectionData } from "../collection/collection-data";
+import { ConfigComponent } from "../config/config.component";
+import { NavComponent } from "../nav/nav.component";
+declare var _: any;
 
 @Component({
     selector: 'app-design',
@@ -14,12 +15,13 @@ declare var _:any;
 })
 export class DesignComponent implements OnInit {
 
-    constructor(private utils:AppUtilities
-        , private dataStore:CollectionData
-        , private navComponent:NavComponent
+    constructor(private utils: AppUtilities
+        , private dataStore: CollectionData
+        , private navComponent: NavComponent
+        , private dataService: CollectionService
         , private app: AppComponent
-        , private config:ConfigComponent
-        , private route:Router) {
+        , private config: ConfigComponent
+        , private route: Router) {
     }
 
     data;
@@ -63,13 +65,16 @@ export class DesignComponent implements OnInit {
                 this.app.updatePrice();
             }
         }
+
         this.loaded = true;
+
+        this.config.renderCanvas();
     }
 
     nextBtn(path) {
         this.route.navigateByUrl(path);
     }
-    prevBtn(path){
+    prevBtn(path) {
         this.route.navigateByUrl('/home');
     }
 
