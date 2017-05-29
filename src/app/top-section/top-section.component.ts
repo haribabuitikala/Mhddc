@@ -1,10 +1,13 @@
-import {Component, OnInit} from '@angular/core';
-import {CollectionData} from "../collection/collection-data";
-import {Router} from '@angular/router';
-import {CollectionService} from "../shared/data.service";
-import {NavComponent} from "../nav/nav.component";
+import { Component, OnInit } from '@angular/core';
+import { CollectionData } from "../collection/collection-data";
+import { Router } from '@angular/router';
+import { CollectionService } from "../shared/data.service";
+import { NavComponent } from "../nav/nav.component";
+import { ConfigComponent } from "../config/config.component";
+import { AppUtilities } from "../shared/appUtilities";
 
-declare var _:any;
+
+declare var _: any;
 
 @Component({
   selector: 'app-top-section',
@@ -13,10 +16,12 @@ declare var _:any;
 })
 export class TopSectionComponent implements OnInit {
 
-  constructor(private dataStore:CollectionData
-      , private route:Router
-      , private navComponent:NavComponent
-      , private dataService:CollectionService) {
+  constructor(private dataStore: CollectionData
+    , private route: Router
+    , private config: ConfigComponent
+    , private utils: AppUtilities
+    , private navComponent: NavComponent
+    , private dataService: CollectionService) {
   }
 
   data;
@@ -40,11 +45,28 @@ export class TopSectionComponent implements OnInit {
 
       }
     });
+
+    this.config.pageTitle = '7.Choose Your Top Section';
+
+    this.utils.resFlowSession.resDoorObj.windows.topsection = res[0];
   }
 
-  nextBtn(path) {
+  nextBtn(path?) {
+    this.navComponent.setNavFlow('res', '');
+    var topsection = this.utils.resFlowSession.resDoorObj.windows.topsection;
+    if (topsection && topsection['glasstypes']) {
+      if (topsection['glasstypes'][0].item_price <= 0) {
+        this.navComponent.setNavFlow('res', 'hideglass');
+        this.route.navigateByUrl('/config/hardware');
+      } else {
+        this.route.navigateByUrl('/config/nonClassic');
+      }
+    } else {
+      this.route.navigateByUrl('/config/nonClassic');
+    }
   }
 
-
-
+  prevBtn() {
+    this.route.navigateByUrl('/config/color');
+  }
 }

@@ -145,9 +145,13 @@ export class NavComponent implements OnInit {
     }
 
     subFlow = false;
+    resSubFlow;
     setNavFlow(flowType, subFlow?) {
         this.gdoVisistedSteps = [];
         this.subFlow = subFlow ? true : false;
+        if (flowType === 'res') {
+            this.resSubFlow = subFlow;
+        }
     }
 
     renderNav(obj) {
@@ -205,6 +209,10 @@ export class NavComponent implements OnInit {
 
                 if (s.No > obj.flowActiveStep) {
                     s.visited = false;
+                }
+
+                if (this.resSubFlow === 'hideglass' && s.No === 8) {
+                    s.disabled = true;
                 }
 
                 steps.push(s);

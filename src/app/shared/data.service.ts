@@ -37,7 +37,17 @@ export class CollectionService {
             .map(res => res.json())
     }
 
+    getResOpener(obj) {
+        return this.http.post(this.url + 'Opener', obj)
+            .map(res => res.json())
+    }
+
     getGdoAdditional(obj) {
+        return this.http.post(this.url + 'OpenerItem', obj)
+            .map(res => res.json())
+    }
+
+    getOpenerAdditional(obj) {
         return this.http.post(this.url + 'OpenerItem', obj)
             .map(res => res.json())
     }
@@ -887,5 +897,11 @@ export class CollectionService {
     getTopSection(obj) {
         return this.http.post(this.url + 'Windows', obj)
             .map(res => res.json())
+    }
+
+    getHardware(obj) {
+        return this.http.post(this.url + 'Hardware', obj).map(
+            res => res.json()
+        );
     }
 }

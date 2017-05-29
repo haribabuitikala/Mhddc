@@ -27,7 +27,8 @@
         "../node_modules/jquery/dist/jquery.js",
         "../node_modules/bootstrap/js/modal.js",
         "../node_modules/lodash/lodash.min.js",
-        "../src/app/jquery.visualize.js"
+        "../src/app/jquery.visualize.js",
+        "legacy-helper.js"
       ],
       "environmentSource": "environments/environment.ts",
       "environments": {

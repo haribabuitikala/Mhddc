@@ -1,7 +1,7 @@
 import {Component, OnInit, Input, Output, EventEmitter, AfterViewInit} from '@angular/core';
-import {GdoConfigComponent} from "../../gdo-config/gdo-config.component";
-import {GdoOpener} from "../../opener/gdoOpener";
-import {AppUtilities} from "../appUtilities";
+import {GdoConfigComponent} from "../gdo-config/gdo-config.component";
+import {GdoOpener} from "../opener/gdoOpener";
+import {AppUtilities} from "../shared/appUtilities";
 declare var $:any;
 declare var _:any;
 
