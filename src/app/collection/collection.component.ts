@@ -99,7 +99,12 @@ export class CollectionComponent implements OnInit {
                     value.popupImg = "collectionpopupCoachman.png";
                     break;
                 case "dtCanyonRidge.jpg":
-                    value.imageUrl = "btnCollectionCanyonRidgeUG.png";
+                    let t = value.item_description
+                    if (t === 'Canyon Ridge&#174; Limited Edition Collection') {
+                        value.imageUrl = "btnCollectionCanyonRidgeLE.png";
+                    } else {
+                        value.imageUrl = "btnCollectionCanyonRidgeUG.png";
+                    }
                     value.popupImg = "collectionpopupCanyonRidge.png";
                     break;
                 case "dtpremium.jpg":
