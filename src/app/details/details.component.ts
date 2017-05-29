@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AppComponent } from "../app.component";
+import { AppUtilities } from "../shared/appUtilities";
 
 @Component({
   selector: 'app-details',
@@ -8,17 +9,36 @@ import { AppComponent } from "../app.component";
 })
 export class DetailsComponent implements OnInit {
 
-  constructor(private appComponent: AppComponent) {
-    appComponent.subscribeToPrice(() => {
-      try {
-        let price = window['getDoorPrice'](window['cObj']);
-        this.itemPrice = price[0];
-      } catch (g) {
 
+  calculatePrice() {
+    try {
+      var itemId = this.utils.resFlowSession.resDoorObj.product.product['item_id'];
+      var count = this.utils.resFlowSession.resDoorObj.QTY;
+      if (itemId) {
+        let cObj = this.utils.resFlowSession.resDoorObj;
+        let price = window['getDoorPrice'](cObj);
+        this.itemPriceInstall = price[0] * count;
+        this.isDIY = false;
+        if (this.appComponent.noDIYs.indexOf(itemId) < 0) {
+          this.isDIY = true;
+          this.itemPriceDY = price[1] * count;
+        }
       }
+
+    } catch (g) {
+
+    }
+  }
+
+  constructor(private appComponent: AppComponent, private utils: AppUtilities) {
+    appComponent.subscribeToPrice(() => {
+      this.calculatePrice();
     });
   }
-  itemPrice;
+  itemPriceInstall;
+  itemPriceDY;
+  isDIY = false;
+  quantity = 1;
 
   ngOnInit() {
     // this.appComponent.currScreen = 0;
@@ -26,6 +46,17 @@ export class DetailsComponent implements OnInit {
   }
   detailsModal() {
 
+  }
+
+  updateQuantity(isIncrement?) {
+    let count = this.utils.resFlowSession.resDoorObj.QTY;
+    if (!isIncrement && count > 1) {
+      this.utils.resFlowSession.resDoorObj.QTY = count - 1;
+    } else {
+      this.utils.resFlowSession.resDoorObj.QTY = count + 1;
+    }
+
+    this.calculatePrice();
   }
 
 }

@@ -904,4 +904,16 @@ export class CollectionService {
             res => res.json()
         );
     }
+
+    getquickDoors(obj) {
+        return this.http.post(this.url + 'Stockdoors', obj).map(
+            res => res.json()
+        );
+    }
+
+    getStockGroup(obj) {
+         return this.http.post(this.url + 'Stockgroup', obj).map(
+            res => res.json()
+        );
+    }
 }

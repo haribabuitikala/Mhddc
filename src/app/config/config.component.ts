@@ -21,6 +21,7 @@ export class ConfigComponent implements OnInit {
     homeImage;
 
     pageTitle;
+    loaded = false;
 
     ngOnInit() {
         // set the curr screen
