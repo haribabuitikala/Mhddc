@@ -17,11 +17,11 @@ export class DetailsComponent implements OnInit {
       if (itemId) {
         let cObj = this.utils.resFlowSession.resDoorObj;
         let price = window['getDoorPrice'](cObj);
-        this.itemPriceInstall = price[0] * count;
+        this.itemPriceInstall = parseFloat(price[0].replace(/ /g, '').replace('$', '')) * count;
         this.isDIY = false;
         if (this.appComponent.noDIYs.indexOf(itemId) < 0) {
           this.isDIY = true;
-          this.itemPriceDY = price[1] * count;
+          this.itemPriceDY = parseFloat(price[1].replace(/ /g, '').replace('$', '')) * count;
         }
       }
 
@@ -55,7 +55,7 @@ export class DetailsComponent implements OnInit {
     } else {
       this.utils.resFlowSession.resDoorObj.QTY = count + 1;
     }
-
+    this.quantity = this.utils.resFlowSession.resDoorObj.QTY;
     this.calculatePrice();
   }
 
