@@ -239,6 +239,8 @@ export class ResSliderComponent implements OnInit, AfterViewInit {
         // this.utils.utilities.gdoOpenerSelectedItm = obj.item_id;
         // this.notify.emit(obj);
         this.saveSelected(obj);
+
+        this.config.renderCanvas();
     }
 
 
