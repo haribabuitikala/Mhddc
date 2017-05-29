@@ -18,7 +18,6 @@ export class GdoConfigComponent implements OnInit, OnChanges {
         , private dataStore: CollectionData) {
             router.events.subscribe(s => {
                 if (s instanceof NavigationEnd) {
-                    console.log('navigation end : ', this.showDetails);
                 }
             })
     }

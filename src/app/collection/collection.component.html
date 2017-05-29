@@ -2,20 +2,20 @@
 
 <!-- Begin Tile 2 -->
 <div *ngIf="popular">
-    <div class="tile margin-t-10" *ngFor="let popular of popularCollections">
+    <div class="tile margin-t-10" *ngFor="let popular of popularCollections" [ngClass]="{ 'selected': isSelected(popular)}">
         <div class="collection-img" (click)="goToHome(popular)">
             <img src="../../assets/images/collection/{{popular.imageUrl}}" alt=""/>
         </div>
         <div class="collection-btn-sec ">
             <collection-popup [popup]="popular"></collection-popup>
-            <div class="btns pull-right">
+            <div class="btns pull-right" (click)="goToHome(popular)">
                 <button>Select</button>
             </div>
         </div>
     </div>
 </div>
 <div *ngIf="speciality">
-    <div class="tile margin-t-10" *ngFor="let speciality of specialCollections">
+    <div class="tile margin-t-10" *ngFor="let speciality of specialCollections" [ngClass]="{ 'selected': isSelected(speciality)}">
         <div class="collection-img" (click)="goToHome(speciality)">
             <img src="../../assets/images/collection/{{speciality.imageUrl}}" alt=""/>
         </div>
@@ -52,7 +52,7 @@
         Prev
     </a>
 
-    <a href="javascript:void(0)" class="pull-right nextBtn" (click)="nextBtn(currScreen,'/home')" data-id="currScreen">
+    <a *ngIf="loaded" href="javascript:void(0)" class="pull-right nextBtn" (click)="nextBtn(currScreen,'/home')" data-id="currScreen">
         Next
         <img src="../../assets/images/Forward-48-thick.png" height="15px">
     </a>

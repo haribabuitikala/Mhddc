@@ -1,5 +1,5 @@
-<h4 class="font-size-16 text-orange">5 Choose Your Design</h4>
-<div class="tile text-center choose-your-design--sec margin-b-15 ptn-rel choose-design">
+<h4 class="font-size-16 text-orange">Choose Your Door Design</h4>
+<div class="tile text-center choose-your-design--sec margin-b-15 ptn-rel choose-design" *ngIf="loaded">
     <!--<div class="margin-b-10">-->
     <!--<img src="../../assets/images/white-short.png" alt="" id="short">-->
     <!--</div>-->
@@ -11,8 +11,8 @@
     <app-res-slider [data]="data"
                     [number]="number"
                     [folder]="folder"
+                    [cname]="'design'"
                     [category]="category">
-
     </app-res-slider>
 
 

@@ -23,6 +23,12 @@ export class AppComponent implements OnInit {
         , private app: AppUtilities
         , private nav: NavComponent
         , private activeRoute: ActivatedRoute) {
+        route.events.subscribe(r => {
+            if (r instanceof NavigationEnd) {
+                console.log('flow Data ', app.resFlowSession.resDoorObj);
+                window['cObj'] = app.resFlowSession.resDoorObj;
+            }
+        })
 
     }
 
@@ -42,7 +48,7 @@ export class AppComponent implements OnInit {
 
 
     ngOnInit() {
-
+        $('body').removeClass('loader');
         if (!this.app.utilities.zipCode && this.location.path() !== '/banner') {
             this.route.navigateByUrl('/');
         }
@@ -92,6 +98,18 @@ export class AppComponent implements OnInit {
     toRoute(path) {
         let link: any = this.app.utilities[this.app.utilities.flow][path];
         this.route.navigateByUrl(link);
+    }
+
+
+
+    priceListener;
+    updatePrice() {
+        if (this.priceListener) {
+            this.priceListener();
+        }
+    }
+    subscribeToPrice(fn) {
+        this.priceListener = fn;
     }
 
 }

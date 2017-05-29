@@ -52,6 +52,7 @@ export class DoorSizeComponent implements OnInit {
         , private navComponent:NavComponent
         , private toastr:ToastrService
         , private navComp:NavService) {
+            utils.clearResFlow();
     }
 
     // private navComponent:NavComponent
@@ -72,6 +73,7 @@ export class DoorSizeComponent implements OnInit {
                 
             }
         });
+
     }
 
     homeSize = "0";
@@ -95,6 +97,7 @@ export class DoorSizeComponent implements OnInit {
         this.dataParams.dheightFt = +this.utils.utilities[door + 'Height'];
         this.dataParams.dheightIn = 0;
 
+        this.utils.resFlowSession.doorSize.door = door;
         this.navigateTo(this.dataParams);
     }
 
@@ -103,6 +106,9 @@ export class DoorSizeComponent implements OnInit {
         this.collection.getCollection(data).subscribe(
             res => {
                 this.data.data = res;
+                this.utils.resFlowSession.doorSize.doorDimensions = data;
+                this.utils.resFlowSession.collections = res;
+                this.utils.resFlowSession.resDoorObj.product.apiData = res;
                 // this.utils.utilities.currPage = 2;
                 // this.utils.utilities.clicked = 1;
                 this.utils.setUtils(2, 1);
@@ -197,11 +203,7 @@ export class DoorSizeComponent implements OnInit {
     }
 
     prevBtn(curr, path) {
-        this.makeNull();
-        // this.utils.utilities.currPage = 1;
-        // this.utils.utilities.clicked = 0;
-        this.utils.setUtils(1, 0);
-        this.route.navigateByUrl(path);
+        this.navComponent.openModal();
     }
 
     makeNull() {

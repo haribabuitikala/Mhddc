@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
+import { AppComponent } from "../app.component";
 import {AppUtilities} from "../shared/appUtilities";
 import {CollectionData} from "../collection/collection-data";
 import {ConfigComponent} from "../config/config.component";
@@ -16,6 +17,7 @@ export class DesignComponent implements OnInit {
     constructor(private utils:AppUtilities
         , private dataStore:CollectionData
         , private navComponent:NavComponent
+        , private app: AppComponent
         , private config:ConfigComponent
         , private route:Router) {
     }
@@ -24,11 +26,13 @@ export class DesignComponent implements OnInit {
     number = 6;
     folder = 'design';
     category = 'constructions';
+    loaded = false;
 
     ngOnInit() {
         this.startProcess();
         $('#visualize-header').html('5 Choose Your Design');
     }
+
 
     startProcess() {
         let utils = this.utils;
@@ -45,18 +49,28 @@ export class DesignComponent implements OnInit {
 
             }
         });
+
+        this.config.pageTitle = '4.Choose Your Door Design';
+
+        this.utils.resFlowSession.resDoorObj.design.dsgn = data[0];
+        this.utils.resFlowSession.resDoorObj.construction.apiData = data[0].constructions;
+        this.utils.resFlowSession.resDoorObj.construction.construction = data[0].constructions[0];
+        var constructionSelected = this.utils.resFlowSession.resDoorObj.construction.construction;
+        if (constructionSelected && constructionSelected['colors']) {
+            if (constructionSelected['colors'].length > 0) {
+                this.utils.resFlowSession.resDoorObj.color.base = constructionSelected['colors'][0];
+                this.utils.resFlowSession.resDoorObj.color.overlay = constructionSelected['colors'][0];
+                this.app.updatePrice();
+            }
+        }
+        this.loaded = true;
     }
 
     nextBtn(path) {
         this.route.navigateByUrl(path);
     }
     prevBtn(path){
-        this.route.navigateByUrl(path);
-    }
-
-    getDesignImgs() {
-
-
+        this.route.navigateByUrl('/home');
     }
 
 }
