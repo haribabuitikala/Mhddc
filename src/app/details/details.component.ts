@@ -55,7 +55,7 @@ export class DetailsComponent implements OnInit {
     } else {
       this.utils.resFlowSession.resDoorObj.QTY = count + 1;
     }
-
+    this.quantity = this.utils.resFlowSession.resDoorObj.QTY;
     this.calculatePrice();
   }
 
