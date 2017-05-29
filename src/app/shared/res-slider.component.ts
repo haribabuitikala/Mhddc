@@ -144,6 +144,8 @@ export class ResSliderComponent implements OnInit {
         utils.resFlow.selectedImg = obj.item_id;
         utils.resFlow.design = obj;
         // this.details.itemPrice = obj.item_price;
+        let t = $('#doorVis').width();
+        alert('doorvis width'+t);
         this.config.getVisUpdate(obj, 'doorVis');
         if (this.category === 'color') {
             this.utils.resFlow.colorconfig = obj.colorconfig;
