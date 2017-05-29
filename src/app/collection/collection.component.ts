@@ -6,8 +6,8 @@ import {NavService} from "../nav/nav-service";
 import {CollectionService} from "../shared/data.service";
 import {NavComponent} from "../nav/nav.component";
 import {AppComponent} from "../app.component";
-declare var $:any;
-declare var _:any;
+declare var $: any;
+declare var _: any;
 @Component({
     selector: 'app-collection',
     templateUrl: './collection.component.html',
@@ -41,13 +41,13 @@ export class CollectionComponent implements OnInit {
     }
 
 
-    constructor(private data:CollectionData
-        , private route:Router
-        , private utils:AppUtilities
-        , private navComp:NavService
-        , private dataService:CollectionService
-        , private navComponent:NavComponent
-        , private appComponent:AppComponent) {
+    constructor(private data: CollectionData
+        , private route: Router
+        , private utils: AppUtilities
+        , private navComp: NavService
+        , private dataService: CollectionService
+        , private navComponent: NavComponent
+        , private appComponent: AppComponent) {
     }
 
     collections;
@@ -66,6 +66,7 @@ export class CollectionComponent implements OnInit {
         this.pageNo = this.utils.utilities.currPage;
 
         this.quickShipObj = this.collections[0];
+        this.utils.resFlow.collection = this.collections[0];
         $.each(this.data.data, function (idx, value) {
             switch (value.item_thumbnail) {
                 case "dtreserve.jpg":
@@ -102,17 +103,18 @@ export class CollectionComponent implements OnInit {
         this.specialCollections = _.filter(this.collections, ['productline', 'speciality']);
         this.popularCollections = _.filter(this.collections, ['productline', 'popular']);
         let utils = this.utils.utilities;
-        if(
+        this.utils.resFlow.quickShip = 0;
+        if (
             this.utils.resFlow.quickShip > 0 ||
             utils.wf === 9 &&
             utils.wi === 0 &&
             utils.hf === 7 &&
             utils.hi === 0
-        ){
-            
+        ) {
+
             this.quickShip = this.utils.resFlow.quickShip;
         }
-        
+
         this.navComp.activateIcon();
 
         this.navComponent.renderNav({
@@ -121,33 +123,34 @@ export class CollectionComponent implements OnInit {
             currentStepUrl: '/collection',
             showStepIndicator: true,
             nextStepFn: () => {
-                
+
             }
         });
 
     }
 
-    isSelected(itm){
+    isSelected(itm) {
         return this.selected === itm.item_id ? true : false;
     }
 
     goToHome(speciality) {
         $('body').addClass('loader');
         this.dataService.getHomes()
-            .then(res=> {
+            .then(res => {
                 let result = res['homes'].home;
                 result = _.filter(result, ['_size', this.utils.utilities.homeSize]);
                 this.data.homeImages = result;
                 // this.setFlow();
                 let params = this.setParams(speciality);
+                this.utils.resFlow.collection = speciality;
                 this.dataService.getDesign(params)
                     .subscribe(
-                        res => {
-                            console.log(res);
-                            this.data.designs = res;
-                            $('body').removeClass('loader');
-                            this.utils.resFlow.quickShip === 1 ? this.route.navigateByUrl('/config') : this.route.navigateByUrl('/home');                            
-                        }
+                    res => {
+                        console.log(res);
+                        this.data.designs = res;
+                        $('body').removeClass('loader');
+                        this.utils.resFlow.quickShip === 1 ? this.route.navigateByUrl('/config') : this.route.navigateByUrl('/home');
+                    }
                     );
             })
     }

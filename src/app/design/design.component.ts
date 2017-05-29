@@ -5,6 +5,7 @@ import {CollectionData} from "../collection/collection-data";
 import {ConfigComponent} from "../config/config.component";
 import {NavComponent} from "../nav/nav.component";
 declare var _:any;
+declare var $:any;
 
 @Component({
     selector: 'app-design',
@@ -27,7 +28,7 @@ export class DesignComponent implements OnInit {
 
     ngOnInit() {
         this.startProcess();
-        $('#visualize-header').html('5 Choose Your Design');
+        $('#visualize-header').html('4 Choose Your Design');
     }
 
     startProcess() {

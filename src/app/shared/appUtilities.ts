@@ -98,7 +98,11 @@ export class AppUtilities {
         selectedHome : '',
         selectedImg : null,
         colorconfig: '',
-        quickShip:0
+        quickShip:0,
+
+        // the below are for canvas render
+        collection:null,
+        design:null
     };
 
     setUtils(curr, clicked) {

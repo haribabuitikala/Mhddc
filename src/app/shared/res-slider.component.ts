@@ -1,10 +1,11 @@
 import {Component, OnInit, Input, Output, EventEmitter, AfterViewInit} from '@angular/core';
 import {AppUtilities} from "./appUtilities";
+import {CanvasRender} from "./canvas-render";
 import {CollectionData} from "../collection/collection-data";
 import {ConfigComponent} from "../config/config.component";
 import {DetailsComponent} from "../details/details.component";
-declare var $:any;
-declare var _:any;
+declare var $: any;
+declare var _: any;
 
 @Component({
     selector: 'app-res-slider',
@@ -39,22 +40,23 @@ declare var _:any;
 })
 export class ResSliderComponent implements OnInit {
 
-    constructor(private utils:AppUtilities
-        , private dataStore:CollectionData
-        , private config:ConfigComponent) {
+    constructor(private utils: AppUtilities
+        , private dataStore: CollectionData
+        , private config: ConfigComponent
+        , private canvas: CanvasRender) {
     }
 
-    @Input() data:any;
-    @Input() count:any;
-    @Input() number:any;
+    @Input() data: any;
+    @Input() count: any;
+    @Input() number: any;
     @Input() selectedIdx;
     @Input() selectedVal;
-    @Input() folder:any;
-    @Input() category:any;
+    @Input() folder: any;
+    @Input() category: any;
 
     sliderRows;
 
-    // @Output() notify = new EventEmitter<GdoOpener>();
+    // @Output() notify = new EventEmitter();
 
     ngOnInit() {
         if (this.data) {
@@ -140,13 +142,16 @@ export class ResSliderComponent implements OnInit {
         event.currentTarget.classList.add('current');
         let utils = this.utils;
         utils.resFlow.selectedImg = obj.item_id;
+        utils.resFlow.design = obj;
         // this.details.itemPrice = obj.item_price;
+        this.config.getVisUpdate(obj, 'doorVis');
         if (this.category === 'color') {
             this.utils.resFlow.colorconfig = obj.colorconfig;
         }
         if (this.category === 'constructions')
             this.config.homeImage = obj.item_thumbnail;
         this.dataStore[this.category] = obj[this.category];
+
         // this.utils.utilities.gdoOpenerSelectedItm = obj.item_id;
         // this.notify.emit(obj);
     }

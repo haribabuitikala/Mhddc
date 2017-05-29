@@ -167,6 +167,7 @@ export class AdditionalOptionsComponent implements OnInit {
             $('.gdoDistance').prop('disabled', 'disabled');
         }
         this.gdoConfig.itemPrice = this.utils.calculateTotalPrice(); //this.calculateTotalPrice(this.utils.utilities.item_price, this.singleOpener, this.doubleOpener, this.mileOpenPr, this.qty);
+        this.mileage(this.distance, this.distancePrice);  
     }
 
     singleOpener = 0;
@@ -307,7 +308,11 @@ export class AdditionalOptionsComponent implements OnInit {
         this.gdoConfig.milep = milep;
         return ((basep * this.utils.utilities.gdoOpenerQty) + singlep + doublep + milep);
     }
-
+    mileage(dist, price){
+        this.gdoConfig.showdistance = true;
+        this.gdoConfig.distance = dist;
+        this.gdoConfig.distancePrice = price;
+    }
     updateDistance(itm, flow) {
         this.utils.utilities.distance = +itm.target.value;
 
@@ -338,6 +343,9 @@ export class AdditionalOptionsComponent implements OnInit {
         this.mileOpenPr = this.distancePrice;
         this.utils.utilities.distancePrice = this.distancePrice;
         this.gdoConfig.itemPrice = this.utils.calculateTotalPrice();
+        this.mileage(this.distance, this.distancePrice);
     }
 
 }
+
+

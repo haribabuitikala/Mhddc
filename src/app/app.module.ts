@@ -34,6 +34,7 @@ import {GdoConfigComponent} from './gdo-config/gdo-config.component';
 import {NavService} from "./nav/nav-service";
 import {ShoppingCartComponent} from './shopping-cart/shopping-cart.component';
 import {ApiConstants} from "./shared/api-constants";
+import {CanvasRender} from "./shared/canvas-render";
 import {GdoOpener} from "./opener/gdoOpener";
 
 @NgModule({
@@ -75,7 +76,8 @@ import {GdoOpener} from "./opener/gdoOpener";
         CollectionData,
         NavService,
         ApiConstants,
-        GdoOpener
+        GdoOpener,
+        CanvasRender
     ],
     bootstrap: [AppComponent]
 })

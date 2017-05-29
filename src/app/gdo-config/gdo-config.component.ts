@@ -38,7 +38,12 @@ export class GdoConfigComponent implements OnInit, OnChanges {
     gdoOpenerSelected = this.dataStore.gdoOpenerAccessories;
     gdoOpeners = [];
     gdoOpenersTxt = 'teststes';
-    gdoLoaded = false
+    gdoLoaded = false;
+
+    // mileage
+    distance;
+    distancePrice;
+    showdistance;
 
     ngOnChanges() {
         console.log('changed', this.showDetails);
@@ -78,7 +83,7 @@ export class GdoConfigComponent implements OnInit, OnChanges {
         });
 
         this.gdoOpenersTxt = strtt.join('');
-        this.gdoLoaded = true;
+        this.gdoLoaded = true;        
     }
 
     toPng(itm) {

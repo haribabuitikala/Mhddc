@@ -52,13 +52,18 @@
                 {{storeName.storename}}
             </span>
         </p>
-        <p>
+        <div *ngIf="gdoLoaded">
             <span class="col-xs-4 bold">Opener :</span>
-            <span class="col-xs-8 padding-0" *ngIf="gdoLoaded">
+            <div class="col-xs-8 padding-0">
                 {{openerTxt}} <br/>
                 <div *ngFor="let g of gdoOpeners">{{g.count}} - {{g.name}}(${{g.price}} each)</div>
-            </span>
-        </p>
+            </div>
+        </div>
+        <div *ngIf="showdistance">
+            <span class="col-xs-offset-4">
+                {{distance}} miles from store ({{distancePrice | currency:'USD':true:'1.2-2'}})
+                </span>
+        </div>
     </modal-body>
 </modal>
 
