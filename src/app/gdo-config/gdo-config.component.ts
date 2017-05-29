@@ -16,10 +16,10 @@ export class GdoConfigComponent implements OnInit, OnChanges {
         , private utils: AppUtilities
         , private router: Router
         , private dataStore: CollectionData) {
-            router.events.subscribe(s => {
-                if (s instanceof NavigationEnd) {
-                }
-            })
+        router.events.subscribe(s => {
+            if (s instanceof NavigationEnd) {
+            }
+        })
     }
 
     data;
@@ -44,6 +44,7 @@ export class GdoConfigComponent implements OnInit, OnChanges {
     }
 
     ngOnInit() {
+
         this.appComponent.currScreen = 3;
         this.calulateAmt = this.utils.utilities.gdoSingleDoor + this.utils.utilities.gdoDoubleDoor + this.utils.utilities.distance;
         this.itemPrice = this.utils.utilities.item_price + this.calulateAmt;
@@ -101,7 +102,7 @@ export class GdoConfigComponent implements OnInit, OnChanges {
                 this.gdoOpeners.push(gdoItem);
             }
         });
-       this.dataStore.gdoOpenerAccessories=this.gdoOpeners;
+        this.dataStore.gdoOpenerAccessories = this.gdoOpeners;
         showDetails.open()
     }
 

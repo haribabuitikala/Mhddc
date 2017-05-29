@@ -179,7 +179,6 @@ export class OpenerComponent implements OnInit {
 
     prevBtn(path) {
         if (this.utils.utilities.flow === 'gdoNavElems') {
-
             this.utils.setUtils(1, 0);
             this.goTo(path)
         } else {

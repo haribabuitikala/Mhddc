@@ -74,6 +74,7 @@ export class AdditionalOptionsComponent implements OnInit {
 
 
     ngOnInit() {
+        this.utils.resetCalc();
         this.appComponent.next = 'Next';
         this.pageNo = this.utils.utilities.currPage;
         this.showMenu = this.utils.utilities.showNav;
@@ -98,13 +99,13 @@ export class AdditionalOptionsComponent implements OnInit {
         $('.gdoCofigDetails').show();
         this.dataStore.gdoDirectQuestions = [];
         this.utils.utilities.distancePrice = 0;
-        
+
         var k = this.pageNo + '.Additional Options';
         $('#visualize-header').html(k);
     }
 
     nextBtn(path) {
-            $('body').addClass('loader');
+        $('body').addClass('loader');
         if (this.utils.utilities.flow === 'gdoNavElems') {
             this.utils.setUtils(4, 1);
             this.goTo('/gdoConfig' + path)
@@ -115,7 +116,8 @@ export class AdditionalOptionsComponent implements OnInit {
     }
 
     prevBtn(path) {
-            $('body').addClass('loader');
+        $('body').addClass('loader');
+        this.gdoConfig.gdoOpeners.length = 0;
         if (this.utils.utilities.flow === 'gdoNavElems') {
             this.utils.setUtils(2, 0);
             if (this.navComponent.subFlow) {
@@ -123,7 +125,7 @@ export class AdditionalOptionsComponent implements OnInit {
                 this.navComponent.renderNav({
                     showStepIndicator: false
                 });
-            $('body').removeClass('loader');
+                $('body').removeClass('loader');
                 this.route.navigateByUrl('/banner');
             } else {
                 this.goTo('/gdoConfig' + path);
