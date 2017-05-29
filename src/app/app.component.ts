@@ -17,6 +17,7 @@ export class AppComponent implements OnInit {
     activeStep = -1;
     flowType;
 
+    noDIYs = [30, 16, 9];
 
     constructor(private route: Router
         , private location: Location

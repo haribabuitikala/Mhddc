@@ -54,6 +54,23 @@ export class CollectionComponent implements OnInit {
     popularCollections;
     selected;
     loaded = false;
+    loadStockGroups() {
+        let utils = this.utils.utilities;
+        let dataParams = {
+            "dwidthFt": utils.wf,
+            "dwidthIn": utils.wi || 0,
+            "dheightFt": utils.hf,
+            "dheightIn": utils.hi || 0,
+            'storeid': +utils.storenumber,
+            'windcode': utils.winCode
+        };
+        this.dataService.getStockGroup(dataParams).subscribe(res => {
+            var stockStore = res[0];
+            this.utils.quickStockInfo.stockgroupid = stockStore.stockgroupid;
+            this.utils.quickStockInfo.storenumber = stockStore.storenumber;
+            this.utils.quickStockInfo.productids = stockStore.productids;
+        });
+    }
     ngOnInit() {
         this.makeNull();
         this.collections = this.data.data;
@@ -110,13 +127,14 @@ export class CollectionComponent implements OnInit {
             }
         });
 
-        this.selected = this.popular ? this.popularCollections[0] : this.specialCollections[0];
+        //this.selected = this.popular ? this.popularCollections[0] : this.specialCollections[0];
 
         this.loaded = true;
+        this.loadStockGroups();
     }
 
     isSelected(itm) {
-        return this.selected.item_id === itm.item_id ? true : false;
+        return (this.selected && this.selected.item_id === itm.item_id) ? true : false;
     }
 
     goToHome(speciality) {
@@ -187,8 +205,25 @@ export class CollectionComponent implements OnInit {
     }
 
     quickShip() {
-        //   user should be redirected to design page
-        console.log('hi');
+        let utils = this.utils.utilities;
+        let dataParams = {
+            "dtype": utils.dtype,
+            "Windcode": utils.winCode,
+            "NatMarketID": +utils.natmarketid,
+            "wf": utils.wf,
+            "wi": utils.wi || 0,
+            "hf": utils.hf,
+            "hi": utils.hi || 0,
+            "lang": "en",
+            "localmarketid": +utils.localmarketid,
+            "doorsize": +utils.homeSize,
+            "isCRLE": false,
+            "productlayout": true
+        };
+        this.dataService.getquickDoors(dataParams).subscribe(res => {
+            console.log('res', res);
+        });
+
     }
 
     dataModel = {
