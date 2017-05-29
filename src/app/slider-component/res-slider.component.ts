@@ -93,6 +93,34 @@ export class ResSliderComponent implements OnInit, AfterViewInit {
                     }
                 }
                 break;
+            case 'glasstype':
+                if (this.utils.resFlowSession.resDoorObj.windows.glasstype) {
+                    if (this.utils.resFlowSession.resDoorObj.windows.glasstype['item_id'] === item['item_id']) {
+                        isSeleted = true;
+                    }
+                }
+                break;
+            case 'handles':
+                if (this.utils.resFlowSession.resDoorObj.hardware.handle) {
+                    if (this.utils.resFlowSession.resDoorObj.hardware.handle['item_id'] === item['item_id']) {
+                        isSeleted = true;
+                    }
+                }
+                break;
+            case 'stepplates':
+                if (this.utils.resFlowSession.resDoorObj.hardware.stepplate) {
+                    if (this.utils.resFlowSession.resDoorObj.hardware.stepplate['item_id'] === item['item_id']) {
+                        isSeleted = true;
+                    }
+                }
+                break;
+            case 'stephinges':
+                if (this.utils.resFlowSession.resDoorObj.hardware.hinge) {
+                    if (this.utils.resFlowSession.resDoorObj.hardware.hinge['item_id'] === item['item_id']) {
+                        isSeleted = true;
+                    }
+                }
+                break;
             default:
                 break;
         }
@@ -156,6 +184,9 @@ export class ResSliderComponent implements OnInit, AfterViewInit {
                     this.utils.resFlowSession.resDoorObj.windows.glasstype = obj['glasstype'][0];
                 }
                 break;
+            case 'glasstype':
+                this.utils.resFlowSession.resDoorObj.windows.glasstype = obj;
+                break;
             case 'handles':
                 this.utils.resFlowSession.resDoorObj.hardware.handle = obj;
                 break;
@@ -170,6 +201,7 @@ export class ResSliderComponent implements OnInit, AfterViewInit {
                 break;
             case 'design':
                 this.utils.resFlowSession.resDoorObj.design.dsgn = obj;
+                this.utils.resFlowSession.resDoorObj.construction.apiData = obj['constructions'];
                 this.utils.resFlowSession.resDoorObj.construction.construction = obj['constructions'][0];
                 break;
             case 'color':

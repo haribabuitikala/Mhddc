@@ -137,7 +137,6 @@ export class CollectionComponent implements OnInit {
                         this.utils.resFlowSession.collection['params'] = params;
                         this.utils.resFlowSession.collection['homeImages'] = result;
                         this.utils.resFlowSession.collection['designs'] = res;
-
                         this.utils.resFlowSession.resDoorObj.design.apiData = res;
                         this.utils.resFlowSession.resDoorObj.design.rows = speciality.Rows;
                         this.utils.resFlowSession.resDoorObj.design.columns = speciality.Columns;

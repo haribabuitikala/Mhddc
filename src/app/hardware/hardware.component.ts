@@ -78,12 +78,14 @@ export class HardwareComponent implements OnInit {
       res => {
         this.utils.resFlowSession.resDoorObj.hardware.apiData = res;
         let yourHandlesData = res[0]['LHDKS'];
+        yourHandlesData = _.uniqBy(yourHandlesData, 'item_id');
         this.yourHandles = _.chunk(yourHandlesData, 3);
 
         let stepPlates = res[0]['StepPlates'];
         this.yourStepPlates = _.chunk(stepPlates, 4);
 
         let stepHinges = res[0]['StrapHinges'];
+        stepHinges = _.uniqBy(stepHinges, 'item_id');
         this.yourStepHinge = _.chunk(stepHinges, 4);
         this.isLoaded = true;
       }
