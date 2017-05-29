@@ -169,10 +169,10 @@ export class CollectionComponent implements OnInit {
         // utils.productid = obj.item_id;
 
         return dataParams = {
-            "productid": obj.item_id,
+            "ProductID": obj.item_id,
             "dtype": utils.dtype,
-            "windcode": utils.winCode,
-            "natmarketid": +utils.natmarketid,
+            "Windcode": utils.winCode,
+            "NatMarketID": +utils.natmarketid,
             "wf": utils.wf,
             "wi": utils.wi || 0,
             "hf": utils.hf,
@@ -180,7 +180,7 @@ export class CollectionComponent implements OnInit {
             "lang": "en",
             "localmarketid": +utils.localmarketid,
             "doorsize": +utils.homeSize,
-            "laborcode": obj.singleinstallcode,
+            "LaborCode": obj.singleinstallcode,
             "isCRLE": false,
             "productlayout": true
         };
