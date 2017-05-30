@@ -31,7 +31,8 @@
                 <div class="_slide-items">
                     <div class="inner-item col-xs-{{number}}" *ngFor="let slideitem of slide; let i=index" [ngClass]="{ 'current' : isSeleted(slideitem, k, i)}"
                         (click)="openerSelected(slideitem, $event)">
-                        <img (error)="onImageLoadError(slideitem, folder)" src="http://hddchtml.clopay.com/Content/en/images/{{slideitem.item_thumbnail.replace('.jpg', '.png')}}"
+                        <img (error)="onImageLoadError(slideitem, folder)" 
+                            src="../../assets/images/{{folder}}/{{slideitem.item_thumbnail.replace('.jpg', '.png')}}"
                             [attr.data-id]="slideitem.item_id">
                     </div>
                 </div>

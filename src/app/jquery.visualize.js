@@ -1422,15 +1422,15 @@ var glassSections = 0;
 		BuildObject = null;
 		console.log($this.element)
 		$($this.element).css('top', topAmmount + 'px')
-		$($this.element).css('left', leftAmmount + 'px')
+		$($this.element).css('left', leftAmmount + 'px !important')
 		$($this.element).css('text-width', $this.options.MAXHEIGHT + 'px')
 		$($this.element).css('text-align', 'center')
-		$($this.element).css('position', 'absolute')
-		$($this.element).css('transform', 'scale(' + ratio + ',' + ratio + ')');
-		$($this.element).css('-moz-transform-origin', '0 0');
-		$($this.element).css('-moz-transform', 'scale(' + ratio + ',' + ratio + ')');
-		$($this.element).css('-ms-transform', 'scale(' + ratio + ',' + ratio + ')');
-		$($this.element).css('-webkit-transform', 'scale(' + ratio + ',' + ratio + ')');
+		$($this.element).css('position', 'absolute !important')
+		// $($this.element).css('transform', 'scale(' + ratio + ',' + ratio + ')');
+		// $($this.element).css('-moz-transform-origin', '0 0');
+		// $($this.element).css('-moz-transform', 'scale(' + ratio + ',' + ratio + ')');
+		// $($this.element).css('-ms-transform', 'scale(' + ratio + ',' + ratio + ')');
+		// $($this.element).css('-webkit-transform', 'scale(' + ratio + ',' + ratio + ')');
 		$($this.element).css('-o-transform', 'scale(' + ratio + ',' + ratio + ')');
 		$($this.element).children().css('position', 'absolute');
 
