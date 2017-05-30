@@ -24,6 +24,14 @@ export class ConfigComponent implements OnInit, AfterViewInit {
 
     pageTitle;
     loaded = false;
+    private fitToContainer(){
+        var canvas = document.querySelector('canvas');
+        canvas.style.width='100%';
+        canvas.style.height='100%';
+        canvas.style.position = 'initial';
+        canvas.width  = canvas.offsetWidth;
+        canvas.height = canvas.offsetHeight;
+    }
     ngAfterViewInit() {
         $('#doorVis').DoorVisualization({
             NAME: 'configView',
@@ -31,7 +39,8 @@ export class ConfigComponent implements OnInit, AfterViewInit {
             MAXHEIGHT: 280,
             MAXWIDTH: 315,
             VIEW: 'door'
-        });
+        });        
+       // this.fitToContainer();
     }
     ngOnInit() {
         // set the curr screen
@@ -39,18 +48,18 @@ export class ConfigComponent implements OnInit, AfterViewInit {
         path === "/config/design" ? path = "/config" : path = this.location.path();
         // this.appComponent.currScreen = this.appComponent.navElems.indexOf(path);
 
-        $('.switcher-box').css({ right: 45 });
+        $('.switcher-box').css({ right: 35 });
 
         this.homeImage = this.utils.resFlow.selectedHome;
         $('.switcher-box').on('click tap', function () {
             $(this).hide();
-            $('.switcher-box-home').show().removeClass('hide').animate({ right: 80 });
+            $('.switcher-box-home').show().removeClass('hide').animate({ right: 60 });
             $('.switcher-image').addClass('homeImage');
         });
 
         $('.switcher-box-home').on('click tap', function () {
             $(this).hide();
-            $('.switcher-box').show().removeClass('hide').animate({ right: 45 });
+            $('.switcher-box').show().removeClass('hide').animate({ right: 35 });
             $('.switcher-image').removeClass('homeImage');
         });
     }
