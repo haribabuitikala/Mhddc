@@ -1,6 +1,9 @@
 var imgSkewURL = 'http://hddchtml.clopay.com/ImageHandler3.aspx';
 var imgFolder = 'http://localhost:3435/pimages';
-// var imgFolder = '/assets/images/pimages';
+// var imgFolder = 'http://localhost:3435';
+if (false && location.href.indexOf('localhost:4200') >= 0) {
+    imgFolder = 'http://localhost:3435/pimages';
+}
 var uploadFolder = 'http://hddchtml.clopay.com/uploads';
 
 var orderObj = {
@@ -15,7 +18,6 @@ var orderObj = {
     "hasMiles": false,
     "cart": [],
     "items": 0,
-    "homedata": "",
     "orderInstallType": "",
     "promotion": [{ bullet0: '', bullet1: '', moreinfo: '', promotionid: 0 }, false],
     "promotionData": [{ bullet0: '', bullet1: '', moreinfo: '', promotionid: 0 }, false],

@@ -34,6 +34,8 @@ export class ResSliderComponent implements OnInit, AfterViewInit {
 
     sliderRows;
 
+    imageUrl = location.href.indexOf('localhost:4200') >= 0 ? 'http://localhost:3435/images' : '';
+
     // @Output() notify = new EventEmitter<GdoOpener>();
 
     ngOnInit() {
@@ -59,6 +61,7 @@ export class ResSliderComponent implements OnInit, AfterViewInit {
         // this.slideIndex = selectedIndex;
         // this.sliderLeft = -(this.slideIndex * this.slideWidth);
 
+        this.imageUrl = location.href.indexOf('localhost:4200') >= 0 ? 'http://localhost:3435/images/' + this.folder : '../../assets/images/' + this.folder;
     }
 
     isSeleted(item, index, itemIndex) {
@@ -188,12 +191,18 @@ export class ResSliderComponent implements OnInit, AfterViewInit {
                 break;
             case 'handles':
                 this.utils.resFlowSession.resDoorObj.hardware.handle = obj;
+                this.utils.resFlowSession.resDoorObj.hardware.handle['count'] = 1;
+                this.utils.resFlowSession.resDoorObj.hardware.handle['placement'] = obj['placement'] ? obj['placement'] : obj['placementlist']; 
                 break;
             case 'stepplates':
                 this.utils.resFlowSession.resDoorObj.hardware.stepplate = obj;
+                this.utils.resFlowSession.resDoorObj.hardware.stepplate['count'] = 1;
+                this.utils.resFlowSession.resDoorObj.hardware.stepplate['placement'] = obj['placement'] ? obj['placement'] : obj['placementlist']; 
                 break;
             case 'stephinges':
                 this.utils.resFlowSession.resDoorObj.hardware.hinge = obj;
+                this.utils.resFlowSession.resDoorObj.hardware.hinge['count'] = 1;
+                 this.utils.resFlowSession.resDoorObj.hardware.hinge['placement'] = obj['placement'] ? obj['placement'] : obj['placementlist']; 
                 break;
             case 'openers':
                 this.utils.resFlowSession.resDoorObj.opener.opener = obj;
@@ -218,6 +227,7 @@ export class ResSliderComponent implements OnInit, AfterViewInit {
                 break;
         }
         this.app.updatePrice();
+        this.config.renderCanvas();
     }
     openerSelected(obj, event) {
         //$('._slide-items img', this.myElem.nativeElement).removeClass('current');
@@ -241,7 +251,7 @@ export class ResSliderComponent implements OnInit, AfterViewInit {
         // this.notify.emit(obj);
         this.saveSelected(obj);
 
-        this.config.renderCanvas();
+        
     }
 
 

@@ -51,6 +51,7 @@ export class HardwareComponent implements OnInit {
     this.utils.resFlowSession.resDoorObj.hardware.stepplate['count'] = this.countManager.StepPlates;
     this.utils.resFlowSession.resDoorObj.hardware.hinge['count'] = this.countManager.StepHinge;
 
+    this.config.renderCanvas();
   }
 
   loadData() {
