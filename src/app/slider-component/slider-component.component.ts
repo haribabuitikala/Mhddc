@@ -2,8 +2,8 @@ import {Component, OnInit, Input, Output, EventEmitter, AfterViewInit} from '@an
 import {GdoConfigComponent} from "../gdo-config/gdo-config.component";
 import {GdoOpener} from "../opener/gdoOpener";
 import {AppUtilities} from "../shared/appUtilities";
-declare var $:any;
-declare var _:any;
+declare var $: any;
+declare var _: any;
 
 @Component({
     selector: 'app-slider-component',
@@ -12,13 +12,13 @@ declare var _:any;
 })
 export class SliderComponentComponent implements OnInit {
 
-    constructor(private gdoConfig:GdoConfigComponent
-        , private utils:AppUtilities) {
+    constructor(private gdoConfig: GdoConfigComponent
+        , private utils: AppUtilities) {
     }
 
-    @Input() data:any;
-    @Input() count:any;
-    @Input() number:any;
+    @Input() data: any;
+    @Input() count: any;
+    @Input() number: any;
 
     sliderRows;
 
@@ -102,6 +102,8 @@ export class SliderComponentComponent implements OnInit {
 
     openerSelected(obj, event) {
         $('._slide-items img').removeClass('current');
+        this.gdoConfig.gdoOpeners.length = 0;
+        this.gdoConfig.openerTxt = obj.item_name;
         this.gdoConfig.itemPrice = obj.item_price * this.utils.utilities.gdoOpenerQty;
         this.utils.utilities.item_price = obj.item_price;
         let t = obj.item_thumbnail.split('.')[0];

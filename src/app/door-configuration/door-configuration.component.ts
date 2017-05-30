@@ -66,8 +66,8 @@ export class DoorConfigurationComponent implements OnInit {
         this.directFlow = this.utils.utilities.directFlow;
         this.itemPrice = this.utils.calculateTotalPrice();
         this.pageNo = this.utils.utilities.currPage;
-        
-$('body').removeClass('loader');
+
+        $('body').removeClass('loader');
         // this.appComponent.next = 'Add To Cart';
         this.navComp.activateIcon();
         this.distancePrice > 0 ? this.showDistancePrice = true : this.showDistancePrice = false;
@@ -75,7 +75,7 @@ $('body').removeClass('loader');
         // this.gdodirectquestions.length ? this.gdodirect = true : this.gdodirect = false;
         this.gdodirect = this.utils.utilities.directFlow;
         this.gdoConfig.showDetails = false;
-         $('.gdoCofigDetails').hide();
+        $('.gdoCofigDetails').hide();
 
 
         this.gdoOpenerSelected.forEach((gdoItem) => {

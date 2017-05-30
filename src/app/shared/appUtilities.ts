@@ -128,6 +128,14 @@ export class AppUtilities {
         return (basep * qty) + singlep + doublep + milesp + kPrice + distancePrice;
     }
 
+    resetCalc() {
+        this.utilities.singlep = 0;
+        this.utilities.doublep = 0;
+        this.utilities.milesp = 0;
+        this.utilities.kPrice = 0;
+        this.utilities.distancePrice = 0;
+    }
+
     updateQty(flow, qty) {
         if (flow === 1 && qty < 6) {
             qty++

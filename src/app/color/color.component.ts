@@ -24,7 +24,7 @@ export class ColorComponent implements OnInit {
     }
 
     data;
-    number = 6;
+    number = 4;
     folder = 'color';
 
     loaded = false;
