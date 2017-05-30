@@ -97,7 +97,7 @@
 
                 <li>
                     <span><strong>Size</strong>
-          {{whdata.widthF}}' {{whdata.widthI}}"(w) x {{whdata.heightF}}' {{whdata.heightI}}"(h)</span></li>
+          {{details.widthF}}' {{details.widthI}}"(w) x {{details.heightF}}' {{details.heightI}}"(h)</span></li>
 
                 <li>
                     <span><strong>WindCode </strong>
@@ -107,9 +107,13 @@
                     <span><strong> Collection </strong>
           {{details.collectionName}}</span></li>
 
-                <li>
+                <li *ngIf="details.designName">
                     <span><strong> Design </strong>
           {{details.designName}}</span></li>
+
+                <li *ngIf="details.constructionName">
+                    <span><strong> Construction </strong>
+          {{details.constructionName}}</span></li>
 
             </ul>
 

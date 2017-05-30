@@ -18,7 +18,7 @@ export class NonClassicComponent implements OnInit {
   data = [];
   loaded = false;
   number = 4;
-  folder = '';
+  folder = 'glass';
 
   constructor(private utils: AppUtilities
     , private dataStore: CollectionData

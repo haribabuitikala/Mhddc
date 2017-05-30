@@ -49,7 +49,12 @@ export class DetailsComponent implements OnInit {
   }
   detailsModal() {
     this.details = this.utils.resFlowSession.resDetails;
-    this.whdata = this.utils.resFlowSession.resDoorObj.size.width;
+    this.details.widthF = this.utils.utilities.wf;
+    this.details.widthI = this.utils.utilities.wi;
+    this.details.heightF = this.utils.utilities.hf;
+    this.details.heightI = this.utils.utilities.hi;
+    // this.details.constructionName = this.resDoorObj.construction.construction[0].item_name;
+    // this.whdata = this.utils.resFlowSession.resDoorObj.size.width;
 
   }
 

@@ -202,7 +202,8 @@ class ResidentialFlowSession {
         heightF:0,
         heightI:0,
         collectionName:'',
-        designName:''
+        designName:'',
+        constructionName: ''
     }
 
     resDoorObj = {
