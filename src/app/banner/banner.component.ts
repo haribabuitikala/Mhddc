@@ -19,6 +19,9 @@ export class BannerComponent implements OnInit {
     zipCode: any;
     lang: any;
 
+    onlyNumberKey(event) {
+        return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57;
+    }
 
     constructor(private appComponent: AppComponent
         , private route: Router
@@ -26,7 +29,7 @@ export class BannerComponent implements OnInit {
         , private localize: LangEnglishService
         , private dataService: CollectionService
         , private dataStore: CollectionData
-        , private utils:AppUtilities) {
+        , private utils: AppUtilities) {
     }
     save(form, event) {
         event.preventDefault();
@@ -56,8 +59,6 @@ export class BannerComponent implements OnInit {
 
         this.appComponent.showStepIndicator = false;
     }
-    onlyNumberKey(event) {
-        return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57;
-    } 
+
 
 }
