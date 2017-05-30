@@ -144,6 +144,7 @@ export class CollectionComponent implements OnInit {
 
     goToHome(speciality) {
         this.utils.resFlowSession.resDoorObj.product.product = speciality;
+        this.utils.resFlowSession.resDetails.collectionName = speciality.item_name;
         this.dataService.getHomes()
             .then(res => {
                 let result = res['homes'].home;

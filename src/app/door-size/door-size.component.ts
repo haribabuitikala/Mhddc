@@ -10,7 +10,7 @@ import {CollectionData} from "../collection/collection-data";
 import {ToastrService} from "toastr-ng2/toastr-service";
 import {NavService} from "../nav/nav-service";
 import {NavComponent} from "../nav/nav.component";
-declare var $:any;
+declare var $: any;
 
 @Component({
     selector: 'app-door-size',
@@ -19,8 +19,8 @@ declare var $:any;
 })
 export class DoorSizeComponent implements OnInit {
 
-    @ViewChild('florida') modal1:ModalComponent;
-    showMeasure:boolean = false;
+    @ViewChild('florida') modal1: ModalComponent;
+    showMeasure: boolean = false;
     lang;
 
     collectionData;
@@ -42,17 +42,17 @@ export class DoorSizeComponent implements OnInit {
     // if user did'nt selected door size the default widths should be singleDoorWidth, singleDoorHeight, doubleDoorWidth and doubleDoorHeight
     // based on the selection either single car door or double car door
 
-    constructor(private appComponent:AppComponent
-        , private route:Router
-        , private language:LangEnglishService
-        , private sizes:SizeList
-        , private utils:AppUtilities
-        , private collection:CollectionService
-        , private data:CollectionData
-        , private navComponent:NavComponent
-        , private toastr:ToastrService
-        , private navComp:NavService) {
-            utils.clearResFlow();
+    constructor(private appComponent: AppComponent
+        , private route: Router
+        , private language: LangEnglishService
+        , private sizes: SizeList
+        , private utils: AppUtilities
+        , private collection: CollectionService
+        , private data: CollectionData
+        , private navComponent: NavComponent
+        , private toastr: ToastrService
+        , private navComp: NavService) {
+        utils.clearResFlow();
     }
 
     // private navComponent:NavComponent
@@ -70,7 +70,7 @@ export class DoorSizeComponent implements OnInit {
             currentStepUrl: '/doorSize',
             showStepIndicator: true,
             nextStepFn: () => {
-                
+
             }
         });
 
@@ -88,7 +88,7 @@ export class DoorSizeComponent implements OnInit {
 
         this.utils.utilities.singleDoor ? this.homeSize = "1" : this.homeSize = "2";
         this.utils.utilities.homeSize = this.homeSize;
-        
+
         event.currentTarget.classList.add('current');
         this.utils.utilities.currScreen += 1;
 
@@ -122,6 +122,8 @@ export class DoorSizeComponent implements OnInit {
         );
     }
 
+    resDetails = this.utils.resFlowSession.resDetails;
+
     getWidthInches(itm) {
         this.widthInches = this.sizes.getInches(itm, this.selectedWidthFeet);
         this.selectedwidth = "width_" + this.selectedWidthFeet + "_0";
@@ -129,6 +131,10 @@ export class DoorSizeComponent implements OnInit {
         // this.heightInches = this.sizes.getInches('height', this.heightFeets[0]);
         this.utils.utilities.wi = this.widthInches[0];
         this.utils.utilities.wf = +this.selectedWidthFeet;
+
+        this.resDetails.widthF = this.widthInches[0];
+        this.resDetails.widthI = +this.selectedWidthFeet;
+
         // this.utils.utilities.hf = this.heightFeets[0];
         // this.utils.utilities.hi = this.heightInches[0];
     }
@@ -138,15 +144,20 @@ export class DoorSizeComponent implements OnInit {
         // this.selectedHeight = "height_" + this.selectedHeightFeet + "_0";
         this.utils.utilities.hf = +this.selectedHeightFeet;
         this.utils.utilities.hi = this.heightInches[0];
+
+        this.resDetails.heightF = this.widthInches[0];
+        this.resDetails.heightI = this.heightInches[0];
     }
 
     getWidth() {
         // this.heightFeets = this.sizes.getHeightFeets(this.selectedwidth);
         this.utils.utilities.wi = +this.selectedWidthInches;
+        this.resDetails.widthI = +this.selectedWidthInches;
     }
 
     getHeight() {
         this.utils.utilities.hi = +this.selectedHeightInches;
+        this.resDetails.heightI = +this.selectedHeightInches;
     }
 
     //  check for florida to open the popup
@@ -192,6 +203,11 @@ export class DoorSizeComponent implements OnInit {
             this.dataParams.dwidthIn = this.utils.utilities.wi;
             this.dataParams.dheightFt = this.utils.utilities.hf;
             this.dataParams.dheightIn = this.utils.utilities.hi;
+
+            this.utils.resFlowSession.resDoorObj.size.width['wf'] = this.utils.utilities.wf + '';
+            this.utils.resFlowSession.resDoorObj.size.width['wi'] = this.utils.utilities.wi + '';
+            this.utils.resFlowSession.resDoorObj.size.width['hf'] = this.utils.utilities.hf + '';
+            this.utils.resFlowSession.resDoorObj.size.width['hi'] = this.utils.utilities.hi + ''; 
 
             let dimension = (this.utils.utilities.wf * 12) + this.utils.utilities.wi;
 
