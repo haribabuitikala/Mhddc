@@ -142,7 +142,7 @@ export class ResSliderComponent implements OnInit, AfterViewInit {
 
     renderSlider() {
         this.slideWidth = $('._slider-container').width();
-        this.sliderWidth = (this.data.length * this.slideWidth) + this.slideWidth;
+        this.sliderWidth = (this.data.length * this.slideWidth) + this.slideWidth - 20;
     }
 
     ngAfterViewInit() {

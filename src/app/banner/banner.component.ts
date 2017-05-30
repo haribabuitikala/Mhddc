@@ -26,16 +26,19 @@ export class BannerComponent implements OnInit {
         , private localize: LangEnglishService
         , private dataService: CollectionService
         , private dataStore: CollectionData
-        , private utils:AppUtilities) {
+        , private utils: AppUtilities) {
     }
     save(form, event) {
         event.preventDefault();
         $('body').addClass('loader');
+        let len = form.value.zip.length;
         this.dataService.getZipResults(form.value.zip)
             .subscribe(
             res => {
                 this.dataStore.zipResults = res;
                 $('body').removeClass('loader');
+                this.utils.resFlowSession.resDetails.zip = form.value.zip;
+                this.utils.resFlowSession.resDetails.windcode = res.windcode
                 this.utils.utilities.winCode = res.windcode;
                 this.route.navigate(['/zipResults', form.value.zip]);
                 this.utils.utilities.zipCode = form.value.zip;
@@ -57,7 +60,12 @@ export class BannerComponent implements OnInit {
         this.appComponent.showStepIndicator = false;
     }
     onlyNumberKey(event) {
-        return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57;
-    } 
+        let len = event.currentTarget.value.length;
+        if (len > 4) {
+            event.preventDefault();
+        }
+        // return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57;
+
+    }
 
 }

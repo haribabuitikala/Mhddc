@@ -136,6 +136,8 @@ export class AppUtilities {
         this.utilities.distancePrice = 0;
     }
 
+
+
     updateQty(flow, qty) {
         if (flow === 1 && qty < 6) {
             qty++
@@ -187,6 +189,14 @@ class ResidentialFlowSession {
     home = {
 
     };
+
+    resDetails = {
+        zip: 0,
+        storeNumber: 0,
+        gdoStore: 0,
+        storeName:'',
+        windcode:''
+    }
 
     resDoorObj = {
         "QTY": 1,

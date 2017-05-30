@@ -40,7 +40,13 @@ export class DesignComponent implements OnInit {
         let utils = this.utils;
         let data = this.dataStore.designs;
         this.config.homeImage = data[0].item_thumbnail;
-        this.data = _.chunk(data, 4);
+        if (utils.utilities.singleDoor === true) {
+            this.number = 6;
+            this.data = _.chunk(data, 2);
+        } else {
+            this.number = 12;
+            this.data = _.chunk(data, 1);
+        }
 
         this.navComponent.renderNav({
             flowType: 'res',

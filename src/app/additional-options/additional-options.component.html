@@ -152,7 +152,7 @@
                     <div>
                         Distance of job site is
                         <form class="inline-block">
-                            <input type="text" pattern = "[0-9]" (keyup)="updateDistance($event,null)"
+                            <input type="number" pattern = "[0-9]" (keyup)="updateDistance($event,null)"
                                    name="gdoDistance" class="gdoDistance" [(ngModel)]="distance" disabled/>
                         </form>
                         drive miles from store
@@ -230,7 +230,7 @@
                     <div>
                         Distance of job site is
                         <form class="inline-block">
-                            <input  type="text" pattern = "[0-9]" (keyup)="updateDistance($event,'direct')"
+                            <input  type="number" pattern = "[0-9]" (keyup)="updateDistance($event,'direct')"
                                    name="gdoDistance" [(ngModel)]="distance" disabled class="gdoDistance"/>
                         </form>
                         drive miles from store
