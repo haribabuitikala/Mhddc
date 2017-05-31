@@ -3,7 +3,6 @@ import { AppUtilities } from "../shared/appUtilities";
 import { CollectionData } from "../collection/collection-data";
 import { ConfigComponent } from "../config/config.component";
 import { AppComponent } from "../app.component";
-import { DetailsComponent } from "../details/details.component";
 declare var $: any;
 declare var _: any;
 
@@ -246,6 +245,8 @@ export class ResSliderComponent implements OnInit, AfterViewInit {
         if (this.category === 'color' || this.category === 'constructions' || this.category === undefined)
             this.config.homeImage = obj.item_thumbnail;
         this.dataStore[this.category] = obj[this.category];
+
+        // this.details.details.designName = obj.item_name;
         // this.utils.utilities.gdoOpenerSelectedItm = obj.item_id;
         // this.notify.emit(obj);
         this.saveSelected(obj);

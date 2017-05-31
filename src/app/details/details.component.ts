@@ -39,13 +39,28 @@ export class DetailsComponent implements OnInit {
   itemPriceDY;
   isDIY = false;
   quantity = 1;
+  details;
+  whdata;
 
   ngOnInit() {
     // this.appComponent.currScreen = 0;
+    this.detailsModal();
 
   }
   detailsModal() {
+    this.details = this.utils.resFlowSession.resDetails;
+    this.details.widthF = this.utils.utilities.wf;
+    this.details.widthI = this.utils.utilities.wi;
+    this.details.heightF = this.utils.utilities.hf;
+    this.details.heightI = this.utils.utilities.hi;
+    // this.details.constructionName = this.resDoorObj.construction.construction[0].item_name;
+    // this.whdata = this.utils.resFlowSession.resDoorObj.size.width;
 
+  }
+
+  openDetailsModal(detailsModal){
+    this.details['designName'] = this.utils.resFlowSession.resDoorObj.design.dsgn['item_name'];
+    detailsModal.open();
   }
 
   updateQuantity(isIncrement?) {

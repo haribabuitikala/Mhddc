@@ -15,7 +15,7 @@
                 <img src="../../assets/images/add.png" alt="" class="add-quantity" (click)="updateQuantity(1)">
             </p>
             <p class="margin-b-5">&nbsp;</p>
-            <h4 class="pull-right padding-r-7 text-orange" (click)="detailsModal.open()">DETAILS</h4>
+            <h4 class="pull-right padding-r-7 text-orange" (click)="openDetailsModal(detailsModal)">DETAILS</h4>
         </div>
     </div>
 </div>
@@ -89,27 +89,31 @@
             <ul>
                 <li>
                     <span><strong>Zip Code/Location</strong>
-         60123 - ELGIN ,KANE COUNTY</span></li>
+         {{details.zip}} - {{details.storeName}} ,{{details.county}} COUNTY</span></li>
 
                 <li>
                     <span><strong>Store</strong>
-          ELGIN</span></li>
+          {{details.storeName}}</span></li>
 
                 <li>
                     <span><strong>Size</strong>
-          19' 0"(w) x 12' 0"(h)</span></li>
+          {{details.widthF}}' {{details.widthI}}"(w) x {{details.heightF}}' {{details.heightI}}"(h)</span></li>
 
                 <li>
                     <span><strong>WindCode </strong>
-          W0</span></li>
+          {{details.windcode}}</span></li>
 
                 <li>
                     <span><strong> Collection </strong>
-          Coachman® Collection</span></li>
+          {{details.collectionName}}</span></li>
 
-                <li>
+                <li *ngIf="details.designName">
                     <span><strong> Design </strong>
-          Design11</span></li>
+          {{details.designName}}</span></li>
+
+                <li *ngIf="details.constructionName">
+                    <span><strong> Construction </strong>
+          {{details.constructionName}}</span></li>
 
             </ul>
 

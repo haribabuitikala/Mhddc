@@ -22,7 +22,7 @@ export class ConstructionComponent implements OnInit {
     }
 
     number:number = 6;
-    folder = 'construction';
+    folder = '';
     category = 'colors';
     data;
 

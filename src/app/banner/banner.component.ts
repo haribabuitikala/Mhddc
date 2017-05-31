@@ -37,8 +37,10 @@ export class BannerComponent implements OnInit {
             res => {
                 this.dataStore.zipResults = res;
                 $('body').removeClass('loader');
-                this.utils.resFlowSession.resDetails.zip = form.value.zip;
-                this.utils.resFlowSession.resDetails.windcode = res.windcode
+                let resDetails = this.utils.resFlowSession.resDetails;
+                resDetails.zip = form.value.zip;
+                resDetails.windcode = res.windcode;
+                resDetails.county = res.county;
                 this.utils.utilities.winCode = res.windcode;
                 this.route.navigate(['/zipResults', form.value.zip]);
                 this.utils.utilities.zipCode = form.value.zip;

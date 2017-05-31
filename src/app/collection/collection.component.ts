@@ -143,7 +143,10 @@ export class CollectionComponent implements OnInit {
     }
 
     goToHome(speciality) {
+        $('.collection-img').removeClass('selected');
         this.utils.resFlowSession.resDoorObj.product.product = speciality;
+        this.utils.resFlowSession.resDetails.collectionName = speciality.item_name;
+        // event.currentTarget.classList.add('selected');
         this.dataService.getHomes()
             .then(res => {
                 let result = res['homes'].home;

@@ -195,7 +195,15 @@ class ResidentialFlowSession {
         storeNumber: 0,
         gdoStore: 0,
         storeName:'',
-        windcode:''
+        windcode:'',
+        county:'',
+        widthF: 0,
+        widthI:0,
+        heightF:0,
+        heightI:0,
+        collectionName:'',
+        designName:'',
+        constructionName: ''
     }
 
     resDoorObj = {
