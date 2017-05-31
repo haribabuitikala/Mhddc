@@ -88,9 +88,7 @@ export class AdditionalOptionsComponent implements OnInit {
             this.utils.utilities.itmPrice = this.data.item_price;
             $('.inner-router').css({ 'margin-top': 0 });
             $('.showDetails').hide();
-// this.gdoConfig.itemPrice = this.utils.calculateTotalPrice();
         } else {
-            // this.gdoConfig.itemPrice = this.utils.calculateTotalPrice();
             $('.showDetails').show();
         }
         this.hidePrev = this.navComponent.subFlow ? true : false;
