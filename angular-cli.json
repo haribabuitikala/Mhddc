@@ -21,7 +21,8 @@
         "styles.css",
         "main.less",
         "../node_modules/bootstrap/dist/css/bootstrap.min.css",
-        "../node_modules/toastr-ng2/toastr.css"
+        "../node_modules/toastr-ng2/toastr.css",
+        "../node_modules/font-awesome/css/font-awesome.min.css"
       ],
       "scripts": [
         "../node_modules/jquery/dist/jquery.js",
