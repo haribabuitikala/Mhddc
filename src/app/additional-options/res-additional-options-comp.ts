@@ -66,7 +66,7 @@ export class ResAdditionalOptionsComponent implements OnInit {
             }
         });
 
-        this.config.pageTitle = 'Additional Options';
+        this.config.pageTitle = '12. Additional Options';
     }
 
 
