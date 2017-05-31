@@ -29,48 +29,52 @@
     <dd class="diy-install-table-header">
       Size
     </dd>
-    <dd>9' 0"(w) x 7' 0"(h)</dd>
+    <dd>{{installSize}}</dd>
     <dd class="diy-install-table-header">
       WindCode
     </dd>
-    <dd>W0</dd>
+    <dd>{{wincode}}</dd>
   </dl>
   <dl class="diy-install-table">
     <dd class="diy-install-table-header">
       Collection
     </dd>
-    <dd>Classic™ Collection - Premium Series</dd>
+    <dd>{{collection}}</dd>
     <dd class="diy-install-table-header">
-      Door Design
+      Door Design 
     </dd>
-    <dd><span class="door-design-txt text-capitalize">Short</span> Panel</dd>
+    <dd><span class="door-design-txt text-capitalize">{{doorDesign}}</span></dd>
     <dd class="diy-install-table-header">
       Door Model
     </dd>
-    <dd>HDP20<span class="pull-right">$876.95</span></dd>
+    <dd>{{doorModel}}<span class="pull-right">${{doorModelPrice}}</span></dd>
     <dd class="diy-install-table-header">
       Door Construction
     </dd>
-    <dd>3-layer 2" Intellicore® Insul. R-Value 18.4</dd>
+    <dd>{{construction}}</dd>
   </dl>
   <dl class="diy-install-table">
     <dd class="diy-install-table-header">
       Color
     </dd>
-    <dd><span class="selected-color text-capitalize">Standard White</span><span class="pull-right">$0.00</span></dd>
+    <dd>
+      <span class="selected-color text-capitalize">{{color}}</span>
+      <span class="pull-right">$0.00</span>
+    </dd>
   </dl>
   <dl class="diy-install-table">
     <dd class="diy-install-table-header">
       Top Section
     </dd>
-    <dd><span>Solid Short Elegant</span></dd>
-    <dd>Placement : 4th Row (TOP)</dd>
+    <dd>
+      <div>{{topSection}}</div>
+    </dd>
   </dl>
   <dl class="diy-install-table">
     <dd class="diy-install-table-header">
       Hardware
     </dd>
-    <dd>Lock : Inside Slide Lock (Retail)<span class="pull-right">$0.00</span></dd>
+    <dd *ngFor="let hrdware of hardware">{{hrdware}}<span class="pull-right">$0.00</span></dd>
   </dl>
 </div>
 
