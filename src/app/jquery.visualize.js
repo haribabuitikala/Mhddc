@@ -161,11 +161,15 @@ var glassSections = 0;
 		$this.element.bind('buildComplete', function (e, params) {
 			logprint("BuildComplete", $this);
 		})
-		$('#ahomeVis').bind('homeComplete', function (e, params) {
+		$('#doorHome').bind('homeComplete', function (e, params) {
 			//$($this.element).empty()
 			var homeXml = $(params);
 			$this.options.HOMEDATA = homeXml;
-			$this._dHome = [$this.newCanvas(false, homeXml.attr('imgwidth'), homeXml.attr('imgheight')), 0]
+			orderObj.HOMEDATA = homeXml;
+
+
+			$this._dHome = [$this.newCanvas(false, $('.switcher-image-sec').innerWidth(), 240), 0]
+			// $this._dHome = [$this.newCanvas(false, homeXml.attr('imgwidth'), homeXml.attr('imgheight')), 0]
 			if (homeXml.attr('upload') == 'true' || homeXml.attr('imagelg') == true) {
 				canvasLoader($this, true, $this.buildObj, $this._dHome[0], uploadFolder + '/' + homeXml.attr('imagelg'), 0, 0, true, false);
 			}
@@ -175,15 +179,12 @@ var glassSections = 0;
 			if ($this.buildObj != null) {
 				if ($this.options.ENABLE) {
 					logprint("Start Build", $this);
-					//console.log($this.options.HOMEDATA)
-
 
 					var homeXml = $(orderObj.homedata);
-					$this.cN = (homeXml == $this.options.HOMEDATA) ? $this.cN : -99
 					$this.options.HOMEDATA = homeXml;
+					$this.cN = (homeXml == $this.options.HOMEDATA) ? $this.cN : -99;
 					$this.buildDoor();
-					//		$this.updateBuildobj($this.options.build);
-					//console.log($this.options.HOMEDATA)
+ 
 				}
 				else {
 					logprint("Disabled", $this);
@@ -193,7 +194,11 @@ var glassSections = 0;
 				logprint("Awaiting Door Object", $this);
 			}
 		});
+
+
 		$this.setupDOM();
+
+
 		if ($this.options.build != null) {
 			if ($this.options.ENABLE) {
 				logprint("Start Build", $this);
@@ -213,7 +218,7 @@ var glassSections = 0;
 		$this._dSlab = [$this.newCanvas(), 0]
 		$this._dSlabClr = [$this.newCanvas(), 0]
 		$this._dOverlay = [$this.newCanvas(), 0]
-		$this._dOverlayClr = [$this.newCanvas(), 0]
+		$this._dOverlayClr = [$this.newCanvas(false, $('.switcher-image-sec').innerWidth(), 240), 0]
 		$this._dWindow = [$this.newCanvas(), 0]
 		$this._dTop = [$this.newCanvas(), 0]
 		$this._dTopColor = [$this.newCanvas(), 0]
@@ -237,7 +242,6 @@ var glassSections = 0;
 	// Update BuildOBJ
 	Plugin.prototype.updateBuildobj = function ($obj) {
 		var $this = this;
-		////console.log($this.options.HOMEDATA)
 		$this.cN = 0;
 		errorBuild = false;
 
@@ -318,16 +322,9 @@ var glassSections = 0;
 
 		if (!errorBuild) {
 			var $this = this;
-			console.log('Build ' + $this.cN)
-
-			//console.log($this.cN)
-
 			switch ($this.cN) {
 				case -99: {
 					$this.cN = 0;
-
-
-
 
 					var homeXml = $this.options.HOMEDATA;
 
@@ -397,9 +394,6 @@ var glassSections = 0;
 				case 0:
 					{ //Clear All Size has Changed
 						$this.setupDOM();
-
-
-
 					}
 				case 1:
 					{ // SLAB - "BUILDSLAB"
@@ -407,14 +401,11 @@ var glassSections = 0;
 							if ($this.buildObj.designimage != "") {
 								var sName = $this.getSlab($this.buildObj.designimage);
 								canvasLoader($this, true, $this.buildObj, $this._dSlab[0], sName);
-								console.log('CN1')
 								$this.cN++
 							}
 						}
 						else {
-							console.log('CN1')
 							$this.cN++;
-							//console.log('bd1')
 							$this.buildDoor();
 
 						}
@@ -425,13 +416,10 @@ var glassSections = 0;
 
 						if ($this.buildObj.designimage != "") {
 							canvasLoader($this, true, $this.buildObj, this._dOverlay[0], $this.getDsgn($this.buildObj.designimage));
-							console.log('CN2')
 							$this.cN++;
 						}
 						else {
-							console.log('CN2')
 							$this.cN++;
-							// console.log('bd2')
 							$this.buildDoor();
 						}
 						break;
@@ -442,19 +430,16 @@ var glassSections = 0;
 						if ($.inArray($this.buildObj.productid, hasSlab) != -1) {
 							if ($this.buildObj.overlaycolor != "") {
 								var sName = $this.getSlab($this.buildObj.designimage);
-								//alert('ad')
 								canvasColr($this, $this.buildObj, $this._dSlabClr[0], sName, $this.buildObj.overlaycolor)
 								$this.cN = 4;
 							}
 							else {
 								$this.cN = 4;
-								//console.log('bd3')
 								$this.buildDoor();
 							}
 						}
 						else {
 							$this.cN = 4;
-							//                         console.log('bd4')
 							$this.buildDoor();
 						}
 						break;
@@ -464,11 +449,9 @@ var glassSections = 0;
 						if ($this.buildObj.colorcode != "") {
 
 							canvasColr($this, $this.buildObj, $this._dOverlayClr[0], $this.getDsgn($this.buildObj.designimage), $this.buildObj.colorcode)
-							console.log('CN3')
 							$this.cN++
 						}
 						else {
-							console.log('CN3')
 							$this.cN++;
 
 							$this.buildDoor();
@@ -495,7 +478,6 @@ var glassSections = 0;
 
 							if ($this.buildObj.glaz != 0 && $this.buildObj.glaz != "GLAZ-SOL") {
 								canvasLoader($this, true, $this.buildObj, $this._dWindow[0], $this.buildObj.doorcolumns + "C_" + size + "_" + $this.buildObj.EnvWindows + ".png", 0, topy);
-								console.log('CN4')
 								$this.cN++
 							} else if (Number(prodid) == 10 && $this.buildObj.topsectionimage.toLowerCase().indexOf("rletop8") < 0) {
 
@@ -520,18 +502,15 @@ var glassSections = 0;
 								sName = sName.replace("10R-", "");
 
 								canvasLoader($this, true, $this.buildObj, $this._dWindow[0], sName, 0, 0);
-								console.log('CN4')
 								$this.cN++
 
 							}
 							else {
-								console.log('CN4')
 								$this.cN++;
 								$this.buildDoor();
 							}
 						}
 						else {
-							console.log('CN4')
 							$this.cN++;
 
 							$this.buildDoor();
@@ -592,7 +571,6 @@ var glassSections = 0;
 						}
 						else {
 							$this.cN++;
-							//console.log('bd8')
 							$this.buildDoor();
 						}
 						break;
@@ -611,7 +589,6 @@ var glassSections = 0;
 						}
 						else {
 							$this.cN++;
-							//                         console.log('bd9')
 							$this.buildDoor();
 						}
 						break;
@@ -708,11 +685,9 @@ var glassSections = 0;
 										plc1 = plc1 + 4;
 									}
 
-									console.log($this.hLoop + '==' + index)
 
 									if ($this.hLoop == index) {
 
-										console.log(index + 1 + '==' + a1.length)
 										if (index + 1 == a1.length) {
 											$this.cN++
 											$this.hLoopOn = false;
@@ -762,10 +737,8 @@ var glassSections = 0;
 
 									var plc = a1[index].split(',');
 									var plc1 = plc[0].slice(1);
-									console.log($this.hLoop + '==' + index)
 									if ($this.hLoop == index) {
 
-										console.log(index + 1 + '==' + a1.length)
 										if (index + 1 == a1.length) {
 											$this.cN++
 											$this.hLoopOn = false
@@ -812,8 +785,6 @@ var glassSections = 0;
 									}
 								}
 
-								console.log('kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk')
-								console.log(tarPos)
 								if (!$this.hLoopOn) {
 									$this.hLoop = 0
 									$this.hLoopOn = true
@@ -886,7 +857,6 @@ var glassSections = 0;
 		$this.updateVisLayers();
 
 
-		console.log($this.cN + 'CALLED FOR BUILD COMPLETE')
 		$this.updateElem();
 		logprint("done Build ready for Complete", $this);
 		$('#SidebarLoader').hide(); 		// custom change to show sidebar loader
@@ -898,7 +868,9 @@ var glassSections = 0;
 		if (window.console && window.console.log && $obj.options.consolereporting) window.console.log($obj.options.NAME + '.log || ' + str);
 	};
 
-	function buildError() { }
+	function buildError() {
+		console.log('build Error ');
+	}
 	Plugin.prototype.getDsgn = function (str) {
 		var $this = this;
 		var prodid = $this.buildObj.productid;
@@ -1104,20 +1076,20 @@ var glassSections = 0;
 	///////////////////////////////////////////////////
 	Plugin.prototype.updateElem = function () {
 
-		console.log('callout')
 		var $this = this;
 		var ratio = 1;
 		var maxWidth = this.options.MAXWIDTH;
-		var maxHeight = this.options.MAXHEIGHT
+		var maxHeight = this.options.MAXHEIGHT;
 		var upload = false;
 		var leftAmmount = 0;
 		var topAmmount = 0;
-		var maxHeight2 = Number(this.options.MAXHEIGHT) - 25
+		var maxHeight2 = Number(this.options.MAXHEIGHT) - 25;
 		//var apiImg
-		var y1
+		var y1;
 
+		
 
-		$($this.element).empty()
+		$($this.element).empty();
 
 
 		exprtElm = $this.newCanvas(false, $this._dSlab[0][0].width, $this._dSlab[0][0].height);
@@ -1126,10 +1098,10 @@ var glassSections = 0;
 		var zoomControl = $('<div id="visZoom" style="position:relative; float: right; left: 0px; top: ' + maxHeight2 + 'px; "></div>');
 		var enviroControl = $('<div id="visTools"  style="position:relative; float: right; left: 0px; top: ' + maxHeight2 + 'px; "></div>').click(function () {
 			if (!upload) {
-				$(this).trigger('doorVisToolsUp')
+				$(this).trigger('doorVisToolsUp');
 			}
 			else {
-				$(this).trigger('doorVisTools')
+				$(this).trigger('doorVisTools');
 			}
 		});
 
@@ -1145,42 +1117,20 @@ var glassSections = 0;
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
 		$('#visZoom', $($this.element).parent()).remove();
 		$('#visTools', $($this.element).parent()).remove();
 
-
 		// $($($this.element).parent()).append(zoomControl);
 
-
-
-
-
-
-
-		var BuildObject = $this.newCanvas();
+		var BuildObject = $this.newCanvas(false, $('.switcher-image-sec').innerWidth(), 240);
 		var bCtx = BuildObject[0].getContext('2d');
-
-		for (var i = 0; i < $this.visualLayers.length; i++) {
-			bCtx.drawImage(($this.visualLayers[i][0][0]), 0, 0);
-			//$('body').append($this.visualLayers[i][0][0])
-		}
-
-
-		var imageData = BuildObject[0].toDataURL()
+		bCtx.drawImage(($this.visualLayers[3][0][0]), 0, 0, $('.switcher-image-sec').innerWidth(), 240);
+		// for (var i = 0; i < $this.visualLayers.length; i++) {
+		// 	bCtx.drawImage(($this.visualLayers[i][0][0]), 0, 0, $('.switcher-image-sec').innerWidth(), 240);
+		// 	//$('body').append($this.visualLayers[i][0][0])
+		// }
+		var imageData = BuildObject[0].toDataURL();
 		//  cArr[$this.buildObj.bitData[0]][$this.buildObj.bitData[1]].VISIMG = imageData
-		//	console.log(	cArr[$this.buildObj.bitData[0]][$this.buildObj.bitData[1]])
 
 		if ($this.options.VIEW != 'home') {
 			$($this.element).css('left', '0px')
@@ -1202,7 +1152,6 @@ var glassSections = 0;
 
 		} else {
 			// HOME VIEW
-
 			$($this.element).css('left', '10px')
 			var mydorPos = 1
 			var upload = false;
@@ -1212,6 +1161,7 @@ var glassSections = 0;
 					upload = true;
 				}
 			}
+
 
 			var doorElm = $this.newCanvas(false, $this.options.HOMEDATA.attr('imgwidth'), $this.options.HOMEDATA.attr('imgheight'));
 			var ctx = doorElm[0].getContext("2d");
@@ -1226,13 +1176,9 @@ var glassSections = 0;
 			$(pnts).each(function (index, value) {
 				var mpass = true
 
-
-
-
 				if (mpass) {
 					var apiImg = new Image();
 					var point = $(value)
-
 
 					var point1 = $(value)
 					var y2 = point.attr('y2')
@@ -1254,7 +1200,6 @@ var glassSections = 0;
 					apiImg.onload = function () {
 
 						var p1 = point1
-
 
 						// Image came back
 						if (upload) {
@@ -1279,7 +1224,6 @@ var glassSections = 0;
 							ctx2.closePath();
 							// Clip to the current path
 							ctx2.clip();
-							//console.log(point)
 							if (Number(y2) < Number(y1)) {
 								y1 = y2;
 							}
@@ -1377,7 +1321,7 @@ var glassSections = 0;
 				//}, 100);
 
 				//$this.timers.push(ajTimer)
-			})
+			});
 			if (upload) {
 				$('.vsDoor', $this.element).remove();
 				if (!$('.homeCNVS', $this.element).length) {
@@ -1395,9 +1339,6 @@ var glassSections = 0;
 				$('.CNVS', $this.element).remove();
 				if (y1 != undefined) {
 
-
-
-
 					$($this.element).append($($this._dHome[0]).attr('class', 'homeCNVS1'));
 					$('.vsDoor', $this.element).remove();
 					if (!$('.homeCNVS1', $this.element).length) {
@@ -1410,17 +1351,11 @@ var glassSections = 0;
 
 
 
-
-
-
-
 		}
-
 
 		if ($this.options.VIEW == 'home') { leftAmmount += 16; topAmmount += -10 }
 
 		BuildObject = null;
-		console.log($this.element)
 		$($this.element).css('top', topAmmount + 'px')
 		$($this.element).css('left', leftAmmount + 'px !important')
 		$($this.element).css('text-width', $this.options.MAXHEIGHT + 'px')
@@ -1432,7 +1367,7 @@ var glassSections = 0;
 		// $($this.element).css('-ms-transform', 'scale(' + ratio + ',' + ratio + ')');
 		// $($this.element).css('-webkit-transform', 'scale(' + ratio + ',' + ratio + ')');
 		$($this.element).css('-o-transform', 'scale(' + ratio + ',' + ratio + ')');
-		$($this.element).children().css('position', 'absolute');
+		$($this.element).children().css('position', 'absolute').css('left', '0').css('top', '0');
 
 
 
@@ -1448,7 +1383,6 @@ var glassSections = 0;
 
 			var destCtx = cloneElm[0].getContext('2d');
 			$("canvas", $this.element).each(function (index, value) {
-				console.log(value)
 				// $('body').prepend(value)
 				destCtx.drawImage(value, 0, 0);
 			});
@@ -1507,7 +1441,6 @@ var glassSections = 0;
 	///////////////////////////////////////////////////
 
 	function canvasLoader(el, needRebuild, buildObj, canvas, dataURL, targX, targY, clr, SWAP) {
-		console.log('CVSLoad')
 		$('#SidebarLoader').show();
 		SWAP = typeof SWAP !== 'undefined' ? SWAP : true;
 		var ctx = canvas[0].getContext("2d");
@@ -1521,12 +1454,9 @@ var glassSections = 0;
 		url = url.replace(".gif", ".@@@@");
 		url = url.replace(".jpg", ".!!!!");
 		if (buildObj.constructionswaprule != "" && SWAP) {
-			//			console.log(url)
 			var constructionSwap = String(buildObj.constructionswaprule).toLowerCase();
-			//			console.log(constructionSwap)
 			var constructionSplit = constructionSwap.split(',');
 			url = url.replace(constructionSplit[0], constructionSplit[1]);
-			//			console.log(url)
 		}
 
 		if (buildObj.colorswaprule != "" && SWAP) {
@@ -1571,11 +1501,8 @@ var glassSections = 0;
 		targY = typeof targY !== 'undefined' ? targY : 0;
 		// Draw Image
 		imageObj.onload = function () {
-			ctx.drawImage(this, targX, targY);
-
+			ctx.drawImage(this, targX, targY, canvas[0].width, canvas[0].height);
 			if (needRebuild) {
-				console.log(url)
-				console.log('buildh2')
 				el.hLoop++;
 				el.buildDoor();
 
@@ -1583,7 +1510,6 @@ var glassSections = 0;
 		};
 		imageObj.onerror = function () {
 			errorBuild = true;
-			console.log('errBD10')
 			$('#SidebarLoader').hide(); 		// custom change to show sidebar loader
 			if (needRebuild) {
 
@@ -1636,8 +1562,6 @@ var glassSections = 0;
 				colrImg(el, canvas, colorCode, 180);
 			}
 			else if (buildObj.productid == '9') {
-				console.log(colorCode)
-				console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!')
 				colrImg(el, canvas, colorCode, 170, false);
 			}
 			else {
@@ -1741,7 +1665,6 @@ var glassSections = 0;
 		}
 
 		ctx.putImageData(imdg, 0, 0);
-		console.log('bd11')
 		el.buildDoor();
 
 		try { }
@@ -1827,7 +1750,7 @@ var glassSections = 0;
 		consolereporting: function (ths, arg) {
 			$(ths).trigger('consoleIO', arg);
 		},
-		updateHome: function (ths, parms) {
+		updateHome: function (ths, params) {
 			var $this = $(ths)
 
 			var homeXml = $(params);
@@ -1839,6 +1762,7 @@ var glassSections = 0;
 			else {
 				canvasLoader($this, false, $this.buildObj, $this._dHome[0], "homeimages/" + homeXml.attr('imagelg'), 0, 0, true, false);
 			}
+
 			if ($this.options.build != null) {
 				if ($this.options.ENABLE) {
 					$this.cN = (homeXml == $this.options.HOMEDATA) ? $this.cN : -99
@@ -1846,11 +1770,11 @@ var glassSections = 0;
 					$this.buildDoor();
 				}
 				else {
-					logprint("Disabled", $this);
+					console.log("Disabled", $this);
 				}
 			}
 			else {
-				logprint("Awaiting Door Object", $this);
+				console.log("Awaiting Door Object", $this);
 			}
 		}
 	};

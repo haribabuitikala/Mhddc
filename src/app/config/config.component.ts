@@ -24,23 +24,31 @@ export class ConfigComponent implements OnInit, AfterViewInit {
 
     pageTitle;
     loaded = false;
-    private fitToContainer(){
+    private fitToContainer() {
         var canvas = document.querySelector('canvas');
-        canvas.style.width='100%';
-        canvas.style.height='100%';
+        canvas.style.width = '100%';
+        canvas.style.height = '100%';
         canvas.style.position = 'initial';
-        canvas.width  = canvas.offsetWidth;
+        canvas.width = canvas.offsetWidth;
         canvas.height = canvas.offsetHeight;
     }
     ngAfterViewInit() {
         $('#doorVis').DoorVisualization({
             NAME: 'configView',
-            consolereporting: true,
+            consolereporting: false,
             MAXHEIGHT: 280,
             MAXWIDTH: 315,
             VIEW: 'door'
-        });        
-       // this.fitToContainer();
+        });
+        $('#doorHome').DoorVisualization({
+            NAME: 'configViewHome',
+            consolereporting: true,
+            MAXHEIGHT: 280,
+            MAXWIDTH: 315,
+            VIEW: 'home'
+        });
+
+        // this.fitToContainer();
     }
     ngOnInit() {
         // set the curr screen
@@ -64,7 +72,10 @@ export class ConfigComponent implements OnInit, AfterViewInit {
         });
     }
 
-    renderCanvas() {
+    renderCanvas(selectedHome?) {
+        // if (selectedHome) {
+        //     $('#doorHome').trigger('homeComplete', selectedHome);
+        // }
         this.getVisUpdate();
     }
 
@@ -79,7 +90,7 @@ export class ConfigComponent implements OnInit, AfterViewInit {
             targ = $('#doorVis');
         } else {
             viewD = 'home'
-            targ = $('#homeVis');
+            targ = $('#doorHome');
         }
 
 
@@ -206,7 +217,7 @@ export class ConfigComponent implements OnInit, AfterViewInit {
                     } else {
                         buildObj.hingeplacement = dor.hardware.hinge.placementlist.split(';')[0];
                     }
-                    
+
                 }
 
             } catch (e) { }
@@ -234,8 +245,6 @@ export class ConfigComponent implements OnInit, AfterViewInit {
 
         targ.DoorVisualization('view', viewD)
         targ.DoorVisualization('update', buildObj)
-
-
 
     }
 }

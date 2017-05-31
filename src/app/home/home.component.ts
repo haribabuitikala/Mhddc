@@ -53,6 +53,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
 
         this.utils.resFlowSession.home['selectedHomeImg'] = itm._imagelg;
         this.utils.resFlowSession.home['selectedHome'] = itm;
+        window['homeSelected'] = itm;
         
     }
 
