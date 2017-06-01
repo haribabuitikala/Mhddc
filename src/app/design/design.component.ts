@@ -8,7 +8,7 @@ import { ConfigComponent } from "../config/config.component";
 import { NavComponent } from "../nav/nav.component";
 import { DetailsComponent } from "../details/details.component";
 declare var _: any;
-declare var $:any;
+declare var $: any;
 
 @Component({
     selector: 'app-design',
@@ -44,7 +44,7 @@ export class DesignComponent implements OnInit {
         this.config.homeImage = data[0].item_thumbnail;
         utils.resFlowSession.resDetails.designName = data[0].item_name;
         //this.details.details.designName = data[0].item_name;
-        
+
         if (utils.utilities.singleDoor === true) {
             this.number = 6;
             this.data = _.chunk(data, 2);
@@ -76,6 +76,13 @@ export class DesignComponent implements OnInit {
                 this.app.updatePrice();
             }
         }
+
+        this.utils.resFlowSession.resDoorObj.windows.topsection = '';
+
+        this.utils.resFlowSession.resDoorObj.hardware.handle = '';
+        this.utils.resFlowSession.resDoorObj.hardware.hinge = '';
+        this.utils.resFlowSession.resDoorObj.hardware.stepplate = '';
+        this.utils.resFlowSession.resDoorObj.hardware.lock = '';
 
         this.loaded = true;
 

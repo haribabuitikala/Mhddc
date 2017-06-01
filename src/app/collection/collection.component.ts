@@ -193,17 +193,17 @@ export class CollectionComponent implements OnInit {
         // };
 
         // utils.productid = obj.item_id;
-
+         
         return dataParams = {
             "ProductID": obj.item_id,
             "dtype": utils.dtype,
             "Windcode": utils.winCode,
             "NatMarketID": +utils.natmarketid,
-            "wf": +utils.doubleDoorWidth,
-            "WidthFt": +utils.doubleDoorWidth,
+            "wf": +utils.wf,
+            "WidthFt": +utils.wf,
             "wi": utils.wi || 0,
-            "hf": +utils.doubleDoorHeight,
-            "HeightFt": +utils.doubleDoorHeight,
+            "hf": +utils.hf,
+            "HeightFt": +utils.hf,
             "hi": utils.hi || 0,
             "lang": "en",
             "localmarketid": +utils.localmarketid,
@@ -211,8 +211,8 @@ export class CollectionComponent implements OnInit {
             "LaborCode": obj.singleinstallcode,
             "isCRLE": false,
             "productlayout": true,
-            "doorwidth" : +utils.doubleDoorWidth,
-            "doorheight" : +utils.doubleDoorHeight
+            "doorwidth" : +utils.wf,
+            "doorheight" : +utils.hf
         };
     }
 

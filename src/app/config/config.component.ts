@@ -74,11 +74,11 @@ export class ConfigComponent implements OnInit, AfterViewInit {
         this.detailsModal();
     }
 
-    renderCanvas() {
-        this.getVisUpdate();
+    renderCanvas(obj?, targ?, elemSelector?) {
+        this.getVisUpdate(obj, targ, elemSelector);
     }
 
-    getVisUpdate(obj?, targ?) {
+    getVisUpdate(obj?, targ?, elemSelector?) {
 
         if (typeof (targ) === 'undefined') targ = 'doorVis';
         if (typeof (obj) === 'undefined') obj = this.utils.resFlowSession.resDoorObj;
@@ -90,6 +90,10 @@ export class ConfigComponent implements OnInit, AfterViewInit {
         } else {
             viewD = 'home'
             targ = $('#homeVis');
+        }
+
+        if (elemSelector) {
+            targ = $(elemSelector);
         }
 
 
@@ -247,6 +251,30 @@ export class ConfigComponent implements OnInit, AfterViewInit {
 
 
 
+    }
+
+    getDoorPrice(cData?) {
+        cData = cData || this.utils.resFlowSession.resDoorObj;
+        var priceObj = { install: 0, diy: 0 };
+        try {
+            var itemId = cData.product.product['item_id'];
+            var count = cData.QTY;
+            if (itemId) {
+                let cObj = cData;
+                let price = window['getDoorPrice'](cObj);
+                priceObj.install= parseFloat(price[0].replace(/ /g, '').replace('$', '')) * count;
+                this.isDIY = false;
+                if (this.appComponent.noDIYs.indexOf(itemId) < 0) {
+                    this.isDIY = true;
+                    priceObj.diy = parseFloat(price[1].replace(/ /g, '').replace('$', '')) * count;
+                }
+            }
+
+        } catch (g) {
+
+        }
+
+        return priceObj;
     }
 
     /** Details **/
