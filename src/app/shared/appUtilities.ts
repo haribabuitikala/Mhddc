@@ -169,9 +169,14 @@ export class AppUtilities {
 
 
     resFlowSession: ResidentialFlowSession = new ResidentialFlowSession();
+ 
+
+    resDiyData : ResidentialFlowSession = new ResidentialFlowSession();
+ 
     resQuickSession = {
         designs: []
     };
+ 
     clearResFlow() {
 
     }
@@ -179,7 +184,7 @@ export class AppUtilities {
 
 }
 
-class ResidentialFlowSession {
+export class ResidentialFlowSession {
     doorSize = {
         door: null,
         doorDimensions: {}

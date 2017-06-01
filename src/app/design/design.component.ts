@@ -63,7 +63,9 @@ export class DesignComponent implements OnInit {
         this.config.homeImage = data[0].item_thumbnail;
         utils.resFlowSession.resDetails.designName = data[0].item_name;
         //this.details.details.designName = data[0].item_name;
+ 
         var uniqueData = _.uniqBy(data, 'item_id');
+ 
         if (utils.utilities.singleDoor === true) {
             this.number = 6;
             this.data = _.chunk(uniqueData, 2);
@@ -100,6 +102,13 @@ export class DesignComponent implements OnInit {
             });
             this.loadQucikDoors();
         }
+
+        this.utils.resFlowSession.resDoorObj.windows.topsection = '';
+
+        this.utils.resFlowSession.resDoorObj.hardware.handle = '';
+        this.utils.resFlowSession.resDoorObj.hardware.hinge = '';
+        this.utils.resFlowSession.resDoorObj.hardware.stepplate = '';
+        this.utils.resFlowSession.resDoorObj.hardware.lock = '';
 
         this.loaded = true;
         this.app.setLoader();

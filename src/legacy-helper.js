@@ -1,6 +1,8 @@
 var imgSkewURL = 'http://hddchtml.clopay.com/ImageHandler3.aspx';
+ 
 var imgFolder = '/assets/images/pimages';
  
+
 var uploadFolder = 'http://hddchtml.clopay.com/uploads';
 
 var orderObj = {
@@ -927,7 +929,7 @@ function getConfigPrice() {
     return prc
 }
 
-function getVisUpdate(obj, targ) {
+function getVisUpdate(obj, targ, elemselector) {
 
     if (typeof (targ) === 'undefined') targ = 'doorVis';
     if (typeof (obj) === 'undefined') obj = cObj;
@@ -941,6 +943,9 @@ function getVisUpdate(obj, targ) {
         targ = $('#homeVis');
     }
 
+    if (elemselector) {
+        targ = $(elemselector);
+    }
 
     var buildObj = {
         centergrooves: 0,

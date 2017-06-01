@@ -1,9 +1,14 @@
+<<<<<<< HEAD
+import { Component, OnInit, ViewChild } from '@angular/core';
+=======
 import { Component, OnInit } from '@angular/core';
+>>>>>>> 560562b6ade07caaff9bb4e204035abfb73245b8
 import { Router } from '@angular/router';
 import { CollectionData } from "../collection/collection-data";
 import { ConfigComponent } from "../config/config.component";
 import { NavComponent } from "../nav/nav.component";
 import { AppUtilities } from "../shared/appUtilities";
+import { ModalComponent } from "ng2-bs3-modal/ng2-bs3-modal";
 
 declare var _: any;
 @Component({
@@ -25,10 +30,15 @@ export class ConstructionComponent implements OnInit {
     folder = 'construction';
     category = 'colors';
     data;
+    showUpsell: boolean = false;
 
     loaded = false;
+    className = '';
+
+    @ViewChild('upsell') upsell: ModalComponent;
 
     ngOnInit() {
+        console.log("construction step");
         this.startProcess();
         if (this.navComponent.flowType === 'res') {
             this.navComponent.renderNav({
@@ -53,6 +63,23 @@ export class ConstructionComponent implements OnInit {
             });
             this.config.pageTitle = '4.Choose Your Construction';
         }
+
+
+		switch (this.utils.resFlowSession.resDetails.collectionName) {
+            case "Coachman&#174; Collection": {
+                this.className = 'classic-collection';
+                break;
+            }
+            case "Gallery&#174; Collection":
+            case "Classic&#8482; Collection - Premium Series": {
+                this.className = 'gallery-collection';
+                break;
+            }
+            case "Modern Steel Collection": {
+                this.className = 'more-steel-collection';
+                break;
+            }
+        }
     }
 
     startProcess() {
@@ -65,12 +92,23 @@ export class ConstructionComponent implements OnInit {
         this.loaded = true;
     }
 
-    nextBtn(path) {
-        this.route.navigateByUrl('config/color');
+ 
+    nextBtn(path, upsellModal) {
+        if (this.utils.resFlowSession.collection.selectedCollection.item_id == 11 || 12 || 13 || 170) {
+            upsellModal.open();
+        } else {
+            this.route.navigateByUrl(path);
+        }
+ 
     }
 
     prevBtn() {
         this.route.navigateByUrl('/config/design');
+    }
+
+    moveNext() {
+        this.route.navigateByUrl('config/color');
+        // this.goToHome(this.selected);
     }
 
 }

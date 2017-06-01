@@ -1,15 +1,15 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
-import {AppComponent} from "../app.component";
-import {Router} from '@angular/router';
-import {ModalComponent} from "ng2-bs3-modal/ng2-bs3-modal";
-import {LangEnglishService} from "../shared/english";
-import {SizeList} from "./sizesList";
-import {AppUtilities} from "../shared/appUtilities";
-import {CollectionService} from "../shared/data.service";
-import {CollectionData} from "../collection/collection-data";
-import {ToastrService} from "toastr-ng2/toastr-service";
-import {NavService} from "../nav/nav-service";
-import {NavComponent} from "../nav/nav.component";
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { AppComponent } from "../app.component";
+import { Router } from '@angular/router';
+import { ModalComponent } from "ng2-bs3-modal/ng2-bs3-modal";
+import { LangEnglishService } from "../shared/english";
+import { SizeList } from "./sizesList";
+import { AppUtilities } from "../shared/appUtilities";
+import { CollectionService } from "../shared/data.service";
+import { CollectionData } from "../collection/collection-data";
+import { ToastrService } from "toastr-ng2/toastr-service";
+import { NavService } from "../nav/nav-service";
+import { NavComponent } from "../nav/nav.component";
 declare var $: any;
 
 @Component({
@@ -25,6 +25,7 @@ export class DoorSizeComponent implements OnInit {
 
     collectionData;
     isValid = true;
+    isRequired = false;
 
 
     widthFeets;
@@ -73,7 +74,6 @@ export class DoorSizeComponent implements OnInit {
 
             }
         });
-
     }
 
     homeSize = "0";
@@ -97,10 +97,24 @@ export class DoorSizeComponent implements OnInit {
         this.dataParams.dheightFt = +this.utils.utilities[door + 'Height'];
         this.dataParams.dheightIn = 0;
 
+ 
+        this.utils.utilities.wf = this.dataParams.dwidthFt;
+        this.utils.utilities.wi = this.dataParams.dwidthIn;
+        this.utils.utilities.hf = this.dataParams.dheightFt;
+        this.utils.utilities.hi = this.dataParams.dheightIn;
+ 
         this.utils.resFlowSession.resDoorObj.size.width['wf'] = this.utils.utilities[door + 'Width'];
         this.utils.resFlowSession.resDoorObj.size.height['hf'] = this.utils.utilities[door + 'Height'];
+ 
 
         this.utils.resFlowSession.doorSize.door = door;
+
+         console.log(this.utils.utilities.wf,
+                this.utils.utilities.wi,
+                this.utils.utilities.hf,
+                this.utils.utilities.hi);
+
+
         this.navigateTo(this.dataParams);
     }
 
@@ -165,21 +179,23 @@ export class DoorSizeComponent implements OnInit {
 
     //  check for florida to open the popup
     checkFlorida(isValid) {
-
-        this.showMeasure = true;
-        if (isValid == true) {
-            this.isValid = false;
-
-        } else {
-            this.isValid = true;
-            this.showMeasure = false;
-
-        }
-        let winCode = +this.utils.utilities.winCode.slice(1);
-        if (winCode >= 6) {
+        if (this.data.zipResults.state == 'FL') {
+            this.showMeasure = true;
+            if (isValid == true) {
+                this.isValid = false;
+                this.isRequired = true;
+            } else {
+                this.isValid = true;
+                this.showMeasure = false;
+                this.isRequired = true;
+            }
+            // let winCode = +this.utils.utilities.winCode.slice(1);
+            // if (winCode >= 6) {
             this.modal1.open();
+            // }
+        } else {
+            this.showMeasure = true;
         }
-
     }
 
     floridaClose() {
@@ -209,15 +225,29 @@ export class DoorSizeComponent implements OnInit {
 
             this.utils.resFlowSession.resDoorObj.size.width['wf'] = this.utils.utilities.wf + '';
             this.utils.resFlowSession.resDoorObj.size.width['wi'] = this.utils.utilities.wi + '';
+ 
             this.utils.resFlowSession.resDoorObj.size.height['hf'] = this.utils.utilities.hf + '';
             this.utils.resFlowSession.resDoorObj.size.height['hi'] = this.utils.utilities.hi + ''; 
+ 
 
             let dimension = (this.utils.utilities.wf * 12) + this.utils.utilities.wi;
 
             dimension > 120 ? this.homeSize = "2" : this.homeSize = "1";
             this.utils.utilities.homeSize = this.homeSize;
 
-            this.navigateTo(this.dataParams);
+            console.log(this.utils.utilities.wf,
+                this.utils.utilities.wi,
+                this.utils.utilities.hf,
+                this.utils.utilities.hi);
+
+            if (this.isRequired) {
+                if (this.selectedHeightFeet > 0 && this.selectedWidthFeet > 0) {
+                    this.navigateTo(this.dataParams);
+                }
+            } else {
+                this.navigateTo(this.dataParams);
+            }
+
         }
     }
 

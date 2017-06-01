@@ -12,7 +12,20 @@
     </div>
 </div>
 
-<modal #upshell>
+<div id="footer" class="col-xs-12 padding-t-10 padding-b-10">
+    <a href="javascript:void(0)" class="pull-left previous-btn" (click)="prevBtn('config/design')" data-id="currScreen">
+        <img src="../../assets/images/back-48-thick.png" height="15px">
+        Prev
+    </a>
+
+    <a href="javascript:void(0)" class="pull-right nextBtn" (click)="nextBtn('config/color',upsell)"
+       data-id="currScreen">
+        Next
+        <img src="../../assets/images/Forward-48-thick.png" height="15px">
+        <!--(click)="nextBtn('/additionalOptions')"-->
+    </a>
+</div>
+<modal #upsell>
     <modal-header [show-close]="true">
     </modal-header>
     <modal-body>
@@ -34,34 +47,19 @@
         <div class="col-xs-12 col6 margin-b-15">
 
             <span class="col-xs-8 pull-right promo-offer">Upgrade for Only $166.00 Per door</span>
-            <img src="../../assets/images/construction/hdb.png" alt=""/>
+            <img src="../../assets/images/construction/hdb.png"  alt=""/>
 
         </div>
         <div class="col-xs-12 col6 margin-b-15">
 
             <span class="col-xs-8 pull-right promo-offer">Upgrade for Only $85.00 Per door</span>
-            <img src="../../assets/images/construction/Mobile-2.png" alt=""/>
+            <img src="../../assets/images/construction/Mobile-2.png"  (click)="moveNext()" alt=""/>
         </div>
         <div class="col-xs-12 col6 margin-b-15 margin-t-10">
 
             <span class="col-xs-8 pull-right"></span>
-            <img src="../../assets/images/construction/hds.png" alt=""/>
+            <img src="../../assets/images/construction/hds.png"  (click)="moveNext()" alt=""/>
         </div>
 
     </modal-body>
 </modal>
-
-
-<div id="footer" class="col-xs-12 padding-t-10 padding-b-10">
-    <a href="javascript:void(0)" class="pull-left previous-btn" (click)="prevBtn('config/design')" data-id="currScreen">
-        <img src="../../assets/images/back-48-thick.png" height="15px">
-        Prev
-    </a>
-
-    <a href="javascript:void(0)" class="pull-right nextBtn" (click)="nextBtn('config/color')"
-       data-id="currScreen">
-        Next
-        <img src="../../assets/images/Forward-48-thick.png" height="15px">
-        <!--(click)="nextBtn('/additionalOptions')"-->
-    </a>
-</div>
