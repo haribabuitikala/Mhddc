@@ -63,6 +63,7 @@ export class ResDoorConfigurationComponent implements OnInit {
     }
     ngOnInit() {
         this.setNavComponent();
+        this.config.pageTitle = "13. Your Door Configuration"
     }
     updateQuantity(flow) {
         

@@ -34,6 +34,11 @@ export class ResSliderComponent implements OnInit, AfterViewInit {
 
     sliderRows;
 
+    // construction details page
+    cObj = this.utils.resFlowSession.resDoorObj;
+    collectionName = this.cObj.product.product;
+    construction = this.cObj.construction.construction;
+
     imageUrl = location.href.indexOf('localhost:4200') >= 0 ? 'http://localhost:3435/images' : '';
 
     // @Output() notify = new EventEmitter<GdoOpener>();
@@ -192,17 +197,17 @@ export class ResSliderComponent implements OnInit, AfterViewInit {
             case 'handles':
                 this.utils.resFlowSession.resDoorObj.hardware.handle = obj;
                 this.utils.resFlowSession.resDoorObj.hardware.handle['count'] = 1;
-                this.utils.resFlowSession.resDoorObj.hardware.handle['placement'] = obj['placement'] ? obj['placement'] : obj['placementlist']; 
+                this.utils.resFlowSession.resDoorObj.hardware.handle['placement'] = obj['placement'] ? obj['placement'] : obj['placementlist'];
                 break;
             case 'stepplates':
                 this.utils.resFlowSession.resDoorObj.hardware.stepplate = obj;
                 this.utils.resFlowSession.resDoorObj.hardware.stepplate['count'] = 1;
-                this.utils.resFlowSession.resDoorObj.hardware.stepplate['placement'] = obj['placement'] ? obj['placement'] : obj['placementlist']; 
+                this.utils.resFlowSession.resDoorObj.hardware.stepplate['placement'] = obj['placement'] ? obj['placement'] : obj['placementlist'];
                 break;
             case 'stephinges':
                 this.utils.resFlowSession.resDoorObj.hardware.hinge = obj;
                 this.utils.resFlowSession.resDoorObj.hardware.hinge['count'] = 1;
-                 this.utils.resFlowSession.resDoorObj.hardware.hinge['placement'] = obj['placement'] ? obj['placement'] : obj['placementlist']; 
+                this.utils.resFlowSession.resDoorObj.hardware.hinge['placement'] = obj['placement'] ? obj['placement'] : obj['placementlist'];
                 break;
             case 'openers':
                 this.utils.resFlowSession.resDoorObj.opener.opener = obj;
@@ -251,7 +256,7 @@ export class ResSliderComponent implements OnInit, AfterViewInit {
         // this.notify.emit(obj);
         this.saveSelected(obj);
 
-        
+
     }
 
 

@@ -533,7 +533,7 @@ export class CollectionService {
                             "_imgheight": "500",
                             "_title": "Single1",
                             "_upload": "false",
-                            "_size": "1"
+                            "_size": "2"
                         },
                         {
                             "dcoords": {
