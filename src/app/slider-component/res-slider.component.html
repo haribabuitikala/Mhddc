@@ -31,7 +31,7 @@
                 <div class="_slide-items" *ngIf="folder!=='construction'">
                     <div class="inner-item col-xs-{{number}}" *ngFor="let slideitem of slide; let i=index" [ngClass]="{ 'current' : isSeleted(slideitem, k, i)}"
                         (click)="openerSelected(slideitem, $event)">
-                        <img (error)="onImageLoadError(slideitem, folder)" src="../../assets/images/{{folder}}/{{slideitem.item_thumbnail.replace('.jpg', '.png')}}"
+                        <img (error)="onImageLoadError(slideitem, folder)" src="http://localhost:3435/assets/images/{{folder}}/{{slideitem.item_thumbnail.replace('.jpg', '.png')}}"
                             [attr.data-id]="slideitem.item_id">
 
                         <div *ngIf="folder=='color'" class="text-blue font-size-10">{{slideitem.item_name}}
