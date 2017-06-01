@@ -32,6 +32,8 @@ export class HardwareComponent implements OnInit {
 
   yourStepHinge = [];
   youStephingeNumber = 6;
+  
+  yourLocks = [];
 
 
   countManager = {
@@ -53,7 +55,12 @@ export class HardwareComponent implements OnInit {
 
     this.config.renderCanvas();
   }
-
+ updateLock(obj,event:any) {  
+        if(obj.item_price > 0){ 
+            this.utils.utilities.lockPrice=obj.item_price; 
+           // this.config.itemPrice = this.utils.calculateTotalPrice();
+         }
+    }
   loadData() {
     var resDoorObj = this.utils.resFlowSession.resDoorObj;
     var params = {
@@ -89,6 +96,9 @@ export class HardwareComponent implements OnInit {
         stepHinges = _.uniqBy(stepHinges, 'item_id');
         this.yourStepHinge = _.chunk(stepHinges, 4);
         this.isLoaded = true;
+        
+        let yourLocksData = res[0]['Locks'];
+        this.yourLocks = yourLocksData;
       }
     );
   }
