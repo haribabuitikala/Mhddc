@@ -4,14 +4,12 @@
                     [category]="'openers'"
                     [cname]="'openers'"
                     [uniqueId]="3"
-                    [folder]="folder">
+                    [folder]="'openers'">
     </app-res-slider>
-</div>
 
 <div id="footer" class="col-xs-12 padding-t-10 padding-b-10">
     <a href="javascript:void(0)" class="pull-left previous-btn" (click)="prevBtn('/gdoDoorSize')" data-id="currScreen">
-        <img src="../../assets/images/back-48-thick.png" height="15px">
-        Prev
+        <img src="../../assets/images/back-48-thick.png" height="15px"> Prev
     </a>
 
     <a href="javascript:void(0)" class="pull-right nextBtn" (click)="nextBtn()" data-id="currScreen">
@@ -31,25 +29,23 @@
             <div class="accessory-sec margin-b-20" *ngFor="let obj of additionalItems; let k = index">
                 {{obj.item_name}}
                 <p class="margin-b-0">
-                   <span class="pull-right" data-id="">
+                    <span class="pull-right" data-id="">
                         <img class="minus-quantity" src="../../assets/images/substract.png" (click)="updateQuantity(data,0,data.item_id)" alt="">
                         <span class="accessory-quantity text-orange">{{obj.count}}</span>
-                        <img class="add-quantity" src="../../assets/images/add.png" (click)="updateQuantity(data,1,data.item_id)" alt="">
+                    <img class="add-quantity" src="../../assets/images/add.png" (click)="updateQuantity(data,1,data.item_id)" alt="">
                     </span>
                     + <span class="text-orange">{{obj.item_price | currency:'USD':true:'1.2-2'}} Each</span>
                 </p>
             </div>
             <div class="text-center button-margin margin-b-20 margin-t-20">
-                <button class="btn btn-default box-shadow text-orange bold text-uppercase"
-                        (click)="accessoriesModalClose()">SELECT OTHER OPENER
+                <button class="btn btn-default box-shadow text-orange bold text-uppercase" (click)="accessoriesModalClose()">SELECT OTHER OPENER
                 </button>
             </div>
             <div class="text-center button-margin margin-b-20 margin-t-20">
-                <button class="btn btn-default  box-shadow text-orange bold text-uppercase"
-                        (click)="accessoriesModalNext()">Next Step
+                <button class="btn btn-default  box-shadow text-orange bold text-uppercase" (click)="accessoriesModalNext()">Next Step
                 </button>
             </div>
         </div>
-      
+
     </modal-body>
 </modal>

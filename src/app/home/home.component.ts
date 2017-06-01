@@ -24,6 +24,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
     }
 
     ngOnInit() {
+        $('body').addClass('loader');
         this.pageNo = this.utils.utilities.currPage;
         this.navComp.activateIcon();
         this.homes = this.dataStore.homeImages;
@@ -38,11 +39,13 @@ export class HomeComponent implements OnInit, AfterViewInit {
                 this.nextBtn(null, '/config/design');
             }
         });
+
     }
 
     ngAfterViewInit(){
         $('.stock div:first-child img').addClass('selected');
         this.utils.resFlow.selectedHome = this.homes[0]._imagelg;
+        $('body').removeClass('loader');
     }
     
     selectHome(itm, evt) {

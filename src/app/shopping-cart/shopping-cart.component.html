@@ -56,8 +56,12 @@
         <img src="../../assets/images/add.png" alt="" height="30" class="add-quantity" (click)="updateQuantity(1)">
     </span>
 </div>
+<div class="text-center margin-b-10" style="display:none">
+    <button type="submit" class="btn btn-default box-shadow text-orange bold   text-uppercase ">ADD ANOTHER DOOR
+    </button>
+</div>
 <div class="text-center">
-    <button type="submit" class="btn btn-default box-shadow text-orange bold   text-uppercase ">CHECKOUT NOW
+    <button type="submit" class="btn btn-default box-shadow text-orange bold   text-uppercase "  (click)="checkout()">CHECKOUT NOW
     </button>
 </div>
 <modal #totalPrice>
@@ -75,6 +79,222 @@
     <modal-body class="text-center"> 
         <div class="margin-t-100">
             <button class="btn btn-default btn-lg box-shadow text-orange bold text-uppercase" (click)="removeItem()">Continue Shopping
+            </button>
+        </div>
+    </modal-body>
+</modal>
+
+<modal #gdoShoppingCartTerms>
+    <modal-header [show-close]="true">
+    </modal-header>
+    <modal-body>
+        <div class="col-xs-12  pull-left  ">
+            <h4 class="bold font-size-16"> Terms & Conditions </h4>
+            <h4 class="bold font-size-16">BASIC INSTALLATION PRICE INCLUDES</h4>
+            <ul class="pad-l-4">
+                <li>Delivery of operator (within 30 miles of store)</li>
+                <li>Take down and haul away of existing opener</li>
+                <li>Installation to manufacturer's specifications of (1) new garage door opener up to 8' from floor and
+                    within 3' of
+                    ceiling using installer provided angle iron
+                </li>
+                <li>Detailed inspection of existing garage door for proper operation</li>
+                <li>Install garage door mounting bracket (included with opener)</li>
+                <li>Install drawbar plate on all steel doors</li>
+                <li>Install extension kit for 8' door (if required)</li>
+                <li>Install quick turn brackets for low headroom installs (if required)</li>
+                <li>Shorten rail (if required)</li>
+                <li>Install push button and safety beam system included with opener</li>
+                <li>Install light bulbs in garage door opener unit (provided by homeowner)</li>
+                <li>Install emergency release (if required by code)</li>
+                <li>Program opener and applicable remote control devices (when included with opener)</li>
+                <li>Install wireless keypad (when included with opener)</li>
+                <li>Adjust torsion or extension springs for proper balance (if applicable)</li>
+                <li>Minor adjustments and lubrication of existing garage door</li>
+                <li>Demonstrate new opener and accessories to customer</li>
+                <li>Job site clean up</li>
+            </ul>
+            <h4 class="bold font-size-16">WHAT TO EXPECT ONCE WE RECEIVE YOUR ORDER</h4>
+            <ul class="pad-l-4">
+                <li>Installer will call customer to schedule appointment</li>
+                <li>Once installer arrives at jobsite, he/she will inspect for additional work that may be required</li>
+                <li>Installer will notify you of additional work, if required, and any applicable charges</li>
+                <li>If you approve additional charges, the installer will complete an authorization form and have you
+                    sign with
+                    credit card number
+                </li>
+                <li>Installer will install opener, make necessary adjustments, and/or agreed upon repairs</li>
+                <li>After the opener is installed and repairs/adjustments made, installer will review operating and
+                    programming
+                    procedures with you to ensure proper operation and remote programming
+                </li>
+                <li>Installer will leave operator manual with you as well as GDO trouble-shooting tip sheet</li>
+                <li>You must do the following prior to the installation date:</li>
+                <li>Clear out the garage a minimum of 10' back from the garage opening</li>
+                <li>Arrange so that pets and children are kept away from the installation project area</li>
+                <li>Disconnect any alarm systems</li>
+                <li>Arrange to have you or a representative (at least 18 years old) home for the entire installation
+                </li>
+                <li>Upon completion of the installation you or your representative will be asked to sign a lien waiver
+                    verifying
+                    service completed
+                </li>
+            </ul>
+
+            <h4 class="bold font-size-16  text-center">Special Notes About Your Garage Door Opener Installation</h4>
+            <h4 class="bold font-size-16  ">BEFORE YOUR INSTALLATION:</h4>
+            <ul class="text-uppercase pad-l-4">
+                <li>THE INSTALLER WILL CALL YOU WITHIN 2 BUSINESS DAYS TO SCHEDULE THE INSTALLATION DATE AND DISCUSS
+                    JOBSITE CONDITIONS INCLUDING EXISTING DOOR MEASUREMENTS, TYPE &amp; CONDITION OF DOOR, HEADROOM
+                    &amp;
+                    ELECTRICAL REQUIREMENTS, ETC...
+                </li>
+                <li>FOR A COMPLETE INSTALLATION, THERE SHOULD BE AN APPROVED 110 VOLT ELECTRICAL OUTLET WITHIN 3' OF
+                    THE POWER HEAD OF THE OPENER. IF NO OUTLET IS IN PLACE, BUT POWER IS AVAILABLE THROUGH AN
+                    EXTENSION CORD, THE INSTALLER WILL USE IT TO TEST AND ADJUST THE OPENER BUT WILL NOT LEAVE THE
+                    EXTENSION CORD IN PLACE.
+                </li>
+                <li>CUSTOMER IS RESPONSIBLE FOR CLEARING THE GARAGE FLOOR 10' BACK FROM THE OPENING PRIOR TO THE
+                    INSTALLATION DATE TO ALLOW AMPLE SPACE FOR INSTALLATION.
+                </li>
+            </ul>
+            <h4 class="bold font-size-16  ">DURING THE INSTALLATION:</h4>
+
+            <ul class="text-uppercase pad-l-4">
+                <li>AN ADULT OVER 18 YEARS OF AGE WITH THE AUTHORITY TO MAKE DECISIONS ABOUT YOUR INSTALLATION MUST
+                    BE PRESENT DURING THE JOBSITE INSPECTION AND INSTALLATION.
+                </li>
+                <li>CHILDREN AND PETS MUST BE KEPT AWAY FROM THE WORK AREA</li>
+                <li>THE CUSTOMER WILL BE REQUIRED TO SIGN A WAIVER UPON THE COMPLETION OF THE JOB.
+                </li>
+            </ul>
+            <h4 class="bold font-size-16  ">FACTORS TO CONSIDER:</h4>
+            <ul class="text-uppercase pad-l-4">
+                <li>DANGEROUS WEATHER CONDITIONS MAY CAUSE THE INSTALLATION TO BE RE-SCHEDULED.</li>
+                <li>CANCELING APPOINTMENTS WITH INSTALLERS WITHOUT 24 HOUR NOTICE OR MISSING SCHEDULED
+                    APPOINTMENTS WILL LEAD TO ADDITIONAL TRIP CHARGES
+                </li>
+                <li>ONLY THE INSTALLER CAN SCHEDULE AN INSTALLATION DATE.</li>
+                <li>HOME DEPOT WILL ONLY INSTALL GARAGE DOOR OPENERS IN RESIDENTIAL BUILDINGS</li>
+                <li>IF UNFORESEEN LABOR IS NEEDED (E.G.. REPAIR DAMAGE FROM TERMITES, ELECTRICAL, OR PLUMBING
+                    PROBLEMS) THERE WILL BE EXTRA CHARGES. IN SOME CASES, THIS LABOR MAY NOT BE AVAILABLE FROM THE
+                    HOME DEPOT, SO THE CUSTOMER MUST HIRE THEIR OWN REPAIR MAN
+                </li>
+            </ul>
+            <h4 class="bold font-size-16">SERVICE NOT AVAILABLE WITH THIS INSTALLATION PROGRAM:</h4>
+            <ul class="pad-l-4">
+                <li>ANY ELECTRICAL WORK (OTHER THAN CONTENTS OF PACKAGED OPENER**) <p style="color:#434343;">
+                        ** The Model 920EV comes standard with a Remote Light Switch that will need to be installed by a
+                        licensed electrician or homeowner, Clopay Installers will not install the Remote Light Switch</p>
+                </li>
+                <li>COMPLETE TRACK REPLACEMENT</li>
+                <li>ANY GARAGE DOOR SECTION ON SITE REPAIR</li>
+                <li>STRUCTURAL MODIFICATIONS TO GARAGE</li>
+                <li>WORK PERFORMED ON WEEKENDS OR LEGAL HOLIDAY UNLESS OTHERWISE AGREED UPON BY INSTALLER AND
+                    CUSTOMER
+                </li>
+            </ul>
+            <div class="bold margin-t-20 text-center">
+                <p class="aggrement-text text-blue">HOME IMPROVEMENT AGREEMENT <br>PLEASE READ THIS </p>
+                <div class="form-group margin-b-20">
+                    <button type="submit"
+                            class="btn btn-default box-shadow text-orange margin-r-10 bold margin-b-10 pull-right"
+                            (click)="gdoShoppingCartTerms.close()">DECLINE
+                    </button>
+                    <button type="submit"
+                            class="btn btn-default box-shadow text-orange margin-r-10 bold margin-b-10 pull-left"
+                            (click)="secureRedirection()">ACCEPT
+                    </button>
+                </div>
+            </div>
+        </div>
+    </modal-body>
+</modal>
+
+<modal #resShoppingCartTerms>
+    <modal-header [show-close]="true">
+    </modal-header>
+    <modal-body>
+        <div class="col-xs-12 font-size-14  pull-left pad-l-4">
+            <p class="font-size-16"><strong>Do-It -Yourself Terms & Conditions </strong></p>
+            <p><strong>CANCELLATIONS, RETURNED GOODS AND CHANGE ORDERS </strong></p>
+            <p>DO IT YOURSELF DOORS ARE NOT RETURNABLE. Because Do-It-Yourself doors are built to order, these doors
+                cannot be returned. Clopay cannot be responsible for improper measurement or installation of its
+                products for Do-It-Yourself installations. Consult our How-To-Measure instructions or call
+                1-800-HOMEDEPOT for how to measure and installation assistance. It is your responsibility to ensure that
+                all measurements (opening, side room, headroom, backroom) are correct before ordering a Do-It-Yourself
+                door(s).</p>
+            <p>The Home Depot and Clopay want to thank you for trusting us with your Garage Door project. </p>
+            <p>
+                CLOPAY CANNOT ACCEPT ANY CHANGES TO OR CANCEL ANY DO-IT-YOURSELF ORDERS AFTER THREE BUSINESS DAYS FROM
+                THE DATE PURCHASED. If order needs to be changed or cancelled within the applicable three day period,
+                immediately call the store through which your order is placed and notify them of the
+                change/cancellation. (See above for store address and phone #)
+            </p>
+            <p><strong>MISSING / BROKEN PARTS </strong></p>
+            <p>If a door is received with missing or broken parts, call 1-800-HOMEDEPOT and the part will be immediately
+                sent.</p>
+            <p><strong>Special Order DIY Notes </strong></p>
+            <ul class="pad-l-4">
+                <li>Home delivery within 30 "drive" miles from the store through which the door is purchased. Additional
+                    charges apply if further than 30 miles.
+                </li>
+                <li> Easy to follow instruction book</li>
+                <li> All new hardware including track, springs, rollers, and hinges</li>
+            </ul>
+            <p><strong>YOUR DO-IT-YOURSELF GARAGE DOOR WILL COME WITH </strong></p>
+            <ul class="pad-l-4">
+                <li><p>Rear track hangar kit - Often constructed of punched angle iron, these hangers attach the end of
+                        the horizontal track to the garage ceiling. You may be able to use existing rear track hanger if
+                        replacing an existing door.</p></li>
+                <li><p>Vinyl Perimeter Seal - This is the weather seal on the top and sides of your jambs. They help
+                        seal out the elements when your door is closed. We recommend you replace this seal but you may be
+                        able to use the existing perimeter seal if replacing an existing door.</p></li>
+                <li><p>Low Headroom Track - May be required in situations with limited headroom. This is the distance
+                        from the top of the door opening upwards to the lowest obstruction on the inside of the garage.
+                        Refer to our How to Measure guide to determine if low headroom track is required for your
+                        application.</p></li>
+                <li><p>Garage Door Opener - Although not required we recommend that you replace your garage door opener
+                        at the same time you replace your Garage Door. Do-It-Yourself garage door openers can be purchased
+                        at The Home Depot.</p></li>
+                <li><p>Operator reinforcement bracket - Used to reinforce top section of door for operator attachment.
+                        (If top panel is not reinforced by either an operator reinforcement bracket or according to
+                        instructions in manual, damage caused by the opener will NOT be covered under your warranty.)</p>
+                </li>
+            </ul>
+            <p><strong>WHAT TO EXPECT ONCE WE RECEIVE YOUR ORDER </strong></p>
+            <p>Your built to order Do-It-Yourself door will be manufactured No changes or cancellations to a
+                Do-It-Yourself order after three business days from the date purchased. You will be contacted within
+                three to four weeks to schedule your FREE HOME DELIVERY</p>
+        </div>
+        <div class="bold margin-t-20 text-center">
+            <p class="aggrement-text text-blue">HOME IMPROVEMENT AGREEMENT <br>PLEASE READ THIS </p>
+            <div class="form-group margin-b-20">
+                <button type="submit"
+                        class="btn btn-default box-shadow text-orange margin-r-10 bold margin-b-10 pull-right"
+                        (click)="resShoppingCartTerms.close()">DECLINE
+                </button>
+                <button type="submit"
+                        class="btn btn-default box-shadow text-orange margin-r-10 bold margin-b-10 pull-left"
+                        (click)="secureRedirection()">ACCEPT
+                </button>
+            </div>
+        </div>
+    </modal-body>
+
+</modal>
+
+<modal #secureRedirectionTerms>  
+    <modal-body class="text-center"> 
+        <p class="font-size-16 margin-t-20 color-black" style="font-size:20px !important;">You will be redirected to a secure website to process your payment and order. </p>
+        <div class="form-group margin-t-20">
+            <button type="submit"
+                    class="btn btn-default box-shadow text-orange margin-r-10 bold margin-b-10 pull-right"
+                    (click)="goToCustomerInfo()">OK
+            </button>
+            <button type="submit"
+                    class="btn btn-default box-shadow text-orange margin-r-10 bold margin-b-10 pull-left"
+                   (click)="goToHome()" >Decline
             </button>
         </div>
     </modal-body>

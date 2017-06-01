@@ -42,6 +42,15 @@ export class CollectionService {
             .map(res => res.json())
     }
 
+    getModelInfo(id){
+        let data = {
+          modelnumber: id.ClopayModelNumber
+        }
+
+        return this.http.post(this.url + 'ModelDescription', data)
+            .map(res => res.json())
+    }
+
     getGdoAdditional(obj) {
         return this.http.post(this.url + 'OpenerItem', obj)
             .map(res => res.json())
@@ -533,7 +542,7 @@ export class CollectionService {
                             "_imgheight": "500",
                             "_title": "Single1",
                             "_upload": "false",
-                            "_size": "1"
+                            "_size": "2"
                         },
                         {
                             "dcoords": {

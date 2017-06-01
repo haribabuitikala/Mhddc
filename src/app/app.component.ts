@@ -3,6 +3,7 @@ import { Location } from '@angular/common';
 import { Router, ActivatedRoute, NavigationEnd } from '@angular/router';
 import { AppUtilities } from "./shared/appUtilities";
 import { NavComponent } from "./nav/nav.component";
+declare var $: any;
 
 @Component({
     selector: 'app-root',
@@ -62,6 +63,10 @@ export class AppComponent implements OnInit {
             this.activeStep = obj.activeStep;
             this.flowType = obj.flowType;
         }, this);
+
+        window.onbeforeunload  =  function (event) {
+            return "Navigating to Home Page will discard<br>all available Cart Items.";
+        };
     }
 
     nextBtn(id): void {
@@ -112,17 +117,24 @@ export class AppComponent implements OnInit {
     subscribeToPrice(fn) {
         this.priceListener = fn;
     }
-    
+
     detailsUpdateFn;
-    sunscribeToDetailsUpdate(fn){
+    sunscribeToDetailsUpdate(fn) {
         this.detailsUpdateFn = fn;
     }
 
-    updateResDetails(){
+    updateResDetails() {
         if (this.detailsUpdateFn) {
             this.detailsUpdateFn();
         }
+    }
 
+    setLoader(show?) {
+        if (show) {
+            $('.spinner').show();
+        } else {
+            $('.spinner').hide();
+        }
     }
 
 }

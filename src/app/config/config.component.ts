@@ -31,7 +31,7 @@ export class ConfigComponent implements OnInit, AfterViewInit {
     quantity = 1;
     details;
     whdata;
-
+ 
     private fitToContainer() {
         var canvas = document.querySelector('canvas');
         canvas.style.width = '100%';
@@ -119,11 +119,16 @@ export class ConfigComponent implements OnInit, AfterViewInit {
         var dor = obj
 
         if (dor.TYPE != "GDO") {
-            if (dor.product.product != '') buildObj.productid = Number(dor.product.product.item_id);
+            if (dor.product.product && dor.product.product != '') buildObj.productid = Number(dor.product.product.item_id);
             if (dor.design != '') {
                 buildObj.designimage = dor.design.dsgn.visimage;
                 buildObj.doorcolumns = Number(dor.design.columns);
                 buildObj.doorrows = Number(dor.design.rows);
+
+                if (this.navComponent.flowType === 'resquick') {
+                    buildObj.doorcolumns = Number(dor.design.dsgn.Columns);
+                    buildObj.doorrows = Number(dor.design.dsgn.Rows);
+                }
             }
 
 
@@ -140,12 +145,12 @@ export class ConfigComponent implements OnInit, AfterViewInit {
                 }
             } catch (e) { }
 
-            if (dor.color.base != '') {
+            if (dor.color.base && dor.color.base != '' && dor.color.base['colorcode']) {
                 buildObj.colorcode = dor.color.base.colorcode;
                 buildObj.overlaycolor = ".94,.94,.94,1,25,25,25,0";
 
             }
-            if (dor.color.base != '') {
+            if (dor.color.base && dor.color.base != '' && dor.color.base['colorcode']) {
                 buildObj.colorswaprule = dor.color.base.colorswaprule;
             }
 
@@ -190,13 +195,41 @@ export class ConfigComponent implements OnInit, AfterViewInit {
                 }
                 catch (e) { }
             }
+
+            if (this.navComponent.flowType === 'resquick') {
+                buildObj.topsectionimage = dor.construction.construction.Topsections[0].visimage;
+                try {
+                    if (dor.windows.glasstype.Config == undefined) {
+                        if (dor.construction.construction.Topsections[0].glasstypes == undefined) {
+                            buildObj['glaz'] = dor.construction.construction.Topsections[0].Config;
+                        }
+                        else {
+                            buildObj.glaz = dor.construction.construction.Topsections[0].glasstypes[0].Config;
+                        }
+                    }
+                    else {
+                        buildObj.glaz = dor.windows.glasstype.Config;
+                    }
+
+                }
+                catch (e) { }
+            }
+
+
             buildObj['glassSection'] = dor.windows.selectedGlassSection;
             //shankar added this, for restopsection placement
-            if (dor.windows.placement != '') buildObj.topsectionrow = dor.windows.placement.item_id;
+            if (dor.windows.placement && dor.windows.placement != '') {
+                buildObj.topsectionrow = dor.windows.placement.item_id;
+            }
             //if (dor.windows.placement != '') buildObj.topsectionrow = dor.windows.placement;
             if (dor.TYPE == "COM") {
                 // shankar added this, for comtopsection placement
-                if (dor.windows.placement != '') buildObj.topsectionrow = dor.windows.placement;
+                if (dor.windows.placement != '') {
+                    buildObj.topsectionrow = dor.windows.placement;
+                    if (dor.windows.placement['item_id']) {
+                        buildObj.topsectionrow = dor.windows.placement['item_id'];
+                    }
+                }
                 if (dor.windows.glasstypePlacement != "") {
                     var separators = ['th', 'rd', 'nd'];
                     var placement = dor.windows.glasstypePlacement;
@@ -220,6 +253,7 @@ export class ConfigComponent implements OnInit, AfterViewInit {
                 }
 
             } catch (e) { }
+
 
             if (dor.hardware.stepplate != '') {
                 buildObj.hardwarestepplate = dor.hardware.stepplate.visimage;

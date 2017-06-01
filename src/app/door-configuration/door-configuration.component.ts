@@ -6,6 +6,8 @@ import { NavService } from "../nav/nav-service";
 import { NavComponent } from "../nav/nav.component";
 import { CollectionData } from "../collection/collection-data";
 import { GdoConfigComponent } from "../gdo-config/gdo-config.component";
+
+// import { QuerySocialService } from 'social-share-ng2';
 declare var $: any;
 declare var _: any;
 
@@ -113,6 +115,11 @@ export class DoorConfigurationComponent implements OnInit {
         } else {
             this.goTo(path)
         }
+    }
+    showSocial = false;
+
+    shareIt() {
+this.showSocial = true;
     }
 
     prevBtn(path) {

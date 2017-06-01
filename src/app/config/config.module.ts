@@ -29,12 +29,14 @@ import {HardwareComponent} from "../hardware/hardware.component";
 import {GdoConfigComponent} from "../gdo-config/gdo-config.component";
 import {GdoUpdateComponent} from "../opener/gdoUpdateQty";
 import {ResSliderComponent} from "../slider-component/res-slider.component";
+import {ShareButtonsModule} from 'ngx-sharebuttons';
 
 @NgModule({
     imports: [
         CommonModule,
         FormsModule,
         Ng2Bs3ModalModule,
+        ShareButtonsModule.forRoot(),
         RouterModule.forChild([
             {
                 path: 'config', component: ConfigComponent,
