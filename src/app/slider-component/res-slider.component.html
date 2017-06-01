@@ -1,12 +1,16 @@
-<!--<div class="_slider-container m20-top">
-    <div class="_slider-wrapper">
+<div class="_slider-container m20-top">
+    <div class="_slider-wrapper {{className}}">
         <div class="_slider unique-{{uniqueId}}" [style.width.px]="sliderWidth" [style.left.px]="sliderLeft">
             <div class="_slide" [style.width.px]="slideWidth" *ngFor="let slide of data; let k = index">
-                <div class="_slide-items">
+                <div class="_slide-items clearfix">
                     <div class="inner-item col-xs-{{number}}" *ngFor="let slideitem of slide; let i=index" [ngClass]="{ 'current' : isSeleted(slideitem, k, i)}"
                         (click)="openerSelected(slideitem, $event)">
-                        <img (error)="onImageLoadError(slideitem, folder)" src="http://hddchtml.clopay.com/Content/en/images/{{slideitem.item_thumbnail.replace('.jpg', '.png')}}"
+                        <img (error)="onImageLoadError(slideitem, folder)" src="../../assets/images/{{folder}}/{{slideitem.item_thumbnail.replace('.jpg', '.png')}}"
                             [attr.data-id]="slideitem.item_id">
+                        <!--<img _ngcontent-xyr-36="" alt="" class="info-icon" height="16" (click)="upsell.open()" src="../../assets/images/Info-64.png">-->
+                        <div *ngIf="folder=='color'" class="text-blue font-size-10">{{slideitem.item_name}}
+                            <p *ngIf="slideitem.item_price!==0"> {{slideitem.item_price}} </p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -22,37 +26,5 @@
         </a>
 
     </div>
-</div>-->
-
-<div class="_slider-container m20-top">
-    <div class="_slider-wrapper">
-        <div class="_slider unique-{{uniqueId}}" [style.width.px]="sliderWidth" [style.left.px]="sliderLeft">
-            <div class="_slide" [style.width.px]="slideWidth" *ngFor="let slide of data; let k = index">
-                 <div class="_slide-items">
-                    <div class="inner-item col-xs-{{number}}" *ngFor="let slideitem of slide; let i=index" [ngClass]="{ 'current' : isSeleted(slideitem, k, i)}"
-
-                         (click)="openerSelected(slideitem, $event)">
-                         <img (error)="onImageLoadError(slideitem, folder)" 
-                            src="../../assets/images/{{folder}}/{{slideitem.item_thumbnail.replace('.jpg', '.png')}}"
-                            [attr.data-id]="slideitem.item_id">
-
-                            <div *ngIf="folder=='color'" class="text-blue font-size-10">{{slideitem.item_name}}  
-                            <br>
-                            <p *ngIf="slideitem.item_price!==0"> {{slideitem.item_price}} </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <a class="left carousel-control" *ngIf="slideIndex > 0" id="prev" (click)="moveSlider()" href="javascript:void(0)" role="button"
-            data-slide="prev">
-            <span class="helper"></span><img style=" transform: rotate(-180deg);" class="left-arrow" src="../../assets/images/ch-left-arrow.png"
-                                             alt="">
-        </a>
-        <a class="right carousel-control" *ngIf="slideIndex < slideCount - 1" id="next" (click)="moveSlider(true)" href="javascript:void(0)"
-           role="button" data-slide="next">
-           <span class="helper"></span><img class="right-arrow" src="../../assets/images/ch-right-arrow.png" alt="">
-        </a>
-
-    </div>
 </div>
+

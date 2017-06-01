@@ -93,7 +93,7 @@ export class ResOpenerComponent implements OnInit {
     };
 
     prevBtn(path) {
-
+         this.route.navigateByUrl('/config/install');
     }
 
     accessoriesModalClose() {

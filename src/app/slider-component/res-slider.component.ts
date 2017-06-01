@@ -3,6 +3,7 @@ import { AppUtilities } from "../shared/appUtilities";
 import { CollectionData } from "../collection/collection-data";
 import { ConfigComponent } from "../config/config.component";
 import { AppComponent } from "../app.component";
+
 declare var $: any;
 declare var _: any;
 
@@ -31,6 +32,7 @@ export class ResSliderComponent implements OnInit, AfterViewInit {
     @Input() category: any;
     @Input() uniqueId: number;
     @Input() cname: string;
+    @Input() className: string;
 
     sliderRows;
 
@@ -39,6 +41,7 @@ export class ResSliderComponent implements OnInit, AfterViewInit {
     // @Output() notify = new EventEmitter<GdoOpener>();
 
     ngOnInit() {
+
         if (this.data) {
             if (this.data.length > 0 && this.data[0].length > 0) {
                 this.saveSelected(this.data[0][0]);
