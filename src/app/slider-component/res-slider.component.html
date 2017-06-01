@@ -2,24 +2,22 @@
     <div class="_slider-wrapper">
         <div class="_slider unique-{{uniqueId}}" [style.width.px]="sliderWidth" [style.left.px]="sliderLeft">
             <div class="_slide" [style.width.px]="slideWidth" *ngFor="let slide of data; let k = index">
-                <div class="_slide-items" *ngIf="folder!=='construction'">
+                <!--<div class="_slide-items" *ngIf="folder==='design'">
                     <div class="inner-item col-xs-{{number}}" *ngFor="let slideitem of slide; let i=index" [ngClass]="{ 'current' : isSeleted(slideitem, k, i)}"
                         (click)="openerSelected(slideitem, $event)">
                         <img (error)="onImageLoadError(slideitem, folder)" src="../../assets/images/{{folder}}/{{slideitem.item_thumbnail.replace('.jpg', '.png')}}"
                             [attr.data-id]="slideitem.item_id">
 
-                        <div *ngIf="folder=='color'" class="text-blue font-size-10">{{slideitem.item_name}}
-                            <br>
-                            <p *ngIf="slideitem.item_price!==0"> {{slideitem.item_price}} </p>
-                        </div>
-                    </div>
-                </div>
 
-                <div class="_slide-items" *ngIf="folder==='openers'">
+                    </div>
+                </div>-->
+
+                <div class="_slide-items" *ngIf="folder!=='construction'">
                     <div class="inner-item col-xs-{{number}}" *ngFor="let slideitem of slide; let i=index" [ngClass]="{ 'current' : isSeleted(slideitem, k, i)}"
                         (click)="openerSelected(slideitem, $event)">
-                        <img (error)="onImageLoadError(slideitem, folder)" src="../../assets/images/{{folder}}/{{slideitem.item_thumbnail}}"
+                        <img (error)="onImageLoadError(slideitem, folder)" src="../../assets/images/{{slideitem.item_thumbnail.replace('.jpg', '.png')}}"
                             [attr.data-id]="slideitem.item_id">
+
 
                         <div *ngIf="folder=='color'" class="text-blue font-size-10">{{slideitem.item_name}}
                             <br>
@@ -45,6 +43,8 @@
 
                     </div>
                 </div>
+
+
 
             </div>
         </div>
@@ -80,4 +80,3 @@
         </div>
     </modal-body>
 </modal>
- 
