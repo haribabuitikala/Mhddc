@@ -4,7 +4,9 @@ import { CollectionData } from "../collection/collection-data";
 import { ConfigComponent } from "../config/config.component";
 import { NavComponent } from '../nav/nav.component'
 import { AppComponent } from "../app.component";
+ 
 import { CollectionService } from "../shared/data.service";
+
 declare var $: any;
 declare var _: any;
 
@@ -35,6 +37,7 @@ export class ResSliderComponent implements OnInit, AfterViewInit {
     @Input() category: any;
     @Input() uniqueId: number;
     @Input() cname: string;
+    @Input() className: string;
 
     sliderRows;
 
@@ -49,6 +52,7 @@ export class ResSliderComponent implements OnInit, AfterViewInit {
     // @Output() notify = new EventEmitter<GdoOpener>();
 
     ngOnInit() {
+
         if (this.data) {
             if (this.navComponent.flowType == 'resquick') {
                 if (this.cname != 'openers') {

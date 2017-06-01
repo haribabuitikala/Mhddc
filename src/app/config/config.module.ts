@@ -19,7 +19,7 @@ import { ResAdditionalOptionsComponent } from "../additional-options/res-additio
 import {DoorConfigurationComponent} from "../door-configuration/door-configuration.component";
 import {ResDoorConfigurationComponent} from "../door-configuration/res-door-configuration.comp";
 import {ThankyouComponent} from "../thankyou/thankyou.component";
-import {DetailsComponent} from "../details/details.component";
+//import {DetailsComponent} from "../details/details.component";
 import {OpenerSelectedComponent} from "../opener-selected/opener-selected.component";
 import {SliderComponentComponent} from "../slider-component/slider-component.component";
 import {InstallQuestionComponent} from "../install-question/install-question.component";
@@ -86,7 +86,7 @@ import {ShareButtonsModule} from 'ngx-sharebuttons';
         DoorConfigurationComponent,
         ResDoorConfigurationComponent,
         ThankyouComponent,
-        DetailsComponent,
+       // DetailsComponent,
         ConfigComponent,
         OpenerSelectedComponent,
         SliderComponentComponent,

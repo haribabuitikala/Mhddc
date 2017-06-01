@@ -16,14 +16,22 @@ export class ConfigComponent implements OnInit, AfterViewInit {
         , public navComponent: NavComponent
         , private utils: AppUtilities) {
 
-
+        appComponent.subscribeToPrice(() => {
+            this.calculatePrice();
+        });
 
     }
 
     homeImage;
-
     pageTitle;
     loaded = false;
+    itemPriceInstall;
+    itemPriceDY;
+    isDIY = false;
+    quantity = 1;
+    details;
+    whdata;
+ 
     private fitToContainer() {
         var canvas = document.querySelector('canvas');
         canvas.style.width = '100%';
@@ -62,6 +70,8 @@ export class ConfigComponent implements OnInit, AfterViewInit {
             $('.switcher-box').show().removeClass('hide').animate({ right: 35 });
             $('.switcher-image').removeClass('homeImage');
         });
+
+        this.detailsModal();
     }
 
     renderCanvas() {
@@ -271,5 +281,53 @@ export class ConfigComponent implements OnInit, AfterViewInit {
 
 
 
+    }
+
+    /** Details **/
+    calculatePrice() {
+        try {
+            var itemId = this.utils.resFlowSession.resDoorObj.product.product['item_id'];
+            var count = this.utils.resFlowSession.resDoorObj.QTY;
+            if (itemId) {
+                let cObj = this.utils.resFlowSession.resDoorObj;
+                let price = window['getDoorPrice'](cObj);
+                this.itemPriceInstall = parseFloat(price[0].replace(/ /g, '').replace('$', '')) * count;
+                this.isDIY = false;
+                if (this.appComponent.noDIYs.indexOf(itemId) < 0) {
+                    this.isDIY = true;
+                    this.itemPriceDY = parseFloat(price[1].replace(/ /g, '').replace('$', '')) * count;
+                }
+            }
+
+        } catch (g) {
+
+        }
+    }
+
+    detailsModal() {
+        this.details = this.utils.resFlowSession.resDetails;
+        this.details.widthF = this.utils.utilities.wf;
+        this.details.widthI = this.utils.utilities.wi;
+        this.details.heightF = this.utils.utilities.hf;
+        this.details.heightI = this.utils.utilities.hi;
+        // this.details.constructionName = this.resDoorObj.construction.construction[0].item_name;
+        // this.whdata = this.utils.resFlowSession.resDoorObj.size.width;
+
+    }
+
+    openDetailsModal(detailsModal) {
+        this.details['designName'] = this.utils.resFlowSession.resDoorObj.design.dsgn['item_name'];
+        detailsModal.open();
+    }
+
+    updateQuantity(isIncrement?) {
+        let count = this.utils.resFlowSession.resDoorObj.QTY;
+        if (!isIncrement && count > 1) {
+            this.utils.resFlowSession.resDoorObj.QTY = count - 1;
+        } else {
+            this.utils.resFlowSession.resDoorObj.QTY = count + 1;
+        }
+        this.quantity = this.utils.resFlowSession.resDoorObj.QTY;
+        this.calculatePrice();
     }
 }

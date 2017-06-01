@@ -206,16 +206,20 @@ export class CollectionComponent implements OnInit {
             "dtype": utils.dtype,
             "Windcode": utils.winCode,
             "NatMarketID": +utils.natmarketid,
-            "wf": utils.wf,
+            "wf": +utils.doubleDoorWidth,
+            "WidthFt": +utils.doubleDoorWidth,
             "wi": utils.wi || 0,
-            "hf": utils.hf,
+            "hf": +utils.doubleDoorHeight,
+            "HeightFt": +utils.doubleDoorHeight,
             "hi": utils.hi || 0,
             "lang": "en",
             "localmarketid": +utils.localmarketid,
             "doorsize": +utils.homeSize,
             "LaborCode": obj.singleinstallcode,
             "isCRLE": false,
-            "productlayout": true
+            "productlayout": true,
+            "doorwidth" : +utils.doubleDoorWidth,
+            "doorheight" : +utils.doubleDoorHeight
         };
     }
 
@@ -291,10 +295,10 @@ export class CollectionComponent implements OnInit {
         this.utils.utilities.productid = null;
         this.utils.utilities.dealerid = null;
         // this.utils.utilities.natmarketid = null;
-        this.utils.utilities.wf = null;
-        this.utils.utilities.wi = null;
-        this.utils.utilities.hf = null;
-        this.utils.utilities.hi = null;
+        // this.utils.utilities.wf = null;
+        // this.utils.utilities.wi = null;
+        // this.utils.utilities.hf = null;
+        // this.utils.utilities.hi = null;
         this.utils.utilities.doorsize = null;
         this.utils.utilities.stockgroupid = null;
         this.utils.utilities.laborcode = null;

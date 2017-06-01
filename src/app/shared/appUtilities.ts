@@ -16,8 +16,8 @@ export class AppUtilities {
         hf: 0, // height feet
         hi: 0, // height inches
         winCode: "W0",
-        doubleDoorHeight: "",
-        doubleDoorWidth: "",
+        doubleDoorHeight: 7,
+        doubleDoorWidth: 16,
         singleDoorHeight: 0,
         singleDoorWidth: 0,
         doubleDoor: false,
