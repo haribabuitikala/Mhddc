@@ -167,7 +167,9 @@ export class AppUtilities {
 
 
     resFlowSession: ResidentialFlowSession = new ResidentialFlowSession();
-
+    resQuickSession = {
+        designs: []
+    };
     clearResFlow() {
 
     }
@@ -194,15 +196,15 @@ class ResidentialFlowSession {
         zip: 0,
         storeNumber: 0,
         gdoStore: 0,
-        storeName:'',
-        windcode:'',
-        county:'',
+        storeName: '',
+        windcode: '',
+        county: '',
         widthF: 0,
-        widthI:0,
-        heightF:0,
-        heightI:0,
-        collectionName:'',
-        designName:'',
+        widthI: 0,
+        heightF: 0,
+        heightI: 0,
+        collectionName: '',
+        designName: '',
         constructionName: ''
     }
 
@@ -249,7 +251,7 @@ class ResidentialFlowSession {
         },
         "windows": {
             "topsection": "",
-            "placement": "",
+            "placement": null,
             "glasstype": "",
             "apiData": ""
         },

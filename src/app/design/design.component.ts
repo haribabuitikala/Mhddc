@@ -8,7 +8,7 @@ import { ConfigComponent } from "../config/config.component";
 import { NavComponent } from "../nav/nav.component";
 import { DetailsComponent } from "../details/details.component";
 declare var _: any;
-declare var $:any;
+declare var $: any;
 
 @Component({
     selector: 'app-design',
@@ -26,7 +26,7 @@ export class DesignComponent implements OnInit {
         , private route: Router) {
     }
 
-    data;
+    data = [];
     number = 6;
     folder = 'design';
     category = 'constructions';
@@ -38,13 +38,14 @@ export class DesignComponent implements OnInit {
     }
 
 
-    startProcess() {
+    loadDesigns() {
         let utils = this.utils;
         let data = this.dataStore.designs;
-        this.config.homeImage = data[0].item_thumbnail;
-        utils.resFlowSession.resDetails.designName = data[0].item_name;
-        //this.details.details.designName = data[0].item_name;
-        
+        if (data && data.length > 0) {
+            this.config.homeImage = data[0].item_thumbnail;
+            utils.resFlowSession.resDetails.designName = data[0].item_name;
+        }
+
         if (utils.utilities.singleDoor === true) {
             this.number = 6;
             this.data = _.chunk(data, 2);
@@ -53,40 +54,66 @@ export class DesignComponent implements OnInit {
             this.data = _.chunk(data, 1);
         }
 
-        this.navComponent.renderNav({
-            flowType: 'res',
-            flowActiveStep: 4,
-            currentStepUrl: '/config/design',
-            showStepIndicator: true,
-            nextStepFn: () => {
-
-            }
-        });
-
         this.config.pageTitle = '4.Choose Your Door Design';
 
-        this.utils.resFlowSession.resDoorObj.design.dsgn = data[0];
-        this.utils.resFlowSession.resDoorObj.construction.apiData = data[0].constructions;
-        this.utils.resFlowSession.resDoorObj.construction.construction = data[0].constructions[0];
-        var constructionSelected = this.utils.resFlowSession.resDoorObj.construction.construction;
-        if (constructionSelected && constructionSelected['colors']) {
-            if (constructionSelected['colors'].length > 0) {
-                this.utils.resFlowSession.resDoorObj.color.base = constructionSelected['colors'][0];
-                this.utils.resFlowSession.resDoorObj.color.overlay = constructionSelected['colors'][0];
-                this.app.updatePrice();
-            }
+    }
+    loadQucikDoors() {
+        let utils = this.utils;
+        let data = this.utils.resQuickSession.designs;
+        this.config.homeImage = data[0].item_thumbnail;
+        utils.resFlowSession.resDetails.designName = data[0].item_name;
+        //this.details.details.designName = data[0].item_name;
+        var uniqueData = _.uniqBy(data, 'item_id');
+        if (utils.utilities.singleDoor === true) {
+            this.number = 6;
+            this.data = _.chunk(uniqueData, 2);
+        } else {
+            this.number = 12;
+            this.data = _.chunk(uniqueData, 1);
+        }
+
+
+        this.config.pageTitle = '3.Choose Your Door Design';
+    }
+
+    startProcess() {
+        if (this.navComponent.flowType === 'res') {
+            this.navComponent.renderNav({
+                flowType: 'res',
+                flowActiveStep: 4,
+                currentStepUrl: '/config/design',
+                showStepIndicator: true,
+                nextStepFn: () => {
+
+                }
+            });
+            this.loadDesigns();
+        } else {
+            this.navComponent.renderNav({
+                flowType: 'resquick',
+                flowActiveStep: 3,
+                currentStepUrl: '/config/design',
+                showStepIndicator: true,
+                nextStepFn: () => {
+
+                }
+            });
+            this.loadQucikDoors();
         }
 
         this.loaded = true;
-
-        this.config.renderCanvas();
+        this.app.setLoader();
     }
 
     nextBtn(path) {
         this.route.navigateByUrl(path);
     }
     prevBtn(path) {
-        this.route.navigateByUrl('/home');
+        if (this.navComponent.flowType === 'res') {
+            this.route.navigateByUrl('/home');
+        } else {
+            this.route.navigateByUrl('/doorSize');
+        }
     }
 
 }

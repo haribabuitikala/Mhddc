@@ -149,6 +149,7 @@ export class NavComponent implements OnInit {
     setNavFlow(flowType, subFlow?) {
         this.gdoVisistedSteps = [];
         this.subFlow = subFlow ? true : false;
+        this.flowType = flowType ? flowType : this.flowType;
         if (flowType === 'res') {
             this.resSubFlow = subFlow;
         }
@@ -217,7 +218,49 @@ export class NavComponent implements OnInit {
 
                 steps.push(s);
             });
+        } else if (obj.flowType === 'resquick') {
+            this.navComp.resQuickFlowSteps.forEach(s => {
+                s.visited = false;
+                s.disabled = false;
+                if (s.No == obj.flowActiveStep) {
+                    s.active = true;
+                    s['url'] = obj.currentStepUrl;
+                    if (obj.nextStepFn) {
+                        s.callFn = obj.nextStepFn;
+                    }
+                } else {
+                    s.active = false;
+                }
+                if (this.resVisistedSteps.indexOf(s.No) >= 0 && s.No != obj.flowActiveStep) {
+                    s.visited = true;
+                }
+                if (this.resVisistedSteps.indexOf(obj.flowActiveStep) < 0) {
+                    this.resVisistedSteps.push(obj.flowActiveStep);
+                }
+
+                if (s.No > obj.flowActiveStep) {
+                    s.visited = false;
+                }
+
+                if (this.resSubFlow === 'hideglass' && s.No === 8) {
+                    s.disabled = true;
+                }
+
+                if (s.No == 1) {
+                    s.visited = true;
+                    s.url = '/doorSize';
+                }
+                if (s.No == 2) {
+                    s.visited = true;
+                    s.url = '/collection';
+                }
+                steps.push(s);
+            });
+            if (this.changeSubscribers) {
+                this.changeSubscribers({ showStepIndicator: obj.showStepIndicator, flowType: obj.flowType, steps: steps, activeStep: obj.flowActiveStep });
+            }
         }
+
         if (this.changeSubscribers) {
             this.changeSubscribers({ showStepIndicator: obj.showStepIndicator, flowType: obj.flowType, steps: steps, activeStep: obj.flowActiveStep });
         }

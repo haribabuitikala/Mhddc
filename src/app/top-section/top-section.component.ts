@@ -55,11 +55,15 @@ export class TopSectionComponent implements OnInit {
     this.navComponent.setNavFlow('res', '');
     var topsection = this.utils.resFlowSession.resDoorObj.windows.topsection;
     if (topsection && topsection['glasstypes']) {
-      if (topsection['glasstypes'][0].item_price <= 0) {
+      if (topsection['glasstypes'][0].item_price <= 0 || topsection['Config'] == 'GLAZ-SOL') {
         this.navComponent.setNavFlow('res', 'hideglass');
         this.route.navigateByUrl('/config/hardware');
       } else {
-        this.route.navigateByUrl('/config/nonClassic');
+        if (topsection['SectionsAllowed'].indexOf(',') > 0) {
+          this.route.navigateByUrl('/config/glassType');
+        } else {
+          this.route.navigateByUrl('/config/nonClassic');
+        }
       }
     } else {
       this.route.navigateByUrl('/config/nonClassic');

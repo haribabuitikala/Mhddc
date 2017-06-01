@@ -2,6 +2,7 @@ import { Component, OnInit, Input, Output, EventEmitter, AfterViewInit, ElementR
 import { AppUtilities } from "../shared/appUtilities";
 import { CollectionData } from "../collection/collection-data";
 import { ConfigComponent } from "../config/config.component";
+import { NavComponent } from '../nav/nav.component'
 import { AppComponent } from "../app.component";
 declare var $: any;
 declare var _: any;
@@ -18,6 +19,7 @@ export class ResSliderComponent implements OnInit, AfterViewInit {
         , private dataStore: CollectionData
         , private myElem: ElementRef
         , private app: AppComponent
+        , private navComponent: NavComponent
         , private config: ConfigComponent) {
         this.myElement = myElem;
     }
@@ -45,26 +47,21 @@ export class ResSliderComponent implements OnInit, AfterViewInit {
 
     ngOnInit() {
         if (this.data) {
-            if (this.data.length > 0 && this.data[0].length > 0) {
-                this.saveSelected(this.data[0][0]);
+            if (this.navComponent.flowType == 'resquick') {
+                if (this.cname != 'openers') {
+                    if (this.data.length > 0 && this.data[0].length > 0) {
+                        this.saveSelected(this.data[0][0]);
+                    }
+                }
+            } else {
+                if (this.data.length > 0 && this.data[0].length > 0) {
+                    this.saveSelected(this.data[0][0]);
+                }
             }
             this.sliderRows = _.times(this.data.length, _.constant(null));
             this.slideCount = this.data ? this.data.length : 0;
         }
         this.renderSlider();
-
-        // let selectedIndex = 0, itemIndex = 0;
-        // for (let i = 0, len = this.data.length; i < len; i++) {
-        //     var innerItems = this.data[i];
-        //     for (let j = 0, jlen = innerItems.length; j < jlen; j++) {
-        //         if (innerItems[j].item_id == this.utils.utilities.gdoOpenerSelectedItm) {
-        //             selectedIndex = i;
-        //             itemIndex = j;
-        //         }
-        //     }
-        // }
-        // this.slideIndex = selectedIndex;
-        // this.sliderLeft = -(this.slideIndex * this.slideWidth);
 
         this.imageUrl = location.href.indexOf('localhost:4200') >= 0 ? 'http://localhost:3435/images/' + this.folder : '../../assets/images/' + this.folder;
     }
@@ -214,8 +211,21 @@ export class ResSliderComponent implements OnInit, AfterViewInit {
                 break;
             case 'design':
                 this.utils.resFlowSession.resDoorObj.design.dsgn = obj;
-                this.utils.resFlowSession.resDoorObj.construction.apiData = obj['constructions'];
-                this.utils.resFlowSession.resDoorObj.construction.construction = obj['constructions'][0];
+                if (obj['constructions']) {
+                    this.utils.resFlowSession.resDoorObj.construction.apiData = obj['constructions'];
+                    this.utils.resFlowSession.resDoorObj.construction.construction = obj['constructions'][0];
+                }
+                let stockdoorconstructions = obj['stockdoorconstructions'];
+                if (stockdoorconstructions && stockdoorconstructions.length > 0) {
+                    this.utils.resFlowSession.resDoorObj.construction.apiData = stockdoorconstructions;
+                    this.utils.resFlowSession.resDoorObj.construction.construction = stockdoorconstructions[0];
+                    let colors = stockdoorconstructions[0]['colors'];
+                    if (colors && colors.length > 0) {
+
+                        this.utils.resFlowSession.resDoorObj.color.overlay = colors[0];
+                        this.utils.resFlowSession.resDoorObj.color.base = colors[0];
+                    }
+                }
                 break;
             case 'color':
                 this.utils.resFlowSession.resDoorObj.color.base = obj;
