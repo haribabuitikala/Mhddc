@@ -37,7 +37,7 @@ export class ResSliderComponent implements OnInit, AfterViewInit {
     // construction details page
     cObj = this.utils.resFlowSession.resDoorObj;
     collectionName = this.cObj.product.product;
-    constructionName = this.cObj.construction.construction;
+    construction = this.cObj.construction.construction;
 
     imageUrl = location.href.indexOf('localhost:4200') >= 0 ? 'http://localhost:3435/images' : '';
 

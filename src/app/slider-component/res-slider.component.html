@@ -45,10 +45,11 @@
                     <div class="inner-item col-xs-{{number}}" *ngFor="let slideitem of slide; let i=index" [ngClass]="{ 'current' : isSeleted(slideitem, k, i)}"
                         (click)="openerSelected(slideitem, $event)">
                         <img (error)="onImageLoadError(slideitem, folder)" src="../../assets/images/{{slideitem.item_thumbnail.replace('.jpg', '.png')}}"
-                            [attr.data-id]="slideitem.item_id"> Model {{slideitem.ClopayModelNumber}}
+                            [attr.data-id]="slideitem.item_id">
+                        <div class="construction-model">Model {{construction.ClopayModelNumber}}</div>
                         <div class="construciton-info">
                             <div>
-                                <img (click)="contructionDetails.open()" src="../../assets/images/Info-64.png" alt="">
+                                <img (click)="contructionDetails.open()" class="nobdr" src="../../assets/images/Info-64.png" alt="">
                             </div>
                             <span>
                                 product <br/>  details
@@ -83,7 +84,7 @@
             <p class="bold">(Model)</p>
             <ul>
                 <li>{{collectionName.item_name}}</li>
-                <li>{{constructionName.item_name}}</li>
+                <li>{{construction.item_name}}</li>
             </ul>
         </div>
     </modal-body>
