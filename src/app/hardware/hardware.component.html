@@ -1,65 +1,60 @@
 <div class="row">
-    <div class="col-xs-9 pull-left" > <h4 class="font-size-16 text-orange">Choose Your Handle</h4></div>
-    <div class="col-xs-3 pull-right  ">  
+    <div class="col-xs-9 pull-left">
+        <h4 class="font-size-16 text-orange">Choose Your Handle</h4>
+    </div>
+    <div class="col-xs-3 pull-right  ">
         <img (click)="updateCount('Handles')" src="../../assets/images/substract.png" alt="" height="22" width="22" class="minus-quantity pull-left">
         <span>{{ countManager.Handles }}</span>
         <img (click)="updateCount('Handles', true)" src="../../assets/images/add.png" alt="" height="22" width="22" class="add-quantity  ">
-    </div> 
+    </div>
 </div>
 <div class="tile margin-b-15 ptn-rel" *ngIf="isLoaded">
-    <app-res-slider [data]="yourHandles"
-                    [number]="yourHandlersNumber"
-                    [category]="'handles'"
-                    [uniqueId]="1"
-                    [cname]="'handles'"
-                    [folder]="'hardware/handles'">
+    <app-res-slider [data]="yourHandles" [number]="yourHandlersNumber" [category]="'handles'" [uniqueId]="1" [cname]="'handles'"
+        [folder]="">
     </app-res-slider>
 </div>
 
 <div class="row">
-    <div class="col-xs-9 pull-left" > <h4 class="font-size-16 text-orange">Choose Your Step Plate</h4></div>
-    <div class="col-xs-3 pull-right  ">  
+    <div class="col-xs-9 pull-left">
+        <h4 class="font-size-16 text-orange">Choose Your Step Plate</h4>
+    </div>
+    <div class="col-xs-3 pull-right  ">
         <img (click)="updateCount('StepPlates')" src="../../assets/images/substract.png" alt="" height="22" width="22" class="minus-quantity pull-left">
         <span>{{ countManager.StepPlates }}</span>
-        <img (click)="updateCount('StepPlates', true)"  src="../../assets/images/add.png" alt="" height="22" width="22" class="add-quantity  ">
-    </div> 
+        <img (click)="updateCount('StepPlates', true)" src="../../assets/images/add.png" alt="" height="22" width="22" class="add-quantity  ">
+    </div>
 </div>
 <div class="tile margin-b-15 ptn-rel" *ngIf="isLoaded">
-     <app-res-slider [data]="yourStepPlates"
-                    [number]="youStepPlatesNumber"
-                    [category]="'stepplates'"
-                    [uniqueId]="2"
-                    [cname]="'stepplates'"
-                    [folder]="'hardware/hinge'">
+    <app-res-slider [data]="yourStepPlates" [number]="youStepPlatesNumber" [category]="'stepplates'" [uniqueId]="2" [cname]="'stepplates'"
+        [folder]="">
     </app-res-slider>
 </div>
 <div class="row">
-    <div class="col-xs-9 pull-left" > <h4 class="font-size-16 text-orange">Choose Your Hinge</h4></div>
-    <div class="col-xs-3 pull-right  ">  
-        <img (click)="updateCount('StepHinge')"  src="../../assets/images/substract.png" alt="" height="22" width="22" class="minus-quantity pull-left">
+    <div class="col-xs-9 pull-left">
+        <h4 class="font-size-16 text-orange">Choose Your Hinge</h4>
+    </div>
+    <div class="col-xs-3 pull-right  ">
+        <img (click)="updateCount('StepHinge')" src="../../assets/images/substract.png" alt="" height="22" width="22" class="minus-quantity pull-left">
         <span>{{ countManager.StepHinge }}</span>
         <img (click)="updateCount('StepHinge', true)" src="../../assets/images/add.png" alt="" height="22" width="22" class="add-quantity ">
-    </div> 
+    </div>
 </div>
 <div class="tile margin-b-15 ptn-rel" *ngIf="isLoaded">
-    <app-res-slider [data]="yourStepHinge"
-                    [number]="youStephingeNumber"
-                    [category]="'stephinges'"
-                    [uniqueId]="3"
-                    [cname]="'stephinges'"
-                    [folder]="'hardware/step-plate'">
+    <app-res-slider [data]="yourStepHinge" [number]="youStephingeNumber" [category]="'stephinges'" [uniqueId]="3" [cname]="'stephinges'"
+        [folder]="">
     </app-res-slider>
 </div>
 <modal #behr>
     <modal-header [show-close]="true">
     </modal-header>
     <modal-body>
-        <div class="col-xs-12" >
+        <div class="col-xs-12">
             <div class="col-xs-5">
-                <img src="../../assets/images/Behar-icon.png" alt=""/>
+                <img src="../../assets/images/Behar-icon.png" alt="" />
             </div>
             <div class="col-xs-7 font-size-16 bold  ">
-                <p>Paint Color Codes for  Clopay Garage Doors <p>
+                <p>Paint Color Codes for Clopay Garage Doors
+                    <p>
             </div>
         </div>
         <div class="text-center font-size-12 padding-b-10">
@@ -70,46 +65,45 @@
             <div class="col-xs-6 text-center font-size-11">
                 <span class="color-sec white"></span>
                 <p>Clopay Color : White BEHR® Color Code:CBP-l</p>
-            </div> 
+            </div>
             <div class="col-xs-6 text-center font-size-11">
                 <span class="color-sec almond"></span>
                 <p>Clopay Color : Almond BEHR® Color Code:CBP-2&nbsp;</p>
-            </div> 
+            </div>
             <div class="col-xs-6 text-center font-size-11">
                 <span class="color-sec grey"></span>
                 <p>Clopay Color : Grey BEHR® Color Code:CBP-7</p>
-            </div> 
+            </div>
             <div class="col-xs-6 text-center font-size-11">
                 <span class="color-sec desertTan"></span>
                 <p>Clopay Color : Desert Tan BEHR® Color Code:CBP-3</p>
-            </div> 
+            </div>
             <div class="col-xs-6 text-center font-size-11">
                 <span class="color-sec sandtone"></span>
                 <p>Clopay Color : Sandtone BEHR® Color Code:CBP-4</p>
-            </div> 
+            </div>
             <div class="col-xs-6 text-center font-size-11">
                 <span class="color-sec chocolate"></span>
                 <p>Clopay Color : Chocolate BEHR® Color Code:CBP-5 **&nbsp;</p>
-            </div> 
+            </div>
             <div class="col-xs-6 text-center font-size-11">
                 <span class="color-sec hunterGreen"></span>
                 <p>Clopay Color : Hunter Green BEHR® Color Code:CBP-7</p>
-            </div> 
+            </div>
         </div>
         <div class="text-center font-size-12">
-            <p>* Color Available only on&nbsp;Clopay classic Collection<br>Premium Series Garage Doors</p></div>
+            <p>* Color Available only on&nbsp;Clopay classic Collection<br>Premium Series Garage Doors</p>
+        </div>
     </modal-body>
 </modal>
 
 
 <div id="footer" class="col-xs-12 padding-t-10 padding-b-10">
     <a href="javascript:void(0)" class="pull-left previous-btn" (click)="prevBtn('config/color')" data-id="currScreen">
-        <img src="../../assets/images/back-48-thick.png" height="15px">
-        Prev
+        <img src="../../assets/images/back-48-thick.png" height="15px"> Prev
     </a>
 
-    <a href="javascript:void(0)" class="pull-right nextBtn" (click)="nextBtn('config/glassType')"
-       data-id="currScreen">
+    <a href="javascript:void(0)" class="pull-right nextBtn" (click)="nextBtn('config/glassType')" data-id="currScreen">
         Next
         <img src="../../assets/images/Forward-48-thick.png" height="15px">
     </a>
