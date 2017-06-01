@@ -3,6 +3,7 @@ import { AppUtilities } from "../shared/appUtilities";
 import { CollectionData } from "../collection/collection-data";
 import { ConfigComponent } from "../config/config.component";
 import { AppComponent } from "../app.component";
+import { CollectionService } from "../shared/data.service";
 declare var $: any;
 declare var _: any;
 
@@ -18,7 +19,8 @@ export class ResSliderComponent implements OnInit, AfterViewInit {
         , private dataStore: CollectionData
         , private myElem: ElementRef
         , private app: AppComponent
-        , private config: ConfigComponent) {
+        , private config: ConfigComponent
+        , private dataService: CollectionService) {
         this.myElement = myElem;
     }
 
@@ -38,6 +40,7 @@ export class ResSliderComponent implements OnInit, AfterViewInit {
     cObj = this.utils.resFlowSession.resDoorObj;
     collectionName = this.cObj.product.product;
     construction = this.cObj.construction.construction;
+    constructionInfo;
 
     imageUrl = location.href.indexOf('localhost:4200') >= 0 ? 'http://localhost:3435/images' : '';
 
@@ -51,7 +54,13 @@ export class ResSliderComponent implements OnInit, AfterViewInit {
             this.sliderRows = _.times(this.data.length, _.constant(null));
             this.slideCount = this.data ? this.data.length : 0;
         }
+        this.dataService.getModelInfo(this.construction)
+            .subscribe(
+            res => this.constructionInfo = res
+            )
         this.renderSlider();
+
+
 
         // let selectedIndex = 0, itemIndex = 0;
         // for (let i = 0, len = this.data.length; i < len; i++) {

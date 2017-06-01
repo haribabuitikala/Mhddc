@@ -35,8 +35,7 @@ export class ResDoorConfigurationComponent implements OnInit {
     showDirectText = this.utils.utilities.directFlow;
 
     gdoOpeners = [];
-
-
+    showShare = false;
 
     // for gdo the pageNo will be 4
     // for residential the pageNo will be 
@@ -57,24 +56,28 @@ export class ResDoorConfigurationComponent implements OnInit {
             currentStepUrl: '/config/doorConfiguration',
             showStepIndicator: true,
             nextStepFn: () => {
-                
+
             }
         });
     }
     ngOnInit() {
         this.setNavComponent();
-        this.config.pageTitle = "13. Your Door Configuration"
+        this.config.pageTitle = "13. Your Door Configuration";
+
+    }
+    shareBtn() {
+        this.showShare = !this.showShare;
     }
     updateQuantity(flow) {
-        
+
     }
 
     nextBtn(path) {
-      
+
     }
 
     prevBtn(path) {
-        
+
     }
 
 

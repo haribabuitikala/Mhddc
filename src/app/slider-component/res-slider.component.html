@@ -83,8 +83,12 @@
         <div class="margin-b-10 margin-top-30">
             <p class="bold">(Model)</p>
             <ul>
-                <li>{{collectionName.item_name}}</li>
-                <li>{{construction.item_name}}</li>
+                <li *ngFor="let info of constructionInfo">
+                    <p>
+                        {{info.modeldescription}}
+                    </p>
+                </li>
+                
             </ul>
         </div>
     </modal-body>
