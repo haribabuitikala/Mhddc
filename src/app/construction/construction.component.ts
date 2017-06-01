@@ -1,11 +1,12 @@
-import {Component, OnInit} from '@angular/core';
-import {Router} from '@angular/router';
-import {CollectionData} from "../collection/collection-data";
-import {ConfigComponent} from "../config/config.component";
-import {NavComponent} from "../nav/nav.component";
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { Router } from '@angular/router';
+import { CollectionData } from "../collection/collection-data";
+import { ConfigComponent } from "../config/config.component";
+import { NavComponent } from "../nav/nav.component";
 import { AppUtilities } from "../shared/appUtilities";
+import { ModalComponent } from "ng2-bs3-modal/ng2-bs3-modal";
 
-declare var _:any;
+declare var _: any;
 @Component({
     selector: 'app-construction',
     templateUrl: './construction.component.html',
@@ -13,22 +14,27 @@ declare var _:any;
 })
 export class ConstructionComponent implements OnInit {
 
-    constructor(private dataStore:CollectionData
-        , private route:Router
-        , private utils:AppUtilities
-        , private config:ConfigComponent
-        , private navComponent:NavComponent) {
+    constructor(private dataStore: CollectionData
+        , private route: Router
+        , private utils: AppUtilities
+        , private config: ConfigComponent
+        , private navComponent: NavComponent) {
 
     }
 
-    number:number = 6;
+    number: number = 6;
     folder = '';
     category = 'colors';
     data;
+    showUpsell: boolean = false;
 
     loaded = false;
+    className = '';
+
+    @ViewChild('upsell') upsell: ModalComponent;
 
     ngOnInit() {
+        console.log("construction step");
         this.startProcess();
 
         this.navComponent.renderNav({
@@ -37,14 +43,31 @@ export class ConstructionComponent implements OnInit {
             currentStepUrl: '/config/construction',
             showStepIndicator: true,
             nextStepFn: () => {
-                
+
             }
         });
 
 
+        switch (this.utils.resFlowSession.resDetails.collectionName) {
+            case "Coachman&#174; Collection": {
+                this.className = 'classic-collection';
+                break;
+            }
+            case "Gallery&#174; Collection":
+            case "Classic&#8482; Collection - Premium Series": {
+                this.className = 'gallery-collection';
+                break;
+            }
+            case "Modern Steel Collection": {
+                this.className = 'more-steel-collection';
+                break;
+            }
+        }
+
+
         this.config.pageTitle = '5.Choose Your Construction';
 
-       
+
     }
 
     startProcess() {
@@ -53,16 +76,25 @@ export class ConstructionComponent implements OnInit {
         this.data = _.chunk(res, 2);
 
         this.utils.resFlowSession.resDoorObj.construction.construction = res[0];
-        
+
         this.loaded = true;
     }
 
-    nextBtn(path) {
-        this.route.navigateByUrl(path);
+    nextBtn(path, upsellModal) {
+        if (this.utils.resFlowSession.collection.selectedCollection.item_id == 11 || 12 || 13 || 170) {
+            upsellModal.open();
+        } else {
+            this.route.navigateByUrl(path);
+        }
     }
 
     prevBtn() {
         this.route.navigateByUrl('/config/design');
+    }
+
+    moveNext() {
+        this.route.navigateByUrl('config/color');
+        // this.goToHome(this.selected);
     }
 
 }
