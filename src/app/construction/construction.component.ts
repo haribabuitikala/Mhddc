@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 import { Component, OnInit, ViewChild } from '@angular/core';
+=======
+import { Component, OnInit } from '@angular/core';
+>>>>>>> 560562b6ade07caaff9bb4e204035abfb73245b8
 import { Router } from '@angular/router';
 import { CollectionData } from "../collection/collection-data";
 import { ConfigComponent } from "../config/config.component";
@@ -23,7 +27,7 @@ export class ConstructionComponent implements OnInit {
     }
 
     number: number = 6;
-    folder = '';
+    folder = 'construction';
     category = 'colors';
     data;
     showUpsell: boolean = false;
@@ -36,19 +40,32 @@ export class ConstructionComponent implements OnInit {
     ngOnInit() {
         console.log("construction step");
         this.startProcess();
+        if (this.navComponent.flowType === 'res') {
+            this.navComponent.renderNav({
+                flowType: 'res',
+                flowActiveStep: 5,
+                currentStepUrl: '/config/construction',
+                showStepIndicator: true,
+                nextStepFn: () => {
 
-        this.navComponent.renderNav({
-            flowType: 'res',
-            flowActiveStep: 5,
-            currentStepUrl: '/config/construction',
-            showStepIndicator: true,
-            nextStepFn: () => {
+                }
+            });
+            this.config.pageTitle = '5.Choose Your Construction';
+        } else {
+            this.navComponent.renderNav({
+                flowType: 'resquick',
+                flowActiveStep: 4,
+                currentStepUrl: '/config/construction',
+                showStepIndicator: true,
+                nextStepFn: () => {
 
-            }
-        });
+                }
+            });
+            this.config.pageTitle = '4.Choose Your Construction';
+        }
 
 
-        switch (this.utils.resFlowSession.resDetails.collectionName) {
+		switch (this.utils.resFlowSession.resDetails.collectionName) {
             case "Coachman&#174; Collection": {
                 this.className = 'classic-collection';
                 break;
@@ -63,11 +80,6 @@ export class ConstructionComponent implements OnInit {
                 break;
             }
         }
-
-
-        this.config.pageTitle = '5.Choose Your Construction';
-
-
     }
 
     startProcess() {
@@ -80,12 +92,14 @@ export class ConstructionComponent implements OnInit {
         this.loaded = true;
     }
 
+ 
     nextBtn(path, upsellModal) {
         if (this.utils.resFlowSession.collection.selectedCollection.item_id == 11 || 12 || 13 || 170) {
             upsellModal.open();
         } else {
             this.route.navigateByUrl(path);
         }
+ 
     }
 
     prevBtn() {

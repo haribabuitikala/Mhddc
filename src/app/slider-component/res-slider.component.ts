@@ -2,7 +2,10 @@ import { Component, OnInit, Input, Output, EventEmitter, AfterViewInit, ElementR
 import { AppUtilities } from "../shared/appUtilities";
 import { CollectionData } from "../collection/collection-data";
 import { ConfigComponent } from "../config/config.component";
+import { NavComponent } from '../nav/nav.component'
 import { AppComponent } from "../app.component";
+ 
+import { CollectionService } from "../shared/data.service";
 
 declare var $: any;
 declare var _: any;
@@ -19,6 +22,8 @@ export class ResSliderComponent implements OnInit, AfterViewInit {
         , private dataStore: CollectionData
         , private myElem: ElementRef
         , private app: AppComponent
+        , private dataService: CollectionService
+        , private navComponent: NavComponent
         , private config: ConfigComponent) {
         this.myElement = myElem;
     }
@@ -36,35 +41,56 @@ export class ResSliderComponent implements OnInit, AfterViewInit {
 
     sliderRows;
 
-    imageUrl = location.href.indexOf('localhost:4200') >= 0 ? 'http://localhost:3435/images' : '';
+    // construction details page
+    cObj = this.utils.resFlowSession.resDoorObj;
+    collectionName = this.cObj.product.product;
+    construction = this.cObj.construction.construction;
+    constructionInfo;
 
+    imageUrl = location.href.indexOf('localhost:4200') >= 0 ? 'http://localhost:3435/images' : '';
+    modelCategory;
     // @Output() notify = new EventEmitter<GdoOpener>();
 
     ngOnInit() {
 
         if (this.data) {
-            if (this.data.length > 0 && this.data[0].length > 0) {
-                this.saveSelected(this.data[0][0]);
+            if (this.navComponent.flowType == 'resquick') {
+                if (this.cname != 'openers') {
+                    if (this.data.length > 0 && this.data[0].length > 0) {
+                        this.saveSelected(this.data[0][0]);
+                    }
+                }
+            } else {
+                if (this.data.length > 0 && this.data[0].length > 0) {
+                    this.saveSelected(this.data[0][0]);
+                }
             }
             this.sliderRows = _.times(this.data.length, _.constant(null));
             this.slideCount = this.data ? this.data.length : 0;
         }
+        this.dataService.getModelInfo(this.construction)
+            .subscribe(
+            res => this.constructionInfo = res
+            )
         this.renderSlider();
-
-        // let selectedIndex = 0, itemIndex = 0;
-        // for (let i = 0, len = this.data.length; i < len; i++) {
-        //     var innerItems = this.data[i];
-        //     for (let j = 0, jlen = innerItems.length; j < jlen; j++) {
-        //         if (innerItems[j].item_id == this.utils.utilities.gdoOpenerSelectedItm) {
-        //             selectedIndex = i;
-        //             itemIndex = j;
-        //         }
-        //     }
-        // }
-        // this.slideIndex = selectedIndex;
-        // this.sliderLeft = -(this.slideIndex * this.slideWidth);
-
         this.imageUrl = location.href.indexOf('localhost:4200') >= 0 ? 'http://localhost:3435/images/' + this.folder : '../../assets/images/' + this.folder;
+        this.getModelCategory(this.construction);
+    }
+
+    getModelCategory(obj) {
+        switch (obj.best_order) {
+            case 0:
+                this.modelCategory = 'Basic(Other Constructions)'
+                break
+            case 1:
+                this.modelCategory = 'Best'
+                break
+            case 2:
+                this.modelCategory = 'Better'
+                break
+            default:
+                this.modelCategory = 'Good'
+        }
     }
 
     isSeleted(item, index, itemIndex) {
@@ -195,25 +221,38 @@ export class ResSliderComponent implements OnInit, AfterViewInit {
             case 'handles':
                 this.utils.resFlowSession.resDoorObj.hardware.handle = obj;
                 this.utils.resFlowSession.resDoorObj.hardware.handle['count'] = 1;
-                this.utils.resFlowSession.resDoorObj.hardware.handle['placement'] = obj['placement'] ? obj['placement'] : obj['placementlist']; 
+                this.utils.resFlowSession.resDoorObj.hardware.handle['placement'] = obj['placement'] ? obj['placement'] : obj['placementlist'];
                 break;
             case 'stepplates':
                 this.utils.resFlowSession.resDoorObj.hardware.stepplate = obj;
                 this.utils.resFlowSession.resDoorObj.hardware.stepplate['count'] = 1;
-                this.utils.resFlowSession.resDoorObj.hardware.stepplate['placement'] = obj['placement'] ? obj['placement'] : obj['placementlist']; 
+                this.utils.resFlowSession.resDoorObj.hardware.stepplate['placement'] = obj['placement'] ? obj['placement'] : obj['placementlist'];
                 break;
             case 'stephinges':
                 this.utils.resFlowSession.resDoorObj.hardware.hinge = obj;
                 this.utils.resFlowSession.resDoorObj.hardware.hinge['count'] = 1;
-                 this.utils.resFlowSession.resDoorObj.hardware.hinge['placement'] = obj['placement'] ? obj['placement'] : obj['placementlist']; 
+                this.utils.resFlowSession.resDoorObj.hardware.hinge['placement'] = obj['placement'] ? obj['placement'] : obj['placementlist'];
                 break;
             case 'openers':
                 this.utils.resFlowSession.resDoorObj.opener.opener = obj;
                 break;
             case 'design':
                 this.utils.resFlowSession.resDoorObj.design.dsgn = obj;
-                this.utils.resFlowSession.resDoorObj.construction.apiData = obj['constructions'];
-                this.utils.resFlowSession.resDoorObj.construction.construction = obj['constructions'][0];
+                if (obj['constructions']) {
+                    this.utils.resFlowSession.resDoorObj.construction.apiData = obj['constructions'];
+                    this.utils.resFlowSession.resDoorObj.construction.construction = obj['constructions'][0];
+                }
+                let stockdoorconstructions = obj['stockdoorconstructions'];
+                if (stockdoorconstructions && stockdoorconstructions.length > 0) {
+                    this.utils.resFlowSession.resDoorObj.construction.apiData = stockdoorconstructions;
+                    this.utils.resFlowSession.resDoorObj.construction.construction = stockdoorconstructions[0];
+                    let colors = stockdoorconstructions[0]['colors'];
+                    if (colors && colors.length > 0) {
+
+                        this.utils.resFlowSession.resDoorObj.color.overlay = colors[0];
+                        this.utils.resFlowSession.resDoorObj.color.base = colors[0];
+                    }
+                }
                 break;
             case 'color':
                 this.utils.resFlowSession.resDoorObj.color.base = obj;
@@ -254,7 +293,7 @@ export class ResSliderComponent implements OnInit, AfterViewInit {
         // this.notify.emit(obj);
         this.saveSelected(obj);
 
-        
+
     }
 
 

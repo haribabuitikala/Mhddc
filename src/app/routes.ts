@@ -9,8 +9,11 @@ import {ThankyouComponent} from "./thankyou/thankyou.component";
 import {ZipResolver} from "./zip-results/zip-resolver.service";
 import {GdoDoorSizeComponent} from "./gdo-door-size/gdo-door-size.component";
 import {ShoppingCartComponent} from "./shopping-cart/shopping-cart.component";
+import {CustomerInfoComponent} from './customer-info/customer-info.component';
+import {CustomerServiceInfoComponent} from './customer-service-info/customer-service-info.component';
 
-export const appRoutes:Routes = [
+
+export const appRoutes: Routes = [
     {path: 'banner', component: BannerComponent},
     {
         path: 'zipResults/:zip',
@@ -20,7 +23,9 @@ export const appRoutes:Routes = [
     {path: 'doorSize', component: DoorSizeComponent},
     {path: 'collection', component: CollectionComponent},
     {path: 'home', component: HomeComponent},
-    {path: 'shoppingCart', component:ShoppingCartComponent},
+    {path: 'shoppingCart', component: ShoppingCartComponent},
+    {path: 'customer-info', component: CustomerInfoComponent},
+    {path: 'customer-service-info', component: CustomerServiceInfoComponent},
     {path: 'thankyou', component: ThankyouComponent},
     // gdo flow
     {path: 'gdoDoorSize', component: GdoDoorSizeComponent},

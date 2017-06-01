@@ -1,5 +1,5 @@
-<div *ngIf="visualizeHeader" class="gdo-config">
-    <h3  id='visualize-header' class="font-size-16 visualize-header">
+<div *ngIf="visualizeHeader" class="gdo-config linear-bg">
+    <h3 id='visualize-header' class="font-size-16 visualize-header">
     </h3>
     <div class="text-center switcher-image-sec gdo">
         <img src="../../assets/images/openers/banner{{gdoBanner}}" class="switcher-image" alt="">
@@ -10,21 +10,23 @@
 
     </router-outlet>
 </div>
-<div class="tile gdoCofigDetails" *ngIf="showDetails">
-    <div class="design-detials--sec">
-        <div class="col-xs-6 padding-r-7  border-white-right font-size-12">
-            <p>{{itemPrice | currency:'USD':true:'1.2-2'}} / Opener</p>
+<div>
+    <div class="tile gdoCofigDetails" *ngIf="showDetails">
+        <div class="design-detials--sec">
+            <div class="col-xs-6 padding-r-7  border-white-right font-size-12">
+                <p>{{itemPrice | currency:'USD':true:'1.2-2'}} / Opener</p>
+            </div>
+            <div class="col-xs-6 padding-0-r  font-size-12 clearfix">
+                <p>
+                    Quantity
+                    <img src="../../assets/images/substract.png" alt="" (click)="updateQuantity(0)" class="minus-quantity">
+                    <span>{{quantity}}</span>
+                    <img src="../../assets/images/add.png" alt="" (click)="updateQuantity(1)" class="add-quantity">
+                </p>
+                <h4 class="pull-right padding-r-7 text-orange showDetails" *ngIf="showDetails" (click)="openShowDetailsmodal(showDetails)">DETAILS</h4>
+            </div>
+            <h4 class="text-center text-orange gdo-details-txt font-size-14">Prices Include All Applicable Discounts</h4>
         </div>
-        <div class="col-xs-6 padding-0-r  font-size-12 clearfix">
-            <p>
-                Quantity
-                <img src="../../assets/images/substract.png" alt="" (click)="updateQuantity(0)" class="minus-quantity">
-                <span>{{quantity}}</span>
-                <img src="../../assets/images/add.png" alt="" (click)="updateQuantity(1)" class="add-quantity">
-            </p>
-            <h4 class="pull-right padding-r-7 text-orange showDetails" *ngIf="showDetails" (click)="openShowDetailsmodal(showDetails)">DETAILS</h4>
-        </div>
-        <h4 class="text-center text-orange gdo-details-txt font-size-14">Prices Include All Applicable Discounts</h4>
     </div>
 </div>
 
@@ -61,4 +63,3 @@
         </p>
     </modal-body>
 </modal>
-

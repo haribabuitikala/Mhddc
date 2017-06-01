@@ -33,16 +33,29 @@ export class ResOpenerComponent implements OnInit {
 
     selectedOpener;
     ngOnInit() {
-        this.navComponent.renderNav({
-            flowType: 'res',
-            flowActiveStep: 11,
-            currentStepUrl: '/config/opener',
-            showStepIndicator: true,
-            nextStepFn: () => {
+        if (this.navComponent.flowType === 'res') {
+            this.navComponent.renderNav({
+                flowType: 'res',
+                flowActiveStep: 11,
+                currentStepUrl: '/config/opener',
+                showStepIndicator: true,
+                nextStepFn: () => {
 
-            }
-        });
-        this.config.pageTitle = '11.Choose Your Opener';
+                }
+            });
+            this.config.pageTitle = '11.Choose Your Opener';
+        } else {
+            this.navComponent.renderNav({
+                flowType: 'resquick',
+                flowActiveStep: 7,
+                currentStepUrl: '/config/opener',
+                showStepIndicator: true,
+                nextStepFn: () => {
+
+                }
+            });
+            this.config.pageTitle = '7.Choose Your Opener';
+        }
         this.dataParams = {
             natmarketid: +this.utils.utilities.natmarketid,
             wf: this.utils.utilities.wf,
@@ -70,19 +83,23 @@ export class ResOpenerComponent implements OnInit {
 
     additionalItems = [];
     nextBtn(path) {
-        let openerParams = {
-            natmarketid: +this.utils.utilities.natmarketid,
-            lang: 'en',
-            localmarketid: +this.utils.utilities.localmarketid,
-            openerid: +this.utils.resFlowSession.resDoorObj.opener.opener['item_id']
-        };
-        this.selectedOpener = this.utils.resFlowSession.resDoorObj.opener.opener;
-        this.dataService.getOpenerAdditional(openerParams)
-            .subscribe(
-            res => {
-                this.additionalItems = res;
-                this.gdoOponerAccessories.open();
-            });
+        if (this.utils.resFlowSession.resDoorObj.opener.opener && this.utils.resFlowSession.resDoorObj.opener.opener != '') {
+            let openerParams = {
+                natmarketid: +this.utils.utilities.natmarketid,
+                lang: 'en',
+                localmarketid: +this.utils.utilities.localmarketid,
+                openerid: +this.utils.resFlowSession.resDoorObj.opener.opener['item_id']
+            };
+            this.selectedOpener = this.utils.resFlowSession.resDoorObj.opener.opener;
+            this.dataService.getOpenerAdditional(openerParams)
+                .subscribe(
+                res => {
+                    this.additionalItems = res;
+                    this.gdoOponerAccessories.open();
+                });
+        } else {
+            this.route.navigateByUrl('/config/additionalOptions');
+        }
     }
 
 
@@ -93,7 +110,7 @@ export class ResOpenerComponent implements OnInit {
     };
 
     prevBtn(path) {
-         this.route.navigateByUrl('/config/install');
+        this.route.navigateByUrl('/config/install');
     }
 
     accessoriesModalClose() {

@@ -35,8 +35,7 @@ export class ResDoorConfigurationComponent implements OnInit {
     showDirectText = this.utils.utilities.directFlow;
 
     gdoOpeners = [];
-
-
+    showShare = false;
 
     // for gdo the pageNo will be 4
     // for residential the pageNo will be 
@@ -57,23 +56,52 @@ export class ResDoorConfigurationComponent implements OnInit {
             currentStepUrl: '/config/doorConfiguration',
             showStepIndicator: true,
             nextStepFn: () => {
-                
+
             }
         });
     }
     ngOnInit() {
         this.setNavComponent();
+        this.config.pageTitle = "13. Your Door Configuration";
+
+    }
+    shareBtn() {
+        this.showShare = !this.showShare;
+        if (this.navComponent.flowType === 'res') {
+            this.navComponent.renderNav({
+                flowType: 'res',
+                flowActiveStep: 13,
+                currentStepUrl: '/config/doorConfiguration',
+                showStepIndicator: true,
+                nextStepFn: () => {
+
+                }
+            });
+            this.config.pageTitle = '13. Your Door Configuration';
+        } else {
+            this.navComponent.renderNav({
+                flowType: 'resquick',
+                flowActiveStep: 9,
+                currentStepUrl: '/config/doorConfiguration',
+                showStepIndicator: true,
+                nextStepFn: () => {
+
+                }
+            });
+            this.config.pageTitle = '9.Your Door Configuration';
+        }
     }
     updateQuantity(flow) {
-        
+
     }
 
     nextBtn(path) {
-      
+        $('body').addClass('loader');
+        this.route.navigateByUrl(path)
     }
 
     prevBtn(path) {
-        
+
     }
 
 

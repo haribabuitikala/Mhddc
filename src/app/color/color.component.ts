@@ -37,17 +37,29 @@ export class ColorComponent implements OnInit {
         let res = this.utils.resFlowSession.resDoorObj.construction.construction['colors'];
         this.data = _.chunk(res, 6);
 
-        this.navComponent.renderNav({
-            flowType: 'res',
-            flowActiveStep: 6,
-            currentStepUrl: '/config/color',
-            showStepIndicator: true,
-            nextStepFn: () => {
+        if (this.navComponent.flowType === 'res') {
+            this.navComponent.renderNav({
+                flowType: 'res',
+                flowActiveStep: 6,
+                currentStepUrl: '/config/color',
+                showStepIndicator: true,
+                nextStepFn: () => {
 
-            }
-        });
+                }
+            });
+            this.config.pageTitle = '6.Choose Your Color';
+        } else {
+            this.navComponent.renderNav({
+                flowType: 'resquick',
+                flowActiveStep: 5,
+                currentStepUrl: '/config/color',
+                showStepIndicator: true,
+                nextStepFn: () => {
 
-        this.config.pageTitle = '6.Choose Your Color';
+                }
+            });
+            this.config.pageTitle = '5.Choose Your Color';
+        }
 
         this.utils.resFlowSession.resDoorObj.color.apiData = res;
         this.utils.resFlowSession.resDoorObj.color.base = res[0];
@@ -79,12 +91,16 @@ export class ColorComponent implements OnInit {
     }
 
     nextBtn(path) {
-        let params = this.setParams();
-        this.dataService.getTopSection(params).subscribe(res => {
-            this.dataStore.topSection = res;
-            this.utils.resFlowSession.resDoorObj.windows.apiData = res;
-            this.route.navigateByUrl(path);
-        });
+        if (this.navComponent.flowType === 'res') {
+            let params = this.setParams();
+            this.dataService.getTopSection(params).subscribe(res => {
+                this.dataStore.topSection = res;
+                this.utils.resFlowSession.resDoorObj.windows.apiData = res;
+                this.route.navigateByUrl(path);
+            });
+        } else {
+            this.route.navigateByUrl('config/install');
+        }
     }
 
     prevBtn() {
