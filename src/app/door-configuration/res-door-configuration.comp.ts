@@ -67,6 +67,29 @@ export class ResDoorConfigurationComponent implements OnInit {
     }
     shareBtn() {
         this.showShare = !this.showShare;
+        if (this.navComponent.flowType === 'res') {
+            this.navComponent.renderNav({
+                flowType: 'res',
+                flowActiveStep: 13,
+                currentStepUrl: '/config/doorConfiguration',
+                showStepIndicator: true,
+                nextStepFn: () => {
+
+                }
+            });
+            this.config.pageTitle = '13. Your Door Configuration';
+        } else {
+            this.navComponent.renderNav({
+                flowType: 'resquick',
+                flowActiveStep: 9,
+                currentStepUrl: '/config/doorConfiguration',
+                showStepIndicator: true,
+                nextStepFn: () => {
+
+                }
+            });
+            this.config.pageTitle = '9.Your Door Configuration';
+        }
     }
     updateQuantity(flow) {
 

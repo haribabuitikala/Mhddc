@@ -24,6 +24,7 @@ export class CollectionComponent implements OnInit {
     speciality = false;
     popular = true;
     pageNo;
+    quickFlow = false;
 
     showSpeciality() {
         this.specialityBtn = false;
@@ -57,18 +58,24 @@ export class CollectionComponent implements OnInit {
     loadStockGroups() {
         let utils = this.utils.utilities;
         let dataParams = {
-            "dwidthFt": utils.wf,
+            "dwidthFt": +this.utils.resFlowSession.resDoorObj.size.width.wf,
             "dwidthIn": utils.wi || 0,
-            "dheightFt": utils.hf,
+            "dheightFt": +this.utils.resFlowSession.resDoorObj.size.height.hf,
             "dheightIn": utils.hi || 0,
             'storeid': +utils.storenumber,
             'windcode': utils.winCode
         };
         this.dataService.getStockGroup(dataParams).subscribe(res => {
             var stockStore = res[0];
-            this.utils.quickStockInfo.stockgroupid = stockStore.stockgroupid;
-            this.utils.quickStockInfo.storenumber = stockStore.storenumber;
-            this.utils.quickStockInfo.productids = stockStore.productids;
+            if (stockStore) {
+                this.utils.quickStockInfo.stockgroupid = stockStore.stockgroupid;
+                this.utils.quickStockInfo.storenumber = stockStore.storenumber;
+                this.utils.quickStockInfo.productids = stockStore.productids;
+
+                if (stockStore.productids != '') {
+                    this.quickFlow = true;
+                }
+            }
         });
     }
     ngOnInit() {
@@ -213,6 +220,7 @@ export class CollectionComponent implements OnInit {
     }
 
     quickShip() {
+        this.appComponent.setLoader(true);
         let utils = this.utils.utilities;
         let dataParams = {
             "dtype": utils.dtype,
@@ -229,7 +237,34 @@ export class CollectionComponent implements OnInit {
             "productlayout": true
         };
         this.dataService.getquickDoors(dataParams).subscribe(res => {
-            console.log('res', res);
+            this.utils.resQuickSession.designs = res;
+            this.navComponent.setNavFlow('resquick');
+            // this.utils.resFlowSession.resDoorObj.product['product'] = {
+            //     QPB: true,
+            //     doubleinstallcode: "FIR020",
+            //     doubleinstallcodew: "FIR021",
+            //     item_id: "",
+            //     item_name: "",
+            //     product_id: "",
+            //     productdefault: {
+            //         DIYDoublePackaging: "PACK-D,2",
+            //         DIYDoubleSpring: "SPRG-GS",
+            //         DIYSinglePackaging: "PACK-D,2",
+            //         DIYSingleSpring: "SPRG-E",
+            //         DoubleLock: "LOCK-1A",
+            //         DoublePackaging: "PACK-D,2",
+            //         DoubleSpring: "SPRG-COT",
+            //         IntDoubleLock: "LOCK-2",
+            //         IntSingleLock: "LOCK-2",
+            //         SingleLock: "LOCK-1A",
+            //         SinglePackaging: "PACK-D,2",
+            //         SingleSpring: "SPRG-COT",
+            //     },
+            //     productid: "",
+            //     singleinstallcode: "FIR010",
+            //     singleinstallcodew: "FIR011",
+            // }
+            this.route.navigateByUrl('/config/design');
         });
 
     }

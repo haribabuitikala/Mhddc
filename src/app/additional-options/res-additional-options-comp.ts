@@ -56,17 +56,29 @@ export class ResAdditionalOptionsComponent implements OnInit {
 
 
     setNavComponent() {
-        this.navComponent.renderNav({
-            flowType: 'res',
-            flowActiveStep: 12,
-            currentStepUrl: '/config/additionalOptions',
-            showStepIndicator: true,
-            nextStepFn: () => {
+         if (this.navComponent.flowType === 'res') {
+            this.navComponent.renderNav({
+                flowType: 'res',
+                flowActiveStep: 11,
+                currentStepUrl: '/config/additionalOptions',
+                showStepIndicator: true,
+                nextStepFn: () => {
 
-            }
-        });
+                }
+            });
+            this.config.pageTitle = '11.Choose Your Opener';
+        } else {
+            this.navComponent.renderNav({
+                flowType: 'resquick',
+                flowActiveStep: 8,
+                currentStepUrl: '/config/additionalOptions',
+                showStepIndicator: true,
+                nextStepFn: () => {
 
-        this.config.pageTitle = '12. Additional Options';
+                }
+            });
+            this.config.pageTitle = '8.Choose Your Opener';
+        }
     }
 
 
@@ -81,7 +93,7 @@ export class ResAdditionalOptionsComponent implements OnInit {
     }
 
     prevBtn(path) {
-        
+        this.route.navigateByUrl('/config/opener');
     }
  
 
