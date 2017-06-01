@@ -1,3 +1,12 @@
+<div   *ngIf="yourLocks.length > 0" >
+    <div class="pull-left" > <h4 class="font-size-16 text-orange">Choose Your Lock</h4></div>
+    <div class="margin-t-10 select-lock" *ngFor="let lock of yourLocks" (click)="updateLock(lock,$event)" > 
+        <img src="../../assets/images/hardware/lock/{{lock.item_thumbnail}}" alt=""/>
+        <div  *ngIf ="lock.item_id=='1512'||lock.item_id=='1651'"  class="font-size-10 text-orange pull-right margin-t-10" (click)="offset.open()"><span (click)="offset.open()">Offset </span></div>
+</div>
+</div>
+
+<div *ngIf="yourHandles.length > 0" >
 <div class="row">
     <div class="col-xs-9 pull-left">
         <h4 class="font-size-16 text-orange">Choose Your Handle</h4>
@@ -13,7 +22,8 @@
         [folder]="">
     </app-res-slider>
 </div>
-
+</div>
+<div *ngIf="yourStepPlates.length > 0" >
 <div class="row">
     <div class="col-xs-9 pull-left">
         <h4 class="font-size-16 text-orange">Choose Your Step Plate</h4>
@@ -29,6 +39,8 @@
         [folder]="">
     </app-res-slider>
 </div>
+</div>
+<div *ngIf="yourStepHinge.length > 0" >
 <div class="row">
     <div class="col-xs-9 pull-left">
         <h4 class="font-size-16 text-orange">Choose Your Hinge</h4>
@@ -44,6 +56,14 @@
         [folder]="">
     </app-res-slider>
 </div>
+</div>
+<modal #offset>
+    <modal-header [show-close]="true">
+    </modal-header>
+    <modal-body>
+        <img src="../../assets/images/lock/popup_offset-1.png" alt=""/>
+    </modal-body>
+</modal>
 <modal #behr>
     <modal-header [show-close]="true">
     </modal-header>
