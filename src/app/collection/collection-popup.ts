@@ -13,8 +13,7 @@ import {Component, OnInit, Input} from '@angular/core';
             <modal-header [show-close]="true">
             </modal-header>
             <modal-body>
-                <p><img src="../../assets/images/collection/popup/{{img}}"></p>
-                <img src="../../assets/images/collection/Collapse-50-3.png" (click)="productExpand.close()" alt="">
+                <p><img src="../../assets/images/collection/popup/{{img}}"></p> 
             </modal-body>
         </modal>
         
