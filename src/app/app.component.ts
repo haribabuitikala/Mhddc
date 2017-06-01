@@ -112,17 +112,24 @@ export class AppComponent implements OnInit {
     subscribeToPrice(fn) {
         this.priceListener = fn;
     }
-    
+
     detailsUpdateFn;
-    sunscribeToDetailsUpdate(fn){
+    sunscribeToDetailsUpdate(fn) {
         this.detailsUpdateFn = fn;
     }
 
-    updateResDetails(){
+    updateResDetails() {
         if (this.detailsUpdateFn) {
             this.detailsUpdateFn();
         }
+    }
 
+    setLoader(show?) {
+        if (show) {
+            $('.spinner').show();
+        } else {
+            $('.spinner').hide();
+        }
     }
 
 }

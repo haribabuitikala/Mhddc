@@ -32,17 +32,30 @@ export class InstallComponent implements OnInit {
 
     ngOnInit() {
 
-        this.navComponent.renderNav({
-            flowType: 'res',
-            flowActiveStep: 10,
-            currentStepUrl: '/config/install',
-            showStepIndicator: true,
-            nextStepFn: () => {
+        if (this.navComponent.flowType === 'res') {
+            this.navComponent.renderNav({
+                flowType: 'res',
+                flowActiveStep: 10,
+                currentStepUrl: '/config/install',
+                showStepIndicator: true,
+                nextStepFn: () => {
 
-            }
-        });
-        this.config.pageTitle = '10.Choose Installed vs. DIY';
-        
+                }
+            });
+            this.config.pageTitle = '10.Choose Installed vs. DIY';
+        } else {
+            this.navComponent.renderNav({
+                flowType: 'resquick',
+                flowActiveStep: 6,
+                currentStepUrl: '/config/install',
+                showStepIndicator: true,
+                nextStepFn: () => {
+
+                }
+            });
+            this.config.pageTitle = '6.Choose Installed vs. DIY';
+        }
+
         this.installSize = this.utils.utilities.wf + "'0 \"(W) X " + this.utils.utilities.hf + "'0 \"(h)";
         this.wincode = this.utils.utilities.winCode;
         this.collection = this.utils.resFlowSession.resDoorObj.product.product['item_name'];
