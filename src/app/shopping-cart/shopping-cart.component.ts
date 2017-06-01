@@ -16,7 +16,7 @@ declare var _: any;
 })
 export class ShoppingCartComponent implements OnInit {
     @ViewChild('continue') continue: ModalComponent;
-     @ViewChild('resShoppingCartTerms') resShoppingCartTerms: ModalComponent;
+    @ViewChild('resShoppingCartTerms') resShoppingCartTerms: ModalComponent;
     @ViewChild('gdoShoppingCartTerms') gdoShoppingCartTerms: ModalComponent;
     @ViewChild('secureRedirectionTerms') secureRedirectionTerms: ModalComponent;
     pageNo;
@@ -42,7 +42,25 @@ export class ShoppingCartComponent implements OnInit {
         , private dataStore: CollectionData
         , private route: Router) {
     }
+    data = this.utils.resFlowSession.resDetails;
+    shoppingCartData() {
 
+        let data = this.utils.resFlowSession.resDetails
+        // return {
+        //     WindCode: data.product.product.windcode,
+        //     Collection: data.product.product.item_name,
+        //     doorDesign: '',
+        //     doorModel: data.construction.construction.ClopayModelNumber,
+        //     doorConstruction: data.construction.construction.item_name,
+        //     Color: data.color.base.item_name,
+        //     topSection: '',
+        //     glassType:'',
+        //     Hardware: {
+        //         handles: data.hardware.handle.item_name,
+        //         stepPlate: data.hardware.stepplate.item_name
+        //     }
+        // }
+    }
     ngOnInit() {
         this.navComp.activateIcon();
         this.pageNo = this.utils.utilities.currPage;
@@ -59,7 +77,12 @@ export class ShoppingCartComponent implements OnInit {
             resetNav: true
         });
         $('body').removeClass('loader');
+        // this.data = this.utils.ResidentialFlowSession.resDetails;
+
+
     }
+
+
 
     removeItem() {
         this.utils.utilities.gdoOpenerText = '';
@@ -94,7 +117,7 @@ export class ShoppingCartComponent implements OnInit {
         $('.shop-count').text('0');
         this.dataStore.gdoOpenerAccessories = [];
         this.dataStore.gdoDirectQuestions = [];
-        this.continue.open(); 
+        this.continue.open();
 
     }
     updateQuantity(flow) {
@@ -122,6 +145,6 @@ export class ShoppingCartComponent implements OnInit {
     goToCustomerInfo() {
         this.route.navigateByUrl('/customer-info');
     }
-   
+
 
 }

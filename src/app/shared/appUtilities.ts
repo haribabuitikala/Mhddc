@@ -206,7 +206,8 @@ class ResidentialFlowSession {
         collectionName: '',
         designName: '',
         constructionName: ''
-    }
+
+    }    
 
     resDoorObj = {
         "QTY": 1,
