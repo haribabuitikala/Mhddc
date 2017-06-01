@@ -96,7 +96,8 @@ export class ResDoorConfigurationComponent implements OnInit {
     }
 
     nextBtn(path) {
-
+        $('body').addClass('loader');
+        this.route.navigateByUrl(path)
     }
 
     prevBtn(path) {

@@ -45,7 +45,7 @@ export class ResSliderComponent implements OnInit, AfterViewInit {
     constructionInfo;
 
     imageUrl = location.href.indexOf('localhost:4200') >= 0 ? 'http://localhost:3435/images' : '';
-
+    modelCategory;
     // @Output() notify = new EventEmitter<GdoOpener>();
 
     ngOnInit() {
@@ -70,6 +70,23 @@ export class ResSliderComponent implements OnInit, AfterViewInit {
             )
         this.renderSlider();
         this.imageUrl = location.href.indexOf('localhost:4200') >= 0 ? 'http://localhost:3435/images/' + this.folder : '../../assets/images/' + this.folder;
+        this.getModelCategory(this.construction);
+    }
+
+    getModelCategory(obj) {
+        switch (obj.best_order) {
+            case 0:
+                this.modelCategory = 'Basic(Other Constructions)'
+                break
+            case 1:
+                this.modelCategory = 'Best'
+                break
+            case 2:
+                this.modelCategory = 'Better'
+                break
+            default:
+                this.modelCategory = 'Good'
+        }
     }
 
     isSeleted(item, index, itemIndex) {

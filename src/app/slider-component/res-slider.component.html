@@ -44,7 +44,7 @@
                 <div class="_slide-items" *ngIf="folder==='openers'">
                     <div class="inner-item col-xs-{{number}}" *ngFor="let slideitem of slide; let i=index" [ngClass]="{ 'current' : isSeleted(slideitem, k, i)}"
                         (click)="openerSelected(slideitem, $event)">
-                        <img (error)="onImageLoadError(slideitem, folder)" src="../../assets/images/{{folder}}/{{slideitem.item_thumbnail.replace('.png', '.jpg')}}"
+                        <img (error)="onImageLoadError(slideitem, folder)" src="../../assets/images/{{folder}}/{{slideitem.item_thumbnail}}"
                             [attr.data-id]="slideitem.item_id">
 
                         <div *ngIf="folder=='color'" class="text-blue font-size-10">{{slideitem.item_name}}
@@ -94,8 +94,8 @@
     </modal-header>
     <modal-body>
         <div class="margin-b-10 margin-top-30">
-            <p class="bold">(Model)</p>
-            <ul>
+            <p class="bold">Model {{modelCategory}}</p>
+            <ul class="constructionInfoList">
                 <li *ngFor="let info of constructionInfo">
                     <p>
                         {{info.modeldescription}}
