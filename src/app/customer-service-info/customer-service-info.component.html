@@ -1,0 +1,85 @@
+<div>
+    <br>     
+    <p><span class="text-orange font-size-16">Checkout</span> <span class="bold pull-right font-size-16">Service Site :</span>
+    </p>
+    <form class="form-label">
+        <div class="checkbox">
+            <label><input type="checkbox">
+                <p><font color="#333333">Same as <strong>Sold To</strong> Address</font></p></label>
+        </div>
+        <div class="form-group">
+            <label for="inputEmail">First Name:</label>
+            <input type="text" class="form-control" id="inputEmail" placeholder="">
+        </div>
+        <div class="form-group">
+            <label for="inputPassword">Last Name:</label>
+            <input type="text" class="form-control" id="inputPassword" placeholder="">
+        </div>
+        <div class="form-group">
+            <label for="inputPassword">Address 1:</label>
+            <input type="text" class="form-control" id="inputPassword" placeholder="">
+        </div>
+        <div class="form-group">
+            <label for="inputPassword">Address 2:</label>
+            <input type="text" class="form-control" id="inputPassword" placeholder="">
+        </div>
+        <div class="form-group col-xs-6 padding-0-l">
+            <label for="inputPassword">City:</label>
+            <input type="text" class="form-control" id="inputPassword" placeholder="">
+        </div>
+        <div class="form-group col-xs-6 padding-0-r">
+            <label for="inputPassword">State:</label>
+            <input type="text" class="form-control" id="inputPassword" placeholder="">
+        </div>
+        <div class="form-group col-xs-6 padding-0-l">
+            <label for="inputPassword">Zipcode:</label>
+            <input type="number" class="form-control" id="inputPassword" placeholder="">
+        </div>
+        <div class="form-group col-xs-6 padding-0-r">
+            <label for="inputPassword">Country:</label>
+            <input type="text" class="form-control" id="inputPassword" placeholder="">
+        </div>
+        <p class="bold font-size-12 pull-left checkout-start-over">City,State,Zip and County can not be changed.If
+            change to these fields is required pleas <span class="start-over"> Start Over.</span></p>
+        <div class="form-group col-xs-6 padding-0-l">
+            <label for="inputPassword">Primary Phone No:</label>
+            <input type="number" class="form-control" id="inputPassword" placeholder="">
+        </div>
+        <div class="form-group col-xs-6 padding-0-r">
+            <label for="inputPassword">Secondary Phone No:</label>
+            <input type="number" class="form-control" id="inputPassword" placeholder="">
+        </div>
+        <div class="form-group margin-b-20 text-center">
+            <button type="submit"
+                    class="btn btn-default box-shadow text-orange margin-r-10 bold margin-b-10  text-uppercase" (click)="checkoutPopup.open()">
+                Submit customer information
+            </button>
+        </div>
+    </form>
+
+    <modal #checkoutPopup>
+        <modal-header >
+            <p class="text-orange font-size-16  bold padding-l-30 pull-left"> Checkout </p> 
+        </modal-header>
+        <modal-body>
+            <div class="col-xs-12 font-size-14  pull-left">
+                <p>Almost done. Please review your final purchase price below and click "Approve Order Totals and Proceed to
+                    Payment" to enter payment information.</p>
+                <p>The Home Depot and Clopay want to thank you for trusting us with your Garage Door project. </p>
+                <p>
+                    The Home Depot Customer Order Number: &nbsp;H1934-21045
+                </p>
+                <div class="bold margin-t-20">
+                    <div><span>Sub Total:</span> <span class="pull-right">961.35</span></div>
+                    <div><span>Estimated Tax</span> <span class="pull-right">79.31</span></div>
+                    <hr class="hr-radius">
+                    <div><span>Total:</span> <span class="pull-right">1040.35</span></div>
+                </div>
+                     <button type="submit"
+                    class="text-center btn btn-default box-shadow text-orange margin-r-10 bold margin-b-25  "
+                   (click)="goToPaymentBilling()" >APPROVE ORDER TOTALS AND PROCEED TO PAYMENT
+            </button>
+            </div>
+        </modal-body>
+    </modal>
+</div>
