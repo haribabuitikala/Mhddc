@@ -90,7 +90,8 @@ export class AppUtilities {
         doublep: 0,
         milesp: 0,
         item_name: '',
-        homeSize: ""
+        homeSize: "",
+        lockPrice:0
         // flow of GDO: Home, Size , Openers, Order Details, Shopping Cart
     };
 
@@ -124,8 +125,9 @@ export class AppUtilities {
         let milesp = this.utilities.milesp;
         let kPrice = this.utilities.kPrice;
         let distancePrice = this.utilities.distancePrice;
+        let lockPrice= this.utilities.lockPrice;
 
-        return (basep * qty) + singlep + doublep + milesp + kPrice + distancePrice;
+        return (basep * qty) + singlep + doublep + milesp + kPrice + distancePrice+lockPrice;
     }
 
     resetCalc() {
@@ -211,7 +213,8 @@ export class ResidentialFlowSession {
         collectionName: '',
         designName: '',
         constructionName: ''
-    }
+
+    }    
 
     resDoorObj = {
         "QTY": 1,

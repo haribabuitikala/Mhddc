@@ -206,11 +206,13 @@ export class CollectionComponent implements OnInit {
             "dtype": utils.dtype,
             "Windcode": utils.winCode,
             "NatMarketID": +utils.natmarketid,
+ 
             "wf": +utils.wf,
             "WidthFt": +utils.wf,
             "wi": utils.wi || 0,
             "hf": +utils.hf,
             "HeightFt": +utils.hf,
+ 
             "hi": utils.hi || 0,
             "lang": "en",
             "localmarketid": +utils.localmarketid,
@@ -218,8 +220,10 @@ export class CollectionComponent implements OnInit {
             "LaborCode": obj.singleinstallcode,
             "isCRLE": false,
             "productlayout": true,
+ 
             "doorwidth" : +utils.wf,
             "doorheight" : +utils.hf
+ 
         };
     }
 
