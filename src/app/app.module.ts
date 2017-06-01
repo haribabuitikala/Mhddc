@@ -35,6 +35,8 @@ import {NavService} from "./nav/nav-service";
 import {ShoppingCartComponent} from './shopping-cart/shopping-cart.component';
 import {ApiConstants} from "./shared/api-constants";
 import {GdoOpener} from "./opener/gdoOpener";
+import { CustomerInfoComponent } from './customer-info/customer-info.component';
+import { CustomerServiceInfoComponent } from './customer-service-info/customer-service-info.component';
 
 @NgModule({
     declarations: [
@@ -52,7 +54,9 @@ import {GdoOpener} from "./opener/gdoOpener";
         CollectionPopup,
         GdoDoorSizeComponent,
         GdoConfigComponent,
-        ShoppingCartComponent
+        ShoppingCartComponent,
+        CustomerInfoComponent,
+        CustomerServiceInfoComponent
     ],
     imports: [
         BrowserModule,
