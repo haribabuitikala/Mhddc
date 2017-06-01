@@ -16,6 +16,9 @@ declare var _: any;
 })
 export class ShoppingCartComponent implements OnInit {
     @ViewChild('continue') continue: ModalComponent;
+     @ViewChild('resShoppingCartTerms') resShoppingCartTerms: ModalComponent;
+    @ViewChild('gdoShoppingCartTerms') gdoShoppingCartTerms: ModalComponent;
+    @ViewChild('secureRedirectionTerms') secureRedirectionTerms: ModalComponent;
     pageNo;
     gdoOpenerTxt = this.utils.utilities.gdoOpenerText;
     gdoOpenerSelected = this.dataStore.gdoOpenerAccessories;
@@ -99,5 +102,26 @@ export class ShoppingCartComponent implements OnInit {
         this.qty = this.utils.utilities.gdoOpenerQty;
         this.baseItmPrice = this.utils.utilities.item_price * this.utils.utilities.gdoOpenerQty;
     }
+    checkout() {
+        if (this.utils.utilities.flow == 'residentialNavElems') {
+            this.resShoppingCartTerms.open();
+        } else {
+            this.gdoShoppingCartTerms.open();
+        }
+
+    }
+    secureRedirection() {
+        this.resShoppingCartTerms.close();
+        this.resShoppingCartTerms.close();
+        this.secureRedirectionTerms.open();
+
+    }
+    goToHome() {
+        this.route.navigateByUrl('/banner');
+    }
+    goToCustomerInfo() {
+        this.route.navigateByUrl('/customer-info');
+    }
+   
 
 }
