@@ -1,10 +1,11 @@
-import { Component, OnInit, Input, Output, EventEmitter, AfterViewInit, ElementRef } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, AfterViewInit, ElementRef, ViewChild } from '@angular/core';
 import { AppUtilities } from "../shared/appUtilities";
 import { CollectionData } from "../collection/collection-data";
 import { ConfigComponent } from "../config/config.component";
 import { NavComponent } from '../nav/nav.component'
 import { AppComponent } from "../app.component";
- 
+import {ModalComponent} from "ng2-bs3-modal/ng2-bs3-modal";
+
 import { CollectionService } from "../shared/data.service";
 
 declare var $: any;
@@ -17,7 +18,8 @@ declare var _: any;
 })
 export class ResSliderComponent implements OnInit, AfterViewInit {
 
-    myElement;
+    @ViewChild('contructionDetails') contructionDetails: ModalComponent;
+    lang; myElement;
     constructor(private utils: AppUtilities
         , private dataStore: CollectionData
         , private myElem: ElementRef
@@ -309,6 +311,15 @@ export class ResSliderComponent implements OnInit, AfterViewInit {
 
     onImageLoadError(item, folder) {
         console.log('item, folder');
+    }
+    detailsInfo(id) {
+        this.dataService.getModelInfo(id)
+            .subscribe(
+            res => {
+                this.constructionInfo = res
+                this.contructionDetails.open();
+            }
+            )
     }
 
 

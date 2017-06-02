@@ -44,7 +44,7 @@ export class CollectionService {
 
     getModelInfo(id){
         let data = {
-          modelnumber: id.ClopayModelNumber
+          modelnumber: id
         }
 
         return this.http.post(this.url + 'ModelDescription', data)
