@@ -91,11 +91,13 @@ export class ConstructionComponent implements OnInit {
 
  
     nextBtn(path, upsellModal) {
-        if (this.utils.resFlowSession.collection.selectedCollection.item_id == 11 || 12 || 13 || 170) {
-            upsellModal.open();
-        } else {
-            this.route.navigateByUrl(path);
-        }
+        // if (this.utils.resFlowSession.collection.selectedCollection.item_id == 11 || 12 || 13 || 170) {
+        //     upsellModal.open();
+        // } else {
+        //     this.route.navigateByUrl(path);
+        // }
+
+        this.route.navigateByUrl(path);
  
     }
 
