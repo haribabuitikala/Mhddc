@@ -1,8 +1,5 @@
-<<<<<<< HEAD
 import { Component, OnInit, ViewChild } from '@angular/core';
-=======
-import { Component, OnInit } from '@angular/core';
->>>>>>> 560562b6ade07caaff9bb4e204035abfb73245b8
+ 
 import { Router } from '@angular/router';
 import { CollectionData } from "../collection/collection-data";
 import { ConfigComponent } from "../config/config.component";
