@@ -1,3 +1,15 @@
+<h4 class="font-size-16 text-orange clear-b" *ngIf="showOverlay">Choose Your Overlay Color</h4>
+<div class="tile margin-b-15 ptn-rel clear-b" *ngIf="loaded && showOverlay">
+    <app-res-slider [data]="data"
+                    [number]="number"
+                    [cname]="'color'"
+                    [subname]="'overlay'"
+                    [issub]="showOverlay"
+                    [folder]="folder">
+                    
+    </app-res-slider>
+</div>
+
 <div class="col-xs-8 pull-left pad-l-0">
     <h4 class="font-size-16 text-orange clear-b">Choose Your Color</h4>
 </div>
@@ -18,20 +30,7 @@
 
 
 </div>
-<h4 class="font-size-16 text-orange clear-b" *ngIf="showOverlay">Choose Your Overlay Color</h4>
-<div class="tile margin-b-15 ptn-rel clear-b" *ngIf="loaded && showOverlay">
 
-    <app-res-slider [data]="data"
-                    [number]="number"
-                    [cname]="'color'"
-                    [subname]="'overlay'"
-                    [issub]="showOverlay"
-                    [folder]="folder">
-                    
-    </app-res-slider>
-
-
-</div>
 <modal #behr>
     <modal-header [show-close]="true">
     </modal-header>

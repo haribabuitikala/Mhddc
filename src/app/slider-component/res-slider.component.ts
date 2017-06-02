@@ -113,11 +113,26 @@ export class ResSliderComponent implements OnInit, AfterViewInit {
                 }
                 break;
             case 'color':
-                if (this.utils.resFlowSession.resDoorObj.color.base) {
-                    if (this.utils.resFlowSession.resDoorObj.color.base['item_id'] === item['item_id']) {
-                        isSeleted = true;
+                if (this.issub) {
+                    if (this.utils.resFlowSession.resDoorObj.color.base && this.subname == 'base') {
+                        if (this.utils.resFlowSession.resDoorObj.color.base['item_id'] === item['item_id']) {
+                            isSeleted = true;
+                        }
+                    }
+
+                    if (this.utils.resFlowSession.resDoorObj.color.overlay && this.subname == 'overlay') {
+                        if (this.utils.resFlowSession.resDoorObj.color.overlay['item_id'] === item['item_id']) {
+                            isSeleted = true;
+                        }
+                    }
+                } else {
+                    if (this.utils.resFlowSession.resDoorObj.color.base) {
+                        if (this.utils.resFlowSession.resDoorObj.color.base['item_id'] === item['item_id']) {
+                            isSeleted = true;
+                        }
                     }
                 }
+
                 break;
             case 'topsection':
                 if (this.utils.resFlowSession.resDoorObj.windows.topsection) {

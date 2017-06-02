@@ -59,7 +59,7 @@ export class TopSectionComponent implements OnInit {
         this.navComponent.setNavFlow('res', 'hideglass');
         this.route.navigateByUrl('/config/hardware');
       } else {
-        if (topsection['SectionsAllowed'].indexOf(',') > 0) {
+        if (this.utils.resFlowSession.resDoorObj.product.product['item_id'] == 13) {
           this.route.navigateByUrl('/config/glassType');
         } else {
           this.route.navigateByUrl('/config/nonClassic');
