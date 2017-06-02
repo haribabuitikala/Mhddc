@@ -55,7 +55,7 @@ export class ResSliderComponent implements OnInit, AfterViewInit {
     // @Output() notify = new EventEmitter<GdoOpener>();
 
     ngOnInit() {
-
+        $('.hardware_screen .inner-item img').css({'height':'30px'})
         if (this.data) {
             if (this.navComponent.flowType == 'resquick') {
                 if (this.cname != 'openers') {
