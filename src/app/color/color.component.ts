@@ -65,9 +65,13 @@ export class ColorComponent implements OnInit {
         this.utils.resFlowSession.resDoorObj.color.base = res[0];
         this.utils.resFlowSession.resDoorObj.color.overlay = res[0];
 
+        if (this.utils.resFlowSession.resDoorObj.product.product['item_id'] == 11) {
+            this.showOverlay = true;
+        }
         this.loaded = true;
     }
 
+    showOverlay = false;
     setParams() {
 
         let utils = this.utils.utilities;
