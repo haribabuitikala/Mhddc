@@ -4,7 +4,7 @@ import { CollectionData } from "../collection/collection-data";
 import { ConfigComponent } from "../config/config.component";
 import { NavComponent } from '../nav/nav.component'
 import { AppComponent } from "../app.component";
- 
+
 import { CollectionService } from "../shared/data.service";
 
 declare var $: any;
@@ -38,6 +38,8 @@ export class ResSliderComponent implements OnInit, AfterViewInit {
     @Input() uniqueId: number;
     @Input() cname: string;
     @Input() className: string;
+    @Input() subname: string;
+    @Input() issub: string;
 
     sliderRows;
 
@@ -255,8 +257,17 @@ export class ResSliderComponent implements OnInit, AfterViewInit {
                 }
                 break;
             case 'color':
-                this.utils.resFlowSession.resDoorObj.color.base = obj;
-                this.utils.resFlowSession.resDoorObj.color.overlay = obj;
+                if (this.issub) {
+                    if (this.subname == 'base') {
+                        this.utils.resFlowSession.resDoorObj.color.base = obj;
+                    } else {
+                        this.utils.resFlowSession.resDoorObj.color.overlay = obj;
+                    }
+
+                } else {
+                    this.utils.resFlowSession.resDoorObj.color.base = obj;
+                    this.utils.resFlowSession.resDoorObj.color.overlay = obj;
+                }
                 break
             case 'construction':
                 this.utils.resFlowSession.resDoorObj.construction.construction = obj;
