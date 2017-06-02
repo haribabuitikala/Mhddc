@@ -35,6 +35,7 @@ export class ResAdditionalOptionsComponent implements OnInit {
     gdoFlowManualDoorInfo = false;
     gdoFlowPowerHeadInfo = false;
     gdoOpenerSelected = this.dataStore.gdoOpenerAccessories;
+    installOrDiy;
 
     t = _.sumBy(this.gdoOpenerSelected, function (o) {
         return o.price * o.count
@@ -82,7 +83,8 @@ export class ResAdditionalOptionsComponent implements OnInit {
     }
 
 
-    ngOnInit() {
+    ngOnInit() { 
+        this.installOrDiy = this.appComponent.selectedInstallDiy 
         this.appComponent.next = 'Next';
         this.pageNo = this.utils.utilities.currPage;
         this.setNavComponent();
