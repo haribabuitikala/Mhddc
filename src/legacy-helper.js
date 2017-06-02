@@ -1026,7 +1026,7 @@ function getVisUpdate(obj, targ, elemselector) {
             buildObj.overlaycolor = '';
         }
 
-        if (dor.windows.topsection != '') {
+        if (dor.windows.topsection && dor.windows.topsection != '') {
             buildObj.topsectionimage = dor.windows.topsection.visimage;
             try {
                 if (dor.windows.glasstype.Config == undefined) {
@@ -1045,7 +1045,7 @@ function getVisUpdate(obj, targ, elemselector) {
         }
         buildObj.glassSection = dor.windows.selectedGlassSection;
         //shankar added this, for restopsection placement
-        if (dor.windows.placement != '') buildObj.topsectionrow = dor.windows.placement.item_id;
+        if (dor.windows.placement && dor.windows.placement != '') buildObj.topsectionrow = dor.windows.placement.item_id;
         //if (dor.windows.placement != '') buildObj.topsectionrow = dor.windows.placement;
         if (dor.TYPE == "COM") {
             // shankar added this, for comtopsection placement
@@ -1173,8 +1173,8 @@ function getDoorPrice(obj, useQty, retunMoney, DOORONLY) {
                 }
 
                 //TopSection Pricing (LOOK FORWARD)
-                if (obj.windows.glasstype == "") {
-                    if (obj.windows.topsection != "") {
+                if (obj.windows.glasstype && obj.windows.glasstype == "") {
+                    if (obj.windows.topsection && obj.windows.topsection != "") {
                         var dFound = false
                         $.each(obj.windows.topsection.glasstypes, function (index, value) {
                             if (value.isdefault && !dFound) {
@@ -1200,7 +1200,7 @@ function getDoorPrice(obj, useQty, retunMoney, DOORONLY) {
                     dpArray.push(dp)
                 }
 
-                if (obj.windows.topsection != "") {
+                if (obj.windows.topsection && obj.windows.topsection != "") {
                     if (type == 'COM') {
                         if (obj.windows.selectedGlassSection != "") {
 
@@ -1472,10 +1472,20 @@ function getDoorPrice(obj, useQty, retunMoney, DOORONLY) {
             }
         }
         else {
-            ip += value.install
-            dip += value.diy
-            nip += value.nInstall
-            ndp += value.nDiy
+            if (!isNaN(value.install)) {
+                ip += value.install
+            }
+            if (!isNaN(value.diy)) {
+                dip += value.diy
+            }
+            if (!isNaN(value.nInstall)) {
+                nip += value.nInstall
+            }
+
+            if (!isNaN(value.nDiy)) {
+                ndp += value.nDiy
+            }
+            
         }
     });
 
