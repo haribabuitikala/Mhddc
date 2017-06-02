@@ -1,7 +1,6 @@
 var imgSkewURL = 'http://hddchtml.clopay.com/ImageHandler3.aspx';
- 
+
 var imgFolder = '/assets/images/pimages';
- 
 
 var uploadFolder = 'http://hddchtml.clopay.com/uploads';
 

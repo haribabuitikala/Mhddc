@@ -62,6 +62,9 @@ export class InstallComponent implements OnInit, AfterViewInit {
 
  
 
+    hideDIY = false;
+    noDIYs = [30, 16, 9];
+
     ngOnInit() {
         this.widthFeets = this.sizes.getWidthFeets();
         this.lang = this.language.getDoorSize();
@@ -113,6 +116,10 @@ export class InstallComponent implements OnInit, AfterViewInit {
         }
 
 
+        if (this.utils.resFlowSession.resDoorObj.product.product && this.noDIYs.indexOf(this.utils.resFlowSession.resDoorObj.product.product['id']) >= 0) {
+             this.hideDIY = true;
+        }
+       
 
         var priceData = this.config.getDoorPrice();
         this.installPrice = priceData.install;
@@ -363,15 +370,15 @@ export class InstallComponent implements OnInit, AfterViewInit {
         return {
             "dtype": 'RES',
             "productid": resDoorObj.product.product['item_id'],
-            "windcode": "W0",
+            "windcode": resDoorObj.product.product['windcode'],
             "NatMarketID": +utils.natmarketid,
             "doorcolumns": resDoorObj.design.dsgn['Columns'],
             'colorconfig': resDoorObj.color.base['colorconfig'],
             "clopaymodelnumber": resDoorObj.construction.construction['ClopayModelNumber'],
-            "dwidthFt": +cData.wf,
-            "dwidthIn": +cData.wi || 0,
-            "dheightFt": +cData.hf,
-            "dheightIn": +cData.hi || 0,
+            "dwidthFt": +cData.size.width.wf,
+            "dwidthIn": +cData.size.width.wi || 0,
+            "dheightFt": +cData.size.height.hf,
+            "dheightIn": +cData.size.width.hi || 0,
             "lang": "en",
             "marketID": +utils.localmarketid,
             "doorsize": +utils.homeSize

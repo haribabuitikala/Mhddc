@@ -1,6 +1,6 @@
 <div class="row tabs fixed-header">
   <div class="col-xs-6">
-    <input id="r1" type="radio" name="installation-type" checked="checked">
+    <input id="r1" type="radio" name="installation-type" checked="checked" [ngClass]="{ 'hide' : hideDIY }" />
     <div class="tab">
       <span class="check"></span>
       <label for="r1" (click)="checkType('install')">
@@ -9,7 +9,7 @@
       </label>
     </div>
   </div>
-  <div class="col-xs-6">
+  <div class="col-xs-6" [ngClass]="{ 'hide' : hideDIY }">
     <input id="r2" type="radio" name="installation-type">
     <div class="tab">
       <span class="check"></span>
