@@ -32,6 +32,9 @@ export class InstallComponent implements OnInit, AfterViewInit {
         , private collection: CollectionService) {
     }
     @ViewChild('exactDoorsize') exactDoorsize: ModalComponent;
+    @ViewChild('leadTest') leadTest: ModalComponent;
+    @ViewChild('epa') epa: ModalComponent;
+    @ViewChild('learnMore') learnMore: ModalComponent;
 
     installSize: string;
     wincode: string;
@@ -143,7 +146,11 @@ export class InstallComponent implements OnInit, AfterViewInit {
             this.config.renderCanvas(window['cObj'], 'doorVis', '#diyDoorVis');
             this.exactDoorsize.open();
         }
-
+        if (txt == 'install') {
+            this.doorDimensionFound = false;
+            this.config.renderCanvas(window['cObj'], 'doorVis', '#diyDoorVis');
+            this.exactDoorsize.open();
+        }
     }
 
     navigateTo(path) {
@@ -153,13 +160,42 @@ export class InstallComponent implements OnInit, AfterViewInit {
 
 
     nextBtn(path) {
-        this.navigateTo('/config/opener');
+         if (this.appComponent.selectedInstallDiy == undefined || this.appComponent.selectedInstallDiy == 'install') {
+            this.appComponent.selectedInstallDiy = "install";
+            this.leadTest.open();
+        }
+        //this.navigateTo('/config/opener');
     }
 
     prevBtn() {
         this.navigateTo('/config/hardware');
     }
+    leadTestValue(buttonValue) {
+        if (buttonValue == "YES") {
+            this.epa.open();
 
+        } else {
+            this.leadTest.close();
+            this.navigateTo('/config/opener');
+        }
+    }
+    epaValue(epaStatus) {
+        if (epaStatus == 'learn') {
+            this.leadTest.close();
+            this.epa.close();
+            this.learnMore.open();
+
+        } else if (epaStatus == 'back') {
+            this.epa.close();
+            this.leadTest.open();
+        } else {
+            this.navigateTo('/config/opener');
+        }
+    }
+    learMoreClose() {
+        this.learnMore.close();
+        this.epa.open();
+    }
     /** DIY */
     dataParams = {
         dtype: this.utils.utilities.dtype,
