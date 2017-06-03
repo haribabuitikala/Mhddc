@@ -1,55 +1,121 @@
 <div>
     <p><span class="text-orange font-size-16">Checkout</span> <span
             class="bold pull-right font-size-16">Sold To :</span></p>
-    <form class="form-label">
+
+    <form class="form-label" #customerFormSoldTo="ngForm" novalidate (ngSubmit)="save(customerFormSoldTo.value, customerFormSoldTo.valid)">
+          <div class="form-group">
+            <label for="txtFirstName_SoldTo">First Name:</label>
+            <input type="text" class="form-control" 
+                   name="txtFirstName_SoldTo"
+                   [(ngModel)]="user.txtFirstName_SoldTo" 
+                   #txtFirstName_SoldTo="ngModel" required   (keypress)="onlyNumberKey($event)">
+                   <div [hidden]="txtFirstName_SoldTo.valid || (txtFirstName_SoldTo.pristine && !customerFormSoldTo.submitted)" class="text-danger">
+                Required  
+            </div>
+
+        </div>
+
         <div class="form-group">
-            <label for="inputEmail">First Name:</label>
-            <input type="text" class="form-control" id="inputEmail" placeholder="">
+            <label for="txtLastName_SoldTo">Last Name:</label>
+            <input type="text" class="form-control" 
+                   name="txtLastName_SoldTo" 
+                   [(ngModel)]="user.txtLastName_SoldTo" 
+                   #txtLastName_SoldTo="ngModel" required placeholder="" (keypress)="onlyNumberKey($event)">
+            <div [hidden]="txtLastName_SoldTo.valid || (txtLastName_SoldTo.pristine && !customerFormSoldTo.submitted)" class="text-danger">
+                Required  
+            </div>
         </div>
         <div class="form-group">
-            <label for="inputPassword">Last Name:</label>
-            <input type="text" class="form-control" id="inputPassword" placeholder="">
+            <label for="txtAddress1_SoldTo">Address 1:</label>
+            <input type="text" class="form-control" name="txtAddress1_SoldTo" [(ngModel)]="user.txtAddress1_SoldTo" 
+                   #txtAddress1_SoldTo="ngModel" required placeholder="" (keypress)="onlyNumberKey($event)">
+            <div [hidden]="txtAddress1_SoldTo.valid || (txtAddress1_SoldTo.pristine && !customerFormSoldTo.submitted)" class="text-danger">
+                Required  
+            </div>
         </div>
         <div class="form-group">
-            <label for="inputPassword">Address 1:</label>
-            <input type="text" class="form-control" id="inputPassword" placeholder="">
-        </div>
-        <div class="form-group">
-            <label for="inputPassword">Address 2:</label>
-            <input type="text" class="form-control" id="inputPassword" placeholder="">
+            <label for="txtAddress2_SoldTo">Address 2:</label>
+            <input type="text" class="form-control" name="txtAddress2_SoldTo" [(ngModel)]="user.txtAddress2_SoldTo" 
+                   #txtAddress2_SoldTo="ngModel" required placeholder="" (keypress)="onlyNumberKey($event)">
+            <div [hidden]="txtAddress2_SoldTo.valid || (txtAddress2_SoldTo.pristine && !customerFormSoldTo.submitted)" class="text-danger">
+                Required  
+            </div>
         </div>
         <div class="form-group col-xs-6 padding-0-l">
-            <label for="inputPassword">City:</label>
-            <input type="text" class="form-control" id="inputPassword" placeholder="">
+            <label for="txtCity_SoldTo">City:</label>
+            <input type="text" class="form-control" name="txtCity_SoldTo" [(ngModel)]="user.txtCity_SoldTo" 
+                   #txtCity_SoldTo="ngModel" required placeholder=""  (keypress)="onlyNumberKey($event)">
+            <div [hidden]="txtCity_SoldTo.valid || (txtCity_SoldTo.pristine && !customerFormSoldTo.submitted)" class="text-danger">
+                Required  
+            </div>
         </div>
         <div class="form-group col-xs-6 padding-0-r">
-            <label for="inputPassword">State:</label>
-            <input type="text" class="form-control" id="inputPassword" placeholder="">
+            <label for="txtState_SoldTo">State:</label>
+            <input type="text" class="form-control" name="txtState_SoldTo" [(ngModel)]="user.txtState_SoldTo" 
+                   #txtState_SoldTo="ngModel" required  placeholder="" (keypress)="disAllowNumbers($event)">
+            <div [hidden]="txtState_SoldTo.valid || (txtState_SoldTo.pristine && !customerFormSoldTo.submitted)" class="text-danger">
+                Required  
+            </div>
         </div>
         <div class="form-group col-xs-6 padding-0-l">
-            <label for="inputPassword">Zipcode:</label>
-            <input type="number" class="form-control" id="inputPassword" placeholder="">
+            <label for="txtZipCode_SoldTo">Zipcode:</label>
+            <input type="number" class="form-control" name="txtZipCode_SoldTo" [(ngModel)]="user.txtZipCode_SoldTo" 
+                   #txtZipCode_SoldTo="ngModel" required  placeholder="">
+            <div [hidden]="txtZipCode_SoldTo.valid || (txtZipCode_SoldTo.pristine && !customerFormSoldTo.submitted)" class="text-danger">
+                Required  
+            </div>
         </div>
         <div class="form-group col-xs-6 padding-0-r">
-            <label for="inputPassword">Country:</label>
-            <input type="text" class="form-control" id="inputPassword" placeholder="">
+            <label for="txtCounty_SoldTo">Country:</label>
+            <input type="text" class="form-control" name="txtCounty_SoldTo" [(ngModel)]="user.txtCounty_SoldTo" 
+                   #txtCounty_SoldTo="ngModel" required placeholder=""  (keypress)="disAllowNumbers($event)">
+            <div [hidden]="txtCounty_SoldTo.valid || (txtCounty_SoldTo.pristine && !customerFormSoldTo.submitted)" class="text-danger">
+                Required 
+
+            </div>
+
         </div>
         <div class="form-group col-xs-6 padding-0-l">
-            <label for="inputPassword">Primary Phone No:</label>
-            <input type="number" class="form-control" id="inputPassword" placeholder="">
+            <label for="txtPhoneNumber_SoldTo">Primary Phone No:</label>
+            <input type="number" class="form-control" name="txtPhoneNumber_SoldTo" [(ngModel)]="user.txtPhoneNumber_SoldTo" 
+                   #txtPhoneNumber_SoldTo="ngModel" required  minlength="10" placeholder="" >
+            <div [hidden]="txtPhoneNumber_SoldTo.valid || (txtPhoneNumber_SoldTo.pristine && !customerFormSoldTo.submitted)" class="text-danger">
+                Required
+                <span *ngIf="txtPhoneNumber_SoldTo.errors?.minlength" class="text-danger">
+                    Phone # must be 
+                    10 digits (inc area code)
+                </span>
+            </div>
+
         </div>
         <div class="form-group col-xs-6 padding-0-r">
-            <label for="inputPassword">Secondary Phone No:</label>
-            <input type="number" class="form-control" id="inputPassword" placeholder="">
+            <label for="txtSecondaryNumber_SoldTo">Secondary Phone No:</label>
+            <input type="number" class="form-control" name="txtSecondaryNumber_SoldTo" [(ngModel)]="user.txtSecondaryNumber_SoldTo" 
+                   #txtSecondaryNumber_SoldTo="ngModel" required placeholder="">
+            <div [hidden]="txtSecondaryNumber_SoldTo.valid || (txtSecondaryNumber_SoldTo.pristine && !customerFormSoldTo.submitted)" class="text-danger">
+                Required  
+                <span *ngIf="txtSecondaryNumber_SoldTo.errors?.minlength" class="text-danger">
+                    Phone # must be 
+                    10 digits (inc area code)
+                </span>
+            </div>
+
         </div>
         <div class="form-group">
-            <label for="inputEmail">Email Address: (Used for order confirmation only)</label>
-            <input type="text" class="form-control" id="inputEmail" placeholder="">
+            <label for="txtCustomerEmail_SoldTo">Email Address: (Used for order confirmation only)</label>
+            <input type="email" class="form-control" name="txtCustomerEmail_SoldTo" [(ngModel)]="user.txtCustomerEmail_SoldTo" 
+                   #txtCustomerEmail_SoldTo="ngModel" required   placeholder="">
+            <div [hidden]="txtCustomerEmail_SoldTo.valid || (txtCustomerEmail_SoldTo.pristine && !customerFormSoldTo.submitted)" class="text-danger">
+                Required  
+            </div>
         </div>
-    </form> 
-       <button type="submit"
-                    class="text-center btn btn-default box-shadow text-orange margin-r-10 bold margin-b-10 pull-left"
-                   (click)="goToCustomerServiceInfo()" >NEXT
-            </button>
+           
+           <p class="pager" style="line-height: 70px;">
+        <button class="col-md-3 text-center" type="submit" style=" text-align: center !important;"
+                class=" text-center btn btn-default box-shadow text-orange margin-r-10 bold margin-b-10  "
+                >NEXT
+        </button>
+        </p>
    
+    </form>   
 </div>
