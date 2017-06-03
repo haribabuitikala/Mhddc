@@ -31,10 +31,10 @@
                         (click)="openerSelected(slideitem, $event)">
                         <img (error)="onImageLoadError(slideitem, folder)" src="../../assets/images/{{slideitem.item_thumbnail.replace('.jpg', '.png')}}"
                             [attr.data-id]="slideitem.item_id">
-                        <div class="construction-model">Model {{construction.ClopayModelNumber}}</div>
+                        <div class="construction-model">Model {{slideitem.DisplayModelNumber}}</div>
                         <div class="construciton-info">
                             <div>
-                                <img (click)="contructionDetails.open()" class="nobdr" src="../../assets/images/Info-64.png" alt="">
+                                <img (click)="detailsInfo(slideitem.DisplayModelNumber)" class="nobdr" src="../../assets/images/Info-64.png" alt="">
                             </div>
                             <span>
                                 product <br/>  details
@@ -68,7 +68,6 @@
     </modal-header>
     <modal-body>
         <div class="margin-b-10 margin-top-30">
-            <p class="bold">Model {{modelCategory}}</p>
             <ul class="constructionInfoList">
                 <li *ngFor="let info of constructionInfo">
                     <p>

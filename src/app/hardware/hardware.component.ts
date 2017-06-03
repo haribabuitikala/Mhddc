@@ -25,7 +25,7 @@ export class HardwareComponent implements OnInit {
 
   isLoaded = false;
   yourHandles = [];
-  yourHandlersNumber = 3;
+  yourHandlersNumber = 4;
 
   yourStepPlates = [];
   youStepPlatesNumber = 6;
