@@ -51,7 +51,7 @@ export class TopSectionComponent implements OnInit {
     this.utils.resFlowSession.resDoorObj.windows.topsection = res[0];
   }
 
-  nextBtn(path?) {
+  nextBtn(path?, longPanel?) {
     this.navComponent.setNavFlow('res', '');
     var topsection = this.utils.resFlowSession.resDoorObj.windows.topsection;
     if (topsection && topsection['glasstypes']) {
@@ -59,11 +59,21 @@ export class TopSectionComponent implements OnInit {
         this.navComponent.setNavFlow('res', 'hideglass');
         this.route.navigateByUrl('/config/hardware');
       } else {
-        if (this.utils.resFlowSession.resDoorObj.product.product['item_id'] == 13) {
-          this.route.navigateByUrl('/config/glassType');
+        var modelString = "HDP20, HDP13,HDG,2050,HDS,HDB,HDB4";
+        var modelNumber = this.utils.resFlowSession.resDoorObj.construction.construction['ClopayModelNumber'];
+        var modelIndex = modelString.indexOf(modelNumber);
+        var topName = topsection['item_name'];
+        topName = topName.toLowerCase();
+        var topId = topsection['item_id'];
+        let pid = this.utils.resFlowSession.resDoorObj.product.product['item_id'];
+        if ((pid == 13 || pid == 14 || pid == 24) && (modelIndex > -1) && (topName.indexOf("long") > -1 || topId == "315" || topId == "316"
+          || topId == "317" || topId == "318" || topId == "393" || topId == "394" || topId == "319" || topId == "320" || topId == "1506" || topId == "1507" || topId == "1508")) {
+            longPanel.open();
         } else {
-          this.route.navigateByUrl('/config/nonClassic');
+          this.nextPage();
         }
+
+
       }
     } else {
       this.route.navigateByUrl('/config/nonClassic');
@@ -72,5 +82,15 @@ export class TopSectionComponent implements OnInit {
 
   prevBtn() {
     this.route.navigateByUrl('/config/color');
+  }
+
+  nextPage() {
+    if (this.utils.resFlowSession.resDoorObj.product.product['item_id'] == 13 ||
+      this.utils.resFlowSession.resDoorObj.product.product['item_id'] == 14 ||
+      this.utils.resFlowSession.resDoorObj.product.product['item_id'] == 24) {
+      this.route.navigateByUrl('/config/glassType');
+    } else {
+      this.route.navigateByUrl('/config/nonClassic');
+    }
   }
 }
