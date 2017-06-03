@@ -28,6 +28,8 @@ export class ColorComponent implements OnInit {
     folder = 'color';
 
     loaded = false;
+    selectedCladding;
+    claddings = [];
 
     ngOnInit() {
         this.startProcess();
@@ -68,6 +70,9 @@ export class ColorComponent implements OnInit {
         if (this.utils.resFlowSession.resDoorObj.product.product['item_id'] == 11) {
             this.showOverlay = true;
         }
+
+        this.claddings = this.utils.resFlowSession.resDoorObj.construction.construction['claddingoverlays'];
+
         this.loaded = true;
     }
 
@@ -95,12 +100,26 @@ export class ColorComponent implements OnInit {
     }
 
     nextBtn(path) {
+        if (this.claddings && this.claddings.length > 1) {
+            if (this.selectedCladding) {
+                this.utils.resFlowSession.resDoorObj.construction.cladding = this.claddings[+this.selectedCladding];
+                this.moveToPage();
+            } else {
+                alert('Please Select Cladding and Overlay');
+            }
+        } else {
+            this.moveToPage();
+        }
+
+    }
+
+    moveToPage() {
         if (this.navComponent.flowType === 'res') {
             let params = this.setParams();
             this.dataService.getTopSection(params).subscribe(res => {
                 this.dataStore.topSection = res;
                 this.utils.resFlowSession.resDoorObj.windows.apiData = res;
-                this.route.navigateByUrl(path);
+                this.route.navigateByUrl('config/topSection');
             });
         } else {
             this.route.navigateByUrl('config/install');

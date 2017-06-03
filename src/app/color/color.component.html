@@ -31,6 +31,13 @@
 
 </div>
 
+<div class="margin-t-20 margin-b-20" *ngIf="claddings && claddings.length > 1">
+    <label>Choose Your Cladding & Overlay:</label>
+    <select [(ngModel)]="selectedCladding" name="color-cladding">
+        <option *ngFor="let cladding of claddings; let index = index" [attr.value]="index">{{ cladding.item_name}}</option>
+    </select>
+</div>
+
 <modal #behr>
     <modal-header [show-close]="true">
     </modal-header>

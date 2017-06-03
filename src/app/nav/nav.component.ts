@@ -220,11 +220,11 @@ export class NavComponent implements OnInit {
                     s.visited = false;
                 }
 
-                if (this.resSubFlow === 'hideglass' && s.No === 8) {
+                if (this.resSubFlow === 'hideglass' && s.No === 8 && s.No < obj.flowActiveStep) {
                     s.disabled = true;
                 }
 
-                if(this.resDisableSteps.indexOf(s.No) >= 0) {
+                if(this.resDisableSteps.indexOf(s.No) >= 0 && s.No < obj.flowActiveStep) {
                     s.disabled = true;
                 }
 
