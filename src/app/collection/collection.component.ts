@@ -106,7 +106,7 @@ export class CollectionComponent implements OnInit {
                     value.popupImg = "collectionpopupCoachman.png";
                     break;
                 case "dtCanyonRidge.jpg":
-                    let t = value.item_description
+                    let t = value.item_name;
                     if (t === 'Canyon Ridge&#174; Limited Edition Collection') {
                         value.imageUrl = "btnCollectionCanyonRidgeLE.png";
                     } else {
@@ -150,9 +150,13 @@ export class CollectionComponent implements OnInit {
     }
 
     goToHome(speciality) {
-        $('.collection-img').removeClass('selected');
+        // $('.collection-img').removeClass('selected');
+        speciality.selected = true;
         this.utils.resFlowSession.resDoorObj.product.product = speciality;
         this.utils.resFlowSession.resDetails.collectionName = speciality.item_name;
+        if (speciality.item_id === 31) {
+            speciality.item_id = 30
+        }
         // event.currentTarget.classList.add('selected');
         this.dataService.getHomes()
             .then(res => {
@@ -200,30 +204,31 @@ export class CollectionComponent implements OnInit {
         // };
 
         // utils.productid = obj.item_id;
-         
+
         return dataParams = {
             "ProductID": obj.item_id,
             "dtype": utils.dtype,
             "Windcode": utils.winCode,
             "NatMarketID": +utils.natmarketid,
- 
+
             "wf": +utils.wf,
             "WidthFt": +utils.wf,
             "wi": utils.wi || 0,
             "hf": +utils.hf,
             "HeightFt": +utils.hf,
- 
+
             "hi": utils.hi || 0,
             "lang": "en",
             "localmarketid": +utils.localmarketid,
             "doorsize": +utils.homeSize,
-            "LaborCode": obj.singleinstallcode,
+            "LaborCode": obj.singleinstallcodew,
             "isCRLE": false,
-            "productlayout": true,
- 
-            "doorwidth" : +utils.wf,
-            "doorheight" : +utils.hf
- 
+            "productlayout": false,
+            "dealerid": 1,
+
+            "doorwidth": +utils.wf,
+            "doorheight": +utils.hf
+
         };
     }
 

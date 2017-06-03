@@ -31,7 +31,7 @@ export class ShoppingCartComponent implements OnInit {
     showDirect;
     directItm = this.dataStore.gdoDirectQuestions;
 
-    itemPrice = this.utils.calculateTotalPrice();
+    itemPrice = this.utils.calculateTotalPrice(this.utils.utilities.itemPriceInstall);
     itmPrice = this.utils.utilities.itmPrice;
     baseItmPrice = this.utils.utilities.item_price * this.utils.utilities.gdoOpenerQty;
 

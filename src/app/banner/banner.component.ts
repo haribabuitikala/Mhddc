@@ -63,9 +63,14 @@ export class BannerComponent implements OnInit {
     }
     onlyNumberKey(event) {
         let len = event.currentTarget.value.length;
+        if (len === 0) $('.show-zip-results').prop('disabled', true);
         if (len > 4) {
             event.preventDefault();
         }
+        if (len === 4) {
+            $('.show-zip-results').removeAttr('disabled');
+        } else
+            $('.show-zip-results').prop('disabled', true);
         // return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57;
 
     }

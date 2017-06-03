@@ -66,7 +66,7 @@ export class DoorConfigurationComponent implements OnInit {
     }
     ngOnInit() {
         this.directFlow = this.utils.utilities.directFlow;
-        this.itemPrice = this.utils.calculateTotalPrice();
+        this.itemPrice = this.utils.calculateTotalPrice(this.utils.utilities.item_price);
         this.pageNo = this.utils.utilities.currPage;
 
         $('body').removeClass('loader');
