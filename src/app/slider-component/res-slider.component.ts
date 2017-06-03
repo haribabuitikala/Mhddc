@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter, AfterViewInit, ElementRef, ViewChild } from '@angular/core';
+import { Component, OnInit, OnChanges, Input, Output, EventEmitter, AfterViewInit, ElementRef, ViewChild } from '@angular/core';
 import { AppUtilities } from "../shared/appUtilities";
 import { CollectionData } from "../collection/collection-data";
 import { ConfigComponent } from "../config/config.component";
@@ -55,6 +55,11 @@ export class ResSliderComponent implements OnInit, AfterViewInit {
     // @Output() notify = new EventEmitter<GdoOpener>();
 
     ngOnInit() {
+        this.startProcess();
+    }
+
+
+    startProcess() {
         if (this.data) {
             if (this.navComponent.flowType == 'resquick') {
                 if (this.cname != 'openers') {
@@ -193,6 +198,13 @@ export class ResSliderComponent implements OnInit, AfterViewInit {
         this.sliderWidth = (this.data.length * this.slideWidth) + this.slideWidth - 20;
     }
 
+    ngOnChanges() {
+        if (this.cname === 'construction') {
+            this.renderSlider();
+            this.slideCount = this.data ? this.data.length : 0;
+        }
+    }
+
     ngAfterViewInit() {
         $('.choose-design .inner-item > img').css({ 'height': 116 });
         $('.constructionSlider .inner-item > img').css({ 'height': 150 });
@@ -304,28 +316,32 @@ export class ResSliderComponent implements OnInit, AfterViewInit {
         this.config.renderCanvas();
     }
     openerSelected(obj, event) {
-        //$('._slide-items img', this.myElem.nativeElement).removeClass('current');
-        // this.gdoConfig.itemPrice = obj.item_price * this.utils.utilities.gdoOpenerQty;
-        // this.utils.utilities.item_price = obj.item_price;
-        // let t = obj.item_thumbnail.split('.')[0];
-        // this.gdoConfig.gdoBanner = t + '.png';
-        //event.currentTarget.classList.add('current');
-        let utils = this.utils;
-        utils.resFlow.selectedImg = obj.item_id;
-        // this.details.itemPrice = obj.item_price;
-        if (this.category === 'color') {
-            this.utils.resFlow.colorconfig = obj.colorconfig;
+        if (obj.clickAction) {
+            obj.clickAction();
+        } else {
+            //$('._slide-items img', this.myElem.nativeElement).removeClass('current');
+            // this.gdoConfig.itemPrice = obj.item_price * this.utils.utilities.gdoOpenerQty;
+            // this.utils.utilities.item_price = obj.item_price;
+            // let t = obj.item_thumbnail.split('.')[0];
+            // this.gdoConfig.gdoBanner = t + '.png';
+            //event.currentTarget.classList.add('current');
+            let utils = this.utils;
+            utils.resFlow.selectedImg = obj.item_id;
+            // this.utils.utilities.itemPriceInstall = obj.item_price;
+            // this.details.itemPrice = obj.item_price;
+            if (this.category === 'color') {
+                this.utils.resFlow.colorconfig = obj.colorconfig;
+            }
+            if (this.category === 'color' || this.category === 'constructions' || this.category === undefined) {
+                this.config.homeImage = obj.item_thumbnail;
+            }
+            this.dataStore[this.category] = obj[this.category];
+
+            // this.details.details.designName = obj.item_name;
+            // this.utils.utilities.gdoOpenerSelectedItm = obj.item_id;
+            // this.notify.emit(obj);
+            this.saveSelected(obj);
         }
-        if (this.category === 'color' || this.category === 'constructions' || this.category === undefined)
-            this.config.homeImage = obj.item_thumbnail;
-        this.dataStore[this.category] = obj[this.category];
-
-        // this.details.details.designName = obj.item_name;
-        // this.utils.utilities.gdoOpenerSelectedItm = obj.item_id;
-        // this.notify.emit(obj);
-        this.saveSelected(obj);
-
-
     }
 
 
@@ -342,14 +358,13 @@ export class ResSliderComponent implements OnInit, AfterViewInit {
     onImageLoadError(item, folder) {
         console.log('item, folder');
     }
-    detailsInfo(id) {
+
+    detailsInfo(id, contructionDetails?) {
         this.dataService.getModelInfo(id)
-            .subscribe(
-            res => {
+            .subscribe(res => {
                 this.constructionInfo = res
-                this.contructionDetails.open();
-            }
-            )
+                contructionDetails.open();
+            });
     }
 
 

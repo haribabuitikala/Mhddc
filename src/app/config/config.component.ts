@@ -322,10 +322,12 @@ export class ConfigComponent implements OnInit, AfterViewInit {
                 let cObj = this.utils.resFlowSession.resDoorObj;
                 let price = window['getDoorPrice'](cObj);
                 this.itemPriceInstall = parseFloat(price[0].replace(/ /g, '').replace('$', '')) * count;
+                this.utils.utilities.itemPriceInstall = this.itemPriceInstall;
                 this.isDIY = false;
                 if (this.appComponent.noDIYs.indexOf(itemId) < 0) {
                     this.isDIY = true;
                     this.itemPriceDY = parseFloat(price[1].replace(/ /g, '').replace('$', '')) * count;
+                    this.utils.utilities.itemPriceDY = this.itemPriceDY;
                 }
             }
 

@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
- 
+
 import { Router } from '@angular/router';
 import { CollectionData } from "../collection/collection-data";
 import { ConfigComponent } from "../config/config.component";
@@ -62,7 +62,7 @@ export class ConstructionComponent implements OnInit {
         }
 
 
-		switch (this.utils.resFlowSession.resDetails.collectionName) {
+        switch (this.utils.resFlowSession.resDetails.collectionName) {
             case "Coachman&#174; Collection": {
                 this.className = 'classic-collection';
                 break;
@@ -82,14 +82,33 @@ export class ConstructionComponent implements OnInit {
     startProcess() {
         // let res = this.dataStore.constructions;
         let res = this.utils.resFlowSession.resDoorObj.construction.apiData;
-        this.data = _.chunk(res, 2);
+        let newData = [];
+        if (res.length > 4) {
+            if (newData.length <= 3) {
+                for (let i = 1; i < 4; i++) {
+                    newData.push(_.find(res, ['best_order', i]))
+                }
+                let t = {
+                    item_thumbnail: 'btnOtherConGallery.png',
+                    action: 'add',
+                    clickAction: () => {
+                        this.data.length = 0;
+                        this.data = _.chunk(res, 2);
+                    }
+                }
+                newData.push(t)
+                this.data = _.chunk(newData, 2)
+            }
+        } else {
+            this.data = _.chunk(res, 2);
+        }
 
         this.utils.resFlowSession.resDoorObj.construction.construction = res[0];
 
         this.loaded = true;
     }
 
- 
+
     nextBtn(path, upsellModal) {
         // if (this.utils.resFlowSession.collection.selectedCollection.item_id == 11 || 12 || 13 || 170) {
         //     upsellModal.open();
@@ -98,7 +117,7 @@ export class ConstructionComponent implements OnInit {
         // }
 
         this.route.navigateByUrl(path);
- 
+
     }
 
     prevBtn() {
