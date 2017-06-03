@@ -150,7 +150,8 @@ export class CollectionComponent implements OnInit {
     }
 
     goToHome(speciality) {
-        $('.collection-img').removeClass('selected');
+        // $('.collection-img').removeClass('selected');
+        speciality.selected  =  true;
         this.utils.resFlowSession.resDoorObj.product.product = speciality;
         this.utils.resFlowSession.resDetails.collectionName = speciality.item_name;
         // event.currentTarget.classList.add('selected');
@@ -200,19 +201,19 @@ export class CollectionComponent implements OnInit {
         // };
 
         // utils.productid = obj.item_id;
-         
+
         return dataParams = {
             "ProductID": obj.item_id,
             "dtype": utils.dtype,
             "Windcode": utils.winCode,
             "NatMarketID": +utils.natmarketid,
- 
+
             "wf": +utils.wf,
             "WidthFt": +utils.wf,
             "wi": utils.wi || 0,
             "hf": +utils.hf,
             "HeightFt": +utils.hf,
- 
+
             "hi": utils.hi || 0,
             "lang": "en",
             "localmarketid": +utils.localmarketid,
@@ -220,10 +221,10 @@ export class CollectionComponent implements OnInit {
             "LaborCode": obj.singleinstallcode,
             "isCRLE": false,
             "productlayout": true,
- 
-            "doorwidth" : +utils.wf,
-            "doorheight" : +utils.hf
- 
+
+            "doorwidth": +utils.wf,
+            "doorheight": +utils.hf
+
         };
     }
 

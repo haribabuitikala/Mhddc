@@ -55,7 +55,6 @@ export class ResSliderComponent implements OnInit, AfterViewInit {
     // @Output() notify = new EventEmitter<GdoOpener>();
 
     ngOnInit() {
-        $('.hardware_screen .inner-item img').css({'height':'30px'})
         if (this.data) {
             if (this.navComponent.flowType == 'resquick') {
                 if (this.cname != 'openers') {
@@ -195,6 +194,12 @@ export class ResSliderComponent implements OnInit, AfterViewInit {
     }
 
     ngAfterViewInit() {
+        $('.choose-design .inner-item > img').css({ 'height': 116 });
+        $('.constructionSlider .inner-item > img').css({ 'height': 150 });
+        $('.colorSlider .inner-item > img').css({ 'height': 72 });
+        $('.topSectionSlider .inner-item > img').css({ 'height': 37 });
+        $('.glass-carousel .inner-item > img').css({ 'height': 75 });
+        $('.hardware_screen .inner-item > img').css({ 'height': '30px' })
         $('._slider', this.myElem.nativeElement).on('touchstart', (e) => {
             this.touchStart = true;
             this.touchX = e.touches[0].clientX;

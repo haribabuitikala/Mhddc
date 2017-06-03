@@ -1,4 +1,3 @@
-
 <div class="content additional-options" id="resInstallFlow" *ngIf="installOrDiy=='install'">
     <h4 class="text-orange font-size-16">Additional Options</h4>
     <dl>
@@ -6,12 +5,11 @@
             <div class="clearfix">
                 <p class="col-xs-10"> Medallion Hardware Upgrade for <span class="text-orange">$59.00</span>?
                 </p>
-                <img (click)="resInstallFlowMed.open()" class="pull-right " alt="" height="25"
-                    src="../../assets/images/info.png">
+                <img (click)="resInstallFlowMed.open()" class="pull-right " alt="" height="25" src="../../assets/images/info.png">
             </div>
             <div id="upgrade">
-                <img src="../../assets/images/Medallionlogo.png" alt=""/>
-                <img src="../../assets/images/MedallionUpgrades_warranties.png" alt=""/>
+                <img src="../../assets/images/Medallionlogo.png" alt="" />
+                <img src="../../assets/images/MedallionUpgrades_warranties.png" alt="" />
             </div>
             <div class="flex-right">
                 <span class="text-orange">Yes</span>
@@ -24,9 +22,8 @@
         </dd>
         <dd>
             <div class="clearfix">
-                <p class="col-xs-10">Is this job site within 30 drive miles of this
-                    store? </p>
-                <img class="pull-right" (click)="resInstallFlowMiles.open()"  alt="" height="25" src="../../assets/images/info.png">
+                <p class="col-xs-10">Is this job site within 30 drive miles of this store? </p>
+                <img class="pull-right" (click)="resInstallFlowMiles.open()" alt="" height="25" src="../../assets/images/info.png">
             </div>
             <div class="flex-right">
                 <span class="text-orange">Yes</span>
@@ -64,8 +61,7 @@
             <div class="clearfix">
                 <p class="col-xs-10">Do you need an <strong>Emergency Release Kit</strong>? <span class="text-orange">$35.00</span>?
                 </p>
-                <img (click)="resFlowReleaseKit.open()" class="pull-right" alt="" height="25"
-                    src="../../assets/images/info.png">
+                <img (click)="resFlowReleaseKit.open()" class="pull-right" alt="" height="25" src="../../assets/images/info.png">
             </div>
             <div class="flex-right">
                 <span class="text-orange">Yes</span>
@@ -78,16 +74,15 @@
         </dd>
     </dl>
 </div>
-<div class="content additional-options" id="resDiyFlow" *ngIf="installOrDiy=='diy'" >
-    <div   class="content additional-options">
+<div class="content additional-options" id="resDiyFlow" *ngIf="installOrDiy=='diy'">
+    <div class="content additional-options">
         <h4 class="text-orange font-size-16">{{pageNo}}. Additional Options</h4>
         <dl>
             <dd>
                 <div class="clearfix">
                     <div class="col-xs-10">Is this job site within 30 drive miles of this store?</div>
                     <div class="col-xs-2 padding-0">
-                        <img (click)="resDiyFlowMiles.open()" class="pull-right" alt="" height="25"
-                            src="../../assets/images/info.png">
+                        <img (click)="resDiyFlowMiles.open()" class="pull-right" alt="" height="25" src="../../assets/images/info.png">
                     </div>
                 </div>
                 <div class="flex-right">
@@ -103,14 +98,13 @@
                     <div>
                         Distance of job site is
                         <form class="inline-block">
-                            <input type="text" (keyup)="updateDistance($event,null)"
-                                   name="gdoDistance" class="gdoDistance" [(ngModel)]="distance" disabled/>
+                            <input type="text" (keyup)="updateDistance($event,null)" name="gdoDistance" class="gdoDistance" [(ngModel)]="distance" disabled/>
                         </form>
                         drive miles from store
                     </div>
 
-                    <p *ngIf="showDistancePrice">{{distance}} miles from store ({{distancePrice |
-                        currency:'USD':true:'1.2-2'}})</p>
+                    <p *ngIf="showDistancePrice">{{distance}} miles from store ({{distancePrice | currency:'USD':true:'1.2-2'}})
+                    </p>
 
                 </div>
 
@@ -121,14 +115,13 @@
                     <div class="col-xs-10"> Do you need <span class='text-orange'>Perimeter Weather Seal?</span>
                     </div>
                     <div class="col-xs-2 padding-0">
-                        <img (click)="resDiyPerimeterSeal.open()" class="pull-right" alt="" height="25"
-                            src="../../assets/images/info.png">
+                        <img (click)="resDiyPerimeterSeal.open()" class="pull-right" alt="" height="25" src="../../assets/images/info.png">
 
 
                     </div>
                 </div>
                 <div class='clearfix'>
-                    <select (change)="vinylSelect($event,0)"   name="vinylSelect" id="vinylSelect">
+                    <select (change)="vinylSelect($event,0)" name="vinylSelect" id="vinylSelect">
                         <option value="1"> - </option>
                         <option value="ALMOND">ALMOND</option>
                         <option value="BLACK">BLACK</option>
@@ -144,7 +137,7 @@
                         <option value="MOCHA" brown="">MOCHA BROWN</option>
                         <option value="SANDTONE">SANDTONE</option>
                         <option value="WALNUT" finish="">WALNUT FINISH</option>
-                        <option value="WHITE">WHITE</option></select> 
+                        <option value="WHITE">WHITE</option></select>
                 </div>
 
                 <div class="flex-right">
@@ -153,7 +146,7 @@
                         <input type="checkbox" (change)="resPerimeterSeal($event)" >
                         <div class="slider round"></div>
                     </label>
-                    <span class="text-orange" checked="checked" >No</span>
+                    <span class="text-orange" checked="checked">No</span>
                 </div>
             </dd>
 
@@ -162,8 +155,7 @@
                     <div class="col-xs-10">Do you need <span class='text-orange'> Low Head Room Conversion Kit </span>?
                     </div>
                     <div class="col-xs-2 padding-0">
-                        <img (click)="resDiyFlowHeadRoom.open()" class="pull-right" alt="" height="25"
-                            src="../../assets/images/info.png">
+                        <img (click)="resDiyFlowHeadRoom.open()" class="pull-right" alt="" height="25" src="../../assets/images/info.png">
                     </div>
                 </div>
                 <div class="flex-right">
@@ -173,7 +165,7 @@
                         <input type="checkbox" (change)="diyFlowHeadRoom($event)">
                         <div class="slider round"></div>
                     </label>
-                    <span class="text-orange" checked="checked" >No</span>
+                    <span class="text-orange" checked="checked">No</span>
                 </div>
 
             </dd>
@@ -182,8 +174,7 @@
                     <div class="col-xs-10">Do you need <span class='text-orange'> Rear Track Hanger Kit </span>?
                     </div>
                     <div class="col-xs-2 padding-0">
-                        <img (click)="resDiyHangerKit.open()" class="pull-right" alt="" height="25"
-                            src="../../assets/images/info.png">
+                        <img (click)="resDiyHangerKit.open()" class="pull-right" alt="" height="25" src="../../assets/images/info.png">
                     </div>
                 </div>
                 <div class="flex-right">
@@ -193,7 +184,7 @@
                         <input type="checkbox" (change)="diyHangerKit($event)">
                         <div class="slider round"></div>
                     </label>
-                    <span class="text-orange" checked="checked" >No</span>
+                    <span class="text-orange" checked="checked">No</span>
                 </div>
 
             </dd>
@@ -201,8 +192,7 @@
                 <div class="clearfix">
                     <p class="col-xs-10">Do you need an <strong class='text-orange'>Emergency Release Kit</strong>? <span class="text-orange">$35.00</span>?
                     </p>
-                    <img (click)="resDiyReleaseKit.open()" class="pull-right" alt="" height="25"
-                        src="../../assets/images/info.png">
+                    <img (click)="resDiyReleaseKit.open()" class="pull-right" alt="" height="25" src="../../assets/images/info.png">
                 </div>
                 <div class="flex-right">
                     <span class="text-orange">yes</span>
@@ -217,11 +207,9 @@
             <dd>
                 <div class="clearfix">
 
-                    <p class="col-xs-10"> Do you have an excessively uneven or unleveled floor? If so, do 
-                        you want larger<strong class='text-orange'>Bottom Weatherseal</strong>? 
+                    <p class="col-xs-10"> Do you have an excessively uneven or unleveled floor? If so, do you want larger<strong class='text-orange'>Bottom Weatherseal</strong>?
                     </p>
-                    <img (click)="resDiyBottomWeatherSeal.open()" class="pull-right" alt="" height="25"
-                        src="../../assets/images/info.png">
+                    <img (click)="resDiyBottomWeatherSeal.open()" class="pull-right" alt="" height="25" src="../../assets/images/info.png">
                 </div>
                 <div class="flex-right">
                     <div class="col-xs-6">
@@ -246,12 +234,10 @@
 
 <div id="footer" class="col-xs-12 padding-t-10 padding-b-10">
     <a href="javascript:void(0)" *ngIf="!hidePrev" class="pull-left previous-btn" (click)="prevBtn('/config/opener')" data-id="currScreen">
-       <img src="../../assets/images/back-48-thick.png" height="15px">
-        Prev
+        <img src="../../assets/images/back-48-thick.png" height="15px"> Prev
     </a>
 
-    <a href="javascript:void(0)" class="pull-right nextBtn" (click)="nextBtn('/config/doorConfiguration')"
-       data-id="currScreen">
+    <a href="javascript:void(0)" class="pull-right nextBtn" (click)="nextBtn('/config/doorConfiguration')" data-id="currScreen">
        Next
        <img src="../../assets/images/Forward-48-thick.png" height="15px">
     </a>
@@ -261,7 +247,7 @@
     <modal-header [show-close]="true">
     </modal-header>
     <modal-body>
-        <img class="margin-top-20" src="../../assets/images/additionalOptions/medallion.jpg" alt=""/>
+        <img class="margin-top-20" src="../../assets/images/additionalOptions/medallion.jpg" alt="" />
         <!--        <img src="../../assets/images/additionalOptions/R_med.png" alt=""/>-->
     </modal-body>
 </modal>
@@ -270,8 +256,8 @@
     </modal-header>
     <modal-body class="bold text-left padding10">
         <p>Distance From Store? </p>
-        <p>Prices INCLUDE Home Delivery withIn a 30 mile driving distance from the store.if job site location is greater
-            than 30 drive miles from store then the following mileage fees apply:</p>
+        <p>Prices INCLUDE Home Delivery withIn a 30 mile driving distance from the store.if job site location is greater than
+            30 drive miles from store then the following mileage fees apply:</p>
         <ul>
             <li><span>31 - 50 miles from store - flat rate of $51</span></li>
             <li><span>Greater than 50 miles from store - ﬂat rate of $51 + $3.00 for every drive mile over50</span></li>
@@ -283,24 +269,21 @@
     </modal-header>
     <modal-body class="text-left padding10">
         <h4 class="margin-b-10 bold">What is a Low Headroom Conversion Kit? </h4>
-        <p class="margin-b-10">Low Headroom track reduces the amount of headroom required 0 Backroom Ceiling for a
-            normal installation Headroom is the space needed above the top of the door upwards to the first obstruction
-            within the path of the door inside the garage.</p>
+        <p class="margin-b-10">Low Headroom track reduces the amount of headroom required 0 Backroom Ceiling for a normal installation Headroom
+            is the space needed above the top of the door upwards to the first obstruction within the path of the door inside
+            the garage.</p>
         <!--<img src="../../assets/images/additionalOptions/lowHeadRoom.jpg" alt=""/>-->
-        <img src="../../assets/images/how_to_measure-drawing.png" class="img-rounded measure margin-r-10" alt=" "
-             width="304"
-             height="236">
+        <img src="../../assets/images/how_to_measure-drawing.png" class="img-rounded measure margin-r-10" alt=" " width="304" height="236">
     </modal-body>
 </modal>
 <modal #resFlowReleaseKit>
     <modal-header [show-close]="true">
     </modal-header>
     <modal-body class="text-left padding10">
-        <p class="margin-b-10 ">The Clopay Emergency Release Kit allows you to disengage the Garage Door
-            Opener. from the outside of the garage. This allows you to
-            open the door in the event of a power outage or opener failure. The Clopay Emergency Release Kit may be
-            required if the Garage Door is the
-            only am to the stmcture. Please check local building codes for clarification.
+        <p class="margin-b-10 ">The Clopay Emergency Release Kit allows you to disengage the Garage Door Opener. from the outside of the garage.
+            This allows you to open the door in the event of a power outage or opener failure. The Clopay Emergency Release
+            Kit may be required if the Garage Door is the only am to the stmcture. Please check local building codes for
+            clarification.
         </p>
         <span class="padding10">Installation required for DIY orders  </span>
     </modal-body>
@@ -310,10 +293,9 @@
     </modal-header>
     <modal-body class="text-left padding10">
         <p class="margin-b-10 ">
-            If door does not operate manually without opener attached then a new opener may not be able to
-            operate the door. You should be able to open and close door manually without the opener attached.
-            If it does not operate manually then you may need to consider spring replacement or purchasing a
-            new Garage Door.
+            If door does not operate manually without opener attached then a new opener may not be able to operate the door. You should
+            be able to open and close door manually without the opener attached. If it does not operate manually then you
+            may need to consider spring replacement or purchasing a new Garage Door.
 
         </p>
     </modal-body>
@@ -322,10 +304,9 @@
     <modal-header [show-close]="true">
     </modal-header>
     <modal-body class="text-left padding10">
-        <p class="margin-b-10  ">For a complete installation. there should be an approved 110 volt electrical
-            outlet within 3' of the power head of the opener. If no outlet is in place, but power is
-            available through an extension cord, the installer will test and adjust the opener but will not leave the
-            extension cord in place.
+        <p class="margin-b-10  ">For a complete installation. there should be an approved 110 volt electrical outlet within 3' of the power head of
+            the opener. If no outlet is in place, but power is available through an extension cord, the installer will test
+            and adjust the opener but will not leave the extension cord in place.
         </p>
     </modal-body>
 </modal>
@@ -334,7 +315,8 @@
     </modal-header>
     <modal-body class="text-left padding10">
         <p>
-            Prices INCLUDE Home Delivery within a 30 mile driving distance from the store.If job site location is greater than 30 drive miles from store then the following mileage fees apply:
+            Prices INCLUDE Home Delivery within a 30 mile driving distance from the store.If job site location is greater than 30 drive
+            miles from store then the following mileage fees apply:
         </p>
         <p style="text-indent: 40px;">31 - 50 miles from store - flat rate of $51 </p>
         <p style="text-indent: 40px;">
@@ -344,7 +326,7 @@
 </modal>
 
 <modal #resDiyBottomWeatherSeal>
-    <modal-header [show-close]="true"> 
+    <modal-header [show-close]="true">
     </modal-header>
     <modal-body class="text-left padding10">
         <p class="font-size-16 bold">Bottom Weatherseal</p>
@@ -352,8 +334,8 @@
                     All Clopay garage doors come standard with bottom weather seal.Bottom weather seal is a black vinyl strip that extends the width of the door underneath the bootm section.It provides a seal between the garage door and the garage floor acting as a barrier against the elements.The standard bottom weather seal accounts for most gaps found in a standard application.In some cases where there is an excessively uneven or unlevel floora thicker bottom weather seal is required to cover the larger gaps
                 </p>-->
 
-        <div class="col-xs-12"> 
-            <img src="../../assets/images/additionalOptions/bottomWeatherSeal.jpg" alt=""/>
+        <div class="col-xs-12">
+            <img src="../../assets/images/additionalOptions/bottomWeatherSeal.jpg" alt="" />
 
         </div>
         <!--<img src="../../assets/images/additionalOptions/sumpop12.png" width="310" height="180px" alt=""/></div>-->
@@ -363,11 +345,10 @@
     <modal-header [show-close]="true">
     </modal-header>
     <modal-body class="text-left padding10">
-        <p class="margin-b-10 ">The Clopay Emergency Release Kit allows you to disengage the Garage Door
-            Opener. from the outside of the garage. This allows you to
-            open the door in the event of a power outage or opener failure. The Clopay Emergency Release Kit may be
-            required if the Garage Door is the
-            only am to the stmcture. Please check local building codes for clarification.
+        <p class="margin-b-10 ">The Clopay Emergency Release Kit allows you to disengage the Garage Door Opener. from the outside of the garage.
+            This allows you to open the door in the event of a power outage or opener failure. The Clopay Emergency Release
+            Kit may be required if the Garage Door is the only am to the stmcture. Please check local building codes for
+            clarification.
         </p>
         <span class="padding10">Installation required for DIY orders  </span>
     </modal-body>
@@ -376,7 +357,7 @@
     <modal-header [show-close]="true">
     </modal-header>
     <modal-body class="text-left padding10">
-        <p class="font-size-16 bold">  What is a Rear Track Hanger Kit? </p>
+        <p class="font-size-16 bold"> What is a Rear Track Hanger Kit? </p>
         <!--        <p>
                     The Clopay Rear Track Hanger Kit has all the parts necessary to attach your new track to the ceiling. It proVIdes an attachment
                     point for the door track while supporting the majority of the door weight when it is in the up position. It also helps keep the track
@@ -386,13 +367,13 @@
                     distances greater than two feet. custom hangers will be required. Rear Track Hangers can be easily made with 13 gauge 1 ‘/.' x
                     1 V." punched angle iron available at Home Depot in the Hardware Department. Your installation manual will include a diagram to
                     help you design your rear hanger.</p>-->
-        <img src="../../assets/images/additionalOptions/rearTrackHangerKit.jpg" alt=""/>
+        <img src="../../assets/images/additionalOptions/rearTrackHangerKit.jpg" alt="" />
     </modal-body>
 </modal>
 <modal #resDiyPerimeterSeal>
     <modal-header [show-close]="true">
     </modal-header>
-    <modal-body> 
+    <modal-body>
         <!--<p class="font-size-16 bold"> What is Perimeter weather seal?</p>-->
         <!--        <p class="margin-b-10"> Clopay perimeter weather seal is designed to help keep
                     the elements out of your garae. This vinyl weather
@@ -405,7 +386,7 @@
                     recommends replacing the weather seal to ensure you
                     are getting the maximum benefit from your new door. 
                 </p>-->
-        <img src="../../assets/images/additionalOptions/perimeterWeatherSeal.jpg" alt=""/>
+        <img src="../../assets/images/additionalOptions/perimeterWeatherSeal.jpg" alt="" />
         <!--        <img class="margin-b-10" src="../../assets/images/additionalOptions/sumpop1.png" alt=""/> 
                 <p class="margin-top-20">Color Options:
                 </p>
@@ -419,7 +400,8 @@
     <modal-body class="bold text-left padding10">
         <p class="bold">Distance From Store? </p>
         <p class="margin-top-30">Prices INCLUDE Home Delivery withIn a 30 mile driving distance from the store </p>
-        <p>If delivery location is greater than a 30 mile driving distance from the store then a $3.00 fee applies for each additional mile. </p>
+        <p>If delivery location is greater than a 30 mile driving distance from the store then a $3.00 fee applies for each
+            additional mile. </p>
     </modal-body>
 </modal>
 
@@ -432,7 +414,7 @@
                     for a normal installation. Headroom is the space needed above 
                     the top of the door upwards to the first obstruction within the
                     path 0! the door inside the garage. a Headroom </p> -->
-        <img src="../../assets/images/additionalOptions/lowHeadRoom.jpg" alt=""/>
+        <img src="../../assets/images/additionalOptions/lowHeadRoom.jpg" alt="" />
         <!--        <img src="../../assets/images/how_to_measure-drawing.png" class="img-rounded measure margin-r-10" alt=" "
                      width="304"
                      height="236">-->
