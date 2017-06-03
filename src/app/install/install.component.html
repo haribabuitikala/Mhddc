@@ -39,7 +39,7 @@
     <dd class="diy-install-table-header">
       Collection
     </dd>
-    <dd>{{collection}}</dd>
+    <dd>{{itemName | escapeHtml}}</dd>
     <dd class="diy-install-table-header">
       Door Design
     </dd>
@@ -51,14 +51,14 @@
     <dd class="diy-install-table-header">
       Door Construction
     </dd>
-    <dd>{{construction}}</dd>
+    <dd>{{construction | escapeHtml}}</dd>
   </dl>
   <dl class="diy-install-table">
     <dd class="diy-install-table-header">
       Color
     </dd>
     <dd>
-      <span class="selected-color text-capitalize">{{color}}</span>
+      <span class="selected-color text-capitalize">{{color | escapeHtml}}</span>
       <span class="pull-right">$0.00</span>
     </dd>
   </dl>

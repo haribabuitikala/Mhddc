@@ -30,6 +30,7 @@ import {GdoConfigComponent} from "../gdo-config/gdo-config.component";
 import {GdoUpdateComponent} from "../opener/gdoUpdateQty";
 import {ResSliderComponent} from "../slider-component/res-slider.component";
 import {ShareButtonsModule} from 'ngx-sharebuttons';
+import { EscapeHtmlPipe } from '../shared/html-entitiy';
 
 @NgModule({
     imports: [
@@ -95,7 +96,8 @@ import {ShareButtonsModule} from 'ngx-sharebuttons';
         NonClassicComponent,
         HardwareComponent,
         GdoUpdateComponent,
-        ResSliderComponent
+        ResSliderComponent,
+        EscapeHtmlPipe
     ]
 })
 export class ConfigModule {

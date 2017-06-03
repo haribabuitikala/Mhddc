@@ -10,6 +10,7 @@ import { SizeList } from "../door-size/sizesList";
 import { LangEnglishService } from "../shared/english";
 import { CollectionData } from "../collection/collection-data";
 import { CollectionService } from "../shared/data.service";
+import { EscapeHtmlPipe } from "../shared/html-entitiy";
 
 declare var _: any;
 declare var $: any;
