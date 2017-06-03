@@ -1,7 +1,7 @@
 <div class="fixed-header">
     <h4 class="font-size-16"><span *ngIf="directFlow">{{pageNo}}.</span>Your Opener Configuration</h4>
     <div class="space-around">
-        <button (click)="shareIt()" class="btn">SHARE<span >
+        <button (click)="share.open()" class="btn">SHARE<span >
                         <img src="../../assets/images/Share-26.png" width="12" height="12" alt=""/>
             </span>
         </button>
@@ -9,9 +9,7 @@
         <button (click)="email.open()" class="btn">EMAIL QUOTE<span
                 class="glyphicon glyphicon-envelope padding-l-3"></span></button>
     </div>
-    <div>
-        <share-buttons [url]="'https://murhafsousli.github.io/ngx-sharebuttons/'"></share-buttons>
-    </div>
+    
 
 </div>
 <div class="content door-configuration" *ngIf="!isGdo">
@@ -164,28 +162,7 @@
         <span class="pull-right padding-r-7 bold">Sub-Total<span> {{itemPrice | currency:'USD':true:'1.2-2'}}</span> </span>
     </div>
 </div>
-<div class="hide">
-    <button (click)="discardDetails.open()" class="btn">discardDetails<span
-            class="glyphicon glyphicon-share padding-l-3"></span></button>
-    <button (click)="paymentBilling.open()" class="btn">Payment Billing<span
-            class="glyphicon glyphicon-share padding-l-3"></span></button>
-    <button (click)="shoppingCart.open()" class="btn">Shopping cart <span
-            class="glyphicon glyphicon-share padding-l-3"></span></button>
-    <button (click)="customerInfo.open()" class="btn">customer Info <span
-            class="glyphicon glyphicon-share padding-l-3"></span></button>
-    <button (click)="customerInfoSoldTo.open()" class="btn">customer Info Sold to<span
-            class="glyphicon glyphicon-share padding-l-3"></span></button>
-    <button (click)="openingHeight.open()" class="btn">Opening Height<span
-            class="glyphicon glyphicon-share padding-l-3"></span></button>
-    <button (click)="checkoutPopup.open()" class="btn">Checkout<span
-            class="glyphicon glyphicon-share padding-l-3"></span></button>
-    <button (click)="shoppingCartTerms.open()" class="btn">Shopping cart terms and conditions<span
-            class="glyphicon glyphicon-share padding-l-3"></span></button>
-    <button (click)="gdoShoppingCartTerms.open()" class="btn">GDO Shopping cart terms and conditions<span
-            class="glyphicon glyphicon-share padding-l-3"></span></button>
-    <button (click)="totalPrice.open()" class="btn">GDO Shopping cart terms and conditions<span
-            class="glyphicon glyphicon-share padding-l-3"></span></button>
-</div>
+
 <modal #email>
     <modal-header [show-close]="true">
     </modal-header>
@@ -214,13 +191,9 @@
         <h4 class="text-orange padding-l-30">Social Share</h4>
     </modal-header>
     <modal-body>
-        <div class="margin-t-40">
-            <div class="col-xs-4"><img src="https://uc.uxpin.com/files/646658/640526/logo-facebook-1.png" /></div>
-            <div class="col-xs-4"><img src="https://uc.uxpin.com/files/646658/640526/twitter.png" /></div>
-            <div class="col-xs-4"><img src="https://uc.uxpin.com/files/646658/640526/google-300x300-1.png" /></div>
-            <div class="col-xs-4"><img style="width:66px;height:65px;" src="https://uc.uxpin.com/files/646658/640526/pintrest-icon.png" /></div>
-            <div class="col-xs-4"><img style="width:76px;height:72px;" src="https://uc.uxpin.com/files/646658/640526/instagram.png" /></div>
-        </div>
+    <div>
+        <share-buttons [url]="'https://murhafsousli.github.io/ngx-sharebuttons/'"></share-buttons>
+    </div>
     </modal-body>
 </modal>
 <modal #checkoutPopup>
