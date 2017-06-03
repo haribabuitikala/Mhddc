@@ -200,30 +200,31 @@ export class CollectionComponent implements OnInit {
         // };
 
         // utils.productid = obj.item_id;
-         
+
         return dataParams = {
             "ProductID": obj.item_id,
             "dtype": utils.dtype,
             "Windcode": utils.winCode,
             "NatMarketID": +utils.natmarketid,
- 
+
             "wf": +utils.wf,
             "WidthFt": +utils.wf,
             "wi": utils.wi || 0,
             "hf": +utils.hf,
             "HeightFt": +utils.hf,
- 
+
             "hi": utils.hi || 0,
             "lang": "en",
             "localmarketid": +utils.localmarketid,
             "doorsize": +utils.homeSize,
-            "LaborCode": obj.singleinstallcode,
+            "LaborCode": obj.singleinstallcodew,
             "isCRLE": false,
-            "productlayout": true,
- 
-            "doorwidth" : +utils.wf,
-            "doorheight" : +utils.hf
- 
+            "productlayout": false,
+            "dealerid": 1,
+
+            "doorwidth": +utils.wf,
+            "doorheight": +utils.hf
+
         };
     }
 
