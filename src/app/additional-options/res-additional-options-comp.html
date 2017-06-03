@@ -38,24 +38,18 @@
             </div>
 
             <div class="align-right ">
-                <p id="distance">Distance of job site is <input type="number" pattern = "[0-9]" (keyup)="updateDistance($event,null)"
-                                                                name="gdoDistance" class="gdoDistance" [(ngModel)]="distance" disabled/> drive miles from store</p>
+                <p id="distance">Distance of job site is <input type="number" pattern="[0-9]" (keyup)="updateDistance($event,null)" name="gdoDistance"
+                        class="gdoDistance" [(ngModel)]="distance" disabled/> drive miles from store</p>
             </div>
 
-            <p *ngIf="showDistancePrice">{{distance}} miles from store ({{distancePrice |
-                        currency:'USD':true:'1.2-2'}})</p>
+            <p *ngIf="showDistancePrice">{{distance}} miles from store ({{distancePrice | currency:'USD':true:'1.2-2'}})
+            </p>
         </dd>
         <dd>
-<<<<<<< HEAD
             <div class="clearfix">
-                <p class="col-xs-11">Do you need Double Track Low Head Room Conversion Kit <span class="text-orange">$85.92</span>?
-=======
-            <div class="clearfix"> 
                 <p class="col-xs-10">Do you need Double Track Low Head Room Conversion Kit <span class="text-orange">$85.92</span>?
->>>>>>> b16cea7eb5406b6e5009b5e031477ebdd4a4bf6e
                 </p>
-                <img (click)="resInstallFlowHeadRoom.open()" class="pull-right" alt="" height="25"
-                    src="../../assets/images/info.png">
+                <img (click)="resInstallFlowHeadRoom.open()" class="pull-right" alt="" height="25" src="../../assets/images/info.png">
             </div>
             <div class="flex-right">
                 <span class="text-orange">Yes</span>
