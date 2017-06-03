@@ -50,24 +50,24 @@ export class ResAdditionalOptionsComponent implements OnInit {
         , private navComp: NavService
         , private dataStore: CollectionData
         , private activeRoute: ActivatedRoute
-        , private config:ConfigComponent
+        , private config: ConfigComponent
         , private navComponent: NavComponent
         , private dataService: CollectionService) {
     }
 
 
     setNavComponent() {
-         if (this.navComponent.flowType === 'res') {
+        if (this.navComponent.flowType === 'res') {
             this.navComponent.renderNav({
                 flowType: 'res',
-                flowActiveStep: 11,
+                flowActiveStep: 12,
                 currentStepUrl: '/config/additionalOptions',
                 showStepIndicator: true,
                 nextStepFn: () => {
 
                 }
             });
-            this.config.pageTitle = '11.Choose Your Opener';
+            this.config.pageTitle = '12.Additional Options';
         } else {
             this.navComponent.renderNav({
                 flowType: 'resquick',
@@ -78,13 +78,13 @@ export class ResAdditionalOptionsComponent implements OnInit {
 
                 }
             });
-            this.config.pageTitle = '8.Choose Your Opener';
+            this.config.pageTitle = '8.Additional Options';
         }
     }
 
 
-    ngOnInit() { 
-        this.installOrDiy = this.appComponent.selectedInstallDiy 
+    ngOnInit() {
+        this.installOrDiy = this.appComponent.selectedInstallDiy
         this.appComponent.next = 'Next';
         this.pageNo = this.utils.utilities.currPage;
         this.setNavComponent();
@@ -95,9 +95,14 @@ export class ResAdditionalOptionsComponent implements OnInit {
     }
 
     prevBtn(path) {
-        this.route.navigateByUrl('/config/opener');
+        if (this.utils.resFlowSession.resDoorObj.INSTALLTYPE === 'DIY') {
+            this.route.navigateByUrl('/config/install');
+        } else {
+            this.route.navigateByUrl('/config/opener');
+        }
+
     }
- 
+
 
     flow = 'res';
 
@@ -106,7 +111,7 @@ export class ResAdditionalOptionsComponent implements OnInit {
     mileOpenPr = 0;
     qty = this.utils.utilities.gdoOpenerQty;
 
-     
+
 
     showManual(itm) {
         if (itm.srcElement.checked === true) {
