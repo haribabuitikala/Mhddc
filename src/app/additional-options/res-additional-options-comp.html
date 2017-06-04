@@ -1,6 +1,6 @@
 <div class="content additional-options" id="resInstallFlow" *ngIf="installOrDiy=='install'">
     <h4 class="text-orange font-size-16">Additional Options</h4>
-    <div *ngFor="let installQuestions  of resInstallQuestions"> 
+    <div *ngFor="let installQuestions  of resInstallQuestions ;let i = index"> 
         <dl> 
             <dd >
                 <div class="clearfix " > 
@@ -9,19 +9,25 @@
                                         <span *ngIf=installQuestions.item_id=='4'"> Do You Need</span>
                                         <span *ngIf=installQuestions.item_id=='11'"> Do You Need any</span> -->  <img  class="pull-right "  (click)="installQuestionsPopup(installQuestions)"  height="25" src="../../assets/images/info.png"> 
                     </p> 
-                 <div id="upgrade" *ngIf="!installQuestions.item_id===7">
+                <div *ngIf="i===0">
                 <img src="../../assets/images/Medallionlogo.png" alt=""/>
                 <img src="../../assets/images/MedallionUpgrades_warranties.png" alt=""/>
-            </div>
+            </div> 
                 </div> 
                 <div class="flex-right" >
-                    <div class="text-orange">{{installQuestions.Answers[1].item_name}}</div>
+                    <div class="text-orange">{{installQuestions.Answers[1].item_name}}
+<!--                        <p [ngIf]="showInstallMiles">, it's <input type="text"/>
+                            miles away</p>-->
+                    </div>
                     <label class="switch">
-                        <input type="checkbox"   (change)="installQuestionsOptions($event,installQuestions)">
+                        <input type="checkbox"  [checked]="installQuestions.Answers[1].isDefault" (change)="installQuestionsOptions($event,installQuestions)">
                         <div class="slider round"></div>
                     </label>
-                    <div class="text-orange">{{installQuestions.Answers[0].item_name}}</div>
+                    <div class="text-orange">{{installQuestions.Answers[0].item_name}}  </div>
                 </div>
+                   <div class="text-center" *ngIf="installQuestions.item_id=='5' ">
+            <p id="distance" >its <input type="text" [(ngModel)]="defaultMiles"    (keyup)="calculatemiles(defaultMiles)" name="defaultMiles"/>   miles away</p> 
+            </div> 
             </dd>
         </dl>
     </div> 
@@ -36,14 +42,25 @@
                     </p> 
                 </div> 
                 <div class="flex-right col-xs-12" >
-                    <div class="text-orange col-xs-9">{{diyQuestions.Answers[1].item_name}}</div>
+                      <div *ngIf="diyQuestions.item_id=='4' ">  
+                            <select    (change)="selectedVinyls($event.target.value)">
+                                <option *ngFor="let vin of vinyls"  value="vin.item_id">{{vin.item_name}}</option>
+                            </select>
+                        </div>
+                    <div class="text-orange  ">{{diyQuestions.Answers[1].item_name}}</div>
+                   
                     <label class="switch">
-                        <input type="checkbox"   (change)="diyQuestionsOptions($event,diyQuestions)">
+                        <input type="checkbox" [checked]="diyQuestions.Answers[1].isDefault"   (change)="diyQuestionsOptions($event,diyQuestions)">
+                       
                         <div class="slider round"></div>
                     </label>
                     <div class="text-orange">{{diyQuestions.Answers[0].item_name}}</div>
                 </div>
-<!--                <div>Selct Will We here</div>-->
+               ` 
+                    <div class="text-center" *ngIf="diyQuestions.item_id=='5' ">
+            <p id="distance" >its <input type="text" [(ngModel)]="defaultMilesDiy"    (keyup)="calculatemilesDiy(defaultMilesDiy)" name="defaultMilesDiy"/>   miles away</p> 
+            </div>
+          
                                
             </dd>
         </dl>
