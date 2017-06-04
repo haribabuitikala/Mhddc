@@ -44,6 +44,7 @@ export class CategoryComponent implements OnInit {
             this.utilities.utilities.currPage = 1;
             this.utilities.utilities.currScreen += 1;
             this.navComp.setNavFlow('res');
+            this.utilities.resFlowSession.resDoorObj.INSTALLTYPE = "";
             this.route.navigateByUrl(path);
         } else {
             let zipCode = this.utilities.utilities.zipCode;

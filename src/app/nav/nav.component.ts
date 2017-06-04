@@ -146,6 +146,7 @@ export class NavComponent implements OnInit {
 
     subFlow = false;
     resSubFlow;
+    resDisableSteps = [];
     setNavFlow(flowType, subFlow?) {
         this.gdoVisistedSteps = [];
         this.subFlow = subFlow ? true : false;
@@ -155,6 +156,13 @@ export class NavComponent implements OnInit {
         }
     }
 
+    clearDisabledSteps() {
+        this.resDisableSteps = [];
+    }
+
+    addDisabledStep(sNo) {
+        this.resDisableSteps.push(sNo);
+    }
     renderNav(obj) {
         let steps = [];
         if (obj.flowType === 'gdo') {
@@ -212,7 +220,11 @@ export class NavComponent implements OnInit {
                     s.visited = false;
                 }
 
-                if (this.resSubFlow === 'hideglass' && s.No === 8) {
+                if (this.resSubFlow === 'hideglass' && s.No === 8 && s.No < obj.flowActiveStep) {
+                    s.disabled = true;
+                }
+
+                if(this.resDisableSteps.indexOf(s.No) >= 0 && s.No < obj.flowActiveStep) {
                     s.disabled = true;
                 }
 
@@ -246,6 +258,8 @@ export class NavComponent implements OnInit {
                     s.disabled = true;
                 }
 
+                
+
                 if (s.No == 1) {
                     s.visited = true;
                     s.url = '/doorSize';
@@ -256,9 +270,7 @@ export class NavComponent implements OnInit {
                 }
                 steps.push(s);
             });
-            if (this.changeSubscribers) {
-                this.changeSubscribers({ showStepIndicator: obj.showStepIndicator, flowType: obj.flowType, steps: steps, activeStep: obj.flowActiveStep });
-            }
+           
         }
 
         if (this.changeSubscribers) {

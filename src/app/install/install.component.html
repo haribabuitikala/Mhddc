@@ -39,7 +39,7 @@
     <dd class="diy-install-table-header">
       Collection
     </dd>
-    <dd>{{collection}}</dd>
+    <dd>{{itemName | escapeHtml}}</dd>
     <dd class="diy-install-table-header">
       Door Design
     </dd>
@@ -51,14 +51,14 @@
     <dd class="diy-install-table-header">
       Door Construction
     </dd>
-    <dd>{{construction}}</dd>
+    <dd>{{construction | escapeHtml}}</dd>
   </dl>
   <dl class="diy-install-table">
     <dd class="diy-install-table-header">
       Color
     </dd>
     <dd>
-      <span class="selected-color text-capitalize">{{color}}</span>
+      <span class="selected-color text-capitalize">{{color | escapeHtml}}</span>
       <span class="pull-right">$0.00</span>
     </dd>
   </dl>
@@ -89,7 +89,7 @@
           <dd (click)="navigateTo('/doorSize')"><img src="../../assets/images/left-nav/leftnav1iconVP.png" alt=""/>Size</dd>
           <dd (click)="navigateTo('/collection')"><img src="../../assets/images/left-nav/leftnav2iconVP.png" alt=""/>Collection</dd>
           <dd (click)="navigateTo('/home')"><img src="../../assets/images/left-nav/leftnav3iconVP.png" alt=""/>Home</dd>
-          <dd (click)="navigateTo('/config/design')"><img src="../../assets/images/leftnav/leftnav4iconVP.png" alt=""/>Design</dd>
+          <dd (click)="navigateTo('/config/design')"><img src="../../assets/images/left-nav/leftnav4iconVP.png" alt=""/>Design</dd>
           <dd (click)="navigateTo('/config/construction')"><img src="../../assets/images/left-nav/leftnav5iconVP.png" alt=""/>Construction</dd>
           <dd (click)="navigateTo('/config/color')"><img src="../../assets/images/left-nav/leftnav6iconVP.png" alt=""/>Color</dd>
           <dd (click)="navigateTo('/config/topSection')"><img src="../../assets/images/left-nav/leftnav7iconVP.png" alt=""/>Top Section</dd>
@@ -124,7 +124,7 @@
           correct. If you would like to have your door professionally installed close this box and then select &amp; proceed
           with an installed door.</p>
       </div>
-      <div class="col-xs-12 padding-b-10 padding-t-10 box-shadow div-border">
+      <div class="col-xs-12 padding-b-10 padding-t-10  div-border">
         <div class="col-xs-3">
           Select
         </div>
@@ -137,7 +137,7 @@
               <div class="col-xs-6 padding-r-7 pad-l-0">
                 <div> {{lang.sizes.feet}}</div>
                 <div>
-                  <select name="" [(ngModel)]="selectedWidthFeet" class="form-control" (change)="getWidthInches('width')" [(ngModel)]='selected'>
+                  <select name="" [(ngModel)]="selectedWidthFeet" class="form-control" (change)="getWidthInches('width')" >
                         <option *ngFor="let widthFeet of widthFeets">{{widthFeet}}</option>
                     </select>
                 </div>
@@ -178,34 +178,13 @@
             </div>
           </div>
         </div>
-        <!--<div class="col-xs-9 padding-b-10">
-        <div class="col-xs-6">
-          Width
-          <select>
-            <option value=" ">8'3'</option>
-            <option value=" "> 8'3'</option>
-            <option value=" ">8'3'</option>
-            <option value=" ">8'3'</option>
-          </select>
-          <span class="size-example ">Ex:10.2</span>
-        </div>
-        <div class="col-xs-6">
-          Height
-          <select>
-            <option value=" "> 8'3'</option>
-            <option value=" "> 8'3'</option>
-            <option value=" ">8'3'</option>
-            <option value=" "> 8'3'</option>
-          </select>
-          <span class="size-example">Ex:10.2</span>
-        </div>
-      </div>-->
-        <div  class="text-center  margin-t-0"  >
-          <button  *ngIf="!doorDimensionFound" (click)="getDoorDimentions()" class="btn btn-default text-uppercase box-shadow bold text-orange   text-center"> Confirm Size 
-          </button>
-          <button  *ngIf="doorDimensionFound" (click)="confirmDIY()" class="btn btn-default text-uppercase box-shadow bold text-orange   text-center"> Next Step 
-          </button>
-        </div>
+        
+          <div  class="text-center  margin-t-15"  >
+              <button  *ngIf="!readyToNextStep" (click)="getDoorDimentions()" class="btn btn-default text-uppercase box-shadow bold text-orange   text-center"> Confirm Size 
+              </button>
+              <button  *ngIf="readyToNextStep" (click)="confirmDIY()" class="btn btn-default text-uppercase box-shadow bold text-orange   text-center"> Next Step 
+              </button>
+          </div>
       </div>
 
       <h4 class="bold font-size-16 margin-t-0">General Size Guidelines:</h4>
@@ -274,7 +253,7 @@
             <button type="submit"
                     class="btn btn-default box-shadow text-orange margin-r-10 bold margin-b-10 pull-left"
 
-                    (click)="leadTest.close()">NO
+                   (click)="leadTestValue('NO')">NO
             </button>
         </div>
     </modal-body>

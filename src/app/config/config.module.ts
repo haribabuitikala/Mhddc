@@ -31,6 +31,7 @@ import {ResUpdateComponent} from "./resUpdateQty";
 import {GdoUpdateComponent} from "../opener/gdoUpdateQty";
 import {ResSliderComponent} from "../slider-component/res-slider.component";
 import {ShareButtonsModule} from 'ngx-sharebuttons';
+import { EscapeHtmlPipe } from '../shared/html-entitiy';
 
 @NgModule({
     imports: [
@@ -42,33 +43,33 @@ import {ShareButtonsModule} from 'ngx-sharebuttons';
             {
                 path: 'config', component: ConfigComponent,
                 children: [
-                    {path: 'design', component: DesignComponent},
-                    {path: 'construction', component: ConstructionComponent},
-                    {path: 'color', component: ColorComponent},
-                    {path: 'topSection', component: TopSectionComponent},
-                    {path: 'hardware', component: HardwareComponent},
-                    {path: 'glassType', component: GlassTypeComponent},
-                    {path: 'nonClassic', component: NonClassicComponent},
-                    {path: 'lock', component: LockComponent},
-                    {path: 'install', component: InstallComponent},
-                    {path: 'opener', component: ResOpenerComponent},
-                    {path: 'openerSelected', component: OpenerSelectedComponent},
-                    {path: 'additionalOptions', component: ResAdditionalOptionsComponent},
-                    {path: 'doorConfiguration', component: ResDoorConfigurationComponent},
-                    {path: '', redirectTo: 'design', pathMatch: 'full'}
+                    { path: 'design', component: DesignComponent },
+                    { path: 'construction', component: ConstructionComponent },
+                    { path: 'color', component: ColorComponent },
+                    { path: 'topSection', component: TopSectionComponent },
+                    { path: 'hardware', component: HardwareComponent },
+                    { path: 'glassType', component: GlassTypeComponent },
+                    { path: 'nonClassic', component: NonClassicComponent },
+                    { path: 'lock', component: LockComponent },
+                    { path: 'install', component: InstallComponent },
+                    { path: 'opener', component: ResOpenerComponent },
+                    { path: 'openerSelected', component: OpenerSelectedComponent },
+                    { path: 'additionalOptions', component: ResAdditionalOptionsComponent },
+                    { path: 'doorConfiguration', component: ResDoorConfigurationComponent },
+                    { path: '', redirectTo: 'design', pathMatch: 'full' }
                 ]
             },
             {
                 path: 'gdoConfig', component: GdoConfigComponent,
                 children: [
-                    {path: 'opener', component: OpenerComponent},
-                    {path: 'additionalOptions', component: AdditionalOptionsComponent},
-                    {path: 'additionalOptions/:havingdooropener', component: AdditionalOptionsComponent},
-                    {path: 'doorConfiguration', component: DoorConfigurationComponent}
+                    { path: 'opener', component: OpenerComponent },
+                    { path: 'additionalOptions', component: AdditionalOptionsComponent },
+                    { path: 'additionalOptions/:havingdooropener', component: AdditionalOptionsComponent },
+                    { path: 'doorConfiguration', component: DoorConfigurationComponent }
                 ]
             },
-            {path: 'installQuestion', component: InstallQuestionComponent},
-            {path: 'installAnswer', component: InstallAnswerComponent}
+            { path: 'installQuestion', component: InstallQuestionComponent },
+            { path: 'installAnswer', component: InstallAnswerComponent }
         ])
     ],
     declarations: [
@@ -87,7 +88,7 @@ import {ShareButtonsModule} from 'ngx-sharebuttons';
         DoorConfigurationComponent,
         ResDoorConfigurationComponent,
         ThankyouComponent,
-       // DetailsComponent,
+        // DetailsComponent,
         ConfigComponent,
         OpenerSelectedComponent,
         SliderComponentComponent,
@@ -97,7 +98,8 @@ import {ShareButtonsModule} from 'ngx-sharebuttons';
         HardwareComponent,
         GdoUpdateComponent,
         ResSliderComponent,
-        ResUpdateComponent
+        ResUpdateComponent,
+        EscapeHtmlPipe
     ]
 })
 export class ConfigModule {
