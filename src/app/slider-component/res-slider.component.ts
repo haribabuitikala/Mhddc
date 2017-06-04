@@ -75,10 +75,6 @@ export class ResSliderComponent implements OnInit, AfterViewInit {
             this.sliderRows = _.times(this.data.length, _.constant(null));
             this.slideCount = this.data ? this.data.length : 0;
         }
-        this.dataService.getModelInfo(this.construction)
-            .subscribe(
-            res => this.constructionInfo = res
-            )
         this.renderSlider();
         this.imageUrl = location.href.indexOf('localhost:4200') >= 0 ? 'http://localhost:3435/images/' + this.folder : '../../assets/images/' + this.folder;
         this.getModelCategory(this.construction);
