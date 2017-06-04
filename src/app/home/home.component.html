@@ -1,7 +1,8 @@
 <h4 class="text-orange font-size-16">{{pageNo}}.Choose Your Home</h4>
 <div class="stock clearfix">
     <div class="col-xs-4" *ngFor="let home of homes">
-        <img src="../../assets/images/btn{{home._btnimage}}" (click)="selectHome(home, $event)"/>
+        <img [ngStyle]="{'background-image': 'url(../../assets/images/btn'+home._btnimage+')'}" (click)="selectHome(home, $event)"
+        />
     </div>
 </div>
 <div class="camera-section-selection space-around col-xs-12">
@@ -30,8 +31,7 @@
 
 <div id="footer" class="col-xs-12 padding-t-10 padding-b-10">
     <a href="javascript:void(0)" class="pull-left previous-btn" (click)="prevBtn(currScreen, '/collection')" data-id="currScreen">
-        <img src="../../assets/images/back-48-thick.png" height="15px">
-        Prev
+        <img src="../../assets/images/back-48-thick.png" height="15px"> Prev
     </a>
 
     <a href="javascript:void(0)" class="pull-right nextBtn" (click)="nextBtn(currScreen,'/config/design')" data-id="currScreen">

@@ -1,11 +1,11 @@
 import {Component, OnInit, Input} from '@angular/core';
 import {AppUtilities} from "../shared/appUtilities";
 import {CollectionData} from "../collection/collection-data";
-import {GdoConfigComponent} from "../gdo-config/gdo-config.component";
+import {ConfigComponent} from "./config.component";
 declare var _:any;
 
 @Component({
-    selector: 'gdo-update-qty',
+    selector: 'res-update-qty',
     template: `
             <span class="pull-right" data-id="">
                 <img class="minus-quantity" src="../../assets/images/substract.png" (click)="updateQuantity(data,0,data.item_id)" alt="">
@@ -13,13 +13,13 @@ declare var _:any;
                 <img class="add-quantity" src="../../assets/images/add.png" (click)="updateQuantity(data,1,data.item_id)" alt="">
             </span>
     `,
-    styleUrls: ['./opener.component.less']
+    styleUrls: ['../opener/opener.component.less']
 })
-export class GdoUpdateComponent implements OnInit {
+export class ResUpdateComponent implements OnInit {
 
     constructor(private utils:AppUtilities
         , private dataStrorage:CollectionData
-        , private gdoConfig:GdoConfigComponent) {
+        , private config:ConfigComponent) {
     }
 
     @Input() data;
@@ -57,6 +57,6 @@ export class GdoUpdateComponent implements OnInit {
 
         this.utils.utilities.kPrice = kPrice;
 
-        this.gdoConfig.itemPrice = this.utils.calculateTotalPrice(this.utils.utilities.itemPriceInstall);
+        // this.config.itemPrice = this.utils.calculateTotalPrice(this.utils.utilities.itemPriceInstall);
     }
 }

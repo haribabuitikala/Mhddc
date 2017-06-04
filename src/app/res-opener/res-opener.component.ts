@@ -30,6 +30,7 @@ export class ResOpenerComponent implements OnInit {
     openers;
     number = 6;
     dataParams: any;
+    quantity = 0;
 
     selectedOpener;
     ngOnInit() {

@@ -925,4 +925,9 @@ export class CollectionService {
             res => res.json()
         );
     }
+      getInstallDiyq(obj) {
+         return this.http.post(this.url + 'DiyInstallq', obj).map(
+            res => res.json()
+        );
+    }
 }

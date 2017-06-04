@@ -1,15 +1,16 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
-import { AppComponent } from "../app.component";
-import { AppUtilities } from "../shared/appUtilities";
-import { NavService } from "../nav/nav-service";
-import { NavComponent } from "../nav/nav.component";
-import { CollectionData } from "../collection/collection-data";
-import { CollectionService } from "../shared/data.service";
-import { ConfigComponent } from "../config/config.component";
-import { ModalComponent } from "ng2-bs3-modal/ng2-bs3-modal";
+import {Component, OnInit, ViewChild} from '@angular/core';
+import {Router, ActivatedRoute} from '@angular/router';
+import {AppComponent} from "../app.component";
+import {AppUtilities} from "../shared/appUtilities";
+import {NavService} from "../nav/nav-service";
+import {NavComponent} from "../nav/nav.component";
+import {CollectionData} from "../collection/collection-data";
+import {CollectionService} from "../shared/data.service";
+import {ConfigComponent} from "../config/config.component";
+import {ModalComponent} from "ng2-bs3-modal/ng2-bs3-modal";
 declare var $: any;
 declare var _: any;
+
 
 @Component({
     selector: 'app-res-additional-options',
@@ -17,8 +18,19 @@ declare var _: any;
     styleUrls: ['./additional-options.component.less']
 })
 export class ResAdditionalOptionsComponent implements OnInit {
-    @ViewChild('gdoFlowManualDoor') gdoFlowManualDoor: ModalComponent;
-    @ViewChild('gdoFlowPowerHead') gdoFlowPowerHead: ModalComponent;
+    //install
+   
+    @ViewChild('resInstallFlowMed') resInstallFlowMed: ModalComponent;
+    @ViewChild('resInstallFlowMiles') resInstallFlowMiles: ModalComponent;
+    @ViewChild('resInstallFlowHeadRoom') resInstallFlowHeadRoom: ModalComponent;
+    @ViewChild('resFlowReleaseKit') resFlowReleaseKit: ModalComponent;
+    //diy 
+    @ViewChild('resDiyFlowHeadRoom') resDiyFlowHeadRoom: ModalComponent;
+    @ViewChild('resDiyFlowMiles') resDiyFlowMiles: ModalComponent;
+    @ViewChild('resDiyPerimeterSeal') resDiyPerimeterSeal: ModalComponent;
+    @ViewChild('resDiyHangerKit') resDiyHangerKit: ModalComponent;
+    @ViewChild('resDiyReleaseKit') resDiyReleaseKit: ModalComponent;
+    @ViewChild('resDiyBottomWeatherSeal') resDiyBottomWeatherSeal: ModalComponent;
 
     pageNo;
     showMenu;
@@ -36,6 +48,17 @@ export class ResAdditionalOptionsComponent implements OnInit {
     gdoFlowPowerHeadInfo = false;
     gdoOpenerSelected = this.dataStore.gdoOpenerAccessories;
     installOrDiy;
+    resAdditionalQuestions;
+    resDiyQuestions;
+    resInstallQuestions;
+    installMed;
+    showMedImg;
+    showInstallMiles; 
+    defaultMiles:any;
+    moreMiles;
+    updatedMiles;
+    defaultMilesDiy:any;
+    vinyls;
 
     t = _.sumBy(this.gdoOpenerSelected, function (o) {
         return o.price * o.count
@@ -50,24 +73,24 @@ export class ResAdditionalOptionsComponent implements OnInit {
         , private navComp: NavService
         , private dataStore: CollectionData
         , private activeRoute: ActivatedRoute
-        , private config:ConfigComponent
+        , private config: ConfigComponent
         , private navComponent: NavComponent
         , private dataService: CollectionService) {
     }
 
 
     setNavComponent() {
-         if (this.navComponent.flowType === 'res') {
+        if (this.navComponent.flowType === 'res') {
             this.navComponent.renderNav({
                 flowType: 'res',
-                flowActiveStep: 11,
+                flowActiveStep: 12,
                 currentStepUrl: '/config/additionalOptions',
                 showStepIndicator: true,
                 nextStepFn: () => {
 
                 }
             });
-            this.config.pageTitle = '11.Choose Your Opener';
+            this.config.pageTitle = '12.Additional Options';
         } else {
             this.navComponent.renderNav({
                 flowType: 'resquick',
@@ -78,16 +101,49 @@ export class ResAdditionalOptionsComponent implements OnInit {
 
                 }
             });
-            this.config.pageTitle = '8.Choose Your Opener';
+            this.config.pageTitle = '8.Additional Options';
         }
     }
 
 
-    ngOnInit() { 
-        this.installOrDiy = this.appComponent.selectedInstallDiy 
+    ngOnInit() {
+        this.installOrDiy = this.appComponent.selectedInstallDiy
+       
         this.appComponent.next = 'Next';
         this.pageNo = this.utils.utilities.currPage;
         this.setNavComponent();
+        let resDoorObj = this.utils.resFlowSession.resDoorObj;
+        let dataParams = {
+            "wi": this.utils.utilities.wi,
+            "windcode": this.utils.utilities.winCode,
+            "NatMarketID": this.utils.utilities.natmarketid,
+            "productid": resDoorObj.product.product['item_id'],
+            "hf": this.utils.utilities.hf,
+            "hi": this.utils.utilities.hi,
+            "wt": 8,
+            "dtype": this.utils.utilities.dtype,
+            "clopaymodelnumber": resDoorObj.construction.construction['ClopayModelNumber'],
+            "localmarketid": this.utils.utilities.localmarketid,
+            "lang": this.utils.utilities.lang,
+            "storeNumber": this.utils.utilities.storenumber,
+            "colorConfig": resDoorObj.color.base['colorconfig']
+        }
+        this.dataService.getInstallDiyq(dataParams).subscribe(res => {
+            this.resAdditionalQuestions = res;
+            this.resDiyQuestions = _.filter(this.resAdditionalQuestions, ['item_type', 'DIY']);
+            this.resInstallQuestions = _.filter(this.resAdditionalQuestions, ['item_type', 'INSTALL']);
+ 
+//console.log("one"+JSON.stringify(this.resDiyQuestions[2].Answers[1].vinyls));
+ this.vinyls=this.resDiyQuestions[2].Answers[1].vinyls 
+            //console.log('resDiyQuestions' + JSON.stringify(this.resDiyQuestions));
+            //            if (this.resInstallQuestions.item_id == 7 && this.resInstallQuestions.item_id == 5) {
+            //
+            //            }
+
+        });
+         if(this.installOrDiy=='install'){
+            this.showMedImg=true;
+        }
     }
 
     nextBtn(path) {
@@ -95,10 +151,193 @@ export class ResAdditionalOptionsComponent implements OnInit {
     }
 
     prevBtn(path) {
-        this.route.navigateByUrl('/config/opener');
-    }
- 
+        if (this.utils.resFlowSession.resDoorObj.INSTALLTYPE === 'DIY') {
+            this.route.navigateByUrl('/config/install');
+        } else {
+            this.route.navigateByUrl('/config/opener');
+        }
 
+    }
+
+    installQuestionsPopup(installQuestions) {
+        if (installQuestions.item_id == 7) {
+            this.resInstallFlowMed.open();
+        } else if (installQuestions.item_id == 5) {
+            this.resInstallFlowMiles.open();
+        } else if (installQuestions.item_id == 4) {
+            this.resInstallFlowHeadRoom.open();
+        } else if (installQuestions.item_id == 11) {
+            this.resFlowReleaseKit.open();
+        }
+
+    }
+
+
+    diyQuestionsPopup(diyQuestions) {
+        if (diyQuestions.item_id == 5) {
+            this.resDiyFlowMiles.open();
+        } else if (diyQuestions.item_id == 1) {
+            this.resDiyPerimeterSeal.open();
+        } else if (diyQuestions.item_id == 4) {
+            this.resDiyFlowHeadRoom.open();
+        } else if (diyQuestions.item_id == 3) {
+            this.resDiyHangerKit.open();
+        } else if (diyQuestions.item_id == 11) {
+            this.resDiyReleaseKit.open();
+        }else if(diyQuestions.item_id == 12){
+            this.resDiyBottomWeatherSeal.open();
+        }
+
+    }
+
+    installQuestionsOptions(itm, obj) {
+        if (itm.srcElement.checked === true) {
+
+            // alert("obj.item_name" + obj.item_name);
+            // alert("obj item price" + obj.Answers[1].item_price);
+            console.log("obj" + JSON.stringify(obj));
+            if (obj.item_id == 7) {
+                if (obj.Answers[0].item_price !== 0) {
+                  //  this.installMed = obj.Answers[1].item_price;
+                }
+            }
+            if (obj.item_id == 5) {
+                    this.defaultMiles=31;
+                if (obj.Answers[0].item_price !== 0) {
+                  //  this.installMiles = obj.Answers[1].item_price;
+                   // this.checkValue=true;
+                     
+                }
+            }
+            if (obj.item_id == 4) {
+                if (obj.Answers[0].item_price !== 0) {
+                  //  this.installHeadRoom = obj.Answers[1].item_price;
+                }
+            }
+             if (obj.item_id == 11) {
+                if (obj.Answers[0].item_price !== 0) {
+                  //  this.installReleaseKit = obj.Answers[1].item_price;
+                }
+            }
+        } else {
+            //alert('false');
+            // alert("obj item price" + obj.Answers[0].item_price);
+            if (obj.item_id == 7) {
+                if (obj.Answers[0].item_price !== 0) {
+                 //   this.installMed = obj.Answers[0].item_price;
+                }
+            }
+            if (obj.item_id == 5) {
+              this.defaultMiles="";
+                if (obj.Answers[0].item_price !== 0) {
+                  //  this.installMiles = obj.Answers[0].item_price;
+                    
+                }
+            }
+            if (obj.item_id == 4) {
+                if (obj.Answers[0].item_price !== 0) {
+                   // this.installHeadRoom = obj.Answers[0].item_price;
+                }
+            }
+             if (obj.item_id == 11) {
+                if (obj.Answers[0].item_price !== 0) {
+                  //  this.installReleaseKit = obj.Answers[0].item_price;
+                }
+            }
+        }
+    }
+    diyQuestionsOptions(itm, obj) {
+        if (itm.srcElement.checked === true) {
+            //alert('true');
+            // alert("obj.item_name" + obj.item_name);
+            // alert("obj item price" + obj.Answers[1].item_price);
+          //  console.log("obj" + JSON.stringify(obj));
+            if (obj.item_id == 5) {
+              this.defaultMilesDiy="31";
+                if (obj.Answers[1].item_price !== 0) {
+                  //  this.installMiles = obj.Answers[0].item_price;
+                    
+                }
+            }
+              if (obj.item_id == 1) {
+            
+                if (obj.Answers[1].item_price !== 0) {
+                  //  this.installMiles = obj.Answers[0].item_price;
+                    
+                }
+            }
+              if (obj.item_id == 4) {
+           
+                if (obj.Answers[1].item_price !== 0) {
+                  //  this.installMiles = obj.Answers[0].item_price;
+                    
+                }
+            }
+              if (obj.item_id == 3) { 
+                if (obj.Answers[1].item_price !== 0) {
+                  //  this.installMiles = obj.Answers[0].item_price;
+                    
+                }
+            }
+              if (obj.item_id == 11) {
+              this.defaultMilesDiy="31";
+                if (obj.Answers[1].item_price !== 0) {
+                  //  this.installMiles = obj.Answers[0].item_price;
+                    
+                }
+            }
+              if (obj.item_id == 12) { 
+                if (obj.Answers[1].item_price !== 0) {
+                  //  this.installMiles = obj.Answers[0].item_price;
+                    
+                }
+            }
+        } else {
+            //  alert('false');
+            //  alert("obj item price" + obj.Answers[0].item_price);
+          if (obj.item_id == 5) {
+              this.defaultMilesDiy="";
+                if (obj.Answers[0].item_price !== 0) {
+                  //  this.installMiles = obj.Answers[0].item_price;
+                    
+                }
+            }
+              if (obj.item_id == 1) { 
+                if (obj.Answers[0].item_price !== 0) {
+                  //  this.installMiles = obj.Answers[0].item_price;
+                    
+                }
+            }
+               if (obj.item_id == 4) { 
+                if (obj.Answers[0].item_price !== 0) {
+                  //  this.installMiles = obj.Answers[0].item_price;
+                    
+                }
+            }
+               if (obj.item_id == 3) { 
+                if (obj.Answers[0].item_price !== 0) {
+                  //  this.installMiles = obj.Answers[0].item_price;
+                    
+                }
+            }
+               if (obj.item_id == 11) { 
+                if (obj.Answers[0].item_price !== 0) {
+                  //  this.installMiles = obj.Answers[0].item_price;
+                    
+                }
+            }
+               if (obj.item_id == 12) { 
+                if (obj.Answers[0].item_price !== 0) {
+                  //  this.installMiles = obj.Answers[0].item_price;
+                    
+                }
+            }
+        }
+    }
+    
+    selectedVinyls(vin){
+       
+    }
     flow = 'res';
 
     singleOpener = 0;
@@ -106,16 +345,6 @@ export class ResAdditionalOptionsComponent implements OnInit {
     mileOpenPr = 0;
     qty = this.utils.utilities.gdoOpenerQty;
 
-     
-
-    showManual(itm) {
-        if (itm.srcElement.checked === true) {
-            this.gdoFlowManualDoorInfo = false;
-
-        } else {
-            this.gdoFlowManualDoorInfo = true;
-        }
-    }
 
     showPowerHead(itm) {
         if (itm.srcElement.checked === true) {
@@ -125,7 +354,30 @@ export class ResAdditionalOptionsComponent implements OnInit {
             this.gdoFlowPowerHeadInfo = true;
         }
     }
-
+calculatemilesInstall(miles){ 
+    if( miles >31 &&  miles < 51){ 
+        this.updatedMiles=51;
+    }else if(miles > 51){
+        this.moreMiles=51-miles; 
+        this.updatedMiles=this.moreMiles*3; 
+        
+    }
+     
+    
+}
+calculatemilesDiy(miles){ 
+    if( miles >31){
+       // alert('the price need to be 3 Dollars')
+    }else if(miles > 31){
+        this.moreMiles=31-miles;
+        //alert('the more miles are'+  this.moreMiles);
+        this.updatedMiles=this.moreMiles*3;
+       // alert( this.updatedMiles+3);
+        
+    }
+     
+    
+}
     directDoorVal = 1;
 
     directDoor(event, flow) {

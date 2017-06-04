@@ -91,7 +91,13 @@ export class AppUtilities {
         milesp: 0,
         item_name: '',
         homeSize: "",
-        lockPrice:0
+        lockPrice: 0,
+        hardwarePrice: 0,
+        itemPriceInstall: 0,
+        itemPriceDY: 0,
+        handlePrice:0,
+        stepPlatePrice:0,
+        hingePrice:0
         // flow of GDO: Home, Size , Openers, Order Details, Shopping Cart
     };
 
@@ -116,18 +122,19 @@ export class AppUtilities {
     //gdoCheck = ['66502', '2217', '77840', '6559', '66604', '2207', '3703'];
     gdoCheck = ['2217', '6559', '2207', '3703'];
 
-    calculateTotalPrice() {
+    calculateTotalPrice(basep) {
 
-        let basep = this.utilities.item_price;
-        let qty = this.utilities.gdoOpenerQty;
+        // let basep = this.utilities.item_price;
+        let qty = this.resFlowSession.resDoorObj.QTY;
         let singlep = this.utilities.singlep;
         let doublep = this.utilities.doublep;
         let milesp = this.utilities.milesp;
         let kPrice = this.utilities.kPrice;
         let distancePrice = this.utilities.distancePrice;
-        let lockPrice= this.utilities.lockPrice;
+        let lockPrice = this.utilities.lockPrice;
+        let hardwarePrice = this.utilities.hardwarePrice;
 
-        return (basep * qty) + singlep + doublep + milesp + kPrice + distancePrice+lockPrice;
+        return (basep * qty) + singlep + doublep + milesp + kPrice + distancePrice + lockPrice + hardwarePrice;
     }
 
     resetCalc() {
@@ -136,6 +143,8 @@ export class AppUtilities {
         this.utilities.milesp = 0;
         this.utilities.kPrice = 0;
         this.utilities.distancePrice = 0;
+        this.utilities.lockPrice = 0;
+        this.utilities.hardwarePrice = 0;
     }
 
 
@@ -149,7 +158,7 @@ export class AppUtilities {
         }
         this.utilities.gdoOpenerQty = qty;
 
-        return this.calculateTotalPrice()
+        return this.calculateTotalPrice(this.utilities.itemPriceInstall)
     }
 
     sumBy(obj) {
@@ -169,14 +178,14 @@ export class AppUtilities {
 
 
     resFlowSession: ResidentialFlowSession = new ResidentialFlowSession();
- 
 
-    resDiyData : ResidentialFlowSession = new ResidentialFlowSession();
- 
+
+    resDiyData: ResidentialFlowSession = new ResidentialFlowSession();
+
     resQuickSession = {
         designs: []
     };
- 
+
     clearResFlow() {
 
     }
@@ -214,7 +223,7 @@ export class ResidentialFlowSession {
         designName: '',
         constructionName: ''
 
-    }    
+    }
 
     resDoorObj = {
         "QTY": 1,

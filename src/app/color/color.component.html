@@ -1,5 +1,5 @@
 <h4 class="font-size-16 text-orange clear-b" *ngIf="showOverlay">Choose Your Overlay Color</h4>
-<div class="tile margin-b-15 ptn-rel clear-b" *ngIf="loaded && showOverlay">
+<div class="tile margin-b-15 ptn-rel clear-b colorSlider" *ngIf="loaded && showOverlay">
     <app-res-slider [data]="data"
                     [number]="number"
                     [cname]="'color'"
@@ -17,7 +17,7 @@
     <img src="../../assets/images/Info-64.png" height="26" class="pull-right" alt="">
     <img src="../../assets/images/color/Behar-icon-small-2.png" class="img-behr pull-right" alt=""/>
 </div>
-<div class="tile margin-b-15 ptn-rel clear-b" *ngIf="loaded">
+<div class="tile margin-b-15 ptn-rel clear-b colorSlider" *ngIf="loaded">
 
     <app-res-slider [data]="data"
                     [number]="number"
@@ -29,6 +29,13 @@
     </app-res-slider>
 
 
+</div>
+
+<div class="margin-t-20 margin-b-20" *ngIf="claddings && claddings.length > 1">
+    <label>Choose Your Cladding & Overlay:</label>
+    <select [(ngModel)]="selectedCladding" name="color-cladding">
+        <option *ngFor="let cladding of claddings; let index = index" [attr.value]="index">{{ cladding.item_name}}</option>
+    </select>
 </div>
 
 <modal #behr>

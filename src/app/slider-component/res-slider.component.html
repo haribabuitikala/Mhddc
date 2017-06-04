@@ -15,13 +15,12 @@
                 <div class="_slide-items" *ngIf="folder!=='construction'">
                     <div class="inner-item col-xs-{{number}}" *ngFor="let slideitem of slide; let i=index" [ngClass]="{ 'current' : isSeleted(slideitem, k, i)}"
                         (click)="openerSelected(slideitem, $event)">
-                        <img (error)="onImageLoadError(slideitem, folder)" src="../../assets/images/{{slideitem.item_thumbnail.replace('.jpg', '.png')}}"
+                        <img (error)="onImageLoadError(slideitem, folder)" [ngStyle]="{'background-image': 'url(../../assets/images/'+slideitem.item_thumbnail.replace('.jpg', '.png')+')'}"
                             [attr.data-id]="slideitem.item_id">
 
 
                         <div *ngIf="folder=='color'" class="text-blue font-size-10">{{slideitem.item_name}}
-                            <br>
-                            <p *ngIf="slideitem.item_price!==0"> {{slideitem.item_price}} </p>
+                             <span *ngIf="slideitem.item_price!==0">  +{{slideitem.item_price}} </span>
                         </div>
                     </div>
                 </div>
@@ -34,11 +33,11 @@
                         <div class="construction-model">Model {{slideitem.DisplayModelNumber}}</div>
                         <div class="construciton-info">
                             <div>
-                                <img (click)="detailsInfo(slideitem.DisplayModelNumber)" class="nobdr" src="../../assets/images/Info-64.png" alt="">
+                                <img (click)="detailsInfo(slideitem.DisplayModelNumber, contructionDetails)" class="nobdr" src="../../assets/images/Info-64.png" alt="">
                             </div>
-                            <span>
+<!--                            <span>
                                 product <br/>  details
-                                </span>
+                                </span>-->
                         </div>
 
                     </div>
@@ -79,4 +78,3 @@
         </div>
     </modal-body>
 </modal>
- 

@@ -32,35 +32,65 @@ export class HardwareComponent implements OnInit {
 
   yourStepHinge = [];
   youStephingeNumber = 6;
-  
+
   yourLocks = [];
 
 
   countManager = {
-    Handles: 1,
-    StepPlates: 1,
-    StepHinge: 1
+    handle: 1,
+    stepplate: 1,
+    hinge: 1
   };
 
   updateCount(type, isincrement) {
-    if (!isincrement && this.countManager[type] > 0) {
+    if (!isincrement && this.countManager[type] > 0 && this.countManager[type] > 1) {
       this.countManager[type] = this.countManager[type] - 1;
-    } else {
+    } else if(isincrement && this.countManager[type] > 0 && this.countManager[type] < 6) {
       this.countManager[type] = this.countManager[type] + 1;
     }
 
-    this.utils.resFlowSession.resDoorObj.hardware.handle['count'] = this.countManager.Handles;
-    this.utils.resFlowSession.resDoorObj.hardware.stepplate['count'] = this.countManager.StepPlates;
-    this.utils.resFlowSession.resDoorObj.hardware.hinge['count'] = this.countManager.StepHinge;
+    this.utils.resFlowSession.resDoorObj.hardware.handle['count'] = this.countManager.handle;
+    this.utils.resFlowSession.resDoorObj.hardware.stepplate['count'] = this.countManager.stepplate;
+    this.utils.resFlowSession.resDoorObj.hardware.hinge['count'] = this.countManager.hinge;
+
+
+
+
+    // this.utils.utilities.handlePrice = this.utils.resFlowSession.resDoorObj.hardware[type].item_price * this.countManager[type];
+
+    this.config.itemPriceInstall = this.utils.calculateTotalPrice(this.utils.utilities.itemPriceInstall);
+    this.config.itemPriceDY = this.utils.calculateTotalPrice(this.utils.utilities.itemPriceDY);
 
     this.config.renderCanvas();
   }
- updateLock(obj,event:any) {  
-        if(obj.item_price > 0){ 
-            this.utils.utilities.lockPrice=obj.item_price; 
-           // this.config.itemPrice = this.utils.calculateTotalPrice();
-         }
+  hardwarePriceTot(price) {
+    let resHard = this.utils.resFlowSession.resDoorObj.hardware;
+    let utils = this.utils.utilities;
+    if (resHard.handle['count'] > 0) {
+      utils.handlePrice = resHard.handle['count'] * resHard.handle['item_installed_price'];
+    } else {
+      utils.handlePrice = 0
     }
+    if (resHard.stepplate['count'] > 0) {
+      utils.stepPlatePrice = resHard.stepplate['count'] * resHard.stepplate['item_installed_price'];
+    } else {
+      utils.stepPlatePrice = 0
+    }
+
+    if (resHard.hinge['count'] > 0) {
+      utils.hingePrice = resHard.hinge['count'] * resHard.hinge['item_installed_price'];
+    } else {
+      utils.hingePrice = 0
+    }
+
+    utils.hardwarePrice = utils.handlePrice + utils.stepPlatePrice + utils.hingePrice;
+  }
+  updateLock(obj, event: any) {
+    if (obj.item_price > 0) {
+      this.utils.utilities.lockPrice = obj.item_price;
+      // this.config.itemPrice = this.utils.calculateTotalPrice();
+    }
+  }
   loadData() {
     var resDoorObj = this.utils.resFlowSession.resDoorObj;
     var params = {
@@ -96,7 +126,7 @@ export class HardwareComponent implements OnInit {
         stepHinges = _.uniqBy(stepHinges, 'item_id');
         this.yourStepHinge = _.chunk(stepHinges, 4);
         this.isLoaded = true;
-        
+
         let yourLocksData = res[0]['Locks'];
         this.yourLocks = yourLocksData;
       }
