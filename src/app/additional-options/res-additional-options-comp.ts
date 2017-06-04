@@ -1,13 +1,13 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
-import { AppComponent } from "../app.component";
-import { AppUtilities } from "../shared/appUtilities";
-import { NavService } from "../nav/nav-service";
-import { NavComponent } from "../nav/nav.component";
-import { CollectionData } from "../collection/collection-data";
-import { CollectionService } from "../shared/data.service";
-import { ConfigComponent } from "../config/config.component";
-import { ModalComponent } from "ng2-bs3-modal/ng2-bs3-modal";
+import {Component, OnInit, ViewChild} from '@angular/core';
+import {Router, ActivatedRoute} from '@angular/router';
+import {AppComponent} from "../app.component";
+import {AppUtilities} from "../shared/appUtilities";
+import {NavService} from "../nav/nav-service";
+import {NavComponent} from "../nav/nav.component";
+import {CollectionData} from "../collection/collection-data";
+import {CollectionService} from "../shared/data.service";
+import {ConfigComponent} from "../config/config.component";
+import {ModalComponent} from "ng2-bs3-modal/ng2-bs3-modal";
 declare var $: any;
 declare var _: any;
 
@@ -17,8 +17,18 @@ declare var _: any;
     styleUrls: ['./additional-options.component.less']
 })
 export class ResAdditionalOptionsComponent implements OnInit {
-    @ViewChild('gdoFlowManualDoor') gdoFlowManualDoor: ModalComponent;
-    @ViewChild('gdoFlowPowerHead') gdoFlowPowerHead: ModalComponent;
+    //install
+    @ViewChild('resInstallFlowMed') resInstallFlowMed: ModalComponent;
+    @ViewChild('resInstallFlowMiles') resInstallFlowMiles: ModalComponent;
+    @ViewChild('resInstallFlowHeadRoom') resInstallFlowHeadRoom: ModalComponent;
+    @ViewChild('resFlowReleaseKit') resFlowReleaseKit: ModalComponent;
+    //diy 
+    @ViewChild('resDiyFlowHeadRoom') resDiyFlowHeadRoom: ModalComponent;
+    @ViewChild('resDiyFlowMiles') resDiyFlowMiles: ModalComponent;
+    @ViewChild('resDiyPerimeterSeal') resDiyPerimeterSeal: ModalComponent;
+    @ViewChild('resDiyHangerKit') resDiyHangerKit: ModalComponent;
+    @ViewChild('resDiyReleaseKit') resDiyReleaseKit: ModalComponent;
+    @ViewChild('resDiyBottomWeatherSeal') resDiyBottomWeatherSeal: ModalComponent;
 
     pageNo;
     showMenu;
@@ -36,6 +46,10 @@ export class ResAdditionalOptionsComponent implements OnInit {
     gdoFlowPowerHeadInfo = false;
     gdoOpenerSelected = this.dataStore.gdoOpenerAccessories;
     installOrDiy;
+    resAdditionalQuestions;
+    resDiyQuestions;
+    resInstallQuestions;
+    installMed;
 
     t = _.sumBy(this.gdoOpenerSelected, function (o) {
         return o.price * o.count
@@ -88,6 +102,33 @@ export class ResAdditionalOptionsComponent implements OnInit {
         this.appComponent.next = 'Next';
         this.pageNo = this.utils.utilities.currPage;
         this.setNavComponent();
+        let resDoorObj = this.utils.resFlowSession.resDoorObj;
+        let dataParams = {
+            "wi": this.utils.utilities.wi,
+            "windcode": this.utils.utilities.winCode,
+            "NatMarketID": this.utils.utilities.natmarketid,
+            "productid": resDoorObj.product.product['item_id'],
+            "hf": this.utils.utilities.hf,
+            "hi": this.utils.utilities.hi,
+            "wt": 8,
+            "dtype": this.utils.utilities.dtype,
+            "clopaymodelnumber": resDoorObj.construction.construction['ClopayModelNumber'],
+            "localmarketid": this.utils.utilities.localmarketid,
+            "lang": this.utils.utilities.lang,
+            "storeNumber": this.utils.utilities.storenumber,
+            "colorConfig": resDoorObj.color.base['colorconfig']
+        }
+        this.dataService.getInstallDiyq(dataParams).subscribe(res => {
+            this.resAdditionalQuestions = res;
+            this.resDiyQuestions = _.filter(this.resAdditionalQuestions, ['item_type', 'DIY']);
+            this.resInstallQuestions = _.filter(this.resAdditionalQuestions, ['item_type', 'INSTALL']);
+
+            console.log('resDiyQuestions' + JSON.stringify(this.resDiyQuestions));
+            //            if (this.resInstallQuestions.item_id == 7 && this.resInstallQuestions.item_id == 5) {
+            //
+            //            }
+
+        });
     }
 
     nextBtn(path) {
@@ -103,7 +144,104 @@ export class ResAdditionalOptionsComponent implements OnInit {
 
     }
 
+    installQuestionsPopup(installQuestions) {
+        if (installQuestions.item_id == 7) {
+            this.resInstallFlowMed.open();
+        } else if (installQuestions.item_id == 5) {
+            this.resInstallFlowMiles.open();
+        } else if (installQuestions.item_id == 4) {
+            this.resInstallFlowHeadRoom.open();
+        } else if (installQuestions.item_id == 11) {
+            this.resFlowReleaseKit.open();
+        }
 
+    }
+
+
+    diyQuestionsPopup(diyQuestions) {
+        if (diyQuestions.item_id == 5) {
+            this.resDiyFlowMiles.open();
+        } else if (diyQuestions.item_id == 1) {
+            this.resDiyPerimeterSeal.open();
+        } else if (diyQuestions.item_id == 4) {
+            this.resDiyFlowHeadRoom.open();
+        } else if (diyQuestions.item_id == 3) {
+            this.resDiyHangerKit.open();
+        } else if (diyQuestions.item_id == 11) {
+            this.resDiyReleaseKit.open();
+        }
+
+    }
+
+    installQuestionsOptions(itm, obj) {
+        if (itm.srcElement.checked === true) {
+
+            // alert("obj.item_name" + obj.item_name);
+            // alert("obj item price" + obj.Answers[1].item_price);
+            console.log("obj" + JSON.stringify(obj));
+            if (obj.item_id == 7) {
+                if (obj.Answers[0].item_price !== 0) {
+                  //  this.installMed = obj.Answers[1].item_price;
+                }
+            }
+            if (obj.item_id == 5) {
+                if (obj.Answers[0].item_price !== 0) {
+                  //  this.installMiles = obj.Answers[1].item_price;
+                }
+            }
+            if (obj.item_id == 4) {
+                if (obj.Answers[0].item_price !== 0) {
+                  //  this.installHeadRoom = obj.Answers[1].item_price;
+                }
+            }
+             if (obj.item_id == 11) {
+                if (obj.Answers[0].item_price !== 0) {
+                  //  this.installReleaseKit = obj.Answers[1].item_price;
+                }
+            }
+        } else {
+            //alert('false');
+            // alert("obj item price" + obj.Answers[0].item_price);
+            if (obj.item_id == 7) {
+                if (obj.Answers[0].item_price !== 0) {
+                 //   this.installMed = obj.Answers[0].item_price;
+                }
+            }
+            if (obj.item_id == 5) {
+                if (obj.Answers[0].item_price !== 0) {
+                  //  this.installMiles = obj.Answers[0].item_price;
+                }
+            }
+            if (obj.item_id == 4) {
+                if (obj.Answers[0].item_price !== 0) {
+                   // this.installHeadRoom = obj.Answers[0].item_price;
+                }
+            }
+             if (obj.item_id == 11) {
+                if (obj.Answers[0].item_price !== 0) {
+                  //  this.installReleaseKit = obj.Answers[0].item_price;
+                }
+            }
+        }
+    }
+    diyQuestionsOptions(itm, obj) {
+        if (itm.srcElement.checked === true) {
+            //alert('true');
+            // alert("obj.item_name" + obj.item_name);
+            // alert("obj item price" + obj.Answers[1].item_price);
+            console.log("obj" + JSON.stringify(obj));
+            if (obj.Answers[0].item_price !== 0) {
+                this.installMed = obj.Answers[1].item_price;
+                //                if()
+            }
+        } else {
+            //  alert('false');
+            //  alert("obj item price" + obj.Answers[0].item_price);
+            if (obj.Answers[0].item_price !== 0) {
+                this.installMed = obj.Answers[1].item_price;
+            }
+        }
+    }
     flow = 'res';
 
     singleOpener = 0;
@@ -111,16 +249,6 @@ export class ResAdditionalOptionsComponent implements OnInit {
     mileOpenPr = 0;
     qty = this.utils.utilities.gdoOpenerQty;
 
-
-
-    showManual(itm) {
-        if (itm.srcElement.checked === true) {
-            this.gdoFlowManualDoorInfo = false;
-
-        } else {
-            this.gdoFlowManualDoorInfo = true;
-        }
-    }
 
     showPowerHead(itm) {
         if (itm.srcElement.checked === true) {

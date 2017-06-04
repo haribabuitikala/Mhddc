@@ -1,240 +1,58 @@
 <div class="content additional-options" id="resInstallFlow" *ngIf="installOrDiy=='install'">
     <h4 class="text-orange font-size-16">Additional Options</h4>
-    <dl>
-        <dd>
-            <div class="clearfix">
-                <p class="col-xs-10"> Medallion Hardware Upgrade for <span class="text-orange">$59.00</span>?
-                </p>
-                <img (click)="resInstallFlowMed.open()" class="pull-right " alt="" height="25" src="../../assets/images/info.png">
+    <div *ngFor="let installQuestions  of resInstallQuestions"> 
+        <dl> 
+            <dd >
+                <div class="clearfix " > 
+                    <p class="col-xs-12">      {{installQuestions.item_list_text}} ?  
+                        <!--                <span *ngIf=installQuestions.item_id=='5'"> Is this job site within</span> 
+                                        <span *ngIf=installQuestions.item_id=='4'"> Do You Need</span>
+                                        <span *ngIf=installQuestions.item_id=='11'"> Do You Need any</span> -->  <img  class="pull-right "  (click)="installQuestionsPopup(installQuestions)"  height="25" src="../../assets/images/info.png"> 
+                    </p> 
+                 <div id="upgrade" *ngIf="!installQuestions.item_id===7">
+                <img src="../../assets/images/Medallionlogo.png" alt=""/>
+                <img src="../../assets/images/MedallionUpgrades_warranties.png" alt=""/>
             </div>
-            <div id="upgrade">
-                <img src="../../assets/images/Medallionlogo.png" alt="" />
-                <img src="../../assets/images/MedallionUpgrades_warranties.png" alt="" />
-            </div>
-            <div class="flex-right">
-                <span class="text-orange">Yes</span>
-                <label class="switch">
-                    <input type="checkbox" checked="checked" (change)="installFlowMed($event)">
-                    <div class="slider round"></div>
-                </label>
-                <span class="text-orange">No</span>
-            </div>
-        </dd>
-        <dd>
-            <div class="clearfix">
-                <p class="col-xs-10">Is this job site within 30 drive miles of this store? </p>
-                <img class="pull-right" (click)="resInstallFlowMiles.open()" alt="" height="25" src="../../assets/images/info.png">
-            </div>
-            <div class="flex-right">
-                <span class="text-orange">Yes</span>
-                <label class="switch">
-                    <input type="checkbox" checked="checked" (change)="showDistance($event,'install')">
-                    <div class="slider round"></div>
-                </label>
-                <span class="text-orange">No</span>
-            </div>
-
-            <div class="align-right ">
-                <p id="distance">Distance of job site is <input type="number" pattern="[0-9]" (keyup)="updateDistance($event,null)" name="gdoDistance"
-                        class="gdoDistance" [(ngModel)]="distance" disabled/> drive miles from store</p>
-            </div>
-
-            <p *ngIf="showDistancePrice">{{distance}} miles from store ({{distancePrice | currency:'USD':true:'1.2-2'}})
-            </p>
-        </dd>
-        <dd>
-            <div class="clearfix">
-                <p class="col-xs-10">Do you need Double Track Low Head Room Conversion Kit <span class="text-orange">$85.92</span>?
-                </p>
-                <img (click)="resInstallFlowHeadRoom.open()" class="pull-right" alt="" height="25" src="../../assets/images/info.png">
-            </div>
-            <div class="flex-right">
-                <span class="text-orange">Yes</span>
-                <label class="switch">
-                    <input type="checkbox" (change)="installFlowHeadRoom($event)">
-                    <div class="slider round"></div>
-                </label>
-                <span class="text-orange">No</span>
-            </div>
-        </dd>
-        <dd>
-            <div class="clearfix">
-                <p class="col-xs-10">Do you need an <strong>Emergency Release Kit</strong>? <span class="text-orange">$35.00</span>?
-                </p>
-                <img (click)="resFlowReleaseKit.open()" class="pull-right" alt="" height="25" src="../../assets/images/info.png">
-            </div>
-            <div class="flex-right">
-                <span class="text-orange">Yes</span>
-                <label class="switch">
-                    <input type="checkbox" (change)="installFlowReleaseKit($event)">
-                    <div class="slider round"></div>
-                </label>
-                <span class="text-orange">No</span>
-            </div>
-        </dd>
-    </dl>
-</div>
-<div class="content additional-options" id="resDiyFlow" *ngIf="installOrDiy=='diy'">
-    <div class="content additional-options">
-        <h4 class="text-orange font-size-16">{{pageNo}}. Additional Options</h4>
-        <dl>
-            <dd>
-                <div class="clearfix">
-                    <div class="col-xs-10">Is this job site within 30 drive miles of this store?</div>
-                    <div class="col-xs-2 padding-0">
-                        <img (click)="resDiyFlowMiles.open()" class="pull-right" alt="" height="25" src="../../assets/images/info.png">
-                    </div>
-                </div>
-                <div class="flex-right">
-                    <span class="text-orange">Yes</span>
+                </div> 
+                <div class="flex-right" >
+                    <div class="text-orange">{{installQuestions.Answers[1].item_name}}</div>
                     <label class="switch">
-                        <input type="checkbox" checked="checked" (change)="diyFlowMiles($event,'diy')">
+                        <input type="checkbox"   (change)="installQuestionsOptions($event,installQuestions)">
                         <div class="slider round"></div>
                     </label>
-                    <span class="text-orange">No</span>
-                </div>
-                <div class="clearfix margin-b-10"></div>
-                <div class="align-right padding-l-15">
-                    <div>
-                        Distance of job site is
-                        <form class="inline-block">
-                            <input type="text" (keyup)="updateDistance($event,null)" name="gdoDistance" class="gdoDistance" [(ngModel)]="distance" disabled/>
-                        </form>
-                        drive miles from store
-                    </div>
-
-                    <p *ngIf="showDistancePrice">{{distance}} miles from store ({{distancePrice | currency:'USD':true:'1.2-2'}})
-                    </p>
-
-                </div>
-
-            </dd>
-
-            <dd>
-                <div class="clearfix">
-                    <div class="col-xs-10"> Do you need <span class='text-orange'>Perimeter Weather Seal?</span>
-                    </div>
-                    <div class="col-xs-2 padding-0">
-                        <img (click)="resDiyPerimeterSeal.open()" class="pull-right" alt="" height="25" src="../../assets/images/info.png">
-
-
-                    </div>
-                </div>
-                <div class='clearfix'>
-                    <select (change)="vinylSelect($event,0)" name="vinylSelect" id="vinylSelect">
-                        <option value="1"> - </option>
-                        <option value="ALMOND">ALMOND</option>
-                        <option value="BLACK">BLACK</option>
-                        <option value="BRONZE">BRONZE</option>
-                        <option value="CHERRY" finish="">CHERRY FINISH</option>
-                        <option value="CHOCOLATE">CHOCOLATE</option>
-                        <option value="DARK" finish="">DARK FINISH</option>
-                        <option value="DESERT" tan="">DESERT TAN</option>
-                        <option value="GLACIER" white="">GLACIER WHITE</option>
-                        <option value="GRAY">GRAY</option>
-                        <option value="HUNTER" green="">HUNTER GREEN</option>
-                        <option value="MEDIUM" finish="">MEDIUM FINISH</option>
-                        <option value="MOCHA" brown="">MOCHA BROWN</option>
-                        <option value="SANDTONE">SANDTONE</option>
-                        <option value="WALNUT" finish="">WALNUT FINISH</option>
-                        <option value="WHITE">WHITE</option></select>
-                </div>
-
-                <div class="flex-right">
-                    <span class="text-orange">Yes</span>
-                    <label class="switch">
-                        <input type="checkbox" (change)="resPerimeterSeal($event)" >
-                        <div class="slider round"></div>
-                    </label>
-                    <span class="text-orange" checked="checked">No</span>
-                </div>
-            </dd>
-
-            <dd>
-                <div class="clearfix">
-                    <div class="col-xs-10">Do you need <span class='text-orange'> Low Head Room Conversion Kit </span>?
-                    </div>
-                    <div class="col-xs-2 padding-0">
-                        <img (click)="resDiyFlowHeadRoom.open()" class="pull-right" alt="" height="25" src="../../assets/images/info.png">
-                    </div>
-                </div>
-                <div class="flex-right">
-                    <span class="text-orange">Yes,</span>
-                    <span>  Double Track Low Headroom Conversion Kit $85.92</span>
-                    <label class="switch">
-                        <input type="checkbox" (change)="diyFlowHeadRoom($event)">
-                        <div class="slider round"></div>
-                    </label>
-                    <span class="text-orange" checked="checked">No</span>
-                </div>
-
-            </dd>
-            <dd>
-                <div class="clearfix">
-                    <div class="col-xs-10">Do you need <span class='text-orange'> Rear Track Hanger Kit </span>?
-                    </div>
-                    <div class="col-xs-2 padding-0">
-                        <img (click)="resDiyHangerKit.open()" class="pull-right" alt="" height="25" src="../../assets/images/info.png">
-                    </div>
-                </div>
-                <div class="flex-right">
-                    <span class="text-orange">Yes</span>
-                    <span>, add a Rear Track Hanger Kit for $20.90</span>
-                    <label class="switch">
-                        <input type="checkbox" (change)="diyHangerKit($event)">
-                        <div class="slider round"></div>
-                    </label>
-                    <span class="text-orange" checked="checked">No</span>
-                </div>
-
-            </dd>
-            <dd>
-                <div class="clearfix">
-                    <p class="col-xs-10">Do you need an <strong class='text-orange'>Emergency Release Kit</strong>? <span class="text-orange">$35.00</span>?
-                    </p>
-                    <img (click)="resDiyReleaseKit.open()" class="pull-right" alt="" height="25" src="../../assets/images/info.png">
-                </div>
-                <div class="flex-right">
-                    <span class="text-orange">yes</span>
-                    <span>add an Emergency Release Kit for $35.00</span>
-                    <label class="switch">
-                        <input type="checkbox" (change)="diyFlowReleaseKit($event)">
-                        <div class="slider round"></div>
-                    </label>
-                    <span class="text-orange">No</span>
-                </div>
-            </dd>
-            <dd>
-                <div class="clearfix">
-
-                    <p class="col-xs-10"> Do you have an excessively uneven or unleveled floor? If so, do you want larger<strong class='text-orange'>Bottom Weatherseal</strong>?
-                    </p>
-                    <img (click)="resDiyBottomWeatherSeal.open()" class="pull-right" alt="" height="25" src="../../assets/images/info.png">
-                </div>
-                <div class="flex-right">
-                    <div class="col-xs-6">
-
-
-                        <span class="text-orange">yes,add 7 inch Bottom Weatherseal for $11.04</span>
-                        <!--                    <span></span>-->
-                    </div>
-                    <div class="col-xs-6">
-                        <label class="switch">
-                            <input type="checkbox" (change)="diyBottomWeatherSeal($event)">
-                            <div class="slider round"></div>
-                        </label>
-                        <span class="text-orange">No</span>
-                    </div>
+                    <div class="text-orange">{{installQuestions.Answers[0].item_name}}</div>
                 </div>
             </dd>
         </dl>
-    </div>
-
+    </div> 
+</div>
+<div class="content additional-options" id="resDiyFlow" *ngIf="installOrDiy=='diy'">
+    <div *ngFor="let diyQuestions  of resDiyQuestions"> 
+        <dl> 
+            <dd >
+                <div class="clearfix " > 
+                    <p class="col-xs-12">      {{diyQuestions.item_list_text}} ?  
+                        <img  class="pull-right "  (click)="diyQuestionsPopup(diyQuestions)"  height="25" src="../../assets/images/info.png"> 
+                    </p> 
+                </div> 
+                <div class="flex-right col-xs-12" >
+                    <div class="text-orange col-xs-9">{{diyQuestions.Answers[1].item_name}}</div>
+                    <label class="switch">
+                        <input type="checkbox"   (change)="diyQuestionsOptions($event,diyQuestions)">
+                        <div class="slider round"></div>
+                    </label>
+                    <div class="text-orange">{{diyQuestions.Answers[0].item_name}}</div>
+                </div>
+<!--                <div>Selct Will We here</div>-->
+                               
+            </dd>
+        </dl>
+    </div>  
 </div>
 
 <div id="footer" class="col-xs-12 padding-t-10 padding-b-10">
     <a href="javascript:void(0)" *ngIf="!hidePrev" class="pull-left previous-btn" (click)="prevBtn('/config/opener')" data-id="currScreen">
-        <img src="../../assets/images/back-48-thick.png" height="15px"> Prev
+       <img src="../../assets/images/back-48-thick.png" height="15px"> Prev
     </a>
 
     <a href="javascript:void(0)" class="pull-right nextBtn" (click)="nextBtn('/config/doorConfiguration')" data-id="currScreen">
@@ -273,8 +91,10 @@
             is the space needed above the top of the door upwards to the first obstruction within the path of the door inside
             the garage.</p>
         <!--<img src="../../assets/images/additionalOptions/lowHeadRoom.jpg" alt=""/>-->
+         <div class="col-xs-12">
         <img src="../../assets/images/how_to_measure-drawing.png" class="img-rounded measure margin-r-10" alt=" " width="304" height="236">
-    </modal-body>
+         </div>
+        </modal-body>
 </modal>
 <modal #resFlowReleaseKit>
     <modal-header [show-close]="true">
@@ -288,42 +108,7 @@
         <span class="padding10">Installation required for DIY orders  </span>
     </modal-body>
 </modal>
-<modal #gdoFlowManualDoor>
-    <modal-header [show-close]="true">
-    </modal-header>
-    <modal-body class="text-left padding10">
-        <p class="margin-b-10 ">
-            If door does not operate manually without opener attached then a new opener may not be able to operate the door. You should
-            be able to open and close door manually without the opener attached. If it does not operate manually then you
-            may need to consider spring replacement or purchasing a new Garage Door.
 
-        </p>
-    </modal-body>
-</modal>
-<modal #gdoFlowPowerHead>
-    <modal-header [show-close]="true">
-    </modal-header>
-    <modal-body class="text-left padding10">
-        <p class="margin-b-10  ">For a complete installation. there should be an approved 110 volt electrical outlet within 3' of the power head of
-            the opener. If no outlet is in place, but power is available through an extension cord, the installer will test
-            and adjust the opener but will not leave the extension cord in place.
-        </p>
-    </modal-body>
-</modal>
-<modal #gdoFlowMiles>
-    <modal-header [show-close]="true">
-    </modal-header>
-    <modal-body class="text-left padding10">
-        <p>
-            Prices INCLUDE Home Delivery within a 30 mile driving distance from the store.If job site location is greater than 30 drive
-            miles from store then the following mileage fees apply:
-        </p>
-        <p style="text-indent: 40px;">31 - 50 miles from store - flat rate of $51 </p>
-        <p style="text-indent: 40px;">
-            Greater than 50 miles from store - flat rate of $51 + $3.00 for every drive mile over 50
-        </p>
-    </modal-body>
-</modal>
 
 <modal #resDiyBottomWeatherSeal>
     <modal-header [show-close]="true">
@@ -367,7 +152,9 @@
                     distances greater than two feet. custom hangers will be required. Rear Track Hangers can be easily made with 13 gauge 1 ‘/.' x
                     1 V." punched angle iron available at Home Depot in the Hardware Department. Your installation manual will include a diagram to
                     help you design your rear hanger.</p>-->
+         <div class="col-xs-12">
         <img src="../../assets/images/additionalOptions/rearTrackHangerKit.jpg" alt="" />
+         </div>
     </modal-body>
 </modal>
 <modal #resDiyPerimeterSeal>
@@ -386,7 +173,9 @@
                     recommends replacing the weather seal to ensure you
                     are getting the maximum benefit from your new door. 
                 </p>-->
+         <div class="col-xs-12">
         <img src="../../assets/images/additionalOptions/perimeterWeatherSeal.jpg" alt="" />
+         </div>
         <!--        <img class="margin-b-10" src="../../assets/images/additionalOptions/sumpop1.png" alt=""/> 
                 <p class="margin-top-20">Color Options:
                 </p>
@@ -414,7 +203,11 @@
                     for a normal installation. Headroom is the space needed above 
                     the top of the door upwards to the first obstruction within the
                     path 0! the door inside the garage. a Headroom </p> -->
+        <div class="col-xs-12">
+            
+     
         <img src="../../assets/images/additionalOptions/lowHeadRoom.jpg" alt="" />
+           </div>
         <!--        <img src="../../assets/images/how_to_measure-drawing.png" class="img-rounded measure margin-r-10" alt=" "
                      width="304"
                      height="236">-->
