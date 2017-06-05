@@ -77,14 +77,22 @@ export class ConfigComponent implements OnInit, AfterViewInit {
                 var nCanvas2d = nCanvas[0].getContext('2d');
                 var himg = new Image();
                 himg.onload = () => {
-                    this.drawDoors(selectedHome, nCanvas2d);
-                    nCanvas2d.drawImage(himg, 0, 0);
-                    nCanvas2d.save();
-
+                    if (selectedHome._upload && selectedHome._upload == true) {
+                        nCanvas2d.drawImage(himg, 0, 0);
+                        nCanvas2d.save();
+                        this.drawDoors(selectedHome, nCanvas2d);
+                    } else {
+                        this.drawDoors(selectedHome, nCanvas2d);
+                        nCanvas2d.drawImage(himg, 0, 0);
+                        nCanvas2d.save();
+                    }
                     res({ canvas: nCanvas[0] });
                 };
-                himg.src = window['imgFolder'] + '/homeimages/' + selectedHome._imagelg
-
+                if (selectedHome._upload && selectedHome._upload == true) {
+                    himg.src = selectedHome.canvas.toDataURL();
+                } else {
+                    himg.src = window['imgFolder'] + '/homeimages/' + selectedHome._imagelg
+                }
             }
         });
 
