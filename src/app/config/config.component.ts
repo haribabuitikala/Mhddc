@@ -104,7 +104,7 @@ export class ConfigComponent implements OnInit, AfterViewInit {
                         height: '100%',
                         width: '100%'
                     });
-                    $('body').removeClass('loader');
+                    this.utils.removeLoader();
                 });
             }
         });
@@ -140,7 +140,9 @@ export class ConfigComponent implements OnInit, AfterViewInit {
     }
 
     renderCanvas(obj?, targ?, elemSelector?) {
+        this.utils.setLoader();
         this.getVisUpdate(obj, targ, elemSelector);
+        this.utils.removeLoader();
     }
 
     getVisUpdate(obj?, targ?, elemSelector?) {
