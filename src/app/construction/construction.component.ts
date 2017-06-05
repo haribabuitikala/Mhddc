@@ -138,7 +138,7 @@ export class ConstructionComponent implements OnInit {
             "windcode": this.utils.utilities.winCode,
             "isCoreAssortment": true
         }
-        if (this.upSellShowCollection.indexOf(this.utils.resFlowSession.resDoorObj.product.product['item_id']) !== -1 && this.utils.resFlow.isUpsellSet) {
+        if (_.includes(this.upSellShowCollection,this.utils.resFlowSession.resDoorObj.product.product['item_id']) && this.utils.resFlow.isUpsellSet) {
             this.upSellImage = this.utils.resFlowSession.resDoorObj.construction.construction['item_thumbnail'];
             this.dataService.getUpsellData(params)
                 .subscribe(

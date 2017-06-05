@@ -247,16 +247,17 @@
 
 
         <div class="form-group margin-b-20 margin-t-20">
-
-            <button type="submit"
-                    class="btn btn-default box-shadow text-orange margin-r-10 bold margin-b-10 pull-right"
+           <button type="submit"
+                    class="btn btn-default box-shadow text-orange margin-r-10 bold margin-b-10 pull-left "
                     (click)="leadTestValue('YES')">YES
             </button>
             <button type="submit"
-                    class="btn btn-default box-shadow text-orange margin-r-10 bold margin-b-10 pull-left"
+                    class="btn btn-default box-shadow text-orange margin-r-10 bold margin-b-10 pull-right"
 
                    (click)="leadTestValue('NO')">NO
             </button>
+           
+           
         </div>
     </modal-body>
 </modal>
@@ -272,25 +273,28 @@
         </p>
         <a class="margin-b-20" href="http://hddcstore.clopay.com/en/documents/renovaterightbrochure.pdf" > Click here to review and print the EPA Lead Paint guide</a>
         <p>
+         
             <label>
-                <input type="checkbox" value="">  By checking this box you signify you have reviewed and understand the EPA Lead Based Paint rules and you have been provided a copy of the EPA brochure
+                <input type="checkbox" value="" (click)="checkboxValue($event)">  By checking this box you signify you have reviewed and understand the EPA Lead Based Paint rules and you have been provided a copy of the EPA brochure
             </label>
-        </p>
+            
+      
        
         <div class="form-group margin-b-20 margin-t-20">
              <button type="submit"
                 class="btn btn-default box-shadow text-orange margin-r-10 bold margin-b-10 pull-left"
                 (click)="epaValue('learn')">LEARN MORE
         </button>
-            <button type="submit"
-                    class="btn btn-default box-shadow text-orange margin-r-10 bold margin-b-10 pull-right"
-                    (click)="epaValue('back')">Back
-            </button>
-            <button type="submit"
+               <button type="submit"
                     class="btn btn-default box-shadow text-orange margin-r-10 bold margin-b-10 pull-right"
                      (click)="epaValue('ok')">OK
             </button>
         </div>
+            <button type="submit"
+                    class="btn btn-default box-shadow text-orange margin-r-10 bold margin-b-10 pull-right"
+                    (click)="epaValue('back')">Back
+            </button>
+         
     </modal-body> 
 </modal>
 <modal #learnMore>

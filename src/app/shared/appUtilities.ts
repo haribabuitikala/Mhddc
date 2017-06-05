@@ -1,8 +1,17 @@
 import { Injectable } from '@angular/core';
 declare var _: any;
+declare var $: any;
 
 @Injectable()
 export class AppUtilities {
+
+    setLoader() {
+        $('body').addClass('loader');
+    }
+
+    removeLoader(){
+        $('body').removeClass('loader');
+    }
 
     utilities = {
         currPage: 1,

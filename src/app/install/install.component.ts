@@ -164,10 +164,17 @@ export class InstallComponent implements OnInit, AfterViewInit {
         this.route.navigateByUrl(path);
     }
 
-
+ 
     nextBtn(path) {
         if (this.appComponent.selectedInstallDiy == 'install') {
-            this.leadTest.open();
+          
+      if(this.data.zipResults.state == "KS"|| this.data.zipResults.state== "CA"|| this.data.zipResults.state == "RI" ){
+              this.navigateTo('/config/opener'); 
+          }else{
+       this.leadTest.open();
+             }
+ 
+         
         } else {
             this.readyToNextStep = false;
             this.setOldValues();
@@ -198,13 +205,20 @@ export class InstallComponent implements OnInit, AfterViewInit {
             this.epa.close();
             this.leadTest.open();
         } else {
-            this.navigateTo('/config/opener');
+           if(this.checkValue == true){
+               this.navigateTo('/config/opener');
+           }
         }
     }
     learMoreClose() {
         this.learnMore.close();
         this.epa.open();
     }
+    checkValue;
+checkboxValue(event){
+ 
+this.checkValue=event.currentTarget.checked;
+}
     /** DIY */
     dataParams = {
         dtype: this.utils.utilities.dtype,
@@ -565,7 +579,6 @@ export class InstallComponent implements OnInit, AfterViewInit {
             }
         });
     }
-
 
 
     confirmDIY() {

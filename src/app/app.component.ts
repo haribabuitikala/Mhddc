@@ -131,9 +131,9 @@ export class AppComponent implements OnInit {
 
     setLoader(show?) {
         if (show) {
-            $('body').addClass('loader');
+            // $('body').addClass('loader');
         } else {
-            $('body').removeClass('loader');
+            // $('body').removeClass('loader');
         }
     }
 
