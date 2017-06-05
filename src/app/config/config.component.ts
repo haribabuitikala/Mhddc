@@ -353,7 +353,7 @@ export class ConfigComponent implements OnInit, AfterViewInit {
 
     }
 
-
+    
     getDoorPrice(cData?) {
         cData = cData || this.utils.resFlowSession.resDoorObj;
         var priceObj = { install: 0, diy: 0 };

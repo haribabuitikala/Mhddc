@@ -137,4 +137,20 @@ export class AppComponent implements OnInit {
         }
     }
 
+    getCheckOut() {
+        this.app.resFlowSession.orderObj.cart.push(this.app.resFlowSession.resDoorObj)
+
+        let price = 1500;
+        try {
+            if (window['CheckOut']) {
+                var ttt = window['CheckOut'](price, null, null, price, this.app.resFlowSession.orderObj);
+
+                console.log('ttt ', ttt);
+            }
+        } catch (r) {
+            //swallow
+        }
+
+    }
+
 }

@@ -7,7 +7,7 @@ import {AppComponent} from "../app.component";
 import {CollectionService} from "../shared/data.service";
 import {CollectionData} from "../collection/collection-data";
 import { NavComponent } from "../nav/nav.component";
-declare var $:any;
+declare var $: any;
 
 @Component({
     selector: 'app-category',
@@ -15,25 +15,25 @@ declare var $:any;
     styleUrls: ['./category.component.less']
 })
 export class CategoryComponent implements OnInit {
-    @ViewChild('modal') modal:ModalComponent;
-    @ViewChild('gdo') gdo:ModalComponent;
+    @ViewChild('modal') modal: ModalComponent;
+    @ViewChild('gdo') gdo: ModalComponent;
     lang;
-    isService:boolean;
+    isService: boolean;
 
-    constructor(private language:LangEnglishService
-        , private route:Router
-        , private utilities:AppUtilities
-        , private appComponent:AppComponent
-        , private navComp:NavComponent
-        , private dataService:CollectionService
-        , private dataStore:CollectionData) {
+    constructor(private language: LangEnglishService
+        , private route: Router
+        , private utilities: AppUtilities
+        , private appComponent: AppComponent
+        , private navComp: NavComponent
+        , private dataService: CollectionService
+        , private dataStore: CollectionData) {
     }
 
     ngOnInit() {
         this.lang = this.language.getCategory();
         this.isService = this.utilities.utilities.isService;
         this.appComponent.currScreen = 2;
-        let utils = this.utilities.utilities; 
+        let utils = this.utilities.utilities;
     }
 
     navigateTo(path, flow, count) {
@@ -44,13 +44,15 @@ export class CategoryComponent implements OnInit {
             this.utilities.utilities.currPage = 1;
             this.utilities.utilities.currScreen += 1;
             this.navComp.setNavFlow('res');
-            this.utilities.resFlowSession.resDoorObj.INSTALLTYPE = "";
+            this.utilities.resFlowSession.resDoorObj.INSTALLTYPE = "NA";
+            this.utilities.resFlowSession.resDoorObj.TYPE = "RES";
             this.route.navigateByUrl(path);
         } else {
             let zipCode = this.utilities.utilities.zipCode;
             let storeNum = this.utilities.utilities.storenumber;
             let arr = JSON.stringify(this.utilities.gdoCheck);
-         arr.indexOf(zipCode) !== -1 || arr.indexOf(storeNum) !== -1 ? this.gdoGoTo('/gdoDoorSize', 'size') : this.gdo.open();
+            this.utilities.resFlowSession.resDoorObj.TYPE = "GDO";
+            arr.indexOf(zipCode) !== -1 || arr.indexOf(storeNum) !== -1 ? this.gdoGoTo('/gdoDoorSize', 'size') : this.gdo.open();
         }
     }
 
@@ -64,7 +66,7 @@ export class CategoryComponent implements OnInit {
 
     gdoGoTo(path, id) {
         this.utilities.utilities.isGDO = true;
-$('body').addClass('loader');
+        $('body').addClass('loader');
         if (id === 'size') {
             this.utilities.utilities.currPage = 3;
             this.utilities.utilities.clicked = null;
@@ -73,10 +75,10 @@ $('body').addClass('loader');
             this.utilities.utilities.visualizeHeader = true;
             this.utilities.utilities.directFlow = false;
             this.navComp.setNavFlow('gdo');
-$('body').removeClass('loader');
+            $('body').removeClass('loader');
             this.route.navigateByUrl(path);
         } else {
-// this is for additional options screen
+            // this is for additional options screen
             let utils = this.utilities.utilities;
             this.utilities.utilities.visualizeHeader = false;
             let dataparams = {
@@ -90,13 +92,13 @@ $('body').removeClass('loader');
             };
             this.dataService.getGdoAdditionalDirect(dataparams)
                 .subscribe(
-                    res => {
-                        this.utilities.utilities.directFlow = true;
-                        this.dataStore.gdoAdditionalDirect = res;
-                        this.navComp.setNavFlow('gdo', true);
-                        $('body').removeClass('loader');
-                        this.route.navigateByUrl(path);
-                    }
+                res => {
+                    this.utilities.utilities.directFlow = true;
+                    this.dataStore.gdoAdditionalDirect = res;
+                    this.navComp.setNavFlow('gdo', true);
+                    $('body').removeClass('loader');
+                    this.route.navigateByUrl(path);
+                }
                 );
 
         }
