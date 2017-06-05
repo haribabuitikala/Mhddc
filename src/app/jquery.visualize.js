@@ -1143,32 +1143,11 @@ var glassSections = 0;
 			}
 		});
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+ 
 
 		$('#visZoom', $($this.element).parent()).remove();
 		$('#visTools', $($this.element).parent()).remove();
-
-
-		// $($($this.element).parent()).append(zoomControl);
-
-
-
-
-
-
-
+ 
 		var BuildObject = $this.newCanvas();
 		var bCtx = BuildObject[0].getContext('2d');
 
@@ -1225,10 +1204,7 @@ var glassSections = 0;
 
 			$(pnts).each(function (index, value) {
 				var mpass = true
-
-
-
-
+ 
 				if (mpass) {
 					var apiImg = new Image();
 					var point = $(value)
@@ -1254,8 +1230,7 @@ var glassSections = 0;
 					apiImg.onload = function () {
 
 						var p1 = point1
-
-
+ 
 						// Image came back
 						if (upload) {
 							//Cliping mask
@@ -1418,9 +1393,10 @@ var glassSections = 0;
 
 
 		if ($this.options.VIEW == 'home') { leftAmmount += 16; topAmmount += -10 }
+		
 
 		BuildObject = null;
-		console.log($this.element)
+		// console.log($this.element)
 		$($this.element).css('top', topAmmount + 'px')
 		$($this.element).css('left', leftAmmount + 'px !important')
 		$($this.element).css('text-width', $this.options.MAXHEIGHT + 'px')
@@ -1472,35 +1448,11 @@ var glassSections = 0;
 		});
 
 
-		/*
+		
+		if ($this.options.doneCallback) {
+			$this.options.doneCallback();
+		}
  
-		 // Clear VISIMAGE in Object
- 
- 
-		 }
-		 else {
-			 apiImg = null
-			 $($this.element).empty();
-			 $('#visZoom', $($this.element).parent()).remove();
-			 $('#visTools', $($this.element).parent()).remove();
-			 $($($this.element).parent()).append(zoomControl);
-			 // VIEW DOOR ONLY
- 
- 
-		 }
-		 var imageData = exprtElm[0].toDataURL()
-		 cArr[$this.buildObj.bitData[0]][$this.buildObj.bitData[1]].VISIMG = imageData
-		 if ($this.options.VIEW != 'home') {
-			 $($this.element).css('left', Number(leftAmmount) + 'px')
-		 }
-		 else {
-			 $($this.element).css('left', '10px')
-		 }
- 
-		 if(ratio != 1){
- 
-	  }
-	  */
 	}
 	/////////////////////////////////////////////////////
 	// canvasLoader: Loads images onto canvas element //
@@ -1572,13 +1524,11 @@ var glassSections = 0;
 		// Draw Image
 		imageObj.onload = function () {
 			ctx.drawImage(this, targX, targY);
-
 			if (needRebuild) {
 				console.log(url)
 				console.log('buildh2')
 				el.hLoop++;
 				el.buildDoor();
-
 			}
 		};
 		imageObj.onerror = function () {
@@ -1586,17 +1536,14 @@ var glassSections = 0;
 			console.log('errBD10')
 			$('#SidebarLoader').hide(); 		// custom change to show sidebar loader
 			if (needRebuild) {
-
 				el.hLoop++;
 				el.buildDoor();
-
 			}
 			buildError();
 		}
 		if (url != '../../content/pimages/homeimages/undefined') {
 			imageObj.crossOrigin = '';
 			imageObj.src = url;
-
 		}
 	}
 	// Color Image

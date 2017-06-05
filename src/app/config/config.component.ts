@@ -31,7 +31,7 @@ export class ConfigComponent implements OnInit, AfterViewInit {
     quantity = 1;
     details;
     whdata;
- 
+
     private fitToContainer() {
         var canvas = document.querySelector('canvas');
         canvas.style.width = '100%';
@@ -40,16 +40,78 @@ export class ConfigComponent implements OnInit, AfterViewInit {
         canvas.width = canvas.offsetWidth;
         canvas.height = canvas.offsetHeight;
     }
+
+
+    drawDoors(selectedHome, nCanvas2d) {
+        var points = $.makeArray(selectedHome.dcoords.point);
+        points.forEach(p => {
+            var x1 = +p._UL.split(',')[0];
+            var y1 = +p._UL.split(',')[1];
+
+            var x2 = +p._UR.split(',')[0];
+            var y2 = +p._UR.split(',')[1];
+
+            var x3 = +p._LL.split(',')[0];
+            var y3 = +p._LL.split(',')[1];
+
+            var x4 = +p._LR.split(',')[0];
+            var y4 = +p._LR.split(',')[1];
+
+            var w = x2 - (x1);
+            var h = y3 - (y1);
+
+            var sConvas = document.querySelector('.vsDoor');
+            nCanvas2d.drawImage(sConvas, x1, y1, w, h);
+            nCanvas2d.save();
+        });
+
+    }
+
+    generateDoorWithHome() {
+        return new Promise((res, rej) => {
+            let selectedHome = window['selectedHome'];
+            if (selectedHome) {
+                var nCanvas = $('<canvas/>');
+                nCanvas[0].setAttribute('width', selectedHome._imgwidth);
+                nCanvas[0].setAttribute('height', selectedHome._imgheight);
+                var nCanvas2d = nCanvas[0].getContext('2d');
+                var himg = new Image();
+                himg.onload = () => {
+                    this.drawDoors(selectedHome, nCanvas2d);
+                    nCanvas2d.drawImage(himg, 0, 0);
+                    nCanvas2d.save();
+
+                    res({ canvas: nCanvas[0] });
+                };
+                himg.src = window['imgFolder'] + '/homeimages/' + selectedHome._imagelg
+
+            }
+        });
+
+    }
+
     ngAfterViewInit() {
         $('#doorVis').DoorVisualization({
             NAME: 'configView',
             consolereporting: true,
             MAXHEIGHT: 280,
             MAXWIDTH: 315,
-            VIEW: 'door'
+            VIEW: 'door',
+            doneCallback: () => {
+                this.generateDoorWithHome().then(({ canvas }) => {
+                    $('#homeVis').html('').append(canvas);
+                    $('#homeVis').find('canvas').css({
+                        height: '100%',
+                        width: '100%'
+                    });
+                });
+
+            }
         });
         // this.fitToContainer();
     }
+
+    isDoor = true;
     ngOnInit() {
         // set the curr screen
         let path = this.location.path();
@@ -59,16 +121,19 @@ export class ConfigComponent implements OnInit, AfterViewInit {
         $('.switcher-box').css({ right: 35 });
 
         this.homeImage = this.utils.resFlow.selectedHome;
+        var $this = this;
         $('.switcher-box').on('click tap', function () {
             $(this).hide();
             $('.switcher-box-home').show().removeClass('hide').animate({ right: 60 });
             $('.switcher-image').addClass('homeImage');
+            $this.isDoor = false;
         });
 
         $('.switcher-box-home').on('click tap', function () {
             $(this).hide();
             $('.switcher-box').show().removeClass('hide').animate({ right: 35 });
             $('.switcher-image').removeClass('homeImage');
+            $this.isDoor = true;
         });
 
         this.detailsModal();
@@ -117,7 +182,10 @@ export class ConfigComponent implements OnInit, AfterViewInit {
             productid: 0,
             stepplateplacement: "",
             topsectionimage: "",
-            topsectionrow: "0"
+            topsectionrow: "0",
+            callBack: () => {
+                console.log('rendering done!!!!!!');
+            }
         };
 
         var dor = obj
@@ -283,11 +351,9 @@ export class ConfigComponent implements OnInit, AfterViewInit {
         targ.DoorVisualization('view', viewD)
         targ.DoorVisualization('update', buildObj)
 
-
-
     }
 
- 
+
     getDoorPrice(cData?) {
         cData = cData || this.utils.resFlowSession.resDoorObj;
         var priceObj = { install: 0, diy: 0 };
@@ -297,7 +363,7 @@ export class ConfigComponent implements OnInit, AfterViewInit {
             if (itemId) {
                 let cObj = cData;
                 let price = window['getDoorPrice'](cObj);
-                priceObj.install= parseFloat(price[0].replace(/ /g, '').replace('$', '')) * count;
+                priceObj.install = parseFloat(price[0].replace(/ /g, '').replace('$', '')) * count;
                 this.isDIY = false;
                 if (this.appComponent.noDIYs.indexOf(itemId) < 0) {
                     this.isDIY = true;
@@ -312,7 +378,7 @@ export class ConfigComponent implements OnInit, AfterViewInit {
         return priceObj;
     }
 
- 
+
     /** Details **/
     calculatePrice() {
         try {

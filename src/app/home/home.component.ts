@@ -40,6 +40,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
             }
         });
 
+        window['selectedHome'] = this.homes[0];
     }
 
     ngAfterViewInit(){
@@ -56,6 +57,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
 
         this.utils.resFlowSession.home['selectedHomeImg'] = itm._imagelg;
         this.utils.resFlowSession.home['selectedHome'] = itm;
+        window['selectedHome'] = itm;
         
     }
 
