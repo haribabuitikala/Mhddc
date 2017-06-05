@@ -937,7 +937,15 @@ export class CollectionService {
     }
     getUpsellData(obj){
          return this.http.post(this.url + 'ModelUpSell', obj).map(
-            res => res.json()
+            res => {
+                try{
+                    res.json()
+                }
+                catch(e){
+                    console.log(e);
+                    {};
+                }
+            }
         );
     }
     

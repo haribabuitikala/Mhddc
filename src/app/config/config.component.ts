@@ -104,8 +104,8 @@ export class ConfigComponent implements OnInit, AfterViewInit {
                         height: '100%',
                         width: '100%'
                     });
+                    $('body').removeClass('loader');
                 });
-
             }
         });
         // this.fitToContainer();

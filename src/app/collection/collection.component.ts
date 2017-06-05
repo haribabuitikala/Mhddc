@@ -151,6 +151,7 @@ export class CollectionComponent implements OnInit {
 
     goToHome(speciality) {
         // $('.collection-img').removeClass('selected');z
+        this.utils.setLoader();
         speciality.selected = true;
         this.utils.resFlowSession.resDoorObj.product.product = speciality;
         this.utils.resFlowSession.resDetails.collectionName = speciality.item_name;
@@ -177,11 +178,15 @@ export class CollectionComponent implements OnInit {
                         this.utils.resFlowSession.resDoorObj.design.apiData = res;
                         this.utils.resFlowSession.resDoorObj.design.rows = speciality.Rows;
                         this.utils.resFlowSession.resDoorObj.design.columns = speciality.Columns;
+                        this.utils.removeLoader();
                         this.route.navigateByUrl('/home');
                     },
                     err => {
-
+                        this.utils.removeLoader();
                     });
+            },e => {
+                console.log(e);
+                this.utils.removeLoader();
             })
     }
 
@@ -249,9 +254,11 @@ export class CollectionComponent implements OnInit {
             "isCRLE": false,
             "productlayout": true
         };
+        this.utils.setLoader();
         this.dataService.getquickDoors(dataParams).subscribe(res => {
             this.utils.resQuickSession.designs = res;
             this.navComponent.setNavFlow('resquick');
+            this.utils.removeLoader();
             // this.utils.resFlowSession.resDoorObj.product['product'] = {
             //     QPB: true,
             //     doubleinstallcode: "FIR020",

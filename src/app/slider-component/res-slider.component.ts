@@ -313,6 +313,7 @@ export class ResSliderComponent implements OnInit, AfterViewInit {
         this.config.renderCanvas();
     }
     openerSelected(obj, event) {
+        this.utils.setLoader();
         if (obj.clickAction) {
             obj.clickAction();
         } else {
@@ -342,6 +343,7 @@ export class ResSliderComponent implements OnInit, AfterViewInit {
             // this.notify.emit(obj);
             this.saveSelected(obj);
         }
+        this.utils.removeLoader();
     }
 
 

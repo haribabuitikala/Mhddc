@@ -119,7 +119,7 @@ export class DoorSizeComponent implements OnInit {
     }
 
     navigateTo(data) {
-        $('body').addClass('loader');
+        this.utils.setLoader();
         this.collection.getCollection(data).subscribe(
             res => {
                 this.data.data = res;
@@ -130,11 +130,11 @@ export class DoorSizeComponent implements OnInit {
                 // this.utils.utilities.clicked = 1;
                 this.utils.setUtils(2, 1);
                 this.route.navigateByUrl('/collection');
-                $('body').removeClass('loader');
+                this.utils.removeLoader();
             },
             error => {
                 this.toastr.error(error.statusText);
-
+                this.utils.removeLoader();
             }
         );
     }
