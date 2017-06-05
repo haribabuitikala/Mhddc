@@ -30,7 +30,9 @@ export class ConstructionComponent implements OnInit {
     category = 'colors';
     data;
     showUpsell: boolean = false;
-
+    upSellData;
+    upSellShowCollection = [11, 12, 13, 14, 24, 170];
+    upSellImage;
     loaded = false;
     className = '';
 
@@ -103,7 +105,7 @@ export class ConstructionComponent implements OnInit {
             }
         } else {
             this.data = _.chunk(res, 2);
-            
+
             // for (var i = 0; i < this.data.length; i++) {
             //     res[i]['itemClick'] = function() {
             //         console.log('hi')
@@ -123,21 +125,32 @@ export class ConstructionComponent implements OnInit {
         // } else {
         //     this.route.navigateByUrl(path);
         // }
+        // windcode: this.utils.utilities.winCode,
+
         let params = {
-            "NatMarketID": 6000,
-            "model": "HDB",
-            "dheightFt": 7,
-            "dheightIn": 0,
-            "dwidthFt": 8,
-            "dwidthIn": 0,
-            "dtype": "res",
-            "windcode": "w0",
+            "NatMarketID": this.utils.utilities.natmarketid,
+            "model": this.utils.resFlowSession.resDoorObj.construction.construction['ClopayModelNumber'],//"HDB",//
+            "dheightFt": this.utils.utilities.hf,
+            "dheightIn": this.utils.utilities.hi,
+            "dwidthFt": this.utils.utilities.wf,
+            "dwidthIn": this.utils.utilities.wi,
+            "dtype": this.utils.utilities.dtype,
+            "windcode": this.utils.utilities.winCode,
             "isCoreAssortment": true
         }
+        if (this.upSellShowCollection.indexOf(this.utils.resFlowSession.resDoorObj.product.product['item_id']) !== -1 && this.utils.resFlow.isUpsellSet) {
+            this.upSellImage = this.utils.resFlowSession.resDoorObj.construction.construction['item_thumbnail'];
+            this.dataService.getUpsellData(params)
+                .subscribe(
+                res => {
+                    this.upSellData = res;
+                    upsellModal.open()
+                });
 
-        this.dataService.getModelUpSell(params)
-            .subscribe(res => console.log(res))
-        this.route.navigateByUrl(path);
+            console.log(this.upSellData);
+        } else {
+            this.route.navigateByUrl(path);
+        }
 
     }
 

@@ -4,7 +4,7 @@ import { CollectionData } from "../collection/collection-data";
 import { ConfigComponent } from "../config/config.component";
 import { NavComponent } from '../nav/nav.component'
 import { AppComponent } from "../app.component";
-import {ModalComponent} from "ng2-bs3-modal/ng2-bs3-modal";
+import { ModalComponent } from "ng2-bs3-modal/ng2-bs3-modal";
 import { CollectionService } from "../shared/data.service";
 
 declare var $: any;
@@ -56,6 +56,7 @@ export class ResSliderComponent implements OnInit, AfterViewInit {
 
     ngOnInit() {
         this.startProcess();
+        this.detailsInfo(this.cObj.construction.construction['ClopayModelNumber']);
     }
 
 
@@ -331,6 +332,9 @@ export class ResSliderComponent implements OnInit, AfterViewInit {
             if (this.category === 'color' || this.category === 'constructions' || this.category === undefined) {
                 this.config.homeImage = obj.item_thumbnail;
             }
+            if (this.cname === 'construction') {
+                this.detailsInfo(obj.ClopayModelNumber);
+            }
             this.dataStore[this.category] = obj[this.category];
 
             // this.details.details.designName = obj.item_name;
@@ -358,10 +362,20 @@ export class ResSliderComponent implements OnInit, AfterViewInit {
     detailsInfo(id, contructionDetails?) {
         this.dataService.getModelInfo(id)
             .subscribe(res => {
-                this.constructionInfo = res
-                contructionDetails.open();
+                if (contructionDetails) {
+                    this.constructionInfo = res
+                    contructionDetails.open();
+                }else{
+                    
+                    let t = parseFloat(res[2].modeldescription.split(' ')[0]);
+                    if(t < 18.4){
+                        this.utils.resFlow.isUpsellSet = true;
+                    }
+                }
+
             });
     }
+
 
 
 }

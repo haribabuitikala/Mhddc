@@ -16,7 +16,7 @@ export class CartDetailsRootComponent implements OnInit {
   openerAccessories = false;
   additional = false;
   ngOnInit() {
-    this.data = this.utils.resFlowSession.resDoorObj;;
+    this.data = this.utils.resFlowSession.resDoorObj;
     if (this.data.hardware.apiData.length > 0) {
       this.hardware = true
     }

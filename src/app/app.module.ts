@@ -73,7 +73,7 @@ import { CartDetailsRootComponent } from './cart-details/cart-details-root.compo
         ApiStoreService,
         NavigateService,
         ZipResults,
-        AppUtilities,
+        AppUtilities, 
         ZipResolver,
         LangEnglishService,
         SizeList,

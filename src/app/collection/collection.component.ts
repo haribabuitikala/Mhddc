@@ -150,7 +150,7 @@ export class CollectionComponent implements OnInit {
     }
 
     goToHome(speciality) {
-        // $('.collection-img').removeClass('selected');
+        // $('.collection-img').removeClass('selected');z
         speciality.selected = true;
         this.utils.resFlowSession.resDoorObj.product.product = speciality;
         this.utils.resFlowSession.resDetails.collectionName = speciality.item_name;

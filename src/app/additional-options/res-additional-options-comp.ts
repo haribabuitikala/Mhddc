@@ -11,6 +11,7 @@ import {ModalComponent} from "ng2-bs3-modal/ng2-bs3-modal";
 declare var $: any;
 declare var _: any;
 
+
 @Component({
     selector: 'app-res-additional-options',
     templateUrl: './res-additional-options-comp.html',
@@ -18,6 +19,7 @@ declare var _: any;
 })
 export class ResAdditionalOptionsComponent implements OnInit {
     //install
+
     @ViewChild('resInstallFlowMed') resInstallFlowMed: ModalComponent;
     @ViewChild('resInstallFlowMiles') resInstallFlowMiles: ModalComponent;
     @ViewChild('resInstallFlowHeadRoom') resInstallFlowHeadRoom: ModalComponent;
@@ -49,7 +51,20 @@ export class ResAdditionalOptionsComponent implements OnInit {
     resAdditionalQuestions;
     resDiyQuestions;
     resInstallQuestions;
+
+    showMedImg;
+    showInstallMiles;
+    defaultMiles: any;
+    moreMiles;
+    updatedMiles;
+    defaultMilesDiy: any;
+    vinyls;
     installMed;
+    installMiles;
+    installHeadRoom;
+    installReleaseKit;
+
+    aditionalDiyPrice;
 
     // options
     medallion = true;
@@ -105,6 +120,7 @@ export class ResAdditionalOptionsComponent implements OnInit {
 
     ngOnInit() {
         this.installOrDiy = this.appComponent.selectedInstallDiy
+
         this.appComponent.next = 'Next';
         this.pageNo = this.utils.utilities.currPage;
         this.setNavComponent();
@@ -129,12 +145,17 @@ export class ResAdditionalOptionsComponent implements OnInit {
             this.resDiyQuestions = _.filter(this.resAdditionalQuestions, ['item_type', 'DIY']);
             this.resInstallQuestions = _.filter(this.resAdditionalQuestions, ['item_type', 'INSTALL']);
 
-            console.log('resDiyQuestions' + JSON.stringify(this.resDiyQuestions));
+            //console.log("one"+JSON.stringify(this.resDiyQuestions[2].Answers[1].vinyls));
+            this.vinyls = this.resDiyQuestions[2].Answers[1].vinyls
+            //console.log('resDiyQuestions' + JSON.stringify(this.resDiyQuestions));
             //            if (this.resInstallQuestions.item_id == 7 && this.resInstallQuestions.item_id == 5) {
             //
             //            }
 
         });
+        if (this.installOrDiy == 'install') {
+            this.showMedImg = true;
+        }
     }
 
     nextBtn(path) {
@@ -175,6 +196,8 @@ export class ResAdditionalOptionsComponent implements OnInit {
             this.resDiyHangerKit.open();
         } else if (diyQuestions.item_id == 11) {
             this.resDiyReleaseKit.open();
+        } else if (diyQuestions.item_id == 12) {
+            this.resDiyBottomWeatherSeal.open();
         }
 
     }
@@ -210,7 +233,6 @@ export class ResAdditionalOptionsComponent implements OnInit {
 
         } else {
 
-            $('#' + obj.item_id).addClass('hide');
             switch (obj.item_id) {
                 case 7:
                     $('#' + obj.item_id).addClass('hide');
@@ -232,6 +254,9 @@ export class ResAdditionalOptionsComponent implements OnInit {
                     break;
             }
         }
+
+        //alert('the final install med is'+this.installMed);
+        this.aditionalDiyPrice = this.installMed + this.installMiles + this.installHeadRoom + this.installReleaseKit;
     }
 
     removeItmOptions(id) {
@@ -245,18 +270,92 @@ export class ResAdditionalOptionsComponent implements OnInit {
             //alert('true');
             // alert("obj.item_name" + obj.item_name);
             // alert("obj item price" + obj.Answers[1].item_price);
-            console.log("obj" + JSON.stringify(obj));
-            if (obj.Answers[0].item_price !== 0) {
-                this.installMed = obj.Answers[1].item_price;
-                //                if()
+            //  console.log("obj" + JSON.stringify(obj));
+            if (obj.item_id == 5) {
+                this.defaultMilesDiy = "31";
+                if (obj.Answers[1].item_price !== 0) {
+                    //  this.installMiles = obj.Answers[0].item_price;
+
+                }
+            }
+            if (obj.item_id == 1) {
+
+                if (obj.Answers[1].item_price !== 0) {
+                    //  this.installMiles = obj.Answers[0].item_price;
+
+                }
+            }
+            if (obj.item_id == 4) {
+
+                if (obj.Answers[1].item_price !== 0) {
+                    //  this.installMiles = obj.Answers[0].item_price;
+
+                }
+            }
+            if (obj.item_id == 3) {
+                if (obj.Answers[1].item_price !== 0) {
+                    //  this.installMiles = obj.Answers[0].item_price;
+
+                }
+            }
+            if (obj.item_id == 11) {
+                this.defaultMilesDiy = "31";
+                if (obj.Answers[1].item_price !== 0) {
+                    //  this.installMiles = obj.Answers[0].item_price;
+
+                }
+            }
+            if (obj.item_id == 12) {
+                if (obj.Answers[1].item_price !== 0) {
+                    //  this.installMiles = obj.Answers[0].item_price;
+
+                }
             }
         } else {
             //  alert('false');
             //  alert("obj item price" + obj.Answers[0].item_price);
-            if (obj.Answers[0].item_price !== 0) {
-                this.installMed = obj.Answers[1].item_price;
+            if (obj.item_id == 5) {
+                this.defaultMilesDiy = "";
+                if (obj.Answers[0].item_price !== 0) {
+                    //  this.installMiles = obj.Answers[0].item_price;
+
+                }
+            }
+            if (obj.item_id == 1) {
+                if (obj.Answers[0].item_price !== 0) {
+                    //  this.installMiles = obj.Answers[0].item_price;
+
+                }
+            }
+            if (obj.item_id == 4) {
+                if (obj.Answers[0].item_price !== 0) {
+                    //  this.installMiles = obj.Answers[0].item_price;
+
+                }
+            }
+            if (obj.item_id == 3) {
+                if (obj.Answers[0].item_price !== 0) {
+                    //  this.installMiles = obj.Answers[0].item_price;
+
+                }
+            }
+            if (obj.item_id == 11) {
+                if (obj.Answers[0].item_price !== 0) {
+                    //  this.installMiles = obj.Answers[0].item_price;
+
+                }
+            }
+            if (obj.item_id == 12) {
+                if (obj.Answers[0].item_price !== 0) {
+                    //  this.installMiles = obj.Answers[0].item_price;
+
+                }
             }
         }
+    }
+
+    selectedVinyls(vin) {
+
     }
     flow = 'res';
 
@@ -274,7 +373,30 @@ export class ResAdditionalOptionsComponent implements OnInit {
             this.gdoFlowPowerHeadInfo = true;
         }
     }
+    calculatemilesInstall(miles) {
+        if (miles > 31 && miles < 51) {
+            this.updatedMiles = 51;
+        } else if (miles > 51) {
+            this.moreMiles = 51 - miles;
+            this.updatedMiles = this.moreMiles * 3;
 
+        }
+
+
+    }
+    calculatemilesDiy(miles) {
+        if (miles > 31) {
+            // alert('the price need to be 3 Dollars')
+        } else if (miles > 31) {
+            this.moreMiles = 31 - miles;
+            //alert('the more miles are'+  this.moreMiles);
+            this.updatedMiles = this.moreMiles * 3;
+            // alert( this.updatedMiles+3);
+
+        }
+
+
+    }
     directDoorVal = 1;
 
     directDoor(event, flow) {

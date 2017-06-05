@@ -11,14 +11,11 @@
         <span class="switcher-box-home switcher-icon hide">
             <img src="../../assets/images/home_icon.png" height="14">
         </span>
-        <span class="switcher-text"> Door</span>
+        <span class="switcher-text">Door</span>
     </div>
-    <div class="text-center switcher-image-sec linear-bg">
-        <!--<img src="../../assets/images/home-1/white-short.png" alt="" class="switcher-image homeImage">-->
-        <!--<img src="../../assets/images/design/{{homeImage}}"  alt="" class="switcher-image landscape-img homeImage">-->
-        <!--<img src="../../assets/images/design/{{homeImage.replace('.jpg', '.png')}}" alt="" class="switcher-image portrait-img homeImage">-->
-        <!--<img height="120px" src="http://hddchtml.clopay.com/Content/en/images/{{homeImage.replace('.jpg', '.png')}}" alt="" class="switcher-image portrait-img homeImage">-->
-        <div id="doorVis"></div>
+    <div class="text-center switcher-image-sec linear-bg" style="position: relative;">
+        <div id="doorVis" [ngClass]="{ 'hide': !isDoor}"></div>
+        <div id="homeVis"  [ngClass]="{ 'hide': isDoor}"></div>
     </div>
 </div>
 <div class="inner-router">
@@ -32,7 +29,7 @@
             <p><span>{{itemPriceInstall | currency:'USD':true:'1.2-2'}}</span> / Installed</p>
             <p *ngIf="isDIY"><span>{{itemPriceDY | currency:'USD':true:'1.2-2'}}</span> / DIY</p>
             <p>
-                <img src="../../assets/images/info.png" (click)="modal.open()" alt="" height="25">
+                <img src="../../assets/idiyQuestions.Answers[0]diyQuestions.Answers[0]diyQuestions.Answers[0]mages/info.png" (click)="modal.open()" alt="" height="25">
             </p>
         </div>
         <div class="col-xs-6 padding-0-r  font-size-12">

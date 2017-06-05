@@ -935,4 +935,10 @@ export class CollectionService {
             res => res.json()
         );
     }
+    getUpsellData(obj){
+         return this.http.post(this.url + 'ModelUpSell', obj).map(
+            res => res.json()
+        );
+    }
+    
 }

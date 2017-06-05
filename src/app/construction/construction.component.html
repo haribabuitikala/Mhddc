@@ -24,22 +24,22 @@
     </modal-header>
     <modal-body>
         <div class="col-xs-12">
-
             <p class="text-center font-size-16 bold">Have You Considered the Benefits of More Insulation for the Biggest Opening in your Home?</p>
+            <p class="text-left font-size-14 pull-left ">Buying a little more insulation now gives you years of better value: Better Energy Efficiency / Better Noise
+                Control / Better Dent Resistance / Better Security </p>
+        </div>
+        <div class="col-xs-12 col6 margin-b-15" *ngFor="let data of upSellData">
 
-
-            <p class="text-left font-size-14 pull-left ">Buying a little more insulation now gives you years of better value:
-               Better Energy Efficiency / Better Noise Control / Better Dent Resistance / Better Security </p>
+            <img src="./assets/images/{{upSellImage.replace('.jpg', '.png')}}" style="border:1px solid #CCC; position:relative; height:190px; width:100%;" alt="" />
 
         </div>
-
-        <div class="col-xs-12 col6 margin-b-15">
+        <div class="col-xs-12 col6 margin-b-15" *ngFor="let data of upSellData">
 
             <span class="col-xs-8 pull-right promo-offer">Upgrade for Only $166.00 Per door</span>
-            <img src="../../assets/images/construction/hdb.png" alt="" />
+            <img src="./assets/images/{{data.upgrade_image}}" style="border:1px solid #CCC; position:relative; height:190px; width:100%;" alt="" />
 
         </div>
-        <div class="col-xs-12 col6 margin-b-15">
+        <!--<div class="col-xs-12 col6 margin-b-15">
 
             <span class="col-xs-8 pull-right promo-offer">Upgrade for Only $85.00 Per door</span>
             <img src="../../assets/images/construction/Mobile-2.png" (click)="moveNext()" alt="" />
@@ -48,9 +48,9 @@
 
             <span class="col-xs-8 pull-right"></span>
             <img src="../../assets/images/construction/hds.png" (click)="moveNext()" alt="" />
-        </div>
+        </div>-->
         <div class="col-xs-12 col6 margin-b-15 margin-t-10 text-center">
-            <button class="btn btn-default text-orange"  (click)="moveNext()" >No Thanks >> Continue</button>
+            <button class="btn btn-default text-orange" (click)="moveNext()">No Thanks >> Continue</button>
         </div>
 
     </modal-body>
