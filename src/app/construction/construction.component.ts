@@ -105,6 +105,12 @@ export class ConstructionComponent implements OnInit {
             }
         } else {
             this.data = _.chunk(res, 2);
+
+            // for (var i = 0; i < this.data.length; i++) {
+            //     res[i]['itemClick'] = function() {
+            //         console.log('hi')
+            //     }
+            // }
         }
 
         this.utils.resFlowSession.resDoorObj.construction.construction = res[0];

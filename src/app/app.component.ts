@@ -64,7 +64,7 @@ export class AppComponent implements OnInit {
             this.flowType = obj.flowType;
         }, this);
 
-        window.onbeforeunload  =  function (event) {
+        window.onbeforeunload = function (event) {
             return "Navigating to Home Page will discard<br>all available Cart Items.";
         };
     }

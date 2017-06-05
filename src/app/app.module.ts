@@ -37,6 +37,7 @@ import {ApiConstants} from "./shared/api-constants";
 import {GdoOpener} from "./opener/gdoOpener";
 import { CustomerInfoComponent } from './customer-info/customer-info.component';
 import { CustomerServiceInfoComponent } from './customer-service-info/customer-service-info.component';
+import { CartDetailsRootComponent } from './cart-details/cart-details-root.component';
 
 @NgModule({
     declarations: [
@@ -56,7 +57,8 @@ import { CustomerServiceInfoComponent } from './customer-service-info/customer-s
         GdoConfigComponent,
         ShoppingCartComponent,
         CustomerInfoComponent,
-        CustomerServiceInfoComponent
+        CustomerServiceInfoComponent,
+        CartDetailsRootComponent
     ],
     imports: [
         BrowserModule,
@@ -71,7 +73,7 @@ import { CustomerServiceInfoComponent } from './customer-service-info/customer-s
         ApiStoreService,
         NavigateService,
         ZipResults,
-        AppUtilities,
+        AppUtilities, 
         ZipResolver,
         LangEnglishService,
         SizeList,

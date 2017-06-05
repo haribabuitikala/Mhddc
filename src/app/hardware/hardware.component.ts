@@ -45,7 +45,7 @@ export class HardwareComponent implements OnInit {
   updateCount(type, isincrement) {
     if (!isincrement && this.countManager[type] > 0 && this.countManager[type] > 1) {
       this.countManager[type] = this.countManager[type] - 1;
-    } else if(isincrement && this.countManager[type] > 0 && this.countManager[type] < 6) {
+    } else if (isincrement && this.countManager[type] > 0 && this.countManager[type] < 6) {
       this.countManager[type] = this.countManager[type] + 1;
     }
 
@@ -53,8 +53,10 @@ export class HardwareComponent implements OnInit {
     this.utils.resFlowSession.resDoorObj.hardware.stepplate['count'] = this.countManager.stepplate;
     this.utils.resFlowSession.resDoorObj.hardware.hinge['count'] = this.countManager.hinge;
 
-
-
+    let hardware = this.utils.resFlowSession.resDoorObj.hardware;
+    hardware.items[0].count = this.countManager.handle;
+    hardware.items[1].count = this.countManager.stepplate;
+    hardware.items[2].count = this.countManager.hinge;    
 
     // this.utils.utilities.handlePrice = this.utils.resFlowSession.resDoorObj.hardware[type].item_price * this.countManager[type];
 
@@ -111,18 +113,24 @@ export class HardwareComponent implements OnInit {
       dheightIn: this.utils.utilities.hi
     };
 
-
     this.dataService.getHardware(params).subscribe(
       res => {
-        this.utils.resFlowSession.resDoorObj.hardware.apiData = res;
+        let hardware = this.utils.resFlowSession.resDoorObj.hardware;
+
+        hardware.apiData = res;
+
         let yourHandlesData = res[0]['LHDKS'];
         yourHandlesData = _.uniqBy(yourHandlesData, 'item_id');
         this.yourHandles = _.chunk(yourHandlesData, 3);
+        this.hardwareItems(res[0]['LHDKS'], 0);
 
+        // this.hardwareItems();
         let stepPlates = res[0]['StepPlates'];
-        this.yourStepPlates = _.chunk(stepPlates, 4);
+        this.yourStepPlates = _.chunk(stepPlates, 4);        
+        this.hardwareItems(res[0]['StepPlates'], 1);
 
-        let stepHinges = res[0]['StrapHinges'];
+        let stepHinges = res[0]['StrapHinges'];        
+        this.hardwareItems(stepHinges, 2);
         stepHinges = _.uniqBy(stepHinges, 'item_id');
         this.yourStepHinge = _.chunk(stepHinges, 4);
         this.isLoaded = true;
@@ -132,7 +140,15 @@ export class HardwareComponent implements OnInit {
       }
     );
   }
-
+  hardwareItems(obj, id) {
+    let hardware = this.utils.resFlowSession.resDoorObj.hardware;
+    id = {
+      name: obj[0].item_name,
+      price: obj[0].item_price,
+      count: 1
+    }
+    hardware.items.push(id);
+  }
   ngOnInit() {
     this.navComponent.renderNav({
       flowType: 'res',
@@ -146,6 +162,7 @@ export class HardwareComponent implements OnInit {
     this.config.pageTitle = '9.Choose Your Hardware';
 
     this.loadData();
+    // this.hardwareItems();
   }
   navigateTo(path) {
     // this.appComponent.currScreen = this.appComponent.navElems.indexOf(path);

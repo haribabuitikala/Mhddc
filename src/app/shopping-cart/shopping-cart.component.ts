@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, OnInit, ViewChild, Directive} from '@angular/core';
 import {ModalComponent} from "ng2-bs3-modal/ng2-bs3-modal";
 import {AppComponent} from "../app.component";
 import {Router} from '@angular/router';
@@ -42,10 +42,10 @@ export class ShoppingCartComponent implements OnInit {
         , private dataStore: CollectionData
         , private route: Router) {
     }
-    data = this.utils.resFlowSession.resDetails;
+    data;
     shoppingCartData() {
 
-        let data = this.utils.resFlowSession.resDetails
+        let data = this.utils.resFlowSession.resDoorObj
         // return {
         //     WindCode: data.product.product.windcode,
         //     Collection: data.product.product.item_name,
@@ -61,6 +61,7 @@ export class ShoppingCartComponent implements OnInit {
         //     }
         // }
     }
+    resFlow = true;
     ngOnInit() {
         this.navComp.activateIcon();
         this.pageNo = this.utils.utilities.currPage;
