@@ -6,6 +6,7 @@ import { ConfigComponent } from "../config/config.component";
 import { NavComponent } from "../nav/nav.component";
 import { AppUtilities } from "../shared/appUtilities";
 import { ModalComponent } from "ng2-bs3-modal/ng2-bs3-modal";
+import { CollectionService } from "../shared/data.service";
 
 declare var _: any;
 @Component({
@@ -19,7 +20,8 @@ export class ConstructionComponent implements OnInit {
         , private route: Router
         , private utils: AppUtilities
         , private config: ConfigComponent
-        , private navComponent: NavComponent) {
+        , private navComponent: NavComponent
+        , private dataService: CollectionService) {
 
     }
 
@@ -28,7 +30,9 @@ export class ConstructionComponent implements OnInit {
     category = 'colors';
     data;
     showUpsell: boolean = false;
-
+    upSellData;
+    upSellShowCollection = [11, 12, 13, 14, 24, 170];
+    upSellImage;
     loaded = false;
     className = '';
 
@@ -115,8 +119,32 @@ export class ConstructionComponent implements OnInit {
         // } else {
         //     this.route.navigateByUrl(path);
         // }
+        // windcode: this.utils.utilities.winCode,
 
-        this.route.navigateByUrl(path);
+        let params = {
+            "NatMarketID": this.utils.utilities.natmarketid,
+            "model": this.utils.resFlowSession.resDoorObj.construction.construction['ClopayModelNumber'],//"HDB",//
+            "dheightFt": this.utils.utilities.hf,
+            "dheightIn": this.utils.utilities.hi,
+            "dwidthFt": this.utils.utilities.wf,
+            "dwidthIn": this.utils.utilities.wi,
+            "dtype": this.utils.utilities.dtype,
+            "windcode": this.utils.utilities.winCode,
+            "isCoreAssortment": true
+        }
+        if (this.upSellShowCollection.indexOf(this.utils.resFlowSession.resDoorObj.product.product['item_id']) !== -1 && this.utils.resFlow.isUpsellSet) {
+            this.upSellImage = this.utils.resFlowSession.resDoorObj.construction.construction['item_thumbnail'];
+            this.dataService.getUpsellData(params)
+                .subscribe(
+                res => {
+                    this.upSellData = res;
+                    upsellModal.open()
+                });
+
+            console.log(this.upSellData);
+        } else {
+            this.route.navigateByUrl(path);
+        }
 
     }
 
