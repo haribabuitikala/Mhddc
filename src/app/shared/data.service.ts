@@ -7,6 +7,7 @@ declare var $: any;
 
 import 'rxjs/add/operator/map';
 import { ApiConstants } from "./api-constants";
+import { AppUtilities } from './appUtilities';
 
 
 @Injectable()
@@ -16,57 +17,91 @@ export class CollectionService {
     // 'http://' + window.location.host + '/app/additional-options/' + path + '.json'
 
     constructor(private http: Http,
-        private api: ApiConstants) {
+        private api: ApiConstants,
+        private utils: AppUtilities) {
     }
 
     url = this.api.constants.url;
 
     getCollection(obj) {
+        this.utils.setLoader();
         return this.http.post(this.url + 'product', obj)
             .map(res => res.json())
+            .finally(() => {
+                this.utils.removeLoader();
+            })
     }
 
     getZipResults(zip) {
+        this.utils.setLoader();
         return this.http.get(this.url + 'zip/' + zip)
             .map(res => res.json())
+            .finally(() => {
+                this.utils.removeLoader();
+            })
     }
 
     //    this is for gdo opener
     getGdoOpener(obj) {
+        this.utils.setLoader();
         return this.http.post(this.url + 'Opener', obj)
             .map(res => res.json())
+            .finally(() => {
+                this.utils.removeLoader();
+            })
     }
 
     getResOpener(obj) {
+        this.utils.setLoader();
         return this.http.post(this.url + 'Opener', obj)
             .map(res => res.json())
+            .finally(() => {
+                this.utils.removeLoader();
+            })
     }
 
     getModelInfo(id) {
+        this.utils.setLoader();
         let data = {
             modelnumber: id
         }
 
         return this.http.post(this.url + 'ModelDescription', data)
             .map(res => res.json())
+            .finally(() => {
+                this.utils.removeLoader();
+            })
     }
 
     getGdoAdditional(obj) {
+        this.utils.setLoader();
         return this.http.post(this.url + 'OpenerItem', obj)
             .map(res => res.json())
+            .finally(() => {
+                this.utils.removeLoader();
+            })
     }
 
     getOpenerAdditional(obj) {
+        this.utils.setLoader();
         return this.http.post(this.url + 'OpenerItem', obj)
             .map(res => res.json())
+            .finally(() => {
+                this.utils.removeLoader();
+            })
     }
 
     getGdoAdditionalDirect(obj) {
+        this.utils.setLoader();
         return this.http.post(this.url + 'Opener', obj)
             .map(res => res.json())
+            .finally(() => {
+                this.utils.removeLoader();
+            })
     }
 
     getHomes() {
+        this.utils.setLoader();
         return new Promise((res) => {
             res({
                 "homes": {
@@ -895,58 +930,84 @@ export class CollectionService {
                     ]
                 }
             });
-        });
+        })
     }
 
     getDesign(obj) {
+        this.utils.setLoader();
         return this.http.post(this.url + 'DesignConstruction', obj)
             .map(res => res.json())
+            .finally(() => {
+                this.utils.removeLoader();
+            })
     }
 
     getTopSection(obj) {
+        this.utils.setLoader();
         return this.http.post(this.url + 'Windows', obj)
             .map(res => res.json())
+            .finally(() => {
+                this.utils.removeLoader();
+            })
     }
 
     getHardware(obj) {
-        return this.http.post(this.url + 'Hardware', obj).map(
-            res => res.json()
-        );
+        this.utils.setLoader();
+        return this.http.post(this.url + 'Hardware', obj)
+            .map(res => res.json())
+            .finally(() => {
+                this.utils.removeLoader();
+            })
     }
 
     getquickDoors(obj) {
-        return this.http.post(this.url + 'Stockdoors', obj).map(
-            res => res.json()
-        );
+        this.utils.setLoader();
+        return this.http.post(this.url + 'Stockdoors', obj)
+            .map(res => res.json())
+            .finally(() => {
+                this.utils.removeLoader();
+            })
     }
 
     getStockGroup(obj) {
-        return this.http.post(this.url + 'Stockgroup', obj).map(
-            res => res.json()
-        );
+        this.utils.setLoader();
+        return this.http.post(this.url + 'Stockgroup', obj)
+            .map(res => res.json())
+            .finally(() => {
+                this.utils.removeLoader();
+            })
     }
     getInstallDiyq(obj) {
-        return this.http.post(this.url + 'DiyInstallq', obj).map(
-            res => res.json()
-        );
+        this.utils.setLoader();
+        return this.http.post(this.url + 'DiyInstallq', obj)
+            .map(res => res.json())
+            .finally(() => {
+                this.utils.removeLoader();
+            })
     }
     getModelUpSell(obj) {
-        return this.http.post(this.url + 'ModelUpSell', obj).map(
-            res => res.json()
-        );
+        this.utils.setLoader();
+        return this.http.post(this.url + 'ModelUpSell', obj)
+            .map(res => res.json())
+            .finally(() => {
+                this.utils.removeLoader();
+            })
     }
     getUpsellData(obj){
+        this.utils.setLoader();
          return this.http.post(this.url + 'ModelUpSell', obj).map(
-            res => {
-                try{
-                    res.json()
+                res => {
+                    try{
+                        res.json()
+                    }
+                    catch(e){
+                        console.log(e);
+                        {};
+                    }
                 }
-                catch(e){
-                    console.log(e);
-                    {};
-                }
-            }
-        );
+            ).finally(() => {
+                this.utils.removeLoader();
+            });
     }
     
 }
