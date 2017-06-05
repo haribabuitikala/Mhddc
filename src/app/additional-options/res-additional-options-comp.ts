@@ -51,6 +51,12 @@ export class ResAdditionalOptionsComponent implements OnInit {
     resInstallQuestions;
     installMed;
 
+    // options
+    medallion = true;
+    milesAway = true;
+    conversionKit = true;
+    emergencyKit = true;
+
     t = _.sumBy(this.gdoOpenerSelected, function (o) {
         return o.price * o.count
     });
@@ -172,58 +178,68 @@ export class ResAdditionalOptionsComponent implements OnInit {
         }
 
     }
+    itmObj;
 
     installQuestionsOptions(itm, obj) {
+        let k = {
+            id: obj.item_id,
+            name: obj.item_name,
+            price: obj.Answers[1].item_price
+        }
+        this.itmObj = this.utils.resFlowSession.resDoorObj.additional;
         if (itm.srcElement.checked === true) {
 
-            // alert("obj.item_name" + obj.item_name);
-            // alert("obj item price" + obj.Answers[1].item_price);
-            console.log("obj" + JSON.stringify(obj));
-            if (obj.item_id == 7) {
-                if (obj.Answers[0].item_price !== 0) {
-                  //  this.installMed = obj.Answers[1].item_price;
-                }
+            switch (obj.item_id) {
+                case 7:
+                    $('#' + obj.item_id).removeClass('hide');
+                    this.itmObj.items.push(k);
+                    break;
+                case 5:
+                    $('#' + obj.item_id).addClass('hide');
+                    this.removeItmOptions(obj.item_id)
+                    break;
+                case 11:
+                    $('#' + obj.item_id).addClass('hide');
+                    this.removeItmOptions(obj.item_id)
+                    break;
+                case 4:
+                    $('#' + obj.item_id).addClass('hide');
+                    this.removeItmOptions(obj.item_id)
+                    break;
             }
-            if (obj.item_id == 5) {
-                if (obj.Answers[0].item_price !== 0) {
-                  //  this.installMiles = obj.Answers[1].item_price;
-                }
-            }
-            if (obj.item_id == 4) {
-                if (obj.Answers[0].item_price !== 0) {
-                  //  this.installHeadRoom = obj.Answers[1].item_price;
-                }
-            }
-             if (obj.item_id == 11) {
-                if (obj.Answers[0].item_price !== 0) {
-                  //  this.installReleaseKit = obj.Answers[1].item_price;
-                }
-            }
+
         } else {
-            //alert('false');
-            // alert("obj item price" + obj.Answers[0].item_price);
-            if (obj.item_id == 7) {
-                if (obj.Answers[0].item_price !== 0) {
-                 //   this.installMed = obj.Answers[0].item_price;
-                }
-            }
-            if (obj.item_id == 5) {
-                if (obj.Answers[0].item_price !== 0) {
-                  //  this.installMiles = obj.Answers[0].item_price;
-                }
-            }
-            if (obj.item_id == 4) {
-                if (obj.Answers[0].item_price !== 0) {
-                   // this.installHeadRoom = obj.Answers[0].item_price;
-                }
-            }
-             if (obj.item_id == 11) {
-                if (obj.Answers[0].item_price !== 0) {
-                  //  this.installReleaseKit = obj.Answers[0].item_price;
-                }
+
+            $('#' + obj.item_id).addClass('hide');
+            switch (obj.item_id) {
+                case 7:
+                    $('#' + obj.item_id).addClass('hide');
+                    this.removeItmOptions(obj.item_id)
+                    break;
+                case 5:
+                    $('#' + obj.item_id).removeClass('hide');
+                    k.price = 51;
+                    k.name = 'Delivery 31 miles from store';
+                    this.itmObj.items.push(k);
+                    break;
+                case 11:
+                    $('#' + obj.item_id).removeClass('hide');
+                    this.itmObj.items.push(k);
+                    break;
+                case 4:
+                    $('#' + obj.item_id).removeClass('hide');
+                    this.itmObj.items.push(k);
+                    break;
             }
         }
     }
+
+    removeItmOptions(id) {
+        this.itmObj.items = this.itmObj.items.filter(function (el) {
+            return el.id != id;
+        });
+    }
+
     diyQuestionsOptions(itm, obj) {
         if (itm.srcElement.checked === true) {
             //alert('true');

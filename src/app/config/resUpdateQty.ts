@@ -2,7 +2,7 @@ import {Component, OnInit, Input} from '@angular/core';
 import {AppUtilities} from "../shared/appUtilities";
 import {CollectionData} from "../collection/collection-data";
 import {ConfigComponent} from "./config.component";
-declare var _:any;
+declare var _: any;
 
 @Component({
     selector: 'res-update-qty',
@@ -17,9 +17,9 @@ declare var _:any;
 })
 export class ResUpdateComponent implements OnInit {
 
-    constructor(private utils:AppUtilities
-        , private dataStrorage:CollectionData
-        , private config:ConfigComponent) {
+    constructor(private utils: AppUtilities
+        , private dataStrorage: CollectionData
+        , private config: ConfigComponent) {
     }
 
     @Input() data;
@@ -32,7 +32,7 @@ export class ResUpdateComponent implements OnInit {
 
 
     updateQuantity(obj, flow, id) {
-       
+
         if (flow === 1 && this.quantity < 6) {
             this.quantity++
         }
@@ -46,11 +46,17 @@ export class ResUpdateComponent implements OnInit {
             name: obj.item_name,
             price: obj.item_price,
             count: this.quantity,
-            totalPrice: obj.item_price * this.quantity
+            totalPrice: obj.item_price * this.quantity,
+            id: id
         };
-        //this.dataStrorage.gdoOpenerAccessories.splice(id, 1);
-        this.dataStrorage.gdoOpenerAccessories.push(k);
+        let items = this.utils.resFlowSession.resDoorObj.opener.items;
 
+        var filterItems = items.filter(g => { return g.id == id })
+        if (filterItems && filterItems.length > 0) {
+            filterItems[0].count = this.quantity;
+        } else {
+            items.push(k);
+        }
         let kPrice = _.sumBy(this.dataStrorage.gdoOpenerAccessories, function (o) {
             return o.price;
         });

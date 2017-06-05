@@ -42,9 +42,9 @@ export class CollectionService {
             .map(res => res.json())
     }
 
-    getModelInfo(id){
+    getModelInfo(id) {
         let data = {
-          modelnumber: id
+            modelnumber: id
         }
 
         return this.http.post(this.url + 'ModelDescription', data)
@@ -921,12 +921,17 @@ export class CollectionService {
     }
 
     getStockGroup(obj) {
-         return this.http.post(this.url + 'Stockgroup', obj).map(
+        return this.http.post(this.url + 'Stockgroup', obj).map(
             res => res.json()
         );
     }
-      getInstallDiyq(obj) {
-         return this.http.post(this.url + 'DiyInstallq', obj).map(
+    getInstallDiyq(obj) {
+        return this.http.post(this.url + 'DiyInstallq', obj).map(
+            res => res.json()
+        );
+    }
+    getModelUpSell(obj) {
+        return this.http.post(this.url + 'ModelUpSell', obj).map(
             res => res.json()
         );
     }

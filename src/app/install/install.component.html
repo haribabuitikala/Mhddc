@@ -20,7 +20,7 @@
     </div>
   </div>
 </div>
-<div class="content diy-install margin-b-15">
+<div class="hide content diy-install margin-b-15">
   <div class="edit-bar">
     <button class="btn" (click)="editModal.open()">Edit<span
       class="glyphicon glyphicon-pencil"></span></button>
@@ -74,9 +74,11 @@
     <dd class="diy-install-table-header">
       Hardware
     </dd>
-    <dd *ngFor="let hrdware of hardware">{{hrdware}}<span class="pull-right">$0.00</span></dd>
+    <dd *ngFor="let hrdware of hardware">{{hrdware}}<span class="pull-right">{{hrdware.price}</span></dd>
   </dl>
 </div>
+
+<app-cart-details></app-cart-details>
 
 <!-- Edit Modal -->
 

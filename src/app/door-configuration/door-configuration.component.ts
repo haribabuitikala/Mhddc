@@ -107,7 +107,6 @@ export class DoorConfigurationComponent implements OnInit {
     }
 
     nextBtn(path) {
-        $('body').addClass('loader');
         if (this.utils.utilities.flow === 'gdoNavElems') {
             this.utils.setUtils(5, 1);
             $('.shop-count').text('1');

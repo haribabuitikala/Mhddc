@@ -32,6 +32,7 @@ import {GdoUpdateComponent} from "../opener/gdoUpdateQty";
 import {ResSliderComponent} from "../slider-component/res-slider.component";
 import {ShareButtonsModule} from 'ngx-sharebuttons';
 import { EscapeHtmlPipe } from '../shared/html-entitiy';
+import { CartDetailsComponent } from '../cart-details/cart-details.component';
 
 @NgModule({
     imports: [
@@ -99,7 +100,8 @@ import { EscapeHtmlPipe } from '../shared/html-entitiy';
         GdoUpdateComponent,
         ResSliderComponent,
         ResUpdateComponent,
-        EscapeHtmlPipe
+        EscapeHtmlPipe,
+        CartDetailsComponent
     ]
 })
 export class ConfigModule {

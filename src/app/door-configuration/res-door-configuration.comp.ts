@@ -10,7 +10,7 @@ declare var $: any;
 declare var _: any;
 
 @Component({
-    selector: 'app-door-configuration',
+    selector: 'res-door-configuration',
     templateUrl: './res-door-configuration.comp.html',
     styleUrls: ['./door-configuration.component.less']
 })
@@ -60,10 +60,12 @@ export class ResDoorConfigurationComponent implements OnInit {
             }
         });
     }
+    data;
+
     ngOnInit() {
         this.setNavComponent();
         this.config.pageTitle = "13. Your Door Configuration";
-
+        this.data = this.utils.resFlowSession.resDoorObj;
     }
     shareBtn() {
         this.showShare = !this.showShare;

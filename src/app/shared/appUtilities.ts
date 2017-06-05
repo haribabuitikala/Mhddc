@@ -95,9 +95,9 @@ export class AppUtilities {
         hardwarePrice: 0,
         itemPriceInstall: 0,
         itemPriceDY: 0,
-        handlePrice:0,
-        stepPlatePrice:0,
-        hingePrice:0
+        handlePrice: 0,
+        stepPlatePrice: 0,
+        hingePrice: 0
         // flow of GDO: Home, Size , Openers, Order Details, Shopping Cart
     };
 
@@ -280,7 +280,8 @@ export class ResidentialFlowSession {
             "lockoptions": "",
             "other": [],
             "strut": "",
-            "apiData": ""
+            "apiData": "",
+            "items": []
         },
         "springs": {
             "springtype": "",
