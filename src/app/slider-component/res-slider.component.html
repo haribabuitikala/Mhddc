@@ -19,8 +19,13 @@
                             [attr.data-id]="slideitem.item_id">
 
 
-                        <div *ngIf="folder=='color'" class="text-blue font-size-10">{{slideitem.item_name}}
-                             <span *ngIf="slideitem.item_price!==0">  +{{slideitem.item_price}} </span>
+                        <div *ngIf="folder==='color'" class="text-blue font-size-10 text-center">
+                            {{slideitem.item_name}}
+                            <span *ngIf="slideitem.item_price > 0">{{slideitem.item_price | currency:'USD':true:'1.2-2'}} </span>
+                        </div>
+                        <div *ngIf="folder==='glass'" class="text-blue font-size-10 text-center">
+                            {{slideitem.item_name}}
+                            <span *ngIf="slideitem.item_price > 0">{{slideitem.item_price | currency:'USD':true:'1.2-2'}} </span>
                         </div>
                     </div>
                 </div>
@@ -33,9 +38,10 @@
                         <div class="construction-model">Model {{slideitem.DisplayModelNumber}}</div>
                         <div class="construciton-info">
                             <div>
-                                <img (click)="detailsInfo(slideitem.ClopayModelNumber, contructionDetails)" class="nobdr" src="../../assets/images/Info-64.png" alt="">
+                                <img (click)="detailsInfo(slideitem.ClopayModelNumber, contructionDetails)" class="nobdr" src="../../assets/images/Info-64.png"
+                                    alt="">
                             </div>
-<!--                            <span>
+                            <!--                            <span>
                                 product <br/>  details
                                 </span>-->
                         </div>
