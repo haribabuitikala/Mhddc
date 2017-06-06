@@ -19,8 +19,11 @@
                             [attr.data-id]="slideitem.item_id">
 
 
-                        <div *ngIf="folder=='color'" class="text-blue font-size-10">{{slideitem.item_name}}
+                       <div *ngIf="folder=='color'" class="text-blue font-size-10 text-center">{{slideitem.item_name}}
                              <span *ngIf="slideitem.item_price!==0">  +{{slideitem.item_price}} </span>
+                        </div>
+                             <div *ngIf="showGlassDetails" class="text-blue font-size-10 text-center">{{slideitem.item_name}}
+                           <span *ngIf="slideitem.item_price!==0">  +{{slideitem.item_price}} </span>
                         </div>
                     </div>
                 </div>
