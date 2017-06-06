@@ -15,14 +15,14 @@
     <div class="ptn-rel col-xs-4 text-center">
         <label class="ptn-rel">
             <img src="../../assets/images/camera-block.png">
-            <input type="file" class="ptn-abs camera" accept="image/*" capture="camera">
+            <input type="file" class="ptn-abs camera" (change)="uploadFile($event, homeImageModal)"   accept="image/*" capture="camera">
             <p>Camera</p>
         </label>
     </div>
     <div class="ptn-rel col-xs-4 text-center">
         <label class="ptn-abs ptn-rel">
             <img src="../../assets/images/gallery-block.png" alt=""/>
-            <input type="file" class="ptn-abs gallery" accept="image/*">
+            <input type="file" class="ptn-abs gallery" (change)="uploadFile($event, homeImageModal)" accept="image/*">
             <p>Gallery</p>
         </label>
     </div>
@@ -39,3 +39,17 @@
         <img src="../../assets/images/Forward-48-thick.png" height="15px">
     </a>
 </div>
+
+
+<modal #homeImageModal class="home-choose-modal">
+    <modal-header >
+    </modal-header>
+    <modal-body class="home-modal">
+        <div class="customer-home"></div>
+        <div class="text-center margin-t-15">
+            <!--<button class="btn btn-default" (click)="">Add Door</button>-->
+            <button class="btn btn-primary" (click)="setSelectedHome(homeImageModal, true, currScreen)"> Finished </button>
+            <button class="btn btn-danger" (click)="setSelectedHome(homeImageModal, fasle, currScreen)"> Cancel </button>
+        </div>
+    </modal-body>
+</modal>

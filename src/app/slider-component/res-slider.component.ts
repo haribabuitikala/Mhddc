@@ -43,6 +43,7 @@ export class ResSliderComponent implements OnInit, AfterViewInit {
     @Input() issub: string;
 
     sliderRows;
+    showGlassDetails;
 
     // construction details page
     cObj = this.utils.resFlowSession.resDoorObj;
@@ -57,6 +58,7 @@ export class ResSliderComponent implements OnInit, AfterViewInit {
     ngOnInit() {
         this.startProcess();
         this.detailsInfo(this.cObj.construction.construction['ClopayModelNumber']);
+        this.showGlassDetails=false;
     }
 
 
@@ -147,6 +149,7 @@ export class ResSliderComponent implements OnInit, AfterViewInit {
                 if (this.utils.resFlowSession.resDoorObj.windows.glasstype) {
                     if (this.utils.resFlowSession.resDoorObj.windows.glasstype['item_id'] === item['item_id']) {
                         isSeleted = true;
+                          this.showGlassDetails=true;
                     }
                 }
                 break;
