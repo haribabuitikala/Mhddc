@@ -72,6 +72,7 @@ export class InstallComponent implements OnInit, AfterViewInit {
     ngOnInit() {
         this.widthFeets = this.sizes.getWidthFeets();
         this.lang = this.language.getDoorSize();
+        this.utils.resFlowSession.resDoorObj.INSTALLTYPE = "INSTALLED";
 
         if (this.navComponent.flowType === 'res') {
             this.navComponent.renderNav({
@@ -145,11 +146,13 @@ export class InstallComponent implements OnInit, AfterViewInit {
     checkType(txt) {
         this.appComponent.selectedInstallDiy = txt;
         if (txt == 'diy') {
+            this.utils.resFlowSession.resDoorObj.INSTALLTYPE = "DIY";
             // this.doorDimensionFound = false;
             // this.config.renderCanvas(window['cObj'], 'doorVis', '#diyDoorVis');
             // this.exactDoorsize.open();
         }
         if (txt == 'install') {
+            this.utils.resFlowSession.resDoorObj.INSTALLTYPE = "Installed";
             // this.doorDimensionFound = false;
             // this.config.renderCanvas(window['cObj'], 'doorVis', '#diyDoorVis');
             // this.exactDoorsize.open();

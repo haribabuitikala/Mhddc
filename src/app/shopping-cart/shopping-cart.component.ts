@@ -78,12 +78,11 @@ export class ShoppingCartComponent implements OnInit {
             resetNav: true
         });
         $('body').removeClass('loader');
+        // window['orderObj'].cart.push(this.utils.resFlowSession.resDoorObj);
         // this.data = this.utils.ResidentialFlowSession.resDetails;
 
 
     }
-
-
 
     removeItem() {
         this.utils.utilities.gdoOpenerText = '';
@@ -128,7 +127,9 @@ export class ShoppingCartComponent implements OnInit {
     }
     checkout() {
         if (this.utils.utilities.flow == 'residentialNavElems') {
+            this.appComp.getCheckOut();
             this.resShoppingCartTerms.open();
+
         } else {
             this.gdoShoppingCartTerms.open();
         }
@@ -138,7 +139,6 @@ export class ShoppingCartComponent implements OnInit {
         this.resShoppingCartTerms.close();
         this.resShoppingCartTerms.close();
         this.secureRedirectionTerms.open();
-
     }
     goToHome() {
         this.route.navigateByUrl('/banner');
@@ -146,6 +146,7 @@ export class ShoppingCartComponent implements OnInit {
     goToCustomerInfo() {
         this.route.navigateByUrl('/customer-info');
     }
+
 
 
 }

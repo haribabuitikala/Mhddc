@@ -44,6 +44,13 @@ export class BannerComponent implements OnInit {
                 this.utils.utilities.winCode = res.windcode;
                 this.route.navigate(['/zipResults', form.value.zip]);
                 this.utils.utilities.zipCode = form.value.zip;
+
+                //  this is for orderobj
+                let orderObj = this.utils.resFlowSession.orderObj;
+                orderObj.windcode = res.windcode;
+                orderObj.zipcode = res.zip;
+                orderObj.locale = res;               
+
             },
             error => {
                 alert("No Stores Found, Please Check Your Zip Code & Try Again");
