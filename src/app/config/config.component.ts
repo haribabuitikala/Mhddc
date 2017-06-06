@@ -362,7 +362,7 @@ export class ConfigComponent implements OnInit, AfterViewInit {
         targ.DoorVisualization('update', buildObj)
     }
 
-    
+
     getDoorPrice(cData?) {
         cData = cData || this.utils.resFlowSession.resDoorObj;
         var priceObj = { install: 0, diy: 0 };
@@ -393,6 +393,7 @@ export class ConfigComponent implements OnInit, AfterViewInit {
         try {
             var itemId = this.utils.resFlowSession.resDoorObj.product.product['item_id'];
             var count = this.utils.resFlowSession.resDoorObj.QTY;
+
             if (itemId) {
                 let cObj = this.utils.resFlowSession.resDoorObj;
                 let price = window['getDoorPrice'](cObj);
@@ -404,10 +405,19 @@ export class ConfigComponent implements OnInit, AfterViewInit {
                     this.itemPriceDY = parseFloat(price[1].replace(/ /g, '').replace('$', '')) * count;
                     this.utils.utilities.itemPriceDY = this.itemPriceDY;
                 }
+                // this.itemPriceInstall = price[0];
+                // this.itemPriceDY = price[1];
+
+                // let baseip = price[0]; // base install price
+                // let basedp = price[1]; // base diy price
+
+
+                // return basep * qty
+
+
             }
 
         } catch (g) {
-
         }
     }
 
