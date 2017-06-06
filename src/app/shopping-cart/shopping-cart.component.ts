@@ -131,6 +131,7 @@ export class ShoppingCartComponent implements OnInit {
             this.resShoppingCartTerms.open();
 
         } else {
+            this.appComp.getCheckOut();
             this.gdoShoppingCartTerms.open();
         }
 

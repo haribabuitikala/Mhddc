@@ -72,7 +72,7 @@ export class InstallComponent implements OnInit, AfterViewInit {
     ngOnInit() {
         this.widthFeets = this.sizes.getWidthFeets();
         this.lang = this.language.getDoorSize();
-        this.utils.resFlowSession.resDoorObj.INSTALLTYPE = "INSTALLED";
+        this.utils.resFlowSession.resDoorObj.INSTALLTYPE = "Installed";
 
         if (this.navComponent.flowType === 'res') {
             this.navComponent.renderNav({

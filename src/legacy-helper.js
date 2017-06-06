@@ -3,7 +3,7 @@ var imgSkewURL = 'http://hddchtml.clopay.com/ImageHandler3.aspx';
 var imgFolder = '/assets/images/pimages';
 
 var uploadFolder = 'http://hddchtml.clopay.com/uploads';
-
+var selectedAnotherDoor;
 var orderObj = {
     "zipcode": "",
     "storeNumber": "",
@@ -1575,7 +1575,7 @@ function cP(obj, pX, node, forceDiy, uqPromo, isUpsell) {
     if (typeof (uqPromo) === 'undefined') useCObj = false;
     if (typeof (uqPromo) === 'undefined') uqPromo = orderObj.promotion[1];
     //shankar added for apply promo, when select 2nd door at shoping cart page
-    if (orderObj.cart.length > 1 && orderObj.promotionData.length > 1 && selectedAnotherDoor == true) {
+    if (orderObj.cart.length > 1 && orderObj.promotionData.length > 1) {
         uqPromo = orderObj.promotionData[selectCartValue];
     }
     if (typeof (isUpsell) == 'undefined') isUpsell = false;

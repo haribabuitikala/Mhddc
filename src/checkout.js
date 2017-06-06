@@ -16,8 +16,10 @@ var topSectionEx2 = ["309", "310", "311", "312", "313", "314"];
 var topSectionEx3 = ["305", "306", "307", "308"];
 var packDIYModels = ["C124", "C125", "C224", "B178", "B278", "B378"];
 var _augustChange = true;
+var orderObj;
 
-function CheckOut(subTotal, taxRate, estimatedTax, grandTotal, orderObj) {
+function CheckOut(subTotal, taxRate, estimatedTax, grandTotal, _orderObj) {
+    orderObj = _orderObj;
     _sendMe = true;
     _orderHeader = "";
     _orderItems = "";
@@ -1384,6 +1386,11 @@ function webTest() {
     if (day < 10) {
         day = "0" + _date.getUTCDate();
     }
+
+    // added urls 
+    var _CheckOutURL = 'https://hddcpgate.clopay.com/mCheckOut.aspx';
+    var _WSURL = 'https://hddccsr.clopay.com/FlashService/FlashService.asmx';
+
     //ASSEMBLE PO
     _orderPO = "<DOCUMENT>" + _newLine;
     _orderPO += "\t" + "<FAX_HDR_DATE>" + month + "/" + day + "/" + year + "</FAX_HDR_DATE>" + _newLine;
@@ -1401,7 +1408,7 @@ function webTest() {
     if (_sendMe) {
         $.ajax({
             type: "POST",
-            url: 'https://test-hddcpgate.clopay.com/mCheckOut.aspx',
+            url: _WSURL,
             dataType: "xml",
             data: soapMessage,
             async: false,
