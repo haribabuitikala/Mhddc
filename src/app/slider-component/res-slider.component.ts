@@ -219,9 +219,9 @@ export class ResSliderComponent implements OnInit, AfterViewInit {
         $('.topSectionSlider .inner-item > img').css({ 'height': 37 });
         $('.glass-carousel .inner-item > img').css({ 'height': 75 });
         $('.hardware_screen .inner-item > img').css({ 'height': 52 })
-        // if (this.folder === 'design' || 'topsection') {
-        //     this.slideWidth = this.slideWidth - 20;
-        // }
+        if (this.folder === 'design' || this.folder === 'topsection') {
+            this.slideWidth = this.slideWidth - 20;
+        }
         $('._slider', this.myElem.nativeElement).on('touchstart', (e) => {
             this.touchStart = true;
             this.touchX = e.touches[0].clientX;
