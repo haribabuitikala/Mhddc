@@ -23,7 +23,7 @@ export class ShoppingCartComponent implements OnInit {
     gdoOpenerTxt = this.utils.utilities.gdoOpenerText;
     gdoOpenerSelected = this.dataStore.gdoOpenerAccessories;
     openerType = this.utils.utilities.openerType;
-    qty = this.utils.utilities.gdoOpenerQty;
+    qty = this.utils.resFlowSession.resDoorObj.QTY;
     showDistancePrice = false;
     distance = this.utils.utilities.distance;
     distancePrice = this.utils.utilities.distancePrice;
@@ -112,11 +112,11 @@ export class ShoppingCartComponent implements OnInit {
     }
     checkout() {
         if (this.utils.utilities.flow == 'residentialNavElems') {
-            this.appComp.getCheckOut();
+            // this.appComp.getCheckOut();
             this.resShoppingCartTerms.open();
 
         } else {
-            this.appComp.getCheckOut();
+            // this.appComp.getCheckOut();
             this.gdoShoppingCartTerms.open();
         }
 
@@ -130,7 +130,8 @@ export class ShoppingCartComponent implements OnInit {
         this.route.navigateByUrl('/banner');
     }
     goToCustomerInfo() {
-        this.route.navigateByUrl('/customer-info');
+        this.appComp.getCheckOut();
+        //this.route.navigateByUrl('/customer-info');
     }
 
 
