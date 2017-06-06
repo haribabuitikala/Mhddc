@@ -143,7 +143,7 @@ export class AppComponent implements OnInit {
         let price = 1500;
         try {
             if (window['CheckOut']) {
-                var ttt = window['CheckOut'](price, null, null, price, this.app.resFlowSession.orderObj);
+                var ttt = window['CheckOut'](price, 0, 0, price, this.app.resFlowSession.orderObj);
 
                 console.log('ttt ', ttt);
             }

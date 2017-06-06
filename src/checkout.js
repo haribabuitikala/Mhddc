@@ -915,11 +915,13 @@ function writeItem(orderType) {
 
                                 else {
                                     //shankar added for labor promo apply
+									try{
                                     if ($promoIsEnable == true && lng != 'en') {
                                         addLineItem(cs.product.product.singleinstallcode, cs.product.product.singleinstallcode, cs.QTY, Number(labor.install));
                                     } else {
                                         addLineItem(cs.product.product.singleinstallcode, cs.product.product.singleinstallcode, cs.QTY, cs.construction.construction.laborcodeprice);
                                     }
+									}catch(e){}
                                 }
                             }
                             else if (doorWidth > 120) {
@@ -1432,24 +1434,7 @@ function webTest() {
 					   window.location.href = _CheckOutURL + '?CheckOutCode=' + poID
 						console.log(_orderPO)
 					}*/
-                    if (lng != 'en') {
-                        //Checkout Code for CANADIAN Version
-                        //console.log(_orderPO)
-                        if (lng == 'fr')
-                            window.location.href = _caCheckOutURL + '?CheckOutCode=' + poID + '&lang=fr'
-                        else
-                            window.location.href = _caCheckOutURL + '?CheckOutCode=' + poID
-                    }
-                    else {
-                        if (inStore) {
-                            window.location.href = _eSVSCheckoutURL + '?CheckOutCode=' + poID
-                            //console.log(_orderPO)
-                        }
-                        else {
-                            window.location.href = _CheckOutURL + '?CheckOutCode=' + poID
-                            //console.log(_orderPO)
-                        }
-                    }
+                    window.location.href = _CheckOutURL + '?CheckOutCode=' + poID
                 }
 
             }

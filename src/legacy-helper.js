@@ -1575,9 +1575,11 @@ function cP(obj, pX, node, forceDiy, uqPromo, isUpsell) {
     if (typeof (uqPromo) === 'undefined') useCObj = false;
     if (typeof (uqPromo) === 'undefined') uqPromo = orderObj.promotion[1];
     //shankar added for apply promo, when select 2nd door at shoping cart page
-    if (orderObj.cart.length > 1 && orderObj.promotionData.length > 1) {
-        uqPromo = orderObj.promotionData[selectCartValue];
-    }
+    try{
+		if (orderObj.cart.length > 1 && orderObj.promotionData.length > 1) {
+			uqPromo = orderObj.promotionData[selectCartValue];
+		}
+	}catch(e){}
     if (typeof (isUpsell) == 'undefined') isUpsell = false;
 
 
