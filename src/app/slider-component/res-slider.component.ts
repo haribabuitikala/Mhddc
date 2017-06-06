@@ -58,7 +58,7 @@ export class ResSliderComponent implements OnInit, AfterViewInit {
     ngOnInit() {
         this.startProcess();
         this.detailsInfo(this.cObj.construction.construction['ClopayModelNumber']);
-        this.showGlassDetails=false;
+        this.showGlassDetails = false;
     }
 
 
@@ -149,7 +149,7 @@ export class ResSliderComponent implements OnInit, AfterViewInit {
                 if (this.utils.resFlowSession.resDoorObj.windows.glasstype) {
                     if (this.utils.resFlowSession.resDoorObj.windows.glasstype['item_id'] === item['item_id']) {
                         isSeleted = true;
-                          this.showGlassDetails=true;
+                        this.showGlassDetails = true;
                     }
                 }
                 break;
@@ -170,6 +170,13 @@ export class ResSliderComponent implements OnInit, AfterViewInit {
             case 'stephinges':
                 if (this.utils.resFlowSession.resDoorObj.hardware.hinge) {
                     if (this.utils.resFlowSession.resDoorObj.hardware.hinge['item_id'] === item['item_id']) {
+                        isSeleted = true;
+                    }
+                }
+                break;
+            case 'opener':
+                if (this.utils.resFlowSession.resDoorObj.opener.opener) {
+                    if (this.utils.resFlowSession.resDoorObj.opener.opener['item_id'] === item['item_id']) {
                         isSeleted = true;
                     }
                 }
@@ -195,7 +202,7 @@ export class ResSliderComponent implements OnInit, AfterViewInit {
 
     renderSlider() {
         this.slideWidth = $('._slider-container').width();
-        this.sliderWidth = (this.data.length * this.slideWidth) + this.slideWidth - 20;
+        this.sliderWidth = (this.data.length * this.slideWidth) + this.slideWidth;
     }
 
     ngOnChanges() {
@@ -212,6 +219,7 @@ export class ResSliderComponent implements OnInit, AfterViewInit {
         $('.topSectionSlider .inner-item > img').css({ 'height': 37 });
         $('.glass-carousel .inner-item > img').css({ 'height': 75 });
         $('.hardware_screen .inner-item > img').css({ 'height': 52 })
+        this.slideWidth = this.slideWidth - 20;
         $('._slider', this.myElem.nativeElement).on('touchstart', (e) => {
             this.touchStart = true;
             this.touchX = e.touches[0].clientX;
@@ -370,9 +378,9 @@ export class ResSliderComponent implements OnInit, AfterViewInit {
                 if (contructionDetails) {
                     this.constructionInfo = res
                     contructionDetails.open();
-                } else {                    
-                    let t = res[2].modeldescription ? parseFloat(res[2].modeldescription.split(' ')[0]) : 19 ;
-                    if(t < 18.4){
+                } else {
+                    let t = res[2].modeldescription ? parseFloat(res[2].modeldescription.split(' ')[0]) : 19;
+                    if (t < 18.4) {
                         this.utils.resFlow.isUpsellSet = true;
                     }
                 }
