@@ -118,6 +118,7 @@ export class DesignComponent implements OnInit {
         this.route.navigateByUrl(path);
     }
     prevBtn(path) {
+        this.utils.resFlowSession.resDoorObj.resetFromStep(2);
         if (this.navComponent.flowType === 'res') {
             this.route.navigateByUrl('/home');
         } else {

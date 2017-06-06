@@ -314,6 +314,107 @@ export class ResidentialFlowSession {
         },
         "stopMold": {
             "items": []
+        },
+        "resetorder": ['size', 'product', 'design', 'construction', 'color', 'windows', 'hardware', 'opener', 'additional'],
+        "resetsize": () => {
+            this.resDoorObj['size'] = {
+                "width": {
+                    "wf": " - ",
+                    "wi": "0"
+                },
+                "height": {
+                    "hf": " - ",
+                    "hi": "0"
+                },
+                "apiData": {}
+            };
+            this.resDoorObj['reset' + this.resDoorObj['resetorder'][1]]();
+        },
+        "resetproduct": () => {
+            this.resDoorObj['product'] = {
+                "product": "",
+                "sourcing": "clopay",
+                "apiData": ""
+            };
+            this.resDoorObj['reset' + this.resDoorObj['resetorder'][2]]();
+        },
+        "resetdesign": () => {
+            this.resDoorObj['design'] = {
+                "columns": "",
+                "rows": "",
+                "dsgn": "",
+                "apiData": ""
+            };
+            this.resDoorObj['reset' + this.resDoorObj['resetorder'][3]]();
+        },
+        "resetconstruction": () => {
+            this.resDoorObj['construction'] = {
+                "construction": "",
+                "cladding": "",
+                "groove": "",
+                "vinyl": "",
+                "apiData": ""
+            };
+            this.resDoorObj['reset' + this.resDoorObj['resetorder'][4]]();
+        },
+        "resetcolor": () => {
+            this.resDoorObj['color'] = {
+                "base": {},
+                "overlay": {},
+                "apiData": {}
+            };
+            this.resDoorObj['reset' + this.resDoorObj['resetorder'][5]]();
+        },
+        "resetwindows": () => {
+            this.resDoorObj['this.windows'] = {
+                "topsection": "",
+                "placement": null,
+                "glasstype": "",
+                "apiData": ""
+            };
+            this.resDoorObj['reset' + this.resDoorObj['resetorder'][6]]();
+        },
+        "resethardware": () => {
+            this.resDoorObj['hardware'] = {
+                "handle": "",
+                "stepplate": "",
+                "hinge": "",
+                "lock": "",
+                "lockoptions": "",
+                "other": [],
+                "strut": "",
+                "apiData": "",
+                "items": []
+            };
+            this.resDoorObj['reset' + this.resDoorObj['resetorder'][7]]();
+        },
+        "resetsprings": () => {
+            this.resDoorObj['springs'] = {
+                "springtype": "",
+                "tracksize": "",
+                "trackmount": "",
+                "trackradius": "",
+                "lifttype": "",
+                "roofpitch": "",
+                "apiData": ""
+            }
+        },
+        "resetopener": () => {
+            this.resDoorObj['opener'] = {
+                "QTY": 1,
+                "opener": "",
+                "items": [],
+                "apiData": ""
+            };
+            this.resDoorObj['reset' + this.resDoorObj['resetorder'][8]]();
+        },
+        "resetadditional": () => {
+            this.resDoorObj['additional'] = {
+                "items": []
+            };
+        },
+        "resetFromStep": (step) => {
+            this.resDoorObj['reset' + this.resDoorObj['resetorder'][step]]();
         }
     }
 

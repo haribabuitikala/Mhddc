@@ -330,6 +330,7 @@ export class CollectionComponent implements OnInit {
     prevBtn(curr, path) {
         this.makeNull();
         this.utils.setUtils(1, 0);
+        this.utils.resFlowSession.resDoorObj.resetFromStep(1);
         this.route.navigateByUrl('/doorSize');
     }
 

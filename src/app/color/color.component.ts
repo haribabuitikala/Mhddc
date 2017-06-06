@@ -127,6 +127,7 @@ export class ColorComponent implements OnInit {
     }
 
     prevBtn() {
+        this.utils.resFlowSession.resDoorObj.resetFromStep(4);
         this.route.navigateByUrl('/config/construction');
     }
 }
