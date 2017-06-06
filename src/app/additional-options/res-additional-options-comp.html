@@ -2,30 +2,25 @@
     <h4 class="text-orange font-size-16">Additional Options</h4>
     <div *ngFor="let installQuestions  of resInstallQuestions ;let i = index; let first = first; let last = last">
         <dl [hidden]="last">
-            <dd>
-                <div class="clearfix ">
-                    <p class="col-xs-12"> {{installQuestions.item_list_text}} ?
-                        <img class="pull-right " (click)="installQuestionsPopup(installQuestions)" height="25" src="../../assets/images/info.png">
-                    </p>
-                    <div *ngIf="i===0">
-                        <img src="../../assets/images/Medallionlogo.png" alt="" />
-                        <img src="../../assets/images/MedallionUpgrades_warranties.png" alt="" />
-                    </div>
+            <dd>                
+                <div class="question">
+                    <p [innerHTML]="installQuestions.item_list_text"></p>
+                    <img (click)="installQuestionsPopup(installQuestions)" height="25" src="../../assets/images/info.png">
                 </div>
+                <div *ngIf="i===0">
+                    <img src="../../assets/images/Medallionlogo.png" alt="" />
+                    <img src="../../assets/images/MedallionUpgrades_warranties.png" alt="" />
+                </div>                
                 <div class="flex-right">
-                    <div class="text-orange">
-                        {{installQuestions.Answers[1].item_name}}
-
-                    </div>
+                    <div class="text-orange" [innerHTML]="installQuestions.Answers[1].item_name"></div>
                     <label class="switch">
                         <input type="checkbox"  [checked]="installQuestions.Answers[1].isDefault" (change)="installQuestionsOptions($event,installQuestions)">
                         <div class="slider round"></div>
                     </label>
-                    <div class="text-orange">{{installQuestions.Answers[0].item_name}} </div>
+                    <div class="text-orange" [innerHTML]="installQuestions.Answers[0].item_name"></div>
                 </div>
-                <div class="text-center" *ngIf="installQuestions.item_id=='5' ">
-                    <p id="distance text-orange" style="margin-top: -24px; padding-right: 76px; 
-                       padding-bottom: 10px;">its <input type="text" [(ngModel)]="defaultMiles" (keyup)="calculatemiles(defaultMiles)" name="defaultMiles"
+                <div *ngIf="installQuestions.item_id=='5' ">
+                    <p id="distance text-orange">it's <input type="text" [(ngModel)]="defaultMiles" (keyup)="calculatemiles(defaultMiles)" name="defaultMiles"
                         /> miles away</p>
                 </div>
             </dd>
@@ -43,31 +38,21 @@
         <dl [hidden]="first"> 
             <dd >                             
                 <div class="clearfix " > 
-                    <p class="col-xs-12">      {{diyQuestions.item_list_text}} ?  
-                        <img  class="pull-right "  (click)="diyQuestionsPopup(diyQuestions)"  height="25" src="../../assets/images/info.png"> 
-                    </p> 
+                    <p [innerHTML]="diyQuestions.item_list_text"></p>
+                    <img  (click)="diyQuestionsPopup(diyQuestions)"  height="25" src="../../assets/images/info.png">  
                 </div> 
-
-                <div class="flex-right " > 
-                    <div class="text-orange col-xs-9  ">{{diyQuestions.Answers[1].item_name}}
-
-                    </div>
-
+                <div class="flex-right" > 
+                    <div class="text-orange" [innerHTML]="diyQuestions.Answers[1].item_name"></div>
                     <label class="switch">
                         <input type="checkbox" [checked]="diyQuestions.Answers[1].isDefault"   (change)="diyQuestionsOptions($event,diyQuestions)">
-
                         <div class="slider round"></div>
                     </label>
-                    <div class="text-orange">{{diyQuestions.Answers[0].item_name}}</div>
+                    <div class="text-orange" [innerHTML]="diyQuestions.Answers[0].item_name"></div>
                 </div> 
-
-                <div class="text-center" *ngIf="diyQuestions.item_id=='5' ">
-                    <p id="distance" style="margin-top: -24px; padding-right: 76px; 
-                       padding-bottom: 10px;" >its <input type="text" [(ngModel)]="defaultMilesDiy"    (keyup)="calculatemilesDiy(defaultMilesDiy)" name="defaultMilesDiy"/>   miles away</p> 
+                <div *ngIf="diyQuestions.item_id=='5' ">
+                    <p id="distance">it's <input type="text" [(ngModel)]="defaultMilesDiy"    (keyup)="calculatemilesDiy(defaultMilesDiy)" name="defaultMilesDiy"/>   miles away</p> 
                 </div> 
-
             </dd>
-
         </dl>
     </div>  
 </div>
