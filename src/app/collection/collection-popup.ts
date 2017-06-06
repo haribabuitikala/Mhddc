@@ -22,9 +22,9 @@ import {Component, OnInit, Input} from '@angular/core';
 })
 export class CollectionPopup implements OnInit {
 
-    showVideo:boolean = false;
-    showPlayIcon:boolean = true;
-    showImageIcon:boolean = false;
+    showVideo: boolean = false;
+    showPlayIcon: boolean = true;
+    showImageIcon: boolean = false;
 
     playVideo() {
         this.showVideo = true;
@@ -42,7 +42,10 @@ export class CollectionPopup implements OnInit {
     img;
 
     ngOnInit() {
-     this.img = this.popup.popupImg;
+        this.img = this.popup.popupImg;
+        if (this.popup.item_id === 31 || this.popup.item_id === 170 || this.popup.item_id === 30) {
+            this.showPlayIcon = false;
+        }
     }
 
 
