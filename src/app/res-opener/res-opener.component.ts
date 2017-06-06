@@ -78,6 +78,7 @@ export class ResOpenerComponent implements OnInit {
                 let data = res;
                 this.openers = _.chunk(data, 2);
                 this.utils.resFlowSession.resDoorObj.opener.apiData = res;
+                this.utils.resFlowSession.resDoorObj.opener.opener = res[0];
                 this.isLoaded = true;
             });
     }

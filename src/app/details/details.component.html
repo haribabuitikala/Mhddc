@@ -105,7 +105,7 @@
 
                 <li>
                     <span><strong> Collection </strong>
-          {{details.collectionName}}</span></li>
+          {{details.collectionName | escapeHtml}}</span></li>
 
                 <li *ngIf="details.designName">
                     <span><strong> Design </strong>

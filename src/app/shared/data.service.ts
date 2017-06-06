@@ -487,39 +487,6 @@ export class CollectionService {
                                         "_width": "8",
                                         "_height": "7",
                                         "_XY": "0,0",
-                                        "_UL": "474,294",
-                                        "_UR": "553,294",
-                                        "_LR": "552,366",
-                                        "_LL": "474,366"
-                                    },
-                                    {
-                                        "_width": "8",
-                                        "_height": "7",
-                                        "_XY": "0,0",
-                                        "_UL": "582,294",
-                                        "_UR": "662,295",
-                                        "_LR": "662,368",
-                                        "_LL": "582,368"
-                                    }
-                                ]
-                            },
-                            "_homeid": "10",
-                            "_btnimage": "DIShomeSngl11.png",
-                            "_imagelg": "DIShomeSngl11.png",
-                            "_window": "reflect",
-                            "_imgwidth": "700",
-                            "_imgheight": "500",
-                            "_title": "Single1",
-                            "_upload": "false",
-                            "_size": "1"
-                        },
-                        {
-                            "dcoords": {
-                                "point": [
-                                    {
-                                        "_width": "8",
-                                        "_height": "7",
-                                        "_XY": "0,0",
                                         "_UL": "283,256",
                                         "_UR": "435,256",
                                         "_LR": "435,376",

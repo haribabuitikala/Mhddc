@@ -278,7 +278,7 @@ export class ResSliderComponent implements OnInit, AfterViewInit {
                 this.utils.resFlowSession.resDoorObj.hardware.hinge['count'] = 1;
                 this.utils.resFlowSession.resDoorObj.hardware.hinge['placement'] = obj['placement'] ? obj['placement'] : obj['placementlist'];
                 break;
-            case 'openers':
+            case 'opener':
                 this.utils.resFlowSession.resDoorObj.opener.opener = obj;
                 break;
             case 'design':

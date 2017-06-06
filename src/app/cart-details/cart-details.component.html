@@ -1,5 +1,5 @@
 <div class="content door-configuration checkout">
-    <p>{{data.product.product.item_name}}</p>
+    <p [innerHTML]="data.product.product.item_name"></p>
 
     <dl class="door-configuration-table">
         <dd class="door-configuration-table-header">
@@ -38,7 +38,7 @@
             Door Construction
         </dd>
         <dd>
-            <p>{{data.construction.construction.item_name}}</p>
+            <p [innerHTML]="data.construction.construction.item_name"></p>
         </dd>
     </dl>
     <dl class="door-configuration-table">
