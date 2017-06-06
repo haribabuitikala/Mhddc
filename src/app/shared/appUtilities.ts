@@ -238,7 +238,7 @@ export class ResidentialFlowSession {
     resDoorObj = {
         "QTY": 1,
         "TYPE": 'RES',
-        "INSTALLTYPE": '',
+        "INSTALLTYPE": 'GDO',
         "VISIMG": null,
         "LEADTEST": false,
         "JAMBTYPE": 'Wood',
