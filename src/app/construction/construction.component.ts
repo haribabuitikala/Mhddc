@@ -136,14 +136,15 @@ export class ConstructionComponent implements OnInit {
             "dwidthIn": this.utils.utilities.wi,
             "dtype": this.utils.utilities.dtype,
             "windcode": this.utils.utilities.winCode,
-            "isCoreAssortment": true
+            "isCoreAssortment": false
         }
-        if (_.includes(this.upSellShowCollection,this.utils.resFlowSession.resDoorObj.product.product['item_id']) && this.utils.resFlow.isUpsellSet) {
+        if (_.includes(this.upSellShowCollection, this.utils.resFlowSession.resDoorObj.product.product['item_id']) && this.utils.resFlow.isUpsellSet) {
             this.upSellImage = this.utils.resFlowSession.resDoorObj.construction.construction['item_thumbnail'];
             this.dataService.getUpsellData(params)
                 .subscribe(
                 res => {
-                    if(res.length > 0) {
+                    console.log('updell length ', res);
+                    if (res.length > 0) {
                         this.upSellData = res;
                         upsellModal.open()
                     } else {
@@ -165,6 +166,16 @@ export class ConstructionComponent implements OnInit {
     moveNext() {
         this.route.navigateByUrl('config/color');
         // this.goToHome(this.selected);
+    }
+
+    getModelPriceUpsell(updata) {
+        var currentConstruction = this.utils.resFlowSession.resDoorObj.construction.construction;
+        var filtermodel = window['cObj'].construction.apiData.filter(c => { console.log(c.design_id, c.id); return c.XMLCOI == updata.upgrade_model; });
+        if (filtermodel.length > 0) {
+            filtermodel = filtermodel[0];
+            return (filtermodel.item_price - ((15 * filtermodel.item_price) / 100)) - (currentConstruction['item_price'] - ((15 * currentConstruction['item_price']) / 100));
+        }
+        return 0;
     }
 
 }
