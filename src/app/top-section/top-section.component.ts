@@ -81,6 +81,7 @@ export class TopSectionComponent implements OnInit {
   }
 
   prevBtn() {
+    this.utils.resFlowSession.resDoorObj.resetFromStep(5);
     this.route.navigateByUrl('/config/color');
   }
 

@@ -176,6 +176,7 @@ export class HardwareComponent implements OnInit {
   }
 
   prevBtn() {
+    this.utils.resFlowSession.resDoorObj.resetFromStep(6);
     this.navigateTo('/config/topSection');
   }
 }

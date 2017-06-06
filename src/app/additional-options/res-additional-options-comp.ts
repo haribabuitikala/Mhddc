@@ -163,6 +163,7 @@ export class ResAdditionalOptionsComponent implements OnInit {
     }
 
     prevBtn(path) {
+        this.utils.resFlowSession.resDoorObj.resetFromStep(8);
         if (this.utils.resFlowSession.resDoorObj.INSTALLTYPE === 'DIY') {
             this.route.navigateByUrl('/config/install');
         } else {

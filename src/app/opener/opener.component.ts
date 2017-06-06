@@ -184,6 +184,7 @@ export class OpenerComponent implements OnInit {
         } else {
             this.goTo('/config' + path)
         }
+        this.utils.resFlowSession.resDoorObj.resetFromStep(8);
     }
 
     goTo(path) {

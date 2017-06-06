@@ -160,6 +160,7 @@ export class ConstructionComponent implements OnInit {
     }
 
     prevBtn() {
+        this.utils.resFlowSession.resDoorObj.resetFromStep(3);
         this.route.navigateByUrl('/config/design');
     }
 
