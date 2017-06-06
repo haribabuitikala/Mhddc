@@ -34,6 +34,8 @@ export class ShoppingCartComponent implements OnInit {
     itemPrice = this.utils.calculateTotalPrice(this.utils.utilities.itemPriceInstall);
     itmPrice = this.utils.utilities.itmPrice;
     baseItmPrice = this.utils.utilities.item_price * this.utils.utilities.gdoOpenerQty;
+    data;
+    resFlow = true;
 
     constructor(private appComp: AppComponent
         , private navComp: NavService
@@ -42,26 +44,12 @@ export class ShoppingCartComponent implements OnInit {
         , private dataStore: CollectionData
         , private route: Router) {
     }
-    data;
+    
     shoppingCartData() {
-
-        let data = this.utils.resFlowSession.resDoorObj
-        // return {
-        //     WindCode: data.product.product.windcode,
-        //     Collection: data.product.product.item_name,
-        //     doorDesign: '',
-        //     doorModel: data.construction.construction.ClopayModelNumber,
-        //     doorConstruction: data.construction.construction.item_name,
-        //     Color: data.color.base.item_name,
-        //     topSection: '',
-        //     glassType:'',
-        //     Hardware: {
-        //         handles: data.hardware.handle.item_name,
-        //         stepPlate: data.hardware.stepplate.item_name
-        //     }
-        // }
+        this.data = this.utils.resFlowSession.resDoorObj;
+        console.log(this.data);
     }
-    resFlow = true;
+    
     ngOnInit() {
         this.navComp.activateIcon();
         this.pageNo = this.utils.utilities.currPage;
@@ -78,10 +66,7 @@ export class ShoppingCartComponent implements OnInit {
             resetNav: true
         });
         $('body').removeClass('loader');
-        // window['orderObj'].cart.push(this.utils.resFlowSession.resDoorObj);
-        // this.data = this.utils.ResidentialFlowSession.resDetails;
-
-
+        this.shoppingCartData();
     }
 
     removeItem() {

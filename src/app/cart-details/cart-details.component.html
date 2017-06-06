@@ -1,92 +1,4 @@
-<!--<dl class="diy-install-table">
-  <dd class="diy-install-table-header">
-    Size
-  </dd>
-  <dd>{{installSize}}</dd>
-  <dd class="diy-install-table-header">
-    WindCode
-  </dd>
-  <dd>{{wincode}}</dd>
-</dl>
-<dl class="diy-install-table">
-  <dd class="diy-install-table-header">
-    Collection
-  </dd>
-  <dd>{{itemName | escapeHtml}}</dd>
-  <dd class="diy-install-table-header">
-    Door Design
-  </dd>
-  <dd><span class="door-design-txt text-capitalize">{{doorDesign}}</span></dd>
-  <dd class="diy-install-table-header">
-    Door Model
-  </dd>
-  <dd>{{doorModel}}<span class="pull-right">{{doorModelPrice | currency:'USD':true:'1.2-2'}}}</span></dd>
-  <dd class="diy-install-table-header">
-    Door Construction
-  </dd>
-  <dd>{{construction | escapeHtml}}</dd>
-</dl>
-<dl class="diy-install-table">
-  <dd class="diy-install-table-header">
-    Color
-  </dd>
-  <dd>
-    <span class="selected-color text-capitalize">{{color.item_name | escapeHtml}}</span>
-    <span class="pull-right">{{color.base.item_price | currency:'USD':true:'1.2-2'}}</span>
-  </dd>
-</dl>
-<dl class="diy-install-table">
-  <dd class="diy-install-table-header">
-    Top Section
-  </dd>
-  <dd>
-    <div>{{topSection}}</div>
-  </dd>
-</dl>
-<dl class="diy-install-table">
-  <dd class="diy-install-table-header">
-    Hardware
-  </dd>
-  <dd *ngFor="let hrdware of hardware">{{hrdware}}<span class="pull-right">{{hrdware.price}</span></dd>
-</dl>
-
-<div *ngIf="doorConfiguration">
-  <dl class="door-configuration-table">
-    <dd class="door-configuration-table-header">
-      Opener
-    </dd>
-    <dd>
-      <p>{{data.opener.opener.item_name}}</p>
-      <span class="pull-right">{{data.opener.opener.item_price | currency:'USD':true:'1.2-2'}}</span>
-    </dd>
-  </dl>
-  <dl class="door-configuration-table">
-    <dd class="door-configuration-table-header">
-      Opener Accessories
-    </dd>
-    <dd>
-      <p *ngFor="let itm of data.opener.items">
-        {{itm.name}}
-      </p>
-      <span class="pull-right">{{itm.price}}</span>
-    </dd>
-  </dl>
-  <dl class="door-configuration-table" *ngIf="data.additional.items.length">
-    <dd class="door-configuration-table-header">
-      Additional Options
-    </dd>
-    <dd>
-      <!--<p>Medallion Hardware Upgrade</p><span class="pull-right">$59.00</span>-->
-<!--<p *ngFor="let itm of data.additional.items">
-        {{itm.name}}
-        <span class="pull-right">{{itm.price}}</span>
-      </p>
-    </dd>
-  </dl>
-</div>-->
-
-
-<div class="content door-configuration">
+<div class="content door-configuration checkout">
     <p>{{data.product.product.item_name}}</p>
 
     <dl class="door-configuration-table">
@@ -151,11 +63,11 @@
                 Hardware
             </dd>
             <dd>
-                <div *ngFor="let itm of data.hardware.items">
+                <div class="item" *ngFor="let itm of data.hardware.items">
                     <p>
                         {{itm.name}}
                     </p>
-                    <span class="pull-right">{{itm.price | currency:'USD':true:'1.2-2'}}</span>
+                    <span>{{itm.price | currency:'USD':true:'1.2-2'}}</span>
                 </div>
             </dd>
         </dl>
@@ -165,8 +77,10 @@
                     Opener
                 </dd>
                 <dd>
-                    <span class="pull-right">{{data.opener.opener.item_price | currency:'USD':true:'1.2-2'}}</span>
-                    <p>{{data.opener.opener.item_name}}</p>
+                    <div class="item">
+                        <p>{{data.opener.opener.item_name}}</p>
+                        <span>{{data.opener.opener.item_price | currency:'USD':true:'1.2-2'}}</span>
+                    </div>
                 </dd>
             </dl>
             <div *ngIf="openerAccessories">
@@ -175,10 +89,12 @@
                         Opener Accessories
                     </dd>
                     <dd>
-                        <p *ngFor="let itm of data.opener.items">
-                            {{itm.name}}
-                        </p>
-                        <span class="pull-right">{{itm.price | currency:'USD':true:'1.2-2'}}</span>
+                        
+                        <div class="item" *ngFor="let itm of data.opener.items">
+                            <p>{{itm.name}}</p>
+                            <span>{{itm.price | currency:'USD':true:'1.2-2'}}</span>
+                        </div>
+                        
                     </dd>
                 </dl>
                 <div *ngIf="additional">
@@ -187,10 +103,10 @@
                             Additional Options
                         </dd>
                         <dd>
-                            <p *ngFor="let itm of data.additional.items">
-                                {{itm.name}}
-                                <span class="pull-right">{{itm.price | currency:'USD':true:'1.2-2'}}</span>
-                            </p>
+                            <div class="item" *ngFor="let itm of data.additional.items">
+                                <p>{{itm.name}}</p>
+                                <span>{{itm.price | currency:'USD':true:'1.2-2'}}</span>
+                            </div>
                         </dd>
                     </dl>
                     <dl class="door-configuration-table">
