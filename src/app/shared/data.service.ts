@@ -998,15 +998,11 @@ export class CollectionService {
          return this.http.post(this.url + 'ModelUpSell', obj).map(
                 res => {
                     try{
-                        let k = res.json();
-                        k.content = "";
-                        return k;
+                        return res.json();
                     }
                     catch(e){
                         console.log(e);
-                        return {
-                            "content": null
-                        };
+                        return {};
                     }
                 }
             ).finally(() => {
