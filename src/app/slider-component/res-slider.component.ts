@@ -370,17 +370,12 @@ export class ResSliderComponent implements OnInit, AfterViewInit {
                 if (contructionDetails) {
                     this.constructionInfo = res
                     contructionDetails.open();
-                }else{
-                    
-                    let t = parseFloat(res[2].modeldescription.split(' ')[0]);
+                } else {                    
+                    let t = res[2].modeldescription ? parseFloat(res[2].modeldescription.split(' ')[0]) : 19 ;
                     if(t < 18.4){
                         this.utils.resFlow.isUpsellSet = true;
                     }
                 }
-
             });
     }
-
-
-
 }
