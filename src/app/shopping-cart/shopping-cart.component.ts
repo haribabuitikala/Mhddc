@@ -46,23 +46,8 @@ export class ShoppingCartComponent implements OnInit {
     }
     
     shoppingCartData() {
-
         this.data = this.utils.resFlowSession.resDoorObj;
         console.log(this.data);
-        // return {
-        //     WindCode: data.product.product.windcode,
-        //     Collection: data.product.product.item_name,
-        //     doorDesign: '',
-        //     doorModel: data.construction.construction.ClopayModelNumber,
-        //     doorConstruction: data.construction.construction.item_name,
-        //     Color: data.color.base.item_name,
-        //     topSection: '',
-        //     glassType:'',
-        //     Hardware: {
-        //         handles: data.hardware.handle.item_name,
-        //         stepPlate: data.hardware.stepplate.item_name
-        //     }
-        // }
     }
     
     ngOnInit() {
@@ -83,8 +68,6 @@ export class ShoppingCartComponent implements OnInit {
         $('body').removeClass('loader');
         this.shoppingCartData();
     }
-
-
 
     removeItem() {
         this.utils.utilities.gdoOpenerText = '';
@@ -129,7 +112,9 @@ export class ShoppingCartComponent implements OnInit {
     }
     checkout() {
         if (this.utils.utilities.flow == 'residentialNavElems') {
+            this.appComp.getCheckOut();
             this.resShoppingCartTerms.open();
+
         } else {
             this.gdoShoppingCartTerms.open();
         }
@@ -139,7 +124,6 @@ export class ShoppingCartComponent implements OnInit {
         this.resShoppingCartTerms.close();
         this.resShoppingCartTerms.close();
         this.secureRedirectionTerms.open();
-
     }
     goToHome() {
         this.route.navigateByUrl('/banner');
@@ -147,6 +131,7 @@ export class ShoppingCartComponent implements OnInit {
     goToCustomerInfo() {
         this.route.navigateByUrl('/customer-info');
     }
+
 
 
 }

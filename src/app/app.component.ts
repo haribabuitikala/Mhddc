@@ -131,10 +131,26 @@ export class AppComponent implements OnInit {
 
     setLoader(show?) {
         if (show) {
-            $('body').addClass('loader');
+            // $('body').addClass('loader');
         } else {
-            $('body').removeClass('loader');
+            // $('body').removeClass('loader');
         }
+    }
+
+    getCheckOut() {
+        this.app.resFlowSession.orderObj.cart.push(this.app.resFlowSession.resDoorObj)
+
+        let price = 1500;
+        try {
+            if (window['CheckOut']) {
+                var ttt = window['CheckOut'](price, null, null, price, this.app.resFlowSession.orderObj);
+
+                console.log('ttt ', ttt);
+            }
+        } catch (r) {
+            //swallow
+        }
+
     }
 
 }

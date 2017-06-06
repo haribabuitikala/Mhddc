@@ -43,6 +43,11 @@ export class ZipResultsComponent implements OnInit {
         resDetails.gdoStore = +item.gdo;
         resDetails.storeName = item.storename;
 
+        // this is for orderObj
+        let orderobj = this.utils.resFlowSession.orderObj;
+        orderobj.storeNumber = item.storenumber;
+        orderobj.store = item;
+
         // setting double door height and width
         this.utils.utilities.doubleDoorHeight = item.DoubleDoorHeight;
         this.utils.utilities.doubleDoorWidth = item.DoubleDoorWidth;

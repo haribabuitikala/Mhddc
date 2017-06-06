@@ -362,7 +362,7 @@ export class ConfigComponent implements OnInit, AfterViewInit {
         targ.DoorVisualization('update', buildObj)
     }
 
-
+    
     getDoorPrice(cData?) {
         cData = cData || this.utils.resFlowSession.resDoorObj;
         var priceObj = { install: 0, diy: 0 };

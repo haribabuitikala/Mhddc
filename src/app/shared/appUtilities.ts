@@ -271,6 +271,7 @@ export class ResidentialFlowSession {
             "vinyl": "",
             "apiData": ""
         },
+        "isPurchase":true,
         "color": {
             "base": {},
             "overlay": {},
@@ -315,6 +316,26 @@ export class ResidentialFlowSession {
             "items": []
         }
     }
+
+    orderObj =
+    {
+        "zipcode": "",
+        "storeNumber": "",
+        "associateId": "",
+        "locale": "",
+        "homedata": "",
+        "store": "",
+        "windcode": "W0",
+        "diyInstall": "",
+        "hasMiles": false,
+        "cart": [],
+        "items": 0,
+        "orderInstallType": "",
+        "promotion": [{ "bullet0": "", "bullet1": "", "moreinfo": "", "promotionid": 0 }, false],
+        "promotionData": [{ "bullet0": "", "bullet1": "", "moreinfo": "", "promotionid": 0 }, false],
+        "jambtype": "Wood", "extendedShaft": false
+    }
+
 
     constructor() {
 
