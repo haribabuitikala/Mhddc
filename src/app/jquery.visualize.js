@@ -891,6 +891,7 @@ var glassSections = 0;
 		logprint("done Build ready for Complete", $this);
 		$('#SidebarLoader').hide(); 		// custom change to show sidebar loader
 		//alert('update')
+		$('body').removeClass('loader');
 	}
 	// Console loggin for debugging & reporting
 
@@ -1102,8 +1103,7 @@ var glassSections = 0;
 	/////////////////////////////////////////////////////
 	// updateElem: Uudates plugin output image //
 	///////////////////////////////////////////////////
-	Plugin.prototype.updateElem = function () {
-
+	Plugin.prototype.updateElem = function () {		
 		console.log('callout')
 		var $this = this;
 		var ratio = 1;
@@ -1452,13 +1452,13 @@ var glassSections = 0;
 		if ($this.options.doneCallback) {
 			$this.options.doneCallback();
 		}
- 
 	}
 	/////////////////////////////////////////////////////
 	// canvasLoader: Loads images onto canvas element //
 	///////////////////////////////////////////////////
 
 	function canvasLoader(el, needRebuild, buildObj, canvas, dataURL, targX, targY, clr, SWAP) {
+		$('body').addClass('loader');
 		console.log('CVSLoad')
 		$('#SidebarLoader').show();
 		SWAP = typeof SWAP !== 'undefined' ? SWAP : true;
@@ -1534,7 +1534,8 @@ var glassSections = 0;
 		imageObj.onerror = function () {
 			errorBuild = true;
 			console.log('errBD10')
-			$('#SidebarLoader').hide(); 		// custom change to show sidebar loader
+			$('#SidebarLoader').hide(); 
+			$('body').removeClass('loader');		// custom change to show sidebar loader
 			if (needRebuild) {
 				el.hLoop++;
 				el.buildDoor();

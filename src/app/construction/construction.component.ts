@@ -143,8 +143,12 @@ export class ConstructionComponent implements OnInit {
             this.dataService.getUpsellData(params)
                 .subscribe(
                 res => {
-                    this.upSellData = res;
-                    upsellModal.open()
+                    if(res.content) {
+                        this.upSellData = res;
+                        upsellModal.open()
+                    } else {
+                        this.route.navigateByUrl(path);
+                    }               
                 });
 
             console.log(this.upSellData);
