@@ -158,8 +158,9 @@ export class OpenerComponent implements OnInit {
         };
         this.dataStrorage.gdoOpenerAccessories.splice(flow, 1);
         this.dataStrorage.gdoOpenerAccessories.push(k);
+        this.utils.utilities.gdoOpenerQty = this.quantity;
         this.utils.utilities.kPrice = this.utils.sumBy(this.dataStrorage.gdoOpenerAccessories);
-        // this.gdoConfig.itemPrice = this.utils.updateQty(flow, 1, 0, 0, 0, 0, kPrice);
+        this.gdoConfig.itemPrice = this.utils.calculateTotalPrice()
 
 
         // this.itemPrice = (this.itmPrice * this.quantity) +

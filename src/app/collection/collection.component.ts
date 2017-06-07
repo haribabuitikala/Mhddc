@@ -226,9 +226,9 @@ export class CollectionComponent implements OnInit {
             "lang": "en",
             "localmarketid": +utils.localmarketid,
             "doorsize": +utils.homeSize,
-            "LaborCode": obj.singleinstallcodew,
+            "LaborCode": obj.singleinstallcode,
             "isCRLE": false,
-            "productlayout": false,
+            "productlayout": true,
             "dealerid": 1,
 
             "doorwidth": +utils.wf,

@@ -31,11 +31,11 @@ export class ShoppingCartComponent implements OnInit {
     showDirect;
     directItm = this.dataStore.gdoDirectQuestions;
 
-    itemPrice = this.utils.calculateTotalPrice(this.utils.utilities.itemPriceInstall);
+    itemPrice = this.utils.calculateTotalPrice();
     itmPrice = this.utils.utilities.itmPrice;
     baseItmPrice = this.utils.utilities.item_price * this.utils.utilities.gdoOpenerQty;
     data;
-    resFlow = true;
+    resFlow
 
     constructor(private appComp: AppComponent
         , private navComp: NavService
@@ -44,14 +44,16 @@ export class ShoppingCartComponent implements OnInit {
         , private dataStore: CollectionData
         , private route: Router) {
     }
-    
+
     shoppingCartData() {
         this.data = this.utils.resFlowSession.resDoorObj;
         console.log(this.data);
     }
-    
+
     ngOnInit() {
         this.navComp.activateIcon();
+        this.utils.resFlowSession.resDoorObj.TYPE === 'GDO' ? this.resFlow = false : this.resFlow = true;
+
         this.pageNo = this.utils.utilities.currPage;
         this.appComp.currScreen = 0;
         this.distancePrice > 0 ? this.showDistancePrice = true : this.showDistancePrice = false;
@@ -109,6 +111,7 @@ export class ShoppingCartComponent implements OnInit {
         this.itemPrice = this.utils.updateQty(flow, this.utils.utilities.gdoOpenerQty);
         this.qty = this.utils.utilities.gdoOpenerQty;
         this.baseItmPrice = this.utils.utilities.item_price * this.utils.utilities.gdoOpenerQty;
+
     }
     checkout() {
         if (this.utils.utilities.flow == 'residentialNavElems') {

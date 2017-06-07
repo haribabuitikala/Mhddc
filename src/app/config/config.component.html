@@ -15,7 +15,7 @@
     </div>
     <div class="text-center switcher-image-sec linear-bg" style="position: relative;">
         <div id="doorVis" [ngClass]="{ 'hide': !isDoor}"></div>
-        <div id="homeVis"  [ngClass]="{ 'hide': isDoor}"></div>
+        <div id="homeVis" [ngClass]="{ 'hide': isDoor}"></div>
     </div>
 </div>
 <div class="inner-router">
@@ -106,16 +106,19 @@
     <modal-header [show-close]="true">
         <h3 class="modal-title">View Details</h3>
     </modal-header>
-    <modal-body > 
-        <div class="quantity-view-details"> 
+    <modal-body>
+        <div class="quantity-view-details">
             <ul>
                 <li>
                     <span><strong>Zip Code/Location</strong>
-         {{details.zip}} - {{details.storeName}} ,{{details.county}} COUNTY</span></li>
+         {{details.zip}} - <span [innerHtml]="details.storeName"></span> ,{{details.county}} COUNTY</span>
+                </li>
 
                 <li>
                     <span><strong>Store</strong>
-          {{details.storeName}}</span></li>
+                    <span [innerHtml]="details.storeName"></span>
+                    </span>
+                </li>
 
                 <li>
                     <span><strong>Size</strong>
@@ -127,15 +130,20 @@
 
                 <li>
                     <span><strong> Collection </strong>
-          {{details.collectionName}}</span></li>
+          <span [innerHtml]="details.collectionName"></span></span>
+                </li>
 
                 <li *ngIf="details.designName">
                     <span><strong> Design </strong>
-          {{details.designName}}</span></li>
+                    <span [innerHtml]="details.designName"></span>
+                    </span>
+                </li>
 
                 <li *ngIf="details.constructionName">
                     <span><strong> Construction </strong>
-          {{details.constructionName}}</span></li>
+                    <span [innerHtml]="details.constructionName"></span>
+                    </span>
+                </li>
 
             </ul>
 

@@ -60,8 +60,8 @@ export class HardwareComponent implements OnInit {
 
     // this.utils.utilities.handlePrice = this.utils.resFlowSession.resDoorObj.hardware[type].item_price * this.countManager[type];
 
-    this.config.itemPriceInstall = this.utils.calculateTotalPrice(this.utils.utilities.itemPriceInstall);
-    this.config.itemPriceDY = this.utils.calculateTotalPrice(this.utils.utilities.itemPriceDY);
+    // this.config.itemPriceInstall = this.utils.calculateTotalPrice(this.utils.utilities.itemPriceInstall);
+    // this.config.itemPriceDY = this.utils.calculateTotalPrice(this.utils.utilities.itemPriceDY);
 
     this.config.renderCanvas();
   }
