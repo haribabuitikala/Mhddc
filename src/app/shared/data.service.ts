@@ -480,33 +480,33 @@ export class CollectionService {
                             "_upload": "false",
                             "_size": "1"
                         },
-                        {
+                          {
                             "dcoords": {
                                 "point": [
                                     {
                                         "_width": "8",
                                         "_height": "7",
                                         "_XY": "0,0",
-                                        "_UL": "283,256",
-                                        "_UR": "435,256",
-                                        "_LR": "435,376",
-                                        "_LL": "284,376"
+                                        "_UL": "473,292",
+                                        "_UR": "554,294",
+                                        "_LR": "554,368",
+                                        "_LL": "473,367"
                                     },
                                     {
                                         "_width": "8",
                                         "_height": "7",
                                         "_XY": "0,0",
-                                        "_UL": "464,256",
-                                        "_UR": "615,257",
-                                        "_LR": "615,376",
-                                        "_LL": "464,376"
+                                        "_UL": "583,293",
+                                        "_UR": "664,294",
+                                        "_LR": "663,370",
+                                        "_LL": "582,370"
                                     }
                                 ]
                             },
                             "_homeid": "10",
-                            "_btnimage": "DIShomeSngl15.png",
-                            "_imagelg": "DIShomeSngl15.png",
-                            "_window": "reflect",
+                            "_btnimage": "DIShomeSngl11.png",
+                            "_imagelg": "DIShomeSngl11.png",
+                            "_window": "lights",
                             "_imgwidth": "700",
                             "_imgheight": "500",
                             "_title": "Single1",
@@ -546,6 +546,39 @@ export class CollectionService {
                         //     "_upload": "false",
                         //     "_size": "2"
                         // },
+                        {
+                            "dcoords": {
+                                "point": [
+                                    {
+                                        "_width": "8",
+                                        "_height": "7",
+                                        "_XY": "0,0",
+                                        "_UL": "283,256",
+                                        "_UR": "435,256",
+                                        "_LR": "435,376",
+                                        "_LL": "284,376"
+                                    },
+                                    {
+                                        "_width": "8",
+                                        "_height": "7",
+                                        "_XY": "0,0",
+                                        "_UL": "464,256",
+                                        "_UR": "615,257",
+                                        "_LR": "615,376",
+                                        "_LL": "464,376"
+                                    }
+                                ]
+                            },
+                            "_homeid": "10",
+                            "_btnimage": "DIShomeSngl15.png",
+                            "_imagelg": "DIShomeSngl15.png",
+                            "_window": "reflect",
+                            "_imgwidth": "700",
+                            "_imgheight": "500",
+                            "_title": "Single1",
+                            "_upload": "false",
+                            "_size": "1"
+                        },
                         {
                             "dcoords": {
                                 "point": [
