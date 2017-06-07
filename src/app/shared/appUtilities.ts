@@ -231,7 +231,9 @@ export class ResidentialFlowSession {
         heightI: 0,
         collectionName: '',
         designName: '',
-        constructionName: ''
+        constructionName: '',
+        // calculation variables
+        upsellPrice:0
 
     }
 
