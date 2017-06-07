@@ -101,9 +101,14 @@ export class AdditionalOptionsComponent implements OnInit {
 
         var k = this.pageNo + '.Additional Options';
         $('#visualize-header').html(k);
-    
 
-}
+
+        this.utils.utilities.kPrice = _.sumBy(this.dataStore.gdoOpenerAccessories, function (o) {
+            return o.price;
+        });
+
+
+    }
 
     nextBtn(path) {
         $('body').addClass('loader');
@@ -119,7 +124,7 @@ export class AdditionalOptionsComponent implements OnInit {
     prevBtn(path) {
         $('body').addClass('loader');
         this.gdoConfig.gdoOpeners.length = 0;
-        this.utils.utilities.kPrice = 0;
+        // this.utils.utilities.kPrice = 0;
         this.gdoConfig.itemPrice = this.utils.calculateTotalPrice();
         if (this.utils.utilities.flow === 'gdoNavElems') {
             this.utils.setUtils(2, 0);
@@ -201,7 +206,7 @@ export class AdditionalOptionsComponent implements OnInit {
 
         }
         this.gdoConfig.itemPrice = this.utils.calculateTotalPrice();
-        
+
     }
 
     showDouble(itm) {

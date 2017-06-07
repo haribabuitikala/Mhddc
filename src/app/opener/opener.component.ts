@@ -8,7 +8,7 @@ import { CollectionService } from "../shared/data.service";
 import { GdoConfigComponent } from "../gdo-config/gdo-config.component";
 import { NavComponent } from '../nav/nav.component'
 declare var _: any;
-declare var $:any;
+declare var $: any;
 
 @Component({
     selector: 'app-opener',
@@ -65,7 +65,7 @@ export class OpenerComponent implements OnInit {
         // });
     }
 
-    
+
     ngOnInit() {
         this.pageNo = this.utils.utilities.currPage;
         this.navComp.activateIcon();
@@ -83,7 +83,7 @@ export class OpenerComponent implements OnInit {
         this.utils.utilities.singlep = 0;
         this.utils.utilities.doublep = 0;
         this.utils.utilities.milesp = 0;
-        this.utils.utilities.kPrice = 0;
+        // this.utils.utilities.kPrice = 0;
         this.utils.utilities.distancePrice = 0;
 
         var k = this.pageNo + '.Choose an Opener';
@@ -93,8 +93,7 @@ export class OpenerComponent implements OnInit {
     }
 
     nextBtn(path) {
-        
-                            $('body').addClass('loader');
+        $('body').addClass('loader');
         if (this.utils.utilities.flow === 'gdoNavElems') {
             this.utils.setUtils(3, 1);
             this.utils.utilities.gdoOpenerText = this.gdoOpenertext;
@@ -103,7 +102,7 @@ export class OpenerComponent implements OnInit {
                 res => {
                     // this.route.navigateByUrl(path);
                     this.gdoOpenerObj = res;
-                            $('body').removeClass('loader');
+                    $('body').removeClass('loader');
                     this.gdoOponerAccessories.open();
                     // this.goTo('gdoConfig' + path)
                 }
@@ -111,7 +110,7 @@ export class OpenerComponent implements OnInit {
 
 
         } else {
-                            $('body').removeClass('loader');
+            $('body').removeClass('loader');
             this.goTo('config' + path)
         }
     }
