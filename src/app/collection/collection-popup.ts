@@ -1,4 +1,6 @@
 import {Component, OnInit, Input} from '@angular/core';
+import {SafeResourceUrl} from     "@angular/platform-browser";
+import { DomSanitizer} from '@angular/platform-browser';
 @Component({
     selector: 'collection-popup',
     template: `    
@@ -7,7 +9,7 @@ import {Component, OnInit, Input} from '@angular/core';
         <img src="../../assets/images/collection/gallery.png" (click)="showGallery()" *ngIf="showImageIcon" alt=""
              height="20"/>
         <span><button (click)="collectionPopup.open()">Info</button></span>        
-                
+        <iframe class="iframe" *ngIf="showVideo" [src]="videoUrl" frameborder="0" allowfullscreen></iframe> 
         <!-- product details popup -->
         <modal #collectionPopup>
             <modal-header [show-close]="true">
@@ -16,7 +18,6 @@ import {Component, OnInit, Input} from '@angular/core';
                 <p><img src="../../assets/images/collection/popup/{{img}}"></p> 
             </modal-body>
         </modal>
-        
     `,
     styleUrls: ['./collection.component.less']
 })
@@ -26,11 +27,15 @@ export class CollectionPopup implements OnInit {
     showPlayIcon: boolean = true;
     showImageIcon: boolean = false;
 
+    constructor(private sanitizer: DomSanitizer) { }
+
     playVideo() {
         this.showVideo = true;
         this.showPlayIcon = false;
         this.showImageIcon = true;
     }
+
+
 
     showGallery() {
         this.showVideo = false;
@@ -39,10 +44,13 @@ export class CollectionPopup implements OnInit {
     }
 
     @Input() popup;
+    @Input() video;
     img;
+    videoUrl;
 
     ngOnInit() {
         this.img = this.popup.popupImg;
+        this.videoUrl = this.sanitizer.bypassSecurityTrustResourceUrl(this.video)
         if (this.popup.item_id === 31 || this.popup.item_id === 170 || this.popup.item_id === 30) {
             this.showPlayIcon = false;
         }

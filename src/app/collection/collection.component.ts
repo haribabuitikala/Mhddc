@@ -238,6 +238,10 @@ export class CollectionComponent implements OnInit {
         };
     }
 
+    videos(obj){
+        return this.videosLinks[obj.item_id];
+    }
+
     videosLinks = {
         16: 'http://player.vimeo.com/video/45261585?title=0&amp;byline=0&amp;portrait=0',
         30: 'http://player.vimeo.com/video/45305455?title=0&amp;byline=0&amp;portrait=0',
