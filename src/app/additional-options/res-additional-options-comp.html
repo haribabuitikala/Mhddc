@@ -11,19 +11,20 @@
                     <img src="../../assets/images/Medallionlogo.png" alt="" />
                     <img src="../../assets/images/MedallionUpgrades_warranties.png" alt="" />
                 </div>
-                <div class="flex-right">
-                    <span [innerHTML]="installQuestions.Answers[1].item_name" [ngClass]="{'hide' : installQuestions.Answers[1].isDefault }" id="{{installQuestions.item_id}}"></span>
-                    <div class="flex">
+                <div class="flex space-between">
+                    <span [innerHTML]="installQuestions.Answers[1].item_name" *ngIf="installQuestions.Answers[1].isDefault && installQuestions.item_id !== 5"></span>
+                    <span></span>
+                    <div class="flex-right">
                         <div class="text-orange">Yes</div>
                         <label class="switch">
-                        <input type="checkbox" [checked]="installQuestions.Answers[1].isDefault" (change)="installQuestionsOptions($event,installQuestions)">
+                        <input type="checkbox" [(ngModel)]="installQuestions.Answers[1].isDefault" (change)="installQuestionsOptions($event,installQuestions)">
                         <div class="slider round"></div>
                     </label>
                         <div class="text-orange">No</div>
                         <!--<div class="text-orange" [innerHTML]="installQuestions.Answers[0].item_name"></div>-->
                     </div>
                 </div>
-                <div *ngIf="installQuestions.item_id=='5' ">
+                <div *ngIf="installQuestions.item_id === 5 && installQuestions.Answers[1].isDefault">
                     <p id="distance text-orange">it's <input type="text" [(ngModel)]="defaultMiles" (keyup)="calculatemiles(defaultMiles)" name="defaultMiles"
                         /> miles away</p>
                 </div>
