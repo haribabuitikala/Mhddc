@@ -31,9 +31,13 @@
         <div class="col6 margin-b-15" *ngIf="upSellImage">
             <img src="./assets/images/{{upSellImage.replace('.jpg', '.png')}}" style="border:1px solid #CCC; position:relative; height:190px; width:100%;" alt="" />
         </div>
-        <div class="col6 margin-b-15" *ngFor="let data of upSellData">
+        <div class="col6 margin-b-15 ptn-rel" *ngFor="let data of upSellData">
             <span class="col-xs-8 pull-right promo-offer">Upgrade for Only {{ getModelPriceUpsell(data) | currency:'USD':true:'1.2-2' }} Per door</span>
-            <img src="./assets/images/{{data.upgrade_image}}" style="border:1px solid #CCC; position:relative; height:190px; width:100%;" alt="" />
+            <img src="./assets/images/{{data.upgrade_image}}" (click)="updateWithUpsellPrice(data)" style="border:1px solid #CCC; position:relative; height:190px; width:100%;" alt="" />
+        
+        <div class="upsellDetails">
+            <span>{{data.upgrade_model}}</span>
+        </div>
         </div>
         <div class="col6 margin-b-15 margin-t-10 text-center">
             <button class="btn btn-default text-orange" (click)="moveNext()">No Thanks >> Continue</button>

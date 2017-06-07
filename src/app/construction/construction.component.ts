@@ -146,7 +146,7 @@ export class ConstructionComponent implements OnInit {
                     console.log('updell length ', res);
                     if (res.length > 0) {
                         this.upSellData = res;
-                        upsellModal.open()
+                        upsellModal.open();
                     } else {
                         this.route.navigateByUrl(path);
                     }
@@ -165,8 +165,10 @@ export class ConstructionComponent implements OnInit {
     }
 
     moveNext() {
+        this.upsell.close();
         this.route.navigateByUrl('config/color');
         // this.goToHome(this.selected);
+        
     }
 
     getModelPriceUpsell(updata) {
@@ -177,6 +179,12 @@ export class ConstructionComponent implements OnInit {
             return (filtermodel.item_price - ((15 * filtermodel.item_price) / 100)) - (currentConstruction['item_price'] - ((15 * currentConstruction['item_price']) / 100));
         }
         return 0;
+    }
+
+    updateWithUpsellPrice(data){
+        this.utils.resFlowSession.resDetails.upsellPrice = this.getModelPriceUpsell(data);
+        this.config.calculatePrice();
+        this.moveNext();
     }
 
 }
