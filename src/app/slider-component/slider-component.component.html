@@ -4,7 +4,7 @@
       <div class="_slide" [style.width.px]="slideWidth" *ngFor="let slide of data; let k = index">
         <div class="_slide-items">
           <div class="inner-item col-xs-{{number}}" *ngFor="let slideitem of slide; let i=index" [ngClass]="{ 'current' : isSeleted(slideitem, k, i)}">
-            <img src="../../../assets/images/openers/{{slideitem.item_thumbnail}}"
+            <img src="../../../assets/images/openers/{{slideitem.item_thumbnail.replace('jpg','png')}}"
                  (click)="openerSelected(slideitem, $event)"                 
                  [attr.data-id]="slideitem.item_id"
                  alt="">
