@@ -34,7 +34,8 @@ export class InstallComponent implements OnInit, AfterViewInit {
     }
     @ViewChild('exactDoorsize') exactDoorsize: ModalComponent;
     @ViewChild('leadTest') leadTest: ModalComponent;
-    @ViewChild('epa') epa: ModalComponent; 
+    @ViewChild('epa') epa: ModalComponent;
+    @ViewChild('learnMore') learnMore: ModalComponent;
 
     installSize: string;
     wincode: string;
@@ -195,7 +196,12 @@ export class InstallComponent implements OnInit, AfterViewInit {
         }
     }
     epaValue(epaStatus) {
-        if (epaStatus == 'back') {
+        if (epaStatus == 'learn') {
+            this.leadTest.close();
+            this.epa.close();
+            this.learnMore.open();
+
+        } else if (epaStatus == 'back') {
             this.epa.close();
             this.leadTest.open();
         } else {
@@ -203,6 +209,10 @@ export class InstallComponent implements OnInit, AfterViewInit {
                this.navigateTo('/config/opener');
            }
         }
+    }
+    learMoreClose() {
+        this.learnMore.close();
+        this.epa.open();
     }
     checkValue;
 checkboxValue(event){

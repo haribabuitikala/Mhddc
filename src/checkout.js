@@ -1390,8 +1390,8 @@ function webTest() {
     }
 
     // added urls 
-    var _CheckOutURL = 'https://hddcpgate.clopay.com/mCheckOut.aspx';
-    var _WSURL = 'https://hddccsr.clopay.com/FlashService/FlashService.asmx';
+    var _CheckOutURL = 'https://test-hddcpgate.clopay.com/mCheckOut.aspx';
+    var _WSURL = 'https://test-hddccsr.clopay.com/FlashService/FlashService.asmx';
 
     //ASSEMBLE PO
     _orderPO = "<DOCUMENT>" + _newLine;

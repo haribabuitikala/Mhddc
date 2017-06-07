@@ -120,13 +120,16 @@ export class ConfigComponent implements OnInit, AfterViewInit {
     }
 
     isDoor = true;
+    basep;
     ngOnInit() {
         // set the curr screen
+        this.basep = this.utils.resFlowSession.resDoorObj.design.apiData[0]['constructions'][0].item_price;
         let path = this.location.path();
         path === "/config/design" ? path = "/config" : path = this.location.path();
         // this.appComponent.currScreen = this.appComponent.navElems.indexOf(path);
-
+        this.calculatePrice();
         $('.switcher-box').css({ right: 35 });
+
 
         this.homeImage = this.utils.resFlow.selectedHome;
         var $this = this;
@@ -388,6 +391,8 @@ export class ConfigComponent implements OnInit, AfterViewInit {
 
 
     /** Details **/
+    
+
     calculatePrice() {
         try {
             this.utils.resFlowSession.resCalculatePrice();
@@ -406,16 +411,16 @@ export class ConfigComponent implements OnInit, AfterViewInit {
     }
 
     openDetailsModal(detailsModal) {
-        this.details['designName'] = this.utils.resFlowSession.resDoorObj.design.dsgn['item_name'];
+        // this.details['designName'] = this.utils.resFlowSession.resDoorObj.design.dsgn['item_name'];
         detailsModal.open();
     }
 
     updateQuantity(isIncrement?) {
         let count = this.utils.resFlowSession.resDoorObj.QTY;
-        if (!isIncrement && count > 1) {
-            this.utils.resFlowSession.resDoorObj.QTY = count - 1;
-        } else {
+        if (isIncrement && count < 6) {
             this.utils.resFlowSession.resDoorObj.QTY = count + 1;
+        } else if (count > 1 && count !== 6) {
+            this.utils.resFlowSession.resDoorObj.QTY = count - 1;
         }
         this.quantity = this.utils.resFlowSession.resDoorObj.QTY;
         this.calculatePrice();

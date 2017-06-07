@@ -46,7 +46,7 @@ export class HardwareComponent implements OnInit {
   updateCount(type, isincrement) {
     if (!isincrement && this.countManager[type] > 0 && this.countManager[type] > 1) {
       this.countManager[type] = this.countManager[type] - 1;
-    } else if (isincrement && this.countManager[type] > 0 && this.countManager[type] < 2) {
+    } else if (isincrement && this.countManager[type] > 0 && this.countManager[type] < 6) {
       this.countManager[type] = this.countManager[type] + 1;
     }
 

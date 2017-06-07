@@ -2,12 +2,12 @@
 
 <!-- Begin Tile 2 -->
 <div *ngIf="popular">
-    <div class="tile margin-t-10" *ngFor="let popular of popularCollections" [ngClass]="{ 'selected': isSelected(popular)}">
+    <div class="tile margin-t-10 ptn-rel" *ngFor="let popular of popularCollections" [ngClass]="{ 'selected': isSelected(popular)}">
         <div class="collection-img" (click)="goToHome(popular)">
             <img src="../../assets/images/collection/{{popular.imageUrl}}" alt=""/>
         </div>
         <div class="collection-btn-sec ">
-            <collection-popup [popup]="popular"></collection-popup>
+            <collection-popup [popup]="popular" [video]="videosLinks[popular.item_id]"></collection-popup>
             <div class="btns pull-right" (click)="goToHome(popular)">
                 <button>Select</button>
             </div>

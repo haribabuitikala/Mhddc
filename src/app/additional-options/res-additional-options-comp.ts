@@ -204,7 +204,7 @@ export class ResAdditionalOptionsComponent implements OnInit {
 
     }
     itmObj;
-    showMiles;
+
     installQuestionsOptions(itm, obj) {
         let k = {
             id: obj.item_id,
@@ -221,8 +221,7 @@ export class ResAdditionalOptionsComponent implements OnInit {
                     break;
                 case 5:
                     $('#' + obj.item_id).addClass('hide');
-                    this.removeItmOptions(obj.item_id);
-                    this.showMiles = false;
+                    this.removeItmOptions(obj.item_id)
                     break;
                 case 11:
                     $('#' + obj.item_id).addClass('hide');
@@ -245,7 +244,6 @@ export class ResAdditionalOptionsComponent implements OnInit {
                     $('#' + obj.item_id).removeClass('hide');
                     k.price = 51;
                     k.name = 'Delivery 31 miles from store';
-                    this.showMiles = true;
                     this.itmObj.items.push(k);
                     break;
                 case 11:
@@ -258,12 +256,10 @@ export class ResAdditionalOptionsComponent implements OnInit {
                     break;
             }
         }
+
         //alert('the final install med is'+this.installMed);
         this.aditionalDiyPrice = this.installMed + this.installMiles + this.installHeadRoom + this.installReleaseKit;
     }
-
-    // showMiles item id 5
-
 
     removeItmOptions(id) {
         this.itmObj.items = this.itmObj.items.filter(function (el) {

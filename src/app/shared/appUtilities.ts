@@ -9,7 +9,7 @@ export class AppUtilities {
         $('body').addClass('loader');
     }
 
-    removeLoader(){
+    removeLoader() {
         $('body').removeClass('loader');
     }
 
@@ -132,10 +132,10 @@ export class AppUtilities {
     //gdoCheck = ['66502', '2217', '77840', '6559', '66604', '2207', '3703'];
     gdoCheck = ['2217', '6559', '2207', '3703'];
 
-    calculateTotalPrice(basep) {
+    calculateTotalPrice() {
 
-        // let basep = this.utilities.item_price;
-        let qty = this.resFlowSession.resDoorObj.QTY;
+        let basep = this.utilities.item_price;
+        let qty = this.utilities.gdoOpenerQty;
         let singlep = this.utilities.singlep;
         let doublep = this.utilities.doublep;
         let milesp = this.utilities.milesp;
@@ -143,8 +143,17 @@ export class AppUtilities {
         let distancePrice = this.utilities.distancePrice;
         let lockPrice = this.utilities.lockPrice;
         let hardwarePrice = this.utilities.hardwarePrice;
+        let upsellPrice = this.resFlowSession.resDetails.upsellPrice;
 
-        return (basep * qty) + singlep + doublep + milesp + kPrice + distancePrice + lockPrice + hardwarePrice;
+        return (basep * qty)
+            + singlep
+            + doublep
+            + milesp
+            + kPrice
+            + distancePrice
+            + lockPrice
+            + hardwarePrice
+            + upsellPrice
     }
 
     resetCalc() {
@@ -168,7 +177,7 @@ export class AppUtilities {
         }
         this.utilities.gdoOpenerQty = qty;
 
-        return this.calculateTotalPrice(this.utilities.itemPriceInstall)
+        return this.calculateTotalPrice()
     }
 
     sumBy(obj) {
@@ -233,7 +242,7 @@ export class ResidentialFlowSession {
         designName: '',
         constructionName: '',
         // calculation variables
-        upsellPrice:0
+        upsellPrice: 0
 
     }
 

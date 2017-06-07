@@ -184,12 +184,14 @@ export class CollectionComponent implements OnInit {
                     err => {
                         this.utils.removeLoader();
                     });
-            },e => {
+            }, e => {
                 console.log(e);
                 this.utils.removeLoader();
             })
     }
-
+    setLcode(obj, itm) {
+        return this.utils.utilities.winCode == "W0" ? obj[itm] : obj[itm + 'w'];
+    }
     setParams(obj) {
         let dataParams;
         let utils = this.utils.utilities;
@@ -226,15 +228,28 @@ export class CollectionComponent implements OnInit {
             "lang": "en",
             "localmarketid": +utils.localmarketid,
             "doorsize": +utils.homeSize,
-            "LaborCode": obj.singleinstallcodew,
+            "LaborCode": this.utils.utilities.singleDoor ? this.setLcode(obj, 'singleinstallcode') : this.setLcode(obj, 'doubleinstallcode'),
             "isCRLE": false,
-            "productlayout": false,
+            "productlayout": true,
             "dealerid": 1,
-
             "doorwidth": +utils.wf,
             "doorheight": +utils.hf
 
         };
+    }
+
+    videos(obj){
+        return this.videosLinks[obj.item_id];
+    }
+
+    videosLinks = {
+        16: 'http://player.vimeo.com/video/45261585?title=0&amp;byline=0&amp;portrait=0',
+        30: 'http://player.vimeo.com/video/45305455?title=0&amp;byline=0&amp;portrait=0',
+        31: 'http://player.vimeo.com/video/45305455?title=0&amp;byline=0&amp;portrait=0',
+        11: 'http://player.vimeo.com/video/45265712?title=0&amp;byline=0&amp;portrait=0',
+        12: 'http://player.vimeo.com/video/45269962?title=0&amp;byline=0&amp;portrait=0',
+        9: 'http://www.youtube.com/v/CFoEJtVEgIU?fs=1&amp;hl=en_US&amp;html5=1',
+        13: 'http://player.vimeo.com/video/45305456?title=0&amp;byline=0&amp;portrait=0&amp;color=0871a8'
     }
 
     quickShip() {

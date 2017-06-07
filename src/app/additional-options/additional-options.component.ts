@@ -101,9 +101,14 @@ export class AdditionalOptionsComponent implements OnInit {
 
         var k = this.pageNo + '.Additional Options';
         $('#visualize-header').html(k);
-    
 
-}
+
+        this.utils.utilities.kPrice = _.sumBy(this.dataStore.gdoOpenerAccessories, function (o) {
+            return o.price;
+        });
+
+
+    }
 
     nextBtn(path) {
         $('body').addClass('loader');
@@ -119,8 +124,8 @@ export class AdditionalOptionsComponent implements OnInit {
     prevBtn(path) {
         $('body').addClass('loader');
         this.gdoConfig.gdoOpeners.length = 0;
-        this.utils.utilities.kPrice = 0;
-        this.gdoConfig.itemPrice = this.utils.calculateTotalPrice(this.utils.utilities.itemPriceInstall);
+        // this.utils.utilities.kPrice = 0;
+        this.gdoConfig.itemPrice = this.utils.calculateTotalPrice();
         if (this.utils.utilities.flow === 'gdoNavElems') {
             this.utils.setUtils(2, 0);
             if (this.navComponent.subFlow) {
@@ -154,13 +159,13 @@ export class AdditionalOptionsComponent implements OnInit {
                 this.flow = 'direct';
                 this.utils.utilities.distancePrice = 2.5;
                 this.distancePrice = 2.5;
-                // this.gdoConfig.itemPrice = this.gdoConfig.itemPrice + 2.50;
+                this.gdoConfig.itemPrice = this.gdoConfig.itemPrice + 2.50;
             }
             else {
                 this.flow = 'non-direct';
                 this.utils.utilities.distancePrice = 51;
                 this.distancePrice = 51;
-                // this.gdoConfig.itemPrice = this.gdoConfig.itemPrice + 51;
+                this.gdoConfig.itemPrice = this.gdoConfig.itemPrice + 51;
             }
             $('.gdoDistance').removeAttr('disabled');
             this.showDistancePrice = false;
@@ -171,7 +176,7 @@ export class AdditionalOptionsComponent implements OnInit {
             this.mileOpenPr = 0;
             $('.gdoDistance').prop('disabled', 'disabled');
         }
-        this.gdoConfig.itemPrice = this.utils.calculateTotalPrice(this.utils.utilities.itemPriceInstall); //this.calculateTotalPrice(this.utils.utilities.item_price, this.singleOpener, this.doubleOpener, this.mileOpenPr, this.qty);
+        this.gdoConfig.itemPrice = this.utils.calculateTotalPrice(); //this.calculateTotalPrice(this.utils.utilities.item_price, this.singleOpener, this.doubleOpener, this.mileOpenPr, this.qty);
     }
 
     singleOpener = 0;
@@ -200,7 +205,8 @@ export class AdditionalOptionsComponent implements OnInit {
             this.utils.utilities.singlep = 0;
 
         }
-        this.gdoConfig.itemPrice = this.utils.calculateTotalPrice(this.utils.utilities.itemPriceInstall);
+        this.gdoConfig.itemPrice = this.utils.calculateTotalPrice();
+
     }
 
     showDouble(itm) {
@@ -223,7 +229,7 @@ export class AdditionalOptionsComponent implements OnInit {
             this.utils.utilities.kPrice = this.removeItm(1);
             this.utils.utilities.doublep = 0;
         }
-        this.gdoConfig.itemPrice = this.utils.calculateTotalPrice(this.utils.utilities.itemPriceInstall);
+        this.gdoConfig.itemPrice = this.utils.calculateTotalPrice();
     }
 
     showManual(itm) {
@@ -283,7 +289,7 @@ export class AdditionalOptionsComponent implements OnInit {
             return o.price;
         });
         this.utils.utilities.kPrice = kPrice;
-        this.gdoConfig.itemPrice = this.utils.calculateTotalPrice(this.utils.utilities.itemPriceInstall);
+        this.gdoConfig.itemPrice = this.utils.calculateTotalPrice();
         // this.localPrice = this.gdoConfig.itemPrice + kPrice;
     }
 
@@ -327,7 +333,6 @@ export class AdditionalOptionsComponent implements OnInit {
                 this.distancePrice = 0;
             }
 
-            // this.gdoConfig.itemPrice = this.calculateTotalPrice(this.utils.utilities.item_price, this.singleOpener, this.doubleOpener, this.mileOpenPr, this.qty);
         } else {
             let k = miles - 50;
 
@@ -342,7 +347,7 @@ export class AdditionalOptionsComponent implements OnInit {
         }
         this.mileOpenPr = this.distancePrice;
         this.utils.utilities.distancePrice = this.distancePrice;
-        this.gdoConfig.itemPrice = this.utils.calculateTotalPrice(this.utils.utilities.itemPriceInstall);
+        this.gdoConfig.itemPrice = this.utils.calculateTotalPrice();
     }
 
 }

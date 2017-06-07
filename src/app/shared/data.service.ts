@@ -513,6 +513,39 @@ export class CollectionService {
                             "_upload": "false",
                             "_size": "1"
                         },
+                        // {
+                        //     "dcoords": {
+                        //         "point": [
+                        //             {
+                        //                 "_width": "8",
+                        //                 "_height": "7",
+                        //                 "_XY": "0,0",
+                        //                 "_UL": "374,294",
+                        //                 "_UR": "473,293",
+                        //                 "_LR": "474,390",
+                        //                 "_LL": "373,389"
+                        //             },
+                        //             {
+                        //                 "_width": "8",
+                        //                 "_height": "7",
+                        //                 "_XY": "0,0",
+                        //                 "_UL": "493,293",
+                        //                 "_UR": "601,292",
+                        //                 "_LR": "601,391",
+                        //                 "_LL": "494,391"
+                        //             }
+                        //         ]
+                        //     },
+                        //     "_homeid": "10",
+                        //     "_btnimage": "DIShomeSngl16.png",
+                        //     "_imagelg": "DIShomeSngl16.png",
+                        //     "_window": "reflect",
+                        //     "_imgwidth": "700",
+                        //     "_imgheight": "500",
+                        //     "_title": "Single1",
+                        //     "_upload": "false",
+                        //     "_size": "2"
+                        // },
                         {
                             "dcoords": {
                                 "point": [
@@ -545,39 +578,6 @@ export class CollectionService {
                             "_title": "Single1",
                             "_upload": "false",
                             "_size": "1"
-                        },
-                        {
-                            "dcoords": {
-                                "point": [
-                                    {
-                                        "_width": "8",
-                                        "_height": "7",
-                                        "_XY": "0,0",
-                                        "_UL": "374,294",
-                                        "_UR": "473,293",
-                                        "_LR": "474,390",
-                                        "_LL": "373,389"
-                                    },
-                                    {
-                                        "_width": "8",
-                                        "_height": "7",
-                                        "_XY": "0,0",
-                                        "_UL": "493,293",
-                                        "_UR": "601,292",
-                                        "_LR": "601,391",
-                                        "_LL": "494,391"
-                                    }
-                                ]
-                            },
-                            "_homeid": "10",
-                            "_btnimage": "DIShomeSngl16.png",
-                            "_imagelg": "DIShomeSngl16.png",
-                            "_window": "reflect",
-                            "_imgwidth": "700",
-                            "_imgheight": "500",
-                            "_title": "Single1",
-                            "_upload": "false",
-                            "_size": "2"
                         },
                         {
                             "dcoords": {

@@ -56,7 +56,6 @@ export class GdoUpdateComponent implements OnInit {
         });
 
         this.utils.utilities.kPrice = kPrice;
-
-        this.gdoConfig.itemPrice = this.utils.calculateTotalPrice(this.utils.utilities.itemPriceInstall);
+        this.gdoConfig.itemPrice = this.utils.calculateTotalPrice();
     }
 }
