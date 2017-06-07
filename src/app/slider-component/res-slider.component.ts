@@ -216,7 +216,7 @@ export class ResSliderComponent implements OnInit, AfterViewInit {
     }
 
     ngAfterViewInit() {
-        $('.choose-design .inner-item > img').css({ 'height': 116 });
+        $('.choose-design .inner-item > img').css({ 'height': 108 });
         $('.constructionSlider .inner-item > img').css({ 'height': 150 });
         $('.colorSlider .inner-item > img').css({ 'height': 72 });
         $('.topSectionSlider .inner-item > img').css({ 'height': 37 });
