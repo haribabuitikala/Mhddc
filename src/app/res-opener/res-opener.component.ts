@@ -97,6 +97,10 @@ export class ResOpenerComponent implements OnInit {
                 .subscribe(
                 res => {
                     this.additionalItems = res;
+                    this.utils.resFlowSession.resDoorObj.opener.items = res;
+                    _.forEach(this.utils.resFlowSession.resDoorObj.opener.items, function (item) {
+                        item['count'] = 0;
+                    })
                     this.gdoOponerAccessories.open();
                 });
         } else {

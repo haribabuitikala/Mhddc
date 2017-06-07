@@ -114,6 +114,10 @@ export class DesignComponent implements OnInit {
         this.app.setLoader();
     }
 
+    onDoorDesignSelected (e) {
+        console.log(e.obj);
+    }
+
     nextBtn(path) {
         this.route.navigateByUrl(path);
     }

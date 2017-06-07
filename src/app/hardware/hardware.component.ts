@@ -20,7 +20,8 @@ export class HardwareComponent implements OnInit {
     , private utils: AppUtilities
     , private dataService: CollectionService
     , private navComponent: NavComponent
-    , private route: Router) {
+    , private route: Router
+    , private app: AppComponent) {
   }
 
   isLoaded = false;
@@ -58,11 +59,7 @@ export class HardwareComponent implements OnInit {
     hardware.items[1].count = this.countManager.stepplate;
     hardware.items[2].count = this.countManager.hinge;    
 
-    // this.utils.utilities.handlePrice = this.utils.resFlowSession.resDoorObj.hardware[type].item_price * this.countManager[type];
-
-    this.config.itemPriceInstall = this.utils.calculateTotalPrice(this.utils.utilities.itemPriceInstall);
-    this.config.itemPriceDY = this.utils.calculateTotalPrice(this.utils.utilities.itemPriceDY);
-
+    this.app.updatePrice();
     this.config.renderCanvas();
   }
   hardwarePriceTot(price) {

@@ -2,6 +2,7 @@ import {Component, OnInit, Input} from '@angular/core';
 import {AppUtilities} from "../shared/appUtilities";
 import {CollectionData} from "../collection/collection-data";
 import {ConfigComponent} from "./config.component";
+import { AppComponent } from "../app.component";
 declare var _: any;
 
 @Component({
@@ -19,7 +20,8 @@ export class ResUpdateComponent implements OnInit {
 
     constructor(private utils: AppUtilities
         , private dataStrorage: CollectionData
-        , private config: ConfigComponent) {
+        , private config: ConfigComponent
+        , private app: AppComponent) {
     }
 
     @Input() data;
@@ -40,28 +42,32 @@ export class ResUpdateComponent implements OnInit {
             this.quantity--;
         }
 
-        let k = id;
-        let t = [];
-        k = {
-            name: obj.item_name,
-            price: obj.item_price,
-            count: this.quantity,
-            totalPrice: obj.item_price * this.quantity,
-            id: id
-        };
-        let items = this.utils.resFlowSession.resDoorObj.opener.items;
+        obj.count = this.quantity;
 
-        var filterItems = items.filter(g => { return g.id == id })
-        if (filterItems && filterItems.length > 0) {
-            filterItems[0].count = this.quantity;
-        } else {
-            items.push(k);
-        }
-        let kPrice = _.sumBy(this.dataStrorage.gdoOpenerAccessories, function (o) {
-            return o.price;
-        });
+        this.app.updatePrice();
 
-        this.utils.utilities.kPrice = kPrice;
+        // let t = [];
+        // let k = {
+        //     name: obj.item_name,
+        //     price: obj.item_price,
+        //     count: this.quantity,
+        //     totalPrice: obj.item_price * this.quantity,
+        //     id: id
+        // };
+        // let items = this.utils.resFlowSession.resDoorObj.opener.items;
+
+        // var filterItems = items.filter(g => { return g.id == id })
+        // if (filterItems && filterItems.length > 0) {
+        //     filterItems[0].count = this.quantity;
+        // } else {
+        //     items.push(k);
+        // }
+        // let kPrice = _.sumBy(this.dataStrorage.gdoOpenerAccessories, function (o) {
+        //     return o.price;
+        // });
+
+        // this.utils.utilities.kPrice = kPrice;
+        
 
         // this.config.itemPrice = this.utils.calculateTotalPrice(this.utils.utilities.itemPriceInstall);
     }

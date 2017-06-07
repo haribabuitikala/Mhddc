@@ -44,7 +44,7 @@ export class CategoryComponent implements OnInit {
             this.utilities.utilities.currPage = 1;
             this.utilities.utilities.currScreen += 1;
             this.navComp.setNavFlow('res');
-            this.utilities.resFlowSession.resDoorObj.INSTALLTYPE = "NA";
+            this.utilities.resFlowSession.resDoorObj.INSTALLTYPE = "Installed";
             this.utilities.resFlowSession.resDoorObj.TYPE = "RES";
             this.route.navigateByUrl(path);
         } else {

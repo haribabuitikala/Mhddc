@@ -159,6 +159,7 @@ export class ResAdditionalOptionsComponent implements OnInit {
     }
 
     nextBtn(path) {
+        this.appComponent.updatePrice();
         this.route.navigateByUrl('/config/doorConfiguration');
     }
 

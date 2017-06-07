@@ -41,6 +41,7 @@ export class ResSliderComponent implements OnInit, AfterViewInit {
     @Input() className: string;
     @Input() subname: string;
     @Input() issub: string;
+    @Output() onSelected = new EventEmitter();
 
     sliderRows;
     showGlassDetails;
@@ -105,6 +106,7 @@ export class ResSliderComponent implements OnInit, AfterViewInit {
             case 'design':
                 if (this.utils.resFlowSession.resDoorObj.design.dsgn) {
                     if (this.utils.resFlowSession.resDoorObj.design.dsgn['item_id'] === item['item_id']) {
+                        this.utils.resFlowSession.resDoorObj.design.dsgn['constructions'][0]['isdefault'] = true;
                         isSeleted = true;
                     }
                 }
@@ -112,6 +114,7 @@ export class ResSliderComponent implements OnInit, AfterViewInit {
             case 'construction':
                 if (this.utils.resFlowSession.resDoorObj.construction.construction) {
                     if (this.utils.resFlowSession.resDoorObj.construction.construction['item_id'] === item['item_id']) {
+                        this.utils.resFlowSession.resDoorObj.construction.construction['isdefault'] = true;
                         isSeleted = true;
                     }
                 }
@@ -256,8 +259,8 @@ export class ResSliderComponent implements OnInit, AfterViewInit {
         switch (this.cname) {
             case 'topsection':
                 this.utils.resFlowSession.resDoorObj.windows.topsection = obj;
-                if (obj['glasstype'] && obj['glasstype'].length > 0) {
-                    this.utils.resFlowSession.resDoorObj.windows.glasstype = obj['glasstype'][0];
+                if (obj['glasstypes'] && obj['glasstypes'].length > 0) {
+                    this.utils.resFlowSession.resDoorObj.windows.glasstype = obj['glasstypes'][0];
                 }
                 break;
             case 'glasstype':
@@ -286,11 +289,13 @@ export class ResSliderComponent implements OnInit, AfterViewInit {
                 if (obj['constructions']) {
                     this.utils.resFlowSession.resDoorObj.construction.apiData = obj['constructions'];
                     this.utils.resFlowSession.resDoorObj.construction.construction = obj['constructions'][0];
+                    this.utils.resFlowSession.resDoorObj.construction.construction['isdefault'] = true;
                 }
                 let stockdoorconstructions = obj['stockdoorconstructions'];
                 if (stockdoorconstructions && stockdoorconstructions.length > 0) {
                     this.utils.resFlowSession.resDoorObj.construction.apiData = stockdoorconstructions;
                     this.utils.resFlowSession.resDoorObj.construction.construction = stockdoorconstructions[0];
+                    this.utils.resFlowSession.resDoorObj.construction.construction['isdefault'] = true;
                     let colors = stockdoorconstructions[0]['colors'];
                     if (colors && colors.length > 0) {
 
@@ -356,6 +361,7 @@ export class ResSliderComponent implements OnInit, AfterViewInit {
             // this.notify.emit(obj);
             this.saveSelected(obj);
         }
+        this.onSelected.next({event: event, obj: obj});
         this.utils.removeLoader();
     }
 

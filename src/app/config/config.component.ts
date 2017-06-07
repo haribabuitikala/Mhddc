@@ -19,7 +19,6 @@ export class ConfigComponent implements OnInit, AfterViewInit {
         appComponent.subscribeToPrice(() => {
             this.calculatePrice();
         });
-
     }
 
     homeImage;
@@ -145,7 +144,7 @@ export class ConfigComponent implements OnInit, AfterViewInit {
             $this.isDoor = true;
         });
 
-        this.detailsModal();
+        this.detailsModal();        
     }
 
     renderCanvas(obj?, targ?, elemSelector?) {
@@ -391,32 +390,9 @@ export class ConfigComponent implements OnInit, AfterViewInit {
     /** Details **/
     calculatePrice() {
         try {
-            var itemId = this.utils.resFlowSession.resDoorObj.product.product['item_id'];
-            var count = this.utils.resFlowSession.resDoorObj.QTY;
-
-            if (itemId) {
-                let cObj = this.utils.resFlowSession.resDoorObj;
-                let price = window['getDoorPrice'](cObj);
-                this.itemPriceInstall = parseFloat(price[0].replace(/ /g, '').replace('$', '')) * count;
-                this.utils.utilities.itemPriceInstall = this.itemPriceInstall;
-                this.isDIY = false;
-                if (this.appComponent.noDIYs.indexOf(itemId) < 0) {
-                    this.isDIY = true;
-                    this.itemPriceDY = parseFloat(price[1].replace(/ /g, '').replace('$', '')) * count;
-                    this.utils.utilities.itemPriceDY = this.itemPriceDY;
-                }
-                // this.itemPriceInstall = price[0];
-                // this.itemPriceDY = price[1];
-
-                // let baseip = price[0]; // base install price
-                // let basedp = price[1]; // base diy price
-
-
-                // return basep * qty
-
-
-            }
-
+            this.utils.resFlowSession.resCalculatePrice();
+            this.itemPriceInstall = this.utils.utilities.itemPriceInstall;
+            this.itemPriceDY = this.utils.utilities.itemPriceDY;
         } catch (g) {
         }
     }
@@ -427,9 +403,6 @@ export class ConfigComponent implements OnInit, AfterViewInit {
         this.details.widthI = this.utils.utilities.wi;
         this.details.heightF = this.utils.utilities.hf;
         this.details.heightI = this.utils.utilities.hi;
-        // this.details.constructionName = this.resDoorObj.construction.construction[0].item_name;
-        // this.whdata = this.utils.resFlowSession.resDoorObj.size.width;
-
     }
 
     openDetailsModal(detailsModal) {
