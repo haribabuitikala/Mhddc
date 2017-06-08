@@ -187,6 +187,8 @@ export class ColorComponent implements OnInit {
     }
 
     updatePrice() {
+        this.utils.resFlowSession.resDoorObj.construction.vinyl = this.vinylOptions[+this.selectedVinyl];
+        this.utils.resFlowSession.resDoorObj.construction.groove = this.grooves[+this.selectedGroove];
         this.app.updatePrice();
     }
 }
