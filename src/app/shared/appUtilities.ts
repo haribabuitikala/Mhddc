@@ -519,6 +519,12 @@ export class ResidentialFlowSession {
                     price[1] = price[1] + hhi['item_installed_price'] * hhi['count'];
                 }
 
+                let locksItem = this.resDoorObj.hardware.lock;
+                if (locksItem && locksItem.hasOwnProperty('item_installed_price')) {
+                    price[0] = price[0] + locksItem['item_installed_price'] * 1;
+                    price[1] = price[1] + locksItem['item_installed_price'] * 1;
+                }
+                
                 // Calculate price for Openers
                 let op = this.resDoorObj.opener.opener;
                 if(op && op.hasOwnProperty('item_price')) {

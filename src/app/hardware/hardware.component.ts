@@ -57,7 +57,7 @@ export class HardwareComponent implements OnInit {
     let hardware = this.utils.resFlowSession.resDoorObj.hardware;
     hardware.items[0].count = this.countManager.handle;
     hardware.items[1].count = this.countManager.stepplate;
-    hardware.items[2].count = this.countManager.hinge;    
+    hardware.items[2].count = this.countManager.hinge;
 
     this.app.updatePrice();
     this.config.renderCanvas();
@@ -87,9 +87,25 @@ export class HardwareComponent implements OnInit {
   updateLock(obj, event: any) {
     if (obj.item_price > 0) {
       this.utils.utilities.lockPrice = obj.item_price;
-      // this.config.itemPrice = this.utils.calculateTotalPrice();
+      //this.config.itemPrice = this.utils.calculateTotalPrice();
+    } else {
+      this.utils.utilities.lockPrice = 0;
     }
+    this.utils.resFlowSession.resDoorObj.hardware.lock = obj;
+    this.app.updatePrice();
   }
+
+  isLockSelected(obj, isfirst) {
+    var lockSelected = this.utils.resFlowSession.resDoorObj.hardware.lock;
+    if (lockSelected && lockSelected['item_id'] == obj.item_id) {
+      return true;
+    } else if (isfirst && !lockSelected) {
+      return true;
+    }
+    return false;
+  }
+
+
   loadData() {
     var resDoorObj = this.utils.resFlowSession.resDoorObj;
     var params = {
@@ -123,10 +139,10 @@ export class HardwareComponent implements OnInit {
 
         // this.hardwareItems();
         let stepPlates = res[0]['StepPlates'];
-        this.yourStepPlates = _.chunk(stepPlates, 4);        
+        this.yourStepPlates = _.chunk(stepPlates, 4);
         this.hardwareItems(res[0]['StepPlates'], 1);
 
-        let stepHinges = res[0]['StrapHinges'];        
+        let stepHinges = res[0]['StrapHinges'];
         this.hardwareItems(stepHinges, 2);
         stepHinges = _.uniqBy(stepHinges, 'item_id');
         this.yourStepHinge = _.chunk(stepHinges, 4);
@@ -134,17 +150,23 @@ export class HardwareComponent implements OnInit {
 
         let yourLocksData = res[0]['Locks'];
         this.yourLocks = yourLocksData;
+        if (yourLocksData && yourLocksData.length > 0) {
+          this.hardwareItems(yourLocksData[0], 0);
+        }
       }
     );
   }
   hardwareItems(obj, id) {
-    let hardware = this.utils.resFlowSession.resDoorObj.hardware;
-    id = {
-      name: obj[0].item_name,
-      price: obj[0].item_price,
-      count: 1
+    if (obj[0]) {
+      let hardware = this.utils.resFlowSession.resDoorObj.hardware;
+      id = {
+        name: obj[0].item_name,
+        price: obj[0].item_price,
+        count: 1,
+        hardwaretype: 'lock'
+      }
+      hardware.items.push(id);
     }
-    hardware.items.push(id);
   }
   ngOnInit() {
     this.navComponent.renderNav({
