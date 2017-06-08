@@ -222,7 +222,7 @@ export class ResSliderComponent implements OnInit, AfterViewInit {
         $('.topSectionSlider .inner-item > img').css({ 'height': 37 });
         $('.glass-carousel .inner-item > img').css({ 'height': 75 });
         $('.hardware_screen .inner-item > img').css({ 'height': 52 })
-        if (this.folder === 'design' || this.folder === 'topsection') {
+        if ((this.folder === 'design' || this.folder === 'topsection') && this.slideCount > 1) {
             this.slideWidth = this.slideWidth - 20;
         }
         $('._slider', this.myElem.nativeElement).on('touchstart', (e) => {
@@ -361,7 +361,7 @@ export class ResSliderComponent implements OnInit, AfterViewInit {
             // this.notify.emit(obj);
             this.saveSelected(obj);
         }
-        this.onSelected.next({event: event, obj: obj});
+        this.onSelected.next({ event: event, obj: obj });
         this.utils.removeLoader();
     }
 

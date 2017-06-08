@@ -123,7 +123,10 @@ export class ConfigComponent implements OnInit, AfterViewInit {
     basep;
     ngOnInit() {
         // set the curr screen
-        this.basep = this.utils.resFlowSession.resDoorObj.design.apiData[0]['constructions'][0].item_price;
+        this.basep =  0;
+        if(this.utils.resFlowSession.resDoorObj.design.apiData) {
+            this.basep = this.utils.resFlowSession.resDoorObj.design.apiData[0]['constructions'][0].item_price;
+        }
         let path = this.location.path();
         path === "/config/design" ? path = "/config" : path = this.location.path();
         // this.appComponent.currScreen = this.appComponent.navElems.indexOf(path);
