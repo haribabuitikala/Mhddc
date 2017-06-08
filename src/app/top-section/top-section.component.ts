@@ -81,6 +81,7 @@ export class TopSectionComponent implements OnInit {
   }
 
   prevBtn() {
+    this.resetPrice();
     this.utils.resFlowSession.resDoorObj.resetFromStep(5);
     this.route.navigateByUrl('/config/color');
   }
@@ -93,5 +94,9 @@ export class TopSectionComponent implements OnInit {
     } else {
       this.route.navigateByUrl('/config/nonClassic');
     }
+  }
+
+  resetPrice() {
+    this.utils.resFlowSession.resDoorObj.windows.glasstype = null;
   }
 }

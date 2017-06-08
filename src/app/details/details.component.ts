@@ -12,28 +12,18 @@ export class DetailsComponent implements OnInit {
 
   calculatePrice() {
     try {
-      var itemId = this.utils.resFlowSession.resDoorObj.product.product['item_id'];
-      var count = this.utils.resFlowSession.resDoorObj.QTY;
-      if (itemId) {
-        let cObj = this.utils.resFlowSession.resDoorObj;
-        let price = window['getDoorPrice'](cObj);
-        this.itemPriceInstall = parseFloat(price[0].replace(/ /g, '').replace('$', '')) * count;
-        this.isDIY = false;
-        if (this.appComponent.noDIYs.indexOf(itemId) < 0) {
-          this.isDIY = true;
-          this.itemPriceDY = parseFloat(price[1].replace(/ /g, '').replace('$', '')) * count;
-        }
-      }
-
+      this.utils.resFlowSession.resCalculatePrice();
+      this.itemPriceInstall = this.utils.utilities.itemPriceInstall;
+      this.itemPriceDY = this.utils.utilities.itemPriceDY;
     } catch (g) {
 
     }
   }
 
   constructor(private appComponent: AppComponent, private utils: AppUtilities) {
-    appComponent.subscribeToPrice(() => {
-      this.calculatePrice();
-    });
+    // appComponent.subscribeToPrice(() => {
+    //   this.calculatePrice();
+    // });
   }
   itemPriceInstall;
   itemPriceDY;

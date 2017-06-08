@@ -9,7 +9,7 @@ import { DomSanitizer} from '@angular/platform-browser';
         <img src="../../assets/images/collection/gallery.png" (click)="showGallery()" *ngIf="showImageIcon" alt=""
              height="20"/>
         <span><button (click)="collectionPopup.open()">Info</button></span>        
-        <iframe class="iframe" *ngIf="showVideo" [src]="videoUrl" frameborder="0" allowfullscreen></iframe> 
+        <iframe class="iframe" *ngIf="showVideo" [src]="videoUrl" frameborder="0"></iframe> 
         <!-- product details popup -->
         <modal #collectionPopup>
             <modal-header [show-close]="true">

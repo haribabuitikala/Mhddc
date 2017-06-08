@@ -184,11 +184,17 @@ export class OpenerComponent implements OnInit {
         } else {
             this.goTo('/config' + path)
         }
+        this.resetPrice();
         this.utils.resFlowSession.resDoorObj.resetFromStep(8);
     }
 
     goTo(path) {
         this.route.navigateByUrl(path);
+    }
+
+    resetPrice() {
+        this.utils.resFlowSession.resDoorObj.opener.opener = null;
+        this.utils.resFlowSession.resDoorObj.opener.items = [];
     }
 
 }

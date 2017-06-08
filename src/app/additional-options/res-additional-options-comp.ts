@@ -159,17 +159,22 @@ export class ResAdditionalOptionsComponent implements OnInit {
     }
 
     nextBtn(path) {
+        this.appComponent.updatePrice();
         this.route.navigateByUrl('/config/doorConfiguration');
     }
 
     prevBtn(path) {
+        this.resetPrice();
         this.utils.resFlowSession.resDoorObj.resetFromStep(8);
         if (this.utils.resFlowSession.resDoorObj.INSTALLTYPE === 'DIY') {
             this.route.navigateByUrl('/config/install');
         } else {
             this.route.navigateByUrl('/config/opener');
         }
+    }
 
+    resetPrice() {
+        this.utils.resFlowSession.resDoorObj.additional.items = [];
     }
 
     installQuestionsPopup(installQuestions) {
@@ -374,30 +379,25 @@ export class ResAdditionalOptionsComponent implements OnInit {
             this.gdoFlowPowerHeadInfo = true;
         }
     }
-    calculatemilesInstall(miles) {
-        if (miles > 31 && miles < 51) {
-            this.updatedMiles = 51;
-        } else if (miles > 51) {
-            this.moreMiles = 51 - miles;
-            this.updatedMiles = this.moreMiles * 3;
 
+    calculatemiles(miles) {
+        if(this.utils.resFlowSession.resDoorObj.TYPE === 'RES') {
+            if (miles > 31 && miles < 51) {
+                this.updatedMiles = 51;
+            } else if (miles > 51) {
+                this.moreMiles = 51 - miles;
+                this.updatedMiles = this.moreMiles * 3;
+
+            }
+        } else {
+            if (miles > 31) {
+            } else if (miles > 31) {
+                this.moreMiles = 31 - miles;
+                this.updatedMiles = this.moreMiles * 3;
+            }
         }
-
-
     }
-    calculatemilesDiy(miles) {
-        if (miles > 31) {
-            // alert('the price need to be 3 Dollars')
-        } else if (miles > 31) {
-            this.moreMiles = 31 - miles;
-            //alert('the more miles are'+  this.moreMiles);
-            this.updatedMiles = this.moreMiles * 3;
-            // alert( this.updatedMiles+3);
 
-        }
-
-
-    }
     directDoorVal = 1;
 
     directDoor(event, flow) {

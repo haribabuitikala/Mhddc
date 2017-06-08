@@ -15,12 +15,12 @@
     </div>
 </div>
 <div *ngIf="speciality">
-    <div class="tile margin-t-10" *ngFor="let speciality of specialCollections" [ngClass]="{ 'selected': isSelected(speciality)}">
+    <div class="tile margin-t-10 ptn-rel" *ngFor="let speciality of specialCollections" [ngClass]="{ 'selected': isSelected(speciality)}">
         <div class="collection-img" (click)="goToHome(speciality)">
             <img src="../../assets/images/collection/{{speciality.imageUrl}}" alt=""/>
         </div>
         <div class="collection-btn-sec ">
-            <collection-popup [popup]="speciality"></collection-popup>
+            <collection-popup [popup]="speciality" [video]="videosLinks[speciality.item_id]"></collection-popup>
             <div class="btns pull-right">
                 <button>Select</button>
             </div>
