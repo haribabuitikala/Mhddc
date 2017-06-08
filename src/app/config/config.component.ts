@@ -402,6 +402,11 @@ export class ConfigComponent implements OnInit, AfterViewInit, AfterViewChecked 
 
     calculatePrice() {
         try {
+            this.isDIY = false;
+            var itemId = this.utils.resFlowSession.resDoorObj.product.product['item_id'];
+            if (this.appComponent.noDIYs.indexOf(itemId) < 0) {
+                this.isDIY = true;
+            }
             this.utils.resFlowSession.resCalculatePrice();
             this.itemPriceInstall = this.utils.utilities.itemPriceInstall;
             this.itemPriceDY = this.utils.utilities.itemPriceDY;

@@ -741,6 +741,14 @@ export class ResidentialFlowSession {
                         }
                     })
                 }
+
+
+                if (this.resDoorObj.product.product['item_id'] == 9) {
+                    if (this.resDoorObj.construction.groove['item_price']) {
+                        price[0] = price[0] + this.resDoorObj.construction.groove['item_price']
+                        price[1] = price[1] + this.resDoorObj.construction.groove['item_price']
+                    }
+                }
             }
         }
         catch (e) {

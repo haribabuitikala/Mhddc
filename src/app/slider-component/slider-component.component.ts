@@ -44,6 +44,10 @@ export class SliderComponentComponent implements OnInit {
         }
         this.slideIndex = selectedIndex;
         this.sliderLeft = -(this.slideIndex * this.slideWidth);
+
+        // reseting the itemPrice
+        this.gdoConfig.itemPrice = this.data[0][0].item_price;
+        this.gdoConfig.quantity = 1;
     }
 
     isSeleted(opener, index, itemIndex) {

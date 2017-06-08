@@ -46,6 +46,8 @@ export class InstallComponent implements OnInit, AfterViewInit {
     color: string; colorPrice: string;
     topSection: string;
     hardware = [];
+    glasstype: string;
+    glassTypePrice = 0;
     lang;
 
     /** DIY POPUP */
@@ -68,8 +70,9 @@ export class InstallComponent implements OnInit, AfterViewInit {
 
     hideDIY = false;
     noDIYs = [30, 16, 9];
-
+   
     ngOnInit() {
+        console.log('install init ');
         this.widthFeets = this.sizes.getWidthFeets();
         this.lang = this.language.getDoorSize();
         this.utils.resFlowSession.resDoorObj.INSTALLTYPE = "Installed";
@@ -98,14 +101,9 @@ export class InstallComponent implements OnInit, AfterViewInit {
             this.config.pageTitle = '6.Choose Installed vs. DIY';
         }
 
-
-        if (this.utils.resFlowSession.resDoorObj.product.product && this.noDIYs.indexOf(this.utils.resFlowSession.resDoorObj.product.product['item_id']) >= 0) {
-            this.hideDIY = true;
-        }
-
         this.installPrice = this.utils.utilities.itemPriceInstall;
         this.diyPrice = this.utils.utilities.itemPriceDY;
-
+        this.selectedType = 'install';
         this.appComponent.selectedInstallDiy = 'install';
     }
 
@@ -119,7 +117,10 @@ export class InstallComponent implements OnInit, AfterViewInit {
             VIEW: 'door'
         });
     }
+
+    selectedType = 'Installed';
     checkType(txt) {
+        this.selectedType = txt;
         this.appComponent.selectedInstallDiy = txt;
         if (txt == 'diy') {
             this.utils.resFlowSession.resDoorObj.INSTALLTYPE = "DIY";
@@ -142,17 +143,17 @@ export class InstallComponent implements OnInit, AfterViewInit {
         this.route.navigateByUrl(path);
     }
 
- 
+
     nextBtn(path) {
         if (this.appComponent.selectedInstallDiy == 'install') {
-          
-      if(this.data.zipResults.state == "KS"|| this.data.zipResults.state== "CA"|| this.data.zipResults.state == "RI" ){
-              this.navigateTo('/config/opener'); 
-          }else{
-       this.leadTest.open();
-             }
- 
-         
+
+            if (this.data.zipResults.state == "KS" || this.data.zipResults.state == "CA" || this.data.zipResults.state == "RI") {
+                this.navigateTo('/config/opener');
+            } else {
+                this.leadTest.open();
+            }
+
+
         } else {
             this.readyToNextStep = false;
             this.setOldValues();
@@ -183,9 +184,9 @@ export class InstallComponent implements OnInit, AfterViewInit {
             this.epa.close();
             this.leadTest.open();
         } else {
-           if(this.checkValue == true){
-               this.navigateTo('/config/opener');
-           }
+            if (this.checkValue == true) {
+                this.navigateTo('/config/opener');
+            }
         }
     }
     learMoreClose() {
@@ -193,10 +194,10 @@ export class InstallComponent implements OnInit, AfterViewInit {
         this.epa.open();
     }
     checkValue;
-checkboxValue(event){
- 
-this.checkValue=event.currentTarget.checked;
-}
+    checkboxValue(event) {
+
+        this.checkValue = event.currentTarget.checked;
+    }
     /** DIY */
     dataParams = {
         dtype: this.utils.utilities.dtype,
@@ -275,15 +276,20 @@ this.checkValue=event.currentTarget.checked;
     }
 
     doorDimensionFound = false;
-    getDoorDimentions() {
+    notmatchdoorsize = null;
+    exactDoorsizeModal = null;
+    getDoorDimentions(notmatchdoorsize, exactDoorsize) {
         this.readyToNextStep = false;
+        this.notmatchdoorsize = notmatchdoorsize;
+        this.exactDoorsizeModal = exactDoorsize;
         this.getProducts();
-
-
     }
 
     reportDataNotMatched() {
-        alert('Data Not Matched');
+        if (this.notmatchdoorsize) {
+            this.exactDoorsizeModal.close();
+            this.notmatchdoorsize.open();
+        }
     }
 
     getProducts() {
@@ -316,10 +322,10 @@ this.checkValue=event.currentTarget.checked;
                         cData.product.product = selectedProducts[0];
                         this.getDesigns(cData, rData);
                     } else {
-                        alert('you selected product is not matched');
+                        this.reportDataNotMatched();
                     }
                 } else {
-                    alert('Your selected size is  not matched');
+                    this.reportDataNotMatched();
                 }
             },
             error => {
@@ -366,7 +372,6 @@ this.checkValue=event.currentTarget.checked;
                 if (speciality) {
                     let params = this.setParams(speciality, cData);
                     this.collection.getDesign(params).subscribe(res => {
-                        console.log('desings ', cData, rData);
                         var isMatched = false;
                         if (res && res.length > 0) {
                             var filterDesigns = res.filter(d => {
@@ -403,7 +408,6 @@ this.checkValue=event.currentTarget.checked;
                                 }
                             }
 
-                            console.log('isMatched ', isMatched);
                             if (isMatched) {
                                 this.getWindows(cData, rData);
                             } else {
@@ -482,7 +486,6 @@ this.checkValue=event.currentTarget.checked;
                         isMatched = true;
                     }
                 }
-                console.log('top section matched ', isMatched);
                 if (isMatched) {
                     this.getHardware(cData, rData);
                 }
@@ -570,4 +573,8 @@ this.checkValue=event.currentTarget.checked;
     }
 
 
+    navigateToSize() {
+        this.utils.resFlowSession.resDoorObj.resetsize();
+        this.navigateTo('/doorSize');
+    }
 }

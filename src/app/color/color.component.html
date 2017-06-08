@@ -11,7 +11,7 @@
 </div>
 
 <div class="col-xs-8 pull-left pad-l-0">
-    <h4 class="font-size-16 text-orange clear-b">Choose Your Color</h4>
+    <h4 class="font-size-16 text-orange clear-b">Choose Your <span *ngIf="showOverlay">Door</span> Color</h4>
 </div>
 <div class="col-xs-4 pull-right behr-pad" (click)="behr.open()">
     <img src="../../assets/images/Info-64.png" height="26" class="pull-right" alt="">
@@ -30,6 +30,23 @@
 
 
 </div>
+
+
+<div class="margin-t-20 margin-b-20" *ngIf="showVinyl">
+    <label>Select a Vinyl Seal:</label>
+    <select [(ngModel)]="selectedVinyl" class="form-control" name="color-vinyl">
+        <option *ngFor="let vinyl of vinylOptions; let index = index" [attr.value]="index">{{ vinyl.item_name}}</option>
+    </select>
+</div>
+
+<div class="margin-t-20 margin-b-20" *ngIf="showgroove">
+    <label>Center Groove:</label>
+    <select [(ngModel)]="selectedGroove" class="form-control" name="color-groove" (change)="updatePrice()">
+        <option *ngFor="let item of grooves; let index = index" [attr.value]="index">{{ item.item_name}}</option>
+    </select>
+</div>
+
+
 
 <div class="margin-t-20 margin-b-20" *ngIf="claddings && claddings.length > 1">
     <label>Choose Your Cladding & Overlay:</label>
@@ -90,6 +107,13 @@
     </modal-body>
 </modal>
 
+<modal #warning>
+    <modal-header [show-close]="true">
+    </modal-header>
+    <modal-body>
+        {{ errorMsg }}
+    </modal-body>
+</modal>
 
 <div id="footer" class="col-xs-12 padding-t-10 padding-b-10">
     <a href="javascript:void(0)" class="pull-left previous-btn" (click)="prevBtn('config/design')" data-id="currScreen">
@@ -97,7 +121,7 @@
         Prev
     </a>
 
-    <a href="javascript:void(0)" class="pull-right nextBtn" (click)="nextBtn('config/topSection')"
+    <a href="javascript:void(0)" class="pull-right nextBtn" (click)="nextBtn('config/topSection', warning)"
        data-id="currScreen">
         Next
         <img src="../../assets/images/Forward-48-thick.png" height="15px">

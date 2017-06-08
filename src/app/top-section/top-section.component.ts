@@ -55,7 +55,7 @@ export class TopSectionComponent implements OnInit {
     this.navComponent.setNavFlow('res', '');
     var topsection = this.utils.resFlowSession.resDoorObj.windows.topsection;
     if (topsection && topsection['glasstypes']) {
-      if (topsection['glasstypes'][0].item_price <= 0 || topsection['Config'] == 'GLAZ-SOL') {
+      if (topsection['glasstypes'][0].item_price <= 0 || topsection['Config'] == 'GLAZ-SOL' || topsection['glasstypes'][0]['Config'] == 'GLAZ-SOL') {
         this.navComponent.setNavFlow('res', 'hideglass');
         this.route.navigateByUrl('/config/hardware');
       } else {

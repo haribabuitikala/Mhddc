@@ -89,7 +89,7 @@ export class ConstructionComponent implements OnInit {
         let newData = [];
         if (res.length > 4) {
             if (newData.length <= 3) {
-                for (let i = 1; i < 4; i++) {
+                for (let i = 1; i <= 4; i++) {
                     newData.push(_.find(res, ['best_order', i]))
                 }
                 let t = {

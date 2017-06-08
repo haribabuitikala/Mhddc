@@ -5,7 +5,7 @@
       <span class="check"></span>
       <label for="r1" (click)="checkType('install')">
         <div>INSTALL</div>
-        <div>${{installPrice }}</div>
+        <div>{{installPrice | currency:'USD':true:'1.2-2'}}</div>
       </label>
     </div>
   </div>
@@ -15,68 +15,17 @@
       <span class="check"></span>
       <label for="r2" (click)="checkType('diy')">
         <div>DIY</div>
-        <div>${{diyPrice }}</div>
+        <div>{{diyPrice | currency:'USD':true:'1.2-2'}}</div>
       </label>
     </div>
   </div>
 </div>
-<div class="edit-bar">
+<div class="content diy-install margin-b-15">
+  <div class="edit-bar">
     <button class="btn" (click)="editModal.open()">Edit<span
     class="glyphicon glyphicon-pencil"></span></button>
+  </div>
 </div>
-<!--<div class="hide content diy-install margin-b-15">  
-  <dl class="diy-install-table">
-    <dd class="diy-install-table-header">
-      Size
-    </dd>
-    <dd>{{installSize}}</dd>
-    <dd class="diy-install-table-header">
-      WindCode
-    </dd>
-    <dd>{{wincode}}</dd>
-  </dl>
-  <dl class="diy-install-table">
-    <dd class="diy-install-table-header">
-      Collection
-    </dd>
-    <dd>{{itemName | escapeHtml}}</dd>
-    <dd class="diy-install-table-header">
-      Door Design
-    </dd>
-    <dd><span class="door-design-txt text-capitalize">{{doorDesign}}</span></dd>
-    <dd class="diy-install-table-header">
-      Door Model
-    </dd>
-    <dd>{{doorModel}}<span class="pull-right">${{doorModelPrice}}</span></dd>
-    <dd class="diy-install-table-header">
-      Door Construction
-    </dd>
-    <dd>{{construction | escapeHtml}}</dd>
-  </dl>
-  <dl class="diy-install-table">
-    <dd class="diy-install-table-header">
-      Color
-    </dd>
-    <dd>
-      <span class="selected-color text-capitalize">{{color | escapeHtml}}</span>
-      <span class="pull-right">$0.00</span>
-    </dd>
-  </dl>
-  <dl class="diy-install-table">
-    <dd class="diy-install-table-header">
-      Top Section
-    </dd>
-    <dd>
-      <div>{{topSection}}</div>
-    </dd>
-  </dl>
-  <dl class="diy-install-table">
-    <dd class="diy-install-table-header">
-      Hardware
-    </dd>
-    <dd *ngFor="let hrdware of hardware">{{hrdware}}<span class="pull-right">{{hrdware.price}</span></dd>
-  </dl>
-</div>-->
 
 <app-cart-details></app-cart-details>
 
@@ -127,9 +76,6 @@
           with an installed door.</p>
       </div>
       <div class="col-xs-12 padding-b-10 padding-t-10  div-border">
-        <div class="col-xs-3">
-          Select
-        </div>
         <div class="tile col-xs-12 padding10">
           <div class="clearfix margin-b-15">
             <div class="col-xs-3 width-height">
@@ -181,8 +127,8 @@
           </div>
         </div>
         
-          <div  class="text-center  margin-t-15"  >
-              <button  *ngIf="!readyToNextStep" (click)="getDoorDimentions()" class="btn btn-default text-uppercase box-shadow bold text-orange   text-center"> Confirm Size 
+          <div  class="text-center  margin-t-15 col-xs-12"  >
+              <button  *ngIf="!readyToNextStep" (click)="getDoorDimentions(notmatchdoorsize, exactDoorsize)" class="btn btn-default text-uppercase box-shadow bold text-orange   text-center"> Confirm Size 
               </button>
               <button  *ngIf="readyToNextStep" (click)="confirmDIY()" class="btn btn-default text-uppercase box-shadow bold text-orange   text-center"> Next Step 
               </button>
@@ -308,6 +254,20 @@
         <span>Please visit <a href="http://www.epa.gov/lead/pubs/renovation.htm"> http://www.epa.gov/lead/pubs/renovation.htm</a>for more information regarding the details of this program.</span>
     </modal-body> 
 </modal>
+
+<modal #notmatchdoorsize>
+    <modal-header>
+    </modal-header>
+    <modal-body>
+        <div class="textContainer textUnselectable">Selected configuration is not valid for updated dimensions.
+          Please <span style="color: blue;" (click)="navigateToSize('/doorSize')">click here</span> to go back to size selection page and select exact size.</div>
+          <div class="margin-t-15 text-center">
+            <button type="button" class="btn btn-danger" (click)="notmatchdoorsize.close();exactDoorsizeModal.open();">Close</button>
+          </div>
+    </modal-body> 
+</modal>
+
+
 <div id="footer" class="col-xs-12 padding-t-10 padding-b-10">
   <a href="javascript:void(0)" class="pull-left previous-btn" (click)="prevBtn('config/color')" data-id="currScreen">
     <img src="../../assets/images/back-48-thick.png" height="15px"> Prev
