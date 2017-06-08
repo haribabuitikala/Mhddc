@@ -53,6 +53,7 @@ export class ShoppingCartComponent implements OnInit {
     ngOnInit() {
         this.navComp.activateIcon();
         this.utils.resFlowSession.resDoorObj.TYPE === 'GDO' ? this.resFlow = false : this.resFlow = true;
+        this.resFlow === true ? this.qty = 1 : this.utils.utilities.gdoOpenerQty
 
         this.pageNo = this.utils.utilities.currPage;
         this.appComp.currScreen = 0;

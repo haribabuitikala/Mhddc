@@ -4,7 +4,7 @@
             <h4 class="font-size-16 text-orange">Choose Your Lock</h4>
         </div>
         <div class="margin-t-10 select-lock" [ngClass]="{ 'current': isLockSelected(lock, first) }" *ngFor="let lock of yourLocks; let first = first;" (click)="updateLock(lock,$event)">
-            <img src="../../assets/images/hardware/lock/{{lock.item_thumbnail}}" alt="" />
+            <img src="../../assets/images/{{lock.item_thumbnail}}" alt="" />
             <div *ngIf="lock.item_id=='1512'||lock.item_id=='1651'" class="font-size-10 text-orange pull-right margin-t-10 offset-info" (click)="offset.open()"><span  >Offset </span></div>
         </div>
     </div>
