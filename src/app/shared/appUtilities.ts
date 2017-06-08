@@ -273,10 +273,13 @@ export class ResidentialFlowSession {
         heightI: 0,
         collectionName: '',
         designName: '',
+        isDIY: false,
         construction: {
             name: '',
             price: 0,
-            qty: 0
+            qty: 0,
+            laborcost: 0,
+            modelNumber: ''
         },
         color: {
             overlay: {
@@ -325,9 +328,7 @@ export class ResidentialFlowSession {
         additionalOptions: {
             items: []
         },
-        // calculation variables
         upsellPrice: 0
-
     }
 
     resDoorObj = {
@@ -454,7 +455,9 @@ export class ResidentialFlowSession {
             this.resDetails.construction = {
                 name: '',
                 price: 0,
-                qty: 0
+                qty: 0,
+                laborcost: 0,
+                modelNumber: ''
             };
             this.resDoorObj['reset' + this.resDoorObj['resetorder'][4]]();
         },
@@ -614,6 +617,8 @@ export class ResidentialFlowSession {
                     this.resDetails.construction.name = dc['item_name'];
                     this.resDetails.construction.price = dc['item_price'];
                     this.resDetails.construction.qty = count;
+                    this.resDetails.construction.laborcost = dc['laborcodeprice'];
+                    this.resDetails.construction.modelNumber = dc['ClopayModelNumber'];
                 } else {
                     let dc = this.resDoorObj.construction['construction'];
                     price[0] = price[0] + dc['item_price'] * count + dc['laborcodeprice'];
@@ -622,6 +627,8 @@ export class ResidentialFlowSession {
                     this.resDetails.construction.name = dc['item_name'];
                     this.resDetails.construction.price = dc['item_price'];
                     this.resDetails.construction.qty = count;
+                    this.resDetails.construction.laborcost = dc['laborcodeprice'];
+                    this.resDetails.construction.modelNumber = dc['ClopayModelNumber'];
                 }
 
                 // Calculate price for Overlay Color

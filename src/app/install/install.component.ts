@@ -98,37 +98,13 @@ export class InstallComponent implements OnInit, AfterViewInit {
             this.config.pageTitle = '6.Choose Installed vs. DIY';
         }
 
-        this.installSize = this.utils.utilities.wf + "'0 \"(W) X " + this.utils.utilities.hf + "'0 \"(h)";
-        this.wincode = this.utils.utilities.winCode;
-        this.itemName = this.utils.resFlowSession.resDoorObj.product.product['item_name'];
-        this.doorDesign = this.utils.resFlowSession.resDoorObj.design.dsgn['item_name']
-        this.doorModel = this.utils.resFlowSession.resDoorObj.construction.construction['ClopayModelNumber'];
-        this.doorModelPrice = this.utils.resFlowSession.resDoorObj.construction.construction['item_price'];
-        this.construction = this.utils.resFlowSession.resDoorObj.construction.construction['item_name'];
-        this.color = this.utils.resFlowSession.resDoorObj.color.base['item_name'];
-        this.colorPrice = this.utils.resFlowSession.resDoorObj.color.base['item_price'];
-        this.topSection = this.utils.resFlowSession.resDoorObj.windows.topsection['item_name'];
-
-        if (this.utils.resFlowSession.resDoorObj.hardware.handle != "") {
-            this.hardware.push('Handles: ' + this.utils.resFlowSession.resDoorObj.hardware.handle['item_name']);
-
-        }
-        if (this.utils.resFlowSession.resDoorObj.hardware.stepplate != "") {
-            this.hardware.push('Step Plate: ' + this.utils.resFlowSession.resDoorObj.hardware.stepplate['item_name']);
-        }
-        if (this.utils.resFlowSession.resDoorObj.hardware.hinge != "") {
-            this.hardware.push('Hinges: ' + this.utils.resFlowSession.resDoorObj.hardware.hinge['item_name']);
-        }
-
 
         if (this.utils.resFlowSession.resDoorObj.product.product && this.noDIYs.indexOf(this.utils.resFlowSession.resDoorObj.product.product['item_id']) >= 0) {
             this.hideDIY = true;
         }
 
-
-        var priceData = this.config.getDoorPrice();
-        this.installPrice = priceData.install;
-        this.diyPrice = priceData.diy;
+        this.installPrice = this.utils.utilities.itemPriceInstall;
+        this.diyPrice = this.utils.utilities.itemPriceDY;
 
         this.appComponent.selectedInstallDiy = 'install';
     }
@@ -147,12 +123,14 @@ export class InstallComponent implements OnInit, AfterViewInit {
         this.appComponent.selectedInstallDiy = txt;
         if (txt == 'diy') {
             this.utils.resFlowSession.resDoorObj.INSTALLTYPE = "DIY";
+            this.utils.resFlowSession.resDetails.isDIY = true;
             // this.doorDimensionFound = false;
             // this.config.renderCanvas(window['cObj'], 'doorVis', '#diyDoorVis');
             // this.exactDoorsize.open();
         }
         if (txt == 'install') {
             this.utils.resFlowSession.resDoorObj.INSTALLTYPE = "Installed";
+            this.utils.resFlowSession.resDetails.isDIY = false;
             // this.doorDimensionFound = false;
             // this.config.renderCanvas(window['cObj'], 'doorVis', '#diyDoorVis');
             // this.exactDoorsize.open();

@@ -138,11 +138,17 @@ input[type=radio] {
     border-bottom: 1px solid #ccc;
 }
 
-.door-configuration-table-header {
-    color: @color_1;
-    border-bottom: 1px solid #ccc;
-    line-height: 25px;
-    height: 22px;
+.door-configuration-table {
+    dd {
+        display: flex;
+        justify-content: space-between;
+    }
+    .door-configuration-table-header {
+        color: @color_1;
+        border-bottom: 1px solid #ccc;
+        line-height: 25px;
+        height: 22px;
+    }
 }
 
 .editModal {

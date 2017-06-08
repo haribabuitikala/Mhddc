@@ -13,7 +13,7 @@
                 </div>
                 <div class="flex space-between">
                     <!--<span [innerHTML]="installQuestions.Answers[1].item_name" *ngIf="installQuestions.Answers[1].isDefault && installQuestions.item_id !== 5"></span>-->
-                    <div *ngIf="installQuestions.item_id === 5 && installQuestions.Answers[1].isDefault">
+                    <div *ngIf="installQuestions.item_id === 5 && !installQuestions.Answers[0].isDefault">
                         <p id="distance text-orange">it's <input type="text" [(ngModel)]="defaultMiles" (blur)="updatePrice()" name="defaultMiles"
                             /> miles away</p>
                     </div>
@@ -21,7 +21,8 @@
                     <div class="flex-right">
                         <div class="text-orange">Yes</div>
                         <label class="switch">
-                        <input type="checkbox" [(ngModel)]="installQuestions.Answers[1].isDefault" (change)="installQuestionsOptions($event,installQuestions)">
+                        <input *ngIf="installQuestions.item_id !== 5" type="checkbox" [(ngModel)]="installQuestions.Answers[1].isDefault" (change)="installQuestionsOptions($event,installQuestions)">
+                        <input *ngIf="installQuestions.item_id === 5" type="checkbox" [(ngModel)]="installQuestions.Answers[0].isDefault" (change)="installQuestionsOptions($event,installQuestions)">
                         <div class="slider round"></div>
                     </label>
                         <div class="text-orange">No</div>

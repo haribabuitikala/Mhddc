@@ -221,18 +221,29 @@ export class ResAdditionalOptionsComponent implements OnInit {
                 case 4:
                 case 11:
                     $('#' + obj.item_id).removeClass('hide');
-                    obj.item_list_text = obj.item_list_text.replace('?', '') + '<span class="text-orange"> $'+ k.price +'</span>?';
+                    obj.item_list_text = obj.item_list_text.split('$')[0] + '<span class="text-orange"> $'+ k.price +'</span>?';
                     this.itmObj.items.push(k);
                     break;
-                case 5:
+                case 5:                    
                     $('#' + obj.item_id).removeClass('hide');
+                    this.removeItmOptions(obj.item_id);
+                    break;
+            }
+        } else {            
+             switch (obj.item_id) {
+                case 7:
+                case 4:
+                case 11:
+                    obj.item_list_text = obj.item_list_text.split('$')[0] + '?';
+                    $('#' + obj.item_id).addClass('hide');
+                    this.removeItmOptions(obj.item_id);
+                    break;
+                case 5:
+                    $('#' + obj.item_id).addClass('hide');
                     k.price = this.calculateMilesPrice();
                     this.itmObj.items.push(k);
                     break;
             }
-        } else {
-            $('#' + obj.item_id).addClass('hide');
-            this.removeItmOptions(obj.item_id);
         }
 
         this.appComponent.updatePrice();
