@@ -125,7 +125,7 @@ this.showSocial = true;
         if (this.utils.utilities.flow === 'gdoNavElems') {
             this.utils.setUtils(3, 0);
             this.utils.utilities.itemsCount = 1;
-            console.log('door ', path);
+            this.gdoConfig.quantity = 1;
             this.goTo('/gdoConfig' + path);
 
         } else {
