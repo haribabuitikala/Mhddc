@@ -99,6 +99,7 @@ export class ResDoorConfigurationComponent implements OnInit {
 
     nextBtn(path) {
         $('body').addClass('loader');
+        $('.shop-count').text('1');
         this.route.navigateByUrl(path)
     }
 
