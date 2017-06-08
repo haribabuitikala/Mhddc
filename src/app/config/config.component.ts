@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit, ChangeDetectorRef, AfterViewChecked } from '@angular/core';
 import { AppComponent } from "../app.component";
 import { Location } from '@angular/common';
 import { AppUtilities } from "../shared/appUtilities";
@@ -9,11 +9,12 @@ declare var $: any;
     templateUrl: './config.component.html',
     styleUrls: ['./config.component.less']
 })
-export class ConfigComponent implements OnInit, AfterViewInit {
+export class ConfigComponent implements OnInit, AfterViewInit, AfterViewChecked {
 
     constructor(private appComponent: AppComponent
         , private location: Location
         , public navComponent: NavComponent
+        , private cdref: ChangeDetectorRef
         , private utils: AppUtilities) {
 
         appComponent.subscribeToPrice(() => {
@@ -30,6 +31,10 @@ export class ConfigComponent implements OnInit, AfterViewInit {
     quantity = 1;
     details;
     whdata;
+
+    ngAfterViewChecked(){
+        this.cdref.detectChanges();
+    }
 
     private fitToContainer() {
         var canvas = document.querySelector('canvas');
@@ -132,7 +137,6 @@ export class ConfigComponent implements OnInit, AfterViewInit {
         // this.appComponent.currScreen = this.appComponent.navElems.indexOf(path);
         this.calculatePrice();
         $('.switcher-box').css({ right: 35 });
-
 
         this.homeImage = this.utils.resFlow.selectedHome;
         var $this = this;

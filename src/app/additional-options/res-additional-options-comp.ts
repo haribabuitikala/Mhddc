@@ -216,10 +216,12 @@ export class ResAdditionalOptionsComponent implements OnInit {
         }
         this.itmObj = this.utils.resFlowSession.resDoorObj.additional;
         if (itm.srcElement.checked === true) {
-
             switch (obj.item_id) {
                 case 7:
+                case 4:
+                case 11:
                     $('#' + obj.item_id).removeClass('hide');
+                    obj.item_list_text = obj.item_list_text.replace('?', '') + '<span class="text-orange"> $'+ k.price +'</span>?';
                     this.itmObj.items.push(k);
                     break;
                 case 5:
@@ -227,35 +229,10 @@ export class ResAdditionalOptionsComponent implements OnInit {
                     k.price = this.calculateMilesPrice();
                     this.itmObj.items.push(k);
                     break;
-                case 11:
-                    $('#' + obj.item_id).removeClass('hide');
-                    this.itmObj.items.push(k);
-                    break;
-                case 4:
-                    $('#' + obj.item_id).removeClass('hide');
-                    this.itmObj.items.push(k);
-                    break;
             }
-
         } else {
-            switch (obj.item_id) {
-                case 7:
-                    $('#' + obj.item_id).addClass('hide');
-                    this.removeItmOptions(obj.item_id)
-                    break;
-                case 5:
-                    $('#' + obj.item_id).addClass('hide');
-                    this.removeItmOptions(obj.item_id)
-                    break;
-                case 11:
-                    $('#' + obj.item_id).addClass('hide');
-                    this.removeItmOptions(obj.item_id)
-                    break;
-                case 4:
-                    $('#' + obj.item_id).addClass('hide');
-                    this.removeItmOptions(obj.item_id)
-                    break;
-            }
+            $('#' + obj.item_id).addClass('hide');
+            this.removeItmOptions(obj.item_id);
         }
 
         this.appComponent.updatePrice();

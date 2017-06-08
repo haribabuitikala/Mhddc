@@ -49,7 +49,9 @@ export class BannerComponent implements OnInit {
                 let orderObj = this.utils.resFlowSession.orderObj;
                 orderObj.windcode = res.windcode;
                 orderObj.zipcode = res.zip;
-                orderObj.locale = res;               
+                orderObj.locale = res;       
+                this.utils.gdoFlowSession.locale = res;    
+                this.utils.gdoFlowSession.zipcode = res.zip;    
 
             },
             error => {
@@ -71,6 +73,9 @@ export class BannerComponent implements OnInit {
     onlyNumberKey(event) {
         let len = event.currentTarget.value.length;
         if (len === 0) $('.show-zip-results').prop('disabled', true);
+        if (event.charCode === 13) {
+            return true;
+        }
         if (len > 4) {
             event.preventDefault();
         }

@@ -35,7 +35,7 @@
                         (click)="openerSelected(slideitem, $event)">
                         <img (error)="onImageLoadError(slideitem, folder)" src="../../assets/images/{{slideitem.item_thumbnail.replace('.jpg', '.png')}}"
                             [attr.data-id]="slideitem.item_id">
-                        <div class="construction-model">Model {{slideitem.DisplayModelNumber}}</div>
+                        <div class="construction-model" [hidden]="slideitem.item_thumbnail == 'btnOtherConGallery.png'">Model {{slideitem.DisplayModelNumber}}</div>
                         <div class="construciton-info">
                             <div [hidden]="slideitem.item_thumbnail == 'btnOtherConGallery.png'">
                                 <img (click)="detailsInfo(slideitem.ClopayModelNumber, contructionDetails)" class="nobdr" src="../../assets/images/Info-64.png"
