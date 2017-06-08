@@ -54,7 +54,7 @@ export class ResAdditionalOptionsComponent implements OnInit {
 
     showMedImg;
     showInstallMiles;
-    defaultMiles: any;
+    defaultMiles: any = 31;
     moreMiles;
     updatedMiles;
     defaultMilesDiy: any;
@@ -158,8 +158,7 @@ export class ResAdditionalOptionsComponent implements OnInit {
         }
     }
 
-    nextBtn(path) {
-        this.appComponent.updatePrice();
+    nextBtn(path) {        
         this.route.navigateByUrl('/config/doorConfiguration');
     }
 
@@ -224,45 +223,66 @@ export class ResAdditionalOptionsComponent implements OnInit {
                     this.itmObj.items.push(k);
                     break;
                 case 5:
-                    $('#' + obj.item_id).addClass('hide');
-                    this.removeItmOptions(obj.item_id)
+                    $('#' + obj.item_id).removeClass('hide');
+                    k.price = this.calculateMilesPrice();
+                    this.itmObj.items.push(k);
                     break;
                 case 11:
-                    $('#' + obj.item_id).addClass('hide');
-                    this.removeItmOptions(obj.item_id)
+                    $('#' + obj.item_id).removeClass('hide');
+                    this.itmObj.items.push(k);
                     break;
                 case 4:
-                    $('#' + obj.item_id).addClass('hide');
-                    this.removeItmOptions(obj.item_id)
+                    $('#' + obj.item_id).removeClass('hide');
+                    this.itmObj.items.push(k);
                     break;
             }
 
         } else {
-
             switch (obj.item_id) {
                 case 7:
                     $('#' + obj.item_id).addClass('hide');
                     this.removeItmOptions(obj.item_id)
                     break;
                 case 5:
-                    $('#' + obj.item_id).removeClass('hide');
-                    k.price = 51;
-                    k.name = 'Delivery 31 miles from store';
-                    this.itmObj.items.push(k);
+                    $('#' + obj.item_id).addClass('hide');
+                    this.removeItmOptions(obj.item_id)
                     break;
                 case 11:
-                    $('#' + obj.item_id).removeClass('hide');
-                    this.itmObj.items.push(k);
+                    $('#' + obj.item_id).addClass('hide');
+                    this.removeItmOptions(obj.item_id)
                     break;
                 case 4:
-                    $('#' + obj.item_id).removeClass('hide');
-                    this.itmObj.items.push(k);
+                    $('#' + obj.item_id).addClass('hide');
+                    this.removeItmOptions(obj.item_id)
                     break;
             }
         }
 
-        //alert('the final install med is'+this.installMed);
-        this.aditionalDiyPrice = this.installMed + this.installMiles + this.installHeadRoom + this.installReleaseKit;
+        this.appComponent.updatePrice();
+    }
+
+    calculateMilesPrice() {
+        if(this.utils.resFlowSession.resDoorObj.TYPE === "RES") {
+            if(this.defaultMiles < 31) {
+                return 0;
+            } else if(this.defaultMiles >= 31 && this.defaultMiles < 51) {
+                return 51;
+            } else if(this.defaultMiles > 50) {
+                return 51 + (this.defaultMiles - 50) * 3;
+            }
+        } else {
+            if(this.defaultMiles < 31) {
+                return 0;
+            } else if(this.defaultMiles > 31) {
+                return (this.defaultMiles - 31) * 3;
+            }
+        }
+    }
+
+    updatePrice() {
+        let k = _.findIndex(this.itmObj.items, {id: 5});
+        this.itmObj.items[k].price = this.calculateMilesPrice();
+        this.appComponent.updatePrice();
     }
 
     removeItmOptions(id) {
@@ -378,25 +398,7 @@ export class ResAdditionalOptionsComponent implements OnInit {
 
             this.gdoFlowPowerHeadInfo = true;
         }
-    }
-
-    calculatemiles(miles) {
-        if(this.utils.resFlowSession.resDoorObj.TYPE === 'RES') {
-            if (miles > 31 && miles < 51) {
-                this.updatedMiles = 51;
-            } else if (miles > 51) {
-                this.moreMiles = 51 - miles;
-                this.updatedMiles = this.moreMiles * 3;
-
-            }
-        } else {
-            if (miles > 31) {
-            } else if (miles > 31) {
-                this.moreMiles = 31 - miles;
-                this.updatedMiles = this.moreMiles * 3;
-            }
-        }
-    }
+    }   
 
     directDoorVal = 1;
 
