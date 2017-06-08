@@ -234,7 +234,7 @@ export class ResAdditionalOptionsComponent implements OnInit {
                 case 7:
                 case 4:
                 case 11:
-                    obj.item_list_text = obj.item_list_text.split('$')[0] + '?';
+                    obj.item_list_text = obj.item_list_text.split('$')[0].split('?')[0] + '?';
                     $('#' + obj.item_id).addClass('hide');
                     this.removeItmOptions(obj.item_id);
                     break;
