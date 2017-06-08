@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { CollectionService } from "../shared/data.service";
 import { ConfigComponent } from "../config/config.component";
 import { NavComponent } from "../nav/nav.component";
+import { AppComponent } from "../app.component";
 import { AppUtilities } from "../shared/appUtilities";
 
 declare var _: any;
@@ -19,6 +20,7 @@ export class ColorComponent implements OnInit {
         , private route: Router
         , private navComponent: NavComponent
         , private utils: AppUtilities
+        , private app: AppComponent
         , private config: ConfigComponent
         , private dataService: CollectionService) {
     }
@@ -26,8 +28,13 @@ export class ColorComponent implements OnInit {
     data;
     number = 4;
     folder = 'color';
-
+    showVinyl = false;
+    vinylOptions = [];
+    selectedVinyl;
+    selectedGroove;
     loaded = false;
+    showgroove = false;
+    grooves = [];
     selectedCladding;
     claddings = [];
 
@@ -74,6 +81,42 @@ export class ColorComponent implements OnInit {
         this.claddings = this.utils.resFlowSession.resDoorObj.construction.construction['claddingoverlays'];
 
         this.loaded = true;
+
+        if (this.utils.resFlowSession.resDoorObj.product.product['item_id'] == 9) {
+            this.showVinyl = true;
+            this.showgroove = true;
+            let vinylOptions = this.utils.resFlowSession.resDoorObj.construction.construction['vinyls'];
+            var vinylOptionsunique = _.uniqBy(vinylOptions, 'item_name');
+            this.vinylOptions = [].concat([{
+                heightitem_price: 0,
+                heightpartid: "",
+                heightqty: 0,
+                isdefault: false,
+                item_description: null,
+                item_id: -1,
+                item_name: "No Vinyl",
+                item_price: 0,
+                item_thumbnail: null,
+                widthitem_price: 0,
+                widthpartid: "",
+                widthqty: 0
+            }], vinylOptionsunique);
+
+            this.selectedVinyl = 0;
+
+            this.grooves = [].concat([{
+                centergrooveconfig: "CNONE",
+                isdefault: false,
+                item_description: null,
+                item_id: 84,
+                item_name: "No Center Groove",
+                item_price: 0,
+                item_thumbnail: null,
+                nogrooves: 0
+
+            }], [this.utils.resFlowSession.resDoorObj.construction.construction['centergrooves'][0]]);
+            this.selectedGroove = 0;
+        }
     }
 
     showOverlay = false;
@@ -99,18 +142,24 @@ export class ColorComponent implements OnInit {
         };
     }
 
-    nextBtn(path) {
+
+    errorMsg;
+    nextBtn(path, warning?) {
+        if (this.utils.resFlowSession.resDoorObj.product.product['item_id'] == 9) {
+            this.utils.resFlowSession.resDoorObj.construction.vinyl = this.vinylOptions[+this.selectedVinyl];
+            this.utils.resFlowSession.resDoorObj.construction.groove = this.grooves[+this.selectedGroove];
+        }
         if (this.claddings && this.claddings.length > 1) {
             if (this.selectedCladding) {
                 this.utils.resFlowSession.resDoorObj.construction.cladding = this.claddings[+this.selectedCladding];
                 this.moveToPage();
             } else {
-                alert('Please Select Cladding and Overlay');
+                this.errorMsg = 'Please Select Cladding and Overlay';
+                warning.open();
             }
         } else {
             this.moveToPage();
         }
-
     }
 
     moveToPage() {
@@ -135,5 +184,9 @@ export class ColorComponent implements OnInit {
     resetPrice() {
         this.utils.resFlowSession.resDoorObj.color.overlay = null;
         this.utils.resFlowSession.resDoorObj.color.base = null;
+    }
+
+    updatePrice() {
+        this.app.updatePrice();
     }
 }
