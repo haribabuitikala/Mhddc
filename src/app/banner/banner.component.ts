@@ -73,6 +73,9 @@ export class BannerComponent implements OnInit {
     onlyNumberKey(event) {
         let len = event.currentTarget.value.length;
         if (len === 0) $('.show-zip-results').prop('disabled', true);
+        if (event.charCode === 13) {
+            return true;
+        }
         if (len > 4) {
             event.preventDefault();
         }
