@@ -125,6 +125,8 @@ export class AdditionalOptionsComponent implements OnInit {
         $('body').addClass('loader');
         this.gdoConfig.gdoOpeners.length = 0;
         // this.utils.utilities.kPrice = 0;
+        // resetting 
+        this.gdoConfig.showDistance = false;
         this.gdoConfig.itemPrice = this.utils.calculateTotalPrice();
         if (this.utils.utilities.flow === 'gdoNavElems') {
             this.utils.setUtils(2, 0);
@@ -154,23 +156,28 @@ export class AdditionalOptionsComponent implements OnInit {
 
         if (itm.srcElement.checked === false) {
             this.distance = 31;
+            this.gdoConfig.showDistance = true;
             this.utils.utilities.distance = 31;
+            this.gdoConfig.distance = 31;
             if (flow === 'direct') {
                 this.flow = 'direct';
                 this.utils.utilities.distancePrice = 2.5;
                 this.distancePrice = 2.5;
                 this.gdoConfig.itemPrice = this.gdoConfig.itemPrice + 2.50;
+                this.gdoConfig.distancePrice = 2.50;
             }
             else {
                 this.flow = 'non-direct';
                 this.utils.utilities.distancePrice = 51;
                 this.distancePrice = 51;
                 this.gdoConfig.itemPrice = this.gdoConfig.itemPrice + 51;
+                this.gdoConfig.distancePrice = 51;
             }
             $('.gdoDistance').removeAttr('disabled');
             this.showDistancePrice = false;
         } else {
             this.distance = '';
+            this.gdoConfig.showDistance = false;
             this.utils.utilities.distancePrice = 0;
             this.showDistancePrice = false;
             this.mileOpenPr = 0;
@@ -284,12 +291,12 @@ export class AdditionalOptionsComponent implements OnInit {
         }
         // this.gdoConfig.itemPrice += k.price;
         // this.dataStore.gdoDirectQuestions.splice(flow, 1);
+        // this is for gdo shoppoing cart
+        this.gdoObjSet(flow, k);
         this.dataStore.gdoDirectQuestions = this.dataStore.gdoDirectQuestions.filter(function (el) {
             return el.id != flow;
         });
         this.dataStore.gdoDirectQuestions.push(k);
-        // this is for gdo shoppoing cart
-        this.gdoObjSet(flow, k);
         let kPrice = _.sumBy(this.dataStore.gdoDirectQuestions, function (o) {
             return o.price;
         });

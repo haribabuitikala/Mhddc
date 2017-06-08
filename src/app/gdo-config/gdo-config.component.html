@@ -57,8 +57,13 @@
         <p>
             <span class="col-xs-4 bold">Opener :</span>
             <span class="col-xs-8 padding-0" *ngIf="gdoLoaded">
-                {{openerTxt}} <br/>
-                <div *ngFor="let g of gdoOpeners">{{g.count}} - {{g.name}}({{g.price}} each)</div>
+                <span [innerHtml]="openerTxt"></span> <br/>
+            <div *ngFor="let g of gdoOpeners">{{g.count}} - {{g.name}}({{g.price | currency:'USD':true:'1.2-2'}} each)</div>
+            </span>
+        </p>
+        <p *ngIf="showDistance">
+            <span class="col-xs-8 col-xs-offset-4 padding-0">
+            {{distance}} miles from store ({{distancePrice | currency:'USD':true:'1.2-2'}})
             </span>
         </p>
     </modal-body>

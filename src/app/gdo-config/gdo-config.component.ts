@@ -37,7 +37,10 @@ export class GdoConfigComponent implements OnInit, OnChanges {
     gdoOpenerSelected = this.dataStore.gdoOpenerAccessories;
     gdoOpeners = [];
     gdoOpenersTxt = 'teststes';
-    gdoLoaded = false
+    gdoLoaded = false;
+    showDistance;
+    distancePrice;
+    distance;
 
     ngOnChanges() {
         console.log('changed', this.showDetails);
