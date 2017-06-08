@@ -46,6 +46,8 @@ export class InstallComponent implements OnInit, AfterViewInit {
     color: string; colorPrice: string;
     topSection: string;
     hardware = [];
+    glasstype: string;
+    glassTypePrice = 0;
     lang;
 
     /** DIY POPUP */
@@ -69,7 +71,62 @@ export class InstallComponent implements OnInit, AfterViewInit {
     hideDIY = false;
     noDIYs = [30, 16, 9];
 
+    setPrices() {
+        this.installSize = this.utils.utilities.wf + "'0 \"(W) X " + this.utils.utilities.hf + "'0 \"(h)";
+        this.wincode = this.utils.utilities.winCode;
+        this.itemName = this.utils.resFlowSession.resDoorObj.product.product['item_name'];
+        this.doorDesign = this.utils.resFlowSession.resDoorObj.design.dsgn['item_name']
+        this.doorModel = this.utils.resFlowSession.resDoorObj.construction.construction['ClopayModelNumber'];
+        this.doorModelPrice = this.utils.resFlowSession.resDoorObj.construction.construction['item_price'];
+
+        if (this.selectedType.toUpperCase() === 'Install'.toUpperCase()) {
+            this.doorModelPrice = this.doorModelPrice  + (this.utils.resFlowSession.resDoorObj.construction.construction['laborcodeprice'] || 0);
+        }
+        this.construction = this.utils.resFlowSession.resDoorObj.construction.construction['item_name'];
+        this.color = this.utils.resFlowSession.resDoorObj.color.base['item_name'];
+        this.colorPrice = this.utils.resFlowSession.resDoorObj.color.base['item_price'];
+        this.topSection = this.utils.resFlowSession.resDoorObj.windows.topsection['item_name'];
+        if (this.utils.resFlowSession.resDoorObj.windows.glasstype) {
+            this.glasstype = this.utils.resFlowSession.resDoorObj.windows.glasstype['item_name'];
+            this.glassTypePrice = this.utils.resFlowSession.resDoorObj.windows.glasstype['item_price'];
+        }
+        
+        this.hardware = [];
+        if (this.utils.resFlowSession.resDoorObj.hardware.handle != "") {
+            var handleCount = this.utils.resFlowSession.resDoorObj.hardware.handle['count'] || 1;
+            this.hardware.push({
+                name: this.utils.resFlowSession.resDoorObj.hardware.handle['item_name'],
+                price: (this.utils.resFlowSession.resDoorObj.hardware.handle['item_price'] * handleCount)
+            });
+
+        }
+        if (this.utils.resFlowSession.resDoorObj.hardware.stepplate != "") {
+            var steplateCount = this.utils.resFlowSession.resDoorObj.hardware.stepplate['count'] || 1;
+            this.hardware.push({
+                name: this.utils.resFlowSession.resDoorObj.hardware.stepplate['item_name'],
+                price: this.utils.resFlowSession.resDoorObj.hardware.stepplate['item_price'] * steplateCount
+            });
+        }
+        if (this.utils.resFlowSession.resDoorObj.hardware.hinge != "") {
+            var hingeCount = this.utils.resFlowSession.resDoorObj.hardware.hinge['count'];
+            this.hardware.push({
+                name: this.utils.resFlowSession.resDoorObj.hardware.hinge['item_name'],
+                price: this.utils.resFlowSession.resDoorObj.hardware.hinge['item_price'] * hingeCount
+            });
+        }
+
+
+        if (this.utils.resFlowSession.resDoorObj.product.product && this.noDIYs.indexOf(this.utils.resFlowSession.resDoorObj.product.product['item_id']) >= 0) {
+            this.hideDIY = true;
+        }
+
+
+        var priceData = this.config.getDoorPrice();
+        this.installPrice = priceData.install;
+        this.diyPrice = priceData.diy;
+    }
     ngOnInit() {
+        console.log('install init ');
         this.widthFeets = this.sizes.getWidthFeets();
         this.lang = this.language.getDoorSize();
         this.utils.resFlowSession.resDoorObj.INSTALLTYPE = "Installed";
@@ -98,38 +155,8 @@ export class InstallComponent implements OnInit, AfterViewInit {
             this.config.pageTitle = '6.Choose Installed vs. DIY';
         }
 
-        this.installSize = this.utils.utilities.wf + "'0 \"(W) X " + this.utils.utilities.hf + "'0 \"(h)";
-        this.wincode = this.utils.utilities.winCode;
-        this.itemName = this.utils.resFlowSession.resDoorObj.product.product['item_name'];
-        this.doorDesign = this.utils.resFlowSession.resDoorObj.design.dsgn['item_name']
-        this.doorModel = this.utils.resFlowSession.resDoorObj.construction.construction['ClopayModelNumber'];
-        this.doorModelPrice = this.utils.resFlowSession.resDoorObj.construction.construction['item_price'];
-        this.construction = this.utils.resFlowSession.resDoorObj.construction.construction['item_name'];
-        this.color = this.utils.resFlowSession.resDoorObj.color.base['item_name'];
-        this.colorPrice = this.utils.resFlowSession.resDoorObj.color.base['item_price'];
-        this.topSection = this.utils.resFlowSession.resDoorObj.windows.topsection['item_name'];
-
-        if (this.utils.resFlowSession.resDoorObj.hardware.handle != "") {
-            this.hardware.push('Handles: ' + this.utils.resFlowSession.resDoorObj.hardware.handle['item_name']);
-
-        }
-        if (this.utils.resFlowSession.resDoorObj.hardware.stepplate != "") {
-            this.hardware.push('Step Plate: ' + this.utils.resFlowSession.resDoorObj.hardware.stepplate['item_name']);
-        }
-        if (this.utils.resFlowSession.resDoorObj.hardware.hinge != "") {
-            this.hardware.push('Hinges: ' + this.utils.resFlowSession.resDoorObj.hardware.hinge['item_name']);
-        }
-
-
-        if (this.utils.resFlowSession.resDoorObj.product.product && this.noDIYs.indexOf(this.utils.resFlowSession.resDoorObj.product.product['item_id']) >= 0) {
-            this.hideDIY = true;
-        }
-
-
-        var priceData = this.config.getDoorPrice();
-        this.installPrice = priceData.install;
-        this.diyPrice = priceData.diy;
-
+        this.selectedType = 'install';
+        this.setPrices();
         this.appComponent.selectedInstallDiy = 'install';
     }
 
@@ -143,7 +170,10 @@ export class InstallComponent implements OnInit, AfterViewInit {
             VIEW: 'door'
         });
     }
+
+    selectedType = 'Installed';
     checkType(txt) {
+        this.selectedType = txt;
         this.appComponent.selectedInstallDiy = txt;
         if (txt == 'diy') {
             this.utils.resFlowSession.resDoorObj.INSTALLTYPE = "DIY";
@@ -157,6 +187,8 @@ export class InstallComponent implements OnInit, AfterViewInit {
             // this.config.renderCanvas(window['cObj'], 'doorVis', '#diyDoorVis');
             // this.exactDoorsize.open();
         }
+
+        this.setPrices();
     }
 
     navigateTo(path) {
@@ -164,17 +196,17 @@ export class InstallComponent implements OnInit, AfterViewInit {
         this.route.navigateByUrl(path);
     }
 
- 
+
     nextBtn(path) {
         if (this.appComponent.selectedInstallDiy == 'install') {
-          
-      if(this.data.zipResults.state == "KS"|| this.data.zipResults.state== "CA"|| this.data.zipResults.state == "RI" ){
-              this.navigateTo('/config/opener'); 
-          }else{
-       this.leadTest.open();
-             }
- 
-         
+
+            if (this.data.zipResults.state == "KS" || this.data.zipResults.state == "CA" || this.data.zipResults.state == "RI") {
+                this.navigateTo('/config/opener');
+            } else {
+                this.leadTest.open();
+            }
+
+
         } else {
             this.readyToNextStep = false;
             this.setOldValues();
@@ -205,9 +237,9 @@ export class InstallComponent implements OnInit, AfterViewInit {
             this.epa.close();
             this.leadTest.open();
         } else {
-           if(this.checkValue == true){
-               this.navigateTo('/config/opener');
-           }
+            if (this.checkValue == true) {
+                this.navigateTo('/config/opener');
+            }
         }
     }
     learMoreClose() {
@@ -215,10 +247,10 @@ export class InstallComponent implements OnInit, AfterViewInit {
         this.epa.open();
     }
     checkValue;
-checkboxValue(event){
- 
-this.checkValue=event.currentTarget.checked;
-}
+    checkboxValue(event) {
+
+        this.checkValue = event.currentTarget.checked;
+    }
     /** DIY */
     dataParams = {
         dtype: this.utils.utilities.dtype,
@@ -297,15 +329,20 @@ this.checkValue=event.currentTarget.checked;
     }
 
     doorDimensionFound = false;
-    getDoorDimentions() {
+    notmatchdoorsize = null;
+    exactDoorsizeModal = null;
+    getDoorDimentions(notmatchdoorsize, exactDoorsize) {
         this.readyToNextStep = false;
+        this.notmatchdoorsize = notmatchdoorsize;
+        this.exactDoorsizeModal = exactDoorsize;
         this.getProducts();
-
-
     }
 
     reportDataNotMatched() {
-        alert('Data Not Matched');
+        if (this.notmatchdoorsize) {
+            this.exactDoorsizeModal.close();
+            this.notmatchdoorsize.open();
+        }
     }
 
     getProducts() {
@@ -338,10 +375,10 @@ this.checkValue=event.currentTarget.checked;
                         cData.product.product = selectedProducts[0];
                         this.getDesigns(cData, rData);
                     } else {
-                        alert('you selected product is not matched');
+                        this.reportDataNotMatched();
                     }
                 } else {
-                    alert('Your selected size is  not matched');
+                    this.reportDataNotMatched();
                 }
             },
             error => {
@@ -388,7 +425,6 @@ this.checkValue=event.currentTarget.checked;
                 if (speciality) {
                     let params = this.setParams(speciality, cData);
                     this.collection.getDesign(params).subscribe(res => {
-                        console.log('desings ', cData, rData);
                         var isMatched = false;
                         if (res && res.length > 0) {
                             var filterDesigns = res.filter(d => {
@@ -425,7 +461,6 @@ this.checkValue=event.currentTarget.checked;
                                 }
                             }
 
-                            console.log('isMatched ', isMatched);
                             if (isMatched) {
                                 this.getWindows(cData, rData);
                             } else {
@@ -504,7 +539,6 @@ this.checkValue=event.currentTarget.checked;
                         isMatched = true;
                     }
                 }
-                console.log('top section matched ', isMatched);
                 if (isMatched) {
                     this.getHardware(cData, rData);
                 }
@@ -592,4 +626,8 @@ this.checkValue=event.currentTarget.checked;
     }
 
 
+    navigateToSize() {
+        this.utils.resFlowSession.resDoorObj.resetsize();
+        this.navigateTo('/doorSize');
+    }
 }
