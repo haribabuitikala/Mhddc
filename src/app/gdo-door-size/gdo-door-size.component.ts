@@ -6,7 +6,7 @@ import { CollectionService } from "../shared/data.service";
 import { CollectionData } from "../collection/collection-data";
 import { NavComponent } from '../nav/nav.component'
 import { NavService } from "../nav/nav-service";
-declare var $:any;
+declare var $: any;
 
 @Component({
     selector: 'app-gdo-door-size',
@@ -58,10 +58,11 @@ export class GdoDoorSizeComponent implements OnInit {
         if (itm > 0) {
             this.utils.utilities.currPage = 2;
             this.utils.utilities.clicked = 1;
-
+            // this is for gdo shopping cart
+            this.utils.gdoFlowSession.cart.size.height.hf = itm;
             this.dataParams.dheightFt = +itm;
 
-                            $('body').addClass('loader');
+            $('body').addClass('loader');
             this.dataService.getGdoOpener(this.dataParams)
                 .subscribe(
                 res => {
@@ -90,6 +91,4 @@ export class GdoDoorSizeComponent implements OnInit {
                 );
         }
     }
-
-
 }

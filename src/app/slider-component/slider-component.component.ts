@@ -102,6 +102,8 @@ export class SliderComponentComponent implements OnInit {
 
     openerSelected(obj, event) {
         $('._slide-items img').removeClass('current');
+        // gdo object
+        this.utils.gdoFlowSession.cart.opener.opener = obj;
         this.gdoConfig.gdoOpeners.length = 0;
         this.gdoConfig.openerTxt = obj.item_name;
         this.gdoConfig.itemPrice = obj.item_price * this.utils.utilities.gdoOpenerQty;

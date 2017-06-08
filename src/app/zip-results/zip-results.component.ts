@@ -47,6 +47,8 @@ export class ZipResultsComponent implements OnInit {
         let orderobj = this.utils.resFlowSession.orderObj;
         orderobj.storeNumber = item.storenumber;
         orderobj.store = item;
+        // gdo shopping cart
+        this.utils.gdoFlowSession.store = item;
 
         // setting double door height and width
         this.utils.utilities.doubleDoorHeight = item.DoubleDoorHeight;

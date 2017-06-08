@@ -65,7 +65,6 @@ export class OpenerComponent implements OnInit {
         // });
     }
 
-
     ngOnInit() {
         this.pageNo = this.utils.utilities.currPage;
         this.navComp.activateIcon();
@@ -73,6 +72,10 @@ export class OpenerComponent implements OnInit {
         this.gdoOpenertext = this.data[0].item_description;
         this.dataParams.openerid = this.data[0].item_id;
         this.utils.utilities.openerType = this.data[0].brand;
+
+        // this is for gdo shopping cart
+        this.utils.gdoFlowSession.cart.opener.opener = this.data[0];
+
         this.data = _.chunk(this.data, 2);
         this.number = 6;
         this.gdoOpenerObj = this.dataStrorage.gdoAdditional;
@@ -102,6 +105,7 @@ export class OpenerComponent implements OnInit {
                 res => {
                     // this.route.navigateByUrl(path);
                     this.gdoOpenerObj = res;
+                    this.utils.gdoFlowSession.cart.opener.apiData = res;
                     $('body').removeClass('loader');
                     this.gdoOponerAccessories.open();
                     // this.goTo('gdoConfig' + path)

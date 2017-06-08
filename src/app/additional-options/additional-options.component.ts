@@ -197,6 +197,8 @@ export class AdditionalOptionsComponent implements OnInit {
                 count: 1 //=== 1 ? val = 1 : val - 1
             };
             this.dataStore.gdoDirectQuestions.push(k);
+            // this is for gdo shopping cart
+            this.utils.gdoFlowSession.cart.additional.items.push(k);
             // this.gdoConfig.itemPrice = this.calculateTotalPrice(this.utils.utilities.item_price, this.singleOpener, this.doubleOpener, this.mileOpenPr, this.qty);
         } else {
             this.singleDrop = false;
@@ -222,6 +224,7 @@ export class AdditionalOptionsComponent implements OnInit {
                 count: 1 //=== 1 ? val = 1 : val - 1
             };
             this.dataStore.gdoDirectQuestions.push(k);
+            this.utils.gdoFlowSession.cart.additional.items.push(k);
 
         } else {
             this.doubleDrop = false;
@@ -285,12 +288,21 @@ export class AdditionalOptionsComponent implements OnInit {
             return el.id != flow;
         });
         this.dataStore.gdoDirectQuestions.push(k);
+        // this is for gdo shoppoing cart
+        this.gdoObjSet(flow, k);
         let kPrice = _.sumBy(this.dataStore.gdoDirectQuestions, function (o) {
             return o.price;
         });
         this.utils.utilities.kPrice = kPrice;
         this.gdoConfig.itemPrice = this.utils.calculateTotalPrice();
         // this.localPrice = this.gdoConfig.itemPrice + kPrice;
+    }
+
+    gdoObjSet(flow, k) {
+        this.dataStore.gdoDirectQuestions = this.dataStore.gdoDirectQuestions.filter(function (el) {
+            return el.id != flow;
+        });
+        this.utils.gdoFlowSession.cart.additional.items.push(k);
     }
 
     removeItm(flow) {

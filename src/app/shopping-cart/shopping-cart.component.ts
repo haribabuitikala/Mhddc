@@ -139,11 +139,11 @@ export class ShoppingCartComponent implements OnInit {
     }
     checkout() {
         if (this.utils.utilities.flow == 'residentialNavElems') {
-            this.appComp.getCheckOut();
+            this.appComp.getCheckOut(this.itemPrice);
             this.resShoppingCartTerms.open();
 
         } else {
-            this.appComp.getCheckOut();
+            this.appComp.getCheckOut(this.itemPrice);
             this.gdoShoppingCartTerms.open();
         }
 

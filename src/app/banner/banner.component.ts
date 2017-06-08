@@ -49,7 +49,9 @@ export class BannerComponent implements OnInit {
                 let orderObj = this.utils.resFlowSession.orderObj;
                 orderObj.windcode = res.windcode;
                 orderObj.zipcode = res.zip;
-                orderObj.locale = res;               
+                orderObj.locale = res;       
+                this.utils.gdoFlowSession.locale = res;    
+                this.utils.gdoFlowSession.zipcode = res.zip;    
 
             },
             error => {
