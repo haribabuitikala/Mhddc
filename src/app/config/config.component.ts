@@ -9,7 +9,7 @@ declare var $: any;
     templateUrl: './config.component.html',
     styleUrls: ['./config.component.less']
 })
-export class ConfigComponent implements OnInit, AfterViewInit {
+export class ConfigComponent implements OnInit, AfterViewInit, AfterViewChecked {
 
     constructor(private appComponent: AppComponent
         , private location: Location
