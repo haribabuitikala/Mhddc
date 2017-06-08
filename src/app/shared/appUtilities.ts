@@ -273,7 +273,58 @@ export class ResidentialFlowSession {
         heightI: 0,
         collectionName: '',
         designName: '',
-        constructionName: '',
+        construction: {
+            name: '',
+            price: 0,
+            qty: 0
+        },
+        color: {
+            overlay: {
+                name: '',
+                price: 0
+            },
+            base: {
+                name: '',
+                price: 0
+            }
+        },
+        topSection: {
+            name: '',
+            glassType: {
+                name: '',
+                price: 0
+            }
+        },
+        hardware: {
+            handle: {
+                name: '',
+                price: 0,
+                qty: 0
+            },
+            stepPlate: {
+                name: '',
+                price: 0,
+                qty: 0
+            },
+            hinge: {
+                name: '',
+                price: 0,
+                qty: 0
+            },
+            lock: {
+                name: '',
+                price: 0,
+                qty: 0
+            }
+        },
+        opener: {
+            name: '',
+            price: 0,
+            items: []
+        },
+        additionalOptions: {
+            items: []
+        },
         // calculation variables
         upsellPrice: 0
 
@@ -400,6 +451,11 @@ export class ResidentialFlowSession {
                 "vinyl": "",
                 "apiData": ""
             };
+            this.resDetails.construction = {
+                name: '',
+                price: 0,
+                qty: 0
+            };
             this.resDoorObj['reset' + this.resDoorObj['resetorder'][4]]();
         },
         "resetcolor": () => {
@@ -407,6 +463,16 @@ export class ResidentialFlowSession {
                 "base": {},
                 "overlay": {},
                 "apiData": {}
+            };
+            this.resDetails.color = {
+                overlay: {
+                    name: '',
+                    price: 0
+                },
+                base: {
+                    name: '',
+                    price: 0
+                }
             };
             this.resDoorObj['reset' + this.resDoorObj['resetorder'][5]]();
         },
@@ -416,6 +482,13 @@ export class ResidentialFlowSession {
                 "placement": null,
                 "glasstype": "",
                 "apiData": ""
+            };
+            this.resDetails.topSection = {
+                name: '',
+                glassType: {
+                    name: '',
+                    price: 0
+                }
             };
             this.resDoorObj['reset' + this.resDoorObj['resetorder'][6]]();
         },
@@ -430,6 +503,28 @@ export class ResidentialFlowSession {
                 "strut": "",
                 "apiData": "",
                 "items": []
+            };
+            this.resDetails.hardware = {
+                handle: {
+                    name: '',
+                    price: 0,
+                    qty: 0
+                },
+                stepPlate: {
+                    name: '',
+                    price: 0,
+                    qty: 0
+                },
+                hinge: {
+                    name: '',
+                    price: 0,
+                    qty: 0
+                },
+                lock: {
+                    name: '',
+                    price: 0,
+                    qty: 0
+                }
             };
             this.resDoorObj['reset' + this.resDoorObj['resetorder'][7]]();
         },
@@ -451,11 +546,19 @@ export class ResidentialFlowSession {
                 "items": [],
                 "apiData": ""
             };
+            this.resDetails.opener = {
+                name: '',
+                price: 0,
+                items: []
+            };
             this.resDoorObj['reset' + this.resDoorObj['resetorder'][8]]();
         },
         "resetadditional": () => {
             this.resDoorObj['additional'] = {
                 "items": []
+            };
+            this.resDetails.additionalOptions = {
+                items: []
             };
         },
         "resetFromStep": (step) => {
@@ -489,7 +592,9 @@ export class ResidentialFlowSession {
         let cObj = this.resDoorObj;
         let itemPriceDY = 0.00;
         let itemPriceInstall = 0.00;
-        let price = [0, 0]; //[installed, diy]
+        let price = [0,0]; //[installed, diy]
+        this.resDetails.additionalOptions.items = [];
+        this.resDetails.opener.items = [];
 
         try {
             if (itemId) {
@@ -505,10 +610,18 @@ export class ResidentialFlowSession {
                     }
                     price[0] = price[0] + dc['item_price'] * count + dc['laborcodeprice'];
                     price[1] = price[1] + dc['item_price'] * count;
+
+                    this.resDetails.construction.name = dc['item_name'];
+                    this.resDetails.construction.price = dc['item_price'];
+                    this.resDetails.construction.qty = count;
                 } else {
                     let dc = this.resDoorObj.construction['construction'];
                     price[0] = price[0] + dc['item_price'] * count + dc['laborcodeprice'];
                     price[1] = price[1] + dc['item_price'] * count;
+
+                    this.resDetails.construction.name = dc['item_name'];
+                    this.resDetails.construction.price = dc['item_price'];
+                    this.resDetails.construction.qty = count;
                 }
 
                 // Calculate price for Overlay Color
@@ -516,6 +629,9 @@ export class ResidentialFlowSession {
                 if (oc && oc.hasOwnProperty('item_price')) {
                     price[0] = price[0] + oc['item_price'];
                     price[1] = price[1] + oc['item_price'];
+
+                    this.resDetails.color.overlay.name = oc['item_name'];
+                    this.resDetails.color.overlay.price = oc['item_price'];
                 }
 
                 // Calculate price for Base Color
@@ -523,13 +639,20 @@ export class ResidentialFlowSession {
                 if (bc && bc.hasOwnProperty('item_price')) {
                     price[0] = price[0] + bc['item_price'];
                     price[1] = price[1] + bc['item_price'];
-                }
+                    
+                    this.resDetails.color.base.name = bc['item_name'];
+                    this.resDetails.color.base.price = bc['item_price'];
+                }                
 
                 // Calculate price for Top Section and Glasstype
                 let tsgt = this.resDoorObj.windows.glasstype;
                 if (tsgt && tsgt.hasOwnProperty('item_price')) {
                     price[0] = price[0] + tsgt['item_price'];
                     price[1] = price[1] + tsgt['item_price'];
+                    
+                    this.resDetails.topSection.name = this.resDoorObj.windows.topsection['item_name'];
+                    this.resDetails.topSection.glassType.name = tsgt['item_name'];
+                    this.resDetails.topSection.glassType.price = tsgt['item_price'];
                 }
 
                 // Calculate price for Hardware
@@ -538,24 +661,39 @@ export class ResidentialFlowSession {
                 if (hh && hh.hasOwnProperty('item_installed_price')) {
                     price[0] = price[0] + hh['item_installed_price'] * hh['count'];
                     price[1] = price[1] + hh['item_installed_price'] * hh['count'];
+
+                    this.utils.resFlowSession.resDetails.hardware.handle.name = hh['item_name'];
+                    this.utils.resFlowSession.resDetails.hardware.handle.price = hh['item_installed_price'];
+                    this.utils.resFlowSession.resDetails.hardware.handle.qty = hh['count'];
                 }
                 // b.Calculate price for Stepplate
                 let hs = this.resDoorObj.hardware.stepplate;
                 if (hs && hs.hasOwnProperty('item_installed_price')) {
                     price[0] = price[0] + hs['item_installed_price'] * hs['count'];
                     price[1] = price[1] + hs['item_installed_price'] * hs['count'];
+
+                    this.utils.resFlowSession.resDetails.hardware.stepPlate.name = hs['item_name'];
+                    this.utils.resFlowSession.resDetails.hardware.stepPlate.price = hs['item_installed_price'];
+                    this.utils.resFlowSession.resDetails.hardware.stepPlate.qty = hs['count'];
                 }
                 // c.Calculate price for Hinges
                 let hhi = this.resDoorObj.hardware.hinge;
                 if (hhi && hhi.hasOwnProperty('item_installed_price')) {
                     price[0] = price[0] + hhi['item_installed_price'] * hhi['count'];
                     price[1] = price[1] + hhi['item_installed_price'] * hhi['count'];
+
+                    this.utils.resFlowSession.resDetails.hardware.hinge.name = hhi['item_name'];
+                    this.utils.resFlowSession.resDetails.hardware.hinge.price = hhi['item_installed_price'];
+                    this.utils.resFlowSession.resDetails.hardware.hinge.qty = hhi['count'];
                 }
 
                 let locksItem = this.resDoorObj.hardware.lock;
                 if (locksItem && locksItem.hasOwnProperty('item_installed_price')) {
                     price[0] = price[0] + locksItem['item_installed_price'] * 1;
                     price[1] = price[1] + locksItem['item_installed_price'] * 1;
+
+                    this.resDetails.hardware.lock.name = locksItem['item_name'];
+                    this.resDetails.hardware.lock.price = locksItem['item_installed_price'];
                 }
 
                 // Calculate price for Openers
@@ -563,35 +701,49 @@ export class ResidentialFlowSession {
                 if (op && op.hasOwnProperty('item_price')) {
                     price[0] = price[0] + op['item_price'] + op['laborprice'];
                     price[1] = price[1] + op['item_price'];
+
+                    this.resDetails.opener.name = op['item_name'];
+                    this.resDetails.opener.price = op['item_price'];
                 }
 
                 // Calculate price for Optional Openers
-                _.forEach(this.resDoorObj.opener.items, function (item) {
-                    if (item.hasOwnProperty('item_price')) {
-                        price[0] = price[0] + item['item_price'] * item['count'];
-                        price[1] = price[1] + item['item_price'] * item['count'];
-                    }
-                })
+                if(this.resDoorObj.opener.items.length > 0) {
+                    _.forEach(this.resDoorObj.opener.items, (item) => {
+                        if(item.hasOwnProperty('item_price') && item['count'] > 0) {
+                            price[0] = price[0] + item['item_price'] * item['count'];
+                            price[1] = price[1] + item['item_price'] * item['count'];
+                            this.resDetails.opener.items.push({
+                                name: item['item_name'],
+                                price: item['item_price'],
+                                qty: item['count']
+                            });
+                        }
+                    })
+                }
 
-                // Calculate price for Additional Options
-                _.forEach(this.resDoorObj.additional.items, function (item) {
-                    if (item.hasOwnProperty('price')) {
-                        price[0] = price[0] + item['price'];
-                        price[1] = price[1] + item['price'];
-                    }
-                })
-
-
-
-                itemPriceInstall = price[0];
-                if (this.noDIYs.indexOf(itemId) < 0) {
-                    itemPriceDY = price[1];
+                // Calculate price for Additional Options    
+                if(this.resDoorObj.additional.items.length > 0) {            
+                    _.forEach(this.resDoorObj.additional.items, (item) => {
+                        if(item.hasOwnProperty('price')) {
+                            price[0] = price[0] + item['price'];
+                            price[1] = price[1] + item['price'];
+                            this.resDetails.additionalOptions.items.push({
+                                name: item['name'],
+                                price: item['price']
+                            });
+                        }
+                    })
                 }
             }
         }
         catch (e) {
+            console.log(e);
         }
         finally {
+            itemPriceInstall = price[0];
+            if (this.noDIYs.indexOf(itemId) < 0) {
+                itemPriceDY = price[1];
+            }
             this.utils.utilities.itemPriceInstall = itemPriceInstall;
             this.utils.utilities.itemPriceDY = itemPriceDY;
         }

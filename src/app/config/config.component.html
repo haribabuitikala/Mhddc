@@ -110,27 +110,38 @@
         <div class="quantity-view-details">
             <ul>
                 <li>
-                    <span><strong>Zip Code/Location</strong>
-         {{details.zip}} - <span [innerHtml]="details.storeName"></span> ,{{details.county}} COUNTY</span>
-                </li>
-
-                <li>
-                    <span><strong>Store</strong>
-                    <span [innerHtml]="details.storeName"></span>
+                    <span>
+                        <strong>Zip Code/Location</strong>
+                        {{details.zip}} - {{details.storeName}} ,{{details.county}} COUNTY
                     </span>
                 </li>
 
                 <li>
-                    <span><strong>Size</strong>
-          {{details.widthF}}' {{details.widthI}}"(w) x {{details.heightF}}' {{details.heightI}}"(h)</span></li>
+                    <span>
+                        <strong>Store</strong>
+                        <span [innerHtml]="details.storeName"></span>
+                    </span>
+                </li>
 
                 <li>
-                    <span><strong>WindCode </strong>
-          {{details.windcode}}</span></li>
+                    <span>
+                        <strong>Size</strong>
+                        {{details.widthF}}' {{details.widthI}}"(w) x {{details.heightF}}' {{details.heightI}}"(h)
+                    </span>
+                </li>
 
                 <li>
-                    <span><strong> Collection </strong>
-          <span [innerHtml]="details.collectionName"></span></span>
+                    <span>
+                        <strong>WindCode </strong>
+                        {{details.windcode}}
+                    </span>
+                </li>
+
+                <li>
+                    <span>
+                        <strong> Collection </strong>
+                        <span [innerHtml]="details.collectionName"></span>
+                    </span>
                 </li>
 
                 <li *ngIf="details.designName">
@@ -144,12 +155,63 @@
                     <span [innerHtml]="details.constructionName"></span>
                     </span>
                 </li>
-
+                <li *ngIf="details.color.base.name !== ''">
+                    <span>
+                        <strong>Color</strong>
+                        <span [innerHTML]="details.color.base.name"></span>
+                    </span>
+                </li>
+                <li *ngIf="details.color.overlay.name !== ''">
+                    <span>
+                        <strong>Overlay Color</strong>
+                        <span [innerHTML]="details.color.overlay.name"></span>
+                    </span>
+                </li>
+                <li *ngIf="details.topSection.name !== ''">
+                    <span>
+                        <strong>Top Section</strong>
+                        <span [innerHTML]="details.topSection.name"></span>
+                    </span>
+                </li>
+                <li *ngIf="details.topSection.glassType.name !== ''">
+                    <span>
+                        <strong>Glass Type</strong>
+                        <span [innerHTML]="details.topSection.glassType.name"></span>
+                    </span>
+                </li>
+                <li *ngIf="details.hardware.handle.name !== ''">
+                    <span>
+                        <strong>Hardware</strong>
+                        <span [innerHTML]="details.hardware.handle.name + ' (x' + details.hardware.handle.qty + ' Per Door)'"></span>
+                        <span [innerHTML]="details.hardware.stepPlate.name + ' (x' + details.hardware.stepPlate.qty + ' Per Door)'"></span>
+                        <span [innerHTML]="details.hardware.hinge.name + ' (x' + details.hardware.hinge.qty + ' Per Door)'"></span>
+                    </span>
+                </li>
+                <li *ngIf="details.opener.name !== ''">
+                    <span>
+                        <strong>Opener</strong>
+                        <span [innerHTML]="details.opener.name"></span>
+                    </span>
+                    {{details.opener.items.length}}
+                </li>
+                <li *ngIf="details.opener.items.length > 0">
+                    <span>
+                        <strong>Opener Accessories</strong>
+                        <span *ngFor="let item of details.opener.items; let i=index">
+                            {{item.name}} (x{{item.qty}})
+                        </span>
+                    </span>
+                </li>
+                <li *ngIf="details.additionalOptions.items.length > 0">
+                    <span>
+                        <strong>Additional Options</strong>
+                        <span *ngFor="let item of details.additionalOptions.items; let i=index">
+                            {{item.name}}
+                        </span>
+                    </span>
+                </li>
             </ul>
-
-
         </div>
-
     </modal-body>
 </modal>
 <div class="row margin-b-15"></div>

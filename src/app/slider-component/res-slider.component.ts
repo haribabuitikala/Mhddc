@@ -141,6 +141,26 @@ export class ResSliderComponent implements OnInit, AfterViewInit {
                 }
 
                 break;
+            case 'hardware': 
+                if (this.issub) {
+                    if (this.utils.resFlowSession.resDoorObj.hardware.hinge && this.subname == 'stephinges') {
+                        if (this.utils.resFlowSession.resDoorObj.hardware.hinge['item_id'] === item['item_id']) {
+                            isSeleted = true;
+                        }
+                    }
+
+                    if (this.utils.resFlowSession.resDoorObj.hardware.stepplate && this.subname == 'stepplates') {
+                        if (this.utils.resFlowSession.resDoorObj.hardware.stepplate['item_id'] === item['item_id']) {
+                            isSeleted = true;
+                        }
+                    }
+                    if (this.utils.resFlowSession.resDoorObj.hardware.handle && this.subname == 'handles') {
+                        if (this.utils.resFlowSession.resDoorObj.hardware.handle['item_id'] === item['item_id']) {
+                            isSeleted = true;
+                        }
+                    }
+                }
+                break;
             case 'topsection':
                 if (this.utils.resFlowSession.resDoorObj.windows.topsection) {
                     if (this.utils.resFlowSession.resDoorObj.windows.topsection['item_id'] === item['item_id']) {
@@ -153,27 +173,6 @@ export class ResSliderComponent implements OnInit, AfterViewInit {
                     if (this.utils.resFlowSession.resDoorObj.windows.glasstype['item_id'] === item['item_id']) {
                         isSeleted = true;
                         this.showGlassDetails = true;
-                    }
-                }
-                break;
-            case 'handles':
-                if (this.utils.resFlowSession.resDoorObj.hardware.handle) {
-                    if (this.utils.resFlowSession.resDoorObj.hardware.handle['item_id'] === item['item_id']) {
-                        isSeleted = true;
-                    }
-                }
-                break;
-            case 'stepplates':
-                if (this.utils.resFlowSession.resDoorObj.hardware.stepplate) {
-                    if (this.utils.resFlowSession.resDoorObj.hardware.stepplate['item_id'] === item['item_id']) {
-                        isSeleted = true;
-                    }
-                }
-                break;
-            case 'stephinges':
-                if (this.utils.resFlowSession.resDoorObj.hardware.hinge) {
-                    if (this.utils.resFlowSession.resDoorObj.hardware.hinge['item_id'] === item['item_id']) {
-                        isSeleted = true;
                     }
                 }
                 break;
@@ -266,20 +265,22 @@ export class ResSliderComponent implements OnInit, AfterViewInit {
             case 'glasstype':
                 this.utils.resFlowSession.resDoorObj.windows.glasstype = obj;
                 break;
-            case 'handles':
-                this.utils.resFlowSession.resDoorObj.hardware.handle = obj;
-                this.utils.resFlowSession.resDoorObj.hardware.handle['count'] = 1;
-                this.utils.resFlowSession.resDoorObj.hardware.handle['placement'] = obj['placement'] ? obj['placement'] : obj['placementlist'];
-                break;
-            case 'stepplates':
-                this.utils.resFlowSession.resDoorObj.hardware.stepplate = obj;
-                this.utils.resFlowSession.resDoorObj.hardware.stepplate['count'] = 1;
-                this.utils.resFlowSession.resDoorObj.hardware.stepplate['placement'] = obj['placement'] ? obj['placement'] : obj['placementlist'];
-                break;
-            case 'stephinges':
-                this.utils.resFlowSession.resDoorObj.hardware.hinge = obj;
-                this.utils.resFlowSession.resDoorObj.hardware.hinge['count'] = 1;
-                this.utils.resFlowSession.resDoorObj.hardware.hinge['placement'] = obj['placement'] ? obj['placement'] : obj['placementlist'];
+            case 'hardware':
+                if (this.issub) {
+                    if (this.subname == 'handles') {
+                        this.utils.resFlowSession.resDoorObj.hardware.handle = obj;
+                        this.utils.resFlowSession.resDoorObj.hardware.handle['count'] = 1;
+                        this.utils.resFlowSession.resDoorObj.hardware.handle['placement'] = obj['placement'] ? obj['placement'] : obj['placementlist'];
+                    } else if(this.subname == 'stepplates'){
+                        this.utils.resFlowSession.resDoorObj.hardware.stepplate = obj;
+                        this.utils.resFlowSession.resDoorObj.hardware.stepplate['count'] = 1;
+                        this.utils.resFlowSession.resDoorObj.hardware.stepplate['placement'] = obj['placement'] ? obj['placement'] : obj['placementlist'];
+                    } else {
+                        this.utils.resFlowSession.resDoorObj.hardware.hinge = obj;
+                        this.utils.resFlowSession.resDoorObj.hardware.hinge['count'] = 1;
+                        this.utils.resFlowSession.resDoorObj.hardware.hinge['placement'] = obj['placement'] ? obj['placement'] : obj['placementlist'];
+                    }
+                }
                 break;
             case 'opener':
                 this.utils.resFlowSession.resDoorObj.opener.opener = obj;
@@ -316,7 +317,7 @@ export class ResSliderComponent implements OnInit, AfterViewInit {
                     this.utils.resFlowSession.resDoorObj.color.base = obj;
                     this.utils.resFlowSession.resDoorObj.color.overlay = obj;
                 }
-                break
+                break;
             case 'construction':
                 this.utils.resFlowSession.resDoorObj.construction.construction = obj;
                 if (obj['colors'] && obj['colors'].length > 0) {
