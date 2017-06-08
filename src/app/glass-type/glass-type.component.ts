@@ -68,6 +68,7 @@ export class GlassTypeComponent implements OnInit {
   }
 
   prevBtn() {
+    this.resetPrice();
     this.route.navigateByUrl('/config/topSection');
   }
 
@@ -96,6 +97,10 @@ export class GlassTypeComponent implements OnInit {
     this.utils.resFlowSession.resDoorObj.windows.placement = placement;
     this.config.renderCanvas();
 
+  }
+
+  resetPrice() {
+    this.utils.resFlowSession.resDoorObj.windows.glasstype = null;
   }
 
 }

@@ -127,7 +127,13 @@ export class ColorComponent implements OnInit {
     }
 
     prevBtn() {
+        this.resetPrice();
         this.utils.resFlowSession.resDoorObj.resetFromStep(4);
         this.route.navigateByUrl('/config/construction');
+    }
+
+    resetPrice() {
+        this.utils.resFlowSession.resDoorObj.color.overlay = null;
+        this.utils.resFlowSession.resDoorObj.color.base = null;
     }
 }

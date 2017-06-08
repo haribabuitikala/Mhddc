@@ -173,8 +173,15 @@ export class HardwareComponent implements OnInit {
   }
 
   prevBtn() {
+    this.resetPrice();
     this.utils.resFlowSession.resDoorObj.resetFromStep(6);
     this.navigateTo('/config/topSection');
+  }
+
+  resetPrice() {
+    this.utils.resFlowSession.resDoorObj.hardware.handle = null;
+    this.utils.resFlowSession.resDoorObj.hardware.stepplate = null;
+    this.utils.resFlowSession.resDoorObj.hardware.hinge = null;
   }
 }
 

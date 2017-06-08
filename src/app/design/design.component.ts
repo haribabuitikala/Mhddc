@@ -114,20 +114,26 @@ export class DesignComponent implements OnInit {
         this.app.setLoader();
     }
 
-    onDoorDesignSelected (e) {
-        console.log(e.obj);
-    }
-
     nextBtn(path) {
         this.route.navigateByUrl(path);
     }
+
     prevBtn(path) {
+        this.resetPrice();
         this.utils.resFlowSession.resDoorObj.resetFromStep(2);
         if (this.navComponent.flowType === 'res') {
             this.route.navigateByUrl('/home');
         } else {
             this.route.navigateByUrl('/doorSize');
         }
+    }
+
+    resetPrice() {
+        _.forEach(this.utils.resFlowSession.resDoorObj.design.dsgn['constructions'], function(o) { 
+			 o.isdefault = false; 
+		});
+        this.utils.resFlowSession.resDoorObj.QTY = 1;
+        this.utils.resFlowSession.resDoorObj.construction.construction = "";
     }
 
 }

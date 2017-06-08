@@ -164,13 +164,17 @@ export class ResAdditionalOptionsComponent implements OnInit {
     }
 
     prevBtn(path) {
+        this.resetPrice();
         this.utils.resFlowSession.resDoorObj.resetFromStep(8);
         if (this.utils.resFlowSession.resDoorObj.INSTALLTYPE === 'DIY') {
             this.route.navigateByUrl('/config/install');
         } else {
             this.route.navigateByUrl('/config/opener');
         }
+    }
 
+    resetPrice() {
+        this.utils.resFlowSession.resDoorObj.additional.items = [];
     }
 
     installQuestionsPopup(installQuestions) {
