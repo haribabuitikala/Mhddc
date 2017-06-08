@@ -53,7 +53,10 @@ export class ShoppingCartComponent implements OnInit {
     ngOnInit() {
         this.navComp.activateIcon();
         this.utils.resFlowSession.resDoorObj.TYPE === 'GDO' ? this.resFlow = false : this.resFlow = true;
-        this.resFlow === true ? this.qty = 1 : this.utils.utilities.gdoOpenerQty
+        if (this.resFlow) {
+            this.qty = 1;
+            this.itemPrice = this.getResPrice()
+        }
 
         this.pageNo = this.utils.utilities.currPage;
         this.appComp.currScreen = 0;
@@ -71,7 +74,9 @@ export class ShoppingCartComponent implements OnInit {
         $('body').removeClass('loader');
         this.shoppingCartData();
     }
-
+    getResPrice() {
+        return this.utils.resFlowSession.resDoorObj.INSTALLTYPE === "Installed" ? this.utils.utilities.itemPriceInstall : this.utils.utilities.itemPriceDY;
+    }
     removeItem() {
         this.utils.utilities.gdoOpenerText = '';
         this.utils.utilities.item_price = 0;
@@ -109,10 +114,28 @@ export class ShoppingCartComponent implements OnInit {
 
     }
     updateQuantity(flow) {
-        this.itemPrice = this.utils.updateQty(flow, this.utils.utilities.gdoOpenerQty);
-        this.qty = this.utils.utilities.gdoOpenerQty;
-        this.baseItmPrice = this.utils.utilities.item_price * this.utils.utilities.gdoOpenerQty;
 
+        if (this.resFlow) {
+            this.updateResQty(flow);
+            this.utils.resFlowSession.resCalculatePrice();
+            this.itemPrice = this.getResPrice();
+            this.qty = this.utils.resFlowSession.resDoorObj.QTY;
+        } else {
+            this.itemPrice = this.utils.updateQty(flow, this.utils.utilities.gdoOpenerQty);
+            this.baseItmPrice = this.utils.utilities.item_price * this.utils.utilities.gdoOpenerQty;
+            // this.baseItmPrice = flow === 1 ? this.utils.updateQty(1, this.utils.utilities.gdoOpenerQty) : this.utils.updateQty(0, this.utils.utilities.gdoOpenerQty);
+            this.qty = this.utils.utilities.gdoOpenerQty;
+        }
+
+
+    }
+    updateResQty(isIncrement?) {
+        let count = this.utils.resFlowSession.resDoorObj.QTY;
+        if (isIncrement && count < 6) {
+            this.utils.resFlowSession.resDoorObj.QTY = count + 1;
+        } else if (count > 1 && count !== 6) {
+            this.utils.resFlowSession.resDoorObj.QTY = count - 1;
+        }
     }
     checkout() {
         if (this.utils.utilities.flow == 'residentialNavElems') {
