@@ -139,11 +139,11 @@ export class ShoppingCartComponent implements OnInit {
     }
     checkout() {
         if (this.utils.utilities.flow == 'residentialNavElems') {
-            this.appComp.getCheckOut(this.itemPrice);
+            // this.appComp.getCheckOut(this.itemPrice);
             this.resShoppingCartTerms.open();
 
         } else {
-            this.appComp.getCheckOut(this.itemPrice);
+            // this.appComp.getCheckOut(this.itemPrice);
             this.gdoShoppingCartTerms.open();
         }
 
@@ -157,7 +157,8 @@ export class ShoppingCartComponent implements OnInit {
         this.route.navigateByUrl('/banner');
     }
     goToCustomerInfo() {
-        this.route.navigateByUrl('/customer-info');
+        // this.route.navigateByUrl('/customer-info');
+        this.appComp.getCheckOut(this.itemPrice);
     }
 
 

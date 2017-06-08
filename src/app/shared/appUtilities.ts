@@ -153,7 +153,6 @@ export class AppUtilities {
         orderInstallType: "GDO",
         items: 1,
         store:""
-
     }
 
     setUtils(curr, clicked) {
