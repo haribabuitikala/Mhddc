@@ -189,10 +189,10 @@ export class DoorSizeComponent implements OnInit {
                 this.showMeasure = false;
                 this.isRequired = true;
             }
-            // let winCode = +this.utils.utilities.winCode.slice(1);
-            // if (winCode >= 6) {
+            let winCode = +this.utils.utilities.winCode.slice(1);
+            if (winCode >= 6) {
             this.modal1.open();
-            // }
+            }
         } else {
             this.showMeasure = true;
         }
