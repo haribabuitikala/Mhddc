@@ -86,7 +86,7 @@ export class OpenerComponent implements OnInit {
         this.utils.utilities.singlep = 0;
         this.utils.utilities.doublep = 0;
         this.utils.utilities.milesp = 0;
-        // this.utils.utilities.kPrice = 0;
+        this.utils.utilities.kPrice = 0;
         this.utils.utilities.distancePrice = 0;
 
         var k = this.pageNo + '.Choose an Opener';

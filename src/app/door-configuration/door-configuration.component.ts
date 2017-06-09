@@ -103,6 +103,7 @@ export class DoorConfigurationComponent implements OnInit {
     updateQuantity(flow) {
         // this.utils.updateQty will call calculate total amount internally
         this.itemPrice = this.utils.updateQty(flow, this.utils.utilities.gdoOpenerQty);
+        this.gdoConfig.itemPrice = this.itemPrice;
         this.qty = this.utils.utilities.gdoOpenerQty;
     }
 
