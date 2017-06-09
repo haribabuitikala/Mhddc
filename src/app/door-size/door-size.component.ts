@@ -63,7 +63,8 @@ export class DoorSizeComponent implements OnInit {
         this.widthFeets = this.sizes.getWidthFeets();
         this.makeNull();
         this.navComp.activateIcon();
-
+        this.navComponent.clearDisabledSteps();
+        this.navComponent.clearVisitedSteps();
         this.navComponent.setNavFlow('res');
         this.navComponent.renderNav({
             flowType: 'res',
@@ -74,6 +75,8 @@ export class DoorSizeComponent implements OnInit {
 
             }
         });
+
+        
     }
 
     homeSize = "0";

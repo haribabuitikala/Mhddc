@@ -160,6 +160,10 @@ export class NavComponent implements OnInit {
         this.resDisableSteps = [];
     }
 
+    clearVisitedSteps() {
+        this.resVisistedSteps = [];
+    }
+
     addDisabledStep(sNo) {
         this.resDisableSteps.push(sNo);
     }

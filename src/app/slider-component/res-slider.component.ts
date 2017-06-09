@@ -72,9 +72,15 @@ export class ResSliderComponent implements OnInit, AfterViewInit {
                     }
                 }
             } else {
-                if (this.data.length > 0 && this.data[0].length > 0) {
-                    this.saveSelected(this.data[0][0]);
+                if (this.utils.resFlowSession.resDoorObj.product.product['item_id'] == 16 &&
+                    this.cname === 'color') {
+                        this.saveSelected(this.data[0][3]);
+                } else {
+                    if (this.data.length > 0 && this.data[0].length > 0) {
+                        this.saveSelected(this.data[0][0]);
+                    }
                 }
+
             }
             this.sliderRows = _.times(this.data.length, _.constant(null));
             this.slideCount = this.data ? this.data.length : 0;
@@ -141,7 +147,7 @@ export class ResSliderComponent implements OnInit, AfterViewInit {
                 }
 
                 break;
-            case 'hardware': 
+            case 'hardware':
                 if (this.issub) {
                     if (this.utils.resFlowSession.resDoorObj.hardware.hinge && this.subname == 'stephinges') {
                         if (this.utils.resFlowSession.resDoorObj.hardware.hinge['item_id'] === item['item_id']) {
@@ -271,7 +277,7 @@ export class ResSliderComponent implements OnInit, AfterViewInit {
                         this.utils.resFlowSession.resDoorObj.hardware.handle = obj;
                         this.utils.resFlowSession.resDoorObj.hardware.handle['count'] = 1;
                         this.utils.resFlowSession.resDoorObj.hardware.handle['placement'] = obj['placement'] ? obj['placement'] : obj['placementlist'];
-                    } else if(this.subname == 'stepplates'){
+                    } else if (this.subname == 'stepplates') {
                         this.utils.resFlowSession.resDoorObj.hardware.stepplate = obj;
                         this.utils.resFlowSession.resDoorObj.hardware.stepplate['count'] = 1;
                         this.utils.resFlowSession.resDoorObj.hardware.stepplate['placement'] = obj['placement'] ? obj['placement'] : obj['placementlist'];
@@ -388,9 +394,11 @@ export class ResSliderComponent implements OnInit, AfterViewInit {
                     this.constructionInfo = res
                     contructionDetails.open();
                 } else {
-                    let t = res[2].modeldescription ? parseFloat(res[2].modeldescription.split(' ')[0]) : 19;
-                    if (t < 18.4) {
-                        this.utils.resFlow.isUpsellSet = true;
+                    if (res && res.length > 0) {
+                        let t = res[2].modeldescription ? parseFloat(res[2].modeldescription.split(' ')[0]) : 19;
+                        if (t < 18.4) {
+                            this.utils.resFlow.isUpsellSet = true;
+                        }
                     }
                 }
             });

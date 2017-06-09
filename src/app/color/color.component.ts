@@ -163,13 +163,21 @@ export class ColorComponent implements OnInit {
     }
 
     moveToPage() {
+        
         if (this.navComponent.flowType === 'res') {
             let params = this.setParams();
-            this.dataService.getTopSection(params).subscribe(res => {
-                this.dataStore.topSection = res;
-                this.utils.resFlowSession.resDoorObj.windows.apiData = res;
-                this.route.navigateByUrl('config/topSection');
-            });
+            if (this.utils.resFlowSession.resDoorObj.product.product['item_id'] == 16) {
+                this.navComponent.clearDisabledSteps();
+                this.navComponent.addDisabledStep(7);
+                this.navComponent.addDisabledStep(8);
+                this.route.navigateByUrl('config/hardware');
+            } else {
+                this.dataService.getTopSection(params).subscribe(res => {
+                    this.dataStore.topSection = res;
+                    this.utils.resFlowSession.resDoorObj.windows.apiData = res;
+                    this.route.navigateByUrl('config/topSection');
+                });
+            }
         } else {
             this.route.navigateByUrl('config/install');
         }

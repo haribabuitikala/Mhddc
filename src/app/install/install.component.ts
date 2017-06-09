@@ -76,7 +76,9 @@ export class InstallComponent implements OnInit, AfterViewInit {
         this.widthFeets = this.sizes.getWidthFeets();
         this.lang = this.language.getDoorSize();
         this.utils.resFlowSession.resDoorObj.INSTALLTYPE = "Installed";
-
+        if (this.noDIYs.indexOf(this.utils.resFlowSession.resDoorObj.product.product['item_id']) >= 0) {
+            this.hideDIY = true;
+        }
         if (this.navComponent.flowType === 'res') {
             this.navComponent.renderNav({
                 flowType: 'res',

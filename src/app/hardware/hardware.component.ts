@@ -52,7 +52,9 @@ export class HardwareComponent implements OnInit {
 
     this.utils.resFlowSession.resDoorObj.hardware.handle['count'] = this.countManager.handle;
     this.utils.resFlowSession.resDoorObj.hardware.stepplate['count'] = this.countManager.stepplate;
-    this.utils.resFlowSession.resDoorObj.hardware.hinge['count'] = this.countManager.hinge;
+    if (this.utils.resFlowSession.resDoorObj.hardware.hinge) {
+      this.utils.resFlowSession.resDoorObj.hardware.hinge['count'] = this.countManager.hinge;
+    }
 
     let hardware = this.utils.resFlowSession.resDoorObj.hardware;
     hardware.items[0].count = this.countManager.handle;
@@ -65,18 +67,18 @@ export class HardwareComponent implements OnInit {
   hardwarePriceTot(price) {
     let resHard = this.utils.resFlowSession.resDoorObj.hardware;
     let utils = this.utils.utilities;
-    if (resHard.handle['count'] > 0) {
+    if (resHard.handle && resHard.handle['count'] > 0) {
       utils.handlePrice = resHard.handle['count'] * resHard.handle['item_installed_price'];
     } else {
       utils.handlePrice = 0
     }
-    if (resHard.stepplate['count'] > 0) {
+    if (resHard.stepplate && resHard.stepplate['count'] > 0) {
       utils.stepPlatePrice = resHard.stepplate['count'] * resHard.stepplate['item_installed_price'];
     } else {
       utils.stepPlatePrice = 0
     }
 
-    if (resHard.hinge['count'] > 0) {
+    if (resHard.hinge && resHard.hinge['count'] > 0) {
       utils.hingePrice = resHard.hinge['count'] * resHard.hinge['item_installed_price'];
     } else {
       utils.hingePrice = 0

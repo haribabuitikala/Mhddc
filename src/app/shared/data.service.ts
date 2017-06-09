@@ -67,7 +67,14 @@ export class CollectionService {
         }
 
         return this.http.post(this.url + 'ModelDescription', data)
-            .map(res => res.json())
+            .map(res => {
+                try {
+                    return res.json();
+                }
+                catch (e) {
+                    return {};
+                }
+            })
             .finally(() => {
                 this.utils.removeLoader();
             })
@@ -480,7 +487,7 @@ export class CollectionService {
                             "_upload": "false",
                             "_size": "1"
                         },
-                          {
+                        {
                             "dcoords": {
                                 "point": [
                                     {
@@ -927,21 +934,21 @@ export class CollectionService {
                 this.utils.removeLoader();
             })
     }
-    getUpsellData(obj){
+    getUpsellData(obj) {
         this.utils.setLoader();
-         return this.http.post(this.url + 'ModelUpSell', obj).map(
-                res => {
-                    try{
-                        return res.json();
-                    }
-                    catch(e){
-                        console.log(e);
-                        return {};
-                    }
+        return this.http.post(this.url + 'ModelUpSell', obj).map(
+            res => {
+                try {
+                    return res.json();
                 }
-            ).finally(() => {
-                this.utils.removeLoader();
-            });
+                catch (e) {
+                    console.log(e);
+                    return {};
+                }
+            }
+        ).finally(() => {
+            this.utils.removeLoader();
+        });
     }
-    
+
 }
