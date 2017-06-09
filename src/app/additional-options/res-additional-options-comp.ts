@@ -221,7 +221,7 @@ export class ResAdditionalOptionsComponent implements OnInit {
                 case 4:
                 case 11:
                     $('#' + obj.item_id).removeClass('hide');
-                    obj.item_list_text = obj.item_list_text.split('$')[0] + '<span class="text-orange"> $'+ k.price +'</span>?';
+                    obj.item_list_text = obj.item_list_text.split('$')[0].split('?')[0] + '<span class="text-orange"> $'+ k.price +'</span>?';
                     this.itmObj.items.push(k);
                     break;
                 case 5:                    
@@ -280,92 +280,118 @@ export class ResAdditionalOptionsComponent implements OnInit {
     }
 
     diyQuestionsOptions(itm, obj) {
+        let k = {
+            id: obj.item_id,
+            name: obj.item_name,
+            price: obj.Answers[1].item_price
+        }
+        this.itmObj = this.utils.resFlowSession.resDoorObj.additional;
         if (itm.srcElement.checked === true) {
-            //alert('true');
-            // alert("obj.item_name" + obj.item_name);
-            // alert("obj item price" + obj.Answers[1].item_price);
-            //  console.log("obj" + JSON.stringify(obj));
-            if (obj.item_id == 5) {
-                this.defaultMilesDiy = "31";
-                if (obj.Answers[1].item_price !== 0) {
-                    //  this.installMiles = obj.Answers[0].item_price;
-
-                }
+            switch (obj.item_id) {
+                case 1:
+                case 3:
+                case 4:
+                case 11:
+                case 12:
+                    $('#' + obj.item_id).removeClass('hide');
+                    obj.item_list_text = obj.item_list_text.split('$')[0].split('?')[0] + '<span class="text-orange"> $'+ k.price +'</span>?';
+                    this.itmObj.items.push(k);
+                    break;
+                case 5:                    
+                    $('#' + obj.item_id).removeClass('hide');
+                    this.removeItmOptions(obj.item_id);
+                    break;
             }
-            if (obj.item_id == 1) {
-
-                if (obj.Answers[1].item_price !== 0) {
-                    //  this.installMiles = obj.Answers[0].item_price;
-
-                }
-            }
-            if (obj.item_id == 4) {
-
-                if (obj.Answers[1].item_price !== 0) {
-                    //  this.installMiles = obj.Answers[0].item_price;
-
-                }
-            }
-            if (obj.item_id == 3) {
-                if (obj.Answers[1].item_price !== 0) {
-                    //  this.installMiles = obj.Answers[0].item_price;
-
-                }
-            }
-            if (obj.item_id == 11) {
-                this.defaultMilesDiy = "31";
-                if (obj.Answers[1].item_price !== 0) {
-                    //  this.installMiles = obj.Answers[0].item_price;
-
-                }
-            }
-            if (obj.item_id == 12) {
-                if (obj.Answers[1].item_price !== 0) {
-                    //  this.installMiles = obj.Answers[0].item_price;
-
-                }
-            }
-        } else {
-            //  alert('false');
-            //  alert("obj item price" + obj.Answers[0].item_price);
-            if (obj.item_id == 5) {
-                this.defaultMilesDiy = "";
-                if (obj.Answers[0].item_price !== 0) {
-                    //  this.installMiles = obj.Answers[0].item_price;
-
-                }
-            }
-            if (obj.item_id == 1) {
-                if (obj.Answers[0].item_price !== 0) {
-                    //  this.installMiles = obj.Answers[0].item_price;
-
-                }
-            }
-            if (obj.item_id == 4) {
-                if (obj.Answers[0].item_price !== 0) {
-                    //  this.installMiles = obj.Answers[0].item_price;
-
-                }
-            }
-            if (obj.item_id == 3) {
-                if (obj.Answers[0].item_price !== 0) {
-                    //  this.installMiles = obj.Answers[0].item_price;
-
-                }
-            }
-            if (obj.item_id == 11) {
-                if (obj.Answers[0].item_price !== 0) {
-                    //  this.installMiles = obj.Answers[0].item_price;
-
-                }
-            }
-            if (obj.item_id == 12) {
-                if (obj.Answers[0].item_price !== 0) {
-                    //  this.installMiles = obj.Answers[0].item_price;
-
-                }
+        } else {            
+             switch (obj.item_id) {
+                case 1:
+                case 3:
+                case 4:
+                case 11:
+                case 12:
+                    obj.item_list_text = obj.item_list_text.split('$')[0].split('?')[0] + '?';
+                    $('#' + obj.item_id).addClass('hide');
+                    this.removeItmOptions(obj.item_id);
+                    break;
+                case 5:
+                    $('#' + obj.item_id).addClass('hide');
+                    k.price = this.calculateMilesPrice();
+                    this.itmObj.items.push(k);
+                    break;
             }
         }
+
+        this.appComponent.updatePrice();
+
+
+        // if (itm.srcElement.checked === true) {
+        //     if (obj.item_id == 5) {
+        //         this.defaultMilesDiy = "31";
+        //         if (obj.Answers[1].item_price !== 0) {
+
+        //         }
+        //     }
+        //     if (obj.item_id == 1) {
+
+        //         if (obj.Answers[1].item_price !== 0) {
+
+        //         }
+        //     }
+        //     if (obj.item_id == 4) {
+
+        //         if (obj.Answers[1].item_price !== 0) {
+
+        //         }
+        //     }
+        //     if (obj.item_id == 3) {
+        //         if (obj.Answers[1].item_price !== 0) {
+
+        //         }
+        //     }
+        //     if (obj.item_id == 11) {
+        //         this.defaultMilesDiy = "31";
+        //         if (obj.Answers[1].item_price !== 0) {
+
+        //         }
+        //     }
+        //     if (obj.item_id == 12) {
+        //         if (obj.Answers[1].item_price !== 0) {
+
+        //         }
+        //     }
+        // } else {
+        //     if (obj.item_id == 5) {
+        //         this.defaultMilesDiy = "";
+        //         if (obj.Answers[0].item_price !== 0) {
+
+        //         }
+        //     }
+        //     if (obj.item_id == 1) {
+        //         if (obj.Answers[0].item_price !== 0) {
+
+        //         }
+        //     }
+        //     if (obj.item_id == 4) {
+        //         if (obj.Answers[0].item_price !== 0) {
+
+        //         }
+        //     }
+        //     if (obj.item_id == 3) {
+        //         if (obj.Answers[0].item_price !== 0) {
+
+        //         }
+        //     }
+        //     if (obj.item_id == 11) {
+        //         if (obj.Answers[0].item_price !== 0) {
+
+        //         }
+        //     }
+        //     if (obj.item_id == 12) {
+        //         if (obj.Answers[0].item_price !== 0) {
+
+        //         }
+        //     }
+        // }
     }
 
     selectedVinyls(vin) {

@@ -98,12 +98,10 @@ export class ResDoorConfigurationComponent implements OnInit {
     }
 
     nextBtn(path) {
-        $('body').addClass('loader');
-        $('.shop-count').text('1');
+        this.utils.resFlowSession.addToCart();
+        $('#shop-count').text(this.utils.resFlowSession.cart.length);
         this.route.navigateByUrl(path)
     }
-
-    
 
     prevBtn(path) {
         this.route.navigateByUrl(path)

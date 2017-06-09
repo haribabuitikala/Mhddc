@@ -256,9 +256,9 @@ export class ResidentialFlowSession {
         selectedCollection: null
     };
 
-    home = {
+    home = {};
 
-    };
+    cart = [];
 
     resDetails = {
         zip: 0,
@@ -611,7 +611,7 @@ export class ResidentialFlowSession {
                     if (!dc) {
                         dc = this.resDoorObj.design.dsgn['constructions'][0];
                     }
-                    price[0] = price[0] + dc['item_price'] * count + dc['laborcodeprice'];
+                    price[0] = price[0] + (dc['item_price'] + dc['laborcodeprice']) * count;
                     price[1] = price[1] + dc['item_price'] * count;
 
                     this.resDetails.construction.name = dc['item_name'];
@@ -621,7 +621,7 @@ export class ResidentialFlowSession {
                     this.resDetails.construction.modelNumber = dc['ClopayModelNumber'];
                 } else {
                     let dc = this.resDoorObj.construction['construction'];
-                    price[0] = price[0] + dc['item_price'] * count + dc['laborcodeprice'];
+                    price[0] = price[0] + (dc['item_price'] + dc['laborcodeprice']) * count;
                     price[1] = price[1] + dc['item_price'] * count;
 
                     this.resDetails.construction.name = dc['item_name'];
@@ -762,6 +762,11 @@ export class ResidentialFlowSession {
             this.utils.utilities.itemPriceInstall = itemPriceInstall;
             this.utils.utilities.itemPriceDY = itemPriceDY;
         }
+    }    
+
+    addToCart() {
+        let k = _.cloneDeep(this.resDetails);
+        this.cart.push(k);
     }
 
     constructor(private utils: AppUtilities) {

@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, AfterViewChecked } from '@angular/core';
 import { AppComponent } from "../app.component";
 import { Router } from '@angular/router';
 import { AppUtilities } from "../shared/appUtilities";
@@ -8,14 +8,15 @@ declare var $: any;
 @Component({
     selector: 'app-header',
     templateUrl: './header.component.html',
-    styleUrls: ['./header.component.less']
+    styleUrls: ['./header.component.less', '../install//install.component.less']
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent implements OnInit, AfterViewChecked {
     showhamburger: boolean = false;
 
     @Input() count: any;
     @Input() showHamburger: boolean = false;
-    itemsCount = this.utils.utilities.itemsCount;
+    itemsCount;
+    data;
 
     constructor(private appComponent: AppComponent
         , private route: Router
@@ -27,8 +28,15 @@ export class HeaderComponent implements OnInit {
         this.appComponent.showStepIndicator = false;
         this.route.navigateByUrl(path);
     }
+    
+    ngAfterViewChecked() {
+        this.itemsCount = this.utils.resFlowSession.cart.length;
+        this.data = this.utils.resFlowSession.resDetails;
+    }
 
     ngOnInit() {
+        this.itemsCount = this.utils.resFlowSession.cart.length;
+        this.data = this.utils.resFlowSession.resDetails;
         $('li span').hide();
         this.humberger();
         this.humbergerCollapse();
@@ -69,5 +77,4 @@ export class HeaderComponent implements OnInit {
             });
         }
     }
-
 }

@@ -6,7 +6,7 @@
             Door Model
         </dd>
         <dd>
-            <p>{{data.construction.modelNumber}}</p>
+            <p [innerHTML]="data.construction.modelNumber"></p>
             <span *ngIf="!data.isDIY">{{data.construction.price + data.construction.laborcost | currency:'USD':true:'1.2-2'}}</span>
             <span *ngIf="data.isDIY">{{data.construction.price | currency:'USD':true:'1.2-2'}}</span>
         </dd>
@@ -24,7 +24,7 @@
             WindCode
         </dd>
         <dd>
-            <p>{{data.windcode}}</p>
+            <p [innerHTML]="data.windcode"></p>
         </dd>
     </dl>
     <dl class="door-configuration-table">
@@ -32,7 +32,7 @@
             Door Design
         </dd>
         <dd>
-            <p>{{data.designName}}</p>
+            <p [innerHTML]="data.designName"></p>
         </dd>
     </dl>
     <dl class="door-configuration-table">
@@ -48,11 +48,11 @@
             Color
         </dd>
         <dd>
-            <p>{{data.color.overlay.name}}</p>
+            <p [innerHTML]="data.color.overlay.name"></p>
             <span>{{data.color.overlay.price | currency:'USD':true:'1.2-2'}}</span>
         </dd>
         <dd>
-            <p>{{data.color.base.name}}</p>
+            <p [innerHTML]="data.color.base.name"></p>
             <span>{{data.color.base.price  | currency:'USD':true:'1.2-2'}}</span>
         </dd>
     </dl>
@@ -61,7 +61,7 @@
             Top Section
         </dd>
         <dd>
-            <p>{{data.topSection.name}}</p>
+            <p [innerHTML]="data.topSection.name"></p>
             <span>{{data.topSection.glassType.price | currency:'USD':true:'1.2-2'}}</span>
         </dd>
     </dl>    
@@ -87,7 +87,7 @@
             Opener
         </dd>
         <dd>
-            <p>{{data.opener.name}}</p>
+            <p [innerHTML]="data.opener.name"></p>
             <span>{{data.opener.price | currency:'USD':true:'1.2-2'}}</span>
         </dd>
     </dl>
@@ -96,7 +96,7 @@
             Opener Accessories
         </dd>
         <dd *ngFor="let itm of data.opener.items">
-            <p>{{itm.name}}</p>
+            <p [innerHTML]="itm.name"></p>
             <span>{{itm.price | currency:'USD':true:'1.2-2'}}</span>
         </dd>
     </dl>
@@ -105,10 +105,10 @@
             Additional Options
         </dd>
         <dd *ngFor="let itm of data.additionalOptions.items">
-            <p>{{itm.name}}</p>
+            <p [innerHTML]="itm.name"></p>
             <span>{{itm.price | currency:'USD':true:'1.2-2'}}</span>
         </dd>
-    </dl>   
+    </dl>
     <div *ngIf="additional">            
         <dl class="door-configuration-table">
             <dd class="door-configuration-table-header">
