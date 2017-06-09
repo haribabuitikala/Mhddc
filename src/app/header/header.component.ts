@@ -34,9 +34,13 @@ export class HeaderComponent implements OnInit {
         this.humbergerCollapse();
         this.bindDocumentClick();
     }
+    cartIcon(modal?) {
+        // modal.open();
+        window.location.hash.indexOf('shoppingCart') != -1 ? '' : modal.open();
+    }
 
     bindDocumentClick() {
-        $(document).click(function(){
+        $(document).click(function () {
             if ($('.menu-collapse').is(":visible")) {
                 $('.nav-component li span').addClass('hide');
                 $('.nav-component').animate({ width: '60px' }, function () {
