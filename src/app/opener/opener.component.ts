@@ -75,6 +75,7 @@ export class OpenerComponent implements OnInit {
 
         // this is for gdo shopping cart
         this.utils.gdoFlowSession.cart.opener.opener = this.data[0];
+        this.utils.utilities.gdoOpenerQty = 1;
 
         this.data = _.chunk(this.data, 2);
         this.number = 6;

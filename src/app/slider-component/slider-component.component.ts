@@ -31,6 +31,7 @@ export class SliderComponentComponent implements OnInit {
             this.slideCount = this.data ? this.data.length : 0;
         }
         this.renderSlider();
+        this.slectedItm = this.data[0][0].item_id;
 
         let selectedIndex = 0, itemIndex = 0;
         for (let i = 0, len = this.data.length; i < len; i++) {
@@ -50,10 +51,18 @@ export class SliderComponentComponent implements OnInit {
         this.gdoConfig.quantity = 1;
     }
 
+    slectedItm;
+
     isSeleted(opener, index, itemIndex) {
-        if (this.utils.utilities.gdoOpenerSelectedItm && opener.item_id == this.utils.utilities.gdoOpenerSelectedItm) {
+
+        // if (this.utils.utilities.gdoOpenerSelectedItm && opener.item_id == this.utils.utilities.gdoOpenerSelectedItm) {
+        //     return true;
+        // } else if (this.utils.utilities.gdoOpenerSelectedItm === null && index === 0 && itemIndex === 0) {
+        //     return true;
+        // }
+        if (this.slectedItm && opener.item_id == this.slectedItm) {
             return true;
-        } else if (this.utils.utilities.gdoOpenerSelectedItm === null && index === 0 && itemIndex === 0) {
+        } else if (this.slectedItm === null && index === 0 && itemIndex === 0) {
             return true;
         }
         return false;
@@ -105,8 +114,6 @@ export class SliderComponentComponent implements OnInit {
     }
 
     openerSelected(obj, event) {
-        $('._slide-items img').removeClass('current');
-        // gdo object
         this.utils.gdoFlowSession.cart.opener.opener = obj;
         this.gdoConfig.gdoOpeners.length = 0;
         this.gdoConfig.openerTxt = obj.item_name;
@@ -114,7 +121,7 @@ export class SliderComponentComponent implements OnInit {
         this.utils.utilities.item_price = obj.item_price;
         let t = obj.item_thumbnail.split('.')[0];
         this.gdoConfig.gdoBanner = t + '.png';
-        event.currentTarget.classList.add('current');
+        this.slectedItm = obj.item_id;
         this.utils.utilities.gdoOpenerSelectedItm = obj.item_id;
         this.notify.emit(obj);
     }
