@@ -17,6 +17,7 @@ export class HeaderComponent implements OnInit, AfterViewChecked {
     @Input() showHamburger: boolean = false;
     itemsCount;
     data;
+    resFlowSession;
 
     constructor(private appComponent: AppComponent
         , private route: Router
@@ -30,20 +31,21 @@ export class HeaderComponent implements OnInit, AfterViewChecked {
     }
     
     ngAfterViewChecked() {
-        this.itemsCount = this.utils.resFlowSession.cart.length;
-        this.data = this.utils.resFlowSession.resDetails;
+        this.resFlowSession = this.utils.resFlowSession;
+        this.itemsCount = this.resFlowSession.cart.length;
+        this.data = this.resFlowSession.resDetails;
     }
 
     ngOnInit() {
-        this.itemsCount = this.utils.resFlowSession.cart.length;
-        this.data = this.utils.resFlowSession.resDetails;
+        this.resFlowSession = this.utils.resFlowSession;
+        this.itemsCount = this.resFlowSession.cart.length;
+        this.data = this.resFlowSession.resDetails;
         $('li span').hide();
         this.humberger();
         this.humbergerCollapse();
         this.bindDocumentClick();
     }
     cartIcon(modal?) {
-        // modal.open();
         window.location.hash.indexOf('shoppingCart') != -1 ? '' : modal.open();
     }
 

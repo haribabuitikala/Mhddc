@@ -1,9 +1,7 @@
 <div class="logo-header row-inner">
     <div class="col-xs-2" *ngIf="showHamburger">
-        <img src="../../assets/images/humburger_icon.png" (click)="humberger()" alt="" height="40"
-             class="pull-left hamburger hamburger_icon">
-        <img src="../../assets/images/humburger_icon.png" (click)="humbergerCollapse()" alt="" height="40"
-             class="collapse-humberger hide pull-left hamburger_icon menu-collapse">
+        <img src="../../assets/images/humburger_icon.png" (click)="humberger()" alt="" height="40" class="pull-left hamburger hamburger_icon">
+        <img src="../../assets/images/humburger_icon.png" (click)="humbergerCollapse()" alt="" height="40" class="collapse-humberger hide pull-left hamburger_icon menu-collapse">
     </div>
     <div class="col-xs-5">
         <a href="http://www.clopaydoor.com/">
@@ -14,129 +12,133 @@
     <div class="col-xs-5 pull-right cart-right">
         <a href="http://www.homedepot.com/"><img src="./assets/images/TheHomeDepot.png" alt="" height="40"
                                                  class="pull-right"></a>
-        <img src="./assets/images/shopping-cart.png" (click)="cartIcon(modal)" alt="" height="30"
-             class="pull-right cart-icon">
+        <img src="./assets/images/shopping-cart.png" (click)="cartIcon(modal)" alt="" height="30" class="pull-right cart-icon">
         <span id="shop-count" class="shop-count">{{itemsCount}}</span>
     </div>
 </div>
 <modal #modal>
     <modal-header [show-close]="true">
-        <h4 class="padding-l-20"> 
+        <h4 class="padding-l-20">
             Cart
         </h4>
     </modal-header>
     <modal-body>
-        <div>
-            <p [innerHTML]="data.collectionName"></p>
-            <dl class="door-configuration-table">
-                <dd class="door-configuration-table-header">
-                    Door Model
-                </dd>
-                <dd>
-                    <p [innerHTML]="data.construction.modelNumber"></p>
-                    <span *ngIf="!data.isDIY">{{data.construction.price + data.construction.laborcost | currency:'USD':true:'1.2-2'}}</span>
-                    <span *ngIf="data.isDIY">{{data.construction.price | currency:'USD':true:'1.2-2'}}</span>
-                </dd>
-            </dl>
-            <dl class="door-configuration-table">
-                <dd class="door-configuration-table-header">
-                    Size
-                </dd>
-                <dd>
-                    <p>{{data.widthF}}'{{data.widthI}}"(w) x {{data.heightF}}'{{data.heightI}}"(h)</p>
-                </dd>
-            </dl>
-            <dl class="door-configuration-table">
-                <dd class="door-configuration-table-header">
-                    WindCode
-                </dd>
-                <dd>
-                    <p [innerHTML]="data.windcode"></p>
-                </dd>
-            </dl>
-            <dl class="door-configuration-table">
-                <dd class="door-configuration-table-header">
-                    Door Design
-                </dd>
-                <dd>
-                    <p [innerHTML]="data.designName"></p>
-                </dd>
-            </dl>
-            <dl class="door-configuration-table">
-                <dd class="door-configuration-table-header">
-                    Door Construction
-                </dd>
-                <dd>
-                    <p [innerHTML]="data.construction.name + ' (x' + data.construction.qty + ' Per Door)'"></p>            
-                </dd>
-            </dl>
-            <dl class="door-configuration-table">
-                <dd class="door-configuration-table-header">
-                    Color
-                </dd>
-                <dd>
-                    <p [innerHTML]="data.color.overlay.name"></p>
-                    <span>{{data.color.overlay.price | currency:'USD':true:'1.2-2'}}</span>
-                </dd>
-                <dd>
-                    <p [innerHTML]="data.color.base.name"></p>
-                    <span>{{data.color.base.price  | currency:'USD':true:'1.2-2'}}</span>
-                </dd>
-            </dl>
-            <dl class="door-configuration-table">
-                <dd class="door-configuration-table-header">
-                    Top Section
-                </dd>
-                <dd>
-                    <p [innerHTML]="data.topSection.name"></p>
-                    <span>{{data.topSection.glassType.price | currency:'USD':true:'1.2-2'}}</span>
-                </dd>
-            </dl>    
-            <dl class="door-configuration-table">
-                <dd class="door-configuration-table-header">
-                    Hardware
-                </dd>
-                <dd>            
-                    <p [innerHTML]="data.hardware.handle.name + ' (x' + data.hardware.handle.qty + ' Per Door)'"></p>
-                    <span>{{data.hardware.handle.price * data.hardware.handle.qty  | currency:'USD':true:'1.2-2'}}</span>
-                </dd>
-                <dd>
-                    <p [innerHTML]="data.hardware.stepPlate.name + ' (x' + data.hardware.stepPlate.qty + ' Per Door)'"></p>
-                    <span>{{data.hardware.stepPlate.price * data.hardware.stepPlate.qty  | currency:'USD':true:'1.2-2'}}</span>                   
-                </dd>
-                <dd>
-                    <p [innerHTML]="data.hardware.hinge.name + ' (x' + data.hardware.hinge.qty + ' Per Door)'"></p>
-                    <span>{{data.hardware.hinge.price * data.hardware.hinge.qty  | currency:'USD':true:'1.2-2'}}</span>                
-                </dd>
-            </dl>        
-            <dl class="door-configuration-table" *ngIf="data.opener.name !== ''">
-                <dd class="door-configuration-table-header">
-                    Opener
-                </dd>
-                <dd>
-                    <p [innerHTML]="data.opener.name"></p>
-                    <span>{{data.opener.price | currency:'USD':true:'1.2-2'}}</span>
-                </dd>
-            </dl>
-            <dl class="door-configuration-table" *ngIf="data.opener.items.length > 0">
-                <dd class="door-configuration-table-header">
-                    Opener Accessories
-                </dd>
-                <dd *ngFor="let itm of data.opener.items">
-                    <p [innerHTML]="itm.name"></p>
-                    <span>{{itm.price | currency:'USD':true:'1.2-2'}}</span>
-                </dd>
-            </dl>
-            <dl class="door-configuration-table" *ngIf="data.additionalOptions.items.length > 0">
-                <dd class="door-configuration-table-header">
-                    Additional Options
-                </dd>
-                <dd *ngFor="let itm of data.additionalOptions.items">
-                    <p [innerHTML]="itm.name"></p>
-                    <span>{{itm.price | currency:'USD':true:'1.2-2'}}</span>
-                </dd>
-            </dl>
-        </div>
+        <accordion [showArrows]="true" [closeOthers]="true" [expandAll]="true">
+            <accordion-group *ngFor="let data of resFlowSession.cart; let i = index; let first = first;" [isOpened]="first">
+                <accordion-heading>
+                    <p [innerHTML]="data.collectionName"></p>
+                </accordion-heading>                
+                <dl class="door-configuration-table">
+                    <dd class="door-configuration-table-header">
+                        Door Model
+                    </dd>
+                    <dd>
+                        <p [innerHTML]="data.construction.modelNumber"></p>
+                        <span *ngIf="!data.isDIY">{{data.construction.price + data.construction.laborcost | currency:'USD':true:'1.2-2'}}</span>
+                        <span *ngIf="data.isDIY">{{data.construction.price | currency:'USD':true:'1.2-2'}}</span>
+                    </dd>
+                </dl>
+                <dl class="door-configuration-table">
+                    <dd class="door-configuration-table-header">
+                        Size
+                    </dd>
+                    <dd>
+                        <p>{{data.widthF}}'{{data.widthI}}"(w) x {{data.heightF}}'{{data.heightI}}"(h)</p>
+                    </dd>
+                </dl>
+                <dl class="door-configuration-table">
+                    <dd class="door-configuration-table-header">
+                        WindCode
+                    </dd>
+                    <dd>
+                        <p [innerHTML]="data.windcode"></p>
+                    </dd>
+                </dl>
+                <dl class="door-configuration-table">
+                    <dd class="door-configuration-table-header">
+                        Door Design
+                    </dd>
+                    <dd>
+                        <p [innerHTML]="data.designName"></p>
+                    </dd>
+                </dl>
+                <dl class="door-configuration-table">
+                    <dd class="door-configuration-table-header">
+                        Door Construction
+                    </dd>
+                    <dd>
+                        <p [innerHTML]="data.construction.name + ' (x' + data.construction.qty + ' Per Door)'"></p>
+                    </dd>
+                </dl>
+                <dl class="door-configuration-table">
+                    <dd class="door-configuration-table-header">
+                        Color
+                    </dd>
+                    <dd>
+                        <p [innerHTML]="data.color.overlay.name"></p>
+                        <span>{{data.color.overlay.price | currency:'USD':true:'1.2-2'}}</span>
+                    </dd>
+                    <dd>
+                        <p [innerHTML]="data.color.base.name"></p>
+                        <span>{{data.color.base.price  | currency:'USD':true:'1.2-2'}}</span>
+                    </dd>
+                </dl>
+                <dl class="door-configuration-table">
+                    <dd class="door-configuration-table-header">
+                        Top Section
+                    </dd>
+                    <dd>
+                        <p [innerHTML]="data.topSection.name"></p>
+                        <span>{{data.topSection.glassType.price | currency:'USD':true:'1.2-2'}}</span>
+                    </dd>
+                </dl>
+                <dl class="door-configuration-table">
+                    <dd class="door-configuration-table-header">
+                        Hardware
+                    </dd>
+                    <dd>
+                        <p [innerHTML]="data.hardware.handle.name + ' (x' + data.hardware.handle.qty + ' Per Door)'"></p>
+                        <span>{{data.hardware.handle.price * data.hardware.handle.qty  | currency:'USD':true:'1.2-2'}}</span>
+                    </dd>
+                    <dd>
+                        <p [innerHTML]="data.hardware.stepPlate.name + ' (x' + data.hardware.stepPlate.qty + ' Per Door)'"></p>
+                        <span>{{data.hardware.stepPlate.price * data.hardware.stepPlate.qty  | currency:'USD':true:'1.2-2'}}</span>
+                    </dd>
+                    <dd>
+                        <p [innerHTML]="data.hardware.hinge.name + ' (x' + data.hardware.hinge.qty + ' Per Door)'"></p>
+                        <span>{{data.hardware.hinge.price * data.hardware.hinge.qty  | currency:'USD':true:'1.2-2'}}</span>
+                    </dd>
+                </dl>
+                <dl class="door-configuration-table" *ngIf="data.opener.name !== ''">
+                    <dd class="door-configuration-table-header">
+                        Opener
+                    </dd>
+                    <dd>
+                        <p [innerHTML]="data.opener.name"></p>
+                        <span>{{data.opener.price | currency:'USD':true:'1.2-2'}}</span>
+                    </dd>
+                </dl>
+                <dl class="door-configuration-table" *ngIf="data.opener.items.length > 0">
+                    <dd class="door-configuration-table-header">
+                        Opener Accessories
+                    </dd>
+                    <dd *ngFor="let itm of data.opener.items">
+                        <p [innerHTML]="itm.name"></p>
+                        <span>{{itm.price | currency:'USD':true:'1.2-2'}}</span>
+                    </dd>
+                </dl>
+                <dl class="door-configuration-table" *ngIf="data.additionalOptions.items.length > 0">
+                    <dd class="door-configuration-table-header">
+                        Additional Options
+                    </dd>
+                    <dd *ngFor="let itm of data.additionalOptions.items">
+                        <p [innerHTML]="itm.name"></p>
+                        <span>{{itm.price | currency:'USD':true:'1.2-2'}}</span>
+                    </dd>
+                </dl>
+                
+            </accordion-group>
+        </accordion>
         <div class="margin-t-100">
             <button class="btn btn-default box-shadow text-orange bold text-uppercase" (click)="modal.close()">Continue Shopping
             </button>

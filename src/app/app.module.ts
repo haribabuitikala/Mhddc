@@ -5,6 +5,7 @@ import {HttpModule} from '@angular/http';
 import {RouterModule} from '@angular/router';
 import {Ng2Bs3ModalModule} from 'ng2-bs3-modal/ng2-bs3-modal';
 import {ToastrModule} from 'toastr-ng2';
+import { AccordionModule } from 'ngx-accordion';
 
 import {AppComponent} from './app.component';
 import {appRoutes} from './routes';
@@ -67,7 +68,8 @@ import { CartDetailsRootComponent } from './cart-details/cart-details-root.compo
         Ng2Bs3ModalModule,
         RouterModule.forRoot(appRoutes,{ useHash: true }),
         ConfigModule,
-        ToastrModule.forRoot()
+        ToastrModule.forRoot(),
+        AccordionModule
     ],
     providers: [
         ApiStoreService,
