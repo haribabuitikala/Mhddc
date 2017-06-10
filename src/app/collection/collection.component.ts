@@ -55,6 +55,7 @@ export class CollectionComponent implements OnInit {
     popularCollections;
     selected;
     loaded = false;
+    crle = false;
     loadStockGroups() {
         let utils = this.utils.utilities;
         let dataParams = {
@@ -212,6 +213,9 @@ export class CollectionComponent implements OnInit {
 
         // utils.productid = obj.item_id;
 
+    if(obj.item_id == 30 && obj.productline == 'speciality'){
+        this.crle = true;
+    }
         return dataParams = {
             "ProductID": obj.item_id,
             "dtype": utils.dtype,
@@ -229,7 +233,7 @@ export class CollectionComponent implements OnInit {
             "localmarketid": +utils.localmarketid,
             "doorsize": +utils.homeSize,
             "LaborCode": this.utils.utilities.singleDoor ? this.setLcode(obj, 'singleinstallcode') : this.setLcode(obj, 'doubleinstallcode'),
-            "isCRLE": false,
+            "isCRLE": this.crle,
             "productlayout": true,
             "dealerid": 1,
             "doorwidth": +utils.wf,
