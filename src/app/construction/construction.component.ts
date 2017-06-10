@@ -93,6 +93,8 @@ export class ConstructionComponent implements OnInit {
     startProcess() {
         // let res = this.dataStore.constructions;
         let res = this.utils.resFlowSession.resDoorObj.construction.apiData;
+        // this is for loading construction name in details popup
+        this.config.details.constructionName = res[0]['item_name'];
         let newData = [];
         if (res.length > 4) {
             if (newData.length <= 3) {
