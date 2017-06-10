@@ -71,7 +71,7 @@ export class ResAdditionalOptionsComponent implements OnInit {
     directDoorVal = 1;
     singleDropVal;
     doubleDropVal;
-    itmObj = this.utils.resFlowSession.resDoorObj.additional;
+    itmObj;
     globalPrice = 0;
     selectedVinyl = {
         heightitem_price: 0,
@@ -174,11 +174,10 @@ export class ResAdditionalOptionsComponent implements OnInit {
             //
             //            }
             
-            if(!this.utils.resFlowSession.resDetails.isDIY) {
+            if(!this.utils.resFlowSession.resDetails.isDIY && this.utils.resFlowSession.resDoorObj.product.product['item_id'] !== 16) {
                 this.installQuestionsOptions(true, this.resInstallQuestions[0]);
-            }
-
-            this.appComponent.updatePrice();
+                this.appComponent.updatePrice();
+            }            
         });
         if (this.installOrDiy == 'install') {
             this.showMedImg = true;
@@ -232,6 +231,7 @@ export class ResAdditionalOptionsComponent implements OnInit {
     }    
 
     installQuestionsOptions(itm, obj) {
+        this.itmObj = this.utils.resFlowSession.resDoorObj.additional;
         let k = {
             id: obj.item_id,
             name: obj.item_name,
@@ -298,6 +298,7 @@ export class ResAdditionalOptionsComponent implements OnInit {
     }
 
     diyQuestionsOptions(itm, obj, event?) {
+        this.itmObj = this.utils.resFlowSession.resDoorObj.additional;
         let k = {
             id: obj.item_id,
             name: obj.item_name,
@@ -342,7 +343,6 @@ export class ResAdditionalOptionsComponent implements OnInit {
                     break;
             }
         }
-
         this.appComponent.updatePrice();
     }
 

@@ -22,7 +22,7 @@
                         <label class="switch">
                             <input *ngIf="installQuestions.item_id !== 7" type="checkbox" [(ngModel)]="installQuestions.Answers[0].isdefault" (change)="installQuestionsOptions(installQuestions.Answers[0].isdefault,installQuestions)">
                             <input *ngIf="installQuestions.item_id === 7 && utils.resFlowSession.resDoorObj.product.product['item_id'] !== 16" type="checkbox" [(ngModel)]="installQuestions.Answers[1].isdefault" (change)="installQuestionsOptions(installQuestions.Answers[1].isdefault,installQuestions)">
-                            <input *ngIf="installQuestions.item_id === 7 && utils.resFlowSession.resDoorObj.product.product['item_id'] === 16" type="checkbox" [(ngModel)]="!installQuestions.Answers[1].isdefault" (change)="installQuestionsOptions(installQuestions.Answers[1].isdefault,installQuestions)">
+                            <input *ngIf="installQuestions.item_id === 7 && utils.resFlowSession.resDoorObj.product.product['item_id'] === 16" type="checkbox" [(ngModel)]="installQuestions.Answers[0].isdefault" (change)="installQuestionsOptions(installQuestions.Answers[0].isdefault,installQuestions)">
                             <div class="slider round"></div>
                         </label>
                         <div class="text-orange">No</div>
