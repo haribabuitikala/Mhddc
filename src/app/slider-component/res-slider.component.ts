@@ -321,7 +321,7 @@ export class ResSliderComponent implements OnInit, AfterViewInit {
 
                 } else {
                     this.utils.resFlowSession.resDoorObj.color.base = obj;
-                    this.utils.resFlowSession.resDoorObj.color.overlay = obj;
+                    //this.utils.resFlowSession.resDoorObj.color.overlay = obj;
                 }
                 break;
             case 'construction':

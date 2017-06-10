@@ -45,7 +45,19 @@ export class ColorComponent implements OnInit {
 
     startProcess() {
         let res = this.utils.resFlowSession.resDoorObj.construction.construction['colors'];
-        this.data = _.chunk(res, 6);
+        let colorsFiltered = res;
+        this.colors = res;
+        let resObj = this.utils.resFlowSession.resDoorObj;
+        if (res && resObj.product && resObj.product.product['item_id'] == 30 &&
+            resObj.product.product['productline'] == 'speciality') {
+            colorsFiltered = res.filter(c => {
+                if (c.item_id != 126) {
+                    return true;
+                }
+                return false;
+            });
+        }
+        this.data = _.chunk(colorsFiltered, 6);
 
         if (this.navComponent.flowType === 'res') {
             this.navComponent.renderNav({
@@ -118,6 +130,11 @@ export class ColorComponent implements OnInit {
             }], [this.utils.resFlowSession.resDoorObj.construction.construction['centergrooves'][0]]);
             this.selectedGroove = 0;
         }
+
+        if (resObj.product && resObj.product.product['item_id'] == 30 &&
+            resObj.product.product['productline'] == 'speciality') {
+            this.showcladding = true;
+        }
     }
 
     showOverlay = false;
@@ -146,10 +163,17 @@ export class ColorComponent implements OnInit {
 
     errorMsg;
     nextBtn(path, warning?) {
+        let resObj = this.utils.resFlowSession.resDoorObj;
         if (this.utils.resFlowSession.resDoorObj.product.product['item_id'] == 9) {
             this.utils.resFlowSession.resDoorObj.construction.vinyl = this.vinylOptions[+this.selectedVinyl];
             this.utils.resFlowSession.resDoorObj.construction.groove = this.grooves[+this.selectedGroove];
         }
+
+        if (resObj.product && resObj.product.product['item_id'] == 30 &&
+            resObj.product.product['productline'] == 'speciality') {
+            this.utils.resFlowSession.resDoorObj.construction.cladding = this.selectedCladding;
+        }
+        
         if (this.claddings && this.claddings.length > 1) {
             if (this.selectedCladding) {
                 this.utils.resFlowSession.resDoorObj.construction.cladding = this.claddings[+this.selectedCladding];
@@ -199,5 +223,31 @@ export class ColorComponent implements OnInit {
         this.utils.resFlowSession.resDoorObj.construction.vinyl = this.vinylOptions[+this.selectedVinyl];
         this.utils.resFlowSession.resDoorObj.construction.groove = this.grooves[+this.selectedGroove];
         this.app.updatePrice();
+    }
+
+    showcladding = false;
+    colors = [];
+    claddingUpdated() {
+        var resObj = this.utils.resFlowSession.resDoorObj;
+        if (this.selectedCladding && this.claddings[this.selectedCladding]) {
+            let coloravailable = this.claddings[this.selectedCladding]['coloravailable'];
+            let colors = this.colors;
+            let colorsFiltered = [];
+            let availablecolors = coloravailable.split(',');
+            availablecolors = _.uniq(availablecolors);
+            availablecolors.forEach(c => {
+                let colorFilter = this.colors.filter(f => {
+                    if (f.item_id == c) {
+                        return true;
+                    }
+                    return false;
+                });
+                if (colorFilter.length > 0 ) {
+                    colorsFiltered.push(colorFilter[0]);
+                }
+            });
+            
+            this.data = _.chunk(colorsFiltered, 6);
+        }
     }
 }
