@@ -72,16 +72,16 @@ export class ResSliderComponent implements OnInit, AfterViewInit {
                     }
                 }
             } else {
-                if (this.utils.resFlowSession.resDoorObj.product.product['item_id'] == 16 &&
-                    this.cname === 'color') {
-                        this.saveSelected(this.data[0][3]);
-                        this.app.updatePrice();
-                } else {
-                    if (this.data.length > 0 && this.data[0].length > 0) {
-                        this.saveSelected(this.data[0][0]);
+                if (this.cname != 'opener') {
+                    if (this.utils.resFlowSession.resDoorObj.product.product['item_id'] == 16 &&  this.cname === 'color') {
+                            this.saveSelected(this.data[0][3]);
+                            this.app.updatePrice();
+                    } else {
+                        if (this.data.length > 0 && this.data[0].length > 0) {
+                            this.saveSelected(this.data[0][0]);
+                        }
                     }
                 }
-
             }
             this.sliderRows = _.times(this.data.length, _.constant(null));
             this.slideCount = this.data ? this.data.length : 0;
