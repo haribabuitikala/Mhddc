@@ -269,7 +269,7 @@ export class ConfigComponent implements OnInit, AfterViewInit, AfterViewChecked 
                 buildObj.overlaycolor = '';
             }
 
-            if (dor.windows.topsection != '') {
+            if (dor.windows.topsection && dor.windows.topsection != '') {
                 buildObj.topsectionimage = dor.windows.topsection.visimage;
                 try {
                     if (dor.windows.glasstype.Config == undefined) {
