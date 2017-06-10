@@ -6,6 +6,7 @@ import {NavService} from "../nav/nav-service";
 import {NavComponent} from "../nav/nav.component";
 import {AppUtilities} from "../shared/appUtilities";
 import {CollectionData} from "../collection/collection-data";
+
 declare var $: any;
 declare var _: any;
 
@@ -74,9 +75,11 @@ export class ShoppingCartComponent implements OnInit {
         $('body').removeClass('loader');
         this.shoppingCartData();
     }
+    
     getResPrice() {
         return this.utils.resFlowSession.resDoorObj.INSTALLTYPE === "Installed" ? this.utils.utilities.itemPriceInstall : this.utils.utilities.itemPriceDY;
     }
+
     removeItem() {
         this.utils.utilities.gdoOpenerText = '';
         this.utils.utilities.item_price = 0;
@@ -95,8 +98,16 @@ export class ShoppingCartComponent implements OnInit {
         this.continue.close();
 
         this.route.navigateByUrl('/category');
-
     }
+
+    AddAnother() {
+        this.utils.resFlowSession.resDoorObj.resetsize();
+        this.navComponent.setNavFlow('res');
+        this.utils.resFlowSession.resDoorObj.INSTALLTYPE = "Installed";
+        this.utils.resFlowSession.resDoorObj.TYPE = "RES";
+        this.route.navigateByUrl('/doorSize');
+    }
+
     cartEmpty() {
         this.utils.utilities.gdoOpenerText = '';
         this.utils.utilities.item_price = 0;
@@ -111,10 +122,9 @@ export class ShoppingCartComponent implements OnInit {
         this.dataStore.gdoOpenerAccessories = [];
         this.dataStore.gdoDirectQuestions = [];
         this.continue.open();
-
     }
-    updateQuantity(flow) {
 
+    updateQuantity(flow) {
         if (this.resFlow) {
             this.updateResQty(flow);
             this.utils.resFlowSession.resCalculatePrice();
@@ -126,9 +136,8 @@ export class ShoppingCartComponent implements OnInit {
             // this.baseItmPrice = flow === 1 ? this.utils.updateQty(1, this.utils.utilities.gdoOpenerQty) : this.utils.updateQty(0, this.utils.utilities.gdoOpenerQty);
             this.qty = this.utils.utilities.gdoOpenerQty;
         }
-
-
     }
+
     updateResQty(isIncrement?) {
         let count = this.utils.resFlowSession.resDoorObj.QTY;
         if (isIncrement && count < 6) {
@@ -137,6 +146,7 @@ export class ShoppingCartComponent implements OnInit {
             this.utils.resFlowSession.resDoorObj.QTY = count - 1;
         }
     }
+
     checkout() {
         if (this.utils.utilities.flow == 'residentialNavElems') {
             // this.appComp.getCheckOut(this.itemPrice);
@@ -146,21 +156,20 @@ export class ShoppingCartComponent implements OnInit {
             // this.appComp.getCheckOut(this.itemPrice);
             this.gdoShoppingCartTerms.open();
         }
-
     }
+
     secureRedirection() {
         this.resShoppingCartTerms.close();
         this.resShoppingCartTerms.close();
         this.secureRedirectionTerms.open();
     }
+
     goToHome() {
         this.route.navigateByUrl('/banner');
     }
+
     goToCustomerInfo() {
         // this.route.navigateByUrl('/customer-info');
         this.appComp.getCheckOut(this.itemPrice);
     }
-
-
-
 }

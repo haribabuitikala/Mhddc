@@ -544,7 +544,7 @@ export class ResidentialFlowSession {
         },
         "resetopener": () => {
             this.resDoorObj['opener'] = {
-                "QTY": 1,
+                "QTY": 0,
                 "opener": "",
                 "items": [],
                 "apiData": ""
@@ -633,7 +633,7 @@ export class ResidentialFlowSession {
 
                 // Calculate price for Overlay Color
                 let oc = this.resDoorObj.color.overlay;
-                if (oc && oc.hasOwnProperty('item_price')) {
+                if (oc && oc.hasOwnProperty('item_price') && this.resDoorObj.product.product['item_id'] !== 16) {
                     price[0] = price[0] + oc['item_price'];
                     price[1] = price[1] + oc['item_price'];
 

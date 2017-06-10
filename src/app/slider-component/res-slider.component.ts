@@ -75,6 +75,7 @@ export class ResSliderComponent implements OnInit, AfterViewInit {
                 if (this.utils.resFlowSession.resDoorObj.product.product['item_id'] == 16 &&
                     this.cname === 'color') {
                         this.saveSelected(this.data[0][3]);
+                        this.app.updatePrice();
                 } else {
                     if (this.data.length > 0 && this.data[0].length > 0) {
                         this.saveSelected(this.data[0][0]);
@@ -297,6 +298,16 @@ export class ResSliderComponent implements OnInit, AfterViewInit {
                     this.utils.resFlowSession.resDoorObj.construction.apiData = obj['constructions'];
                     this.utils.resFlowSession.resDoorObj.construction.construction = obj['constructions'][0];
                     this.utils.resFlowSession.resDoorObj.construction.construction['isdefault'] = true;
+                    let construction = obj['constructions'][0];
+                    if (construction && construction['colors'] && construction['colors'].length > 0) {
+                        this.utils.resFlowSession.resDoorObj.color.overlay = construction['colors'][0];
+                        this.utils.resFlowSession.resDoorObj.color.base = construction['colors'][0];
+
+                         if (this.utils.resFlowSession.resDoorObj.product.product['item_id'] == 16) {
+                            this.utils.resFlowSession.resDoorObj.color.overlay = construction['colors'][3];
+                            this.utils.resFlowSession.resDoorObj.color.base = construction['colors'][3];
+                         }
+                    }
                 }
                 let stockdoorconstructions = obj['stockdoorconstructions'];
                 if (stockdoorconstructions && stockdoorconstructions.length > 0) {
@@ -323,12 +334,18 @@ export class ResSliderComponent implements OnInit, AfterViewInit {
                     this.utils.resFlowSession.resDoorObj.color.base = obj;
                     //this.utils.resFlowSession.resDoorObj.color.overlay = obj;
                 }
+                
                 break;
             case 'construction':
                 this.utils.resFlowSession.resDoorObj.construction.construction = obj;
                 if (obj['colors'] && obj['colors'].length > 0) {
                     this.utils.resFlowSession.resDoorObj.color.base = obj['colors'][0];
                     this.utils.resFlowSession.resDoorObj.color.overlay = obj['colors'][0];
+
+                    if (this.utils.resFlowSession.resDoorObj.product.product['item_id'] == 16 && obj['colors'].length > 3) {
+                        this.utils.resFlowSession.resDoorObj.color.overlay = obj['colors'][3];
+                        this.utils.resFlowSession.resDoorObj.color.base = obj['colors'][3];
+                    }
                 }
                 break;
             default:
