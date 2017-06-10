@@ -26,7 +26,7 @@
         <accordion [showArrows]="true" [closeOthers]="true" [expandAll]="true">
             <accordion-group *ngFor="let data of resFlowSession.cart; let i = index; let first = first;" [isOpened]="first">
                 <accordion-heading>
-                    <p [innerHTML]="data.collectionName"></p>
+                    <span [innerHTML]="data.collectionName"></span>
                 </accordion-heading>                
                 <dl class="door-configuration-table">
                     <dd class="door-configuration-table-header">
@@ -135,11 +135,10 @@
                         <p [innerHTML]="itm.name"></p>
                         <span>{{itm.price | currency:'USD':true:'1.2-2'}}</span>
                     </dd>
-                </dl>
-                
+                </dl>                
             </accordion-group>
         </accordion>
-        <div class="margin-t-100">
+        <div class="margin-t-20 margin-b-20">
             <button class="btn btn-default box-shadow text-orange bold text-uppercase" (click)="modal.close()">Continue Shopping
             </button>
         </div>
