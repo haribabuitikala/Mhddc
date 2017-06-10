@@ -75,7 +75,7 @@ export class DoorSizeComponent implements OnInit {
             nextStepFn: () => {
 
             }
-        });                 
+        });
     }
 
     homeSize = "0";

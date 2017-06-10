@@ -246,7 +246,7 @@ export class ResAdditionalOptionsComponent implements OnInit {
                     obj.item_list_text = n + '<span class="text-orange"> $'+ k.price +'</span>?';
                     this.itmObj.items.push(k);
                     break;
-                case 5:                    
+                case 5:    
                     this.removeItmOptions(obj.item_id);
                     break;
             }
@@ -259,6 +259,7 @@ export class ResAdditionalOptionsComponent implements OnInit {
                     this.removeItmOptions(obj.item_id);
                     break;
                 case 5:
+                    this.defaultMiles = 31;
                     k.price = this.calculateMilesPrice();
                     this.itmObj.items.push(k);
                     break;

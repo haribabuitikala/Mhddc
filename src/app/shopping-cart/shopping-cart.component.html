@@ -43,126 +43,121 @@
 </div>
 <div *ngIf="resFlow" class="checkout">
 
-    <div class=" hide content door-configuration" *ngIf="!isGdo">
-        <p>{{data.product.product.item_name}}</p>
-
-        <dl class="door-configuration-table">
-            <dd class="door-configuration-table-header">
-                Door Model
-            </dd>
-            <dd>
-                <p>{{data.construction.construction.ClopayModelNumber}}</p><span class="pull-right">{{data.construction.construction.item_price | currency:'USD':true:'1.2-2'}}</span>
-            </dd>
-        </dl>
-        <dl class="door-configuration-table">
-            <dd class="door-configuration-table-header">
-                Size
-            </dd>
-            <dd>
-                <p>{{data.size.width.wf}}'{{data.size.width.wi}}"(w) x {{data.size.height.hf}}'{{data.size.height.hi}}"(h)</p>
-            </dd>
-        </dl>
-        <dl class="door-configuration-table">
-            <dd class="door-configuration-table-header">
-                WindCode
-            </dd>
-            <dd>
-                <p>{{data.product.product.windcode}}</p>
-            </dd>
-        </dl>
-        <dl class="door-configuration-table">
-            <dd class="door-configuration-table-header">
-                Door Design
-            </dd>
-            <dd>
-                <p>{{data.design.dsgn.item_name}}</p>
-            </dd>
-        </dl>
-        <dl class="door-configuration-table">
-            <dd class="door-configuration-table-header">
-                Door Construction
-            </dd>
-            <dd>
-                <p>{{data.construction.construction.item_name}}</p>
-            </dd>
-        </dl>
-        <dl class="door-configuration-table">
-            <dd class="door-configuration-table-header">
-                Color
-            </dd>
-            <dd>
-                <p [innerHtml]="data.color.base.item_name"></p>
-            </dd>
-        </dl>
-        <dl class="door-configuration-table">
-            <dd class="door-configuration-table-header">
-                Top Section
-            </dd>
-            <dd>
-                <p>{{data.windows.topsection.item_name}}</p>
-            </dd>
-        </dl>
-        <dl class="door-configuration-table">
-            <dd class="door-configuration-table-header">
-                Hardware
-            </dd>
-            <dd>
-                <div class="item" *ngFor="let itm of data.additional.items">
-                    <p>{{itm.item_name}}</p>
-                    <span>{{itm.item_price}}</span>
-                </div>
-            </dd>
-        </dl>
-        <dl class="door-configuration-table">
-            <dd class="door-configuration-table-header">
-                Opener
-            </dd>
-            <dd>
-                <p>{{data.opener.opener.item_name}}</p>
-                <span class="pull-right">{{data.opener.opener.item_price | currency:'USD':true:'1.2-2'}}</span>
-            </dd>
-        </dl>
-        <dl class="door-configuration-table">
-            <dd class="door-configuration-table-header">
-                Opener Accessories
-            </dd>
-            <dd>
-                <div class="item" *ngFor="let itm of data.opener.items">
-                   <p>{{itm.name}}</p> 
-                   <span>{{itm.price}}</span>
-                </div>
-                
-            </dd>
-        </dl>
-        <dl class="door-configuration-table" *ngIf="data.additional.items.length">
-            <dd class="door-configuration-table-header">
-                Additional Options
-            </dd>
-            <dd>
-                <!--<p>Medallion Hardware Upgrade</p><span class="pull-right">$59.00</span>-->
-                <div class="item" *ngFor="let itm of data.additional.items">
-                    <p>{{itm.name}}</p>
-                    <span class="pull-right">{{itm.price}}</span>
-                </div>
-            </dd>
-        </dl>
-        <dl class="door-configuration-table">
-            <dd class="door-configuration-table-header">
-                Quantity
-            </dd>
-            <dd>
-                <div class="row">
-                    <div class="col-xs-4">Openers</div>
-                    <div class="col-xs-8 pull-right">
-                        <img src="../../assets/images/substract.png" alt="" height="22" width="22" class="minus-quantity pull-left">
-                        <span>1</span>
-                        <img src="../../assets/images/add.png" alt="" height="22" width="22" class="add-quantity ">
-                    </div>
-                </div>
-            </dd>
-        </dl>
-    </div>
-    <app-cart-root-details></app-cart-root-details>
+    <accordion [showArrows]="true" [closeOthers]="true" [expandAll]="true">
+        <accordion-group *ngFor="let data of resFlowSession.cart; let i = index; let first = first;" [isOpened]="first">
+            <accordion-heading>
+                <span [innerHTML]="data.collectionName"></span>
+            </accordion-heading>                
+            <dl class="door-configuration-table">
+                <dd class="door-configuration-table-header">
+                    Door Model
+                </dd>
+                <dd>
+                    <p [innerHTML]="data.construction.modelNumber"></p>
+                    <span *ngIf="!data.isDIY">{{data.construction.price + data.construction.laborcost | currency:'USD':true:'1.2-2'}}</span>
+                    <span *ngIf="data.isDIY">{{data.construction.price | currency:'USD':true:'1.2-2'}}</span>
+                </dd>
+            </dl>
+            <dl class="door-configuration-table">
+                <dd class="door-configuration-table-header">
+                    Size
+                </dd>
+                <dd>
+                    <p>{{data.widthF}}'{{data.widthI}}"(w) x {{data.heightF}}'{{data.heightI}}"(h)</p>
+                </dd>
+            </dl>
+            <dl class="door-configuration-table">
+                <dd class="door-configuration-table-header">
+                    WindCode
+                </dd>
+                <dd>
+                    <p [innerHTML]="data.windcode"></p>
+                </dd>
+            </dl>
+            <dl class="door-configuration-table">
+                <dd class="door-configuration-table-header">
+                    Door Design
+                </dd>
+                <dd>
+                    <p [innerHTML]="data.designName"></p>
+                </dd>
+            </dl>
+            <dl class="door-configuration-table">
+                <dd class="door-configuration-table-header">
+                    Door Construction
+                </dd>
+                <dd>
+                    <p [innerHTML]="data.construction.name + ' (x' + data.construction.qty + ' Per Door)'"></p>
+                </dd>
+            </dl>
+            <dl class="door-configuration-table">
+                <dd class="door-configuration-table-header">
+                    Color
+                </dd>
+                <dd>
+                    <p [innerHTML]="data.color.overlay.name"></p>
+                    <span>{{data.color.overlay.price | currency:'USD':true:'1.2-2'}}</span>
+                </dd>
+                <dd>
+                    <p [innerHTML]="data.color.base.name"></p>
+                    <span>{{data.color.base.price  | currency:'USD':true:'1.2-2'}}</span>
+                </dd>
+            </dl>
+            <dl class="door-configuration-table">
+                <dd class="door-configuration-table-header">
+                    Top Section
+                </dd>
+                <dd>
+                    <p [innerHTML]="data.topSection.name"></p>
+                    <span>{{data.topSection.glassType.price | currency:'USD':true:'1.2-2'}}</span>
+                </dd>
+            </dl>
+            <dl class="door-configuration-table">
+                <dd class="door-configuration-table-header">
+                    Hardware
+                </dd>
+                <dd>
+                    <p [innerHTML]="data.hardware.handle.name + ' (x' + data.hardware.handle.qty + ' Per Door)'"></p>
+                    <span>{{data.hardware.handle.price * data.hardware.handle.qty  | currency:'USD':true:'1.2-2'}}</span>
+                </dd>
+                <dd>
+                    <p [innerHTML]="data.hardware.stepPlate.name + ' (x' + data.hardware.stepPlate.qty + ' Per Door)'"></p>
+                    <span>{{data.hardware.stepPlate.price * data.hardware.stepPlate.qty  | currency:'USD':true:'1.2-2'}}</span>
+                </dd>
+                <dd>
+                    <p [innerHTML]="data.hardware.hinge.name + ' (x' + data.hardware.hinge.qty + ' Per Door)'"></p>
+                    <span>{{data.hardware.hinge.price * data.hardware.hinge.qty  | currency:'USD':true:'1.2-2'}}</span>
+                </dd>
+            </dl>
+            <dl class="door-configuration-table" *ngIf="data.opener.name !== ''">
+                <dd class="door-configuration-table-header">
+                    Opener
+                </dd>
+                <dd>
+                    <p [innerHTML]="data.opener.name"></p>
+                    <span>{{data.opener.price | currency:'USD':true:'1.2-2'}}</span>
+                </dd>
+            </dl>
+            <dl class="door-configuration-table" *ngIf="data.opener.items.length > 0">
+                <dd class="door-configuration-table-header">
+                    Opener Accessories
+                </dd>
+                <dd *ngFor="let itm of data.opener.items">
+                    <p [innerHTML]="itm.name"></p>
+                    <span>{{itm.price | currency:'USD':true:'1.2-2'}}</span>
+                </dd>
+            </dl>
+            <dl class="door-configuration-table" *ngIf="data.additionalOptions.items.length > 0">
+                <dd class="door-configuration-table-header">
+                    Additional Options
+                </dd>
+                <dd *ngFor="let itm of data.additionalOptions.items">
+                    <p [innerHTML]="itm.name"></p>
+                    <span>{{itm.price | currency:'USD':true:'1.2-2'}}</span>
+                </dd>
+            </dl>                
+        </accordion-group>
+    </accordion>
 
 </div>
 <div class="flex space-between margin-b-20">

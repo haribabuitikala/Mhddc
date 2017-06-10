@@ -13,7 +13,7 @@ declare var _: any;
 @Component({
     selector: 'app-shopping-cart',
     templateUrl: './shopping-cart.component.html',
-    styleUrls: ['./shopping-cart.component.less']
+    styleUrls: ['./shopping-cart.component.less', '../install//install.component.less']
 })
 export class ShoppingCartComponent implements OnInit {
     @ViewChild('continue') continue: ModalComponent;
@@ -36,7 +36,8 @@ export class ShoppingCartComponent implements OnInit {
     itmPrice = this.utils.utilities.itmPrice;
     baseItmPrice = this.utils.utilities.item_price * this.utils.utilities.gdoOpenerQty;
     data;
-    resFlow
+    resFlow;
+    resFlowSession;
 
     constructor(private appComp: AppComponent
         , private navComp: NavService
@@ -44,11 +45,6 @@ export class ShoppingCartComponent implements OnInit {
         , private navComponent: NavComponent
         , private dataStore: CollectionData
         , private route: Router) {
-    }
-
-    shoppingCartData() {
-        this.data = this.utils.resFlowSession.resDoorObj;
-        console.log(this.data);
     }
 
     ngOnInit() {
@@ -73,7 +69,7 @@ export class ShoppingCartComponent implements OnInit {
             resetNav: true
         });
         $('body').removeClass('loader');
-        this.shoppingCartData();
+        this.resFlowSession = this.utils.resFlowSession;        
     }
     
     getResPrice() {
