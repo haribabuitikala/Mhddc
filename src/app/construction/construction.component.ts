@@ -39,7 +39,7 @@ export class ConstructionComponent implements OnInit {
     @ViewChild('upsell') upsell: ModalComponent;
 
     ngOnInit() {
-        this.utils.resFlowSession.resDoorObj.resetconstruction();
+        this.resetConstruction();
         this.startProcess();
         if (this.navComponent.flowType === 'res') {
             this.navComponent.renderNav({
@@ -81,6 +81,12 @@ export class ConstructionComponent implements OnInit {
                 break;
             }
         }
+    }
+
+    resetConstruction() {
+        this.utils.resFlowSession.resDoorObj.resetconstruction();
+        this.utils.resFlowSession.resDoorObj.construction.construction = this.utils.resFlowSession.resDoorObj.design.dsgn["constructions"][0];
+        this.utils.resFlowSession.resDoorObj.construction.apiData = this.utils.resFlowSession.resDoorObj.design.dsgn["constructions"];
     }
 
     startProcess() {
