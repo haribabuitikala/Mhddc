@@ -86,6 +86,7 @@ export class AdditionalOptionsComponent implements OnInit {
             this.gdoConfig.itmPrice = this.data.item_price;
             this.utils.utilities.item_price = this.data.item_price;
             this.utils.utilities.itmPrice = this.data.item_price;
+            this.utils.gdoFlowSession.cart.opener.opener = this.data;
             $('.inner-router').css({ 'margin-top': 0 });
             $('.showDetails').hide();
         } else {
