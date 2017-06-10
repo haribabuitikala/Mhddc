@@ -39,6 +39,7 @@ export class ColorComponent implements OnInit {
     claddings = [];
 
     ngOnInit() {
+        this.utils.resFlowSession.resDoorObj.resetcolor();
         this.startProcess();
     }
 

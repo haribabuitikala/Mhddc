@@ -39,7 +39,7 @@ export class ConstructionComponent implements OnInit {
     @ViewChild('upsell') upsell: ModalComponent;
 
     ngOnInit() {
-        console.log("construction step");
+        this.utils.resFlowSession.resDoorObj.resetconstruction();
         this.startProcess();
         if (this.navComponent.flowType === 'res') {
             this.navComponent.renderNav({

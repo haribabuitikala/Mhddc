@@ -171,6 +171,7 @@ export class HardwareComponent implements OnInit {
     }
   }
   ngOnInit() {
+    this.utils.resFlowSession.resDoorObj.resethardware();
     this.navComponent.renderNav({
       flowType: 'res',
       flowActiveStep: 9,

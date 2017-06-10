@@ -58,6 +58,7 @@ export class DoorSizeComponent implements OnInit {
 
     // private navComponent:NavComponent
     ngOnInit() {
+        this.utils.resFlowSession.resDoorObj.resetsize();
         this.appComponent.currScreen = 3;
         this.lang = this.language.getDoorSize();
         this.widthFeets = this.sizes.getWidthFeets();
@@ -74,9 +75,7 @@ export class DoorSizeComponent implements OnInit {
             nextStepFn: () => {
 
             }
-        });
-
-        
+        });                 
     }
 
     homeSize = "0";

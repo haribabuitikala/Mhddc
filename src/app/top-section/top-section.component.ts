@@ -29,6 +29,7 @@ export class TopSectionComponent implements OnInit {
   folder = 'top-section/slider';
 
   ngOnInit() {
+    this.utils.resFlowSession.resDoorObj.resetwindows();
     this.startProcess();
   }
 

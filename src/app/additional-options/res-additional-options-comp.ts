@@ -138,6 +138,7 @@ export class ResAdditionalOptionsComponent implements OnInit {
     }
 
     ngOnInit() {
+        this.utils.resFlowSession.resDoorObj.resetadditional();
         this.installOrDiy = this.appComponent.selectedInstallDiy
 
         this.appComponent.next = 'Next';

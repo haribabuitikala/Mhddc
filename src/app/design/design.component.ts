@@ -33,6 +33,7 @@ export class DesignComponent implements OnInit {
     loaded = false;
 
     ngOnInit() {
+        this.utils.resFlowSession.resDoorObj.resetdesign();
         this.startProcess();
         $('#visualize-header').html('5 Choose Your Design');
     }
