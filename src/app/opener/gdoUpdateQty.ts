@@ -2,7 +2,7 @@ import {Component, OnInit, Input} from '@angular/core';
 import {AppUtilities} from "../shared/appUtilities";
 import {CollectionData} from "../collection/collection-data";
 import {GdoConfigComponent} from "../gdo-config/gdo-config.component";
-declare var _:any;
+declare var _: any;
 
 @Component({
     selector: 'gdo-update-qty',
@@ -17,9 +17,9 @@ declare var _:any;
 })
 export class GdoUpdateComponent implements OnInit {
 
-    constructor(private utils:AppUtilities
-        , private dataStrorage:CollectionData
-        , private gdoConfig:GdoConfigComponent) {
+    constructor(private utils: AppUtilities
+        , private dataStrorage: CollectionData
+        , private gdoConfig: GdoConfigComponent) {
     }
 
     @Input() data;
@@ -32,7 +32,7 @@ export class GdoUpdateComponent implements OnInit {
 
 
     updateQuantity(obj, flow, id) {
-       
+
         if (flow === 1 && this.quantity < 6) {
             this.quantity++
         }
@@ -46,9 +46,10 @@ export class GdoUpdateComponent implements OnInit {
             name: obj.item_name,
             price: obj.item_price,
             count: this.quantity,
-            totalPrice: obj.item_price * this.quantity
+            totalPrice: obj.item_price * this.quantity,
+            id: id
         };
-        //this.dataStrorage.gdoOpenerAccessories.splice(id, 1);
+        this.removeItm(this.dataStrorage.gdoOpenerAccessories, id);
         this.dataStrorage.gdoOpenerAccessories.push(k);
 
         let kPrice = _.sumBy(this.dataStrorage.gdoOpenerAccessories, function (o) {
@@ -57,5 +58,15 @@ export class GdoUpdateComponent implements OnInit {
 
         this.utils.utilities.kPrice = kPrice;
         this.gdoConfig.itemPrice = this.utils.calculateTotalPrice();
+    }
+    removeItm(arr, id) {
+        for (var i = 0; i < arr.length; i++) {
+            var obj = arr[i];
+
+            if (obj.id === id) {
+                arr.splice(i, 1);
+                i--;
+            }
+        }
     }
 }
