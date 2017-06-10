@@ -35,6 +35,7 @@ export class ConstructionComponent implements OnInit {
     upSellImage;
     loaded = false;
     className = '';
+    isCoreAssortment = true;
 
     @ViewChild('upsell') upsell: ModalComponent;
 
@@ -104,6 +105,7 @@ export class ConstructionComponent implements OnInit {
                     clickAction: () => {
                         this.data.length = 0;
                         this.data = _.chunk(res, 2);
+                        this.isCoreAssortment = false;
                     }
                 }
                 newData.push(t)
@@ -142,7 +144,7 @@ export class ConstructionComponent implements OnInit {
             "dwidthIn": this.utils.utilities.wi,
             "dtype": this.utils.utilities.dtype,
             "windcode": this.utils.utilities.winCode,
-            "isCoreAssortment": false
+            "isCoreAssortment": this.isCoreAssortment
         }
         if (_.includes(this.upSellShowCollection, this.utils.resFlowSession.resDoorObj.product.product['item_id']) && this.utils.resFlow.isUpsellSet) {
             this.upSellImage = this.utils.resFlowSession.resDoorObj.construction.construction['item_thumbnail'];
