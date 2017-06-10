@@ -98,7 +98,7 @@ export class AdditionalOptionsComponent implements OnInit {
         $('.gdoCofigDetails').show();
         this.dataStore.gdoDirectQuestions = [];
         this.utils.utilities.distancePrice = 0;
-
+        this.gdoConfig.itemPrice = this.utils.calculateTotalPrice();
         var k = this.pageNo + '.Additional Options';
         $('#visualize-header').html(k);
 

@@ -128,6 +128,7 @@ this.showSocial = true;
             this.utils.utilities.itemsCount = 1;
             this.gdoConfig.quantity = 1;
             this.utils.utilities.gdoOpenerQty = 1;
+            this.gdoConfig.itemPrice = this.utils.calculateTotalPrice();
             this.goTo('/gdoConfig' + path);
 
         } else {
