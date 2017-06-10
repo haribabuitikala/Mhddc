@@ -127,6 +127,7 @@ this.showSocial = true;
             this.utils.setUtils(3, 0);
             this.utils.utilities.itemsCount = 1;
             this.gdoConfig.quantity = 1;
+            this.utils.utilities.gdoOpenerQty = 1;
             this.goTo('/gdoConfig' + path);
 
         } else {
