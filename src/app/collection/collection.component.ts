@@ -222,13 +222,11 @@ export class CollectionComponent implements OnInit {
             "Windcode": utils.winCode,
             "NatMarketID": +utils.natmarketid,
 
-            "wf": +utils.wf,
             "WidthFt": +utils.wf,
-            "wi": utils.wi || 0,
-            "hf": +utils.hf,
+            "WidthIn": utils.wi || 0,
             "HeightFt": +utils.hf,
-
-            "hi": utils.hi || 0,
+            "HeightIn": utils.hi || 0,
+            
             "lang": "en",
             "localmarketid": +utils.localmarketid,
             "doorsize": +utils.homeSize,
