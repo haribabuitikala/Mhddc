@@ -187,23 +187,21 @@
     <modal-body>
         <div class="font-size-16 pull-left font-size-16 bold margin-b-10">Lead Test Question:</div>
         <br>
-        <p  class="text-center  margin-t-20">
+        <p  class="margin-t-20">
             The Environmental Protection Agency (EPA) has mandated that all homes built prior to 1978 be assessed by an EPA Certified Lead Renovator prior to any professional home renovation to determine if lead based paint is present in the work area and whether containment of lead based paint will be required during the renovation.
         <p class="bold font-size-16 text-center  margin-t-20" >Was your Garage / Home built prior to 1978?</p>
 
 
-        <div class="form-group margin-b-20 margin-t-20">
+        <div class="form-group margin-b-20 margin-t-20 text-center">
            <button type="submit"
-                    class="btn btn-default box-shadow text-orange margin-r-10 bold margin-b-10 pull-left "
+                    class="btn btn-default box-shadow text-orange margin-r-10 bold margin-b-10"
                     (click)="leadTestValue('YES')">YES
             </button>
             <button type="submit"
-                    class="btn btn-default box-shadow text-orange margin-r-10 bold margin-b-10 pull-right"
+                    class="btn btn-default box-shadow text-orange margin-r-10 bold margin-b-10"
 
                    (click)="leadTestValue('NO')">NO
             </button>
-           
-           
         </div>
     </modal-body>
 </modal>
@@ -218,29 +216,27 @@
             A Lead Based Paint assessment fee of $20 will be added to your order. The EPA Certified Lead Renovator will provide additional details and assessment results during site inspection of the work area. If it is determined that lead containment procedures are required for your project, additional fees will apply. 
         </p>
         <a class="margin-b-20" href="http://hddcstore.clopay.com/en/documents/renovaterightbrochure.pdf" > Click here to review and print the EPA Lead Paint guide</a>
-        <p>
          
-            <label>
-                <input type="checkbox" value="" (click)="checkboxValue($event)">  By checking this box you signify you have reviewed and understand the EPA Lead Based Paint rules and you have been provided a copy of the EPA brochure
-            </label>
-            
-      
+        <label>
+            <input type="checkbox" value="" (click)="checkboxValue($event)">  By checking this box you signify you have reviewed and understand the EPA Lead Based Paint rules and you have been provided a copy of the EPA brochure
+        </label>
+
+        <p class="bold font-size-16 margin-t-10 ">Home Depot is committed to keeping you safe and in compliance with all local and national laws.</p>
+
+        <p class="margin-b-10">In 2008 the EPA mandated that a test for the presence of lead paint be performed on Garage Doors and associated trim on houses built before 1978, prior to replacement. </p>
+
+        <span>Please visit <a href="http://www.epa.gov/lead/pubs/renovation.htm"> http://www.epa.gov/lead/pubs/renovation.htm</a>for more information regarding the details of this program.</span>
        
-        <div class="form-group margin-b-20 margin-t-20">
-             <button type="submit"
-                class="btn btn-default box-shadow text-orange margin-r-10 bold margin-b-10 pull-left"
-                (click)="epaValue('learn')">LEARN MORE
-        </button>
+        <div class="form-group margin-b-20 margin-t-20 text-center">
                <button type="submit"
-                    class="btn btn-default box-shadow text-orange margin-r-10 bold margin-b-10 pull-right"
+                    class="btn btn-default box-shadow text-orange margin-r-10 bold margin-b-10"
                      (click)="epaValue('ok')">OK
-            </button>
-        </div>
+            </button>        
             <button type="submit"
-                    class="btn btn-default box-shadow text-orange margin-r-10 bold margin-b-10 pull-right"
+                    class="btn btn-default box-shadow text-orange margin-r-10 bold margin-b-10"
                     (click)="epaValue('back')">BACK
             </button>
-         
+         </div>
     </modal-body> 
 </modal>
 <modal #learnMore>

@@ -32,7 +32,7 @@
             Door Design
         </dd>
         <dd>
-            <p [innerHTML]="data.designName"></p>
+            <p style="width: 100%" [innerHTML]="data.designName"></p>
         </dd>
     </dl>
     <dl class="door-configuration-table">
@@ -40,16 +40,21 @@
             Door Construction
         </dd>
         <dd>
-            <p [innerHTML]="data.construction.name + ' (x' + data.construction.qty + ' Per Door)'"></p>            
+            <p [innerHTML]="data.construction.name + ' (x' + data.construction.qty + ')'"></p>            
         </dd>
     </dl>
     <dl class="door-configuration-table">
         <dd class="door-configuration-table-header">
-            Color
+            Overlay Color
         </dd>
         <dd>
             <p [innerHTML]="data.color.overlay.name"></p>
             <span>{{data.color.overlay.price | currency:'USD':true:'1.2-2'}}</span>
+        </dd>
+    </dl>
+    <dl class="door-configuration-table">
+        <dd class="door-configuration-table-header">
+            Base Color
         </dd>
         <dd>
             <p [innerHTML]="data.color.base.name"></p>

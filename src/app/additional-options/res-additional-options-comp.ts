@@ -51,7 +51,6 @@ export class ResAdditionalOptionsComponent implements OnInit {
     resAdditionalQuestions;
     resDiyQuestions;
     resInstallQuestions;
-
     showMedImg;
     showInstallMiles;
     defaultMiles: any = 31;
@@ -63,8 +62,31 @@ export class ResAdditionalOptionsComponent implements OnInit {
     installMiles;
     installHeadRoom;
     installReleaseKit;
-
     aditionalDiyPrice;
+    flow = 'res';
+    singleOpener = 0;
+    doubleOpener = 0;
+    mileOpenPr = 0;
+    qty = this.utils.utilities.gdoOpenerQty;
+    directDoorVal = 1;
+    singleDropVal;
+    doubleDropVal;
+    itmObj = this.utils.resFlowSession.resDoorObj.additional;
+    globalPrice = 0;
+    selectedVinyl = {
+        heightitem_price: 0,
+        heightpartid: "",
+        heightqty: 0,
+        isdefault: false,
+        item_description: null,
+        item_id: 0,
+        item_name: "",
+        item_price: 0,
+        item_thumbnail: null,
+        widthitem_price: 0,
+        widthpartid: null,
+        widthqty: 0
+    };
 
     // options
     medallion = true;
@@ -78,7 +100,6 @@ export class ResAdditionalOptionsComponent implements OnInit {
 
     // for gdo the pageNo will be 3
     // for residential the pageNo will be
-
     constructor(private appComponent: AppComponent
         , private utils: AppUtilities
         , private route: Router
@@ -89,7 +110,6 @@ export class ResAdditionalOptionsComponent implements OnInit {
         , private navComponent: NavComponent
         , private dataService: CollectionService) {
     }
-
 
     setNavComponent() {
         if (this.navComponent.flowType === 'res') {
@@ -117,7 +137,6 @@ export class ResAdditionalOptionsComponent implements OnInit {
         }
     }
 
-
     ngOnInit() {
         this.installOrDiy = this.appComponent.selectedInstallDiy
 
@@ -126,19 +145,18 @@ export class ResAdditionalOptionsComponent implements OnInit {
         this.setNavComponent();
         let resDoorObj = this.utils.resFlowSession.resDoorObj;
         let dataParams = {
-            "wi": this.utils.utilities.wi,
-            "windcode": this.utils.utilities.winCode,
-            "NatMarketID": this.utils.utilities.natmarketid,
+            "natmarketid": this.utils.utilities.natmarketid,
+            "localmarketid": parseInt(this.utils.utilities.localmarketid),
             "productid": resDoorObj.product.product['item_id'],
+            "wf": this.utils.utilities.wf,
+            "wi": this.utils.utilities.wi,
             "hf": this.utils.utilities.hf,
             "hi": this.utils.utilities.hi,
-            "wt": 8,
-            "dtype": this.utils.utilities.dtype,
-            "clopaymodelnumber": resDoorObj.construction.construction['ClopayModelNumber'],
-            "localmarketid": this.utils.utilities.localmarketid,
-            "lang": this.utils.utilities.lang,
-            "storeNumber": this.utils.utilities.storenumber,
-            "colorConfig": resDoorObj.color.base['colorconfig']
+            "model":  resDoorObj.construction.construction['ClopayModelNumber'],            
+            "dtype": _.upperCase(this.utils.utilities.dtype),
+            "store": this.utils.utilities.storenumber,  
+            "colorConfig": resDoorObj.color.base['colorconfig'],           
+            "lang": this.utils.utilities.lang
         }
         this.dataService.getInstallDiyq(dataParams).subscribe(res => {
             this.resAdditionalQuestions = res;
@@ -146,12 +164,20 @@ export class ResAdditionalOptionsComponent implements OnInit {
             this.resInstallQuestions = _.filter(this.resAdditionalQuestions, ['item_type', 'INSTALL']);
 
             //console.log("one"+JSON.stringify(this.resDiyQuestions[2].Answers[1].vinyls));
-            this.vinyls = this.resDiyQuestions[2].Answers[1].vinyls
+            this.vinyls = _.uniqBy(this.resDiyQuestions[2].Answers[1].vinyls, function(o){
+                return o.item_name;
+            });            
+            this.selectedVinyl = this.vinyls[15];
             //console.log('resDiyQuestions' + JSON.stringify(this.resDiyQuestions));
             //            if (this.resInstallQuestions.item_id == 7 && this.resInstallQuestions.item_id == 5) {
             //
             //            }
+            
+            if(!this.utils.resFlowSession.resDetails.isDIY) {
+                this.installQuestionsOptions(true, this.resInstallQuestions[0]);
+            }
 
+            this.appComponent.updatePrice();
         });
         if (this.installOrDiy == 'install') {
             this.showMedImg = true;
@@ -186,9 +212,7 @@ export class ResAdditionalOptionsComponent implements OnInit {
         } else if (installQuestions.item_id == 11) {
             this.resFlowReleaseKit.open();
         }
-
     }
-
 
     diyQuestionsPopup(diyQuestions) {
         if (diyQuestions.item_id == 5) {
@@ -204,9 +228,7 @@ export class ResAdditionalOptionsComponent implements OnInit {
         } else if (diyQuestions.item_id == 12) {
             this.resDiyBottomWeatherSeal.open();
         }
-
-    }
-    itmObj;
+    }    
 
     installQuestionsOptions(itm, obj) {
         let k = {
@@ -214,18 +236,16 @@ export class ResAdditionalOptionsComponent implements OnInit {
             name: obj.item_name,
             price: obj.Answers[1].item_price
         }
-        this.itmObj = this.utils.resFlowSession.resDoorObj.additional;
-        if (itm.srcElement.checked === true) {
+        let n = obj.item_list_text.split('<span class="text-orange">').join('').split('</span>').join('').replace('?','').replace('$'+k.price,'').trim();        
+        if (itm) {
             switch (obj.item_id) {
                 case 7:
                 case 4:
                 case 11:
-                    $('#' + obj.item_id).removeClass('hide');
-                    obj.item_list_text = obj.item_list_text.split('$')[0].split('?')[0] + '<span class="text-orange"> $'+ k.price +'</span>?';
+                    obj.item_list_text = n + '<span class="text-orange"> $'+ k.price +'</span>?';
                     this.itmObj.items.push(k);
                     break;
                 case 5:                    
-                    $('#' + obj.item_id).removeClass('hide');
                     this.removeItmOptions(obj.item_id);
                     break;
             }
@@ -234,18 +254,15 @@ export class ResAdditionalOptionsComponent implements OnInit {
                 case 7:
                 case 4:
                 case 11:
-                    obj.item_list_text = obj.item_list_text.split('$')[0].split('?')[0] + '?';
-                    $('#' + obj.item_id).addClass('hide');
+                    obj.item_list_text = n + '?';
                     this.removeItmOptions(obj.item_id);
                     break;
                 case 5:
-                    $('#' + obj.item_id).addClass('hide');
                     k.price = this.calculateMilesPrice();
                     this.itmObj.items.push(k);
                     break;
             }
         }
-
         this.appComponent.updatePrice();
     }
 
@@ -279,26 +296,32 @@ export class ResAdditionalOptionsComponent implements OnInit {
         });
     }
 
-    diyQuestionsOptions(itm, obj) {
+    diyQuestionsOptions(itm, obj, event?) {
         let k = {
             id: obj.item_id,
             name: obj.item_name,
             price: obj.Answers[1].item_price
         }
-        this.itmObj = this.utils.resFlowSession.resDoorObj.additional;
-        if (itm.srcElement.checked === true) {
+        if(obj.item_id === 4) {
+            if(event) {
+                this.selectedVinyl = this.vinyls[15];
+            }            
+            k.name = this.selectedVinyl.item_name;
+            k.price = this.selectedVinyl.item_price;
+        }  
+
+        let n = obj.item_list_text.split('<span class="text-orange">').join('').split('</span>').join('').replace('?','').replace('$'+k.price,'').trim();        
+        if (itm) {
             switch (obj.item_id) {
                 case 1:
                 case 3:
-                case 4:
+                case 4:            
                 case 11:
                 case 12:
-                    $('#' + obj.item_id).removeClass('hide');
-                    obj.item_list_text = obj.item_list_text.split('$')[0].split('?')[0] + '<span class="text-orange"> $'+ k.price +'</span>?';
+                    obj.item_list_text = n + '<span class="text-orange"> $'+ k.price +'</span>?';
                     this.itmObj.items.push(k);
                     break;
                 case 5:                    
-                    $('#' + obj.item_id).removeClass('hide');
                     this.removeItmOptions(obj.item_id);
                     break;
             }
@@ -309,12 +332,10 @@ export class ResAdditionalOptionsComponent implements OnInit {
                 case 4:
                 case 11:
                 case 12:
-                    obj.item_list_text = obj.item_list_text.split('$')[0].split('?')[0] + '?';
-                    $('#' + obj.item_id).addClass('hide');
+                    obj.item_list_text = n + '?';
                     this.removeItmOptions(obj.item_id);
                     break;
                 case 5:
-                    $('#' + obj.item_id).addClass('hide');
                     k.price = this.calculateMilesPrice();
                     this.itmObj.items.push(k);
                     break;
@@ -322,88 +343,20 @@ export class ResAdditionalOptionsComponent implements OnInit {
         }
 
         this.appComponent.updatePrice();
-
-
-        // if (itm.srcElement.checked === true) {
-        //     if (obj.item_id == 5) {
-        //         this.defaultMilesDiy = "31";
-        //         if (obj.Answers[1].item_price !== 0) {
-
-        //         }
-        //     }
-        //     if (obj.item_id == 1) {
-
-        //         if (obj.Answers[1].item_price !== 0) {
-
-        //         }
-        //     }
-        //     if (obj.item_id == 4) {
-
-        //         if (obj.Answers[1].item_price !== 0) {
-
-        //         }
-        //     }
-        //     if (obj.item_id == 3) {
-        //         if (obj.Answers[1].item_price !== 0) {
-
-        //         }
-        //     }
-        //     if (obj.item_id == 11) {
-        //         this.defaultMilesDiy = "31";
-        //         if (obj.Answers[1].item_price !== 0) {
-
-        //         }
-        //     }
-        //     if (obj.item_id == 12) {
-        //         if (obj.Answers[1].item_price !== 0) {
-
-        //         }
-        //     }
-        // } else {
-        //     if (obj.item_id == 5) {
-        //         this.defaultMilesDiy = "";
-        //         if (obj.Answers[0].item_price !== 0) {
-
-        //         }
-        //     }
-        //     if (obj.item_id == 1) {
-        //         if (obj.Answers[0].item_price !== 0) {
-
-        //         }
-        //     }
-        //     if (obj.item_id == 4) {
-        //         if (obj.Answers[0].item_price !== 0) {
-
-        //         }
-        //     }
-        //     if (obj.item_id == 3) {
-        //         if (obj.Answers[0].item_price !== 0) {
-
-        //         }
-        //     }
-        //     if (obj.item_id == 11) {
-        //         if (obj.Answers[0].item_price !== 0) {
-
-        //         }
-        //     }
-        //     if (obj.item_id == 12) {
-        //         if (obj.Answers[0].item_price !== 0) {
-
-        //         }
-        //     }
-        // }
     }
 
-    selectedVinyls(vin) {
-
+    selectedVinyls(vin) {   
+        let k = _.findIndex(this.resDiyQuestions, {'item_id': 4});
+        if(vin) {
+            if(vin.item_id !== -1) {
+                this.selectedVinyl = vin;   
+                this.diyQuestionsOptions(true, this.resDiyQuestions[k]);
+            } else {
+                this.diyQuestionsOptions(false, this.resDiyQuestions[k]);
+                this.selectedVinyl = vin;
+            }
+        }
     }
-    flow = 'res';
-
-    singleOpener = 0;
-    doubleOpener = 0;
-    mileOpenPr = 0;
-    qty = this.utils.utilities.gdoOpenerQty;
-
 
     showPowerHead(itm) {
         if (itm.srcElement.checked === true) {
@@ -412,9 +365,7 @@ export class ResAdditionalOptionsComponent implements OnInit {
 
             this.gdoFlowPowerHeadInfo = true;
         }
-    }   
-
-    directDoorVal = 1;
+    }
 
     directDoor(event, flow) {
         let val = +event.target.value;
@@ -456,7 +407,6 @@ export class ResAdditionalOptionsComponent implements OnInit {
     }
 
     removeItm(flow) {
-        // flow = 0 ? this.utils.utilities.singlep = 0 : this.utils.utilities.doublep = 0;
         this.dataStore.gdoDirectQuestions = this.dataStore.gdoDirectQuestions.filter(function (el) {
             return el.id != flow;
         });
@@ -467,13 +417,6 @@ export class ResAdditionalOptionsComponent implements OnInit {
         });
         return kPrice;
     }
-
-    singleDropVal;
-    doubleDropVal;
-
-
-    globalPrice = 0;
-
 
     updateDistance(itm, flow) {
         this.utils.utilities.distance = +itm.target.value;
@@ -505,7 +448,4 @@ export class ResAdditionalOptionsComponent implements OnInit {
         this.mileOpenPr = this.distancePrice;
         this.utils.utilities.distancePrice = this.distancePrice;
     }
-
 }
-
-
