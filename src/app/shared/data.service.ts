@@ -934,6 +934,15 @@ export class CollectionService {
                 this.utils.removeLoader();
             })
     }
+    
+    sendMail(obj) {
+        this.utils.setLoader();
+        return this.http.post(this.url + 'SendEmail', obj)
+            .map(res => res.json())
+            .finally(() => {
+                this.utils.removeLoader();
+            })
+    }
     getUpsellData(obj) {
         this.utils.setLoader();
         return this.http.post(this.url + 'ModelUpSell', obj).map(

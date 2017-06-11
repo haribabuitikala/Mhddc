@@ -309,6 +309,10 @@ export class ResSliderComponent implements OnInit, AfterViewInit {
                         this.utils.resFlowSession.resDoorObj.hardware.hinge['placement'] = obj['placement'] ? obj['placement'] : obj['placementlist'];
                         if (obj['placementlist'] && obj['placementlist'].split(';').length > 0) {
                             this.utils.resFlowSession.resDoorObj.hardware.hinge['placement'] = obj['placementlist'].split(';')[0];
+                            var defaultCount = parseInt(obj.defaultkit);
+                            if (defaultCount == 2 && obj['placementlist'].split(';').length > 1) {
+                                this.utils.resFlowSession.resDoorObj.hardware.hinge['placement'] = obj['placementlist'].split(';')[1];
+                            }
                         }
                     }
                 }

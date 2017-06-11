@@ -6,6 +6,7 @@ import { NavService } from "../nav/nav-service";
 import { NavComponent } from "../nav/nav.component";
 import { CollectionData } from "../collection/collection-data";
 import {ConfigComponent } from "../config/config.component";
+import { CollectionService } from "../shared/data.service";
 declare var $: any;
 declare var _: any;
 
@@ -46,11 +47,12 @@ export class ResDoorConfigurationComponent implements OnInit {
         , private navComp: NavService
         , private navComponent: NavComponent
         , private dataStore: CollectionData
+        , private dataService: CollectionService
         , private config: ConfigComponent) {
     }
 
     setNavComponent() {
-       if (this.navComponent.flowType === 'res') {
+        if (this.navComponent.flowType === 'res') {
             this.navComponent.renderNav({
                 flowType: 'res',
                 flowActiveStep: 13,
@@ -75,6 +77,7 @@ export class ResDoorConfigurationComponent implements OnInit {
         }
     }
     data;
+    shareEmail:any;
 
     ngOnInit() {
         this.setNavComponent();
@@ -88,7 +91,22 @@ export class ResDoorConfigurationComponent implements OnInit {
     }
     shareBtn() {
         this.showShare = !this.showShare;
-        
+
+    }
+
+
+
+    
+    sendMail() {
+        let obj = {
+            ToEmail: this.shareEmail,
+            body: '',
+            subject: ''
+        }
+        this.dataService.sendMail(obj)
+            .subscribe(res => {
+                console.log('sent mail')
+            })
     }
     updateQuantity(flow) {
 
