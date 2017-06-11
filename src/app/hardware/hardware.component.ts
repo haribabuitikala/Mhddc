@@ -86,22 +86,23 @@ export class HardwareComponent implements OnInit {
         }
       }
 
-      this.hingesPlacementArr = [];
-      this.hingePlacements = [];
-      let hinge = this.yourStepHinge[0][0];
-      if (hinge && hinge != '') {
-        if (hinge['placementlist']) {
-          let placements = hinge['placementlist'].split(';');
-          let arr3 = [];
-          placements.forEach(h => {
-            arr3.push(h.split(':')[0]);
-            this.hingePlacements.push(h);
-          });
-          this.hingesPlacementArr = arr3;
-          this.countManager.hinge = 0;
+      if(this.yourStepHinge.length > 0) {
+        this.hingesPlacementArr = [];
+        this.hingePlacements = [];
+        let hinge = this.yourStepHinge[0][0];
+        if (hinge && hinge != '') {
+          if (hinge['placementlist']) {
+            let placements = hinge['placementlist'].split(';');
+            let arr3 = [];
+            placements.forEach(h => {
+              arr3.push(h.split(':')[0]);
+              this.hingePlacements.push(h);
+            });
+            this.hingesPlacementArr = arr3;
+            this.countManager.hinge = 0;
+          }
         }
       }
-
     } else {
       switch (cname) {
         case 'handles':
@@ -377,8 +378,13 @@ export class HardwareComponent implements OnInit {
 
   prevBtn() {
     this.resetPrice();
-    this.utils.resFlowSession.resDoorObj.resetFromStep(6);
-    this.navigateTo('/config/topSection');
+    if(this.utils.resFlowSession.resDoorObj.product.product['item_id'] === 16) {
+      this.utils.resFlowSession.resDoorObj.resetFromStep(4);
+      this.navigateTo('/config/color');
+    } else {
+      this.utils.resFlowSession.resDoorObj.resetFromStep(6);
+      this.navigateTo('/config/topSection');
+    }    
   }
 
   resetPrice() {
