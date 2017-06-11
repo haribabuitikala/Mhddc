@@ -50,26 +50,7 @@ export class ResDoorConfigurationComponent implements OnInit {
     }
 
     setNavComponent() {
-        this.navComponent.renderNav({
-            flowType: 'res',
-            flowActiveStep: 13,
-            currentStepUrl: '/config/doorConfiguration',
-            showStepIndicator: true,
-            nextStepFn: () => {
-
-            }
-        });
-    }
-    data;
-
-    ngOnInit() {
-        this.setNavComponent();
-        this.config.pageTitle = "13. Your Door Configuration";
-        this.data = this.utils.resFlowSession.resDoorObj;
-    }
-    shareBtn() {
-        this.showShare = !this.showShare;
-        if (this.navComponent.flowType === 'res') {
+       if (this.navComponent.flowType === 'res') {
             this.navComponent.renderNav({
                 flowType: 'res',
                 flowActiveStep: 13,
@@ -92,6 +73,17 @@ export class ResDoorConfigurationComponent implements OnInit {
             });
             this.config.pageTitle = '9.Your Door Configuration';
         }
+    }
+    data;
+
+    ngOnInit() {
+        this.setNavComponent();
+        this.config.pageTitle = "13. Your Door Configuration";
+        this.data = this.utils.resFlowSession.resDoorObj;
+    }
+    shareBtn() {
+        this.showShare = !this.showShare;
+        
     }
     updateQuantity(flow) {
 
