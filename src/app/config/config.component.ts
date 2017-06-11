@@ -105,7 +105,7 @@ export class ConfigComponent implements OnInit, AfterViewInit, AfterViewChecked 
     ngAfterViewInit() {
         $('#doorVis').DoorVisualization({
             NAME: 'configView',
-            consolereporting: true,
+            consolereporting: false,
             MAXHEIGHT: 280,
             MAXWIDTH: 315,
             VIEW: 'door',
@@ -335,12 +335,6 @@ export class ConfigComponent implements OnInit, AfterViewInit, AfterViewChecked 
                 if (dor.hardware.hinge != '') {
                     buildObj.hardwarehinge = dor.hardware.hinge.visimage;
                     buildObj.hingeplacement = dor.hardware.hinge.placement;
-                    if (dor.hardware.hinge.count) {
-                        buildObj.hingeplacement = dor.hardware.hinge.placementlist.split(';')[dor.hardware.hinge.count - 1];
-                    } else {
-                        buildObj.hingeplacement = dor.hardware.hinge.placementlist.split(';')[0];
-                    }
-
                 }
 
             } catch (e) { }

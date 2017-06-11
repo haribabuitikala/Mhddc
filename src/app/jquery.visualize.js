@@ -318,7 +318,7 @@ var glassSections = 0;
 
 		if (!errorBuild) {
 			var $this = this;
-			console.log('Build ' + $this.cN)
+			// console.log('Build ' + $this.cN)
 
 			//console.log($this.cN)
 
@@ -407,12 +407,12 @@ var glassSections = 0;
 							if ($this.buildObj.designimage != "") {
 								var sName = $this.getSlab($this.buildObj.designimage);
 								canvasLoader($this, true, $this.buildObj, $this._dSlab[0], sName);
-								console.log('CN1')
+								// console.log('CN1')
 								$this.cN++
 							}
 						}
 						else {
-							console.log('CN1')
+							// console.log('CN1')
 							$this.cN++;
 							//console.log('bd1')
 							$this.buildDoor();
@@ -425,11 +425,11 @@ var glassSections = 0;
 
 						if ($this.buildObj.designimage != "") {
 							canvasLoader($this, true, $this.buildObj, this._dOverlay[0], $this.getDsgn($this.buildObj.designimage));
-							console.log('CN2')
+							// console.log('CN2')
 							$this.cN++;
 						}
 						else {
-							console.log('CN2')
+							// console.log('CN2')
 							$this.cN++;
 							// console.log('bd2')
 							$this.buildDoor();
@@ -464,11 +464,11 @@ var glassSections = 0;
 						if ($this.buildObj.colorcode != "") {
 
 							canvasColr($this, $this.buildObj, $this._dOverlayClr[0], $this.getDsgn($this.buildObj.designimage), $this.buildObj.colorcode)
-							console.log('CN3')
+							// console.log('CN3')
 							$this.cN++
 						}
 						else {
-							console.log('CN3')
+							// console.log('CN3')
 							$this.cN++;
 
 							$this.buildDoor();
@@ -495,7 +495,7 @@ var glassSections = 0;
 
 							if ($this.buildObj.glaz != 0 && $this.buildObj.glaz != "GLAZ-SOL") {
 								canvasLoader($this, true, $this.buildObj, $this._dWindow[0], $this.buildObj.doorcolumns + "C_" + size + "_" + $this.buildObj.EnvWindows + ".png", 0, topy);
-								console.log('CN4')
+								// console.log('CN4')
 								$this.cN++
 							} else if (Number(prodid) == 10 && $this.buildObj.topsectionimage.toLowerCase().indexOf("rletop8") < 0) {
 
@@ -520,18 +520,18 @@ var glassSections = 0;
 								sName = sName.replace("10R-", "");
 
 								canvasLoader($this, true, $this.buildObj, $this._dWindow[0], sName, 0, 0);
-								console.log('CN4')
+								// console.log('CN4')
 								$this.cN++
 
 							}
 							else {
-								console.log('CN4')
+								// console.log('CN4')
 								$this.cN++;
 								$this.buildDoor();
 							}
 						}
 						else {
-							console.log('CN4')
+							// console.log('CN4')
 							$this.cN++;
 
 							$this.buildDoor();
@@ -708,11 +708,11 @@ var glassSections = 0;
 										plc1 = plc1 + 4;
 									}
 
-									console.log($this.hLoop + '==' + index)
+									// console.log($this.hLoop + '==' + index)
 
 									if ($this.hLoop == index) {
 
-										console.log(index + 1 + '==' + a1.length)
+										// console.log(index + 1 + '==' + a1.length)
 										if (index + 1 == a1.length) {
 											$this.cN++
 											$this.hLoopOn = false;
@@ -762,10 +762,10 @@ var glassSections = 0;
 
 									var plc = a1[index].split(',');
 									var plc1 = plc[0].slice(1);
-									console.log($this.hLoop + '==' + index)
+									// console.log($this.hLoop + '==' + index)
 									if ($this.hLoop == index) {
 
-										console.log(index + 1 + '==' + a1.length)
+										// console.log(index + 1 + '==' + a1.length)
 										if (index + 1 == a1.length) {
 											$this.cN++
 											$this.hLoopOn = false
@@ -812,8 +812,8 @@ var glassSections = 0;
 									}
 								}
 
-								console.log('kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk')
-								console.log(tarPos)
+								// console.log('kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk')
+								// console.log(tarPos)
 								if (!$this.hLoopOn) {
 									$this.hLoop = 0
 									$this.hLoopOn = true
@@ -886,7 +886,7 @@ var glassSections = 0;
 		$this.updateVisLayers();
 
 
-		console.log($this.cN + 'CALLED FOR BUILD COMPLETE')
+		// console.log($this.cN + 'CALLED FOR BUILD COMPLETE')
 		$this.updateElem();
 		logprint("done Build ready for Complete", $this);
 		$('#SidebarLoader').hide(); 		// custom change to show sidebar loader
@@ -1104,7 +1104,7 @@ var glassSections = 0;
 	// updateElem: Uudates plugin output image //
 	///////////////////////////////////////////////////
 	Plugin.prototype.updateElem = function () {		
-		console.log('callout')
+		// console.log('callout')
 		var $this = this;
 		var ratio = 1;
 		var maxWidth = this.options.MAXWIDTH;
@@ -1424,7 +1424,7 @@ var glassSections = 0;
 
 			var destCtx = cloneElm[0].getContext('2d');
 			$("canvas", $this.element).each(function (index, value) {
-				console.log(value)
+				// console.log(value)
 				// $('body').prepend(value)
 				destCtx.drawImage(value, 0, 0);
 			});
@@ -1459,7 +1459,7 @@ var glassSections = 0;
 
 	function canvasLoader(el, needRebuild, buildObj, canvas, dataURL, targX, targY, clr, SWAP) {
 		$('body').addClass('loader');
-		console.log('CVSLoad')
+		// console.log('CVSLoad')
 		$('#SidebarLoader').show();
 		SWAP = typeof SWAP !== 'undefined' ? SWAP : true;
 		var ctx = canvas[0].getContext("2d");
@@ -1525,15 +1525,15 @@ var glassSections = 0;
 		imageObj.onload = function () {
 			ctx.drawImage(this, targX, targY);
 			if (needRebuild) {
-				console.log(url)
-				console.log('buildh2')
+				// console.log(url)
+				// console.log('buildh2')
 				el.hLoop++;
 				el.buildDoor();
 			}
 		};
 		imageObj.onerror = function () {
 			errorBuild = true;
-			console.log('errBD10')
+			// console.log('errBD10')
 			$('#SidebarLoader').hide(); 
 			$('body').removeClass('loader');		// custom change to show sidebar loader
 			if (needRebuild) {
@@ -1584,8 +1584,8 @@ var glassSections = 0;
 				colrImg(el, canvas, colorCode, 180);
 			}
 			else if (buildObj.productid == '9') {
-				console.log(colorCode)
-				console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!')
+				// console.log(colorCode)
+				// console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!')
 				colrImg(el, canvas, colorCode, 170, false);
 			}
 			else {
@@ -1689,7 +1689,7 @@ var glassSections = 0;
 		}
 
 		ctx.putImageData(imdg, 0, 0);
-		console.log('bd11')
+		// console.log('bd11')
 		el.buildDoor();
 
 		try { }

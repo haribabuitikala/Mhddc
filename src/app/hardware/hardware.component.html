@@ -16,7 +16,7 @@
             </div>
             <div class="col-xs-3 pull-right padding-0 margin-t-10">
                 <img (click)="updateCount('handle')" src="../../assets/images/substract.png" alt="" height="22" width="22" class="minus-quantity pull-left">
-                <span>{{ countManager.handle }}</span>
+                <span *ngIf="handlePlacementArr.length > 0">{{ handlePlacementArr[countManager.handle] }}</span>
                 <img (click)="updateCount('handle', true)" src="../../assets/images/add.png" alt="" height="22" width="22" class="add-quantity  ">
             </div>
         </div>
@@ -25,10 +25,11 @@
             [data]="yourHandles" 
             [number]="yourHandlersNumber" 
             [category]="'handles'" 
-            [uniqueId]="1" 
+            [uniqueId]="1"
             [subname]="'handles'"
             [issub]="'hardware'"
             [cname]="'hardware'"
+            (onSelected)="onHardwareSelected($event)"
                 [folder]="">
             </app-res-slider>
         </div>
@@ -40,7 +41,7 @@
             </div>
             <div class="col-xs-3 pull-right padding-0 margin-t-10">
                 <img (click)="updateCount('stepplate')" src="../../assets/images/substract.png" alt="" height="22" width="22" class="minus-quantity pull-left">
-                <span>{{ countManager.stepplate }}</span>
+                <span>{{ stepplatePlacementArr[countManager.stepplate] }}</span>
                 <img (click)="updateCount('stepplate', true)" src="../../assets/images/add.png" alt="" height="22" width="22" class="add-quantity  ">
             </div>
         </div>
@@ -53,6 +54,7 @@
             [subname]="'stepplates'"
             [issub]="'hardware'"
             [cname]="'hardware'"
+             (onSelected)="onHardwareSelected($event)"
                 [folder]="">
             </app-res-slider>
         </div>
@@ -64,7 +66,7 @@
             </div>
             <div class="col-xs-3 pull-right padding-0 margin-t-10">
                 <img (click)="updateCount('hinge')" src="../../assets/images/substract.png" alt="" height="22" width="22" class="minus-quantity pull-left">
-                <span>{{ countManager.hinge }}</span>
+                <span *ngIf="hingesPlacementArr.length > 0">{{ hingesPlacementArr[countManager.hinge] }}</span>
                 <img (click)="updateCount('hinge', true)" src="../../assets/images/add.png" alt="" height="22" width="22" class="add-quantity ">
             </div>
         </div>
@@ -77,6 +79,7 @@
             [subname]="'stephinges'"
             [issub]="'hardware'"
             [cname]="'hardware'"
+             (onSelected)="onHardwareSelected($event)"
                 [folder]="">
             </app-res-slider>
         </div>

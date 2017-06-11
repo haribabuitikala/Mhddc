@@ -73,9 +73,9 @@ export class ResSliderComponent implements OnInit, AfterViewInit {
                 }
             } else {
                 if (this.cname != 'opener') {
-                    if (this.utils.resFlowSession.resDoorObj.product.product['item_id'] == 16 &&  this.cname === 'color') {
-                            this.saveSelected(this.data[0][3]);
-                            this.app.updatePrice();
+                    if (this.utils.resFlowSession.resDoorObj.product.product['item_id'] == 16 && this.cname === 'color') {
+                        this.saveSelected(this.data[0][3]);
+                        this.app.updatePrice();
                     } else {
                         if (this.data.length > 0 && this.data[0].length > 0) {
                             this.saveSelected(this.data[0][0]);
@@ -286,6 +286,9 @@ export class ResSliderComponent implements OnInit, AfterViewInit {
                         this.utils.resFlowSession.resDoorObj.hardware.hinge = obj;
                         this.utils.resFlowSession.resDoorObj.hardware.hinge['count'] = 1;
                         this.utils.resFlowSession.resDoorObj.hardware.hinge['placement'] = obj['placement'] ? obj['placement'] : obj['placementlist'];
+                        if (obj['placementlist'] && obj['placementlist'].split(';').length > 0) {
+                            this.utils.resFlowSession.resDoorObj.hardware.hinge['placement'] = obj['placementlist'].split(';')[0];
+                        }
                     }
                 }
                 break;
@@ -303,10 +306,10 @@ export class ResSliderComponent implements OnInit, AfterViewInit {
                         this.utils.resFlowSession.resDoorObj.color.overlay = construction['colors'][0];
                         this.utils.resFlowSession.resDoorObj.color.base = construction['colors'][0];
 
-                         if (this.utils.resFlowSession.resDoorObj.product.product['item_id'] == 16) {
+                        if (this.utils.resFlowSession.resDoorObj.product.product['item_id'] == 16) {
                             this.utils.resFlowSession.resDoorObj.color.overlay = construction['colors'][3];
                             this.utils.resFlowSession.resDoorObj.color.base = construction['colors'][3];
-                         }
+                        }
                     }
                 }
                 let stockdoorconstructions = obj['stockdoorconstructions'];
@@ -334,7 +337,7 @@ export class ResSliderComponent implements OnInit, AfterViewInit {
                     this.utils.resFlowSession.resDoorObj.color.base = obj;
                     //this.utils.resFlowSession.resDoorObj.color.overlay = obj;
                 }
-                
+
                 break;
             case 'construction':
                 this.utils.resFlowSession.resDoorObj.construction.construction = obj;
@@ -353,6 +356,7 @@ export class ResSliderComponent implements OnInit, AfterViewInit {
         }
         this.app.updatePrice();
         this.config.renderCanvas();
+
     }
     openerSelected(obj, event) {
         this.utils.setLoader();
@@ -385,7 +389,7 @@ export class ResSliderComponent implements OnInit, AfterViewInit {
             // this.notify.emit(obj);
             this.saveSelected(obj);
         }
-        this.onSelected.next({ event: event, obj: obj });
+        this.onSelected.next({ event: event, obj: obj, subname: this.subname });
         this.utils.removeLoader();
     }
 
