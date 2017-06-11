@@ -127,7 +127,7 @@ export class AppUtilities {
 
         windcode: this.utilities.winCode,
         zipcode: "",
-        cart: {
+        cart: [{
             "INSTALLTYPE": "GDO",
             "QTY": 1,
             "TYPE": "GDO",
@@ -148,11 +148,11 @@ export class AppUtilities {
             "additional": {
                 "items": []
             }
-        },
+        }],
         locale: "",
         orderInstallType: "GDO",
         items: 1,
-        store:""
+        store: ""
     }
 
     setUtils(curr, clicked) {
@@ -597,7 +597,7 @@ export class ResidentialFlowSession {
         let cObj = obj;
         let itemPriceDY = 0.00;
         let itemPriceInstall = 0.00;
-        let price = [0,0]; //[installed, diy]
+        let price = [0, 0]; //[installed, diy]
         this.resDetails.additionalOptions.items = [];
         this.resDetails.opener.items = [];
 
@@ -648,17 +648,17 @@ export class ResidentialFlowSession {
                 if (bc && bc.hasOwnProperty('item_price')) {
                     price[0] = price[0] + bc['item_price'];
                     price[1] = price[1] + bc['item_price'];
-                    
+
                     this.resDetails.color.base.name = bc['item_name'];
                     this.resDetails.color.base.price = bc['item_price'];
-                }                
+                }
 
                 // Calculate price for Top Section and Glasstype
                 let tsgt = obj.windows.glasstype;
                 if (tsgt && tsgt.hasOwnProperty('item_price')) {
                     price[0] = price[0] + tsgt['item_price'];
                     price[1] = price[1] + tsgt['item_price'];
-                    
+
                     this.resDetails.topSection.name = obj.windows.topsection['item_name'];
                     this.resDetails.topSection.glassType.name = tsgt['item_name'];
                     this.resDetails.topSection.glassType.price = tsgt['item_price'];
@@ -706,7 +706,7 @@ export class ResidentialFlowSession {
                 }
 
                 // Calculate price if EPA
-                if(this.resDoorObj.isEPA) {
+                if (this.resDoorObj.isEPA) {
                     price[0] = price[0] + 20;
                 }
 
@@ -721,9 +721,9 @@ export class ResidentialFlowSession {
                 }
 
                 // Calculate price for Optional Openers
-                if(obj.opener.items.length > 0) {
+                if (obj.opener.items.length > 0) {
                     _.forEach(obj.opener.items, (item) => {
-                        if(item.hasOwnProperty('item_price') && item['count'] > 0) {
+                        if (item.hasOwnProperty('item_price') && item['count'] > 0) {
                             price[0] = price[0] + item['item_price'] * item['count'];
                             price[1] = price[1] + item['item_price'] * item['count'];
                             this.resDetails.opener.items.push({
@@ -736,9 +736,9 @@ export class ResidentialFlowSession {
                 }
 
                 // Calculate price for Additional Options    
-                if(obj.additional.items.length > 0) {            
+                if (obj.additional.items.length > 0) {
                     _.forEach(obj.additional.items, (item) => {
-                        if(item.hasOwnProperty('price')) {
+                        if (item.hasOwnProperty('price')) {
                             price[0] = price[0] + item['price'];
                             price[1] = price[1] + item['price'];
                             this.resDetails.additionalOptions.items.push({
@@ -770,7 +770,7 @@ export class ResidentialFlowSession {
             this.utils.utilities.itemPriceDY = itemPriceDY;
             return obj;
         }
-    }    
+    }
 
     addToCart() {
         let k = _.cloneDeep(this.resDetails);
