@@ -64,7 +64,8 @@ export class DesignComponent implements OnInit {
         utils.resFlowSession.resDetails.designName = data[0].item_name;
         //this.details.details.designName = data[0].item_name;
  
-        var uniqueData = _.uniqBy(data, 'item_id');
+        // var uniqueData = _.uniqBy(data, 'item_id');
+        var uniqueData = data;
  
         if (utils.utilities.singleDoor === true) {
             this.number = 6;

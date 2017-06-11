@@ -590,7 +590,7 @@ export class ResidentialFlowSession {
 
     resCalculatePrice() {
         console.log(this.resDoorObj);
-        let itemId = this.resDoorObj.product.product['item_id'];
+        let itemId = this.resDoorObj.product.product['item_id'] || 0;
         let count = this.resDoorObj.QTY;
         let cObj = this.resDoorObj;
         let itemPriceDY = 0.00;
@@ -600,7 +600,7 @@ export class ResidentialFlowSession {
         this.resDetails.opener.items = [];
 
         try {
-            if (itemId) {
+            if (itemId != null) {
                 //let price = window['getDoorPrice'](cObj);
 
                 // Calculate price for Door Design and Construction

@@ -112,9 +112,16 @@ export class ResSliderComponent implements OnInit, AfterViewInit {
         switch (this.cname) {
             case 'design':
                 if (this.utils.resFlowSession.resDoorObj.design.dsgn) {
-                    if (this.utils.resFlowSession.resDoorObj.design.dsgn['item_id'] === item['item_id']) {
-                        this.utils.resFlowSession.resDoorObj.design.dsgn['constructions'][0]['isdefault'] = true;
-                        isSeleted = true;
+                    if (this.navComponent.flowType == 'resquick') {
+                        if (this.utils.resFlowSession.resDoorObj.design.dsgn['item_id'] === item['item_id']) {
+                            this.utils.resFlowSession.resDoorObj.design.dsgn['stockdoorconstructions'][0]['isdefault'] = true;
+                            isSeleted = true;
+                        }
+                    } else {
+                        if (this.utils.resFlowSession.resDoorObj.design.dsgn['item_id'] === item['item_id']) {
+                            this.utils.resFlowSession.resDoorObj.design.dsgn['constructions'][0]['isdefault'] = true;
+                            isSeleted = true;
+                        }
                     }
                 }
                 break;
@@ -314,6 +321,8 @@ export class ResSliderComponent implements OnInit, AfterViewInit {
                 }
                 let stockdoorconstructions = obj['stockdoorconstructions'];
                 if (stockdoorconstructions && stockdoorconstructions.length > 0) {
+                    this.utils.resFlowSession.resDoorObj.design.columns = obj['Columns'];
+                    this.utils.resFlowSession.resDoorObj.design.rows = obj['Rows'];
                     this.utils.resFlowSession.resDoorObj.construction.apiData = stockdoorconstructions;
                     this.utils.resFlowSession.resDoorObj.construction.construction = stockdoorconstructions[0];
                     this.utils.resFlowSession.resDoorObj.construction.construction['isdefault'] = true;

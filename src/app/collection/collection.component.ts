@@ -214,9 +214,9 @@ export class CollectionComponent implements OnInit {
 
         // utils.productid = obj.item_id;
 
-    if(obj.item_id == 30 && obj.productline == 'speciality'){
-        this.crle = true;
-    }
+        if (obj.item_id == 30 && obj.productline == 'speciality') {
+            this.crle = true;
+        }
         return dataParams = {
             "ProductID": obj.item_id,
             "dtype": utils.dtype,
@@ -227,7 +227,7 @@ export class CollectionComponent implements OnInit {
             "WidthIn": utils.wi || 0,
             "HeightFt": +utils.hf,
             "HeightIn": utils.hi || 0,
-            
+
             "lang": "en",
             "localmarketid": +utils.localmarketid,
             "doorsize": +utils.homeSize,
@@ -241,7 +241,7 @@ export class CollectionComponent implements OnInit {
         };
     }
 
-    videos(obj){
+    videos(obj) {
         return this.videosLinks[obj.item_id];
     }
 
@@ -274,34 +274,17 @@ export class CollectionComponent implements OnInit {
         };
         this.utils.setLoader();
         this.dataService.getquickDoors(dataParams).subscribe(res => {
-            this.utils.resQuickSession.designs = res;
-            this.navComponent.setNavFlow('resquick');
-            this.utils.removeLoader();
-            // this.utils.resFlowSession.resDoorObj.product['product'] = {
-            //     QPB: true,
-            //     doubleinstallcode: "FIR020",
-            //     doubleinstallcodew: "FIR021",
-            //     item_id: "",
-            //     item_name: "",
-            //     product_id: "",
-            //     productdefault: {
-            //         DIYDoublePackaging: "PACK-D,2",
-            //         DIYDoubleSpring: "SPRG-GS",
-            //         DIYSinglePackaging: "PACK-D,2",
-            //         DIYSingleSpring: "SPRG-E",
-            //         DoubleLock: "LOCK-1A",
-            //         DoublePackaging: "PACK-D,2",
-            //         DoubleSpring: "SPRG-COT",
-            //         IntDoubleLock: "LOCK-2",
-            //         IntSingleLock: "LOCK-2",
-            //         SingleLock: "LOCK-1A",
-            //         SinglePackaging: "PACK-D,2",
-            //         SingleSpring: "SPRG-COT",
-            //     },
-            //     productid: "",
-            //     singleinstallcode: "FIR010",
-            //     singleinstallcodew: "FIR011",
-            // }
+            var designs = [];
+            if (res) {
+                res.forEach(d => {
+                    d.constructions = d.stockdoorconstructions;
+                    designs.push(d);
+                });
+                this.utils.resQuickSession.designs = designs;
+                this.navComponent.setNavFlow('resquick');
+                this.utils.removeLoader();
+            }
+
             this.route.navigateByUrl('/config/design');
         });
 
