@@ -6,6 +6,7 @@ import { NavService } from "../nav/nav-service";
 import { NavComponent } from "../nav/nav.component";
 import { CollectionData } from "../collection/collection-data";
 import { GdoConfigComponent } from "../gdo-config/gdo-config.component";
+import { CollectionService } from "../shared/data.service";
 
 // import { QuerySocialService } from 'social-share-ng2';
 declare var $: any;
@@ -50,6 +51,7 @@ export class DoorConfigurationComponent implements OnInit {
         , private navComp: NavService
         , private navComponent: NavComponent
         , private dataStore: CollectionData
+        , private dataService: CollectionService
         , private gdoConfig: GdoConfigComponent) {
     }
 
@@ -106,6 +108,17 @@ export class DoorConfigurationComponent implements OnInit {
         this.gdoConfig.itemPrice = this.itemPrice;
         this.qty = this.utils.utilities.gdoOpenerQty;
     }
+    shareEmail() {
+        let obj = {
+            ToEmail: "maddylali@gmail.com",
+            Subject: 'subject',
+            Body: 'body'
+        }
+        this.dataService.sendMail(obj)
+            .subscribe(res => {
+                console.log('sent mail')
+            })
+    }
 
     nextBtn(path) {
         if (this.utils.utilities.flow === 'gdoNavElems') {
@@ -119,7 +132,7 @@ export class DoorConfigurationComponent implements OnInit {
     showSocial = false;
 
     shareIt() {
-this.showSocial = true;
+        this.showSocial = true;
     }
 
     prevBtn(path) {
