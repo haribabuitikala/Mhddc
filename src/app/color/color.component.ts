@@ -35,7 +35,7 @@ export class ColorComponent implements OnInit {
     loaded = false;
     showgroove = false;
     grooves = [];
-    selectedCladding;
+    selectedCladding = "-1";
     claddings = [];
 
     ngOnInit() {
@@ -160,7 +160,7 @@ export class ColorComponent implements OnInit {
         }
         
         if (this.claddings && this.claddings.length > 1) {
-            if (this.selectedCladding) {
+            if (this.selectedCladding !== "-1") {
                 this.utils.resFlowSession.resDoorObj.construction.cladding = this.claddings[+this.selectedCladding];
                 this.moveToPage();
             } else {
