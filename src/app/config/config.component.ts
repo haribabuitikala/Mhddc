@@ -290,7 +290,7 @@ export class ConfigComponent implements OnInit, AfterViewInit, AfterViewChecked 
             if (this.navComponent.flowType === 'resquick') {
                 buildObj.topsectionimage = dor.construction.construction.Topsections[0].visimage;
                 if (buildObj.topsectionimage.toLowerCase().indexOf('0c') > 0) {
-                    buildObj.topsectionimage= buildObj.topsectionimage.replace('0C', buildObj.doorcolumns + 'C');
+                    buildObj.topsectionimage = buildObj.topsectionimage.replace('0C', buildObj.doorcolumns + 'C');
                 }
                 try {
                     if (dor.windows.glasstype.Config == undefined) {
@@ -412,6 +412,7 @@ export class ConfigComponent implements OnInit, AfterViewInit, AfterViewChecked 
     }
 
     detailsModal() {
+
         this.details = this.utils.resFlowSession.resDetails;
         this.details.widthF = this.utils.utilities.wf;
         this.details.widthI = this.utils.utilities.wi;
@@ -420,6 +421,34 @@ export class ConfigComponent implements OnInit, AfterViewInit, AfterViewChecked 
     }
 
     openDetailsModal(detailsModal) {
+        var pos = $('.res-config').offset();
+        var linearhgt = $('.res-config').outerHeight();
+        var header = $('.logo-header').outerHeight();
+        var width = $('.res-config').outerWidth();
+        var hgt;
+        var detailshgt;
+        var bodyWdt = $('body').width();
+        switch (bodyWdt) {
+            case 414:
+                hgt = linearhgt + header;
+                break;
+            case 375:
+                hgt = linearhgt - header;
+                break;
+            case 320:
+                hgt = 148;
+                detailshgt = "50vh";
+                break;
+            case 320:
+                detailshgt = "43vh";
+                break;
+        }
+        $('.details-modal').css({
+            "margin-top": hgt,
+            "width": width,
+            "left": pos.left,
+            "max-height": detailshgt
+        })
         // this.details['designName'] = this.utils.resFlowSession.resDoorObj.design.dsgn['item_name'];
         detailsModal.open();
     }
