@@ -35,14 +35,14 @@
 <div class="margin-t-20 margin-b-20" *ngIf="showVinyl">
     <label>Select a Vinyl Seal:</label>
     <select [(ngModel)]="selectedVinyl" class="form-control" name="color-vinyl">
-        <option *ngFor="let vinyl of vinylOptions; let index = index" [attr.value]="index">{{ vinyl.item_name}}</option>
+        <option *ngFor="let vinyl of vinylOptions; let index = index" [attr.value]="index" [innerHTML]="vinyl.item_name"></option>
     </select>
 </div>
 
 <div class="margin-t-20 margin-b-20" *ngIf="showgroove">
     <label>Center Groove:</label>
     <select [(ngModel)]="selectedGroove" class="form-control" name="color-groove" (change)="updatePrice()">
-        <option *ngFor="let item of grooves; let index = index" [attr.value]="index">{{ item.item_name}}</option>
+        <option *ngFor="let item of grooves; let index = index" [attr.value]="index" [innerHTML]="item.item_name"></option>
     </select>
 </div>
 

@@ -99,22 +99,7 @@ export class ColorComponent implements OnInit {
             this.showVinyl = true;
             this.showgroove = true;
             let vinylOptions = this.utils.resFlowSession.resDoorObj.construction.construction['vinyls'];
-            var vinylOptionsunique = _.uniqBy(vinylOptions, 'item_name');
-            this.vinylOptions = [].concat([{
-                heightitem_price: 0,
-                heightpartid: "",
-                heightqty: 0,
-                isdefault: false,
-                item_description: null,
-                item_id: -1,
-                item_name: "No Vinyl",
-                item_price: 0,
-                item_thumbnail: null,
-                widthitem_price: 0,
-                widthpartid: "",
-                widthqty: 0
-            }], vinylOptionsunique);
-
+            this.vinylOptions = _.uniqBy(vinylOptions, 'item_name');
             this.selectedVinyl = 0;
 
             this.grooves = [].concat([{
