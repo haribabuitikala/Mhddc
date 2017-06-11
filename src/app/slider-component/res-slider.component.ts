@@ -107,16 +107,17 @@ export class ResSliderComponent implements OnInit, AfterViewInit {
         }
     }
 
+    designSelected = null;
     isSeleted(item, index, itemIndex) {
         let isSeleted = false;
         switch (this.cname) {
             case 'design':
                 if (this.utils.resFlowSession.resDoorObj.design.dsgn) {
                     if (this.navComponent.flowType == 'resquick') {
-                        if (this.utils.resFlowSession.resDoorObj.design.dsgn['item_id'] === item['item_id']) {
-                            this.utils.resFlowSession.resDoorObj.design.dsgn['stockdoorconstructions'][0]['isdefault'] = true;
+                        if (this.designSelected == item['item_thumbnail']) {
                             isSeleted = true;
                         }
+                        
                     } else {
                         if (this.utils.resFlowSession.resDoorObj.design.dsgn['item_id'] === item['item_id']) {
                             this.utils.resFlowSession.resDoorObj.design.dsgn['constructions'][0]['isdefault'] = true;
@@ -347,6 +348,8 @@ export class ResSliderComponent implements OnInit, AfterViewInit {
                         this.utils.resFlowSession.resDoorObj.color.base = colors[0];
                     }
                 }
+
+                this.designSelected = obj['item_thumbnail'];
                 break;
             case 'color':
                 if (this.issub) {
