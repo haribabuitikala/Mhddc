@@ -1406,7 +1406,9 @@ function webTest() {
     jQuery.support.cors = true;
     var soapEnv = '<soap12:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/soap/envelope/"> <soap12:Body> <FlashSendPurchaseOrder xmlns="http://www.Hddcadmin.clopay.com/"> <FlashPOXML>'
     var soapEnv2 = '</FlashPOXML> </FlashSendPurchaseOrder> </soap12:Body> </soap12:Envelope>'
-    var soapMessage = '<soap12:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/soap/envelope/"> <soap12:Body> <FlashSendPurchaseOrder xmlns="http://www.Hddcadmin.clopay.com/"> <FlashPOXML>' + getFixedHTML(_orderPO) + '</FlashPOXML> </FlashSendPurchaseOrder> </soap12:Body> </soap12:Envelope>';
+    var soapMessage = '<soap12:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/soap/envelope/"> <soap12:Body> <FlashSendPurchaseOrder xmlns="http://www.Hddcadmin.clopay.com/"> <FlashPOXML>' + 
+    console.log(_orderPO);
+    getFixedHTML(_orderPO) + '</FlashPOXML> </FlashSendPurchaseOrder> </soap12:Body> </soap12:Envelope>';
     if (_sendMe) {
         $.ajax({
             type: "POST",

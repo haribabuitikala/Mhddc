@@ -59,7 +59,7 @@ export class GdoDoorSizeComponent implements OnInit {
             this.utils.utilities.currPage = 2;
             this.utils.utilities.clicked = 1;
             // this is for gdo shopping cart
-            this.utils.gdoFlowSession.cart.size.height.hf = itm;
+            this.utils.gdoFlowSession.cart[0].size.height.hf = itm;
             this.dataParams.dheightFt = +itm;
 
             $('body').addClass('loader');

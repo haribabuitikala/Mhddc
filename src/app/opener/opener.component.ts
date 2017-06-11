@@ -74,7 +74,7 @@ export class OpenerComponent implements OnInit {
         this.utils.utilities.openerType = this.data[0].brand;
 
         // this is for gdo shopping cart
-        this.utils.gdoFlowSession.cart.opener.opener = this.data[0];
+        this.utils.gdoFlowSession.cart[0].opener.opener = this.data[0];
         this.utils.utilities.gdoOpenerQty = 1;
 
         this.data = _.chunk(this.data, 2);
@@ -106,7 +106,7 @@ export class OpenerComponent implements OnInit {
                 res => {
                     // this.route.navigateByUrl(path);
                     this.gdoOpenerObj = res;
-                    this.utils.gdoFlowSession.cart.opener.apiData = res;
+                    this.utils.gdoFlowSession.cart[0].opener.apiData = res;
                     $('body').removeClass('loader');
                     this.gdoOponerAccessories.open();
                     // this.goTo('gdoConfig' + path)

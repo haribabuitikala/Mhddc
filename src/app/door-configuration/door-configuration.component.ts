@@ -122,9 +122,9 @@ export class DoorConfigurationComponent implements OnInit {
 
     nextBtn(path) {
         if (this.utils.resFlowSession.resDoorObj.INSTALLTYPE === 'DIY') {
-            this.utils.resFlowSession.resDetails.totalPrice = this.utils.utilities.itemPriceDY;
+            // this.utils.resFlowSession.resDetails.totalPrice = this.utils.utilities.itemPriceDY;
         } else {
-            this.utils.resFlowSession.resDetails.totalPrice = this.utils.utilities.itemPriceInstall;
+            // this.utils.resFlowSession.resDetails.totalPrice = this.utils.utilities.itemPriceInstall;
         }
         if (this.utils.utilities.flow === 'gdoNavElems') {
             this.utils.setUtils(5, 1);

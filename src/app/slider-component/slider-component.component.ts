@@ -115,7 +115,7 @@ export class SliderComponentComponent implements OnInit {
     }
 
     openerSelected(obj, event) {
-        this.utils.gdoFlowSession.cart.opener.opener = obj;
+        this.utils.gdoFlowSession.cart[0].opener.opener = obj;
         this.gdoConfig.gdoOpeners.length = 0;
         this.gdoConfig.openerTxt = obj.item_name;
         this.gdoConfig.itemPrice = obj.item_price * this.utils.utilities.gdoOpenerQty;
