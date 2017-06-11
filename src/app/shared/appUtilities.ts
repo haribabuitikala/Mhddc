@@ -427,6 +427,7 @@ export class ResidentialFlowSession {
                 },
                 "apiData": {}
             };
+            this.resDoorObj.QTY = 1;
             this.resDoorObj['reset' + this.resDoorObj['resetorder'][1]]();
         },
         "resetproduct": () => {

@@ -5,6 +5,7 @@ import { NavService } from "../nav/nav-service";
 import { NavComponent } from "../nav/nav.component";
 import { CollectionData } from "../collection/collection-data";
 import { ConfigComponent } from "../config/config.component";
+import { AppComponent } from "../app.component";
 declare var $: any;
 @Component({
     selector: 'app-home',
@@ -20,7 +21,8 @@ export class HomeComponent implements OnInit, AfterViewInit {
         , private navComp: NavService
         , private route: Router
         , private navComponent: NavComponent
-        , private dataStore: CollectionData) {
+        , private dataStore: CollectionData
+        , private app: AppComponent) {
     }
 
     ngOnInit() {
@@ -41,7 +43,8 @@ export class HomeComponent implements OnInit, AfterViewInit {
         });
 
         window['selectedHome'] = this.homes[0];
- 
+        this.utils.resFlowSession.resDoorObj.resetsize();
+        //this.app.updatePrice();
     }
 
     ngAfterViewInit() {
