@@ -14,5 +14,23 @@ export class CartDetailsComponent implements OnInit {
 
   ngOnInit(){
     this.data = this.utils.resFlowSession.resDetails;
+
+    //it is not recommended place to write this code here
+    let hardware = this.utils.resFlowSession.resDoorObj.hardware;
+    try {
+        if (hardware.hinge && hardware.hinge['placement'].indexOf(':') >= 0) {
+          this.data.hardware.hinge.qty = parseInt(hardware.hinge['placement'].split(':')[0]);
+        }
+
+        if (hardware.handle && hardware.handle['placement'].indexOf(':') >= 0) {
+          this.data.hardware.handle.qty = parseInt(hardware.handle['placement'].split(':')[0]);
+        }
+
+        if (hardware.stepplate && hardware.stepplate['placement'].indexOf(':') >= 0) {
+          this.data.hardware.stepPlate.qty = parseInt(hardware.stepplate['placement'].split(':')[0]);
+        }
+    } catch(e) {
+      //swallow
+    }
   }
 }

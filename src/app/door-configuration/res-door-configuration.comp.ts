@@ -96,7 +96,7 @@ export class ResDoorConfigurationComponent implements OnInit {
     }
 
     prevBtn(path) {
-        this.route.navigateByUrl(path)
+        this.route.navigateByUrl('/config/additionalOptions');
     }
 
 
