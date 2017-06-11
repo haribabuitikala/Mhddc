@@ -432,11 +432,6 @@ export class ResidentialFlowSession {
             this.resDoorObj['reset' + this.resDoorObj['resetorder'][1]]();
         },
         "resetproduct": () => {
-            this.resDoorObj['product'] = {
-                "product": "",
-                "sourcing": "clopay",
-                "apiData": ""
-            };
             this.resDoorObj['reset' + this.resDoorObj['resetorder'][2]]();
         },
         "resetdesign": () => {
