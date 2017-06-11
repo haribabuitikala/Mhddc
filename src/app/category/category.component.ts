@@ -34,6 +34,7 @@ export class CategoryComponent implements OnInit {
         this.isService = this.utilities.utilities.isService;
         this.appComponent.currScreen = 2;
         let utils = this.utilities.utilities;
+        this.appComponent.showStepIndicator = false;
     }
 
     navigateTo(path, flow, count) {
