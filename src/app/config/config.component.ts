@@ -32,7 +32,7 @@ export class ConfigComponent implements OnInit, AfterViewInit, AfterViewChecked 
     details;
     whdata;
 
-    ngAfterViewChecked(){
+    ngAfterViewChecked() {
         this.cdref.detectChanges();
     }
 
@@ -128,8 +128,8 @@ export class ConfigComponent implements OnInit, AfterViewInit, AfterViewChecked 
     basep;
     ngOnInit() {
         // set the curr screen
-        this.basep =  0;
-        if(this.utils.resFlowSession.resDoorObj.design.apiData) {
+        this.basep = 0;
+        if (this.utils.resFlowSession.resDoorObj.design.apiData) {
             this.basep = this.utils.resFlowSession.resDoorObj.design.apiData[0]['constructions'][0].item_price;
         }
         let path = this.location.path();
@@ -154,7 +154,7 @@ export class ConfigComponent implements OnInit, AfterViewInit, AfterViewChecked 
             $this.isDoor = true;
         });
 
-        this.detailsModal();        
+        this.detailsModal();
     }
 
     renderCanvas(obj?, targ?, elemSelector?) {
@@ -289,6 +289,9 @@ export class ConfigComponent implements OnInit, AfterViewInit, AfterViewChecked 
 
             if (this.navComponent.flowType === 'resquick') {
                 buildObj.topsectionimage = dor.construction.construction.Topsections[0].visimage;
+                if (buildObj.topsectionimage.toLowerCase().indexOf('0c') > 0) {
+                    buildObj.topsectionimage= buildObj.topsectionimage.replace('0C', buildObj.doorcolumns + 'C');
+                }
                 try {
                     if (dor.windows.glasstype.Config == undefined) {
                         if (dor.construction.construction.Topsections[0].glasstypes == undefined) {
@@ -392,7 +395,7 @@ export class ConfigComponent implements OnInit, AfterViewInit, AfterViewChecked 
 
 
     /** Details **/
-    
+
 
     calculatePrice() {
         try {

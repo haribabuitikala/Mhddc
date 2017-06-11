@@ -266,11 +266,16 @@ export class CollectionComponent implements OnInit {
             "wi": utils.wi || 0,
             "hf": utils.hf,
             "hi": utils.hi || 0,
+            "dwidthFt": utils.wf,
+            "dwidthIn": utils.wi || 0,
+            "dheightFt": utils.hf,
+            "dheightIn": utils.hi || 0,
             "lang": "en",
             "localmarketid": +utils.localmarketid,
             "doorsize": +utils.homeSize,
             "isCRLE": false,
-            "productlayout": true
+            "productlayout": true,
+            "stockgroupid": this.utils.quickStockInfo.stockgroupid
         };
         this.utils.setLoader();
         this.dataService.getquickDoors(dataParams).subscribe(res => {
