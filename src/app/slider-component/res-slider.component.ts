@@ -284,11 +284,24 @@ export class ResSliderComponent implements OnInit, AfterViewInit {
                     if (this.subname == 'handles') {
                         this.utils.resFlowSession.resDoorObj.hardware.handle = obj;
                         this.utils.resFlowSession.resDoorObj.hardware.handle['count'] = 1;
-                        this.utils.resFlowSession.resDoorObj.hardware.handle['placement'] = obj['placement'] ? obj['placement'] : obj['placementlist'];
+                        if (obj['placementlist'] && obj['placementlist'].split(';').length > 0) {
+                            this.utils.resFlowSession.resDoorObj.hardware.handle['placement'] = obj['placementlist'].split(';')[0];
+                            var defaultCount = parseInt(obj.defaultkit);
+                            if (defaultCount == 2 && obj['placementlist'].split(';').length > 1) {
+                                this.utils.resFlowSession.resDoorObj.hardware.handle['placement'] = obj['placementlist'].split(';')[1];
+                            }
+                        }
+                        // this.utils.resFlowSession.resDoorObj.hardware.handle['placement'] = obj['placement'] ? obj['placement'] : obj['placementlist'];
                     } else if (this.subname == 'stepplates') {
                         this.utils.resFlowSession.resDoorObj.hardware.stepplate = obj;
                         this.utils.resFlowSession.resDoorObj.hardware.stepplate['count'] = 1;
-                        this.utils.resFlowSession.resDoorObj.hardware.stepplate['placement'] = obj['placement'] ? obj['placement'] : obj['placementlist'];
+                        if (obj['placementlist'] && obj['placementlist'].split(';').length > 0) {
+                            this.utils.resFlowSession.resDoorObj.hardware.stepplate['placement'] = obj['placementlist'].split(';')[0];
+                            var defaultCount = parseInt(obj.defaultkit);
+                            if (defaultCount == 2 && obj['placementlist'].split(';').length > 1) {
+                                this.utils.resFlowSession.resDoorObj.hardware.stepplate['placement'] = obj['placementlist'].split(';')[1];
+                            }
+                        }
                     } else {
                         this.utils.resFlowSession.resDoorObj.hardware.hinge = obj;
                         this.utils.resFlowSession.resDoorObj.hardware.hinge['count'] = 1;
