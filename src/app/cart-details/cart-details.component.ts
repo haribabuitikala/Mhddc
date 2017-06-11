@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AppUtilities } from "../shared/appUtilities";
 
 @Component({
@@ -6,7 +6,13 @@ import { AppUtilities } from "../shared/appUtilities";
   templateUrl: './cart-details.component.html',
   styleUrls: ['./cart-details.component.less', '../install//install.component.less']
 })
-export class CartDetailsComponent {
-  constructor(private utils: AppUtilities) { }
-  data = this.utils.resFlowSession.resDetails;
+export class CartDetailsComponent implements OnInit {
+  constructor(private utils: AppUtilities) { 
+
+  }
+  data;
+
+  ngOnInit(){
+    this.data = this.utils.resFlowSession.resDetails;
+  }
 }
