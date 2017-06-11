@@ -45,8 +45,8 @@ export class HomeComponent implements OnInit, AfterViewInit {
     }
 
     ngAfterViewInit() {
-        $('.stock div:first-child img').addClass('selected');
-        this.utils.resFlow.selectedHome = this.homes[0]._imagelg;
+        $('.stock div:nth-child(2) img').addClass('selected');
+        this.utils.resFlow.selectedHome = this.homes[1]._imagelg;
         $('body').removeClass('loader');
     }
 
