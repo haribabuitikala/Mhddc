@@ -186,7 +186,7 @@ export class ConstructionComponent implements OnInit {
         var filtermodel = window['cObj'].construction.apiData.filter(c => { console.log(c.design_id, c.id); return c.XMLCOI == updata.upgrade_model; });
         if (filtermodel.length > 0) {
             filtermodel = filtermodel[0];
-            return (filtermodel.item_price - ((15 * filtermodel.item_price) / 100)) - (currentConstruction['item_price'] - ((15 * currentConstruction['item_price']) / 100));
+            return (filtermodel.item_price - currentConstruction['item_price']);
         }
         return 0;
     }
