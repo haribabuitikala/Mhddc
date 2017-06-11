@@ -636,13 +636,10 @@ var glassSections = 0;
 								}
 
 								$.each(a1, function (index, value) {
-
-
-
 									var plc = a1[index].split(',');
 									var plc1 = plc[0].slice(1);
 									var pid = $this.buildObj.productid;
-									if (pid == 30) { plc1 = plc1 - 2; }
+									// if (pid == 30) { plc1 = plc1 - 2; }
 									if ($this.hLoop == index) {
 
 										if (index + 1 == a1.length) {

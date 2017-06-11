@@ -54,7 +54,7 @@ export class HardwareComponent implements OnInit {
   setHardwareMinMax(cname?) {
     let hardware = this.utils.resFlowSession.resDoorObj.hardware;
     if (!cname) {
-      if(this.yourHandles.length > 0) {
+      if (this.yourHandles.length > 0) {
         this.handlePlacementArr = [];
         this.handlePlacements = [];
         let handle = this.yourHandles[0][0];
@@ -74,9 +74,9 @@ export class HardwareComponent implements OnInit {
             }
           }
         }
-      }      
+      }
 
-      if(this.yourStepPlates.length > 0) {
+      if (this.yourStepPlates.length > 0) {
         this.stepplatePlacementArr = [];
         this.stepplatePlacements = [];
         let stepplate = this.yourStepPlates[0][0];
@@ -97,7 +97,7 @@ export class HardwareComponent implements OnInit {
             }
           }
         }
-      }      
+      }
 
       if (this.yourStepHinge.length > 0) {
         this.hingesPlacementArr = [];
@@ -132,6 +132,11 @@ export class HardwareComponent implements OnInit {
               this.handlePlacementArr = arr1;
               this.countManager.handle = 0;
             }
+
+            var defaultCount = parseInt(hardware.handle['defaultkit']);
+            if (defaultCount == 2 && hardware.handle['placementlist'].split(';').length > 1) {
+              this.countManager.handle = 1;
+            }
             this.utils.resFlowSession.resDoorObj.hardware.handle['count'] = this.countManager.handle;
             this.utils.resFlowSession.resDoorObj.hardware.handle['placement'] = this.handlePlacements[this.countManager.handle];
           }
@@ -149,6 +154,11 @@ export class HardwareComponent implements OnInit {
               });
               this.stepplatePlacementArr = arr2;
               this.countManager.stepplate = 0;
+              var defaultCount = parseInt(hardware.stepplate['defaultkit']);
+              if (defaultCount == 2 && hardware.stepplate['placementlist'].split(';').length > 1) {
+                this.countManager.stepplate = 1;
+              }
+
               this.utils.resFlowSession.resDoorObj.hardware.stepplate['count'] = this.countManager.stepplate;
               this.utils.resFlowSession.resDoorObj.hardware.stepplate['placement'] = this.stepplatePlacements[this.countManager.stepplate];
             }
@@ -167,7 +177,10 @@ export class HardwareComponent implements OnInit {
               });
               this.hingesPlacementArr = arr3;
               this.countManager.hinge = 0;
-
+              var defaultCount = parseInt(hardware.hinge['defaultkit']);
+              if (defaultCount == 2 && hardware.hinge['placementlist'].split(';').length > 1) {
+                this.countManager.hinge = 1;
+              }
               //this.utils.resFlowSession.resDoorObj.hardware.hinge['count'] = this.countManager.hinge;
               //this.utils.resFlowSession.resDoorObj.hardware.hinge['placement'] = this.hingePlacements[this.countManager.hinge];
             }
