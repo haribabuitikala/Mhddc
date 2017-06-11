@@ -20,6 +20,7 @@ declare var $: any;
 export class DoorSizeComponent implements OnInit {
 
     @ViewChild('florida') modal1: ModalComponent;
+    @ViewChild('noSize') noSize: ModalComponent;
     showMeasure: boolean = false;
     lang;
 
@@ -134,9 +135,9 @@ export class DoorSizeComponent implements OnInit {
                 this.route.navigateByUrl('/collection');
                 this.utils.removeLoader();
             },
-            error => {
-                this.toastr.error(error.statusText);
+            error => {                
                 this.utils.removeLoader();
+                this.noSize.open();
             }
         );
     }

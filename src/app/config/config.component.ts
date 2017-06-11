@@ -141,6 +141,8 @@ export class ConfigComponent implements OnInit, AfterViewInit, AfterViewChecked 
         $('.switcher-box').css({ right: 35 });
 
         this.homeImage = this.utils.resFlow.selectedHome;
+
+
         var $this = this;
         $('.switcher-box').on('click tap', function () {
             $(this).hide();
@@ -155,6 +157,16 @@ export class ConfigComponent implements OnInit, AfterViewInit, AfterViewChecked 
             $('.switcher-image').removeClass('homeImage');
             $this.isDoor = true;
         });
+
+        let selectedHome = window['selectedHome'];
+        if (selectedHome) {
+            if (selectedHome._upload && selectedHome._upload == true) {
+                $('.switcher-box-home').show().removeClass('hide').css({ right: 60 });
+                $('.switcher-image').addClass('homeImage');
+                $('.switcher-box').addClass('hide').animate({ right: 35 });
+                $this.isDoor = false;
+            }
+        }
 
         this.detailsModal();
 
