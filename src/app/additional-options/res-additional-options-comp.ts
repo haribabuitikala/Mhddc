@@ -184,7 +184,7 @@ export class ResAdditionalOptionsComponent implements OnInit {
         }
     }
 
-    nextBtn(path) {        
+    nextBtn(path) {
         this.route.navigateByUrl('/config/doorConfiguration');
     }
 

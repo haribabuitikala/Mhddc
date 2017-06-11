@@ -196,5 +196,10 @@ export class ConstructionComponent implements OnInit {
         this.config.calculatePrice();
         this.moveNext();
     }
+    getDisplayModelNumber(clopayNumber) {   
+      var filterItem = window['cObj'].design.dsgn.constructions.filter(c => { return c.ClopayModelNumber == clopayNumber});
+      filterItem = filterItem[0];
+      return filterItem.DisplayModelNumber;
+    }
 
 }
