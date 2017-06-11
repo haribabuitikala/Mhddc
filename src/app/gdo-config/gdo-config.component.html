@@ -36,29 +36,34 @@
     <modal-header [show-close]="true">
     </modal-header>
     <modal-body>
-        <p>
+        <p class="clearfix">
             <span class="col-xs-4 bold">Zip Code :</span>
             <span class="col-xs-8 padding-0">
                 {{detailObj.zip}} - {{detailObj.city}} <br>
             </span>
         </p>
-        <p>
+        <p class="clearfix">
             <span class="col-xs-4 bold">Location :</span>
             <span class="col-xs-8 padding-0">
                 {{detailObj.county}} COUNTY
             </span>
         </p>
-        <p>
+        <p class="clearfix">
             <span class="col-xs-4 bold">Store :</span>
             <span class="col-xs-8 padding-0">
                 {{storeName.storename}}
             </span>
         </p>
-        <p>
+        <p class="clearfix">
             <span class="col-xs-4 bold">Opener :</span>
             <span class="col-xs-8 padding-0" *ngIf="gdoLoaded">
                 <span [innerHtml]="openerTxt"></span> <br/>
-            <div *ngFor="let g of gdoOpeners">{{g.count}} - {{g.name}}({{g.price | currency:'USD':true:'1.2-2'}} each)</div>
+            </span>
+        </p>
+        <p class="clearfix" *ngIf="gdoOpeners && gdoOpeners.length > 0">
+            <span class="col-xs-4 bold">Opener Accessories:</span>
+            <span class="col-xs-8 padding-0" *ngIf="gdoLoaded">
+                <div *ngFor="let g of gdoOpeners">{{g.count}} - {{g.name}}({{g.price | currency:'USD':true:'1.2-2'}} each)</div>
             </span>
         </p>
         <p *ngIf="showDistance">
