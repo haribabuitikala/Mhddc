@@ -436,12 +436,13 @@ export class ResidentialFlowSession {
             this.resDoorObj['reset' + this.resDoorObj['resetorder'][2]]();
         },
         "resetdesign": () => {
-            this.resDoorObj['design'] = {
-                "columns": "",
-                "rows": "",
-                "dsgn": "",
-                "apiData": ""
-            };
+            // this.resDoorObj['design'] = {
+            //     "columns": "",
+            //     "rows": "",
+            //     "dsgn": "",
+            //     "apiData": ""
+            // };
+            this.resDoorObj.design.dsgn = '';
             this.resDoorObj['reset' + this.resDoorObj['resetorder'][3]]();
         },
         "resetconstruction": () => {
