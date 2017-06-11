@@ -76,26 +76,6 @@ export class ShoppingCartComponent implements OnInit {
         return this.utils.resFlowSession.resDoorObj.INSTALLTYPE === "Installed" ? this.utils.utilities.itemPriceInstall : this.utils.utilities.itemPriceDY;
     }
 
-    removeItem() {
-        this.utils.utilities.gdoOpenerText = '';
-        this.utils.utilities.item_price = 0;
-        this.utils.utilities.openerType = null;
-        this.utils.utilities.gdoOpenerQty = 1;
-        this.utils.utilities.distance = 0;
-        this.utils.utilities.distancePrice = 0;
-
-        this.utils.utilities.singlep = 0;
-        this.utils.utilities.doublep = 0;
-        this.utils.utilities.kPrice = 0;
-
-        $('.shop-count').text('0');
-        this.dataStore.gdoOpenerAccessories = [];
-        this.dataStore.gdoDirectQuestions = [];
-        this.continue.close();
-
-        this.route.navigateByUrl('/category');
-    }
-
     AddAnother() {
         this.utils.resFlowSession.resDoorObj.resetsize();
         this.navComponent.setNavFlow('res');
@@ -104,25 +84,16 @@ export class ShoppingCartComponent implements OnInit {
         this.route.navigateByUrl('/doorSize');
     }
 
-    cartEmpty() {
-        this.utils.utilities.gdoOpenerText = '';
-        this.utils.utilities.item_price = 0;
-        this.utils.utilities.openerType = null;
-        this.utils.utilities.gdoOpenerQty = 1;
-        this.utils.utilities.distance = 0;
-        this.utils.utilities.distancePrice = 0;
-        this.utils.utilities.singlep = 0;
-        this.utils.utilities.doublep = 0;
-        this.utils.utilities.kPrice = 0;
-        $('.shop-count').text('0');
-        this.dataStore.gdoOpenerAccessories = [];
-        this.dataStore.gdoDirectQuestions = [];
+    removeItem(item) {        
+        this.utils.resFlowSession.cart = _.remove(this.utils.resFlowSession.cart, function(n) {
+            return n.item_id == item.item_id;
+        });
+        $('.shop-count').text(this.utils.resFlowSession.cart.length);
         this.continue.open();
     }
 
     updateQuantity(flow) {
         if (this.resFlow) {
-            this.updateResQty(flow);
             this.utils.resFlowSession.resCalculatePrice();
             this.itemPrice = this.getResPrice();
             this.qty = this.utils.resFlowSession.resDoorObj.QTY;
@@ -134,13 +105,8 @@ export class ShoppingCartComponent implements OnInit {
         }
     }
 
-    updateResQty(isIncrement?) {
-        let count = this.utils.resFlowSession.resDoorObj.QTY;
-        if (isIncrement && count < 6) {
-            this.utils.resFlowSession.resDoorObj.QTY = count + 1;
-        } else if (count > 1 && count !== 6) {
-            this.utils.resFlowSession.resDoorObj.QTY = count - 1;
-        }
+    updateQty(item) {
+        this.utils.resFlowSession.resCalculatePrice(item);
     }
 
     checkout() {
@@ -167,5 +133,10 @@ export class ShoppingCartComponent implements OnInit {
     goToCustomerInfo() {
         // this.route.navigateByUrl('/customer-info');
         this.appComp.getCheckOut(this.itemPrice);
+    }
+
+    toggleSection(e, i) {
+        $('#section-'+i).toggleClass('in');
+        $(e.currentTarget).find('.fa').toggleClass('fa-chevron-up').toggleClass('fa-chevron-down');
     }
 }

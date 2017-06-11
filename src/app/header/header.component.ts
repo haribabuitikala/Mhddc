@@ -16,8 +16,6 @@ export class HeaderComponent implements OnInit, AfterViewChecked {
     @Input() count: any;
     @Input() showHamburger: boolean = false;
     itemsCount;
-    data;
-    resFlowSession;
 
     constructor(private appComponent: AppComponent
         , private route: Router
@@ -30,16 +28,12 @@ export class HeaderComponent implements OnInit, AfterViewChecked {
         this.route.navigateByUrl(path);
     }
     
-    ngAfterViewChecked() {
-        this.resFlowSession = this.utils.resFlowSession;
-        this.itemsCount = this.resFlowSession.cart.length;
-        this.data = this.resFlowSession.resDetails;
+    ngAfterViewChecked() {        
+        this.itemsCount = this.utils.resFlowSession.cart.length;
     }
 
     ngOnInit() {
-        this.resFlowSession = this.utils.resFlowSession;
-        this.itemsCount = this.resFlowSession.cart.length;
-        this.data = this.resFlowSession.resDetails;
+        this.itemsCount = this.utils.resFlowSession.cart.length;
         $('li span').hide();
         this.humberger();
         this.humbergerCollapse();

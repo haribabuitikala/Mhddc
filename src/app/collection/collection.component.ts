@@ -80,7 +80,7 @@ export class CollectionComponent implements OnInit {
         });
     }
     ngOnInit() {
-        this.utils.resFlowSession.resDoorObj.resetproduct();
+        //this.utils.resFlowSession.resDoorObj.resetproduct();
         this.makeNull();
         this.collections = this.data.data;
         this.pageNo = this.utils.utilities.currPage;
