@@ -187,6 +187,7 @@ export class InstallComponent implements OnInit, AfterViewInit {
             this.leadTest.open();
         } else {
             if (this.checkValue == true) {
+                this.utils.resFlowSession.resDoorObj.isEPA = true;
                 this.navigateTo('/config/opener');
             }
         }

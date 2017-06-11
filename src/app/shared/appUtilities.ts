@@ -274,6 +274,7 @@ export class ResidentialFlowSession {
         collectionName: '',
         designName: '',
         isDIY: false,
+        isEPA: false,
         construction: {
             name: '',
             price: 0,
@@ -369,6 +370,7 @@ export class ResidentialFlowSession {
         },
         "isPurchase": true,
         "isDIY": false,
+        "isEPA": false,
         "color": {
             "base": {},
             "overlay": {},
@@ -507,6 +509,7 @@ export class ResidentialFlowSession {
                 "apiData": "",
                 "items": []
             };
+            this.resDoorObj['isEPA'] = false;
             this.resDetails.hardware = {
                 handle: {
                     name: '',
@@ -529,6 +532,7 @@ export class ResidentialFlowSession {
                     qty: 0
                 }
             };
+            this.resDetails.isEPA = false;
             this.resDoorObj['reset' + this.resDoorObj['resetorder'][7]]();
         },
         "resetsprings": () => {
@@ -701,6 +705,11 @@ export class ResidentialFlowSession {
 
                     this.resDetails.hardware.lock.name = locksItem['item_name'];
                     this.resDetails.hardware.lock.price = locksItem['item_installed_price'];
+                }
+
+                // Calculate price if EPA
+                if(this.resDoorObj.isEPA) {
+                    price[0] = price[0] + 20;
                 }
 
                 // Calculate price for Openers
