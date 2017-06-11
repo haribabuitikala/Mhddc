@@ -42,28 +42,29 @@
     </p>
 </div>
 <div *ngIf="resFlow" class="checkout">
-
-    <accordion [showArrows]="true" [closeOthers]="true" [expandAll]="true">
-        <accordion-group *ngFor="let data of resFlowSession.cart; let i = index; let first = first;" [isOpened]="first">
-            <accordion-heading>
-                <span [innerHTML]="data.collectionName"></span>
-            </accordion-heading>                
-            <app-cart-root-details [Item]="data"></app-cart-root-details>              
-        </accordion-group>
-    </accordion>
-
-</div>
-<div class="flex space-between margin-b-20">
-    <button type="submit" (click)="cartEmpty()" class="btn btn-default box-shadow text-orange text-uppercase">
-        REMOVE ITEM
-    </button>
-    <span>
-        Quantity
-        <img src="../../assets/images/substract.png" alt="" height="30" class="minus-quantity"
-             (click)="updateQuantity(0)">
-        <span>{{qty}}</span>
-    <img src="../../assets/images/add.png" alt="" height="30" class="add-quantity" (click)="updateQuantity(1)">
-    </span>
+    <div class="section margin-b-10" *ngFor="let data of resFlowSession.cart; let i = index; let first = first;" >
+        <div class="flex space-between subsection" (click)="toggleSection($event, i)">
+            <div>
+                <div [innerHTML]="data.collectionName"></div>
+                <div>{{data.widthF}}'{{data.widthI}}'' X {{data.heightF}}'{{data.heightI}}'' - ({{data.INSTALLTYPE}})</div>
+            </div>
+            <span *ngIf="!data.isDIY">{{data.construction.price + data.construction.laborcost | currency:'USD':true:'1.2-2'}}</span>
+            <span *ngIf="data.isDIY">{{data.construction.price | currency:'USD':true:'1.2-2'}}</span>
+            <span><i class="fa fa-chevron-down"></i></span>
+        </div>
+        <div class="flex space-between margin-t-10 subsection">
+            <button class="btn btn-default text-orange">REMOVE ITEM</button>
+            <div class="flex">
+                <span class="margin-r-4">QTY:</span>
+                <img (click)="updateQty(data)" src="../../assets/images/substract.png" alt="" height="22" width="22" class="minus-quantity margin-r-4">
+                <span>{{data.construction.qty}}</span>
+                <img (click)="updateQty(data, true)" src="../../assets/images/add.png" alt="" height="22" width="22" class="add-quantity margin-l-4">
+            </div>
+        </div>
+        <div id="section-{{i}}" class="subsection">
+            <app-cart-root-details [Item]="data"></app-cart-root-details>
+        </div>
+    </div>
 </div>
 <div class="text-center margin-b-20">
     <button type="submit" class="btn btn-default box-shadow text-orange bold text-uppercase " (click)="AddAnother()">ADD ANOTHER DOOR

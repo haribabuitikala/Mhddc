@@ -126,6 +126,7 @@ export class InstallComponent implements OnInit, AfterViewInit {
         this.appComponent.selectedInstallDiy = txt;
         if (txt == 'diy') {
             this.utils.resFlowSession.resDoorObj.INSTALLTYPE = "DIY";
+            this.utils.resFlowSession.resDetails.INSTALLTYPE = "DIY";
             this.utils.resFlowSession.resDetails.isDIY = true;
             // this.doorDimensionFound = false;
             // this.config.renderCanvas(window['cObj'], 'doorVis', '#diyDoorVis');
@@ -133,6 +134,7 @@ export class InstallComponent implements OnInit, AfterViewInit {
         }
         if (txt == 'install') {
             this.utils.resFlowSession.resDoorObj.INSTALLTYPE = "Installed";
+            this.utils.resFlowSession.resDetails.INSTALLTYPE = "Installed";
             this.utils.resFlowSession.resDetails.isDIY = false;
             // this.doorDimensionFound = false;
             // this.config.renderCanvas(window['cObj'], 'doorVis', '#diyDoorVis');
