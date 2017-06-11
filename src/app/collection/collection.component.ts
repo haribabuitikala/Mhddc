@@ -181,6 +181,7 @@ export class CollectionComponent implements OnInit {
                         this.utils.resFlowSession.resDoorObj.design.rows = speciality.Rows;
                         this.utils.resFlowSession.resDoorObj.design.columns = speciality.Columns;
                         this.utils.removeLoader();
+                        speciality.selected = false;
                         this.route.navigateByUrl('/home');
                     },
                     err => {
