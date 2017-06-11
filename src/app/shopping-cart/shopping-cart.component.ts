@@ -32,7 +32,7 @@ export class ShoppingCartComponent implements OnInit {
     showDirect;
     directItm = this.dataStore.gdoDirectQuestions;
 
-    itemPrice = this.utils.calculateTotalPrice();
+    itemPrice = 0;
     itmPrice = this.utils.utilities.itmPrice;
     baseItmPrice = this.utils.utilities.item_price * this.utils.utilities.gdoOpenerQty;
     data;
@@ -69,7 +69,16 @@ export class ShoppingCartComponent implements OnInit {
             resetNav: true
         });
         $('body').removeClass('loader');
-        this.resFlowSession = this.utils.resFlowSession;        
+        this.resFlowSession = this.utils.resFlowSession;
+        if(this.utils.resFlowSession.resDoorObj.TYPE !== 'RES') {
+            this.itemPrice = this.utils.calculateTotalPrice();
+        } else {
+            let k = 0;
+            this.resFlowSession.cart.forEach(function(i) {
+                k = k + i.totalPrice;
+            });
+            this.itemPrice = k;
+        }
     }
     
     getResPrice() {

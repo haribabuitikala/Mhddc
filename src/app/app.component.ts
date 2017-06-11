@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, AfterViewInit, OnChanges } from '@angular/core';
+import { Component, Input, OnInit, OnChanges, AfterViewChecked, ChangeDetectorRef } from '@angular/core';
 import { Location } from '@angular/common';
 import { Router, ActivatedRoute, NavigationEnd } from '@angular/router';
 import { AppUtilities } from "./shared/appUtilities";
@@ -11,7 +11,7 @@ declare var $: any;
     styleUrls: ['./app.component.css'],
     providers: [NavComponent]
 })
-export class AppComponent implements OnInit {
+export class AppComponent implements OnInit, AfterViewChecked, OnChanges {
 
     showStepIndicator = false;
     steps = [];
@@ -24,7 +24,8 @@ export class AppComponent implements OnInit {
         , private location: Location
         , private app: AppUtilities
         , private nav: NavComponent
-        , private activeRoute: ActivatedRoute) {
+        , private activeRoute: ActivatedRoute
+        , private cdref: ChangeDetectorRef) {
         route.events.subscribe(r => {
             if (r instanceof NavigationEnd) {
                 console.log('flow Data ', app.resFlowSession.resDoorObj);
@@ -48,6 +49,9 @@ export class AppComponent implements OnInit {
         this.currScreen = this.app.utilities.currScreen;
     }
 
+    ngAfterViewChecked() {
+        this.cdref.detectChanges();
+    }
 
     ngOnInit() {
         $('body').removeClass('loader');

@@ -48,8 +48,7 @@
                 <div [innerHTML]="data.collectionName"></div>
                 <div>{{data.widthF}}'{{data.widthI}}'' X {{data.heightF}}'{{data.heightI}}'' - ({{data.INSTALLTYPE}})</div>
             </div>
-            <span *ngIf="!data.isDIY">{{data.construction.price + data.construction.laborcost | currency:'USD':true:'1.2-2'}}</span>
-            <span *ngIf="data.isDIY">{{data.construction.price | currency:'USD':true:'1.2-2'}}</span>
+            <span>{{data.totalPrice | currency:'USD':true:'1.2-2'}}</span>
             <span><i class="fa fa-chevron-down"></i></span>
         </div>
         <div class="flex space-between margin-t-10 subsection">

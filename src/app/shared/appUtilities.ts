@@ -276,6 +276,7 @@ export class ResidentialFlowSession {
         isDIY: false,
         isEPA: false,
         INSTALLTYPE: 'Installed',
+        totalPrice: 0,
         construction: {
             name: '',
             price: 0,
