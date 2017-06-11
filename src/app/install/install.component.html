@@ -1,6 +1,7 @@
 <div class="row tabs fixed-header">
   <div class="col-xs-6">
-    <input id="r1" type="radio" (click)="checkType('install')" name="installation-type" checked="checked" [ngClass]="{ 'hide' : hideDIY }" />
+    <input id="r1" type="radio" (click)="checkType('install')" name="installation-type" checked="checked" [ngClass]="{ 'hide' : hideDIY }"
+    />
     <div class="tab">
       <span class="check"></span>
       <label for="r1" (click)="checkType('install')">
@@ -9,7 +10,7 @@
       </label>
     </div>
   </div>
-  <div class="col-xs-6"  [ngClass]="{ 'hide' : hideDIY }">
+  <div class="col-xs-6" [ngClass]="{ 'hide' : hideDIY }">
     <input id="r2" (click)="checkType('diy')" type="radio" name="installation-type">
     <div class="tab">
       <span class="check"></span>
@@ -31,23 +32,23 @@
 
 <!-- Edit Modal -->
 
-<modal #editModal class="col-xs-12">
+<modal #editModal class="edit-modal">
   <modal-header [show-close]="true">
-    <h4 class="modal-title">Select The Option You Want To Edit</h4>
+    <h4 class="modal-title text-orange">Change your door configuration</h4>
   </modal-header>
   <modal-body class="editModal margin-t-20">
-      <dl>
-          <dd (click)="navigateTo('/doorSize')"><img src="../../assets/images/left-nav/leftnav1iconVP.png" alt=""/>Size</dd>
-          <dd (click)="navigateTo('/collection')"><img src="../../assets/images/left-nav/leftnav2iconVP.png" alt=""/>Collection</dd>
-          <dd (click)="navigateTo('/home')"><img src="../../assets/images/left-nav/leftnav3iconVP.png" alt=""/>Home</dd>
-          <dd (click)="navigateTo('/config/design')"><img src="../../assets/images/left-nav/leftnav4iconVP.png" alt=""/>Design</dd>
-          <dd (click)="navigateTo('/config/construction')"><img src="../../assets/images/left-nav/leftnav5iconVP.png" alt=""/>Construction</dd>
-          <dd (click)="navigateTo('/config/color')"><img src="../../assets/images/left-nav/leftnav6iconVP.png" alt=""/>Color</dd>
-          <dd (click)="navigateTo('/config/topSection')"><img src="../../assets/images/left-nav/leftnav7iconVP.png" alt=""/>Top Section</dd>
-          <dd (click)="navigateTo('/config/topSection')"><img src="../../assets/images/left-nav/leftnav8iconVP.png" alt=""/>Glass Type</dd>
-          <dd (click)="navigateTo('/config/hardware')"><img src="../../assets/images/left-nav/leftnav9iconVP.png" alt=""/>Hardware</dd>
-          <!--<dd (click)="navigateTo('/config/hardware')"><img src="../../assets/images/left-nav/leftnav7iconVP.png" alt=""/>Hardware</dd>-->
-      </dl> 
+    <dl>
+      <dd (click)="navigateTo('/banner')"><img src="../../assets/images/home_icon.png" alt="" />Home</dd>
+      <dd (click)="navigateTo('/doorSize')"><img src="../../assets/images/left-nav/leftnav1iconVP.png" alt="" />Size</dd>
+      <dd (click)="navigateTo('/collection')"><img src="../../assets/images/left-nav/leftnav2iconVP.png" alt="" />Collection</dd>
+      <dd (click)="navigateTo('/home')"><img src="../../assets/images/left-nav/leftnav3iconVP.png" alt="" />Home</dd>
+      <dd (click)="navigateTo('/config/design')"><img src="../../assets/images/left-nav/leftnav4iconVP.png" alt="" />Design</dd>
+      <dd (click)="navigateTo('/config/construction')"><img src="../../assets/images/left-nav/leftnav5iconVP.png" alt="" />Construction</dd>
+      <dd (click)="navigateTo('/config/color')"><img src="../../assets/images/left-nav/leftnav6iconVP.png" alt="" />Color</dd>
+      <dd (click)="navigateTo('/config/topSection')"><img src="../../assets/images/left-nav/leftnav7iconVP.png" alt="" />Top Section</dd>
+      <dd (click)="navigateTo('/config/topSection')"><img src="../../assets/images/left-nav/leftnav8iconVP.png" alt="" />Glass Type</dd>
+      <dd (click)="navigateTo('/config/hardware')"><img src="../../assets/images/left-nav/leftnav9iconVP.png" alt="" />Hardware</dd>
+    </dl>
   </modal-body>
 </modal>
 
@@ -85,7 +86,7 @@
               <div class="col-xs-6 padding-r-7 pad-l-0">
                 <div> {{lang.sizes.feet}}</div>
                 <div>
-                  <select name="" [(ngModel)]="selectedWidthFeet" class="form-control" (change)="getWidthInches('width')" >
+                  <select name="" [(ngModel)]="selectedWidthFeet" class="form-control" (change)="getWidthInches('width')">
                         <option *ngFor="let widthFeet of widthFeets">{{widthFeet}}</option>
                     </select>
                 </div>
@@ -126,13 +127,13 @@
             </div>
           </div>
         </div>
-        
-          <div  class="text-center  margin-t-15 col-xs-12"  >
-              <button  *ngIf="!readyToNextStep" (click)="getDoorDimentions(notmatchdoorsize, exactDoorsize)" class="btn btn-default text-uppercase box-shadow bold text-orange   text-center"> Confirm Size 
+
+        <div class="text-center  margin-t-15 col-xs-12">
+          <button *ngIf="!readyToNextStep" (click)="getDoorDimentions(notmatchdoorsize, exactDoorsize)" class="btn btn-default text-uppercase box-shadow bold text-orange   text-center"> Confirm Size 
               </button>
-              <button  *ngIf="readyToNextStep" (click)="confirmDIY()" class="btn btn-default text-uppercase box-shadow bold text-orange   text-center"> Next Step 
+          <button *ngIf="readyToNextStep" (click)="confirmDIY()" class="btn btn-default text-uppercase box-shadow bold text-orange   text-center"> Next Step 
               </button>
-          </div>
+        </div>
       </div>
 
       <h4 class="bold font-size-16 margin-t-0">General Size Guidelines:</h4>
@@ -182,85 +183,83 @@
 </modal>
 
 <modal #leadTest>
-    <modal-header>
-    </modal-header>
-    <modal-body>
-        <div class="font-size-16 pull-left font-size-16 bold margin-b-10">Lead Test Question:</div>
-        <br>
-        <p  class="margin-t-20">
-            The Environmental Protection Agency (EPA) has mandated that all homes built prior to 1978 be assessed by an EPA Certified Lead Renovator prior to any professional home renovation to determine if lead based paint is present in the work area and whether containment of lead based paint will be required during the renovation.
-        <p class="bold font-size-16 text-center  margin-t-20" >Was your Garage / Home built prior to 1978?</p>
+  <modal-header>
+  </modal-header>
+  <modal-body>
+    <div class="font-size-16 pull-left font-size-16 bold margin-b-10">Lead Test Question:</div>
+    <br>
+    <p class="margin-t-20">
+      The Environmental Protection Agency (EPA) has mandated that all homes built prior to 1978 be assessed by an EPA Certified
+      Lead Renovator prior to any professional home renovation to determine if lead based paint is present in the work area
+      and whether containment of lead based paint will be required during the renovation.
+      <p class="bold font-size-16 text-center  margin-t-20">Was your Garage / Home built prior to 1978?</p>
 
 
-        <div class="form-group margin-b-20 margin-t-20 text-center">
-           <button type="submit"
-                    class="btn btn-default box-shadow text-orange margin-r-10 bold margin-b-10"
-                    (click)="leadTestValue('YES')">YES
+      <div class="form-group margin-b-20 margin-t-20 text-center">
+        <button type="submit" class="btn btn-default box-shadow text-orange margin-r-10 bold margin-b-10" (click)="leadTestValue('YES')">YES
             </button>
-            <button type="submit"
-                    class="btn btn-default box-shadow text-orange margin-r-10 bold margin-b-10"
-
-                   (click)="leadTestValue('NO')">NO
+        <button type="submit" class="btn btn-default box-shadow text-orange margin-r-10 bold margin-b-10" (click)="leadTestValue('NO')">NO
             </button>
-        </div>
-    </modal-body>
+      </div>
+  </modal-body>
 </modal>
 <modal #epa>
-    <modal-header>
-    </modal-header>
-    <modal-body>
-        <p class="text-center"> 
-            The Environmental Protection Agency (EPA) has mandated that all homes built prior to 1978 be assessed by an EPA Certified Lead Renovator prior to any professional home renovation to determine if lead based paint is present in the work area and whether containment of lead based paint will be required during the renovation.
-        </p>
-        <p class="margin-t-10 text-center">
-            A Lead Based Paint assessment fee of $20 will be added to your order. The EPA Certified Lead Renovator will provide additional details and assessment results during site inspection of the work area. If it is determined that lead containment procedures are required for your project, additional fees will apply. 
-        </p>
-        <a class="margin-b-20" href="http://hddcstore.clopay.com/en/documents/renovaterightbrochure.pdf" target="_blank"> Click here to review and print the EPA Lead Paint guide</a>
-         
-        <label>
+  <modal-header>
+  </modal-header>
+  <modal-body>
+    <p class="text-center">
+      The Environmental Protection Agency (EPA) has mandated that all homes built prior to 1978 be assessed by an EPA Certified
+      Lead Renovator prior to any professional home renovation to determine if lead based paint is present in the work area
+      and whether containment of lead based paint will be required during the renovation.
+    </p>
+    <p class="margin-t-10 text-center">
+      A Lead Based Paint assessment fee of $20 will be added to your order. The EPA Certified Lead Renovator will provide additional
+      details and assessment results during site inspection of the work area. If it is determined that lead containment procedures
+      are required for your project, additional fees will apply.
+    </p>
+    <a class="margin-b-20" href="http://hddcstore.clopay.com/en/documents/renovaterightbrochure.pdf" target="_blank"> Click here to review and print the EPA Lead Paint guide</a>
+
+    <label>
             <input type="checkbox" value="" (click)="checkboxValue($event)">  By checking this box you signify you have reviewed and understand the EPA Lead Based Paint rules and you have been provided a copy of the EPA brochure
         </label>
 
-        <p class="bold font-size-16 margin-t-10 ">Home Depot is committed to keeping you safe and in compliance with all local and national laws.</p>
+    <p class="bold font-size-16 margin-t-10 ">Home Depot is committed to keeping you safe and in compliance with all local and national laws.</p>
 
-        <p class="margin-b-10">In 2008 the EPA mandated that a test for the presence of lead paint be performed on Garage Doors and associated trim on houses built before 1978, prior to replacement. </p>
+    <p class="margin-b-10">In 2008 the EPA mandated that a test for the presence of lead paint be performed on Garage Doors and associated trim
+      on houses built before 1978, prior to replacement. </p>
 
-        <span>Please visit <a href="http://www.epa.gov/lead/pubs/renovation.htm"> http://www.epa.gov/lead/pubs/renovation.htm</a>for more information regarding the details of this program.</span>
-       
-        <div class="form-group margin-b-20 margin-t-20 text-center">
-               <button type="submit"
-                    class="btn btn-default box-shadow text-orange margin-r-10 bold margin-b-10"
-                     (click)="epaValue('ok')">OK
-            </button>        
-            <button type="submit"
-                    class="btn btn-default box-shadow text-orange margin-r-10 bold margin-b-10"
-                    (click)="epaValue('back')">BACK
+    <span>Please visit <a href="http://www.epa.gov/lead/pubs/renovation.htm"> http://www.epa.gov/lead/pubs/renovation.htm</a>for more information regarding the details of this program.</span>
+
+    <div class="form-group margin-b-20 margin-t-20 text-center">
+      <button type="submit" class="btn btn-default box-shadow text-orange margin-r-10 bold margin-b-10" (click)="epaValue('ok')">OK
             </button>
-         </div>
-    </modal-body> 
+      <button type="submit" class="btn btn-default box-shadow text-orange margin-r-10 bold margin-b-10" (click)="epaValue('back')">BACK
+            </button>
+    </div>
+  </modal-body>
 </modal>
 <modal #learnMore>
-    <modal-header  [show-close]="true" (click)='learMoreClose()'>
-    </modal-header>
-    <modal-body>
-        <p class="bold font-size-16 margin-t-10 ">Home Depot is committed to keeping you safe and in compliance with all local and national laws.</p>
+  <modal-header [show-close]="true" (click)='learMoreClose()'>
+  </modal-header>
+  <modal-body>
+    <p class="bold font-size-16 margin-t-10 ">Home Depot is committed to keeping you safe and in compliance with all local and national laws.</p>
 
-        <p class="margin-b-10  ">In 2008 the EPA mandated that a test for the presence of lead paint be performed on Garage Doors and associated trim on houses built before 1978, prior to replacement. </p>
+    <p class="margin-b-10  ">In 2008 the EPA mandated that a test for the presence of lead paint be performed on Garage Doors and associated trim
+      on houses built before 1978, prior to replacement. </p>
 
-        <span>Please visit <a href="http://www.epa.gov/lead/pubs/renovation.htm"> http://www.epa.gov/lead/pubs/renovation.htm</a>for more information regarding the details of this program.</span>
-    </modal-body> 
+    <span>Please visit <a href="http://www.epa.gov/lead/pubs/renovation.htm"> http://www.epa.gov/lead/pubs/renovation.htm</a>for more information regarding the details of this program.</span>
+  </modal-body>
 </modal>
 
 <modal #notmatchdoorsize>
-    <modal-header>
-    </modal-header>
-    <modal-body>
-        <div class="textContainer textUnselectable">Selected configuration is not valid for updated dimensions.
-          Please <span style="color: blue;" (click)="navigateToSize('/doorSize')">click here</span> to go back to size selection page and select exact size.</div>
-          <div class="margin-t-15 text-center">
-            <button type="button" class="btn btn-danger" (click)="notmatchdoorsize.close();exactDoorsizeModal.open();">Close</button>
-          </div>
-    </modal-body> 
+  <modal-header>
+  </modal-header>
+  <modal-body>
+    <div class="textContainer textUnselectable">Selected configuration is not valid for updated dimensions. Please <span style="color: blue;" (click)="navigateToSize('/doorSize')">click here</span>      to go back to size selection page and select exact size.</div>
+    <div class="margin-t-15 text-center">
+      <button type="button" class="btn btn-danger" (click)="notmatchdoorsize.close();exactDoorsizeModal.open();">Close</button>
+    </div>
+  </modal-body>
 </modal>
 
 
