@@ -20,6 +20,7 @@ export class ConfigComponent implements OnInit, AfterViewInit, AfterViewChecked 
         appComponent.subscribeToPrice(() => {
             this.calculatePrice();
         });
+
     }
 
     homeImage;
@@ -31,7 +32,8 @@ export class ConfigComponent implements OnInit, AfterViewInit, AfterViewChecked 
     quantity = 1;
     details;
     whdata;
-
+    openerName;
+    
     ngAfterViewChecked() {
         this.cdref.detectChanges();
     }
@@ -155,6 +157,8 @@ export class ConfigComponent implements OnInit, AfterViewInit, AfterViewChecked 
         });
 
         this.detailsModal();
+
+        this.openerName = this.details.opener.name + (this.details.opener.items.length);
     }
 
     renderCanvas(obj?, targ?, elemSelector?) {
