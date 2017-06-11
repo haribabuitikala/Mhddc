@@ -9,7 +9,7 @@
     <form novalidate #form="ngForm" (ngSubmit)="save(form, $event)" class="form-group banner-zip-search ptn-rel">
       <div class="ptn-rel">
         <div class="form-control">
-          <input type="number" placeholder="{{lang.placeholder}}" minlength="5" maxlength="5" name="zip" class="zip-code" autocomplete="off"
+          <input type="number" oncopy="return false" onpaste="return false" placeholder="{{lang.placeholder}}" minlength="5" maxlength="5" name="zip" class="zip-code" autocomplete="off"
             (keypress)="onlyNumberKey($event)" ngModel #zipCode="ngModel" required>
         </div>
         <span *ngIf="zipCode.errors?.required && zipCode.touched" class="error ptn-abs">
