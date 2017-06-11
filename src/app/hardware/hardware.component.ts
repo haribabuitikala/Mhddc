@@ -54,46 +54,50 @@ export class HardwareComponent implements OnInit {
   setHardwareMinMax(cname?) {
     let hardware = this.utils.resFlowSession.resDoorObj.hardware;
     if (!cname) {
-      this.handlePlacementArr = [];
-      this.handlePlacements = [];
-      let handle = this.yourHandles[0][0];
-      if (handle && handle != '') {
-        if (handle['placementlist']) {
-          let placements = handle['placementlist'].split(';');
-          let arr1 = [];
-          placements.forEach(h => {
-            arr1.push(h.split(':')[0]);
-            this.handlePlacements.push(h);
-          });
-          this.handlePlacementArr = arr1;
-          this.countManager.handle = 0;
-          var defaultCount = parseInt(handle.defaultkit);
-          if (defaultCount == 2 && handle['placementlist'].split(';').length > 1) {
-            this.countManager.handle = 1;
+      if(this.yourHandles.length > 0) {
+        this.handlePlacementArr = [];
+        this.handlePlacements = [];
+        let handle = this.yourHandles[0][0];
+        if (handle && handle != '') {
+          if (handle['placementlist']) {
+            let placements = handle['placementlist'].split(';');
+            let arr1 = [];
+            placements.forEach(h => {
+              arr1.push(h.split(':')[0]);
+              this.handlePlacements.push(h);
+            });
+            this.handlePlacementArr = arr1;
+            this.countManager.handle = 0;
+            var defaultCount = parseInt(handle.defaultkit);
+            if (defaultCount == 2 && handle['placementlist'].split(';').length > 1) {
+              this.countManager.handle = 1;
+            }
           }
         }
-      }
+      }      
 
-      this.stepplatePlacementArr = [];
-      this.stepplatePlacements = [];
-      let stepplate = this.yourStepPlates[0][0];
-      if (stepplate && stepplate != '') {
-        if (stepplate['placementlist']) {
-          let placements = stepplate['placementlist'].split(';');
-          let arr2 = [];
-          placements.forEach(h => {
-            arr2.push(h.split(':')[0]);
-            this.stepplatePlacements.push(h);
-          });
-          this.stepplatePlacementArr = arr2;
-          this.countManager.stepplate = 0;
+      if(this.yourStepPlates.length > 0) {
+        this.stepplatePlacementArr = [];
+        this.stepplatePlacements = [];
+        let stepplate = this.yourStepPlates[0][0];
+        if (stepplate && stepplate != '') {
+          if (stepplate['placementlist']) {
+            let placements = stepplate['placementlist'].split(';');
+            let arr2 = [];
+            placements.forEach(h => {
+              arr2.push(h.split(':')[0]);
+              this.stepplatePlacements.push(h);
+            });
+            this.stepplatePlacementArr = arr2;
+            this.countManager.stepplate = 0;
 
-          var defaultCount = parseInt(stepplate.defaultkit);
-          if (defaultCount == 2 && stepplate['placementlist'].split(';').length > 1) {
-            this.countManager.stepplate = 1;
+            var defaultCount = parseInt(stepplate.defaultkit);
+            if (defaultCount == 2 && stepplate['placementlist'].split(';').length > 1) {
+              this.countManager.stepplate = 1;
+            }
           }
         }
-      }
+      }      
 
       if (this.yourStepHinge.length > 0) {
         this.hingesPlacementArr = [];

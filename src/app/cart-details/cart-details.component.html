@@ -43,7 +43,7 @@
             <p [innerHTML]="data.construction.name + ' (x' + data.construction.qty + ')'"></p>            
         </dd>
     </dl>
-    <dl class="door-configuration-table">
+    <dl class="door-configuration-table" *ngIf="data.color.overlay.name !== ''">
         <dd class="door-configuration-table-header">
             Overlay Color
         </dd>
@@ -61,7 +61,7 @@
             <span>{{data.color.base.price  | currency:'USD':true:'1.2-2'}}</span>
         </dd>
     </dl>
-    <dl class="door-configuration-table">
+    <dl class="door-configuration-table" *ngIf="data.topSection.name !== ''">
         <dd class="door-configuration-table-header">
             Top Section
         </dd>
@@ -70,6 +70,15 @@
             <span>{{data.topSection.glassType.price | currency:'USD':true:'1.2-2'}}</span>
         </dd>
     </dl>    
+    <dl class="door-configuration-table" *ngIf="data.topSection.name !== ''">
+        <dd class="door-configuration-table-header">
+            Glass Type
+        </dd>
+        <dd>
+            <p [innerHTML]="data.topSection.name"></p>
+            <span>{{data.topSection.glassType.price | currency:'USD':true:'1.2-2'}}</span>
+        </dd>
+    </dl>
     <dl class="door-configuration-table">
         <dd class="door-configuration-table-header">
             Hardware
@@ -82,12 +91,12 @@
             <p [innerHTML]="data.hardware.stepPlate.name + ' (x' + data.hardware.stepPlate.qty + ' Per Door)'"></p>
             <span>{{data.hardware.stepPlate.price * data.hardware.stepPlate.qty  | currency:'USD':true:'1.2-2'}}</span>                   
         </dd>
-        <dd *ngIf="data.hardware.hinge.qty && data.hardware.hinge.qty > 0">
+        <dd *ngIf="data.hardware.hinge.price !== 0">
             <p [innerHTML]="data.hardware.hinge.name + ' (x' + data.hardware.hinge.qty + ' Per Door)'"></p>
             <span>{{data.hardware.hinge.price * data.hardware.hinge.qty  | currency:'USD':true:'1.2-2'}}</span>                
         </dd>
     </dl>        
-    <dl class="door-configuration-table" *ngIf="data.opener.name !== ''">
+    <dl class="door-configuration-table" *ngIf="data.opener.QTY !== 0">
         <dd class="door-configuration-table-header">
             Opener
         </dd>

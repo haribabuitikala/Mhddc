@@ -483,7 +483,7 @@ export class ResidentialFlowSession {
             this.resDoorObj['reset' + this.resDoorObj['resetorder'][5]]();
         },
         "resetwindows": () => {
-            this.resDoorObj['this.windows'] = {
+            this.resDoorObj['windows'] = {
                 "topsection": "",
                 "placement": null,
                 "glasstype": "",
