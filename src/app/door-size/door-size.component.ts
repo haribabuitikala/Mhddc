@@ -100,22 +100,22 @@ export class DoorSizeComponent implements OnInit {
         this.dataParams.dheightFt = +this.utils.utilities[door + 'Height'];
         this.dataParams.dheightIn = 0;
 
- 
+
         this.utils.utilities.wf = this.dataParams.dwidthFt;
         this.utils.utilities.wi = this.dataParams.dwidthIn;
         this.utils.utilities.hf = this.dataParams.dheightFt;
         this.utils.utilities.hi = this.dataParams.dheightIn;
- 
+
         this.utils.resFlowSession.resDoorObj.size.width['wf'] = this.utils.utilities[door + 'Width'];
         this.utils.resFlowSession.resDoorObj.size.height['hf'] = this.utils.utilities[door + 'Height'];
- 
+
 
         this.utils.resFlowSession.doorSize.door = door;
 
-         console.log(this.utils.utilities.wf,
-                this.utils.utilities.wi,
-                this.utils.utilities.hf,
-                this.utils.utilities.hi);
+        console.log(this.utils.utilities.wf,
+            this.utils.utilities.wi,
+            this.utils.utilities.hf,
+            this.utils.utilities.hi);
 
 
         this.navigateTo(this.dataParams);
@@ -135,7 +135,7 @@ export class DoorSizeComponent implements OnInit {
                 this.route.navigateByUrl('/collection');
                 this.utils.removeLoader();
             },
-            error => {                
+            error => {
                 this.utils.removeLoader();
                 this.noSize.open();
             }
@@ -196,7 +196,7 @@ export class DoorSizeComponent implements OnInit {
             }
             let winCode = +this.utils.utilities.winCode.slice(1);
             if (winCode >= 6) {
-            this.modal1.open();
+                this.modal1.open();
             }
         } else {
             this.showMeasure = true;
@@ -223,7 +223,7 @@ export class DoorSizeComponent implements OnInit {
 
     nextBtn(curr, path) {
         if (this.utils.utilities.wf != null && this.utils.utilities.wi != null && this.utils.utilities.hf != null && this.utils.utilities.hi != null &&
-            this.utils.utilities.hf != 0 ) {
+            this.utils.utilities.hf != 0) {
             this.dataParams.dwidthFt = this.utils.utilities.wf;
             this.dataParams.dwidthIn = this.utils.utilities.wi;
             this.dataParams.dheightFt = this.utils.utilities.hf;
@@ -231,15 +231,17 @@ export class DoorSizeComponent implements OnInit {
 
             this.utils.resFlowSession.resDoorObj.size.width['wf'] = this.utils.utilities.wf + '';
             this.utils.resFlowSession.resDoorObj.size.width['wi'] = this.utils.utilities.wi + '';
- 
+
             this.utils.resFlowSession.resDoorObj.size.height['hf'] = this.utils.utilities.hf + '';
-            this.utils.resFlowSession.resDoorObj.size.height['hi'] = this.utils.utilities.hi + ''; 
- 
+            this.utils.resFlowSession.resDoorObj.size.height['hi'] = this.utils.utilities.hi + '';
+
 
             let dimension = (this.utils.utilities.wf * 12) + this.utils.utilities.wi;
 
-            dimension > 120 ? this.homeSize = "2" : this.homeSize = "1";
-            this.utils.utilities.homeSize = this.homeSize;
+            // dimension > 120 ? this.homeSize = "2" : this.homeSize = "1";
+            dimension > 120 ? this.setHomeSize("2", false) : this.setHomeSize("1", true);
+            // this.utils.utilities.homeSize = this.homeSize;
+
 
             console.log(this.utils.utilities.wf,
                 this.utils.utilities.wi,
@@ -255,6 +257,11 @@ export class DoorSizeComponent implements OnInit {
             }
 
         }
+    }
+    setHomeSize(num, door) {
+        let utils = this.utils.utilities;
+        utils.homeSize = num;
+        utils.singleDoor = door;
     }
 
     prevBtn(curr, path) {
