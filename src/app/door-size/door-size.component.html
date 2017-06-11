@@ -168,13 +168,23 @@
                 <input type="checkbox" value=""> {{lang.floridaPopup.confirm}}
             </label>
         </p>
-        <div class="text-center  margin-t-0 text-center text-uppercase">
+        <div class="text-center margin-t-0 text-uppercase">
             <button (click)="floridaClose()"
-                class="btn btn-default text-uppercase box-shadow bold text-orange text-center"> {{lang.floridaPopup.enter}}
+                class="btn btn-default text-uppercase box-shadow bold text-orange"> {{lang.floridaPopup.enter}}
             </button>
         </div>
 
     </modal-body>
 </modal>
-
-
+<modal #noSize>
+    <modal-body class="padding10 text-center">        
+        <p>
+            We are sorry, the size you are trying to build is unavailble. Please call us at 1-877-526-2050 for assistance.
+        </p>
+        <div class="margin-t-0 text-uppercase">
+            <button (click)="noSize.close()"
+                class="btn btn-default text-uppercase box-shadow bold text-orange"> CLOSE
+            </button>
+        </div>
+    </modal-body>
+</modal>
