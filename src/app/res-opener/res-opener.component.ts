@@ -7,6 +7,7 @@ import { CollectionData } from "../collection/collection-data";
 import { CollectionService } from "../shared/data.service";
 import { NavComponent } from '../nav/nav.component'
 import { ConfigComponent } from "../config/config.component";
+import { AppComponent } from "../app.component";
 declare var _: any;
 
 @Component({
@@ -23,7 +24,8 @@ export class ResOpenerComponent implements OnInit {
         , private route: Router
         , private config: ConfigComponent
         , private dataStrorage: CollectionData
-        , private dataService: CollectionService) {
+        , private dataService: CollectionService
+        , private app: AppComponent) {
     }
 
     isLoaded = false;
@@ -81,6 +83,7 @@ export class ResOpenerComponent implements OnInit {
                 this.utils.resFlowSession.resDoorObj.opener.apiData = res;
                 this.isLoaded = true;
             });
+        this.app.updatePrice();
     }
 
     additionalItems = [];
