@@ -147,6 +147,7 @@ export class DoorSizeComponent implements OnInit {
         this.widthInches = this.sizes.getInches(itm, this.selectedWidthFeet);
         this.selectedwidth = "width_" + this.selectedWidthFeet + "_0";
         this.heightFeets = this.sizes.getHeightFeets(this.selectedwidth);
+        this.selectedHeightFeet = 0;
         // this.heightInches = this.sizes.getInches('height', this.heightFeets[0]);
         this.utils.utilities.wi = this.widthInches[0];
         this.utils.utilities.wf = +this.selectedWidthFeet;
@@ -172,6 +173,7 @@ export class DoorSizeComponent implements OnInit {
         // this.heightFeets = this.sizes.getHeightFeets(this.selectedwidth);
         this.utils.utilities.wi = +this.selectedWidthInches;
         this.resDetails.widthI = +this.selectedWidthInches;
+        this.selectedHeightFeet = 0;
     }
 
     getHeight() {
@@ -219,7 +221,8 @@ export class DoorSizeComponent implements OnInit {
     };
 
     nextBtn(curr, path) {
-        if (this.utils.utilities.wf != null && this.utils.utilities.wi != null && this.utils.utilities.hf != null && this.utils.utilities.hi != null) {
+        if (this.utils.utilities.wf != null && this.utils.utilities.wi != null && this.utils.utilities.hf != null && this.utils.utilities.hi != null &&
+            this.utils.utilities.hf != 0 ) {
             this.dataParams.dwidthFt = this.utils.utilities.wf;
             this.dataParams.dwidthIn = this.utils.utilities.wi;
             this.dataParams.dheightFt = this.utils.utilities.hf;
