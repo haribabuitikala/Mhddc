@@ -48,6 +48,7 @@ export class SliderComponentComponent implements OnInit {
 
         // reseting the itemPrice
         this.gdoConfig.itemPrice = this.data[0][0].item_price;
+        this.gdoConfig.openerTxt = this.data[0][0].item_name;
         this.gdoConfig.quantity = 1;
     }
 
