@@ -142,7 +142,8 @@ export class AppComponent implements OnInit, AfterViewChecked, OnChanges {
     }
 
     getCheckOut(price) {
-        let resObj = this.app.resFlowSession.orderObj.cart.push(this.app.resFlowSession.resDoorObj);
+        this.app.resFlowSession.orderObj.cart.push(this.app.resFlowSession.resDoorObj);
+        let resObj = this.app.resFlowSession.orderObj;
         let gdoObj = this.app.gdoFlowSession;
         let Obj = this.app.utilities.isGDO === true ? gdoObj : resObj;
 
