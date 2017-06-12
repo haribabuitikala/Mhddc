@@ -38,6 +38,7 @@ export class ShoppingCartComponent implements OnInit {
     data;
     resFlow;
     resFlowSession;
+    isGdo;
 
     constructor(private appComp: AppComponent
         , private navComp: NavService
@@ -72,6 +73,7 @@ export class ShoppingCartComponent implements OnInit {
         this.resFlowSession = this.utils.resFlowSession;
         if(this.utils.resFlowSession.resDoorObj.TYPE !== 'RES') {
             this.itemPrice = this.utils.calculateTotalPrice();
+            this.isGdo = true;
         } else {
             let k = 0;
             this.resFlowSession.cart.forEach(function(i) {
