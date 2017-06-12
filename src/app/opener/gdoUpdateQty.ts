@@ -55,7 +55,13 @@ export class GdoUpdateComponent implements OnInit {
         let kPrice = _.sumBy(this.dataStrorage.gdoOpenerAccessories, function (o) {
             return o.price;
         });
-
+        // set the selected itm count
+        let openrItm = this.utils.gdoFlowSession.cart[0].opener.items;
+        for (var i = 0; i < openrItm.length; i++) {
+            if (obj.item_id === openrItm[i].item_id) {
+                openrItm[i].QTY = k.count;
+            }
+        }
         this.utils.utilities.kPrice = kPrice;
         this.gdoConfig.itemPrice = this.utils.calculateTotalPrice();
     }
