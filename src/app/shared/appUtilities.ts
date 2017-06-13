@@ -261,6 +261,7 @@ export class ResidentialFlowSession {
     cart = [];
 
     resDetails = {
+        itemNumber: 0,
         zip: 0,
         storeNumber: 0,
         gdoStore: 0,
@@ -773,8 +774,23 @@ export class ResidentialFlowSession {
         }
     }
 
+    resCalculateCartItemPrice(item) {
+        let price;
+        let count = item.construction.qty;
+        item.totalPrice = 0;
+
+        // Calculate Door price
+        if(!item.isDIY) {
+            item.totalPrice = item.construction.qty * (item.construction.price + item.construction.laborcost);
+        } else {
+            item.totalPrice = item.construction.qty * item.construction.price;
+        }
+        return item;
+    }
+
     addToCart() {
         let k = _.cloneDeep(this.resDetails);
+        k.itemNumber = this.cart.length; 
         this.cart.push(k);
     }
 

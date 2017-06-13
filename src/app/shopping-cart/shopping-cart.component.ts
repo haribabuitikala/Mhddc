@@ -75,12 +75,16 @@ export class ShoppingCartComponent implements OnInit {
             this.itemPrice = this.utils.calculateTotalPrice();
             this.isGdo = true;
         } else {
-            let k = 0;
-            this.resFlowSession.cart.forEach(function(i) {
-                k = k + i.totalPrice;
-            });
-            this.itemPrice = k;
+            this.getTotalCartValue();
         }
+    }
+
+    getTotalCartValue() {
+        let k = 0;
+        this.resFlowSession.cart.forEach(function(i) {
+            k = k + i.totalPrice;
+        });
+        this.itemPrice = k;
     }
     
     getResPrice() {
@@ -95,12 +99,10 @@ export class ShoppingCartComponent implements OnInit {
         this.route.navigateByUrl('/doorSize');
     }
 
-    removeItem(item) {        
-        this.utils.resFlowSession.cart = _.remove(this.utils.resFlowSession.cart, function(n) {
-            return n.item_id == item.item_id;
-        });
-        $('.shop-count').text(this.utils.resFlowSession.cart.length);
-        this.continue.open();
+    removeItem(item, index) {        
+        this.resFlowSession.cart.splice(index, 1);
+        $('.shop-count').text(this.resFlowSession.cart.length);
+        this.getTotalCartValue();
     }
 
     updateQuantity(flow) {
@@ -116,8 +118,14 @@ export class ShoppingCartComponent implements OnInit {
         }
     }
 
-    updateQty(item) {
-        this.utils.resFlowSession.resCalculatePrice(item);
+    updateQty(item, index, increment?) {
+        if(increment) {
+            item.construction.qty = item.construction.qty + 1;
+        } else {
+            item.construction.qty = item.construction.qty - 1;
+        }
+        this.utils.resFlowSession.cart[index]  = this.utils.resFlowSession.resCalculateCartItemPrice(item);
+        this.getTotalCartValue();
     }
 
     checkout() {

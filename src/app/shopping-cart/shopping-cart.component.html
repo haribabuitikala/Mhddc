@@ -3,7 +3,7 @@
     <span class="bold">
         Estimated Pre Tax Sub-Total :
     </span>
-    <span class="pull-right bold">
+    <span class="bold">
         {{itemPrice | currency:'USD':true:'1.2-2'}}
     </span>
 </p>
@@ -42,7 +42,7 @@
     </p>
 </div>
 <div *ngIf="resFlow" class="checkout">
-    <div class="section margin-b-10" *ngFor="let data of resFlowSession.cart; let i = index; let first = first;" >
+    <div class="section margin-b-10" *ngFor="let data of resFlowSession.cart; let i = index;" >
         <div class="flex space-between subsection" (click)="toggleSection($event, i)">
             <div>
                 <div [innerHTML]="data.collectionName"></div>
@@ -52,16 +52,16 @@
             <span><i class="fa fa-chevron-down"></i></span>
         </div>
         <div class="flex space-between margin-t-10 subsection">
-            <button class="btn btn-default text-orange">REMOVE ITEM</button>
+            <button class="btn btn-default text-orange" (click)="removeItem(data, i)">REMOVE ITEM</button>
             <div class="flex">
                 <span class="margin-r-4">QTY:</span>
-                <img (click)="updateQty(data)" src="../../assets/images/substract.png" alt="" height="22" width="22" class="minus-quantity margin-r-4">
+                <img (click)="updateQty(data, i)" src="../../assets/images/substract.png" alt="" height="22" width="22" class="minus-quantity margin-r-4">
                 <span>{{data.construction.qty}}</span>
-                <img (click)="updateQty(data, true)" src="../../assets/images/add.png" alt="" height="22" width="22" class="add-quantity margin-l-4">
+                <img (click)="updateQty(data, i, true)" src="../../assets/images/add.png" alt="" height="22" width="22" class="add-quantity margin-l-4">
             </div>
         </div>
         <div id="section-{{i}}" class="subsection">
-            <app-cart-root-details [Item]="data"></app-cart-root-details>
+            <app-cart-root-details [(Item)]="data"></app-cart-root-details>
         </div>
     </div>
 </div>
