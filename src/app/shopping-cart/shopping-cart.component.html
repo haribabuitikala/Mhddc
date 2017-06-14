@@ -1,5 +1,5 @@
 <h4 class="text-orange">Your Shopping Cart </h4>
-<p><img src="../../assets/images/Info-64.png" height="26" alt="" (click)="totalPrice.open()">
+<p *ngIf="resFlowSession.cart.length > 0"><img src="../../assets/images/Info-64.png" height="26" alt="" (click)="totalPrice.open()">
     <span class="bold">
         Estimated Pre Tax Sub-Total :
     </span>
@@ -77,7 +77,7 @@
     </div>
 </div>
 <div class="text-center" *ngIf="resFlowSession.cart.length === 0">
-    <div>Your Shopping Cart Is Empty</div>
+    <div class="margin-t-20 margin-b-20">Your Shopping Cart Is Empty</div>
     <div>
         <button class="btn btn-default text-orange" (click)="continueShopping()">Continue Shopping</button>
     </div>
