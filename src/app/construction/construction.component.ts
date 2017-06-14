@@ -139,6 +139,10 @@ export class ConstructionComponent implements OnInit {
         // }
         // windcode: this.utils.utilities.winCode,
 
+        let coreAssortment = this.isCoreAssortment;
+        if (this.utils.resFlowSession.resDoorObj.product.product['item_id'] == '11') {
+            coreAssortment = false;
+        }
         let params = {
             "NatMarketID": this.utils.utilities.natmarketid,
             "model": this.utils.resFlowSession.resDoorObj.construction.construction['ClopayModelNumber'],//"HDB",//
@@ -148,7 +152,7 @@ export class ConstructionComponent implements OnInit {
             "dwidthIn": this.utils.utilities.wi,
             "dtype": this.utils.utilities.dtype,
             "windcode": this.utils.utilities.winCode,
-            "isCoreAssortment": this.isCoreAssortment
+            "isCoreAssortment": coreAssortment
         }
         if (_.includes(this.upSellShowCollection, this.utils.resFlowSession.resDoorObj.product.product['item_id']) && this.utils.resFlow.isUpsellSet) {
             this.upSellImage = this.utils.resFlowSession.resDoorObj.construction.construction['item_thumbnail'];
@@ -187,7 +191,7 @@ export class ConstructionComponent implements OnInit {
 
     getModelPriceUpsell(updata) {
         var currentConstruction = this.utils.resFlowSession.resDoorObj.construction.construction;
-        var filtermodel = window['cObj'].construction.apiData.filter(c => { console.log(c.design_id, c.id); return c.XMLCOI == updata.upgrade_model; });
+        var filtermodel = window['cObj'].construction.apiData.filter(c => { console.log(c.design_id, c.id); return c.ClopayModelNumber == updata.upgrade_model; });
         if (filtermodel.length > 0) {
             filtermodel = filtermodel[0];
             return (filtermodel.item_price - currentConstruction['item_price']);
