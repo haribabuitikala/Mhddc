@@ -376,7 +376,9 @@ export class HardwareComponent implements OnInit {
     }
   }
   ngOnInit() {
-    this.config.detailsInfo.Hardware = true;
+    let detailsInfo = this.config.detailsInfo;;
+    detailsInfo.Hardware = true;
+    detailsInfo.Opener = false;
     this.utils.resFlowSession.resDoorObj.resethardware();
     this.navComponent.renderNav({
       flowType: 'res',

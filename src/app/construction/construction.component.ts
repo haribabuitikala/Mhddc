@@ -69,6 +69,7 @@ export class ConstructionComponent implements OnInit {
         }
 
 
+
         switch (this.utils.resFlowSession.resDetails.collectionName) {
             case "Coachman&#174; Collection": {
                 this.className = 'classic-collection';
@@ -93,6 +94,20 @@ export class ConstructionComponent implements OnInit {
     }
 
     startProcess() {
+
+        // setting the details info
+        this.config.detailsInfo = {
+            construction: true,
+            baseName: false,
+            overlayName: false,
+            topSection: false,
+            Hardware: false,
+            color: false,
+            overlayColor: false,
+            glassType: false,
+            Opener: false
+        }
+
         // let res = this.dataStore.constructions;
         let res = this.utils.resFlowSession.resDoorObj.construction.apiData;
         // this is for loading construction name in details popup
@@ -162,8 +177,8 @@ export class ConstructionComponent implements OnInit {
                     console.log('updell length ', res);
                     if (res.length > 0) {
                         this.upSellData = res;
-                         this.currentModelName=this.upSellData[0].current_model;
-                        this.currentModel='btn'+this.upSellData[0].current_model+'.png';
+                        this.currentModelName = this.upSellData[0].current_model;
+                        this.currentModel = 'btn' + this.upSellData[0].current_model + '.png';
                         upsellModal.open();
                     } else {
                         this.route.navigateByUrl(path);
@@ -186,7 +201,7 @@ export class ConstructionComponent implements OnInit {
         this.upsell.close();
         this.route.navigateByUrl('config/color');
         // this.goToHome(this.selected);
-        
+
     }
 
     getModelPriceUpsell(updata) {
@@ -199,15 +214,15 @@ export class ConstructionComponent implements OnInit {
         return 0;
     }
 
-    updateWithUpsellPrice(data){
+    updateWithUpsellPrice(data) {
         this.utils.resFlowSession.resDetails.upsellPrice = this.getModelPriceUpsell(data);
         this.config.calculatePrice();
         this.moveNext();
     }
-    getDisplayModelNumber(clopayNumber) {   
-      var filterItem = window['cObj'].design.dsgn.constructions.filter(c => { return c.ClopayModelNumber == clopayNumber});
-      filterItem = filterItem[0];
-      return filterItem.DisplayModelNumber;
+    getDisplayModelNumber(clopayNumber) {
+        var filterItem = window['cObj'].design.dsgn.constructions.filter(c => { return c.ClopayModelNumber == clopayNumber });
+        filterItem = filterItem[0];
+        return filterItem.DisplayModelNumber;
     }
 
 }

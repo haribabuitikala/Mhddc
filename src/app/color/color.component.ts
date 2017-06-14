@@ -44,7 +44,20 @@ export class ColorComponent implements OnInit {
     }
 
     startProcess() {
-        this.config.detailsInfo.color = true;
+        
+
+        // setting the details info
+        this.config.detailsInfo = {
+            construction: true,
+            baseName: true,
+            overlayName: false,
+            topSection: false,
+            Hardware: false,
+            color: true,
+            overlayColor: false,
+            glassType: false,
+            Opener: false
+        }
         let res = this.utils.resFlowSession.resDoorObj.construction.construction['colors'];
         let colorsFiltered = res;
         this.colors = res;

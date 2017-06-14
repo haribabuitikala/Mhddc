@@ -34,7 +34,14 @@ export class TopSectionComponent implements OnInit {
   }
 
   startProcess() {
-    this.config.detailsInfo.topSection = true;
+
+
+    // setting the details info
+    let detailsInfo = this.config.detailsInfo;
+    detailsInfo.topSection = true;
+    detailsInfo.Hardware = false;
+    detailsInfo.glassType = false;
+    detailsInfo.Opener = false;
     let res = this.dataStore.topSection;
     this.data = _.chunk(res, 6);
 
@@ -70,7 +77,7 @@ export class TopSectionComponent implements OnInit {
         let pid = this.utils.resFlowSession.resDoorObj.product.product['item_id'];
         if ((pid == 13 || pid == 14 || pid == 24) && (modelIndex > -1) && (topName.indexOf("long") > -1 || topId == "315" || topId == "316"
           || topId == "317" || topId == "318" || topId == "393" || topId == "394" || topId == "319" || topId == "320" || topId == "1506" || topId == "1507" || topId == "1508")) {
-            longPanel.open();
+          longPanel.open();
         } else {
           this.nextPage();
         }

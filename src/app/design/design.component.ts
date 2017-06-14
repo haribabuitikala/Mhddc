@@ -63,10 +63,10 @@ export class DesignComponent implements OnInit {
         this.config.homeImage = data[0].item_thumbnail;
         utils.resFlowSession.resDetails.designName = data[0].item_name;
         //this.details.details.designName = data[0].item_name;
- 
+
         // var uniqueData = _.uniqBy(data, 'item_id');
         var uniqueData = data;
- 
+
         if (utils.utilities.singleDoor === true) {
             this.number = 6;
             this.data = _.chunk(uniqueData, 2);
@@ -103,9 +103,20 @@ export class DesignComponent implements OnInit {
             });
             this.loadQucikDoors();
         }
+        // setting the details info
+        this.config.detailsInfo = {
+            construction: false,
+            baseName: false,
+            overlayName: false,
+            topSection: false,
+            Hardware: false,
+            color: false,
+            overlayColor: false,
+            glassType: false,
+            Opener: false
+        }
 
         this.utils.resFlowSession.resDoorObj.windows.topsection = '';
-
         this.utils.resFlowSession.resDoorObj.hardware.handle = '';
         this.utils.resFlowSession.resDoorObj.hardware.hinge = '';
         this.utils.resFlowSession.resDoorObj.hardware.stepplate = '';
@@ -116,7 +127,6 @@ export class DesignComponent implements OnInit {
     }
 
     nextBtn(path) {
-        this.config.detailsInfo.construction = true;
         this.route.navigateByUrl(path);
     }
 
@@ -131,9 +141,9 @@ export class DesignComponent implements OnInit {
     }
 
     resetPrice() {
-        _.forEach(this.utils.resFlowSession.resDoorObj.design.dsgn['constructions'], function(o) { 
-			 o.isdefault = false; 
-		});
+        _.forEach(this.utils.resFlowSession.resDoorObj.design.dsgn['constructions'], function (o) {
+            o.isdefault = false;
+        });
         this.utils.resFlowSession.resDoorObj.QTY = 1;
         this.utils.resFlowSession.resDoorObj.construction.construction = "";
     }
