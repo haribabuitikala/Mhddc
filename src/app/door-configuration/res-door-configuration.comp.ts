@@ -84,9 +84,9 @@ export class ResDoorConfigurationComponent implements OnInit {
         this.config.pageTitle = "13. Your Door Configuration";
         this.data = this.utils.resFlowSession.resDoorObj;
         if (this.utils.resFlowSession.resDoorObj.INSTALLTYPE === 'DIY') {
-            // this.utils.resFlowSession.resDetails.totalPrice = this.utils.utilities.itemPriceDY;
+            this.utils.resFlowSession.resDetails.totalPrice = this.utils.utilities.itemPriceDY;
         } else {
-            // this.utils.resFlowSession.resDetails.totalPrice = this.utils.utilities.itemPriceInstall;
+            this.utils.resFlowSession.resDetails.totalPrice = this.utils.utilities.itemPriceInstall;
         }
     }
     shareBtn() {

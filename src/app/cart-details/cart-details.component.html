@@ -7,8 +7,8 @@
         </dd>
         <dd>
             <p [innerHTML]="data.construction.modelNumber"></p>
-            <span *ngIf="!data.isDIY">{{data.construction.price + data.construction.laborcost | currency:'USD':true:'1.2-2'}}</span>
-            <span *ngIf="data.isDIY">{{data.construction.price | currency:'USD':true:'1.2-2'}}</span>
+            <span *ngIf="!data.isDIY">{{(data.construction.price + data.construction.laborcost) * data.construction.qty | currency:'USD':true:'1.2-2'}}</span>
+            <span *ngIf="data.isDIY">{{data.construction.price * data.construction.qty | currency:'USD':true:'1.2-2'}}</span>
         </dd>
     </dl>
     <dl class="door-configuration-table">
@@ -49,7 +49,7 @@
         </dd>
         <dd>
             <p [innerHTML]="data.color.overlay.name"></p>
-            <span>{{data.color.overlay.price | currency:'USD':true:'1.2-2'}}</span>
+            <span>{{data.color.overlay.price * data.color.overlay.qty | currency:'USD':true:'1.2-2'}}</span>
         </dd>
     </dl>
     <dl class="door-configuration-table">
@@ -58,7 +58,7 @@
         </dd>
         <dd>
             <p [innerHTML]="data.color.base.name"></p>
-            <span>{{data.color.base.price  | currency:'USD':true:'1.2-2'}}</span>
+            <span>{{data.color.base.price * data.color.base.qty  | currency:'USD':true:'1.2-2'}}</span>
         </dd>
     </dl>
     <dl class="door-configuration-table" *ngIf="data.topSection.name !== ''">
@@ -67,7 +67,7 @@
         </dd>
         <dd>
             <p [innerHTML]="data.topSection.name"></p>
-            <span>{{data.topSection.glassType.price | currency:'USD':true:'1.2-2'}}</span>
+            <span>{{data.topSection.glassType.price * data.topSection.glassType.qty | currency:'USD':true:'1.2-2'}}</span>
         </dd>
     </dl>    
     <dl class="door-configuration-table" *ngIf="data.topSection.name !== ''">
@@ -76,7 +76,7 @@
         </dd>
         <dd>
             <p [innerHTML]="data.topSection.name"></p>
-            <span>{{data.topSection.glassType.price | currency:'USD':true:'1.2-2'}}</span>
+            <span>{{data.topSection.glassType.price * data.topSection.glassType.qty | currency:'USD':true:'1.2-2'}}</span>
         </dd>
     </dl>
     <dl class="door-configuration-table" *ngIf="data.hardware.handle.qty > 0 || data.hardware.stepPlate.qty > 0 || data.hardware.hinge.qty > 0">
@@ -84,15 +84,15 @@
             Hardware
         </dd>
         <dd *ngIf="data.hardware.handle.qty > 0">
-            <p [innerHTML]="data.hardware.handle.name + ' (x' + data.hardware.handle.qty + ' Per Door)'"></p>
+            <p [innerHTML]="data.hardware.handle.name + ' (x' + data.hardware.handle.qty * data.construction.qty + ')'"></p>
             <span>{{data.hardware.handle.price * data.hardware.handle.qty  | currency:'USD':true:'1.2-2'}}</span>
         </dd>
         <dd *ngIf="data.hardware.stepPlate.qty > 0">
-            <p [innerHTML]="data.hardware.stepPlate.name + ' (x' + data.hardware.stepPlate.qty + ' Per Door)'"></p>
+            <p [innerHTML]="data.hardware.stepPlate.name + ' (x' + data.hardware.stepPlate.qty * data.construction.qty + ')'"></p>
             <span>{{data.hardware.stepPlate.price * data.hardware.stepPlate.qty  | currency:'USD':true:'1.2-2'}}</span>                   
         </dd>
         <dd *ngIf="data.hardware.hinge.price !== 0">
-            <p [innerHTML]="data.hardware.hinge.name + ' (x' + data.hardware.hinge.qty + ' Per Door)'"></p>
+            <p [innerHTML]="data.hardware.hinge.name + ' (x' + data.hardware.hinge.qty * data.construction.qty + ')'"></p>
             <span>{{data.hardware.hinge.price * data.hardware.hinge.qty  | currency:'USD':true:'1.2-2'}}</span>                
         </dd>
     </dl>        
@@ -120,7 +120,7 @@
         </dd>
         <dd *ngFor="let itm of data.additionalOptions.items">
             <p [innerHTML]="itm.name"></p>
-            <span>{{itm.price | currency:'USD':true:'1.2-2'}}</span>
+            <span>{{itm.price * itm.qty | currency:'USD':true:'1.2-2'}}</span>
         </dd>
     </dl>
     <div *ngIf="additional">            
