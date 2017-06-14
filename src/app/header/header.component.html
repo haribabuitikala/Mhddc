@@ -23,6 +23,6 @@
         </h4>
     </modal-header>
     <modal-body>
-        <app-shopping-cart></app-shopping-cart>
+        <app-shopping-cart [IsModal]='true' (closeModal)='closeDialog()'></app-shopping-cart>
     </modal-body>
 </modal>

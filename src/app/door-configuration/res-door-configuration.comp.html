@@ -80,9 +80,9 @@
     <modal-header [show-close]="true">
     </modal-header>
     <modal-body>
-        <form class="form-horizontal col-sm-12 ">
+        <form class="form-horizontal col-sm-12 " name="share-email-form">
             <div class="form-group margin-t-20"><label>Please Insert Email Address </label>
-            <input class="form-control email" [(ngModel)]="shareEmail" placeholder="email@example.com"
+            <input name="shareemail" class="form-control email" [(ngModel)]="shareEmail" placeholder="email@example.com"
                     data-placement="top" data-trigger="manual" data-content="Must be a valid e-mail address (user@gmail.com)"
                     type="text">
             </div>
@@ -106,17 +106,17 @@
     </modal-header>
     <modal-body>
         <div>
-            <share-buttons [url]="'https://murhafsousli.github.io/ngx-sharebuttons/'"></share-buttons>
+            <!--<share-buttons [url]="'https://murhafsousli.github.io/ngx-sharebuttons/'"></share-buttons>-->
             <!--<share-button button="facebook" [title]="'title'" [description]="'description'" [image]="'image'" [url]="'https://murhafsousli.github.io/ngx-sharebuttons/'"></share-button>
             <share-button button="pintrest" [url]="'https://murhafsousli.github.io/ngx-sharebuttons/'"></share-button>
             <share-button button="google" [url]="'https://murhafsousli.github.io/ngx-sharebuttons/'"></share-button>
             <share-button button="twitter" [url]="'https://murhafsousli.github.io/ngx-sharebuttons/'"></share-button>-->
-            <button class="flex shared-button">
+            <!--<button class="flex shared-button">
                 <span class="instagram"><i class="fa fa-instagram"></i></span>
             </button>
             <button class="flex shared-button">
                 <span class="houzz"><i class="fa fa-houzz"></i></span>
-            </button>
+            </button>-->
         </div>
     </modal-body>
 </modal>
@@ -245,7 +245,7 @@
     </modal-header>
     <modal-body>
         <p><span class="text-orange font-size-16">Checkout</span> <span class="bold pull-right font-size-16">Sold To :</span></p>
-        <form class="form-label">
+        <!--<form class="form-label" name="checkout-form">
             <div class="form-group">
                 <label for="inputEmail">First Name:</label>
                 <input type="text" class="form-control" id="inputEmail" placeholder="">
@@ -290,7 +290,7 @@
                 <label for="inputEmail">Email Address: (Used for order confirmation only)</label>
                 <input type="text" class="form-control" id="inputEmail" placeholder="">
             </div>
-        </form>
+        </form>-->
     </modal-body>
 </modal>
 <modal #customerInfoSoldTo>
@@ -299,7 +299,7 @@
     <modal-body>
         <p><span class="text-orange font-size-16">Checkout</span> <span class="bold pull-right font-size-16">Service Site :</span>
         </p>
-        <form class="form-label">
+        <!--<form class="form-label" name="checkout">
             <div class="checkbox">
                 <label><input type="checkbox">
                     <p><font color="#333333">Same as <strong>Sold To</strong> Address</font></p></label>
@@ -350,7 +350,7 @@
                     Submit customer information
                 </button>
             </div>
-        </form>
+        </form>-->
     </modal-body>
 </modal>
 <modal #shoppingCart>
@@ -487,7 +487,7 @@
     <modal-body>
         <p class="bold  font-size-16 ">Credit Card</p>
         <img src="../../assets/images/card-6.png" alt="" />
-        <form class="form-label">
+        <!--<form class="form-label">
             <div class="form-group">
                 <label for="inputEmail">Card Number:</label>
                 <input type="text" class="form-control" id="inputEmail" placeholder="">
@@ -544,7 +544,7 @@
                     Submit
                 </button>
             </div>
-        </form>
+        </form>-->
     </modal-body>
 </modal>
 <modal #discardDetails>

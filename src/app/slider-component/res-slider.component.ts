@@ -58,7 +58,7 @@ export class ResSliderComponent implements OnInit, AfterViewInit {
 
     ngOnInit() {
         this.startProcess();
-        this.detailsInfo(this.cObj.construction.construction['ClopayModelNumber']);
+        this.detailsInfo(this.cObj.construction.construction['DisplayModelNumber']);
         this.showGlassDetails = false;
     }
 
