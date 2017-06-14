@@ -29,7 +29,7 @@
             <p class="font-size-14 margin-b-15">Better Energy Efficiency / Better Noise Control / Better Dent Resistance / Better Security</p>
         </div>
         <div class="col6 margin-b-15" *ngIf="upSellImage">
-            <img class="upsell-image" [ngStyle]="{'background-image': 'url(../../assets/images/upsell-'+upSellData[0].current_model+'-1.png)'}"
+            <img class="upsell-image" [ngStyle]="{'background-image': 'url(../../assets/images/'+currentModel+')'}"
                  alt="" />
                  <div class="upsellDetailsDefault">
                 <span>{{currentModelName}}</span>
