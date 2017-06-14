@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild, Directive} from '@angular/core';
+import {Component, OnInit, ViewChild, Directive, Input, Output, EventEmitter} from '@angular/core';
 import {ModalComponent} from "ng2-bs3-modal/ng2-bs3-modal";
 import {AppComponent} from "../app.component";
 import {Router} from '@angular/router';
@@ -20,6 +20,8 @@ export class ShoppingCartComponent implements OnInit {
     @ViewChild('resShoppingCartTerms') resShoppingCartTerms: ModalComponent;
     @ViewChild('gdoShoppingCartTerms') gdoShoppingCartTerms: ModalComponent;
     @ViewChild('secureRedirectionTerms') secureRedirectionTerms: ModalComponent;
+    @Input() IsModal:boolean = false;
+    @Output() closeModal = new EventEmitter();
     pageNo;
     gdoOpenerTxt = this.utils.utilities.gdoOpenerText;
     gdoOpenerSelected = this.dataStore.gdoOpenerAccessories;
@@ -96,6 +98,9 @@ export class ShoppingCartComponent implements OnInit {
         this.navComponent.setNavFlow('res');
         this.utils.resFlowSession.resDoorObj.INSTALLTYPE = "Installed";
         this.utils.resFlowSession.resDoorObj.TYPE = "RES";
+        if(this.IsModal) {
+            this.closeModal.next();
+        }
         this.route.navigateByUrl('/doorSize');
     }
 

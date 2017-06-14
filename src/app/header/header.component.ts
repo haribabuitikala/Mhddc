@@ -1,4 +1,5 @@
-import { Component, OnInit, Input, AfterViewChecked } from '@angular/core';
+import { Component, OnInit, Input, AfterViewChecked, ViewChild } from '@angular/core';
+import { ModalComponent } from "ng2-bs3-modal/ng2-bs3-modal";
 import { AppComponent } from "../app.component";
 import { Router } from '@angular/router';
 import { AppUtilities } from "../shared/appUtilities";
@@ -11,10 +12,12 @@ declare var $: any;
     styleUrls: ['./header.component.less', '../install//install.component.less']
 })
 export class HeaderComponent implements OnInit, AfterViewChecked {
+    @ViewChild('modal') modal: ModalComponent;
     showhamburger: boolean = false;
 
     @Input() count: any;
     @Input() showHamburger: boolean = false;
+
     itemsCount;
 
     constructor(private appComponent: AppComponent
@@ -76,5 +79,9 @@ export class HeaderComponent implements OnInit, AfterViewChecked {
                 $('body').removeClass('menu-open');
             });
         }
+    }
+
+    closeDialog() {
+        this.modal.close();
     }
 }
