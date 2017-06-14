@@ -119,28 +119,6 @@ export class CollectionService {
                                     "_width": "8",
                                     "_height": "7",
                                     "_XY": "0,0",
-                                    "_UL": "178,264",
-                                    "_UR": "322,259",
-                                    "_LR": "320,368",
-                                    "_LL": "181,395"
-                                }
-                            },
-                            "_homeid": "10",
-                            "_btnimage": "DIShomeSngl09.png",
-                            "_imagelg": "DIShomeSngl09.png",
-                            "_window": "lights",
-                            "_imgwidth": "700",
-                            "_imgheight": "500",
-                            "_title": "Single1",
-                            "_upload": "false",
-                            "_size": "1"
-                        },
-                        {
-                            "dcoords": {
-                                "point": {
-                                    "_width": "8",
-                                    "_height": "7",
-                                    "_XY": "0,0",
                                     "_UL": "155,221",
                                     "_UR": "355,221",
                                     "_LR": "356,399",
@@ -151,6 +129,27 @@ export class CollectionService {
                             "_btnimage": "DIShomeSngl06.png",
                             "_imagelg": "DIShomeSngl06.png",
                             "_window": "reflect",
+                            "_imgwidth": "700",
+                            "_imgheight": "500",
+                            "_title": "Single1",
+                            "_upload": "false",
+                            "_size": "1"
+                        },   {
+                            "dcoords": {
+                                "point": {
+                                    "_width": "8",
+                                    "_height": "7",
+                                    "_XY": "0,0",
+                                    "_UL": "178,264",
+                                    "_UR": "322,259",
+                                    "_LR": "320,368",
+                                    "_LL": "181,395"
+                                }
+                            },
+                            "_homeid": "10",
+                            "_btnimage": "DIShomeSngl09.png",
+                            "_imagelg": "DIShomeSngl09.png",
+                            "_window": "lights",
                             "_imgwidth": "700",
                             "_imgheight": "500",
                             "_title": "Single1",
@@ -960,4 +959,46 @@ export class CollectionService {
         });
     }
 
+
+
+     getPromotionsByMarketId(marketId) {
+        this.utils.setLoader();
+        return this.http.get(this.url + `promotion/${marketId}`).map(res => {
+            try {
+                return res.json();
+            } catch (e) {
+                return {};
+            }
+        }).finally(() => {
+            this.utils.removeLoader();
+        });
+    }
+
+
+    getPromotionByProductId(reqData) {
+        //
+        this.utils.setLoader();
+        return this.http.post(this.url + `promotion/${reqData.marketId}`, reqData).map(res => {
+            try {
+                return res.json();
+            } catch (e) {
+                return {};
+            }
+        }).finally(() => {
+            this.utils.removeLoader();
+        });
+    }
+
+    getProductsByPromotionId(reqData) {
+        this.utils.setLoader();
+        return this.http.post(this.url + `ProductByPromotion`, reqData).map(res => {
+            try {
+                return res.json();
+            } catch (e) {
+                return {};
+            }
+        }).finally(() => {
+            this.utils.removeLoader();
+        });
+    }
 }

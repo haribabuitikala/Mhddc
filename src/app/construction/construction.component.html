@@ -10,12 +10,12 @@
 
 <div id="footer" class="col-xs-12 padding-t-10 padding-b-10">
     <a href="javascript:void(0)" class="pull-left previous-btn" (click)="prevBtn('config/design')" data-id="currScreen">
-        <img src="../../assets/images/back-48-thick.png" height="15px"> Prev
+       <img src="../../assets/images/back-48-thick.png" height="15px"> Prev
     </a>
 
     <a href="javascript:void(0)" class="pull-right nextBtn" (click)="nextBtn('config/color',upsell)" data-id="currScreen">
-        Next
-        <img src="../../assets/images/Forward-48-thick.png" height="15px">
+       Next
+       <img src="../../assets/images/Forward-48-thick.png" height="15px">
         <!--(click)="nextBtn('/additionalOptions')"-->
     </a>
 </div>
@@ -28,17 +28,19 @@
             <p class="font-size-14 margin-b-15">Buying a little more insulation now gives you years of better value: </p>
             <p class="font-size-14 margin-b-15">Better Energy Efficiency / Better Noise Control / Better Dent Resistance / Better Security</p>
         </div>
-        {{upSellData}}
         <div class="col6 margin-b-15" *ngIf="upSellImage">
-            <img class="upsell-image" [ngStyle]="{'background-image': 'url(../../assets/images/upsell-'+upSellData[0].current_model+'-1.png)'}"
+            <img class="upsell-image" [ngStyle]="{'background-image': 'url(../../assets/images/'+currentModel+')'}"
                  alt="" />
+                 <div class="upsellDetailsDefault">
+                <span>{{currentModelName}}</span>
+            </div>  
         </div>
         <div class="col6 margin-b-15 ptn-rel" *ngFor="let data of upSellData">
-            <span class="pull-right promo-offer">Upgrade for Only {{ getModelPriceUpsell(data) | currency:'USD':true:'1.2-2' }} Per door</span>
+             <span class="pull-right promo-offer">Upgrade for Only {{ getModelPriceUpsell(data) | currency:'USD':true:'1.2-2' }} Per door</span>
             <img class="upsell-image" [ngStyle]="{'background-image': 'url(../../assets/images/'+data.upgrade_image+')'}" (click)="updateWithUpsellPrice(data)"
-                alt="" />
+                 alt="" />
 
-            <div class="upsellDetails">
+                 <div class="upsellDetails">
                 <span>{{getDisplayModelNumber(data.upgrade_model)}}</span>
             </div>
         </div>
