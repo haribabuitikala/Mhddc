@@ -31,6 +31,8 @@ export class ConstructionComponent implements OnInit {
     data;
     showUpsell: boolean = false;
     upSellData;
+    currentModel;
+    currentModelName;
     upSellShowCollection = [11, 12, 13, 14, 24, 170];
     upSellImage;
     loaded = false;
@@ -156,6 +158,8 @@ export class ConstructionComponent implements OnInit {
                     console.log('updell length ', res);
                     if (res.length > 0) {
                         this.upSellData = res;
+                         this.currentModelName=this.upSellData[0].current_model;
+                        this.currentModel='btn'+this.upSellData[0].current_model+'.png';
                         upsellModal.open();
                     } else {
                         this.route.navigateByUrl(path);

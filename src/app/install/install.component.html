@@ -207,21 +207,21 @@
   <modal-header>
   </modal-header>
   <modal-body>
-    <p class="text-center">
+    <p class="text-left">
       The Environmental Protection Agency (EPA) has mandated that all homes built prior to 1978 be assessed by an EPA Certified
       Lead Renovator prior to any professional home renovation to determine if lead based paint is present in the work area
       and whether containment of lead based paint will be required during the renovation.
     </p>
-    <p class="margin-t-10 text-center">
+    <p class="margin-t-10 text-left">
       A Lead Based Paint assessment fee of $20 will be added to your order. The EPA Certified Lead Renovator will provide additional
       details and assessment results during site inspection of the work area. If it is determined that lead containment procedures
       are required for your project, additional fees will apply.
     </p>
     <a class="margin-b-20" href="http://hddcstore.clopay.com/en/documents/renovaterightbrochure.pdf" target="_blank"> Click here to review and print the EPA Lead Paint guide</a>
 
-    <label>
+    <br>
             <input type="checkbox" value="" (click)="checkboxValue($event)">  By checking this box you signify you have reviewed and understand the EPA Lead Based Paint rules and you have been provided a copy of the EPA brochure
-        </label>
+        
 
     <!--<p class="bold font-size-16 margin-t-10 ">Home Depot is committed to keeping you safe and in compliance with all local and national laws.</p>
 
@@ -231,9 +231,11 @@
     <span>Please visit <a href="http://www.epa.gov/lead/pubs/renovation.htm"> http://www.epa.gov/lead/pubs/renovation.htm</a>for more information regarding the details of this program.</span>-->
 
     <div class="form-group margin-b-20 margin-t-20 text-center">
-      <button type="submit" class="btn btn-default box-shadow text-orange margin-r-10 bold margin-b-10" (click)="epaValue('ok')">OK
+        <button type="submit" class="btn btn-default box-shadow text-orange margin-r-10 bold margin-b-10 pull-left" (click)="epaValue('learn')">LEARN MORE
             </button>
-      <button type="submit" class="btn btn-default box-shadow text-orange margin-r-10 bold margin-b-10" (click)="epaValue('back')">BACK
+      <button type="submit" class="btn btn-default box-shadow text-orange margin-r-10 bold margin-b-10  " (click)="epaValue('ok')">OK
+            </button>
+      <button type="submit" class="btn btn-default box-shadow text-orange margin-r-10 bold margin-b-10 pull-right" (click)="epaValue('back')">BACK
             </button>
     </div>
   </modal-body>
