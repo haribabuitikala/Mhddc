@@ -101,6 +101,7 @@ export class ShoppingCartComponent implements OnInit {
 
     removeItem(item, index) {        
         this.resFlowSession.cart.splice(index, 1);
+        this.utils.resFlowSession.cart = this.resFlowSession.cart;
         $('.shop-count').text(this.resFlowSession.cart.length);
         this.getTotalCartValue();
     }
