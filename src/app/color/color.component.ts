@@ -44,6 +44,7 @@ export class ColorComponent implements OnInit {
     }
 
     startProcess() {
+        this.config.detailsInfo.color = true;
         let res = this.utils.resFlowSession.resDoorObj.construction.construction['colors'];
         let colorsFiltered = res;
         this.colors = res;
@@ -89,6 +90,7 @@ export class ColorComponent implements OnInit {
 
         if (this.utils.resFlowSession.resDoorObj.product.product['item_id'] == 11) {
             this.showOverlay = true;
+            this.config.detailsInfo.overlayColor = true;
         }
 
         this.claddings = this.utils.resFlowSession.resDoorObj.construction.construction['claddingoverlays'];

@@ -116,6 +116,7 @@ export class DesignComponent implements OnInit {
     }
 
     nextBtn(path) {
+        this.config.detailsInfo.construction = true;
         this.route.navigateByUrl(path);
     }
 

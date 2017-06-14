@@ -36,6 +36,7 @@ export class ResOpenerComponent implements OnInit {
 
     selectedOpener;
     ngOnInit() {
+        this.config.detailsInfo.Opener = true;
         this.utils.resFlowSession.resDoorObj.resetopener();
         if (this.navComponent.flowType === 'res') {
             this.navComponent.renderNav({

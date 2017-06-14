@@ -34,6 +34,7 @@ export class TopSectionComponent implements OnInit {
   }
 
   startProcess() {
+    this.config.detailsInfo.topSection = true;
     let res = this.dataStore.topSection;
     this.data = _.chunk(res, 6);
 

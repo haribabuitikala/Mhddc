@@ -33,7 +33,7 @@ export class GlassTypeComponent implements OnInit {
   imageURl = 'http://localhost:3435/assets/images/buttons';
 
   ngOnInit() {
-
+this.config.detailsInfo.glassType = true;
     this.navComponent.renderNav({
       flowType: 'res',
       flowActiveStep: 8,

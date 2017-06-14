@@ -33,7 +33,7 @@ export class ConfigComponent implements OnInit, AfterViewInit, AfterViewChecked 
     details;
     whdata;
     openerName;
-    
+
     ngAfterViewChecked() {
         this.cdref.detectChanges();
     }
@@ -124,6 +124,18 @@ export class ConfigComponent implements OnInit, AfterViewInit, AfterViewChecked 
             }
         });
         // this.fitToContainer();
+    }
+
+    detailsInfo = {
+        construction: false,
+        baseName: false,
+        overlayName: false,
+        topSection: false,
+        Hardware: false,
+        color: false,
+        overlayColor: false,
+        glassType: false,
+        Opener: false
     }
 
     isDoor = true;

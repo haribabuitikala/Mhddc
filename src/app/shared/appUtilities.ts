@@ -338,6 +338,7 @@ export class ResidentialFlowSession {
         upsellPrice: 0
     }
 
+
     resDoorObj = {
         "QTY": 1,
         "TYPE": 'RES',
@@ -751,7 +752,7 @@ export class ResidentialFlowSession {
                 if (obj.additional.items.length > 0) {
                     _.forEach(obj.additional.items, (item) => {
                         if (item.hasOwnProperty('price')) {
-                            if(item.id !== 5) {
+                            if (item.id !== 5) {
                                 price[0] = price[0] + item['price'] * count;
                                 price[1] = price[1] + item['price'] * count;
                                 this.resDetails.additionalOptions.items.push({
@@ -767,7 +768,7 @@ export class ResidentialFlowSession {
                                     id: item['id'],
                                     name: item['name'],
                                     price: item['price'],
-                                    qty: 1 
+                                    qty: 1
                                 });
                             }
                         }
@@ -802,7 +803,7 @@ export class ResidentialFlowSession {
         item.totalPrice = 0;
 
         // Calculate Door price
-        if(!item.isDIY) {
+        if (!item.isDIY) {
             item.totalPrice = item.totalPrice + count * (item.construction.price + item.construction.laborcost);
         } else {
             item.totalPrice = item.totalPrice + count * item.construction.price;
@@ -811,10 +812,10 @@ export class ResidentialFlowSession {
         // Calculate color price 
         // a. Calculate Overlay price
         item.totalPrice = item.totalPrice + item.color.overlay.price * count;
-        item.color.overlay.qty = count; 
+        item.color.overlay.qty = count;
         // b. Calculate Base price
         item.totalPrice = item.totalPrice + item.color.base.price * count;
-        item.color.base.qty = count; 
+        item.color.base.qty = count;
 
         // Calculate Top Section price
         item.totalPrice = item.totalPrice + item.topSection.glassType.price * count;
@@ -829,18 +830,18 @@ export class ResidentialFlowSession {
         item.totalPrice = item.totalPrice + item.hardware.hinge.price * count;
 
         // Calculate EPA price
-        if(item.isEPA) {
-            item.totalPrice = item.totalPrice + 20 * count;    
+        if (item.isEPA) {
+            item.totalPrice = item.totalPrice + 20 * count;
         }
 
         // Calculate Additional Options price
         item.additionalOptions.items.forEach(function (itm) {
-            if(itm.id !== 5) {
+            if (itm.id !== 5) {
                 item.totalPrice = item.totalPrice + item.price * count;
                 itm.qty = count;
             } else {
                 item.totalPrice = item.totalPrice + item.price;
-            }            
+            }
         });
 
         return item;
@@ -848,7 +849,7 @@ export class ResidentialFlowSession {
 
     addToCart() {
         let k = _.cloneDeep(this.resDetails);
-        k.itemNumber = this.cart.length; 
+        k.itemNumber = this.cart.length;
         this.cart.push(k);
     }
 

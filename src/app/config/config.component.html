@@ -150,36 +150,36 @@
                     </span>
                 </li>
 
-                <li *ngIf="details.constructionName">
+                <li *ngIf="detailsInfo.construction">
                     <span><strong> Construction </strong>
                     <span [innerHtml]="details.constructionName"></span>
                     </span>
                 </li>
-                <li *ngIf="details.color.base.name !== ''">
+                <li *ngIf="detailsInfo.color">
                     <span>
                         <strong>Color</strong>
                         <span [innerHTML]="details.color.base.name"></span>
                     </span>
                 </li>
-                <li *ngIf="details.color.overlay.name !== ''">
+                <li *ngIf="detailsInfo.overlayName">
                     <span>
                         <strong>Overlay Color</strong>
                         <span [innerHTML]="details.color.overlay.name"></span>
                     </span>
                 </li>
-                <li *ngIf="details.topSection.name !== ''">
+                <li *ngIf="detailsInfo.topSection">
                     <span>
                         <strong>Top Section</strong>
                         <span [innerHTML]="details.topSection.name"></span>
                     </span>
                 </li>
-                <li *ngIf="details.topSection.glassType.name !== ''">
+                <li *ngIf="detailsInfo.GlassType">
                     <span>
                         <strong>Glass Type</strong>
                         <span [innerHTML]="details.topSection.glassType.name"></span>
                     </span>
                 </li>
-                <li *ngIf="details.hardware.handle.name !== ''">
+                <li *ngIf="detailsInfo.Hardware">
                     <span>
                         <strong>Hardware</strong>
                         <span [innerHTML]="details.hardware.handle.name + ' (x' + details.hardware.handle.qty + ' Per Door)'"></span>
@@ -187,7 +187,7 @@
                     <span [innerHTML]="details.hardware.hinge.name + ' (x' + details.hardware.hinge.qty + ' Per Door)'"></span>
                     </span>
                 </li>
-                <li *ngIf="details.opener.name !== ''">
+                <li *ngIf="detailsInfo.Opener">
                     <span>
                         <strong>Opener</strong>
                         <span [innerHTML]="details.opener.name + ' ('+ details.opener.items.length + ')'"></span>
