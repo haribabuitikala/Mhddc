@@ -113,11 +113,17 @@ export class DoorConfigurationComponent implements OnInit {
         this.gdoConfig.itemPrice = this.itemPrice;
         this.qty = this.utils.utilities.gdoOpenerQty;
     }
+    emailBody = this.utils.gdoFlowSession;
     shareEmail() {
+        var data = this.emailBody;
+        var windcode = data.windcode;
+        var body = `
+          <p>WindoCode : ${windcode}</p>
+        `
         let obj = {
             ToEmail: "maddylali@gmail.com",
             Subject: 'subject',
-            Body: 'body'
+            Body: body
         }
         this.dataService.sendMail(obj)
             .subscribe(res => {
@@ -131,7 +137,7 @@ export class DoorConfigurationComponent implements OnInit {
         } else {
             // this.utils.resFlowSession.resDetails.totalPrice = this.utils.utilities.itemPriceInstall;
         }
- 
+
         if (this.utils.utilities.flow === 'gdoNavElems') {
             this.utils.setUtils(5, 1);
             $('.shop-count').text('1');

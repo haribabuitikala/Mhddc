@@ -62,7 +62,6 @@ export class ResSliderComponent implements OnInit, AfterViewInit {
         this.showGlassDetails = false;
     }
 
-
     startProcess() {
         if (this.data) {
             if (this.navComponent.flowType == 'resquick') {

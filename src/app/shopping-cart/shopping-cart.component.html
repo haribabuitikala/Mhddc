@@ -28,7 +28,6 @@
     </div>
 
     <div *ngIf="showDirect">
-
         <div *ngFor="let opener of directItm">
             <div class="clearfix">
                 <p class="col-xs-10 pull-left">{{opener.count}}-{{opener.name}} </p>
@@ -43,7 +42,7 @@
 </div>
 <div *ngIf="resFlow" class="checkout">
     <div class="section margin-b-10" *ngFor="let data of resFlowSession.cart; let i = index;" >
-        <div class="flex space-between subsection" (click)="toggleSection($event, i)">
+        <div id="section-header-{{i}}" class="flex space-between subsection" (click)="toggleSection(i)">
             <div>
                 <div [innerHTML]="data.collectionName"></div>
                 <div>{{data.widthF}}'{{data.widthI}}'' X {{data.heightF}}'{{data.heightI}}'' - ({{data.INSTALLTYPE}})</div>
@@ -60,21 +59,30 @@
                 <img (click)="updateQty(data, i, true)" src="../../assets/images/add.png" alt="" height="22" width="22" class="add-quantity margin-l-4">
             </div>
         </div>
-        <div id="section-{{i}}" class="subsection">
+        <div id="section-body-{{i}}" class="subsection">
             <app-cart-root-details [Item]="data"></app-cart-root-details>
         </div>
     </div>
 </div>
-<div class="text-center margin-b-20">
-    <button 
-    *ngIf="!isGdo"
-    type="submit" class="btn btn-default box-shadow text-orange bold text-uppercase " (click)="AddAnother()">ADD ANOTHER DOOR
-    </button>
+<div *ngIf="resFlowSession.cart.length > 0">
+    <div class="text-center margin-b-20">
+        <button 
+        *ngIf="!isGdo"
+        type="submit" class="btn btn-default box-shadow text-orange bold text-uppercase " (click)="AddAnother()">ADD ANOTHER DOOR
+        </button>
+    </div>
+    <div class="text-center margin-b-20">
+        <button type="submit" class="btn btn-default box-shadow text-orange bold text-uppercase " (click)="checkout()">CHECKOUT NOW
+        </button>
+    </div>
 </div>
-<div class="text-center margin-b-20">
-    <button type="submit" class="btn btn-default box-shadow text-orange bold text-uppercase " (click)="checkout()">CHECKOUT NOW
-    </button>
+<div class="text-center" *ngIf="resFlowSession.cart.length === 0">
+    <div>Your Shopping Cart Is Empty</div>
+    <div>
+        <button class="btn btn-default text-orange" (click)="continueShopping()">Continue Shopping</button>
+    </div>
 </div>
+
 <modal #totalPrice>
     <modal-header [show-close]="true">
     </modal-header>

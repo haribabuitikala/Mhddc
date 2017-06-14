@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild, Directive, Input, Output, EventEmitter} from '@angular/core';
+import {Component, OnInit, ViewChild, Directive, Input, Output, EventEmitter, AfterViewInit} from '@angular/core';
 import {ModalComponent} from "ng2-bs3-modal/ng2-bs3-modal";
 import {AppComponent} from "../app.component";
 import {Router} from '@angular/router';
@@ -20,7 +20,7 @@ export class ShoppingCartComponent implements OnInit {
     @ViewChild('resShoppingCartTerms') resShoppingCartTerms: ModalComponent;
     @ViewChild('gdoShoppingCartTerms') gdoShoppingCartTerms: ModalComponent;
     @ViewChild('secureRedirectionTerms') secureRedirectionTerms: ModalComponent;
-    @Input() IsModal:boolean = false;
+    @Input() IsModal: boolean = false;
     @Output() closeModal = new EventEmitter();
     pageNo;
     gdoOpenerTxt = this.utils.utilities.gdoOpenerText;
@@ -73,22 +73,30 @@ export class ShoppingCartComponent implements OnInit {
         });
         $('body').removeClass('loader');
         this.resFlowSession = this.utils.resFlowSession;
-        if(this.utils.resFlowSession.resDoorObj.TYPE !== 'RES') {
+        if (this.utils.resFlowSession.resDoorObj.TYPE !== 'RES') {
             this.itemPrice = this.utils.calculateTotalPrice();
             this.isGdo = true;
         } else {
-            this.getTotalCartValue();
+            this.getTotalCartValue(); 
+        }        
+    }
+
+    ngAfterViewInit(){        
+        if(this.resFlowSession.cart.length === 1) {
+            this.toggleSection(0);
+        } else if(this.resFlowSession.cart.length > 1) {
+            this.toggleSection(this.resFlowSession.cart.length-1);
         }
     }
 
     getTotalCartValue() {
         let k = 0;
-        this.resFlowSession.cart.forEach(function(i) {
+        this.resFlowSession.cart.forEach(function (i) {
             k = k + i.totalPrice;
         });
         this.itemPrice = k;
     }
-    
+
     getResPrice() {
         return this.utils.resFlowSession.resDoorObj.INSTALLTYPE === "Installed" ? this.utils.utilities.itemPriceInstall : this.utils.utilities.itemPriceDY;
     }
@@ -98,13 +106,13 @@ export class ShoppingCartComponent implements OnInit {
         this.navComponent.setNavFlow('res');
         this.utils.resFlowSession.resDoorObj.INSTALLTYPE = "Installed";
         this.utils.resFlowSession.resDoorObj.TYPE = "RES";
-        if(this.IsModal) {
+        if (this.IsModal) {
             this.closeModal.next();
         }
         this.route.navigateByUrl('/doorSize');
     }
 
-    removeItem(item, index) {        
+    removeItem(item, index) {
         this.resFlowSession.cart.splice(index, 1);
         this.utils.resFlowSession.cart = this.resFlowSession.cart;
         $('.shop-count').text(this.resFlowSession.cart.length);
@@ -125,14 +133,14 @@ export class ShoppingCartComponent implements OnInit {
     }
 
     updateQty(item, index, increment?) {
-        if(increment) {
-            if(item.construction.qty !== 6)
+        if (increment) {
+            if (item.construction.qty !== 6)
                 item.construction.qty = item.construction.qty + 1;
         } else {
-            if(item.construction.qty !== 1)
+            if (item.construction.qty !== 1)
                 item.construction.qty = item.construction.qty - 1;
         }
-        this.utils.resFlowSession.cart[index]  = this.utils.resFlowSession.resCalculateCartItemPrice(item);
+        this.utils.resFlowSession.cart[index] = this.utils.resFlowSession.resCalculateCartItemPrice(item);
         this.utils.resFlowSession.cart[index] = this.resFlowSession.cart[index];
         this.getTotalCartValue();
     }
@@ -163,8 +171,12 @@ export class ShoppingCartComponent implements OnInit {
         this.appComp.getCheckOut(this.itemPrice);
     }
 
-    toggleSection(e, i) {
-        $('#section-'+i).toggleClass('in');
-        $(e.currentTarget).find('.fa').toggleClass('fa-chevron-up').toggleClass('fa-chevron-down');
+    toggleSection(i) {
+        $('#section-body-' + i).toggleClass('in');
+        $('#section-header-' + i).find('.fa').toggleClass('fa-chevron-up').toggleClass('fa-chevron-down');
+    }
+
+    continueShopping() {
+        this.route.navigateByUrl('/doorSize');
     }
 }

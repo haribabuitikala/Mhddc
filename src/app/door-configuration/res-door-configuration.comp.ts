@@ -77,7 +77,7 @@ export class ResDoorConfigurationComponent implements OnInit {
         }
     }
     data;
-    shareEmail:any;
+    shareEmail: any;
 
     ngOnInit() {
         this.setNavComponent();
@@ -96,12 +96,44 @@ export class ResDoorConfigurationComponent implements OnInit {
 
 
 
-    
+    emailData = this.utils.resFlowSession.resDetails;
     sendMail() {
+        var data = this.emailData;
+        var collectionName = data.collectionName;
+        var constructionMdlNo = data.construction.modelNumber;
+        var constructionPrice = function () {
+            if (!data.isDIY) {
+                return (data.construction.price + data.construction.laborcost) * data.construction.qty;
+            }
+            else {
+                return data.construction.price * data.construction.qty
+            }
+        }
+
+        var widthF = data.widthF;
+        var widthI = data.widthI;
+        var heightF = data.heightF;
+        var heightI = data.heightI;
+        var body = `
+          <p>${data.collectionName}</p>            
+          <dd class="door-configuration-table-header">
+            Door Model
+          </dd>
+          <dd>
+            <p>${constructionMdlNo}</p>
+            <p>$ ${constructionPrice} </p>
+          </dd>
+           <dd class="door-configuration-table-header">
+                Size
+            </dd>
+            <dd>
+                <p>${widthF}'${widthI}"(w) x ${heightF}'${heightI}"(h)</p>
+            </dd>
+        `
         let obj = {
             ToEmail: this.shareEmail,
-            body: '',
-            subject: ''
+            Body: body,
+            Subject: 'door configuration'
         }
         this.dataService.sendMail(obj)
             .subscribe(res => {
