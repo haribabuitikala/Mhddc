@@ -288,18 +288,21 @@ export class ResidentialFlowSession {
         color: {
             overlay: {
                 name: '',
-                price: 0
+                price: 0,
+                qty: 0
             },
             base: {
                 name: '',
-                price: 0
+                price: 0,
+                qty: 0
             }
         },
         topSection: {
             name: '',
             glassType: {
                 name: '',
-                price: 0
+                price: 0,
+                qty: 0
             }
         },
         hardware: {
@@ -472,11 +475,13 @@ export class ResidentialFlowSession {
             this.resDetails.color = {
                 overlay: {
                     name: '',
-                    price: 0
+                    price: 0,
+                    qty: 0
                 },
                 base: {
                     name: '',
-                    price: 0
+                    price: 0,
+                    qty: 0
                 }
             };
             this.resDoorObj['reset' + this.resDoorObj['resetorder'][5]]();
@@ -492,7 +497,8 @@ export class ResidentialFlowSession {
                 name: '',
                 glassType: {
                     name: '',
-                    price: 0
+                    price: 0,
+                    qty: 0
                 }
             };
             this.resDoorObj['reset' + this.resDoorObj['resetorder'][6]]();
@@ -638,40 +644,43 @@ export class ResidentialFlowSession {
                 // Calculate price for Overlay Color
                 let oc = obj.color.overlay;
                 if (oc && oc.hasOwnProperty('item_price') && obj.product.product['item_id'] !== 16) {
-                    price[0] = price[0] + oc['item_price'];
-                    price[1] = price[1] + oc['item_price'];
+                    price[0] = price[0] + oc['item_price'] * count;
+                    price[1] = price[1] + oc['item_price'] * count;
 
                     this.resDetails.color.overlay.name = oc['item_name'];
                     this.resDetails.color.overlay.price = oc['item_price'];
+                    this.resDetails.color.overlay.qty = count;
                 }
 
                 // Calculate price for Base Color
                 let bc = obj.color.base;
                 if (bc && bc.hasOwnProperty('item_price')) {
-                    price[0] = price[0] + bc['item_price'];
-                    price[1] = price[1] + bc['item_price'];
+                    price[0] = price[0] + bc['item_price'] * count;
+                    price[1] = price[1] + bc['item_price'] * count;
 
                     this.resDetails.color.base.name = bc['item_name'];
                     this.resDetails.color.base.price = bc['item_price'];
+                    this.resDetails.color.base.qty = count;
                 }
 
                 // Calculate price for Top Section and Glasstype
                 let tsgt = obj.windows.glasstype;
                 if (tsgt && tsgt.hasOwnProperty('item_price')) {
-                    price[0] = price[0] + tsgt['item_price'];
-                    price[1] = price[1] + tsgt['item_price'];
+                    price[0] = price[0] + tsgt['item_price'] * count;
+                    price[1] = price[1] + tsgt['item_price'] * count;
 
                     this.resDetails.topSection.name = obj.windows.topsection['item_name'];
                     this.resDetails.topSection.glassType.name = tsgt['item_name'];
                     this.resDetails.topSection.glassType.price = tsgt['item_price'];
+                    this.resDetails.topSection.glassType.qty = count;
                 }
 
                 // Calculate price for Hardware
                 // a.Calculate price for Handles
                 let hh = obj.hardware.handle;
                 if (hh && hh.hasOwnProperty('item_installed_price')) {
-                    price[0] = price[0] + hh['item_installed_price'] * hh['count'];
-                    price[1] = price[1] + hh['item_installed_price'] * hh['count'];
+                    price[0] = price[0] + hh['item_installed_price'] * hh['count'] * count;
+                    price[1] = price[1] + hh['item_installed_price'] * hh['count'] * count;
 
                     this.utils.resFlowSession.resDetails.hardware.handle.name = hh['item_name'];
                     this.utils.resFlowSession.resDetails.hardware.handle.price = hh['item_installed_price'];
@@ -680,8 +689,8 @@ export class ResidentialFlowSession {
                 // b.Calculate price for Stepplate
                 let hs = obj.hardware.stepplate;
                 if (hs && hs.hasOwnProperty('item_installed_price')) {
-                    price[0] = price[0] + hs['item_installed_price'] * hs['count'];
-                    price[1] = price[1] + hs['item_installed_price'] * hs['count'];
+                    price[0] = price[0] + hs['item_installed_price'] * hs['count'] * count;
+                    price[1] = price[1] + hs['item_installed_price'] * hs['count'] * count;
 
                     this.utils.resFlowSession.resDetails.hardware.stepPlate.name = hs['item_name'];
                     this.utils.resFlowSession.resDetails.hardware.stepPlate.price = hs['item_installed_price'];
@@ -690,8 +699,8 @@ export class ResidentialFlowSession {
                 // c.Calculate price for Hinges
                 let hhi = obj.hardware.hinge;
                 if (hhi && hhi.hasOwnProperty('item_installed_price')) {
-                    price[0] = price[0] + hhi['item_installed_price'] * hhi['count'];
-                    price[1] = price[1] + hhi['item_installed_price'] * hhi['count'];
+                    price[0] = price[0] + hhi['item_installed_price'] * hhi['count'] * count;
+                    price[1] = price[1] + hhi['item_installed_price'] * hhi['count'] * count;
 
                     this.utils.resFlowSession.resDetails.hardware.hinge.name = hhi['item_name'];
                     this.utils.resFlowSession.resDetails.hardware.hinge.price = hhi['item_installed_price'];
@@ -709,7 +718,8 @@ export class ResidentialFlowSession {
 
                 // Calculate price if EPA
                 if (this.resDoorObj.isEPA) {
-                    price[0] = price[0] + 20;
+                    price[0] = price[0] + 20 * count;
+                    this.resDetails.isEPA = true;
                 }
 
                 // Calculate price for Openers
@@ -741,16 +751,28 @@ export class ResidentialFlowSession {
                 if (obj.additional.items.length > 0) {
                     _.forEach(obj.additional.items, (item) => {
                         if (item.hasOwnProperty('price')) {
-                            price[0] = price[0] + item['price'];
-                            price[1] = price[1] + item['price'];
-                            this.resDetails.additionalOptions.items.push({
-                                name: item['name'],
-                                price: item['price']
-                            });
+                            if(item.id !== 5) {
+                                price[0] = price[0] + item['price'] * count;
+                                price[1] = price[1] + item['price'] * count;
+                                this.resDetails.additionalOptions.items.push({
+                                    id: item['id'],
+                                    name: item['name'],
+                                    price: item['price'],
+                                    qty: count
+                                });
+                            } else {
+                                price[0] = price[0] + item['price'];
+                                price[1] = price[1] + item['price'];
+                                this.resDetails.additionalOptions.items.push({
+                                    id: item['id'],
+                                    name: item['name'],
+                                    price: item['price'],
+                                    qty: 1 
+                                });
+                            }
                         }
                     })
                 }
-
 
                 if (obj.product.product['item_id'] == 9) {
                     if (obj.construction.groove['item_price']) {
@@ -781,10 +803,46 @@ export class ResidentialFlowSession {
 
         // Calculate Door price
         if(!item.isDIY) {
-            item.totalPrice = item.construction.qty * (item.construction.price + item.construction.laborcost);
+            item.totalPrice = item.totalPrice + count * (item.construction.price + item.construction.laborcost);
         } else {
-            item.totalPrice = item.construction.qty * item.construction.price;
+            item.totalPrice = item.totalPrice + count * item.construction.price;
         }
+
+        // Calculate color price 
+        // a. Calculate Overlay price
+        item.totalPrice = item.totalPrice + item.color.overlay.price * count;
+        item.color.overlay.qty = count; 
+        // b. Calculate Base price
+        item.totalPrice = item.totalPrice + item.color.base.price * count;
+        item.color.base.qty = count; 
+
+        // Calculate Top Section price
+        item.totalPrice = item.totalPrice + item.topSection.glassType.price * count;
+        item.topSection.glassType.qty = count;
+
+        // Calculate Hardware price
+        // a. Calculate Handle price
+        item.totalPrice = item.totalPrice + item.hardware.handle.price * count;
+        // b. Calculate Handle price
+        item.totalPrice = item.totalPrice + item.hardware.stepPlate.price * count;
+        // c. Calculate Handle price
+        item.totalPrice = item.totalPrice + item.hardware.hinge.price * count;
+
+        // Calculate EPA price
+        if(item.isEPA) {
+            item.totalPrice = item.totalPrice + 20 * count;    
+        }
+
+        // Calculate Additional Options price
+        item.additionalOptions.items.forEach(function (itm) {
+            if(itm.id !== 5) {
+                item.totalPrice = item.totalPrice + item.price * count;
+                itm.qty = count;
+            } else {
+                item.totalPrice = item.totalPrice + item.price;
+            }            
+        });
+
         return item;
     }
 

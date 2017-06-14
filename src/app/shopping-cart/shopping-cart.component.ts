@@ -121,11 +121,14 @@ export class ShoppingCartComponent implements OnInit {
 
     updateQty(item, index, increment?) {
         if(increment) {
-            item.construction.qty = item.construction.qty + 1;
+            if(item.construction.qty !== 6)
+                item.construction.qty = item.construction.qty + 1;
         } else {
-            item.construction.qty = item.construction.qty - 1;
+            if(item.construction.qty !== 1)
+                item.construction.qty = item.construction.qty - 1;
         }
         this.utils.resFlowSession.cart[index]  = this.utils.resFlowSession.resCalculateCartItemPrice(item);
+        this.utils.resFlowSession.cart[index] = this.resFlowSession.cart[index];
         this.getTotalCartValue();
     }
 
