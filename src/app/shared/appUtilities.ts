@@ -702,7 +702,7 @@ export class ResidentialFlowSession {
                 let hs = obj.hardware.stepplate;
                 if (hs && hs.hasOwnProperty('item_installed_price')) {
                     price[0] = price[0] + hs['item_installed_price'] * hs['count'] * count;
-                    price[1] = price[1] + hs['item_installed_price'] * hs['count'] * count;
+                    price[1] = price[1] + hs['item_price'] * hs['count'] * count;
 
                     this.utils.resFlowSession.resDetails.hardware.stepPlate.name = hs['item_name'];
                     this.utils.resFlowSession.resDetails.hardware.stepPlate.install_price = hs['item_installed_price'];
@@ -713,7 +713,7 @@ export class ResidentialFlowSession {
                 let hhi = obj.hardware.hinge;
                 if (hhi && hhi.hasOwnProperty('item_installed_price')) {
                     price[0] = price[0] + hhi['item_installed_price'] * hhi['count'] * count;
-                    price[1] = price[1] + hhi['item_installed_price'] * hhi['count'] * count;
+                    price[1] = price[1] + hhi['item_price'] * hhi['count'] * count;
 
                     this.utils.resFlowSession.resDetails.hardware.hinge.name = hhi['item_name'];
                     this.utils.resFlowSession.resDetails.hardware.hinge.install_price = hhi['item_installed_price'];
@@ -724,7 +724,8 @@ export class ResidentialFlowSession {
                 let locksItem = obj.hardware.lock;
                 if (locksItem && locksItem.hasOwnProperty('item_installed_price')) {
                     price[0] = price[0] + locksItem['item_installed_price'] * 1;
-                    price[1] = price[1] + locksItem['item_installed_price'] * 1;
+                    let itemPrice = locksItem['item_price'] ? locksItem['item_price'] : locksItem['item_installed_price'];
+                    price[1] = price[1] + itemPrice * 1;
 
                     this.resDetails.hardware.lock.name = locksItem['item_name'];
                     this.resDetails.hardware.lock.price = locksItem['item_installed_price'];
