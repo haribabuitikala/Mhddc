@@ -17,8 +17,6 @@
     </div>
 </div>
 <modal #modal [backdrop]='false'>
-    <modal-header [show-close]='true'>
-    </modal-header>
     <modal-body>
         <app-shopping-cart #shoppingCart [IsModal]='true' (closeModal)='closeDialog()'></app-shopping-cart>
     </modal-body>

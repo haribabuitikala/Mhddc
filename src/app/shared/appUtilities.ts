@@ -120,7 +120,11 @@ export class AppUtilities {
         selectedHome: '',
         selectedImg: null,
         colorconfig: '',
-        isUpsellSet: false
+        isUpsellSet: false,
+        wf: 0,
+        wi: 0,
+        hf: 0,
+        hi: 0
     };
 
     gdoFlowSession = {
@@ -844,7 +848,7 @@ export class ResidentialFlowSession {
                 }
             });
         }
-        catch(e) {
+        catch (e) {
             console.log(e);
         }
         return item;

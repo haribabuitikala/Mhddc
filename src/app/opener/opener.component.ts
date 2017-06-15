@@ -65,10 +65,7 @@ export class OpenerComponent implements OnInit {
         // });
     }
 
-    ngOnInit() {
-
-        let detailsInfo;
-        detailsInfo.Opener = true;
+    ngOnInit() {      
 
         this.pageNo = this.utils.utilities.currPage;
         this.navComp.activateIcon();

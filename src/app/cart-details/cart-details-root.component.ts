@@ -11,6 +11,6 @@ export class CartDetailsRootComponent implements OnInit {
   @Input() Item;
   data;
   ngOnInit() {
-    this.data = this.Item || this.utils.resFlowSession.resDetails;
+    this.data = this.Item || this.utils.resFlowSession.resDoorObj;
   }
 }

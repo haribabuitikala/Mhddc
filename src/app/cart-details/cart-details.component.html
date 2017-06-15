@@ -75,7 +75,7 @@
             Glass Type
         </dd>
         <dd>
-            <p [innerHTML]="data.topSection.name"></p>
+            <p [innerHTML]="data.topSection.glassType.name"></p>
             <span>{{data.topSection.glassType.price * data.topSection.glassType.qty | currency:'USD':true:'1.2-2'}}</span>
         </dd>
     </dl>

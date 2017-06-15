@@ -153,6 +153,9 @@ export class DoorSizeComponent implements OnInit {
         this.utils.utilities.wi = this.widthInches[0];
         this.utils.utilities.wf = +this.selectedWidthFeet;
 
+        this.utils.resFlow.wf = +this.selectedWidthFeet;
+        this.utils.resFlow.wi = this.widthInches[0];
+
         this.resDetails.widthF = this.widthInches[0];
         this.resDetails.widthI = +this.selectedWidthFeet;
 
@@ -166,6 +169,9 @@ export class DoorSizeComponent implements OnInit {
         this.utils.utilities.hf = +this.selectedHeightFeet;
         this.utils.utilities.hi = this.heightInches[0];
 
+        this.utils.resFlow.hf = +this.selectedHeightFeet;
+        this.utils.resFlow.hi = this.heightInches[0];
+
         this.resDetails.heightF = this.widthInches[0];
         this.resDetails.heightI = this.heightInches[0];
     }
@@ -173,12 +179,14 @@ export class DoorSizeComponent implements OnInit {
     getWidth() {
         // this.heightFeets = this.sizes.getHeightFeets(this.selectedwidth);
         this.utils.utilities.wi = +this.selectedWidthInches;
+        this.utils.resFlow.wi = +this.selectedWidthInches;
         this.resDetails.widthI = +this.selectedWidthInches;
         this.selectedHeightFeet = 0;
     }
 
     getHeight() {
-        this.utils.utilities.hi = +this.selectedHeightInches;
+        this.utils.utilities.hi = +this.selectedHeightInches;        
+        this.utils.resFlow.hi = +this.selectedHeightInches;
         this.resDetails.heightI = +this.selectedHeightInches;
     }
 

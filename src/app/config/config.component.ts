@@ -442,10 +442,7 @@ export class ConfigComponent implements OnInit, AfterViewInit, AfterViewChecked 
     detailsModal() {
 
         this.details = this.utils.resFlowSession.resDetails;
-        this.details.widthF = this.utils.utilities.wf;
-        this.details.widthI = this.utils.utilities.wi;
-        this.details.heightF = this.utils.utilities.hf;
-        this.details.heightI = this.utils.utilities.hi;
+
     }
 
     openDetailsModal(detailsModal) {
@@ -456,6 +453,11 @@ export class ConfigComponent implements OnInit, AfterViewInit, AfterViewChecked 
         var hgt;
         var detailshgt;
         var bodyWdt = $('body').width();
+        
+        this.details.widthF = this.utils.resFlow.wf;
+        this.details.widthI = this.utils.resFlow.wi;
+        this.details.heightF = this.utils.resFlow.hf;
+        this.details.heightI = this.utils.resFlow.hi;
         switch (bodyWdt) {
             case 414:
                 hgt = linearhgt + header;
