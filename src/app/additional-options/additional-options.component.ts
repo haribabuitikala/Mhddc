@@ -72,6 +72,15 @@ export class AdditionalOptionsComponent implements OnInit {
         });
     }
 
+    onPaste(e) {
+
+        let content = e.clipboardData.getData('text/plain');
+        // Do stuff 
+        setTimeout(() => {
+            this.distance = "";
+        }, 0);
+    }
+
 
     ngOnInit() {
         this.utils.resetCalc();
