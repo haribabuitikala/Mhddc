@@ -312,17 +312,20 @@ export class ResidentialFlowSession {
         hardware: {
             handle: {
                 name: '',
-                price: 0,
+                install_price: 0,
+                diy_price: 0,
                 qty: 0
             },
             stepPlate: {
                 name: '',
-                price: 0,
+                install_price: 0,
+                diy_price: 0,
                 qty: 0
             },
             hinge: {
                 name: '',
-                price: 0,
+                install_price: 0,
+                diy_price: 0,
                 qty: 0
             },
             lock: {
@@ -524,17 +527,20 @@ export class ResidentialFlowSession {
             this.resDetails.hardware = {
                 handle: {
                     name: '',
-                    price: 0,
+                    install_price: 0,
+                    diy_price: 0,
                     qty: 0
                 },
                 stepPlate: {
                     name: '',
-                    price: 0,
+                    install_price: 0,
+                    diy_price: 0,
                     qty: 0
                 },
                 hinge: {
                     name: '',
-                    price: 0,
+                    install_price: 0,
+                    diy_price: 0,
                     qty: 0
                 },
                 lock: {
@@ -685,10 +691,11 @@ export class ResidentialFlowSession {
                 let hh = obj.hardware.handle;
                 if (hh && hh.hasOwnProperty('item_installed_price')) {
                     price[0] = price[0] + hh['item_installed_price'] * hh['count'] * count;
-                    price[1] = price[1] + hh['item_installed_price'] * hh['count'] * count;
+                    price[1] = price[1] + hh['item_price'] * hh['count'] * count;
 
                     this.utils.resFlowSession.resDetails.hardware.handle.name = hh['item_name'];
-                    this.utils.resFlowSession.resDetails.hardware.handle.price = hh['item_installed_price'];
+                    this.utils.resFlowSession.resDetails.hardware.handle.install_price = hh['item_installed_price'];
+                    this.utils.resFlowSession.resDetails.hardware.handle.diy_price = hh['item_price'];
                     this.utils.resFlowSession.resDetails.hardware.handle.qty = hh['count'];
                 }
                 // b.Calculate price for Stepplate
@@ -698,7 +705,8 @@ export class ResidentialFlowSession {
                     price[1] = price[1] + hs['item_installed_price'] * hs['count'] * count;
 
                     this.utils.resFlowSession.resDetails.hardware.stepPlate.name = hs['item_name'];
-                    this.utils.resFlowSession.resDetails.hardware.stepPlate.price = hs['item_installed_price'];
+                    this.utils.resFlowSession.resDetails.hardware.stepPlate.install_price = hs['item_installed_price'];
+                    this.utils.resFlowSession.resDetails.hardware.stepPlate.diy_price = hs['item_price'];
                     this.utils.resFlowSession.resDetails.hardware.stepPlate.qty = hs['count'];
                 }
                 // c.Calculate price for Hinges
@@ -708,7 +716,8 @@ export class ResidentialFlowSession {
                     price[1] = price[1] + hhi['item_installed_price'] * hhi['count'] * count;
 
                     this.utils.resFlowSession.resDetails.hardware.hinge.name = hhi['item_name'];
-                    this.utils.resFlowSession.resDetails.hardware.hinge.price = hhi['item_installed_price'];
+                    this.utils.resFlowSession.resDetails.hardware.hinge.install_price = hhi['item_installed_price'];
+                    this.utils.resFlowSession.resDetails.hardware.hinge.diy_price = hhi['item_price'];
                     this.utils.resFlowSession.resDetails.hardware.hinge.qty = hhi['count'];
                 }
 
@@ -826,12 +835,22 @@ export class ResidentialFlowSession {
             item.topSection.glassType.qty = count;
 
             // Calculate Hardware price
-            // a. Calculate Handle price
-            item.totalPrice = item.totalPrice + item.hardware.handle.price * count;
-            // b. Calculate Handle price
-            item.totalPrice = item.totalPrice + item.hardware.stepPlate.price * count;
-            // c. Calculate Handle price
-            item.totalPrice = item.totalPrice + item.hardware.hinge.price * count;
+            // For Installed
+            if(!item.isDIY) {
+                // a. Calculate Handle price
+                item.totalPrice = item.totalPrice + item.hardware.handle.install_price * count;
+                // b. Calculate Handle price
+                item.totalPrice = item.totalPrice + item.hardware.stepPlate.install_price * count;
+                // c. Calculate Handle price
+                item.totalPrice = item.totalPrice + item.hardware.hinge.install_price * count;
+            } else {
+                // a. Calculate Handle price
+                item.totalPrice = item.totalPrice + item.hardware.handle.diy_price * count;
+                // b. Calculate Handle price
+                item.totalPrice = item.totalPrice + item.hardware.stepPlate.diy_price * count;
+                // c. Calculate Handle price
+                item.totalPrice = item.totalPrice + item.hardware.hinge.diy_price * count;
+            }           
 
             // Calculate EPA price
             if (item.isEPA) {
