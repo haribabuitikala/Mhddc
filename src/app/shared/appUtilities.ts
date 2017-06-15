@@ -801,49 +801,52 @@ export class ResidentialFlowSession {
         let price;
         let count = item.construction.qty;
         item.totalPrice = 0;
-
-        // Calculate Door price
-        if (!item.isDIY) {
-            item.totalPrice = item.totalPrice + count * (item.construction.price + item.construction.laborcost);
-        } else {
-            item.totalPrice = item.totalPrice + count * item.construction.price;
-        }
-
-        // Calculate color price 
-        // a. Calculate Overlay price
-        item.totalPrice = item.totalPrice + item.color.overlay.price * count;
-        item.color.overlay.qty = count;
-        // b. Calculate Base price
-        item.totalPrice = item.totalPrice + item.color.base.price * count;
-        item.color.base.qty = count;
-
-        // Calculate Top Section price
-        item.totalPrice = item.totalPrice + item.topSection.glassType.price * count;
-        item.topSection.glassType.qty = count;
-
-        // Calculate Hardware price
-        // a. Calculate Handle price
-        item.totalPrice = item.totalPrice + item.hardware.handle.price * count;
-        // b. Calculate Handle price
-        item.totalPrice = item.totalPrice + item.hardware.stepPlate.price * count;
-        // c. Calculate Handle price
-        item.totalPrice = item.totalPrice + item.hardware.hinge.price * count;
-
-        // Calculate EPA price
-        if (item.isEPA) {
-            item.totalPrice = item.totalPrice + 20 * count;
-        }
-
-        // Calculate Additional Options price
-        item.additionalOptions.items.forEach(function (itm) {
-            if (itm.id !== 5) {
-                item.totalPrice = item.totalPrice + item.price * count;
-                itm.qty = count;
+        try {
+            // Calculate Door price
+            if (!item.isDIY) {
+                item.totalPrice = item.totalPrice + count * (item.construction.price + item.construction.laborcost);
             } else {
-                item.totalPrice = item.totalPrice + item.price;
+                item.totalPrice = item.totalPrice + count * item.construction.price;
             }
-        });
 
+            // Calculate color price 
+            // a. Calculate Overlay price
+            item.totalPrice = item.totalPrice + item.color.overlay.price * count;
+            item.color.overlay.qty = count;
+            // b. Calculate Base price
+            item.totalPrice = item.totalPrice + item.color.base.price * count;
+            item.color.base.qty = count;
+
+            // Calculate Top Section price
+            item.totalPrice = item.totalPrice + item.topSection.glassType.price * count;
+            item.topSection.glassType.qty = count;
+
+            // Calculate Hardware price
+            // a. Calculate Handle price
+            item.totalPrice = item.totalPrice + item.hardware.handle.price * count;
+            // b. Calculate Handle price
+            item.totalPrice = item.totalPrice + item.hardware.stepPlate.price * count;
+            // c. Calculate Handle price
+            item.totalPrice = item.totalPrice + item.hardware.hinge.price * count;
+
+            // Calculate EPA price
+            if (item.isEPA) {
+                item.totalPrice = item.totalPrice + 20 * count;
+            }
+
+            // Calculate Additional Options price
+            item.additionalOptions.items.forEach(function (itm) {
+                if (itm.id !== 5) {
+                    item.totalPrice = item.totalPrice + itm.price * count;
+                    itm.qty = count;
+                } else {
+                    item.totalPrice = item.totalPrice + itm.price;
+                }
+            });
+        }
+        catch(e) {
+            console.log(e);
+        }
         return item;
     }
 
