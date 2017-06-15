@@ -16,13 +16,10 @@
         <span id="shop-count" class="shop-count">{{itemsCount}}</span>
     </div>
 </div>
-<modal #modal>
-    <modal-header  >
-        <h4 class="padding-l-20">
-            Cart
-        </h4>
+<modal #modal [backdrop]='false'>
+    <modal-header [show-close]='true'>
     </modal-header>
     <modal-body>
-        <app-shopping-cart [IsModal]='true' (closeModal)='closeDialog()'></app-shopping-cart>
+        <app-shopping-cart #shoppingCart [IsModal]='true' (closeModal)='closeDialog()'></app-shopping-cart>
     </modal-body>
 </modal>

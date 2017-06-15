@@ -3,6 +3,7 @@ import { ModalComponent } from "ng2-bs3-modal/ng2-bs3-modal";
 import { AppComponent } from "../app.component";
 import { Router } from '@angular/router';
 import { AppUtilities } from "../shared/appUtilities";
+import { ShoppingCartComponent } from '../shopping-cart/shopping-cart.component';
 
 declare var $: any;
 
@@ -13,6 +14,7 @@ declare var $: any;
 })
 export class HeaderComponent implements OnInit, AfterViewChecked {
     @ViewChild('modal') modal: ModalComponent;
+    @ViewChild('shoppingCart') shoppingCartComp: ShoppingCartComponent;
     showhamburger: boolean = false;
 
     @Input() count: any;
@@ -43,7 +45,13 @@ export class HeaderComponent implements OnInit, AfterViewChecked {
         this.bindDocumentClick();
     }
     cartIcon(modal?) {
-        window.location.hash.indexOf('shoppingCart') != -1 ? '' : modal.open();
+        if(window.location.hash.indexOf('shoppingCart') == -1) {
+            this.shoppingCartComp.getItemPrice();
+            if(this.shoppingCartComp.resFlowSession.cart.length > 0) {
+                this.shoppingCartComp.toggleSection(this.shoppingCartComp.resFlowSession.cart.length - 1);
+            }
+            modal.open();
+        }        
     }
 
     bindDocumentClick() {

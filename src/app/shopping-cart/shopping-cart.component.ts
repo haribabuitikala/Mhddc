@@ -53,11 +53,6 @@ export class ShoppingCartComponent implements OnInit {
     ngOnInit() {
         this.navComp.activateIcon();
         this.utils.resFlowSession.resDoorObj.TYPE === 'GDO' ? this.resFlow = false : this.resFlow = true;
-        if (this.resFlow) {
-            this.qty = 1;
-            this.itemPrice = this.getResPrice()
-        }
-
         this.pageNo = this.utils.utilities.currPage;
         this.appComp.currScreen = 0;
         this.distancePrice > 0 ? this.showDistancePrice = true : this.showDistancePrice = false;
@@ -73,12 +68,16 @@ export class ShoppingCartComponent implements OnInit {
         });
         $('body').removeClass('loader');
         this.resFlowSession = this.utils.resFlowSession;
+        this.getItemPrice();
+    }
+
+    getItemPrice() {
         if (this.utils.resFlowSession.resDoorObj.TYPE !== 'RES') {
             this.itemPrice = this.utils.calculateTotalPrice();
             this.isGdo = true;
         } else {
             this.getTotalCartValue(); 
-        }        
+        }
     }
 
     ngAfterViewInit(){        
@@ -177,6 +176,7 @@ export class ShoppingCartComponent implements OnInit {
     }
 
     continueShopping() {
+        this.closeModal.next();
         this.route.navigateByUrl('/doorSize');
     }
 }
