@@ -72,6 +72,7 @@ export class HardwareComponent implements OnInit {
             if (defaultCount == 2 && handle['placementlist'].split(';').length > 1) {
               this.countManager.handle = 1;
             }
+ 
           }
         }
       }
@@ -95,6 +96,7 @@ export class HardwareComponent implements OnInit {
             if (defaultCount == 2 && stepplate['placementlist'].split(';').length > 1) {
               this.countManager.stepplate = 1;
             }
+ 
           }
         }
       }
@@ -113,6 +115,8 @@ export class HardwareComponent implements OnInit {
             });
             this.hingesPlacementArr = arr3;
             this.countManager.hinge = 0;
+
+            
           }
         }
       }
@@ -139,6 +143,10 @@ export class HardwareComponent implements OnInit {
             }
             this.utils.resFlowSession.resDoorObj.hardware.handle['count'] = this.countManager.handle;
             this.utils.resFlowSession.resDoorObj.hardware.handle['placement'] = this.handlePlacements[this.countManager.handle];
+
+            if (hardware.handle['placement'].split(':').length > 0) {
+              hardware.handle['count'] = parseInt(hardware.handle['placement'].split(':')[0]);
+            }
           }
           break;
         case 'stepplates':
@@ -161,6 +169,10 @@ export class HardwareComponent implements OnInit {
 
               this.utils.resFlowSession.resDoorObj.hardware.stepplate['count'] = this.countManager.stepplate;
               this.utils.resFlowSession.resDoorObj.hardware.stepplate['placement'] = this.stepplatePlacements[this.countManager.stepplate];
+
+              if (hardware.stepplate['placement'].split(':').length > 0) {
+                hardware.stepplate['count'] = parseInt(hardware.stepplate['placement'].split(':')[0]);
+              }
             }
           }
           break;
@@ -181,8 +193,9 @@ export class HardwareComponent implements OnInit {
               if (defaultCount == 2 && hardware.hinge['placementlist'].split(';').length > 1) {
                 this.countManager.hinge = 1;
               }
-              //this.utils.resFlowSession.resDoorObj.hardware.hinge['count'] = this.countManager.hinge;
-              //this.utils.resFlowSession.resDoorObj.hardware.hinge['placement'] = this.hingePlacements[this.countManager.hinge];
+              if (hardware.hinge['placement'].split(':').length > 0) {
+                hardware.hinge['count'] = parseInt(hardware.hinge['placement'].split(':')[0]);
+              }
             }
           }
           break;
@@ -201,11 +214,24 @@ export class HardwareComponent implements OnInit {
   actionOnUpdateCount() {
     this.utils.resFlowSession.resDoorObj.hardware.handle['count'] = this.countManager.handle;
     this.utils.resFlowSession.resDoorObj.hardware.handle['placement'] = this.handlePlacements[this.countManager.handle];
+    let handleplacement = this.utils.resFlowSession.resDoorObj.hardware.handle['placement'];
+    if (handleplacement.split(':').length > 0) {
+      this.utils.resFlowSession.resDoorObj.hardware.handle['count'] = parseInt(handleplacement.split(':')[0]);
+    }
     this.utils.resFlowSession.resDoorObj.hardware.stepplate['count'] = this.countManager.stepplate;
     this.utils.resFlowSession.resDoorObj.hardware.stepplate['placement'] = this.stepplatePlacements[this.countManager.stepplate];
+    let stepplacement = this.utils.resFlowSession.resDoorObj.hardware.stepplate['placement'];
+    if (stepplacement.split(':').length > 0) {
+      this.utils.resFlowSession.resDoorObj.hardware.stepplate['count'] = parseInt(stepplacement.split(':')[0]);
+    }
     if (this.utils.resFlowSession.resDoorObj.hardware.hinge) {
       this.utils.resFlowSession.resDoorObj.hardware.hinge['count'] = this.countManager.hinge;
       this.utils.resFlowSession.resDoorObj.hardware.hinge['placement'] = this.hingePlacements[this.countManager.hinge];
+      let hingeplacement = this.utils.resFlowSession.resDoorObj.hardware.hinge['placement'];
+      if (hingeplacement.split(':').length > 0) {
+        this.utils.resFlowSession.resDoorObj.hardware.hinge['count'] = parseInt(hingeplacement.split(':')[0]);
+      }
+      
     }
 
     let hardware = this.utils.resFlowSession.resDoorObj.hardware;
