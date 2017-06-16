@@ -36,6 +36,25 @@ export class ConfigComponent implements OnInit, AfterViewInit, AfterViewChecked 
 
     ngAfterViewChecked() {
         this.cdref.detectChanges();
+        if(this.utils.resFlowSession.cart.length === 0) {
+            if(window.location.hash.indexOf('install') != -1) {
+                if(this.utils.resFlowSession.resDoorObj.INSTALLTYPE === 'Installed') {
+                    this.itemPriceDY = 0;
+                    this.itemPriceInstall = this.utils.utilities.itemPriceInstall;
+                } else {
+                    this.itemPriceInstall = 0;
+                    this.itemPriceDY = this.utils.utilities.itemPriceDY;
+                }
+            }
+        } else {
+            if(this.utils.resFlowSession.resDoorObj.INSTALLTYPE === 'Installed') {
+                this.itemPriceDY = 0;
+                this.itemPriceInstall = this.utils.utilities.itemPriceInstall;
+            } else {
+                this.itemPriceInstall = 0;
+                this.itemPriceDY = this.utils.utilities.itemPriceDY;
+            }
+        }
     }
 
     private fitToContainer() {
@@ -435,22 +454,6 @@ export class ConfigComponent implements OnInit, AfterViewInit, AfterViewChecked 
             this.utils.resFlowSession.resCalculatePrice();
             this.itemPriceInstall = this.utils.utilities.itemPriceInstall;
             this.itemPriceDY = this.utils.utilities.itemPriceDY;
-            if(this.utils.resFlowSession.cart.length === 0) {
-                if(window.location.hash.indexOf('install') != -1) {
-                    if(this.utils.resFlowSession.resDoorObj.INSTALLTYPE === 'Installed') {
-                        this.itemPriceDY = 0;
-                    } else {
-                        this.itemPriceInstall = 0;
-                    }
-                }
-            } else {
-                if(this.utils.resFlowSession.resDoorObj.INSTALLTYPE === 'Installed') {
-                    this.itemPriceDY = 0;
-                } else {
-                     this.itemPriceInstall = 0;   
-                }
-            }
-            
         } catch (g) {
         }
     }
