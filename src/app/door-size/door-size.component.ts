@@ -60,6 +60,15 @@ export class DoorSizeComponent implements OnInit {
     // private navComponent:NavComponent
     ngOnInit() {
         this.utils.resFlowSession.resDoorObj.resetsize();
+        if(this.utils.resFlowSession.cart.length > 0) {
+            if(this.utils.resFlowSession.cart[0].isDIY) {
+                this.utils.resFlowSession.resDoorObj.INSTALLTYPE = 'DIY';
+            } else {
+                this.utils.resFlowSession.resDoorObj.INSTALLTYPE = 'Installed';
+            }
+        } else {
+            this.utils.resFlowSession.resDoorObj.INSTALLTYPE = 'Installed';
+        }
         this.appComponent.currScreen = 3;
         this.lang = this.language.getDoorSize();
         this.widthFeets = this.sizes.getWidthFeets();
