@@ -206,7 +206,7 @@ export class ConstructionComponent implements OnInit {
 
     getModelPriceUpsell(updata) {
         var currentConstruction = this.utils.resFlowSession.resDoorObj.construction.construction;
-        var filtermodel = window['cObj'].construction.apiData.filter(c => { console.log(c.design_id, c.id); return c.ClopayModelNumber == updata.upgrade_model; });
+        var filtermodel = window['cObj'].construction.apiData.filter(c => {  return c.ClopayModelNumber == updata.upgrade_model; });
         if (filtermodel.length > 0) {
             filtermodel = filtermodel[0];
             return (filtermodel.item_price - currentConstruction['item_price']);
@@ -215,7 +215,12 @@ export class ConstructionComponent implements OnInit {
     }
 
     updateWithUpsellPrice(data) {
-        this.utils.resFlowSession.resDetails.upsellPrice = this.getModelPriceUpsell(data);
+        //this.utils.resFlowSession.resDetails.upsellPrice = this.getModelPriceUpsell(data);
+        var filtermodel = window['cObj'].construction.apiData.filter(c => {  return c.ClopayModelNumber == data.upgrade_model; });
+        if (filtermodel.length > 0) {
+            filtermodel = filtermodel[0];
+            this.utils.resFlowSession.resDoorObj.construction.construction = filtermodel;
+        }
         this.config.calculatePrice();
         this.moveNext();
     }
