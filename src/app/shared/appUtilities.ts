@@ -124,7 +124,8 @@ export class AppUtilities {
         wf: 0,
         wi: 0,
         hf: 0,
-        hi: 0
+        hi: 0,
+        imgSrc: ''
     };
 
     gdoFlowSession = {
@@ -202,7 +203,9 @@ export class AppUtilities {
         this.utilities.hardwarePrice = 0;
     }
 
-
+    // resetGdoTot() {
+    //     return this.utilities.item_price * 1;
+    // }
 
     updateQty(flow, qty) {
         if (flow === 1 && qty < 6) {
@@ -837,7 +840,7 @@ export class ResidentialFlowSession {
 
             // Calculate Hardware price
             // For Installed
-            if(!item.isDIY) {
+            if (!item.isDIY) {
                 // a. Calculate Handle price
                 item.totalPrice = item.totalPrice + item.hardware.handle.install_price * count;
                 // b. Calculate Handle price
@@ -851,7 +854,7 @@ export class ResidentialFlowSession {
                 item.totalPrice = item.totalPrice + item.hardware.stepPlate.diy_price * count;
                 // c. Calculate Handle price
                 item.totalPrice = item.totalPrice + item.hardware.hinge.diy_price * count;
-            }           
+            }
 
             // Calculate EPA price
             if (item.isEPA) {

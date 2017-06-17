@@ -83,7 +83,7 @@ export class AdditionalOptionsComponent implements OnInit {
 
 
     ngOnInit() {
-        this.utils.resetCalc();
+        // this.utils.resetCalc();
         this.appComponent.next = 'Next';
         this.pageNo = this.utils.utilities.currPage;
         this.showMenu = this.utils.utilities.showNav;
@@ -113,9 +113,9 @@ export class AdditionalOptionsComponent implements OnInit {
         $('#visualize-header').html(k);
 
 
-        this.utils.utilities.kPrice = _.sumBy(this.dataStore.gdoOpenerAccessories, function (o) {
-            return o.price;
-        });
+        // this.utils.utilities.kPrice = _.sumBy(this.dataStore.gdoOpenerAccessories, function (o) {
+        //     return o.price;
+        // });
 
 
     }

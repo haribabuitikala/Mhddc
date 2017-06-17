@@ -114,15 +114,102 @@ export class DoorConfigurationComponent implements OnInit {
         this.qty = this.utils.utilities.gdoOpenerQty;
     }
     emailBody = this.utils.gdoFlowSession;
+    genItems(j, obj) {
+        for (var i = 0; i < j.length; i++) {
+            var itm = 'itm' + i;
+            var itmPrice = 'itm' + i + 'Price';
+            var itmDisplay = 'itm' + i + 'Display';
+            itmDisplay = 'none';
+            if (obj.items[0].QTY) {
+                itm = obj.items[i].item_name
+                itmPrice = '$' + (obj.items[0].item_price * obj.items[0].QTY).toFixed(2);
+                itmDisplay = 'block';
+            }
+        }
+    }
     shareEmail() {
         var data = this.emailBody;
         var windcode = data.windcode;
+        var opener = data.cart[0].opener.opener['item_name'];
+        var openerPrice = '$' + (data.cart[0].opener.opener['item_price']).toFixed(2);
+        var items = this.utils.gdoFlowSession.cart[0].opener.items.length;
+        var itm0, itm1, itm2, itm0Price, itm1Price, itm2Price;
+        var itm0Display = 'none';
+        var itm1Display = 'none';
+        var itm2Display = 'none';
+        let accesories = this.utils.gdoFlowSession.cart[0].opener;
+        switch (items) {
+            case 1:
+                if (accesories.items[0].QTY) {
+                    itm0 = accesories.items[0].item_name + '(x' + accesories.items[0].QTY + ')';
+                    itm0Price = '$' + (accesories.items[0].item_price * accesories.items[0].QTY).toFixed(2);
+                    itm0Display = 'block';
+                }
+                break;
+            case 2:
+                if (accesories.items[0].QTY && accesories.items[1].QTY) {
+                    itm0 = accesories.items[0].item_name + '(x' + accesories.items[0].QTY + ')';
+                    itm0Price = '$' + (accesories.items[0].item_price * accesories.items[0].QTY).toFixed(2);
+                    itm0Display = 'block';
+                    itm1 = accesories.items[1].item_name + '(x' + accesories.items[1].QTY + ')';
+                    itm1Price = '$' + (accesories.items[1].item_price * accesories.items[1].QTY).toFixed(2);
+                    itm1Display = 'block';
+                }
+                break;
+            case 3:
+                if (accesories.items[0].QTY && accesories.items[1].QTY && accesories.items[2].QTY) {
+                    itm0 = accesories.items[0].item_name + '(x' + accesories.items[0].QTY + ')';
+                    itm0Price = '$' + (accesories.items[0].item_price * accesories.items[0].QTY).toFixed(2);
+                    itm0Display = 'block';
+                    itm1 = accesories.items[1].item_name + '(x' + accesories.items[1].QTY + ')';
+                    itm1Price = '$' + (accesories.items[1].item_price * accesories.items[1].QTY).toFixed(2);
+                    itm1Display = 'block';
+                    itm2 = accesories.items[2].item_name + '(x' + accesories.items[2].QTY + ')';
+                    itm2Price = '$' + (accesories.items[2].item_price * accesories.items[2].QTY).toFixed(2);
+                    itm2Display = 'block';
+                }
+                break;
+        }
+        var itemPrice = this.gdoConfig.itemPrice;
+
         var body = `
-          <p>WindoCode : ${windcode}</p>
+          
+          <table style="border-collapse: collapse">
+            <tr style="border-bottom: 1px solid #ccc">
+                <td style="color: #f96302;padding:5px">
+                Opener:
+                </td>
+                <td style="border-left:1px solid #ccc">${opener}</td>
+                <td style="border-left:1px solid #ccc">
+                 ${openerPrice}
+                </td>
+            </tr>
+            <tr style="border-bottom: 1px solid #ccc">
+                <td style="color: #f96302;padding:5px">
+                Opener Items:
+                </td>
+                <td style="padding:5px;border-left:1px solid #ccc">
+                   <div style="display: ${itm0Display}">${itm0}</div>
+                   <div style="display: ${itm1Display}">${itm1}</div>
+                   <div style="display: ${itm2Display}">${itm2}</div>
+                </td>
+                <td style="border-left:1px solid #ccc">
+                   <div style="display: ${itm0Display}">${itm0Price}</div>
+                   <div style="display: ${itm1Display}">${itm1Price}</div>
+                   <div style="display: ${itm2Display}">${itm2Price}</div>
+                </td>
+            </tr><tr>
+                <td></td>
+                <td>
+                <div style="text-align:right;color: #f96302;padding-right:40px">Sub Total:</div>
+                </td>
+                <td>${'$' + itemPrice.toFixed(2)}</td>
+            </tr>
+          </table>
         `
         let obj = {
             ToEmail: "maddylali@gmail.com",
-            Subject: 'subject',
+            Subject: 'Gdo Configuration',
             Body: body
         }
         this.dataService.sendMail(obj)

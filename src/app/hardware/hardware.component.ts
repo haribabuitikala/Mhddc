@@ -72,7 +72,7 @@ export class HardwareComponent implements OnInit {
             if (defaultCount == 2 && handle['placementlist'].split(';').length > 1) {
               this.countManager.handle = 1;
             }
- 
+
           }
         }
       }
@@ -96,7 +96,7 @@ export class HardwareComponent implements OnInit {
             if (defaultCount == 2 && stepplate['placementlist'].split(';').length > 1) {
               this.countManager.stepplate = 1;
             }
- 
+
           }
         }
       }
@@ -116,7 +116,7 @@ export class HardwareComponent implements OnInit {
             this.hingesPlacementArr = arr3;
             this.countManager.hinge = 0;
 
-            
+
           }
         }
       }
@@ -231,7 +231,7 @@ export class HardwareComponent implements OnInit {
       if (hingeplacement.split(':').length > 0) {
         this.utils.resFlowSession.resDoorObj.hardware.hinge['count'] = parseInt(hingeplacement.split(':')[0]);
       }
-      
+
     }
 
     let hardware = this.utils.resFlowSession.resDoorObj.hardware;
@@ -428,6 +428,12 @@ export class HardwareComponent implements OnInit {
 
 
   nextBtn(path) {
+    if (document.querySelector('.vsDoor') && document.querySelector('.vsDoor')['toDataURL']) {
+      this.utils.resFlow.imgSrc = document.querySelector('.vsDoor')['toDataURL']();
+    } else if (document.querySelector('#homeVis canvas') && document.querySelector('#homeVis canvas')['toDataURL']) {
+      this.utils.resFlow.imgSrc = document.querySelector('#homeVis canvas')['toDataURL']();
+    }
+
     this.navigateTo('/config/install');
   }
 

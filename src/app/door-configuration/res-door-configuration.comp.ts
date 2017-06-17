@@ -94,41 +94,242 @@ export class ResDoorConfigurationComponent implements OnInit {
 
     }
 
-
-
     emailData = this.utils.resFlowSession.resDetails;
-    sendMail() {
+    genItems(j, resObj) {
+        for (var i = 0; i < j; i++) {
+            var itm = 'itm' + i;
+            var itmPrice = 'itm' + i + 'Price';
+            var itmDisplay = 'itm' + i + 'display';
+            var itm = resObj.opener.items[i].item_name + '(x' + resObj.opener.items[i].count + ')';
+            var itmPrice = '$' + (resObj.opener.items[i].item_price * resObj.opener.items[i].count).toFixed(2);
+            var itmDisplay = 'block';
+        }
+    }
+    sendMail(email) {
         var data = this.emailData;
+        var resObj = this.utils.resFlowSession.resDoorObj;
+        var size = this.utils.resFlow
         var collectionName = data.collectionName;
         var constructionMdlNo = data.construction.modelNumber;
-        var constructionPrice = function () {
-            if (!data.isDIY) {
-                return (data.construction.price + data.construction.laborcost) * data.construction.qty;
-            }
-            else {
-                return data.construction.price * data.construction.qty
-            }
+        var constructionPrice = '$' + data.construction.price.toFixed(2);
+        var doorLen = data.construction.qty;
+
+        var imgSrc = this.utils.resFlow.imgSrc;
+
+        var widthF = size.wf;
+        var widthI = size.wi;
+        var heightF = size.hf;
+        var heightI = size.hi;
+        var WindCode = data.windcode;
+        var doorDesign = data.designName;
+        var doorConstruction = data.construction.name;
+        var color = data.color.base.name;
+        var topSection = data.topSection.name;
+        var placement = resObj.windows.placement;
+        var handle = data.hardware.handle.name;
+        var hardware = resObj.hardware.lock;
+        var hinge = data.hardware.hinge.name;
+        var stepPlate = data.hardware.stepPlate.name;
+        var opener = data.opener.name;
+        var openerPrice = '$' + data.opener.price.toFixed(2)
+        var items = resObj.opener.items;
+        var itemLen = items.length;
+
+        var itm0display = 'none';
+        var itm1display = 'none';
+        var itm2display = 'none';
+        var itm3display = 'none';
+        var itm4display = 'none';
+        var itm5display = 'none';
+        // opener accessories 
+        switch (resObj.opener.items.length) {
+            case 1:
+                var itm0 = resObj.opener.items[0].item_name + '(x' + resObj.opener.items[0].count + ')';
+                var itm0Price = '$' + (resObj.opener.items[0].item_price * resObj.opener.items[0].count).toFixed(2);
+                var itm0display = 'block';
+                break;
+            case 2:
+                itm0 = resObj.opener.items[0].item_name + '(x' + resObj.opener.items[0].count + ')';
+                itm0Price = '$' + (resObj.opener.items[0].item_price * resObj.opener.items[0].count).toFixed(2);
+                var itm1 = resObj.opener.items[1].item_name + '(x' + resObj.opener.items[1].count + ')';
+                var itm1Price = '$' + (resObj.opener.items[1].item_price * resObj.opener.items[1].count).toFixed(2);
+                itm0display = 'block';
+                var itm1display = 'block';
+                break;
+            case 3:
+                itm0 = resObj.opener.items[0].item_name + '(x' + resObj.opener.items[0].count + ')';
+                itm0Price = '$' + (resObj.opener.items[0].item_price * resObj.opener.items[0].count).toFixed(2);
+                itm1 = resObj.opener.items[1].item_name + '(x' + resObj.opener.items[1].count + ')';
+                itm1Price = '$' + (resObj.opener.items[1].item_price * resObj.opener.items[1].count).toFixed(2);
+                var itm2 = resObj.opener.items[2].item_name + '(x' + resObj.opener.items[2].count + ')';
+                var itm2Price = '$' + (resObj.opener.items[2].item_price * resObj.opener.items[2].count).toFixed(2);
+                itm0display = 'block';
+                itm1display = 'block';
+                var itm2display = 'block';
+                this.genItems(3,resObj);
+                break;
+            case 4:
+                itm0 = resObj.opener.items[0].item_name + '(x' + resObj.opener.items[0].count + ')';
+                itm0Price = '$' + (resObj.opener.items[0].item_price * resObj.opener.items[0].count).toFixed(2);
+                itm1 = resObj.opener.items[1].item_name + '(x' + resObj.opener.items[1].count + ')';
+                itm1Price = '$' + (resObj.opener.items[1].item_price * resObj.opener.items[1].count).toFixed(2);
+                itm2 = resObj.opener.items[2].item_name + '(x' + resObj.opener.items[2].count + ')';
+                itm2Price = '$' + (resObj.opener.items[2].item_price * resObj.opener.items[2].count).toFixed(2);
+                var itm3 = resObj.opener.items[3].item_name + '(x' + resObj.opener.items[3].count + ')';
+                var itm3Price = '$' + (resObj.opener.items[3].item_price * resObj.opener.items[3].count).toFixed(2);
+                itm0display = 'block';
+                itm1display = 'block';
+                itm2display = 'block';
+                var itm3display = 'block';
+                break;
+            case 5:
+                itm0 = resObj.opener.items[0].item_name + '(x' + resObj.opener.items[0].count + ')';
+                itm0Price = '$' + (resObj.opener.items[0].item_price * resObj.opener.items[0].count).toFixed(2);
+               
+                itm1 = resObj.opener.items[1].item_name + '(x' + resObj.opener.items[1].count + ')';
+                itm1Price = '$' + (resObj.opener.items[1].item_price * resObj.opener.items[1].count).toFixed(2);
+               
+                itm2 = resObj.opener.items[2].item_name + '(x' + resObj.opener.items[2].count + ')';
+                itm2Price = '$' + (resObj.opener.items[2].item_price * resObj.opener.items[2].count).toFixed(2);
+               
+                itm3 = resObj.opener.items[3].item_name + '(x' + resObj.opener.items[3].count + ')';
+                itm3Price = '$' + (resObj.opener.items[3].item_price * resObj.opener.items[3].count).toFixed(2);
+                
+                var itm4 = resObj.opener.items[4].item_name + '(x' + resObj.opener.items[4].count + ')';
+                var itm4Price = '$' + (resObj.opener.items[4].item_price * resObj.opener.items[4].count).toFixed(2);
+                itm0display = 'block';
+                itm1display = 'block';
+                itm2display = 'block';
+                itm3display = 'block';
+                var itm4display = 'block';
+                break;
+            case 6:
+                itm0 = resObj.opener.items[0].item_name + '(x' + resObj.opener.items[0].count + ')';
+                itm0Price = '$' + (resObj.opener.items[0].item_price * resObj.opener.items[0].count).toFixed(2);
+                itm1 = resObj.opener.items[1].item_name + '(x' + resObj.opener.items[1].count + ')';
+                itm1Price = '$' + (resObj.opener.items[1].item_price * resObj.opener.items[2].count).toFixed(2);
+                itm2 = resObj.opener.items[2].item_name + '(x' + resObj.opener.items[2].count + ')';
+                itm2Price = '$' + (resObj.opener.items[2].item_price * resObj.opener.items[2].count).toFixed(2);
+                itm3 = resObj.opener.items[3].item_name + '(x' + resObj.opener.items[3].count + ')';
+                itm3Price = '$' + resObj.opener.items[3].item_price * resObj.opener.items[3].count;
+                itm4 = '$' + (resObj.opener.items[3].item_price * resObj.opener.items[3].count).toFixed(2);
+                itm4Price = '$' + resObj.opener.items[4].item_price * resObj.opener.items[4].count;
+                var itm5 = resObj.opener.items[5].item_name + '(x' + resObj.opener.items[5].count + ')';
+                var itm5Price = '$' + resObj.opener.items[5].item_price * resObj.opener.items[5].count;
+                itm0display = 'block';
+                itm1display = 'block';
+                itm2display = 'block';
+                itm3display = 'block';
+                itm4display = 'block';
+                var itm5display = 'block';
+                break;
         }
 
-        var widthF = data.widthF;
-        var widthI = data.widthI;
-        var heightF = data.heightF;
-        var heightI = data.heightI;
+        //  lead Test
+        var leadTest = resObj.LEADTEST === true ? 'Required' : 'Not Required';
+        var leadPrice = resObj.LEADTEST === true ? '$20.00' : "";
+        var medalian = true;
+        var itemPrice = resObj.INSTALLTYPE === 'Installed' ? this.utils.utilities.itemPriceInstall : this.utils.utilities.itemPriceDY;
+
         var body = `
-          <p>${data.collectionName}</p>            
-          <dd class="door-configuration-table-header">
-            Door Model
-          </dd>
-          <dd>
-            <p>${constructionMdlNo}</p>
-            <p>$ ${constructionPrice} </p>
-          </dd>
-           <dd class="door-configuration-table-header">
-                Size
-            </dd>
-            <dd>
-                <p>${widthF}'${widthI}"(w) x ${heightF}'${heightI}"(h)</p>
-            </dd>
+            <div>
+              <img src="${imgSrc}" width="300" height="200" />
+            </div>
+            <table style="border-collapse: collapse">
+            <tr style="border-bottom: 1px solid #ccc">
+                <td style="color: #f96302;padding:5px">Door Model</td>
+                <td style="border-left:1px solid #ccc">${constructionMdlNo}</td>
+                <td>${constructionPrice}</td>
+            </tr>
+            <tr style="border-bottom: 1px solid #ccc">
+                <td style="color: #f96302;padding:5px">Size</td>
+                <td style="border-left:1px solid #ccc">${widthF}'${widthI}"(w) x ${heightF}'${heightI}"(h)</td>
+                <td></td>
+            </tr>
+            <tr style="border-bottom: 1px solid #ccc">
+                <td style="color: #f96302;padding:5px">WindCode</td>
+                <td style="border-left:1px solid #ccc">${WindCode}</td>
+                <td></td>
+            </tr>
+            <tr style="border-bottom: 1px solid #ccc">
+                <td style="color: #f96302;padding:5px">Door Design</td>
+                <td style="border-left:1px solid #ccc">${doorDesign}</td>
+                <td></td>
+            </tr>
+            <tr style="border-bottom: 1px solid #ccc">
+                <td style="color: #f96302;padding:5px">Door Construction</td>
+                <td style="border-left:1px solid #ccc">${doorConstruction}</td>
+                <td></td>
+            </tr>
+            <tr style="border-bottom: 1px solid #ccc">
+                <td style="color: #f96302;padding:5px">Color</td>
+                <td style="border-left:1px solid #ccc">${color}</td>
+                <td></td>
+            </tr>
+            <tr style="border-bottom: 1px solid #ccc">
+                <td style="color: #f96302;padding:5px">Top Section</td>
+                <td style="border-left:1px solid #ccc">
+                    <div>${topSection}</div> 
+                <div>Placement: ${placement || '-'}</div>
+                </td>
+                <td></td>
+            </tr>
+            <tr style="border-bottom: 1px solid #ccc">
+                <td style="color: #f96302;padding:5px">Hardware</td>
+                <td style="border-left:1px solid #ccc">${hardware}</td>
+                <td></td>
+            </tr>
+            <tr style="border-bottom: 1px solid #ccc">
+                <td style="color: #f96302;padding:5px">Opener</td>
+                <td style="border-left:1px solid #ccc">${opener || '-'}</td>
+                <td>${openerPrice}</td>
+            </tr>
+            <tr style="border-bottom: 1px solid #ccc">
+                <td style="color: #f96302;padding:5px">Opener Accessories</td>
+                <td style="border-left:1px solid #ccc">
+                <div style="display: ${itm0display}">${itm0}</div>
+                <div style="display: ${itm1display}">${itm1}</div>
+                <div style="display: ${itm2display}">${itm2}</div>
+                <div style="display: ${itm3display}">${itm3}</div>
+                <div style="display: ${itm4display}">${itm4}</div>
+                <div style="display: ${itm5display}">${itm5}</div>
+                </td>
+                <td>
+                <div style="display: ${itm0display}">${itm0Price}</div>
+                <div style="display: ${itm1display}">${itm1Price}</div>
+                <div style="display: ${itm2display}">${itm2Price}</div>
+                <div style="display: ${itm3display}">${itm3Price}</div>
+                <div style="display: ${itm4display}">${itm4Price}</div>
+                <div style="display: ${itm5display}">${itm5Price}</div>
+                </td>
+            </tr>
+            <tr style="border-bottom: 1px solid #ccc">
+                <td style="color: #f96302">Lead Paint Test</td>
+                <td style="border-left:1px solid #ccc">
+                <div>${leadTest}</div>
+                <div style="display: ${medalian}">Medallian Hardware Upgrade</div>
+                </td>
+                <td>${leadPrice}
+                <div style="display: ${medalian}">$59.00</div>
+                </td>
+            </tr>
+            <tr style="border-bottom: 1px solid #ccc">
+                <td style="color: #f96302">Quantity</td>
+                <td style="border-left:1px solid #ccc">
+                <div>Doors    ${doorLen}</div>
+                <div>Openers   ${itemLen}</div>
+                </td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>
+                <div style="text-align:right;color: #f96302;padding-right:40px">Sub Total:</div>
+                </td>
+                <td>${'$' + itemPrice.toFixed(2)}</td>
+            </tr>
+            </table>
+
         `
         let obj = {
             ToEmail: this.shareEmail,
@@ -137,7 +338,8 @@ export class ResDoorConfigurationComponent implements OnInit {
         }
         this.dataService.sendMail(obj)
             .subscribe(res => {
-                console.log('sent mail')
+                console.log('sent mail');
+                email.close();
             })
     }
     updateQuantity(flow) {
