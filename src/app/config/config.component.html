@@ -23,7 +23,7 @@
 
     </router-outlet>
 </div>
-<div class="tile">
+<!--<div class="tile">-->
     <div class="design-detials--sec">
         <div class="col-xs-6 padding-r-7  border-white-right font-size-12 price-section">
             <p *ngIf="itemPriceInstall != 0"><span>{{itemPriceInstall | currency:'USD':true:'1.2-2'}}</span> / Installed</p>
@@ -43,7 +43,7 @@
             <h4 class="pull-right padding-r-7 text-orange" (click)="openDetailsModal(detailsModal)">DETAILS</h4>
         </div>
     </div>
-</div>
+<!--</div>-->
 <!-- product info modal -->
 <modal #modal>
     <modal-header [show-close]="true">
