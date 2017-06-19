@@ -4,6 +4,7 @@ import { Location } from '@angular/common';
 import { AppUtilities } from "../shared/appUtilities";
 import { NavComponent } from "../nav/nav.component";
 declare var $: any;
+declare var _: any;
 @Component({
     selector: 'app-config',
     templateUrl: './config.component.html',
@@ -37,7 +38,7 @@ export class ConfigComponent implements OnInit, AfterViewInit, AfterViewChecked 
     ngAfterViewChecked() {
         this.cdref.detectChanges();
         if(this.utils.resFlowSession.cart.length === 0) {
-            if(window.location.hash.indexOf('install') != -1) {
+            if([10, 11, 12, 13].indexOf(this.appComponent.activeStep) !== -1) {
                 if(this.utils.resFlowSession.resDoorObj.INSTALLTYPE === 'Installed') {
                     this.itemPriceDY = 0;
                     this.itemPriceInstall = this.utils.utilities.itemPriceInstall;

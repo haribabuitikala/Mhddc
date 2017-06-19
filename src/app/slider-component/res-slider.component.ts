@@ -116,7 +116,7 @@ export class ResSliderComponent implements OnInit, AfterViewInit {
                         if (this.designSelected == item['item_thumbnail']) {
                             isSeleted = true;
                         }
-                        
+
                     } else {
                         if (this.utils.resFlowSession.resDoorObj.design.dsgn['item_id'] === item['item_id']) {
                             this.utils.resFlowSession.resDoorObj.design.dsgn['constructions'][0]['isdefault'] = true;
@@ -273,7 +273,10 @@ export class ResSliderComponent implements OnInit, AfterViewInit {
             case 'topsection':
                 this.utils.resFlowSession.resDoorObj.windows.topsection = obj;
                 if (obj['glasstypes'] && obj['glasstypes'].length > 0) {
-                    this.utils.resFlowSession.resDoorObj.windows.glasstype = obj['glasstypes'][0];
+                    let res = obj.glasstypes.filter(function (el) {
+                        return el.isdefault == true
+                    })
+                    this.utils.resFlowSession.resDoorObj.windows.glasstype = res[0]
                 }
                 break;
             case 'glasstype':

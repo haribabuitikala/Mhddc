@@ -179,7 +179,7 @@ export class ResAdditionalOptionsComponent implements OnInit {
                 this.appComponent.updatePrice();
             }            
         });
-        if (this.installOrDiy == 'install') {
+        if (this.installOrDiy == 'Installed') {
             this.showMedImg = true;
         }
     }
