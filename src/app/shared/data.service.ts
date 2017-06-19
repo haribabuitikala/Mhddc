@@ -912,7 +912,13 @@ export class CollectionService {
     getStockGroup(obj) {
         this.utils.setLoader();
         return this.http.post(this.url + 'Stockgroup', obj)
-            .map(res => res.json())
+            .map(res => {
+                try {
+                    return res.json();
+                } catch (e) {
+                    return {};
+                }
+            })
             .finally(() => {
                 this.utils.removeLoader();
             })
@@ -928,7 +934,13 @@ export class CollectionService {
     getModelUpSell(obj) {
         this.utils.setLoader();
         return this.http.post(this.url + 'ModelUpSell', obj)
-            .map(res => res.json())
+            .map(res => {
+                try {
+                    return res.json();
+                } catch (e) {
+                    return {};
+                }
+            })
             .finally(() => {
                 this.utils.removeLoader();
             })
@@ -948,8 +960,7 @@ export class CollectionService {
             res => {
                 try {
                     return res.json();
-                }
-                catch (e) {
+                } catch (e) {
                     console.log(e);
                     return {};
                 }
