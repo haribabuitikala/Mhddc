@@ -749,14 +749,14 @@ img {
     position: relative;
 }
 
-.design-detials--sec {
+/*.design-detials--sec {
     background: #000;
     margin: 2% 2% 0;
     color: #fff;
     padding: 2%;
     width: 96%;
     display: inline-block;
-}
+}*/
 
 .design-detials--sec span, .design-detials--sec img {
     margin-left: 3%;
