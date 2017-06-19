@@ -259,6 +259,8 @@ export class CollectionComponent implements OnInit {
     quickShip() {
         this.appComponent.setLoader(true);
         let utils = this.utils.utilities;
+        let labour = this.utils.resFlowSession.resDoorObj;
+        let labourCode = labour.size.width.wf === '16' ? labour.product.apiData[0]['doubleinstallcode'] : labour.product.apiData[0]['singleinstallcode'];
         let dataParams = {
             "dtype": utils.dtype,
             "Windcode": utils.winCode,
@@ -273,6 +275,7 @@ export class CollectionComponent implements OnInit {
             "dheightIn": utils.hi || 0,
             "lang": "en",
             "localmarketid": +utils.localmarketid,
+            "Laborcode": labourCode,
             "doorsize": +utils.homeSize,
             "isCRLE": false,
             "productlayout": true,

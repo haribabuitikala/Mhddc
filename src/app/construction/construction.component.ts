@@ -178,7 +178,7 @@ export class ConstructionComponent implements OnInit {
                     if (res.length > 0) {
                         this.upSellData = res;
                         this.currentModelName = this.upSellData[0].current_model;
-                        this.currentModel = 'btn' + this.upSellData[0].current_model + '.png';
+                        this.currentModel = 'upsell-' + this.upSellData[0].current_model + '-1.png';
                         upsellModal.open();
                     } else {
                         this.route.navigateByUrl(path);
