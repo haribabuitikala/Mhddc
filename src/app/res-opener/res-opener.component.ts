@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, ChangeDetectorRef } from '@angular/core';
 import { ModalComponent } from "ng2-bs3-modal/ng2-bs3-modal";
 import { Router } from '@angular/router';
 import { AppUtilities } from "../shared/appUtilities";
@@ -18,7 +18,9 @@ declare var _: any;
 export class ResOpenerComponent implements OnInit {
     @ViewChild('gdoOponerAccessories') gdoOponerAccessories: ModalComponent;
 
-    constructor(private utils: AppUtilities
+    constructor(
+        private utils: AppUtilities
+        , private cdref: ChangeDetectorRef
         , private navComp: NavService
         , private navComponent: NavComponent
         , private route: Router
@@ -36,6 +38,7 @@ export class ResOpenerComponent implements OnInit {
 
     selectedOpener;
     ngOnInit() {
+        this.cdref.detectChanges();
         this.config.detailsInfo.Opener = true;
         this.utils.resFlowSession.resDoorObj.resetopener();
         if (this.navComponent.flowType === 'res') {

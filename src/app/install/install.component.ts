@@ -105,8 +105,8 @@ export class InstallComponent implements OnInit, AfterViewInit {
 
         this.installPrice = this.utils.utilities.itemPriceInstall;
         this.diyPrice = this.utils.utilities.itemPriceDY;
-        this.selectedType = 'install';
-        this.appComponent.selectedInstallDiy = 'install';
+        this.selectedType = 'Installed';
+        this.appComponent.selectedInstallDiy = 'Installed';
     }
 
 
@@ -124,7 +124,7 @@ export class InstallComponent implements OnInit, AfterViewInit {
     checkType(txt) {
         this.selectedType = txt;
         this.appComponent.selectedInstallDiy = txt;
-        if (txt == 'diy') {
+        if (txt == 'DIY') {
             this.utils.resFlowSession.resDoorObj.INSTALLTYPE = "DIY";
             this.utils.resFlowSession.resDetails.INSTALLTYPE = "DIY";
             this.utils.resFlowSession.resDetails.isDIY = true;
@@ -132,7 +132,7 @@ export class InstallComponent implements OnInit, AfterViewInit {
             // this.config.renderCanvas(window['cObj'], 'doorVis', '#diyDoorVis');
             // this.exactDoorsize.open();
         }
-        if (txt == 'install') {
+        if (txt == 'Installed') {
             this.utils.resFlowSession.resDoorObj.INSTALLTYPE = "Installed";
             this.utils.resFlowSession.resDetails.INSTALLTYPE = "Installed";
             this.utils.resFlowSession.resDetails.isDIY = false;
@@ -149,7 +149,7 @@ export class InstallComponent implements OnInit, AfterViewInit {
 
 
     nextBtn(path) {
-        if (this.appComponent.selectedInstallDiy == 'install') {
+        if (this.appComponent.selectedInstallDiy == 'Installed') {
 
             if (this.data.zipResults.state == "KS" || this.data.zipResults.state == "CA" || this.data.zipResults.state == "RI") {
                 this.navigateTo('/config/opener');
