@@ -44,7 +44,7 @@ export class ShoppingCartComponent implements OnInit {
 
     constructor(private appComp: AppComponent
         , private navComp: NavService
-        , private utils: AppUtilities
+        , private utils: AppUtilities   
         , private navComponent: NavComponent
         , private dataStore: CollectionData
         , private route: Router) {
@@ -69,6 +69,7 @@ export class ShoppingCartComponent implements OnInit {
         $('body').removeClass('loader');
         this.resFlowSession = this.utils.resFlowSession;
         this.getItemPrice();
+        this.data = this.utils.gdoFlowSession.cart[0];
     }
 
     getItemPrice() {
@@ -80,7 +81,7 @@ export class ShoppingCartComponent implements OnInit {
         }
     }
 
-    ngAfterViewInit(){        
+    ngAfterViewInit() {        
         if(this.resFlowSession.cart.length === 1) {
             this.toggleSection(0);
         } else if(this.resFlowSession.cart.length > 1) {
@@ -112,23 +113,23 @@ export class ShoppingCartComponent implements OnInit {
     }
 
     removeItem(item, index) {
-        this.resFlowSession.cart.splice(index, 1);
-        this.utils.resFlowSession.cart = this.resFlowSession.cart;
-        $('.shop-count').text(this.resFlowSession.cart.length);
-        this.getTotalCartValue();
+        if (this.resFlow) {
+            this.resFlowSession.cart.splice(index, 1);
+            this.utils.resFlowSession.cart = this.resFlowSession.cart;
+            $('.shop-count').text(this.resFlowSession.cart.length);
+            this.getTotalCartValue();
+        } else {
+            this.utils.gdoFlowSession.cart.splice(index, 1);
+            $('.shop-count').text(this.resFlowSession.cart.length);
+            this.route.navigateByUrl('/category');
+            this.data = null;
+        }
     }
 
     updateQuantity(flow) {
-        if (this.resFlow) {
-            this.utils.resFlowSession.resCalculatePrice();
-            this.itemPrice = this.getResPrice();
-            this.qty = this.utils.resFlowSession.resDoorObj.QTY;
-        } else {
-            this.itemPrice = this.utils.updateQty(flow, this.utils.utilities.gdoOpenerQty);
-            this.baseItmPrice = this.utils.utilities.item_price * this.utils.utilities.gdoOpenerQty;
-            // this.baseItmPrice = flow === 1 ? this.utils.updateQty(1, this.utils.utilities.gdoOpenerQty) : this.utils.updateQty(0, this.utils.utilities.gdoOpenerQty);
-            this.qty = this.utils.utilities.gdoOpenerQty;
-        }
+        this.itemPrice = this.utils.updateQty(flow, this.utils.utilities.gdoOpenerQty);
+        this.baseItmPrice = this.utils.utilities.item_price * this.utils.utilities.gdoOpenerQty;
+        this.qty = this.utils.utilities.gdoOpenerQty;
     }
 
     updateQty(item, index, increment?) {
@@ -141,7 +142,7 @@ export class ShoppingCartComponent implements OnInit {
         }
         this.utils.resFlowSession.cart[index] = this.utils.resFlowSession.resCalculateCartItemPrice(item);
         this.utils.resFlowSession.cart[index] = this.resFlowSession.cart[index];
-        this.getTotalCartValue();
+        this.getTotalCartValue();        
     }
 
     checkout() {
