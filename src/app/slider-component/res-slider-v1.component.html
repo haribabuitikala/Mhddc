@@ -14,7 +14,7 @@
 
                 <div class="_slide-items" *ngIf="folder!=='construction'">
                     <div class="inner-item col-xs-{{number}}" *ngFor="let slideitem of slide; let i=index" [ngClass]="{ 'current' : isSeleted(slideitem, k, i)}"
-                        (click)="openerSelected(slideitem, $event)">
+                        (click)="openerSelected(slideitem, $event)"> 
                         <img (error)="onImageLoadError(slideitem, folder)" [ngStyle]="{'background-image': 'url(http://dev-mhddc.clopay.com/assets/images/'+slideitem.item_thumbnail.replace('.jpg', '.png')+')'}"
                             [attr.data-id]="slideitem.item_id">
 
