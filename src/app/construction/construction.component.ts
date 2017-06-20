@@ -115,8 +115,20 @@ export class ConstructionComponent implements OnInit {
         let newData = [];
         if (res.length > 4) {
             if (newData.length <= 3) {
+                let defaultindex = 0;
                 for (let i = 1; i <= 4; i++) {
-                    newData.push(_.find(res, ['best_order', i]))
+                    let y = _.find(res, ['best_order', i]);
+                    if (y) {
+                        newData.push(y);
+                    } else {
+                        let g = _.filter(res, function (r) {
+                            return r.best_order == 0;
+                        });
+                        if (g.length > 0) {
+                            newData.push(g[defaultindex]);
+                            defaultindex = defaultindex + 1;
+                        }
+                    }
                 }
                 let t = {
                     item_thumbnail: 'btnOtherConGallery.png',
@@ -177,8 +189,10 @@ export class ConstructionComponent implements OnInit {
                     console.log('updell length ', res);
                     if (res.length > 0) {
                         this.upSellData = res;
-                        this.currentModelName = this.upSellData[0].current_model;
-                        this.currentModel = 'btn' + this.upSellData[0].current_model + '.png';
+                        // this.currentModelName = this.upSellData[0].current_model;
+                        // this.currentModel = 'upsell-' + this.upSellData[0].current_model + '-1.png';
+                        this.currentModelName =  this.getDisplayModelNumber(this.upSellData[0].current_model);
+                        this.currentModel =  'upsell-'  +  this.currentModelName +  '-1.png';
                         upsellModal.open();
                     } else {
                         this.route.navigateByUrl(path);
@@ -206,7 +220,7 @@ export class ConstructionComponent implements OnInit {
 
     getModelPriceUpsell(updata) {
         var currentConstruction = this.utils.resFlowSession.resDoorObj.construction.construction;
-        var filtermodel = window['cObj'].construction.apiData.filter(c => {  return c.ClopayModelNumber == updata.upgrade_model; });
+        var filtermodel = window['cObj'].construction.apiData.filter(c => { return c.ClopayModelNumber == updata.upgrade_model; });
         if (filtermodel.length > 0) {
             filtermodel = filtermodel[0];
             return (filtermodel.item_price - currentConstruction['item_price']);
@@ -216,7 +230,7 @@ export class ConstructionComponent implements OnInit {
 
     updateWithUpsellPrice(data) {
         //this.utils.resFlowSession.resDetails.upsellPrice = this.getModelPriceUpsell(data);
-        var filtermodel = window['cObj'].construction.apiData.filter(c => {  return c.ClopayModelNumber == data.upgrade_model; });
+        var filtermodel = window['cObj'].construction.apiData.filter(c => { return c.ClopayModelNumber == data.upgrade_model; });
         if (filtermodel.length > 0) {
             filtermodel = filtermodel[0];
             this.utils.resFlowSession.resDoorObj.construction.construction = filtermodel;

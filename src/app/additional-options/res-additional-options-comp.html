@@ -1,5 +1,5 @@
-<div class="content additional-options" id="resInstallFlow" *ngIf="installOrDiy=='install'">
-    <h4 class="text-orange font-size-16">Additional Options</h4>
+<div class="content additional-options" id="resInstallFlow" *ngIf="installOrDiy=='Installed'">
+<!--    <h4 class="text-orange font-size-16">Additional Options</h4>-->
     <div *ngFor="let installQuestions  of resInstallQuestions ;let i = index; let first = first; let last = last">
         <dl [hidden]="last">
             <dd>
@@ -32,8 +32,8 @@
         </dl>
     </div>
 </div>
-<div class="content additional-options" id="resDiyFlow" *ngIf="installOrDiy=='diy'">
-    <h4 class="text-orange font-size-16">Additional Options</h4>
+<div class="content additional-options" id="resDiyFlow" *ngIf="installOrDiy=='DIY'">
+<!--    <h4 class="text-orange font-size-16">Additional Options</h4>-->
     <div *ngFor="let diyQuestions  of resDiyQuestions;let i = index; let first = first; let last = last">        
         <dl [hidden]="first">
             <dd>
@@ -220,4 +220,3 @@
         height="236">-->
     </modal-body>
 </modal>
-

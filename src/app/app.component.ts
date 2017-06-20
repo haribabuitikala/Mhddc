@@ -51,6 +51,7 @@ export class AppComponent implements OnInit, AfterViewChecked, OnChanges {
 
     ngAfterViewChecked() {
         this.cdref.detectChanges();
+        this.selectedInstallDiy = this.app.resFlowSession.cart.length > 0 ? this.app.resFlowSession.cart[0]['INSTALLTYPE'] : 'Installed'; 
     }
 
     ngOnInit() {
@@ -75,7 +76,7 @@ export class AppComponent implements OnInit, AfterViewChecked, OnChanges {
     nextBtn(id): void {
         if (this.app.utilities[this.flow][id + 1] !== undefined) {
             this.currScreen = id + 1;
-            if (this.selectedInstallDiy === 'diy') {
+            if (this.selectedInstallDiy === 'DIY') {
                 this.currScreen = id + 2
             }
             this.app.utilities.currPage = this.currScreen - 2;

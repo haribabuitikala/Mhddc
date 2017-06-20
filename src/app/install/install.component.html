@@ -1,20 +1,20 @@
 <div class="row tabs fixed-header">
   <div class="col-xs-6">
-    <input id="r1" type="radio" (click)="checkType('install')" name="installation-type" checked="checked" [ngClass]="{ 'hide' : hideDIY }"
+    <input id="r1" type="radio" (click)="checkType('Installed')" name="installation-type" checked="checked" [ngClass]="{ 'hide' : hideDIY }"
     />
     <div class="tab">
       <span class="check"></span>
-      <label for="r1" (click)="checkType('install')">
+      <label for="r1" (click)="checkType('Installed')">
         <div>INSTALL</div>
         <div>{{installPrice | currency:'USD':true:'1.2-2'}}</div>
       </label>
     </div>
   </div>
   <div class="col-xs-6" [ngClass]="{ 'hide' : hideDIY }">
-    <input id="r2" (click)="checkType('diy')" type="radio" name="installation-type">
+    <input id="r2" (click)="checkType('DIY')" type="radio" name="installation-type">
     <div class="tab">
       <span class="check"></span>
-      <label for="r2" (click)="checkType('diy')">
+      <label for="r2" (click)="checkType('DIY')">
         <div>DIY</div>
         <div>{{diyPrice | currency:'USD':true:'1.2-2'}}</div>
       </label>
