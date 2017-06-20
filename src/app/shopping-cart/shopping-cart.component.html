@@ -76,7 +76,7 @@
     </div>
 </div>
 
-<div *ngIf="utils.gdoFlowSession.cart.length > 0 && isGdo">
+<div *ngIf="utils.gdoFlowSession.added > 0 && isGdo">
     <div class="flex space-between margin-t-10 subsection margin-b-20">
         <button class="btn btn-default text-orange" (click)="removeItem(data, i)">REMOVE ITEM</button>
         <div class="flex">

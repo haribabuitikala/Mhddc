@@ -53,6 +53,28 @@ export class CategoryComponent implements OnInit {
             let storeNum = this.utilities.utilities.storenumber;
             let arr = JSON.stringify(this.utilities.gdoCheck);
             this.utilities.resFlowSession.resDoorObj.TYPE = "GDO";
+            this.utilities.gdoFlowSession.cart.push({
+                "INSTALLTYPE": "GDO",
+                "QTY": 1,
+                "TYPE": "GDO",
+                "idex": 0,
+                "isPurchase": true,
+                "opener": {
+                    apiData: [],
+                    items: [],
+                    opener: {}
+                },
+                "size": {
+                    "height": {
+                        "hf": "7",
+                        "hi": "0"
+                    },
+                    "apiData": {}
+                },
+                "additional": {
+                    "items": []
+                }
+            });
             arr.indexOf(zipCode) !== -1 || arr.indexOf(storeNum) !== -1 ? this.gdoGoTo('/gdoDoorSize', 'size') : this.gdo.open();
         }
     }

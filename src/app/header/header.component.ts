@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, AfterViewChecked, ViewChild } from '@angular/core';
 import { ModalComponent } from "ng2-bs3-modal/ng2-bs3-modal";
 import { AppComponent } from "../app.component";
-import { Router } from '@angular/router';
+import { Router, NavigationEnd } from '@angular/router';
 import { AppUtilities } from "../shared/appUtilities";
 import { ShoppingCartComponent } from '../shopping-cart/shopping-cart.component';
 
@@ -25,6 +25,18 @@ export class HeaderComponent implements OnInit, AfterViewChecked {
     constructor(private appComponent: AppComponent
         , private route: Router
         , private utils: AppUtilities) {
+        route.events.subscribe(r => {
+            if (r instanceof NavigationEnd) {
+                this.showCartIcon = true;
+                if (window.location.href.indexOf('banner') >= 0) {
+                    this.showCartIcon = false;
+                }
+
+                if (window.location.href.indexOf('zipResults') >= 0) {
+                    this.showCartIcon = false;
+                }
+            }
+        })
     }
 
     homePage(path) {
@@ -32,11 +44,12 @@ export class HeaderComponent implements OnInit, AfterViewChecked {
         this.appComponent.showStepIndicator = false;
         this.route.navigateByUrl(path);
     }
-    
-    ngAfterViewChecked() {        
+
+    ngAfterViewChecked() {
         this.itemsCount = this.utils.resFlowSession.cart.length;
     }
 
+    showCartIcon = true;
     ngOnInit() {
         this.itemsCount = this.utils.resFlowSession.cart.length;
         $('li span').hide();
@@ -51,7 +64,7 @@ export class HeaderComponent implements OnInit, AfterViewChecked {
             //     this.shoppingCartComp.toggleSection(this.shoppingCartComp.resFlowSession.cart.length - 1);
             // }
             modal.open();
-        }        
+        }
     }
 
     bindDocumentClick() {

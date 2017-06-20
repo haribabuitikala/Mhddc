@@ -65,10 +65,12 @@ export class BannerComponent implements OnInit {
     }
 
     ngOnInit() {
+        this.utils.gdoFlowSession.cart.length = 0;
+        this.utils.resFlowSession.cart.length = 0;
         this.appComponent.currScreen = 0;
         this.lang = this.localize.getBanner();
 
-        this.appComponent.showStepIndicator = false;
+        this.appComponent.showStepIndicator = false;  
     }
     onlyNumberKey(event) {
         let len = event.currentTarget.value.length;

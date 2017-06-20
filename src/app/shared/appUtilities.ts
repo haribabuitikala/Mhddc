@@ -132,32 +132,12 @@ export class AppUtilities {
 
         windcode: this.utilities.winCode,
         zipcode: "",
-        cart: [{
-            "INSTALLTYPE": "GDO",
-            "QTY": 1,
-            "TYPE": "GDO",
-            "idex": 0,
-            "isPurchase": true,
-            "opener": {
-                apiData: [],
-                items: [],
-                opener: {}
-            },
-            "size": {
-                "height": {
-                    "hf": "7",
-                    "hi": "0"
-                },
-                "apiData": {}
-            },
-            "additional": {
-                "items": []
-            }
-        }],
+        cart: [],
         locale: "",
         orderInstallType: "GDO",
         items: 1,
-        store: ""
+        store: "",
+        added: false
     }
 
     setUtils(curr, clicked) {

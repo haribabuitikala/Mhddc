@@ -229,6 +229,7 @@ export class DoorConfigurationComponent implements OnInit {
         if (this.utils.utilities.flow === 'gdoNavElems') {
             this.utils.setUtils(5, 1);
             $('.shop-count').text('1');
+            this.utils.gdoFlowSession.added = true;
             this.goTo(path)
         } else {
             this.goTo(path)

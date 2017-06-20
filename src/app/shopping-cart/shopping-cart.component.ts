@@ -113,6 +113,7 @@ export class ShoppingCartComponent implements OnInit {
     }
 
     removeItem(item, index) {
+        this.utils.gdoFlowSession.added = false;
         if (this.resFlow) {
             this.resFlowSession.cart.splice(index, 1);
             this.utils.resFlowSession.cart = this.resFlowSession.cart;
@@ -178,6 +179,6 @@ export class ShoppingCartComponent implements OnInit {
 
     continueShopping() {
         this.closeModal.next();
-        this.route.navigateByUrl('/doorSize');
+        //this.route.navigateByUrl('/doorSize');
     }
 }
