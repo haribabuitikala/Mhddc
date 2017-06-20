@@ -349,7 +349,6 @@ export class ResDoorConfigurationComponent implements OnInit {
             .subscribe(
             res => {
                 imageUrl = res;
-            }).finally(() => {
                 let body = this.renderEmailBody(imageUrl || '');
                 let obj = {
                     ToEmail: this.shareEmail,
