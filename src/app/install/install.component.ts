@@ -158,7 +158,7 @@ export class InstallComponent implements OnInit, AfterViewInit {
                 this.utils.resFlowSession.resDetails.collectionName = construction['product_name'];
             }
         }
-        if (this.appComponent.selectedInstallDiy == 'Installed') {
+        if (this.selectedType == 'Installed') {
 
             if (this.data.zipResults.state == "KS" || this.data.zipResults.state == "CA" || this.data.zipResults.state == "RI") {
                 this.navigateTo('/config/opener');
