@@ -71,7 +71,7 @@ const ENG =
             },
             "doubleDoor": {
                 "doubleDoorTitle": "Double Car Door",
-                "doubleDoorContent": "Door up to 10' wide"
+                "doubleDoorContent": "Door over 10’ wide"
             },
             "sizes": {
                 "sizeTitle": " Know your exact door size ?",

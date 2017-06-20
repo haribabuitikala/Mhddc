@@ -1000,6 +1000,19 @@ export class CollectionService {
         });
     }
 
+    getImageUrl(reqData) {
+        this.utils.setLoader();
+        return this.http.post(this.url + 'EmailImages', reqData).map(res => {
+            try {
+                return res.json();
+            } catch (e) {
+                return {};
+            }
+        }).finally(() => {
+            this.utils.removeLoader();
+        });
+    }
+
     getProductsByPromotionId(reqData) {
         this.utils.setLoader();
         return this.http.post(this.url + `ProductByPromotion`, reqData).map(res => {

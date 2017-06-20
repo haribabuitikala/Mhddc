@@ -166,7 +166,7 @@ export class ResDoorConfigurationComponent implements OnInit {
                 itm0display = 'block';
                 itm1display = 'block';
                 var itm2display = 'block';
-                this.genItems(3,resObj);
+                this.genItems(3, resObj);
                 break;
             case 4:
                 itm0 = resObj.opener.items[0].item_name + '(x' + resObj.opener.items[0].count + ')';
@@ -185,16 +185,16 @@ export class ResDoorConfigurationComponent implements OnInit {
             case 5:
                 itm0 = resObj.opener.items[0].item_name + '(x' + resObj.opener.items[0].count + ')';
                 itm0Price = '$' + (resObj.opener.items[0].item_price * resObj.opener.items[0].count).toFixed(2);
-               
+
                 itm1 = resObj.opener.items[1].item_name + '(x' + resObj.opener.items[1].count + ')';
                 itm1Price = '$' + (resObj.opener.items[1].item_price * resObj.opener.items[1].count).toFixed(2);
-               
+
                 itm2 = resObj.opener.items[2].item_name + '(x' + resObj.opener.items[2].count + ')';
                 itm2Price = '$' + (resObj.opener.items[2].item_price * resObj.opener.items[2].count).toFixed(2);
-               
+
                 itm3 = resObj.opener.items[3].item_name + '(x' + resObj.opener.items[3].count + ')';
                 itm3Price = '$' + (resObj.opener.items[3].item_price * resObj.opener.items[3].count).toFixed(2);
-                
+
                 var itm4 = resObj.opener.items[4].item_name + '(x' + resObj.opener.items[4].count + ')';
                 var itm4Price = '$' + (resObj.opener.items[4].item_price * resObj.opener.items[4].count).toFixed(2);
                 itm0display = 'block';
@@ -230,10 +230,21 @@ export class ResDoorConfigurationComponent implements OnInit {
         var leadPrice = resObj.LEADTEST === true ? '$20.00' : "";
         var medalian = true;
         var itemPrice = resObj.INSTALLTYPE === 'Installed' ? this.utils.utilities.itemPriceInstall : this.utils.utilities.itemPriceDY;
-
+        var imageUrl;
+        let params = {
+            base64String: this.utils.resFlow.imgSrc,
+            imagename: 'currentImg',
+            imageformat: 'jpeg'
+        }
+        this.dataService.getImageUrl(params)
+            .subscribe(
+                res => {
+                    imageUrl = res;
+                }
+            )
         var body = `
             <div>
-              <img src="${imgSrc}" width="300" height="200" />
+              <img src="${imageUrl}" width="300" height="200" />
             </div>
             <table style="border-collapse: collapse">
             <tr style="border-bottom: 1px solid #ccc">

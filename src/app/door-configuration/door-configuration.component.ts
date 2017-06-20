@@ -128,6 +128,7 @@ export class DoorConfigurationComponent implements OnInit {
         }
     }
     shareEmail() {
+       
         var data = this.emailBody;
         var windcode = data.windcode;
         var opener = data.cart[0].opener.opener['item_name'];

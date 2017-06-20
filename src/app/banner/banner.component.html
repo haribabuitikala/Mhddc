@@ -18,7 +18,6 @@
         <span *ngIf="zipCode.errors?.minlength && zipCode.touched" class="error ptn-abs">
           {{lang.zipcodeMessage}} 
         </span>
-
       </div>
       <div class="btn-sec">
         <button class="btn btn-sm border-white text-white show-zip-results go-btn" [disabled]="form.invalid">{{lang.Go}}</button>

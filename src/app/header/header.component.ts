@@ -47,9 +47,9 @@ export class HeaderComponent implements OnInit, AfterViewChecked {
     cartIcon(modal?) {
         if(window.location.hash.indexOf('shoppingCart') == -1) {
             this.shoppingCartComp.getItemPrice();
-            if(this.shoppingCartComp.resFlowSession.cart.length > 0) {
-                this.shoppingCartComp.toggleSection(this.shoppingCartComp.resFlowSession.cart.length - 1);
-            }
+            // if(this.shoppingCartComp.resFlowSession.cart.length > 0) {
+            //     this.shoppingCartComp.toggleSection(this.shoppingCartComp.resFlowSession.cart.length - 1);
+            // }
             modal.open();
         }        
     }

@@ -10,6 +10,7 @@ export class CartDetailsRootComponent implements OnInit {
   constructor(private utils: AppUtilities) { }  
   @Input() Item;
   data;
+  itemPrice = this.utils.resFlowSession.cart[0].totalPrice;
   ngOnInit() {
     this.data = this.Item || this.utils.resFlowSession.resDoorObj;
   }

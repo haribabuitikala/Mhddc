@@ -40,7 +40,7 @@
             Door Construction
         </dd>
         <dd>
-            <p [innerHTML]="data.construction.name + ' (x' + data.construction.qty + ')'"></p>            
+            <p [innerHTML]="data.construction.name + ' (x' + data.construction.qty + ')'"></p>
         </dd>
     </dl>
     <dl class="door-configuration-table" *ngIf="data.color.overlay.name !== ''">
@@ -69,7 +69,7 @@
             <p [innerHTML]="data.topSection.name"></p>
             <span>{{data.topSection.glassType.price * data.topSection.glassType.qty | currency:'USD':true:'1.2-2'}}</span>
         </dd>
-    </dl>    
+    </dl>
     <dl class="door-configuration-table" *ngIf="data.topSection.name !== ''">
         <dd class="door-configuration-table-header">
             Glass Type
@@ -82,20 +82,20 @@
     <dl class="door-configuration-table" *ngIf="data.hardware.handle.qty > 0 || data.hardware.stepPlate.qty > 0 || data.hardware.hinge.qty > 0">
         <dd class="door-configuration-table-header">
             Hardware
-        </dd>        
+        </dd>
         <dd *ngIf="data.hardware.handle.qty > 0">
             <p [innerHTML]="data.hardware.handle.name + ' (x' + data.hardware.handle.qty * data.construction.qty + ')'"></p>
             <span>{{(data.isDIY ? data.hardware.handle.diy_price : data.hardware.handle.install_price) * data.hardware.handle.qty  | currency:'USD':true:'1.2-2'}}</span>
         </dd>
         <dd *ngIf="data.hardware.stepPlate.qty > 0">
             <p [innerHTML]="data.hardware.stepPlate.name + ' (x' + data.hardware.stepPlate.qty * data.construction.qty + ')'"></p>
-            <span>{{(data.isDIY ? data.hardware.stepPlate.diy_price : data.hardware.stepPlate.install_price) * data.hardware.stepPlate.qty  | currency:'USD':true:'1.2-2'}}</span>                   
+            <span>{{(data.isDIY ? data.hardware.stepPlate.diy_price : data.hardware.stepPlate.install_price) * data.hardware.stepPlate.qty  | currency:'USD':true:'1.2-2'}}</span>
         </dd>
         <dd *ngIf="data.hardware.hinge.price !== 0">
             <p [innerHTML]="data.hardware.hinge.name + ' (x' + data.hardware.hinge.qty * data.construction.qty + ')'"></p>
-            <span>{{(data.isDIY ? data.hardware.hinge.diy_price : data.hardware.hinge.install_price) * data.hardware.hinge.qty  | currency:'USD':true:'1.2-2'}}</span>                
+            <span>{{(data.isDIY ? data.hardware.hinge.diy_price : data.hardware.hinge.install_price) * data.hardware.hinge.qty  | currency:'USD':true:'1.2-2'}}</span>
         </dd>
-    </dl>        
+    </dl>
     <dl class="door-configuration-table" *ngIf="data.opener.QTY !== 0 && data.opener.price !== 0">
         <dd class="door-configuration-table-header">
             Opener
@@ -123,7 +123,7 @@
             <span>{{itm.price * itm.qty | currency:'USD':true:'1.2-2'}}</span>
         </dd>
     </dl>
-    <div *ngIf="additional">            
+    <div *ngIf="additional">
         <dl class="door-configuration-table">
             <dd class="door-configuration-table-header">
                 Quantity
@@ -139,5 +139,18 @@
                 </div>
             </dd>
         </dl>
-    </div>    
+    </div>
+    <div class="text-orange">
+        <dl class="door-configuration-table">
+            <dd class="door-configuration-table-header">
+            </dd>
+        </dl>
+        <div class="pull-right">
+
+            Sub-Total : {{itemPrice | currency:'USD':true:'1.2-2'}}
+        </div>
+
+
+    </div>
+
 </div>
