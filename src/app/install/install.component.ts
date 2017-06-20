@@ -185,7 +185,11 @@ export class InstallComponent implements OnInit, AfterViewInit {
     }
 
     prevBtn() {
-        this.navigateTo('/config/hardware');
+        if (this.appComponent.flowType === 'resquick') {
+            this.navigateTo('/config/color');
+        } else {
+            this.navigateTo('/config/hardware');
+        }
     }
     leadTestValue(buttonValue) {
         if (buttonValue == "YES") {
