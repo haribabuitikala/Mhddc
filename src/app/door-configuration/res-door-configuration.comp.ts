@@ -105,7 +105,8 @@ export class ResDoorConfigurationComponent implements OnInit {
             var itmDisplay = 'block';
         }
     }
-    sendMail(email) {
+
+    renderEmailBody(imageUrl) {
         var data = this.emailData;
         var resObj = this.utils.resFlowSession.resDoorObj;
         var size = this.utils.resFlow
@@ -230,20 +231,10 @@ export class ResDoorConfigurationComponent implements OnInit {
         var leadPrice = resObj.LEADTEST === true ? '$20.00' : "";
         var medalian = true;
         var itemPrice = resObj.INSTALLTYPE === 'Installed' ? this.utils.utilities.itemPriceInstall : this.utils.utilities.itemPriceDY;
-        var imageUrl;
-        var d = new Date();
-        var timeStamp = d.getTime();
-        let params = {
-            base64String: this.utils.resFlow.imgSrc,
-            imagename: 'res-' + timeStamp,
-            imageformat: 'jpeg'
-        }
-        this.dataService.getImageUrl(params)
-            .subscribe(
-            res => {
-                imageUrl = res;
 
-                var body = `
+
+
+        var body = `
             <div>
               <img src="${imageUrl}" width="300" height="200" />
             </div>
@@ -342,7 +333,24 @@ export class ResDoorConfigurationComponent implements OnInit {
             </tr>
             </table>
 
-        `
+        `;
+        return body;
+    }
+    sendMail(email) {
+        var imageUrl;
+        var d = new Date();
+        var timeStamp = d.getTime();
+        let params = {
+            base64String: this.utils.resFlow.imgSrc,
+            imagename: 'res-' + timeStamp,
+            imageformat: 'jpeg'
+        }
+        this.dataService.getImageUrl(params)
+            .subscribe(
+            res => {
+                imageUrl = res;
+            }).finally(() => {
+                let body = this.renderEmailBody(imageUrl || '');
                 let obj = {
                     ToEmail: this.shareEmail,
                     Body: body,
@@ -353,8 +361,7 @@ export class ResDoorConfigurationComponent implements OnInit {
                         console.log('sent mail');
                         email.close();
                     })
-            }
-            )
+            });
     }
     updateQuantity(flow) {
 
