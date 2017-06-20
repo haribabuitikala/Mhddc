@@ -677,6 +677,10 @@ export class ResidentialFlowSession {
                     this.resDetails.color.base.qty = count;
                 }
 
+                //Setting topsetion name if topsection is already asigned
+                if (obj.windows && obj.windows.topsection) {
+                    this.resDetails.topSection.name = obj.windows.topsection['item_name'];
+                }
                 // Calculate price for Top Section and Glasstype
                 let tsgt = obj.windows.glasstype;
                 if (tsgt && tsgt.hasOwnProperty('item_price')) {

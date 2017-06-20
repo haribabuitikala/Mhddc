@@ -444,7 +444,15 @@ export class HardwareComponent implements OnInit {
       this.navigateTo('/config/color');
     } else {
       this.utils.resFlowSession.resDoorObj.resetFromStep(6);
-      this.navigateTo('/config/topSection');
+      if (this.config.detailsInfo.glassType) {
+        if (this.utils.resFlowSession.resDoorObj.product.product['item_id'] === 13) {
+          this.navigateTo('/config/glassType');
+        } else {
+          this.navigateTo('/config/nonClassic');
+        }
+      } else {
+        this.navigateTo('/config/topSection');
+      }
     }
   }
 
