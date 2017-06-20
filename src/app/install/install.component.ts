@@ -36,6 +36,7 @@ export class InstallComponent implements OnInit, AfterViewInit {
     @ViewChild('leadTest') leadTest: ModalComponent;
     @ViewChild('epa') epa: ModalComponent;
     @ViewChild('learnMore') learnMore: ModalComponent;
+    @ViewChild('florida') modal1: ModalComponent;
 
     installSize: string;
     wincode: string;
@@ -65,12 +66,13 @@ export class InstallComponent implements OnInit, AfterViewInit {
 
     installPrice = 0;
     diyPrice = 0;
-
+    isChecked = false;
+    checkboxFlag = false;
 
 
     hideDIY = false;
     noDIYs = [30, 16, 9];
-   
+
     ngOnInit() {
         console.log('install init ');
         this.widthFeets = this.sizes.getWidthFeets();
@@ -157,13 +159,29 @@ export class InstallComponent implements OnInit, AfterViewInit {
                 this.leadTest.open();
             }
 
-
         } else {
-            this.readyToNextStep = false;
-            this.setOldValues();
-            this.config.renderCanvas(window['cObj'], 'doorVis', '#diyDoorVis');
-            this.exactDoorsize.open();
+            let winCode = +this.utils.utilities.winCode.slice(1);
+            if (this.data.zipResults.state == 'FL' && winCode >= 6) {
+                this.checkboxFlag = false; // if user checked the checkbox and returned again
+                this.isChecked = true;
+                this.modal1.open();
+            } else {
+                this.gotoNext();
+            }
         }
+    }
+    setFloridaConfirmValue(event) {
+        if (event.currentTarget.checked) {
+            this.isChecked = false;
+        } else {
+            this.isChecked = true;
+        }
+    }
+    gotoNext() {
+        this.readyToNextStep = false;
+        this.setOldValues();
+        this.config.renderCanvas(window['cObj'], 'doorVis', '#diyDoorVis');
+        this.exactDoorsize.open();
     }
 
     prevBtn() {
@@ -270,6 +288,7 @@ export class InstallComponent implements OnInit, AfterViewInit {
     }
 
     getWidth() {
+
         this.heightFeets = this.sizes.getHeightFeets(this.selectedwidth);
         this.selectedHeightFeet = null;
 
@@ -583,5 +602,23 @@ export class InstallComponent implements OnInit, AfterViewInit {
     navigateToSize() {
         this.utils.resFlowSession.resDoorObj.resetsize();
         this.navigateTo('/doorSize');
+    }
+
+    //  check for florida to open the popup
+    checkFlorida() {
+
+    }
+
+    floridaClose() {
+        if (this.isChecked) {
+            return false;
+        } else {
+            this.isChecked = false;
+            this.modal1.close();
+            this.readyToNextStep = false;
+            this.setOldValues();
+            this.exactDoorsize.open();
+            this.config.renderCanvas(window['cObj'], 'doorVis', '#diyDoorVis');
+        }
     }
 }
