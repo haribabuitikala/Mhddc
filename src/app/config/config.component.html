@@ -186,6 +186,12 @@
                     <span *ngIf="details.hardware.hinge.name != 'None'" [innerHTML]="details.hardware.hinge.name + ' (x' + details.hardware.hinge.qty + ' Per Door)'"></span>
                     </span>
                 </li>
+                <li *ngIf="detailsInfo.isEPA">
+                    <span>
+                        <strong>Lead Paint Test</strong>
+                        <span>Required</span>
+                    </span>
+                </li>
                 <li *ngIf="detailsInfo.Opener">
                     <span>
                         <strong>Opener</strong>
