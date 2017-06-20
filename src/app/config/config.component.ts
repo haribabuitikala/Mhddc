@@ -37,9 +37,9 @@ export class ConfigComponent implements OnInit, AfterViewInit, AfterViewChecked 
 
     ngAfterViewChecked() {
         this.cdref.detectChanges();
-        if(this.utils.resFlowSession.cart.length === 0) {
-            if([10, 11, 12, 13].indexOf(this.appComponent.activeStep) !== -1) {
-                if(this.utils.resFlowSession.resDoorObj.INSTALLTYPE === 'Installed') {
+        if (this.utils.resFlowSession.cart.length === 0) {
+            if ([10, 11, 12, 13].indexOf(this.appComponent.activeStep) !== -1) {
+                if (this.utils.resFlowSession.resDoorObj.INSTALLTYPE === 'Installed') {
                     this.itemPriceDY = 0;
                     this.itemPriceInstall = this.utils.utilities.itemPriceInstall;
                 } else {
@@ -48,7 +48,7 @@ export class ConfigComponent implements OnInit, AfterViewInit, AfterViewChecked 
                 }
             }
         } else {
-            if(this.utils.resFlowSession.resDoorObj.INSTALLTYPE === 'Installed') {
+            if (this.utils.resFlowSession.resDoorObj.INSTALLTYPE === 'Installed') {
                 this.itemPriceDY = 0;
                 this.itemPriceInstall = this.utils.utilities.itemPriceInstall;
             } else {
@@ -473,28 +473,21 @@ export class ConfigComponent implements OnInit, AfterViewInit, AfterViewChecked 
         var hgt;
         var detailshgt;
         var bodyWdt = $('body').width();
-        
+
         this.details.widthF = this.utils.resFlow.wf;
         this.details.widthI = this.utils.resFlow.wi;
         this.details.heightF = this.utils.resFlow.hf;
         this.details.heightI = this.utils.resFlow.hi;
         switch (bodyWdt) {
             case 414:
-                hgt = linearhgt + header;
+                detailshgt = "18vh";
                 break;
-            case 375:
-                hgt = linearhgt - header;
-                break;
-            case 320:
-                hgt = 148;
-                detailshgt = "50vh";
-                break;
-            case 320:
-                detailshgt = "43vh";
+            default:
+                detailshgt = "19vh";
                 break;
         }
         $('.details-modal').css({
-            "margin-top": hgt,
+            "margin-top": linearhgt,
             "width": width,
             "left": pos.left,
             "max-height": detailshgt
