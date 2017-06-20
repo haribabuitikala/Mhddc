@@ -145,7 +145,7 @@
             <dd class="door-configuration-table-header">
             </dd>
         </dl>
-        <div class="pull-right">
+        <div class="pull-right" *ngIf="itemPrice">
 
             Sub-Total : {{itemPrice | currency:'USD':true:'1.2-2'}}
         </div>
