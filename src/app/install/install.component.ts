@@ -151,6 +151,13 @@ export class InstallComponent implements OnInit, AfterViewInit {
 
 
     nextBtn(path) {
+        //Best place to set collection name in quickship flow
+        if (this.appComponent.flowType == 'resquick') {
+            let construction = this.utils.resFlowSession.resDoorObj.construction.construction;
+            if (construction) {
+                this.utils.resFlowSession.resDetails.collectionName = construction['product_name'];
+            }
+        }
         if (this.appComponent.selectedInstallDiy == 'Installed') {
 
             if (this.data.zipResults.state == "KS" || this.data.zipResults.state == "CA" || this.data.zipResults.state == "RI") {
