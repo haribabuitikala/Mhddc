@@ -74,7 +74,8 @@ export class ResSliderComponent implements OnInit, AfterViewInit {
                 if (this.cname != 'opener') {
                     if (this.utils.resFlowSession.resDoorObj.product.product['item_id'] == 16 && this.cname === 'color') {
                         this.saveSelected(this.data[0][3]);
-                        this.app.updatePrice();
+                    } if(this.cname == 'glasstype') {
+                        this.saveSelected(this.data[0][2]);
                     } else {
                         if (this.data.length > 0 && this.data[0].length > 0) {
                             this.saveSelected(this.data[0][0]);
