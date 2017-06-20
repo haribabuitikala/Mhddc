@@ -264,7 +264,23 @@
     </div>
   </modal-body>
 </modal>
+<modal #florida>
+    <modal-body class="padding10">
+        <p class="font-size-14" [innerHTML]="lang.floridaPopup.modalContent">
+        </p>
+        <p>
+            <label>
+                <input type="checkbox" value="" [(ngModel)]="checkboxFlag"  (change)="setFloridaConfirmValue($event)" > {{lang.floridaPopup.confirm}}
+            </label>
+        </p>
+        <div class="text-center margin-t-0 text-uppercase">
+            <button (click)="floridaClose()"
+                class="btn btn-default text-uppercase box-shadow bold text-orange"> {{lang.floridaPopup.enter}}
+            </button>
+        </div>
 
+    </modal-body>
+</modal>
 
 <div id="footer" class="col-xs-12 padding-t-10 padding-b-10">
   <a href="javascript:void(0)" class="pull-left previous-btn" (click)="prevBtn('config/color')" data-id="currScreen">

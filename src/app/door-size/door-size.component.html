@@ -161,11 +161,11 @@
 </modal>
 <modal #florida>
     <modal-body class="padding10">
-        <p class="font-size-14">  {{lang.floridaPopup.modalContent}}
+        <p class="font-size-14" [innerHTML]="lang.floridaPopup.modalContent">
         </p>
         <p>
             <label>
-                <input type="checkbox" value=""> {{lang.floridaPopup.confirm}}
+                <input type="checkbox" value="" [(ngModel)]="checkboxFlag"  (change)="setFloridaConfirmValue($event)"> {{lang.floridaPopup.confirm}}
             </label>
         </p>
         <div class="text-center margin-t-0 text-uppercase">
@@ -188,3 +188,4 @@
         </div>
     </modal-body>
 </modal>
+

@@ -27,6 +27,8 @@ export class DoorSizeComponent implements OnInit {
     collectionData;
     isValid = true;
     isRequired = false;
+    isChecked = false;
+    checkboxFlag = false;
 
 
     widthFeets;
@@ -60,8 +62,8 @@ export class DoorSizeComponent implements OnInit {
     // private navComponent:NavComponent
     ngOnInit() {
         this.utils.resFlowSession.resDoorObj.resetsize();
-        if(this.utils.resFlowSession.cart.length > 0) {
-            if(this.utils.resFlowSession.cart[0].isDIY) {
+        if (this.utils.resFlowSession.cart.length > 0) {
+            if (this.utils.resFlowSession.cart[0].isDIY) {
                 this.utils.resFlowSession.resDoorObj.INSTALLTYPE = 'DIY';
             } else {
                 this.utils.resFlowSession.resDoorObj.INSTALLTYPE = 'Installed';
@@ -206,6 +208,7 @@ export class DoorSizeComponent implements OnInit {
     checkFlorida(isValid) {
         if (this.data.zipResults.state == 'FL') {
             this.showMeasure = true;
+            this.isChecked = false;
             if (isValid == true) {
                 this.isValid = false;
                 this.isRequired = true;
@@ -216,16 +219,31 @@ export class DoorSizeComponent implements OnInit {
             }
             let winCode = +this.utils.utilities.winCode.slice(1);
             if (winCode >= 6) {
+                this.checkboxFlag = false; // if user checked the checkbox and returned again
+                this.isChecked = true;
                 this.modal1.open();
             }
         } else {
             this.showMeasure = true;
         }
     }
+    setFloridaConfirmValue(event) {
+        if (event.currentTarget.checked) {
+            this.isChecked = false;
+        } else {
+            this.isChecked = true;
+        }
+    }
 
     floridaClose() {
-        this.showMeasure = true;
-        this.modal1.close();
+        if (this.isChecked) {
+            return false;
+        } else {
+            this.isChecked = false;
+            this.showMeasure = true;
+            this.modal1.close();
+        }
+
     }
 
     dataParams = {
