@@ -198,7 +198,7 @@ export class CollectionComponent implements OnInit {
     setParams(obj) {
         let dataParams;
         let utils = this.utils.utilities;
-        this.utils.checkDoor();
+        // this.utils.checkDoor();
         // return dataParams = {
         //     "productid": obj.item_id,
         //     "dtype": utils.dtype,
