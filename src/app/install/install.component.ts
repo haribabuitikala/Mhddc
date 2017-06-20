@@ -161,7 +161,7 @@ export class InstallComponent implements OnInit, AfterViewInit {
             }
         }
         if (this.selectedType == 'Installed') {
-
+            this.utils.resFlowSession.orderObj.orderInstallType = "Installed";
             if (this.data.zipResults.state == "KS" || this.data.zipResults.state == "CA" || this.data.zipResults.state == "RI") {
                 this.navigateTo('/config/opener');
             } else {
@@ -170,6 +170,7 @@ export class InstallComponent implements OnInit, AfterViewInit {
 
         } else {
             let winCode = +this.utils.utilities.winCode.slice(1);
+            this.utils.resFlowSession.orderObj.orderInstallType = "DIY";
             if (this.data.zipResults.state == 'FL' && winCode >= 6) {
                 this.checkboxFlag = false; // if user checked the checkbox and returned again
                 this.isChecked = true;
