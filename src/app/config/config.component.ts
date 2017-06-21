@@ -469,23 +469,24 @@ export class ConfigComponent implements OnInit, AfterViewInit, AfterViewChecked 
         var pos = $('.res-config').offset();
         var linearhgt = $('.res-config').outerHeight();
         var header = $('.logo-header').outerHeight();
-        var width = $('.res-config').outerWidth();
-        var hgt;
-        var detailshgt;
+        var width = $('.res-config').outerWidth();        
+        // var hgt;
+        var detailshgt = $('.inner-router').height();
         var bodyWdt = $('body').width();
 
         this.details.widthF = this.utils.resFlow.wf;
         this.details.widthI = this.utils.resFlow.wi;
         this.details.heightF = this.utils.resFlow.hf;
         this.details.heightI = this.utils.resFlow.hi;
-        switch (bodyWdt) {
-            case 414:
-                detailshgt = "18vh";
-                break;
-            default:
-                detailshgt = "19vh";
-                break;
-        }
+        // switch (bodyWdt) {
+        //     case 414:
+        //         detailshgt = "18vh";
+        //         break;
+        //     default:
+        //         detailshgt = "19vh";
+        //         break;
+        // }
+
         $('.details-modal').css({
             "margin-top": linearhgt,
             "width": width,
