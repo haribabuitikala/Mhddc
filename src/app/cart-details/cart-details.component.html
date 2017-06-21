@@ -96,6 +96,12 @@
             <span>{{(data.isDIY ? data.hardware.hinge.diy_price : data.hardware.hinge.install_price) * data.hardware.hinge.qty  | currency:'USD':true:'1.2-2'}}</span>
         </dd>
     </dl>
+    <dl *ngIf="data.isEPA">
+        <dd>
+            <p>Lead Paint Test</p>
+            <span>Required</span>
+        </dd>
+    </dl>
     <dl class="door-configuration-table" *ngIf="data.opener.QTY !== 0 && data.opener.price !== 0">
         <dd class="door-configuration-table-header">
             Opener
