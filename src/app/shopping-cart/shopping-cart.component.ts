@@ -33,8 +33,6 @@ export class ShoppingCartComponent implements OnInit {
     accessories;
     showDirect;
     directItm = this.dataStore.gdoDirectQuestions;
-    showGdo = false;
-
     itemPrice = 0;
     itmPrice = this.utils.utilities.itmPrice;
     baseItmPrice = this.utils.utilities.item_price * this.utils.utilities.gdoOpenerQty;
