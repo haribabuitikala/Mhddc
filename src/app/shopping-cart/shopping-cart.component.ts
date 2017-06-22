@@ -42,6 +42,7 @@ export class ShoppingCartComponent implements OnInit {
     resFlow;
     resFlowSession;
     isGdo;
+    showGdo = this.utils.gdoFlowSession.cart.length === 0 ? true : false;
 
     constructor(private appComp: AppComponent
         , private navComp: NavService
@@ -185,6 +186,6 @@ export class ShoppingCartComponent implements OnInit {
     continueShopping() {
         this.closeModal.next();
         this.utils.utilities.dtype = 'RES';
-        this.route.navigateByUrl('/doorSize');
+        this.route.navigateByUrl('/category');
     }
 }

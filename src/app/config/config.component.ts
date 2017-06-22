@@ -170,7 +170,7 @@ export class ConfigComponent implements OnInit, AfterViewInit, AfterViewChecked 
         path === "/config/design" ? path = "/config" : path = this.location.path();
         // this.appComponent.currScreen = this.appComponent.navElems.indexOf(path);
         this.calculatePrice();
-        //$('.switcher-box').css({ right: 35 });
+        $('.switcher-box').css({ right: 28 });
 
         this.homeImage = this.utils.resFlow.selectedHome;
 
@@ -178,14 +178,14 @@ export class ConfigComponent implements OnInit, AfterViewInit, AfterViewChecked 
         var $this = this;
         $('.switcher-box').on('click tap', function () {
             $(this).hide();
-            $('.switcher-box-home').show().removeClass('hide');
+            $('.switcher-box-home').show().removeClass('hide').animate({ 'right': '60' , 'animation-duration': '2s' });
             $('.switcher-image').addClass('homeImage');
             $this.isDoor = false;
         });
 
         $('.switcher-box-home').on('click tap', function () {
             $(this).hide();
-            $('.switcher-box').show().removeClass('hide');
+            $('.switcher-box').show().removeClass('hide').animate({ 'right': '28' , 'animation-duration': '2s'});
             $('.switcher-image').removeClass('homeImage');
             $this.isDoor = true;
         });
@@ -193,9 +193,9 @@ export class ConfigComponent implements OnInit, AfterViewInit, AfterViewChecked 
         let selectedHome = window['selectedHome'];
         if (selectedHome) {
             if (selectedHome._upload && selectedHome._upload == true) {
-                $('.switcher-box-home').show().removeClass('hide');
+                $('.switcher-box-home').show().removeClass('hide').animate({ right: 60});
                 $('.switcher-image').addClass('homeImage');
-                $('.switcher-box').addClass('hide');
+                $('.switcher-box').addClass('hide').animate({ right: 35 });
                 $this.isDoor = false;
             }
         }
