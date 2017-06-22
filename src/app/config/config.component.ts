@@ -170,7 +170,7 @@ export class ConfigComponent implements OnInit, AfterViewInit, AfterViewChecked 
         path === "/config/design" ? path = "/config" : path = this.location.path();
         // this.appComponent.currScreen = this.appComponent.navElems.indexOf(path);
         this.calculatePrice();
-        $('.switcher-box').css({ right: 35 });
+        $('.switcher-box').css({ right: 28 });
 
         this.homeImage = this.utils.resFlow.selectedHome;
 
@@ -185,7 +185,7 @@ export class ConfigComponent implements OnInit, AfterViewInit, AfterViewChecked 
 
         $('.switcher-box-home').on('click tap', function () {
             $(this).hide();
-            $('.switcher-box').show().removeClass('hide').animate({ 'right': '35' , 'animation-duration': '2s'});
+            $('.switcher-box').show().removeClass('hide').animate({ 'right': '28' , 'animation-duration': '2s'});
             $('.switcher-image').removeClass('homeImage');
             $this.isDoor = true;
         });
