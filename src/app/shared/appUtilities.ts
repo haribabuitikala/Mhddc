@@ -854,6 +854,20 @@ export class ResidentialFlowSession {
                     item.totalPrice = item.totalPrice + itm.price;
                 }
             });
+
+            // Calculate price for Openers
+            let op = item.opener;
+            if (op && op.price) {
+                item.totalPrice = item.totalPrice + op.price;
+            }
+
+            // Calculate price for Optional Openers
+            if (item.opener.items.length > 0) {
+                _.forEach(item.opener.items, (openeritem) => {
+                    item.totalPrice = item.totalPrice + openeritem['price'] * openeritem['qty'];
+                });
+            }
+            
         }
         catch (e) {
             console.log(e);
