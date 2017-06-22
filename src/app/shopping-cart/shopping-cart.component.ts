@@ -33,7 +33,6 @@ export class ShoppingCartComponent implements OnInit {
     accessories;
     showDirect;
     directItm = this.dataStore.gdoDirectQuestions;
-
     itemPrice = 0;
     itmPrice = this.utils.utilities.itmPrice;
     baseItmPrice = this.utils.utilities.item_price * this.utils.utilities.gdoOpenerQty;
@@ -184,6 +183,7 @@ export class ShoppingCartComponent implements OnInit {
 
     continueShopping() {
         this.closeModal.next();
+        this.utils.utilities.dtype = 'RES';
         this.route.navigateByUrl('/category');
     }
 }
