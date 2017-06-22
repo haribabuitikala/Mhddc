@@ -33,6 +33,7 @@ export class ShoppingCartComponent implements OnInit {
     accessories;
     showDirect;
     directItm = this.dataStore.gdoDirectQuestions;
+    showGdo = false;
 
     itemPrice = 0;
     itmPrice = this.utils.utilities.itmPrice;
@@ -122,6 +123,7 @@ export class ShoppingCartComponent implements OnInit {
         } else {
             this.utils.gdoFlowSession.cart.splice(index, 1);
             $('.shop-count').text(this.resFlowSession.cart.length);
+            this.showGdo = true;
             //this.route.navigateByUrl('/category');
             this.data = null;
         }
@@ -182,6 +184,7 @@ export class ShoppingCartComponent implements OnInit {
 
     continueShopping() {
         this.closeModal.next();
-        //this.route.navigateByUrl('/doorSize');
+        this.utils.utilities.dtype = 'RES';
+        this.route.navigateByUrl('/doorSize');
     }
 }
