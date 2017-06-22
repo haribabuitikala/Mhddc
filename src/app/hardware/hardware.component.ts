@@ -45,7 +45,7 @@ export class HardwareComponent implements OnInit {
 
   handlePlacementArr = [1];
   stepplatePlacementArr = [1];
-  hingesPlacementArr = [1];
+  hingesPlacementArr = [0];
 
   handlePlacements = [];
   stepplatePlacements = [];
@@ -114,6 +114,9 @@ export class HardwareComponent implements OnInit {
               this.hingePlacements.push(h);
             });
             this.hingesPlacementArr = arr3;
+            if (hinge && hinge.item_name == 'None') {
+              this.hingesPlacementArr = [0];
+            }
             this.countManager.hinge = 0;
 
 
@@ -185,9 +188,12 @@ export class HardwareComponent implements OnInit {
               let arr3 = [];
               placements.forEach(h => {
                 arr3.push(h.split(':')[0]);
-                this.hingePlacements.push(h);
+                this.hingePlacements.push(h); 
               });
               this.hingesPlacementArr = arr3;
+              if (hardware.hinge && hardware.hinge['item_name'] == 'None') {
+                this.hingesPlacementArr = [0];
+              }
               this.countManager.hinge = 0;
               var defaultCount = parseInt(hardware.hinge['defaultkit']);
               if (defaultCount == 2 && hardware.hinge['placementlist'].split(';').length > 1) {
