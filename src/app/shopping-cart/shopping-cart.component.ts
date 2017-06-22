@@ -182,6 +182,6 @@ export class ShoppingCartComponent implements OnInit {
 
     continueShopping() {
         this.closeModal.next();
-        //this.route.navigateByUrl('/doorSize');
+        this.route.navigateByUrl('/category');
     }
 }
