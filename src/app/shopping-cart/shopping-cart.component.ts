@@ -41,6 +41,7 @@ export class ShoppingCartComponent implements OnInit {
     resFlow;
     resFlowSession;
     isGdo;
+    showGdo = this.utils.gdoFlowSession.cart.length === 0 ? true : false;
 
     constructor(private appComp: AppComponent
         , private navComp: NavService
@@ -122,6 +123,7 @@ export class ShoppingCartComponent implements OnInit {
         } else {
             this.utils.gdoFlowSession.cart.splice(index, 1);
             $('.shop-count').text(this.resFlowSession.cart.length);
+            this.showGdo = true;
             //this.route.navigateByUrl('/category');
             this.data = null;
         }
