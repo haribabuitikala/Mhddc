@@ -51,7 +51,7 @@ export class AppComponent implements OnInit, AfterViewChecked, OnChanges {
 
     ngAfterViewChecked() {
         this.cdref.detectChanges();
-        this.selectedInstallDiy = this.app.resFlowSession.cart.length > 0 ? this.app.resFlowSession.cart[0]['INSTALLTYPE'] : 'Installed'; 
+        this.selectedInstallDiy = this.app.resFlowSession.cart.length > 0 ? this.app.resFlowSession.cart[0]['INSTALLTYPE'] : 'Installed';
     }
 
     ngOnInit() {
@@ -144,6 +144,9 @@ export class AppComponent implements OnInit, AfterViewChecked, OnChanges {
     getCheckOut(price) {
         this.app.resFlowSession.orderObj.cart.push(this.app.resFlowSession.resDoorObj);
         let resObj = this.app.resFlowSession.orderObj;
+        if (resObj.cart[0].windows.placement == null) {
+            resObj.cart[0].windows.placement = '';
+        }
         let gdoObj = this.app.gdoFlowSession;
         let Obj = this.app.utilities.isGDO === true ? gdoObj : resObj;
 
