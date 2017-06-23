@@ -178,14 +178,14 @@ export class ConfigComponent implements OnInit, AfterViewInit, AfterViewChecked 
         var $this = this;
         $('.switcher-box').on('click tap', function () {
             $(this).hide();
-            $('.switcher-box-home').show().removeClass('hide').animate({ 'right': '60' , 'animation-duration': '2s' });
+            $('.switcher-box-home').show().removeClass('hide').animate({ 'right': '60', 'animation-duration': '2s' });
             $('.switcher-image').addClass('homeImage');
             $this.isDoor = false;
         });
 
         $('.switcher-box-home').on('click tap', function () {
             $(this).hide();
-            $('.switcher-box').show().removeClass('hide').animate({ 'right': '28' , 'animation-duration': '2s'});
+            $('.switcher-box').show().removeClass('hide').animate({ 'right': '28', 'animation-duration': '2s' });
             $('.switcher-image').removeClass('homeImage');
             $this.isDoor = true;
         });
@@ -193,7 +193,7 @@ export class ConfigComponent implements OnInit, AfterViewInit, AfterViewChecked 
         let selectedHome = window['selectedHome'];
         if (selectedHome) {
             if (selectedHome._upload && selectedHome._upload == true) {
-                $('.switcher-box-home').show().removeClass('hide').animate({ right: 60});
+                $('.switcher-box-home').show().removeClass('hide').animate({ right: 60 });
                 $('.switcher-image').addClass('homeImage');
                 $('.switcher-box').addClass('hide').animate({ right: 35 });
                 $this.isDoor = false;
@@ -472,7 +472,7 @@ export class ConfigComponent implements OnInit, AfterViewInit, AfterViewChecked 
         var pos = $('.res-config').offset();
         var linearhgt = $('.res-config').outerHeight();
         var header = $('.logo-header').outerHeight();
-        var width = $('.res-config').outerWidth();        
+        var width = $('.res-config').outerWidth();
         // var hgt;
         var detailshgt = $('.inner-router').height();
         var bodyWdt = $('body').width();
@@ -489,7 +489,10 @@ export class ConfigComponent implements OnInit, AfterViewInit, AfterViewChecked 
         //         detailshgt = "19vh";
         //         break;
         // }
-
+        if (detailshgt > 200) {
+            detailshgt = 220;
+            linearhgt = 218;
+        }
         $('.details-modal').css({
             "margin-top": linearhgt,
             "width": width,
