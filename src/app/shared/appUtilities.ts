@@ -329,7 +329,8 @@ export class ResidentialFlowSession {
     }
 
 
-    resDoorObj = {
+    resDoorObj = {        
+        "QPB": false,
         "QTY": 1,
         "TYPE": 'RES',
         "INSTALLTYPE": 'GDO',
@@ -574,7 +575,7 @@ export class ResidentialFlowSession {
     }
 
     orderObj = {
-        "QPB": false,
+        "QPB":false,
         "zipcode": "",
         "storeNumber": "",
         "associateId": "",

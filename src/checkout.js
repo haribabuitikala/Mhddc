@@ -17,6 +17,7 @@ var topSectionEx3 = ["305", "306", "307", "308"];
 var packDIYModels = ["C124", "C125", "C224", "B178", "B278", "B378"];
 var _augustChange = true;
 var orderObj;
+var $promoIsEnable = false;
 
 function CheckOut(subTotal, taxRate, estimatedTax, grandTotal, _orderObj) {
     orderObj = _orderObj;
