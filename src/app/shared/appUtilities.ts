@@ -574,6 +574,7 @@ export class ResidentialFlowSession {
     }
 
     orderObj = {
+        "QPB": false,
         "zipcode": "",
         "storeNumber": "",
         "associateId": "",

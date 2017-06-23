@@ -65,7 +65,7 @@ export class ResSliderComponent implements OnInit, AfterViewInit {
     startProcess() {
         if (this.data) {
             if (this.navComponent.flowType == 'resquick') {
-                if (this.cname != 'openers') {
+                if (this.cname != 'opener') {
                     if (this.data.length > 0 && this.data[0].length > 0) {
                         this.saveSelected(this.data[0][0]);
                     }
