@@ -11,10 +11,11 @@ export class CartDetailsComponent implements OnInit {
 
   }
   data;
+  coachman;
 
   ngOnInit() {
     this.data = this.utils.resFlowSession.resDetails;
-
+    this.coachman = this.utils.resFlowSession.resDoorObj.product.product['item_id'] === 11 ? true : false;
     let size = this.utils.resFlow;
     this.data.widthF = size.wf;
     this.data.widthI = size.wi;

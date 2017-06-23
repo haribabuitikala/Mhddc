@@ -43,7 +43,7 @@
             <p [innerHTML]="data.construction.name + ' (x' + data.construction.qty + ')'"></p>
         </dd>
     </dl>
-    <dl class="door-configuration-table" *ngIf="data.color.overlay.name !== ''">
+    <dl class="door-configuration-table" *ngIf="data.color.overlay.name !== '' && coachman">
         <dd class="door-configuration-table-header">
             Overlay Color
         </dd>
@@ -52,7 +52,7 @@
             <span>{{data.color.overlay.price * data.color.overlay.qty | currency:'USD':true:'1.2-2'}}</span>
         </dd>
     </dl>
-    <dl class="door-configuration-table">
+    <dl class="door-configuration-table" *ngIf="coachman">
         <dd class="door-configuration-table-header">
             Base Color
         </dd>
