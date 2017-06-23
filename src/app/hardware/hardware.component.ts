@@ -329,6 +329,9 @@ export class HardwareComponent implements OnInit {
       this.utils.utilities.lockPrice = 0;
     }
     this.utils.resFlowSession.resDoorObj.hardware.lock = obj;
+    this.utils.resFlowSession.resDetails.hardware.lock.name = obj.item_name;
+    this.utils.resFlowSession.resDetails.hardware.lock.price = obj.item_installed_price;
+    this.utils.resFlowSession.resDetails.hardware.lock.qty = 1;
     this.app.updatePrice();
   }
 
@@ -389,6 +392,15 @@ export class HardwareComponent implements OnInit {
         this.yourLocks = yourLocksData;
         if (yourLocksData && yourLocksData.length > 0) {
           this.hardwareItems(yourLocksData[0], 0);
+          this.utils.resFlowSession.resDoorObj.hardware.lock = yourLocksData[0];
+          
+          this.utils.resFlowSession.resDetails.hardware.lock.name = yourLocksData[0].item_name;
+          this.utils.resFlowSession.resDetails.hardware.lock.price = yourLocksData[0].item_installed_price;
+          this.utils.resFlowSession.resDetails.hardware.lock.qty = 1;
+        } else {
+          this.utils.resFlowSession.resDetails.hardware.lock.name = '';
+          this.utils.resFlowSession.resDetails.hardware.lock.price = 0;
+          this.utils.resFlowSession.resDetails.hardware.lock.qty = 0;
         }
 
         this.setHardwareMinMax();

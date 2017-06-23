@@ -1036,7 +1036,7 @@ export class CollectionService {
             try {
                 return res.json();
             } catch (e) {
-                return {};
+                return res;
             }
         }).finally(() => {
             this.utils.removeLoader();

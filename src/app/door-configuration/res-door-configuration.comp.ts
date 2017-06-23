@@ -78,6 +78,8 @@ export class ResDoorConfigurationComponent implements OnInit {
     }
     data;
     shareEmail: any;
+    emailMsg;
+    showEmailMsg = false;
 
     ngOnInit() {
         this.setNavComponent();
@@ -337,30 +339,33 @@ export class ResDoorConfigurationComponent implements OnInit {
         return body;
     }
     sendMail(email) {
-        var imageUrl;
-        var d = new Date();
-        var timeStamp = d.getTime();
-        let params = {
-            base64String: this.utils.resFlow.imgSrc,
-            imagename: 'res-' + timeStamp,
-            imageformat: 'jpeg'
+        if (this.shareEmail !== '') {
+            var imageUrl;
+            var d = new Date();
+            var timeStamp = d.getTime();
+            let params = {
+                base64String: this.utils.resFlow.imgSrc,
+                imagename: 'res-' + timeStamp,
+                imageformat: 'jpeg'
+            }
+            this.dataService.getImageUrl(params)
+                .subscribe(
+                res => {
+                    imageUrl = res;
+                    let body = this.renderEmailBody(imageUrl || '');
+                    let obj = {
+                        ToEmail: this.shareEmail,
+                        Body: body,
+                        Subject: 'door configuration'
+                    }
+                    this.emailMsg = 'Mail Send Successfully';
+                    this.showEmailMsg = true;
+                    this.dataService.sendMail(obj)
+                        .subscribe(res => {
+                            console.log('sent mail');
+                        })
+                });
         }
-        this.dataService.getImageUrl(params)
-            .subscribe(
-            res => {
-                imageUrl = res;
-                let body = this.renderEmailBody(imageUrl || '');
-                let obj = {
-                    ToEmail: this.shareEmail,
-                    Body: body,
-                    Subject: 'door configuration'
-                }
-                this.dataService.sendMail(obj)
-                    .subscribe(res => {
-                        console.log('sent mail');
-                        email.close();
-                    })
-            });
     }
     updateQuantity(flow) {
 

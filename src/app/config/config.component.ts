@@ -262,6 +262,9 @@ export class ConfigComponent implements OnInit, AfterViewInit, AfterViewChecked 
             if (dor.design != '') {
                 buildObj.designimage = dor.design.dsgn.visimage;
                 buildObj.doorcolumns = Number(dor.design.columns);
+                if (buildObj.productid === 13) {
+                    buildObj.doorcolumns = Number(dor.design.dsgn.Columns);
+                }
                 buildObj.doorrows = Number(dor.design.rows);
 
                 if (this.navComponent.flowType === 'resquick') {

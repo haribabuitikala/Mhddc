@@ -181,9 +181,10 @@
                 <li *ngIf="detailsInfo.Hardware">
                     <span>
                         <strong>Hardware</strong>
-                        <span [innerHTML]="details.hardware.handle.name + ' (x' + details.hardware.handle.qty + ' Per Door)'"></span>
-                    <span [innerHTML]="details.hardware.stepPlate.name + ' (x' + details.hardware.stepPlate.qty + ' Per Door)'"></span>
-                    <span *ngIf="details.hardware.hinge.name != 'None'" [innerHTML]="details.hardware.hinge.name + ' (x' + details.hardware.hinge.qty + ' Per Door)'"></span>
+                        <span *ngIf="details.hardware.handle.qty > 0" [innerHTML]="details.hardware.handle.name + ' (x' + details.hardware.handle.qty + ' Per Door)'"></span>
+                        <span *ngIf="details.hardware.stepPlate.qty > 0" [innerHTML]="details.hardware.stepPlate.name + ' (x' + details.hardware.stepPlate.qty + ' Per Door)'"></span>
+                        <span *ngIf="details.hardware.hinge.name != 'None' && details.hardware.hinge.qty > 0" [innerHTML]="details.hardware.hinge.name + ' (x' + details.hardware.hinge.qty + ' Per Door)'"></span>
+                        <span *ngIf="details.hardware.lock.qty > 0" [innerHTML]="details.hardware.lock.name + ' (x' + details.hardware.lock.qty + ' Per Door)'"></span>
                     </span>
                 </li>
                 <li *ngIf="detailsInfo.isEPA">

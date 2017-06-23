@@ -325,6 +325,7 @@ export class ResSliderComponent implements OnInit, AfterViewInit {
                 break;
             case 'opener':
                 this.utils.resFlowSession.resDoorObj.opener.opener = obj;
+                this.utils.resFlowSession.resDoorObj.opener.QTY = 1;
                 break;
             case 'design':
                 this.utils.resFlowSession.resDoorObj.design.dsgn = obj;

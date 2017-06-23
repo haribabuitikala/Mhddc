@@ -61,6 +61,15 @@
             <span>{{data.color.base.price * data.color.base.qty  | currency:'USD':true:'1.2-2'}}</span>
         </dd>
     </dl>
+    <dl class="door-configuration-table" *ngIf="!coachman">
+        <dd class="door-configuration-table-header">
+            Color
+        </dd>
+        <dd>
+            <p [innerHTML]="data.color.base.name"></p>
+            <span>{{data.color.base.price * data.color.base.qty  | currency:'USD':true:'1.2-2'}}</span>
+        </dd>
+    </dl>
     <dl class="door-configuration-table" *ngIf="data.topSection.name !== ''">
         <dd class="door-configuration-table-header">
             Top Section
@@ -79,7 +88,7 @@
             <span>{{data.topSection.glassType.price * data.topSection.glassType.qty | currency:'USD':true:'1.2-2'}}</span>
         </dd>
     </dl>
-    <dl class="door-configuration-table" *ngIf="data.hardware.handle.qty > 0 || data.hardware.stepPlate.qty > 0 || data.hardware.hinge.qty > 0">
+    <dl class="door-configuration-table" *ngIf="data.hardware.lock.qty == 0 && (data.hardware.handle.qty > 0 || data.hardware.stepPlate.qty > 0 || data.hardware.hinge.qty > 0)">
         <dd class="door-configuration-table-header">
             Hardware
         </dd>
@@ -96,6 +105,16 @@
             <span>{{(data.isDIY ? data.hardware.hinge.diy_price : data.hardware.hinge.install_price) * data.hardware.hinge.qty  | currency:'USD':true:'1.2-2'}}</span>
         </dd>
     </dl>
+    <dl class="door-configuration-table" *ngIf="data.hardware.lock.qty > 0">
+        <dd class="door-configuration-table-header">
+            Hardware
+        </dd>
+        <dd >
+            <p [innerHTML]="data.hardware.lock.name + ' (x' + 1 * data.construction.qty + ')'"></p>
+            <span>{{(data.isDIY ? data.hardware.lock.price : data.hardware.lock.price) * 1  | currency:'USD':true:'1.2-2'}}</span>
+        </dd>
+    </dl>
+    
     <dl class="door-configuration-table" *ngIf="data.isEPA">
         <dd class="door-configuration-table-header">
             Lead Paint Test
