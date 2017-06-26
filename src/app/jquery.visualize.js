@@ -888,7 +888,7 @@ var glassSections = 0;
 		logprint("done Build ready for Complete", $this);
 		$('#SidebarLoader').hide(); 		// custom change to show sidebar loader
 		//alert('update')
-		$('body').removeClass('loader');
+		//$('body').removeClass('loader');
 	}
 	// Console loggin for debugging & reporting
 

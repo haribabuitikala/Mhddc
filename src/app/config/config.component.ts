@@ -139,8 +139,31 @@ export class ConfigComponent implements OnInit, AfterViewInit, AfterViewChecked 
                         height: '90%',
                         width: '90%'
                     });
-                    this.utils.removeLoader();
+                    //this.utils.removeLoader();
+					
+					//this.utils.removeLoader();
+                    if ($('#homeVis').hasClass('default-canvas-hide')) {
+                        //_this.isDoor
+                        $('#homeVis')
+                        this.isDoor = false;
+                        console.log("45678")
+                        setTimeout(function () {
+                            this.utils.removeLoader();
+                            $('#homeVis , #doorVis').removeClass('default-canvas-hide')
+                        }, 100)
+                    } else {
+                        this.utils.removeLoader();
+                    }
+					
                 });
+				
+				
+				
+				
+				
+				
+				
+				
             }
         });
         // this.fitToContainer();
@@ -170,7 +193,8 @@ export class ConfigComponent implements OnInit, AfterViewInit, AfterViewChecked 
         path === "/config/design" ? path = "/config" : path = this.location.path();
         // this.appComponent.currScreen = this.appComponent.navElems.indexOf(path);
         this.calculatePrice();
-        $('.switcher-box').css({ right: 28 });
+       // $('.switcher-box').css({ right: 28 });
+		$('.switcher-box').css({ right: 48 });
 
         this.homeImage = this.utils.resFlow.selectedHome;
 
@@ -180,6 +204,10 @@ export class ConfigComponent implements OnInit, AfterViewInit, AfterViewChecked 
             $(this).hide();
             $('.switcher-box-home').show().removeClass('hide').animate({ 'right': '48', 'animation-duration': '2s' });
             $('.switcher-image').addClass('homeImage');
+			$('#homeVis , #doorVis').addClass('default-canvas-hide')
+			setTimeout(function () {
+								$('#homeVis , #doorVis').removeClass('default-canvas-hide')								
+							}, 5)
             $this.isDoor = false;
         });
 
@@ -187,6 +215,10 @@ export class ConfigComponent implements OnInit, AfterViewInit, AfterViewChecked 
             $(this).hide();
             $('.switcher-box').show().removeClass('hide').animate({ 'right': '28', 'animation-duration': '2s' });
             $('.switcher-image').removeClass('homeImage');
+			$('#homeVis , #doorVis').addClass('default-canvas-hide')
+			setTimeout(function () {
+								$('#homeVis , #doorVis').removeClass('default-canvas-hide')								
+							}, 5)
             $this.isDoor = true;
         });
 
