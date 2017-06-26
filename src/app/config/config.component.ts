@@ -142,7 +142,7 @@ export class ConfigComponent implements OnInit, AfterViewInit, AfterViewChecked 
                         width: '90%'
                     });
                     //this.utils.removeLoader();
-					
+					 
 					//this.utils.removeLoader();
                     if ($('#homeVis').hasClass('default-canvas-hide')) {
                         //_this.isDoor
