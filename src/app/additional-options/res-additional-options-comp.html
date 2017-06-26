@@ -43,7 +43,7 @@
                 </div>
                 <div class="flex space-between">
                     <div *ngIf="diyQuestions.item_id === 5 && !diyQuestions.Answers[0].isdefault">
-                        <p id="distance text-orange">it's <input type="text" [(ngModel)]="defaultMiles" (blur)="updatePrice()" name="defaultMiles"
+                        <p id="distance text-orange">it's <input type="text" [(ngModel)]="defaultMiles" (blur)="updatePrice()" name="defaultMiles" oncopy="return false" onpaste="return false"
                             /> miles away</p>
                     </div>
                     <select [ngModel]="selectedVinyl" *ngIf="diyQuestions.item_id === 1 && diyQuestions.Answers[0].isdefault" (ngModelChange)="selectedVinyls($event, diyQuestions)">
