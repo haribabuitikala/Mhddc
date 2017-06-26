@@ -33,7 +33,6 @@ export class ShoppingCartComponent implements OnInit {
     accessories;
     showDirect;
     directItm = this.dataStore.gdoDirectQuestions;
-
     itemPrice = 0;
     itmPrice = this.utils.utilities.itmPrice;
     baseItmPrice = this.utils.utilities.item_price * this.utils.utilities.gdoOpenerQty;
@@ -41,6 +40,7 @@ export class ShoppingCartComponent implements OnInit {
     resFlow;
     resFlowSession;
     isGdo;
+    showGdo = this.utils.gdoFlowSession.cart.length === 0 ? true : false;
 
     constructor(private appComp: AppComponent
         , private navComp: NavService
@@ -52,6 +52,7 @@ export class ShoppingCartComponent implements OnInit {
 
     ngOnInit() {
         this.navComp.activateIcon();
+        window.location.hash.indexOf('shopping') !== -1 ? $('.content').addClass('shoppingCart') : $('.content').removeClass('shoppingCart');
         this.utils.resFlowSession.resDoorObj.TYPE === 'GDO' ? this.resFlow = false : this.resFlow = true;
         this.pageNo = this.utils.utilities.currPage;
         this.appComp.currScreen = 0;
@@ -82,11 +83,11 @@ export class ShoppingCartComponent implements OnInit {
     }
 
     ngAfterViewInit() {        
-        // if(this.resFlowSession.cart.length === 1) {
-        //     this.toggleSection(0);
-        // } else if(this.resFlowSession.cart.length > 1) {
-        //     this.toggleSection(this.resFlowSession.cart.length-1);
-        // }
+        if(this.resFlowSession.cart.length === 1) {
+            this.toggleSection(0);
+        } else if(this.resFlowSession.cart.length > 1) {
+            this.toggleSection(this.resFlowSession.cart.length-1);
+        }
     }
 
     getTotalCartValue() {
@@ -109,10 +110,12 @@ export class ShoppingCartComponent implements OnInit {
         if (this.IsModal) {
             this.closeModal.next();
         }
+        $('.content').removeClass('shoppingCart');
         this.route.navigateByUrl('/doorSize');
     }
 
     removeItem(item, index) {
+        this.utils.gdoFlowSession.added = false;
         if (this.resFlow) {
             this.resFlowSession.cart.splice(index, 1);
             this.utils.resFlowSession.cart = this.resFlowSession.cart;
@@ -121,9 +124,14 @@ export class ShoppingCartComponent implements OnInit {
         } else {
             this.utils.gdoFlowSession.cart.splice(index, 1);
             $('.shop-count').text(this.resFlowSession.cart.length);
-            this.route.navigateByUrl('/category');
+            this.showGdo = true;
+            //this.route.navigateByUrl('/category');
             this.data = null;
         }
+    }
+    gdoContinue(){
+        $('.content').removeClass('shoppingCart');
+        this.route.navigateByUrl('/category');
     }
 
     updateQuantity(flow) {
@@ -177,7 +185,9 @@ export class ShoppingCartComponent implements OnInit {
     }
 
     continueShopping() {
+        $('.content').removeClass('shoppingCart');
         this.closeModal.next();
-        this.route.navigateByUrl('/doorSize');
+        this.utils.utilities.dtype = 'RES';
+        this.route.navigateByUrl('/category');
     }
 }

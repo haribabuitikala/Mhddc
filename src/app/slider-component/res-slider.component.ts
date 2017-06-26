@@ -65,7 +65,7 @@ export class ResSliderComponent implements OnInit, AfterViewInit {
     startProcess() {
         if (this.data) {
             if (this.navComponent.flowType == 'resquick') {
-                if (this.cname != 'openers') {
+                if (this.cname != 'opener') {
                     if (this.data.length > 0 && this.data[0].length > 0) {
                         this.saveSelected(this.data[0][0]);
                     }
@@ -74,10 +74,14 @@ export class ResSliderComponent implements OnInit, AfterViewInit {
                 if (this.cname != 'opener') {
                     if (this.utils.resFlowSession.resDoorObj.product.product['item_id'] == 16 && this.cname === 'color') {
                         this.saveSelected(this.data[0][3]);
-                        this.app.updatePrice();
                     } else {
                         if (this.data.length > 0 && this.data[0].length > 0) {
-                            this.saveSelected(this.data[0][0]);
+                            let k = _.filter(this.data[0], ['isdefault', true]);
+                            if(k.length > 0) {
+                                this.saveSelected(k[0]);    
+                            } else {
+                                this.saveSelected(this.data[0][0]);
+                            }
                         }
                     }
                 }
@@ -321,6 +325,7 @@ export class ResSliderComponent implements OnInit, AfterViewInit {
                 break;
             case 'opener':
                 this.utils.resFlowSession.resDoorObj.opener.opener = obj;
+                this.utils.resFlowSession.resDoorObj.opener.QTY = 1;
                 break;
             case 'design':
                 this.utils.resFlowSession.resDoorObj.design.dsgn = obj;

@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
+import { Component, OnInit, ViewChild, AfterViewInit, ChangeDetectorRef, AfterViewChecked } from '@angular/core';
 import { AppComponent } from "../app.component";
 import { Router } from '@angular/router';
 import { ConfigComponent } from "../config/config.component";
@@ -20,7 +20,7 @@ declare var $: any;
     templateUrl: './install.component.html',
     styleUrls: ['./install.component.less']
 })
-export class InstallComponent implements OnInit, AfterViewInit {
+export class InstallComponent implements OnInit, AfterViewInit, AfterViewChecked {
 
     constructor(private appComponent: AppComponent
         , private navComponent: NavComponent
@@ -73,11 +73,18 @@ export class InstallComponent implements OnInit, AfterViewInit {
     hideDIY = false;
     noDIYs = [30, 16, 9];
 
+    ngAfterViewChecked() {
+        this.installPrice = this.utils.utilities.itemPriceInstall;
+        this.diyPrice = this.utils.utilities.itemPriceDY;
+    }
+
     ngOnInit() {
         console.log('install init ');
         this.widthFeets = this.sizes.getWidthFeets();
         this.lang = this.language.getDoorSize();
         this.utils.resFlowSession.resDoorObj.INSTALLTYPE = "Installed";
+        this.utils.resFlowSession.resDetails.INSTALLTYPE = "Installed";
+        this.utils.resFlowSession.resDetails.isDIY = false;
         if (this.noDIYs.indexOf(this.utils.resFlowSession.resDoorObj.product.product['item_id']) >= 0) {
             this.hideDIY = true;
         }
@@ -151,8 +158,15 @@ export class InstallComponent implements OnInit, AfterViewInit {
 
 
     nextBtn(path) {
-        if (this.appComponent.selectedInstallDiy == 'Installed') {
-
+        //Best place to set collection name in quickship flow
+        if (this.appComponent.flowType == 'resquick') {
+            let construction = this.utils.resFlowSession.resDoorObj.construction.construction;
+            if (construction) {
+                this.utils.resFlowSession.resDetails.collectionName = construction['product_name'];
+            }
+        }
+        if (this.selectedType == 'Installed') {
+            this.utils.resFlowSession.orderObj.orderInstallType = "Installed";
             if (this.data.zipResults.state == "KS" || this.data.zipResults.state == "CA" || this.data.zipResults.state == "RI") {
                 this.navigateTo('/config/opener');
             } else {
@@ -161,6 +175,7 @@ export class InstallComponent implements OnInit, AfterViewInit {
 
         } else {
             let winCode = +this.utils.utilities.winCode.slice(1);
+            this.utils.resFlowSession.orderObj.orderInstallType = "DIY";
             if (this.data.zipResults.state == 'FL' && winCode >= 6) {
                 this.checkboxFlag = false; // if user checked the checkbox and returned again
                 this.isChecked = true;
@@ -181,11 +196,19 @@ export class InstallComponent implements OnInit, AfterViewInit {
         this.readyToNextStep = false;
         this.setOldValues();
         this.config.renderCanvas(window['cObj'], 'doorVis', '#diyDoorVis');
-        this.exactDoorsize.open();
+        if (this.utils.resFlowSession.resDoorObj.size.height.hi !== '0' && this.utils.resFlowSession.resDoorObj.size.width.wi !== '0') {
+            this.exactDoorsize.open();
+        } else {
+            this.navigateTo('/config/additionalOptions');
+        }
     }
 
     prevBtn() {
-        this.navigateTo('/config/hardware');
+        if (this.appComponent.flowType === 'resquick') {
+            this.navigateTo('/config/color');
+        } else {
+            this.navigateTo('/config/hardware');
+        }
     }
     leadTestValue(buttonValue) {
         if (buttonValue == "YES") {

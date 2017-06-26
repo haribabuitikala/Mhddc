@@ -78,6 +78,8 @@ export class ResDoorConfigurationComponent implements OnInit {
     }
     data;
     shareEmail: any;
+    emailMsg;
+    showEmailMsg = false;
 
     ngOnInit() {
         this.setNavComponent();
@@ -105,7 +107,8 @@ export class ResDoorConfigurationComponent implements OnInit {
             var itmDisplay = 'block';
         }
     }
-    sendMail(email) {
+
+    renderEmailBody(imageUrl) {
         var data = this.emailData;
         var resObj = this.utils.resFlowSession.resDoorObj;
         var size = this.utils.resFlow
@@ -230,18 +233,9 @@ export class ResDoorConfigurationComponent implements OnInit {
         var leadPrice = resObj.LEADTEST === true ? '$20.00' : "";
         var medalian = true;
         var itemPrice = resObj.INSTALLTYPE === 'Installed' ? this.utils.utilities.itemPriceInstall : this.utils.utilities.itemPriceDY;
-        var imageUrl;
-        let params = {
-            base64String: this.utils.resFlow.imgSrc,
-            imagename: 'currentImg',
-            imageformat: 'jpeg'
-        }
-        this.dataService.getImageUrl(params)
-            .subscribe(
-                res => {
-                    imageUrl = res;
-                }
-            )
+
+
+
         var body = `
             <div>
               <img src="${imageUrl}" width="300" height="200" />
@@ -341,17 +335,37 @@ export class ResDoorConfigurationComponent implements OnInit {
             </tr>
             </table>
 
-        `
-        let obj = {
-            ToEmail: this.shareEmail,
-            Body: body,
-            Subject: 'door configuration'
+        `;
+        return body;
+    }
+    sendMail(email) {
+        if (this.shareEmail !== '') {
+            var imageUrl;
+            var d = new Date();
+            var timeStamp = d.getTime();
+            let params = {
+                base64String: this.utils.resFlow.imgSrc,
+                imagename: 'res-' + timeStamp,
+                imageformat: 'jpeg'
+            }
+            this.dataService.getImageUrl(params)
+                .subscribe(
+                res => {
+                    imageUrl = res;
+                    let body = this.renderEmailBody(imageUrl || '');
+                    let obj = {
+                        ToEmail: this.shareEmail,
+                        Body: body,
+                        Subject: 'door configuration'
+                    }
+                    this.emailMsg = 'Mail Send Successfully';
+                    this.showEmailMsg = true;
+                    this.dataService.sendMail(obj)
+                        .subscribe(res => {
+                            console.log('sent mail');
+                        })
+                });
         }
-        this.dataService.sendMail(obj)
-            .subscribe(res => {
-                console.log('sent mail');
-                email.close();
-            })
     }
     updateQuantity(flow) {
 

@@ -876,7 +876,13 @@ export class CollectionService {
     getDesign(obj) {
         this.utils.setLoader();
         return this.http.post(this.url + 'DesignConstruction', obj)
-            .map(res => res.json())
+            .map(res => {
+                try {
+                    return res.json();
+                } catch (e) {
+                    return {};
+                }
+            })
             .finally(() => {
                 this.utils.removeLoader();
             })
@@ -885,7 +891,13 @@ export class CollectionService {
     getTopSection(obj) {
         this.utils.setLoader();
         return this.http.post(this.url + 'Windows', obj)
-            .map(res => res.json())
+            .map(res => {
+                try {
+                    return res.json();
+                } catch (e) {
+                    return {};
+                }
+            })
             .finally(() => {
                 this.utils.removeLoader();
             })
@@ -894,7 +906,13 @@ export class CollectionService {
     getHardware(obj) {
         this.utils.setLoader();
         return this.http.post(this.url + 'Hardware', obj)
-            .map(res => res.json())
+            .map(res => {
+                try {
+                    return res.json();
+                } catch (e) {
+                    return {};
+                }
+            })
             .finally(() => {
                 this.utils.removeLoader();
             })
@@ -903,7 +921,13 @@ export class CollectionService {
     getquickDoors(obj) {
         this.utils.setLoader();
         return this.http.post(this.url + 'Stockdoors', obj)
-            .map(res => res.json())
+            .map(res => {
+                try {
+                    return res.json();
+                } catch (e) {
+                    return {};
+                }
+            })
             .finally(() => {
                 this.utils.removeLoader();
             })
@@ -926,7 +950,13 @@ export class CollectionService {
     getInstallDiyq(obj) {
         this.utils.setLoader();
         return this.http.post(this.url + 'DiyInstallq', obj)
-            .map(res => res.json())
+            .map(res => {
+                try {
+                    return res.json();
+                } catch (e) {
+                    return {};
+                }
+            })
             .finally(() => {
                 this.utils.removeLoader();
             })
@@ -1006,7 +1036,7 @@ export class CollectionService {
             try {
                 return res.json();
             } catch (e) {
-                return {};
+                return res;
             }
         }).finally(() => {
             this.utils.removeLoader();

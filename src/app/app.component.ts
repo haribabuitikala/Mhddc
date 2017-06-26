@@ -51,7 +51,7 @@ export class AppComponent implements OnInit, AfterViewChecked, OnChanges {
 
     ngAfterViewChecked() {
         this.cdref.detectChanges();
-        this.selectedInstallDiy = this.app.resFlowSession.cart.length > 0 ? this.app.resFlowSession.cart[0]['INSTALLTYPE'] : 'Installed'; 
+        this.selectedInstallDiy = this.app.resFlowSession.cart.length > 0 ? this.app.resFlowSession.cart[0]['INSTALLTYPE'] : 'Installed';
     }
 
     ngOnInit() {
@@ -144,6 +144,33 @@ export class AppComponent implements OnInit, AfterViewChecked, OnChanges {
     getCheckOut(price) {
         this.app.resFlowSession.orderObj.cart.push(this.app.resFlowSession.resDoorObj);
         let resObj = this.app.resFlowSession.orderObj;
+        let qpbProduct;
+        try {
+             if (this.app.resFlowSession.resDoorObj.product.apiData && this.app.resFlowSession.resDoorObj.product.apiData['filter']) {
+                let productQuickShip = this.app.resFlowSession.resDoorObj.product.apiData['filter'](p => {
+                    return p.item_id == 13;
+                });
+
+                if (productQuickShip.length > 0) {
+                    qpbProduct = productQuickShip[0];
+                }
+            }
+        } catch (r) {
+            //swallow
+        }
+       
+        for (var i = 0; i < resObj.cart.length; i++) {
+            if (resObj.QPB === true) {
+                resObj.cart[i].product.product.QPB = true;
+                if (qpbProduct) {
+                    resObj.cart[i].product.product = qpbProduct;
+                }
+            }
+
+            if (resObj.cart[i].windows.placement == null) {
+                resObj.cart[i].windows.placement = '';
+            }
+        }
         let gdoObj = this.app.gdoFlowSession;
         let Obj = this.app.utilities.isGDO === true ? gdoObj : resObj;
 

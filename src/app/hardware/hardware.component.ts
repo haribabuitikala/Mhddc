@@ -45,7 +45,7 @@ export class HardwareComponent implements OnInit {
 
   handlePlacementArr = [1];
   stepplatePlacementArr = [1];
-  hingesPlacementArr = [1];
+  hingesPlacementArr = [0];
 
   handlePlacements = [];
   stepplatePlacements = [];
@@ -114,6 +114,9 @@ export class HardwareComponent implements OnInit {
               this.hingePlacements.push(h);
             });
             this.hingesPlacementArr = arr3;
+            if (hinge && hinge.item_name == 'None') {
+              this.hingesPlacementArr = [0];
+            }
             this.countManager.hinge = 0;
 
 
@@ -185,9 +188,12 @@ export class HardwareComponent implements OnInit {
               let arr3 = [];
               placements.forEach(h => {
                 arr3.push(h.split(':')[0]);
-                this.hingePlacements.push(h);
+                this.hingePlacements.push(h); 
               });
               this.hingesPlacementArr = arr3;
+              if (hardware.hinge && hardware.hinge['item_name'] == 'None') {
+                this.hingesPlacementArr = [0];
+              }
               this.countManager.hinge = 0;
               var defaultCount = parseInt(hardware.hinge['defaultkit']);
               if (defaultCount == 2 && hardware.hinge['placementlist'].split(';').length > 1) {
@@ -323,6 +329,9 @@ export class HardwareComponent implements OnInit {
       this.utils.utilities.lockPrice = 0;
     }
     this.utils.resFlowSession.resDoorObj.hardware.lock = obj;
+    this.utils.resFlowSession.resDetails.hardware.lock.name = obj.item_name;
+    this.utils.resFlowSession.resDetails.hardware.lock.price = obj.item_installed_price;
+    this.utils.resFlowSession.resDetails.hardware.lock.qty = 1;
     this.app.updatePrice();
   }
 
@@ -383,6 +392,15 @@ export class HardwareComponent implements OnInit {
         this.yourLocks = yourLocksData;
         if (yourLocksData && yourLocksData.length > 0) {
           this.hardwareItems(yourLocksData[0], 0);
+          this.utils.resFlowSession.resDoorObj.hardware.lock = yourLocksData[0];
+          
+          this.utils.resFlowSession.resDetails.hardware.lock.name = yourLocksData[0].item_name;
+          this.utils.resFlowSession.resDetails.hardware.lock.price = yourLocksData[0].item_installed_price;
+          this.utils.resFlowSession.resDetails.hardware.lock.qty = 1;
+        } else {
+          this.utils.resFlowSession.resDetails.hardware.lock.name = '';
+          this.utils.resFlowSession.resDetails.hardware.lock.price = 0;
+          this.utils.resFlowSession.resDetails.hardware.lock.qty = 0;
         }
 
         this.setHardwareMinMax();
@@ -444,7 +462,15 @@ export class HardwareComponent implements OnInit {
       this.navigateTo('/config/color');
     } else {
       this.utils.resFlowSession.resDoorObj.resetFromStep(6);
-      this.navigateTo('/config/topSection');
+      if (this.config.detailsInfo.glassType) {
+        if (this.utils.resFlowSession.resDoorObj.product.product['item_id'] === 13) {
+          this.navigateTo('/config/glassType');
+        } else {
+          this.navigateTo('/config/nonClassic');
+        }
+      } else {
+        this.navigateTo('/config/topSection');
+      }
     }
   }
 

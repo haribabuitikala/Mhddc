@@ -139,7 +139,7 @@ export class ResAdditionalOptionsComponent implements OnInit {
 
     ngOnInit() {
         this.utils.resFlowSession.resDoorObj.resetadditional();
-        this.installOrDiy = this.appComponent.selectedInstallDiy
+        this.installOrDiy = this.utils.resFlowSession.resDetails.isDIY ? 'DIY' : 'Installed';
 
         this.appComponent.next = 'Next';
         this.pageNo = this.utils.utilities.currPage;
@@ -305,15 +305,15 @@ export class ResAdditionalOptionsComponent implements OnInit {
             name: obj.item_name,
             price: obj.Answers[1].item_price
         }
-        if(obj.item_id === 4) {
+        if(obj.item_id === 1) {
             if(event) {
                 this.selectedVinyl = this.vinyls[15];
             }            
             k.name = this.selectedVinyl.item_name;
             k.price = this.selectedVinyl.item_price;
-        }  
+        }
 
-        let n = obj.item_list_text.split('<span class="text-orange">').join('').split('</span>').join('').replace('?','').replace('$'+k.price,'').trim();        
+        let n = obj.item_list_text.split('<span class="text-orange">').join('').split('</span>').join('').replace('?','').replace('$'+k.price,'').trim().split('$')[0].trim();        
         if (itm) {
             switch (obj.item_id) {
                 case 1:
@@ -322,6 +322,7 @@ export class ResAdditionalOptionsComponent implements OnInit {
                 case 11:
                 case 12:
                     obj.item_list_text = n + '<span class="text-orange"> $'+ k.price +'</span>?';
+                    this.removeItmOptions(obj.item_id);
                     this.itmObj.items.push(k);
                     break;
                 case 5:                    
@@ -347,8 +348,8 @@ export class ResAdditionalOptionsComponent implements OnInit {
         this.appComponent.updatePrice();
     }
 
-    selectedVinyls(vin) {   
-        let k = _.findIndex(this.resDiyQuestions, {'item_id': 4});
+    selectedVinyls(vin, diyQuestion) {   
+        let k = _.findIndex(this.resDiyQuestions, {'item_id': diyQuestion.item_id});
         if(vin) {
             if(vin.item_id !== -1) {
                 this.selectedVinyl = vin;   

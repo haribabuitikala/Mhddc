@@ -84,6 +84,7 @@ export class CollectionComponent implements OnInit {
         this.makeNull();
         this.collections = this.data.data;
         this.pageNo = this.utils.utilities.currPage;
+        this.utils.resFlowSession.orderObj.QPB = false;
 
         $.each(this.data.data, function (idx, value) {
             switch (value.item_thumbnail) {
@@ -198,7 +199,7 @@ export class CollectionComponent implements OnInit {
     setParams(obj) {
         let dataParams;
         let utils = this.utils.utilities;
-        this.utils.checkDoor();
+        // this.utils.checkDoor();
         // return dataParams = {
         //     "productid": obj.item_id,
         //     "dtype": utils.dtype,
@@ -260,6 +261,7 @@ export class CollectionComponent implements OnInit {
         this.appComponent.setLoader(true);
         let utils = this.utils.utilities;
         let labour = this.utils.resFlowSession.resDoorObj;
+        this.utils.resFlowSession.orderObj.QPB = true;
         let labourCode = labour.size.width.wf === '16' ? labour.product.apiData[0]['doubleinstallcode'] : labour.product.apiData[0]['singleinstallcode'];
         let dataParams = {
             "dtype": utils.dtype,
@@ -290,6 +292,7 @@ export class CollectionComponent implements OnInit {
                     designs.push(d);
                 });
                 this.utils.resQuickSession.designs = designs;
+                this.utils.resFlowSession.resDoorObj.product.product = res[0];
                 this.navComponent.setNavFlow('resquick');
                 this.utils.removeLoader();
             }

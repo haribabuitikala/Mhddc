@@ -132,32 +132,12 @@ export class AppUtilities {
 
         windcode: this.utilities.winCode,
         zipcode: "",
-        cart: [{
-            "INSTALLTYPE": "GDO",
-            "QTY": 1,
-            "TYPE": "GDO",
-            "idex": 0,
-            "isPurchase": true,
-            "opener": {
-                apiData: [],
-                items: [],
-                opener: {}
-            },
-            "size": {
-                "height": {
-                    "hf": "7",
-                    "hi": "0"
-                },
-                "apiData": {}
-            },
-            "additional": {
-                "items": []
-            }
-        }],
+        cart: [],
         locale: "",
         orderInstallType: "GDO",
         items: 1,
-        store: ""
+        store: "",
+        added: false
     }
 
     setUtils(curr, clicked) {
@@ -349,7 +329,8 @@ export class ResidentialFlowSession {
     }
 
 
-    resDoorObj = {
+    resDoorObj = {        
+        "QPB": false,
         "QTY": 1,
         "TYPE": 'RES',
         "INSTALLTYPE": 'GDO',
@@ -594,6 +575,7 @@ export class ResidentialFlowSession {
     }
 
     orderObj = {
+        "QPB":false,
         "zipcode": "",
         "storeNumber": "",
         "associateId": "",
@@ -677,6 +659,10 @@ export class ResidentialFlowSession {
                     this.resDetails.color.base.qty = count;
                 }
 
+                //Setting topsetion name if topsection is already asigned
+                if (obj.windows && obj.windows.topsection) {
+                    this.resDetails.topSection.name = obj.windows.topsection['item_name'];
+                }
                 // Calculate price for Top Section and Glasstype
                 let tsgt = obj.windows.glasstype;
                 if (tsgt && tsgt.hasOwnProperty('item_price')) {
@@ -723,15 +709,16 @@ export class ResidentialFlowSession {
                     this.utils.resFlowSession.resDetails.hardware.hinge.diy_price = hhi['item_price'];
                     this.utils.resFlowSession.resDetails.hardware.hinge.qty = hhi['count'];
                 }
-
+                // d.Calculate price for Locks
                 let locksItem = obj.hardware.lock;
                 if (locksItem && locksItem.hasOwnProperty('item_installed_price')) {
-                    price[0] = price[0] + locksItem['item_installed_price'] * 1;
+                    price[0] = price[0] + locksItem['item_installed_price'] * count;
                     let itemPrice = locksItem['item_price'] ? locksItem['item_price'] : locksItem['item_installed_price'];
-                    price[1] = price[1] + itemPrice * 1;
+                    price[1] = price[1] + itemPrice * count;
 
                     this.resDetails.hardware.lock.name = locksItem['item_name'];
                     this.resDetails.hardware.lock.price = locksItem['item_installed_price'];
+                    this.resDetails.hardware.lock.qty = count;
                 }
 
                 // Calculate price if EPA
@@ -870,6 +857,20 @@ export class ResidentialFlowSession {
                     item.totalPrice = item.totalPrice + itm.price;
                 }
             });
+
+            // Calculate price for Openers
+            let op = item.opener;
+            if (op && op.price) {
+                item.totalPrice = item.totalPrice + op.price;
+            }
+
+            // Calculate price for Optional Openers
+            if (item.opener.items.length > 0) {
+                _.forEach(item.opener.items, (openeritem) => {
+                    item.totalPrice = item.totalPrice + openeritem['price'] * openeritem['qty'];
+                });
+            }
+            
         }
         catch (e) {
             console.log(e);

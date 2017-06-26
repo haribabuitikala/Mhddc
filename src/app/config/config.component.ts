@@ -34,12 +34,14 @@ export class ConfigComponent implements OnInit, AfterViewInit, AfterViewChecked 
     details;
     whdata;
     openerName;
+    showDetailTxt = true;
 
     ngAfterViewChecked() {
         this.cdref.detectChanges();
-        if(this.utils.resFlowSession.cart.length === 0) {
-            if([10, 11, 12, 13].indexOf(this.appComponent.activeStep) !== -1) {
-                if(this.utils.resFlowSession.resDoorObj.INSTALLTYPE === 'Installed') {
+        this.showDetailTxt = window.location.hash.indexOf('doorConfiguration') !== -1 ? false : true;
+        if (this.utils.resFlowSession.cart.length === 0) {
+            if ([10, 11, 12, 13].indexOf(this.appComponent.activeStep) !== -1) {
+                if (this.utils.resFlowSession.resDoorObj.INSTALLTYPE === 'Installed') {
                     this.itemPriceDY = 0;
                     this.itemPriceInstall = this.utils.utilities.itemPriceInstall;
                 } else {
@@ -48,7 +50,7 @@ export class ConfigComponent implements OnInit, AfterViewInit, AfterViewChecked 
                 }
             }
         } else {
-            if(this.utils.resFlowSession.resDoorObj.INSTALLTYPE === 'Installed') {
+            if (this.utils.resFlowSession.resDoorObj.INSTALLTYPE === 'Installed') {
                 this.itemPriceDY = 0;
                 this.itemPriceInstall = this.utils.utilities.itemPriceInstall;
             } else {
@@ -136,14 +138,38 @@ export class ConfigComponent implements OnInit, AfterViewInit, AfterViewChecked 
                     this.utils.setLoader();
                     $('#homeVis').html('').append(canvas);
                     $('#homeVis').find('canvas').css({
-                        height: '100%',
-                        width: '100%'
+                        height: '90%',
+                        width: '90%'
                     });
-                    this.utils.removeLoader();
+                    //this.utils.removeLoader();
+					 
+					//this.utils.removeLoader();
+                    if ($('#homeVis').hasClass('default-canvas-hide')) {
+                        //_this.isDoor
+                        $('#homeVis')
+                        this.isDoor = false;
+                        console.log("45678")
+                        setTimeout(function () {
+                            this.utils.removeLoader();
+                            $('#homeVis , #doorVis').removeClass('default-canvas-hide')
+                        }, 100)
+                    } else {
+                        this.utils.removeLoader();
+                    }
+					
                 });
+				
+				
+				
+				
+				
+				
+				
+				
             }
         });
         // this.fitToContainer();
+
     }
 
     detailsInfo = {
@@ -170,7 +196,8 @@ export class ConfigComponent implements OnInit, AfterViewInit, AfterViewChecked 
         path === "/config/design" ? path = "/config" : path = this.location.path();
         // this.appComponent.currScreen = this.appComponent.navElems.indexOf(path);
         this.calculatePrice();
-        $('.switcher-box').css({ right: 35 });
+       // $('.switcher-box').css({ right: 28 });
+		$('.switcher-box').css({ right: 48 });
 
         this.homeImage = this.utils.resFlow.selectedHome;
 
@@ -178,22 +205,30 @@ export class ConfigComponent implements OnInit, AfterViewInit, AfterViewChecked 
         var $this = this;
         $('.switcher-box').on('click tap', function () {
             $(this).hide();
-            $('.switcher-box-home').show().removeClass('hide').animate({ right: 60 });
+            $('.switcher-box-home').show().removeClass('hide').animate({ 'right': '48', 'animation-duration': '2s' });
             $('.switcher-image').addClass('homeImage');
+			$('#homeVis , #doorVis').addClass('default-canvas-hide')
+			setTimeout(function () {
+								$('#homeVis , #doorVis').removeClass('default-canvas-hide')								
+							}, 5)
             $this.isDoor = false;
         });
 
         $('.switcher-box-home').on('click tap', function () {
             $(this).hide();
-            $('.switcher-box').show().removeClass('hide').animate({ right: 35 });
+            $('.switcher-box').show().removeClass('hide').animate({ 'right': '28', 'animation-duration': '2s' });
             $('.switcher-image').removeClass('homeImage');
+			$('#homeVis , #doorVis').addClass('default-canvas-hide')
+			setTimeout(function () {
+								$('#homeVis , #doorVis').removeClass('default-canvas-hide')								
+							}, 5)
             $this.isDoor = true;
         });
 
         let selectedHome = window['selectedHome'];
         if (selectedHome) {
             if (selectedHome._upload && selectedHome._upload == true) {
-                $('.switcher-box-home').show().removeClass('hide').css({ right: 60 });
+                $('.switcher-box-home').show().removeClass('hide').animate({ right: 48 });
                 $('.switcher-image').addClass('homeImage');
                 $('.switcher-box').addClass('hide').animate({ right: 35 });
                 $this.isDoor = false;
@@ -262,6 +297,9 @@ export class ConfigComponent implements OnInit, AfterViewInit, AfterViewChecked 
             if (dor.design != '') {
                 buildObj.designimage = dor.design.dsgn.visimage;
                 buildObj.doorcolumns = Number(dor.design.columns);
+                if (buildObj.productid === 13) {
+                    buildObj.doorcolumns = Number(dor.design.dsgn.Columns);
+                }
                 buildObj.doorrows = Number(dor.design.rows);
 
                 if (this.navComponent.flowType === 'resquick') {
@@ -470,31 +508,28 @@ export class ConfigComponent implements OnInit, AfterViewInit, AfterViewChecked 
         var linearhgt = $('.res-config').outerHeight();
         var header = $('.logo-header').outerHeight();
         var width = $('.res-config').outerWidth();
-        var hgt;
-        var detailshgt;
+        // var hgt;
+        var detailshgt = $('.inner-router').height();
         var bodyWdt = $('body').width();
-        
+
         this.details.widthF = this.utils.resFlow.wf;
         this.details.widthI = this.utils.resFlow.wi;
         this.details.heightF = this.utils.resFlow.hf;
         this.details.heightI = this.utils.resFlow.hi;
-        switch (bodyWdt) {
-            case 414:
-                hgt = linearhgt + header;
-                break;
-            case 375:
-                hgt = linearhgt - header;
-                break;
-            case 320:
-                hgt = 148;
-                detailshgt = "50vh";
-                break;
-            case 320:
-                detailshgt = "43vh";
-                break;
+        // switch (bodyWdt) {
+        //     case 414:
+        //         detailshgt = "18vh";
+        //         break;
+        //     default:
+        //         detailshgt = "19vh";
+        //         break;
+        // }
+        if (detailshgt > 200) {
+            detailshgt = 220;
+            linearhgt = 218;
         }
         $('.details-modal').css({
-            "margin-top": hgt,
+            "margin-top": linearhgt,
             "width": width,
             "left": pos.left,
             "max-height": detailshgt

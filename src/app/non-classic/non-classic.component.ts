@@ -40,6 +40,12 @@ export class NonClassicComponent implements OnInit {
   }
 
   ngOnInit() {
+    let detailsInfo = this.config.detailsInfo;
+    detailsInfo.Hardware = false;
+    detailsInfo.glassType = true;
+    detailsInfo.Opener = false;
+
+
     this.navComponent.renderNav({
       flowType: 'res',
       flowActiveStep: 8,

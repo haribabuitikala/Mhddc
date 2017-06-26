@@ -888,7 +888,7 @@ var glassSections = 0;
 		logprint("done Build ready for Complete", $this);
 		$('#SidebarLoader').hide(); 		// custom change to show sidebar loader
 		//alert('update')
-		$('body').removeClass('loader');
+		//$('body').removeClass('loader');
 	}
 	// Console loggin for debugging & reporting
 
@@ -1172,7 +1172,7 @@ var glassSections = 0;
 				if ($this._dSlab[0][0].width > maxWidth) ratio = (maxWidth - 10) / $this._dSlab[0][0].width;
 				if (($this._dSlab[0][0].height * ratio) > maxHeight) ratio = (maxHeight - 10) / $this._dSlab[0][0].height;
 			}
-
+ 
 			leftAmmount = (maxWidth / 2) - (($this._dSlab[0][0].width * ratio) / 2) + 15
 			topAmmount = (maxHeight / 2) - (($this._dSlab[0][0].height * ratio) / 2) + 20
 

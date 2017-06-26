@@ -1,21 +1,21 @@
 <div class="clearfix res-config">
-    <h3 class="font-size-16 margin-t-10 visualize-header swicher-align" >
-        {{ pageTitle }}
+    <h3 class="font-size-14 margin-t-10 visualize-header swicher-align" >
+        {{ pageTitle }} 
     </h3>
     <div class="switcher-sec text-orange text-uppercase home-image">
         <span class="switcher-text">Home</span>
         <span class="switcher margin-b-10"></span>
-        <span class="switcher-box switcher-icon">
+        <span class="switcher-box switcher-icon hide">
             <img src="../../assets/images/door_icon.png" height="14">
         </span>
-        <span class="switcher-box-home switcher-icon hide">
+        <span class="switcher-box-home switcher-icon ">
             <img src="../../assets/images/home_icon.png" height="14">
         </span>
         <span class="switcher-text">Door</span>
     </div>
     <div class="text-center switcher-image-sec linear-bg" style="position: relative;">
-        <div id="doorVis" [ngClass]="{ 'hide': !isDoor}"></div>
-        <div id="homeVis" [ngClass]="{ 'hide': isDoor}"></div>
+        <div id="doorVis" class="default-canvas-hide" [ngClass]="{ 'hide': !isDoor}"></div>
+        <div id="homeVis"  class="default-canvas-hide" [ngClass]="{ 'hide': isDoor}"></div>
     </div>
 </div>
 <div class="inner-router">
@@ -40,7 +40,7 @@
                 <img src="../../assets/images/add.png" alt="" class="add-quantity" (click)="updateQuantity(1)">
             </p>
             <p class="margin-b-5">&nbsp;</p>
-            <h4 class="pull-right padding-r-7 text-orange" (click)="openDetailsModal(detailsModal)">DETAILS</h4>
+            <h4 class="pull-right padding-r-7 text-orange" *ngIf="showDetailTxt" (click)="openDetailsModal(detailsModal)">DETAILS</h4>
         </div>
     </div>
 <!--</div>-->
@@ -181,9 +181,16 @@
                 <li *ngIf="detailsInfo.Hardware">
                     <span>
                         <strong>Hardware</strong>
-                        <span [innerHTML]="details.hardware.handle.name + ' (x' + details.hardware.handle.qty + ' Per Door)'"></span>
-                    <span [innerHTML]="details.hardware.stepPlate.name + ' (x' + details.hardware.stepPlate.qty + ' Per Door)'"></span>
-                    <span [innerHTML]="details.hardware.hinge.name + ' (x' + details.hardware.hinge.qty + ' Per Door)'"></span>
+                        <span *ngIf="details.hardware.handle.qty > 0" [innerHTML]="details.hardware.handle.name + ' (x' + details.hardware.handle.qty + ' Per Door)'"></span>
+                        <span *ngIf="details.hardware.stepPlate.qty > 0" [innerHTML]="details.hardware.stepPlate.name + ' (x' + details.hardware.stepPlate.qty + ' Per Door)'"></span>
+                        <span *ngIf="details.hardware.hinge.name != 'None' && details.hardware.hinge.qty > 0" [innerHTML]="details.hardware.hinge.name + ' (x' + details.hardware.hinge.qty + ' Per Door)'"></span>
+                        <span *ngIf="details.hardware.lock.qty > 0" [innerHTML]="details.hardware.lock.name + ' (x' + details.hardware.lock.qty + ' Per Door)'"></span>
+                    </span>
+                </li>
+                <li *ngIf="detailsInfo.isEPA">
+                    <span>
+                        <strong>Lead Paint Test</strong>
+                        <span>Required</span>
                     </span>
                 </li>
                 <li *ngIf="detailsInfo.Opener">

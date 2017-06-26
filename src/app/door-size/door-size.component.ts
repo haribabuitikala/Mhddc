@@ -79,6 +79,8 @@ export class DoorSizeComponent implements OnInit {
         this.navComponent.clearDisabledSteps();
         this.navComponent.clearVisitedSteps();
         this.navComponent.setNavFlow('res');
+        //defaulting to dtype as 'res' in door-size due to landing from card page
+        this.utils.utilities.dtype = 'res';
         this.navComponent.renderNav({
             flowType: 'res',
             flowActiveStep: 1,
@@ -224,7 +226,7 @@ export class DoorSizeComponent implements OnInit {
                 this.modal1.open();
             }
         } else {
-            this.showMeasure = true;
+            this.showMeasure = !this.showMeasure;
         }
     }
     setFloridaConfirmValue(event) {
@@ -245,7 +247,7 @@ export class DoorSizeComponent implements OnInit {
         }
 
     }
-
+    
     dataParams = {
         dtype: this.utils.utilities.dtype,
         windcode: this.utils.utilities.winCode,
