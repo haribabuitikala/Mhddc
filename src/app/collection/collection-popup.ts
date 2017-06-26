@@ -51,7 +51,7 @@ export class CollectionPopup implements OnInit {
     ngOnInit() {
         this.img = this.popup.popupImg;
         this.videoUrl = this.sanitizer.bypassSecurityTrustResourceUrl(this.video)
-        if (this.popup.item_id === 31 || this.popup.item_id === 170 || this.popup.item_id === 30) {
+        if (this.popup.item_id === 170 || this.popup.item_id === 30) {
             this.showPlayIcon = false;
         }
     }

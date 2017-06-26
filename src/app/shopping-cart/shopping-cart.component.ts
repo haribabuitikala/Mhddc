@@ -52,6 +52,7 @@ export class ShoppingCartComponent implements OnInit {
 
     ngOnInit() {
         this.navComp.activateIcon();
+        window.location.hash.indexOf('shopping') !== -1 ? $('.content').addClass('shoppingCart') : $('.content').removeClass('shoppingCart');
         this.utils.resFlowSession.resDoorObj.TYPE === 'GDO' ? this.resFlow = false : this.resFlow = true;
         this.pageNo = this.utils.utilities.currPage;
         this.appComp.currScreen = 0;
@@ -109,6 +110,7 @@ export class ShoppingCartComponent implements OnInit {
         if (this.IsModal) {
             this.closeModal.next();
         }
+        $('.content').removeClass('shoppingCart');
         this.route.navigateByUrl('/doorSize');
     }
 
@@ -128,6 +130,7 @@ export class ShoppingCartComponent implements OnInit {
         }
     }
     gdoContinue(){
+        $('.content').removeClass('shoppingCart');
         this.route.navigateByUrl('/category');
     }
 
@@ -182,6 +185,7 @@ export class ShoppingCartComponent implements OnInit {
     }
 
     continueShopping() {
+        $('.content').removeClass('shoppingCart');
         this.closeModal.next();
         this.utils.utilities.dtype = 'RES';
         this.route.navigateByUrl('/category');

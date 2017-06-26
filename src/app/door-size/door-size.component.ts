@@ -226,7 +226,7 @@ export class DoorSizeComponent implements OnInit {
                 this.modal1.open();
             }
         } else {
-            this.showMeasure = true;
+            this.showMeasure = !this.showMeasure;
         }
     }
     setFloridaConfirmValue(event) {

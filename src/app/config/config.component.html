@@ -40,7 +40,7 @@
                 <img src="../../assets/images/add.png" alt="" class="add-quantity" (click)="updateQuantity(1)">
             </p>
             <p class="margin-b-5">&nbsp;</p>
-            <h4 class="pull-right padding-r-7 text-orange" (click)="openDetailsModal(detailsModal)">DETAILS</h4>
+            <h4 class="pull-right padding-r-7 text-orange" *ngIf="showDetailTxt" (click)="openDetailsModal(detailsModal)">DETAILS</h4>
         </div>
     </div>
 <!--</div>-->

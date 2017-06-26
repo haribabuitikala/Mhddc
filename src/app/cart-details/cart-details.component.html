@@ -110,8 +110,8 @@
             Hardware
         </dd>
         <dd >
-            <p [innerHTML]="data.hardware.lock.name + ' (x' + 1 * data.construction.qty + ')'"></p>
-            <span>{{(data.isDIY ? data.hardware.lock.price : data.hardware.lock.price) * 1  | currency:'USD':true:'1.2-2'}}</span>
+            <p [innerHTML]="data.hardware.lock.name + ' (x' + data.hardware.lock.qty + ')'"></p>
+            <span>{{data.hardware.lock.price * data.hardware.lock.qty  | currency:'USD':true:'1.2-2'}}</span>
         </dd>
     </dl>
     
@@ -121,6 +121,7 @@
         </dd>
         <dd>
             <p>Required</p>
+            <span>$20.00</span>
         </dd>
     </dl>
     <dl class="door-configuration-table" *ngIf="data.opener.QTY !== 0 && data.opener.price !== 0">
@@ -174,7 +175,7 @@
         </dl>
         <div class="pull-right" *ngIf="itemPrice">
 
-            Sub-Total : {{itemPrice | currency:'USD':true:'1.2-2'}}
+            Sub-Total : {{data.totalPrice | currency:'USD':true:'1.2-2'}}
         </div>
 
 
