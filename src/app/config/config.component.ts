@@ -34,9 +34,11 @@ export class ConfigComponent implements OnInit, AfterViewInit, AfterViewChecked 
     details;
     whdata;
     openerName;
+    showDetailTxt = true;
 
     ngAfterViewChecked() {
         this.cdref.detectChanges();
+        this.showDetailTxt = window.location.hash.indexOf('doorConfiguration') !== -1 ? false : true;
         if (this.utils.resFlowSession.cart.length === 0) {
             if ([10, 11, 12, 13].indexOf(this.appComponent.activeStep) !== -1) {
                 if (this.utils.resFlowSession.resDoorObj.INSTALLTYPE === 'Installed') {
@@ -144,6 +146,7 @@ export class ConfigComponent implements OnInit, AfterViewInit, AfterViewChecked 
             }
         });
         // this.fitToContainer();
+
     }
 
     detailsInfo = {
