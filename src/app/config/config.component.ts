@@ -142,7 +142,7 @@ export class ConfigComponent implements OnInit, AfterViewInit, AfterViewChecked 
                         width: '90%'
                     });
                     //this.utils.removeLoader();
-					 
+					
 					//this.utils.removeLoader();
                     if ($('#homeVis').hasClass('default-canvas-hide')) {
                         //_this.isDoor
@@ -150,11 +150,11 @@ export class ConfigComponent implements OnInit, AfterViewInit, AfterViewChecked 
                         this.isDoor = false;
                         console.log("45678")
                         setTimeout(function () {
-                            this.utils.removeLoader();
+                            $('body').removeClass('loader');
                             $('#homeVis , #doorVis').removeClass('default-canvas-hide')
                         }, 100)
                     } else {
-                        this.utils.removeLoader();
+                        $('body').removeClass('loader');
                     }
 					
                 });
