@@ -77,8 +77,8 @@
         <div class="margin-b-10 margin-top-30">
             <ul class="constructionInfoList">
                 <li *ngFor="let info of constructionInfo">
-                    <p>
-                        {{info.modeldescription}}
+                    <p [innerHtml]="info.modeldescription">
+                        
                     </p>
                 </li>
 

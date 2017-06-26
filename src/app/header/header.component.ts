@@ -60,6 +60,7 @@ export class HeaderComponent implements OnInit, AfterViewChecked {
     cartIcon(modal?) {
         if(window.location.hash.indexOf('shoppingCart') == -1) {
             this.shoppingCartComp.getItemPrice();
+            $('.content').addClass('shoppingCart');
             // if(this.shoppingCartComp.resFlowSession.cart.length > 0) {
             //     this.shoppingCartComp.toggleSection(this.shoppingCartComp.resFlowSession.cart.length - 1);
             // }

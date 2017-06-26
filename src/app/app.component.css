@@ -4,3 +4,7 @@
     justify-content: space-around;
     margin-top: 55px;
 }
+.shoppingCart{    
+    height: 90vh;
+    overflow-y: scroll;
+}
