@@ -69,13 +69,13 @@
     margin: 0 !important;
   }
   .modal-content {
-    height: 100vh;
+    // height: 100vh;
     border-radius: 0;
-    overflow: hidden;
+    // overflow: hidden;
   }
   .modal-body {
-    padding-top: 0px !important;
-    height: 94%;
+       padding: 13% 10px 6% 10px !important;
+    height: 100%;
     overflow-y: scroll;
   }
   .modal-backdrop {
@@ -87,8 +87,13 @@
   }
 
   .modal-header {
-    padding: 15px 15px 0 0 !important;
+ padding: 15px 15px 10px 0 !important;
     border: none !important;
+    position: fixed;
+    width: 99%;
+    background: #fff;
+    z-index: 999;
+    top: 56px;
   }
 }
 
@@ -851,4 +856,18 @@ select {
             }
         }
     }
+}
+
+
+.modal.in .modal-dialog {
+   -webkit-transform:inherit!important; 
+   transform: inherit!important;
+}
+
+.modal.fade .modal-dialog {
+    transition:inherit!important;
+    transition: inherit!important;
+   transition: inherit!important;
+    -webkit-transform: inherit!important;
+    transform:inherit!important; 
 }
