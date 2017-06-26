@@ -13,7 +13,7 @@
                 </div>
                 <div class="flex space-between">
                     <div *ngIf="installQuestions.item_id === 5 && !installQuestions.Answers[0].isdefault">
-                        <p id="distance text-orange">it's <input type="text" [(ngModel)]="defaultMiles" (blur)="updatePrice()" name="defaultMiles"
+                        <p id="distance text-orange">it's <input type="text" [(ngModel)]="defaultMiles" (blur)="updatePrice()" name="defaultMiles" oncopy="return false" onpaste="return false"
                             /> miles away</p>
                     </div>
                     <span></span>
