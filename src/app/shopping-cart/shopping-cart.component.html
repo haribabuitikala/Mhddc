@@ -44,7 +44,7 @@
 <div *ngIf="resFlow" class="checkout">
     <div class="section margin-b-10" *ngFor="let data of resFlowSession.cart; let i = index;">
         <div id="section-header-{{i}}" class="flex space-between subsection" (click)="toggleSection(i)">
-            <div>
+            <div class="section-header">
                 <div [innerHTML]="data.collectionName"></div>
                 <div>{{data.widthF}}'{{data.widthI}}'' X {{data.heightF}}'{{data.heightI}}'' - ({{data.INSTALLTYPE}})</div>
             </div>
