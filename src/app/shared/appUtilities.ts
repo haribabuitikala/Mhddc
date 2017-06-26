@@ -709,15 +709,16 @@ export class ResidentialFlowSession {
                     this.utils.resFlowSession.resDetails.hardware.hinge.diy_price = hhi['item_price'];
                     this.utils.resFlowSession.resDetails.hardware.hinge.qty = hhi['count'];
                 }
-
+                // d.Calculate price for Locks
                 let locksItem = obj.hardware.lock;
                 if (locksItem && locksItem.hasOwnProperty('item_installed_price')) {
-                    price[0] = price[0] + locksItem['item_installed_price'] * 1;
+                    price[0] = price[0] + locksItem['item_installed_price'] * count;
                     let itemPrice = locksItem['item_price'] ? locksItem['item_price'] : locksItem['item_installed_price'];
-                    price[1] = price[1] + itemPrice * 1;
+                    price[1] = price[1] + itemPrice * count;
 
                     this.resDetails.hardware.lock.name = locksItem['item_name'];
                     this.resDetails.hardware.lock.price = locksItem['item_installed_price'];
+                    this.resDetails.hardware.lock.qty = count;
                 }
 
                 // Calculate price if EPA

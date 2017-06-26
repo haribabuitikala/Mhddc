@@ -110,8 +110,8 @@
             Hardware
         </dd>
         <dd >
-            <p [innerHTML]="data.hardware.lock.name + ' (x' + 1 * data.construction.qty + ')'"></p>
-            <span>{{(data.isDIY ? data.hardware.lock.price : data.hardware.lock.price) * 1  | currency:'USD':true:'1.2-2'}}</span>
+            <p [innerHTML]="data.hardware.lock.name + ' (x' + data.hardware.lock.qty + ')'"></p>
+            <span>{{data.hardware.lock.price * data.hardware.lock.qty  | currency:'USD':true:'1.2-2'}}</span>
         </dd>
     </dl>
     
