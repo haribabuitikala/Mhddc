@@ -118,17 +118,19 @@ export class ColorComponent implements OnInit {
             this.vinylOptions = _.uniqBy(vinylOptions, 'item_name');
             this.selectedVinyl = 0;
 
-            this.grooves = [].concat([{
-                centergrooveconfig: "CNONE",
-                isdefault: false,
-                item_description: null,
-                item_id: 84,
-                item_name: "No Center Groove",
-                item_price: 0,
-                item_thumbnail: null,
-                nogrooves: 0
+           // this.grooves = [];
+            this.grooves = this.utils.resFlowSession.resDoorObj.construction.construction['centergrooves'];
+            // .concat([{
+            //     centergrooveconfig: "CNONE",
+            //     isdefault: false,
+            //     item_description: null,
+            //     item_id: 84,
+            //     item_name: "No Center Groove",
+            //     item_price: 0,
+            //     item_thumbnail: null,
+            //     nogrooves: 0
 
-            }], [this.utils.resFlowSession.resDoorObj.construction.construction['centergrooves'][0]]);
+            // }], [this.utils.resFlowSession.resDoorObj.construction.construction['centergrooves'][0]]);
             this.selectedGroove = 0;
         }
 
