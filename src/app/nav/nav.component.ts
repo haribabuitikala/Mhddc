@@ -37,6 +37,15 @@ export class NavComponent implements OnInit {
     current: string = 'current';
     menuCount = this.app.utilities.navCount;
     pathName;
+    flowActiveStep = -1;
+    changeSubscribers;
+    appContext;
+    gdoVisistedSteps = [];
+    resVisistedSteps = [];
+    subFlow = false;
+    resSubFlow;
+    resDisableSteps = [];
+    pageTitle = '';
 
     ngOnChanges() {
         this.menuArray = this.buildMenu();
@@ -104,19 +113,10 @@ export class NavComponent implements OnInit {
 
     }
 
-
-
-
-
-    flowActiveStep = -1;
-    changeSubscribers;
-    appContext;
     subscribeMe(fn, context) {
         this.changeSubscribers = fn;
         this.appContext = context;
     }
-    gdoVisistedSteps = [];
-    resVisistedSteps = [];
 
     goToStep(step, checkNextStep) {
         if (checkNextStep) {
@@ -143,10 +143,7 @@ export class NavComponent implements OnInit {
             }
         }
     }
-
-    subFlow = false;
-    resSubFlow;
-    resDisableSteps = [];
+    
     setNavFlow(flowType, subFlow?) {
         this.gdoVisistedSteps = [];
         this.subFlow = subFlow ? true : false;
@@ -169,6 +166,8 @@ export class NavComponent implements OnInit {
     }
     renderNav(obj) {
         let steps = [];
+        this.flowActiveStep = obj.flowActiveStep;
+        this.pageTitle = obj.pageTitle;
         if (obj.flowType === 'gdo') {
             this.gdoFlowSteps.forEach((s, i) => {
                 s.visited = false;

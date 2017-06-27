@@ -79,22 +79,23 @@ export class ColorComponent implements OnInit {
                 flowActiveStep: 6,
                 currentStepUrl: '/config/color',
                 showStepIndicator: true,
+                pageTitle: 'Choose Your Color',
                 nextStepFn: () => {
 
                 }
             });
-            this.config.pageTitle = '6.Choose Your Color';
+            
         } else {
             this.navComponent.renderNav({
                 flowType: 'resquick',
                 flowActiveStep: 5,
                 currentStepUrl: '/config/color',
                 showStepIndicator: true,
+                pageTitle: 'Choose Your Color',
                 nextStepFn: () => {
 
                 }
             });
-            this.config.pageTitle = '5.Choose Your Color';
         }
 
         this.utils.resFlowSession.resDoorObj.color.apiData = res;

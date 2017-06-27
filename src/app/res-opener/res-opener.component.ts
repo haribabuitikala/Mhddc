@@ -47,22 +47,22 @@ export class ResOpenerComponent implements OnInit {
                 flowActiveStep: 11,
                 currentStepUrl: '/config/opener',
                 showStepIndicator: true,
+                pageTitle: 'Choose Your Opener',
                 nextStepFn: () => {
 
                 }
             });
-            this.config.pageTitle = '11.Choose Your Opener';
         } else {
             this.navComponent.renderNav({
                 flowType: 'resquick',
                 flowActiveStep: 7,
                 currentStepUrl: '/config/opener',
                 showStepIndicator: true,
+                pageTitle: 'Choose Your Opener',
                 nextStepFn: () => {
 
                 }
-            });
-            this.config.pageTitle = '7.Choose Your Opener';
+            });            
         }
         this.dataParams = {
             natmarketid: +this.utils.utilities.natmarketid,

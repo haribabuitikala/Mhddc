@@ -94,24 +94,23 @@ export class InstallComponent implements OnInit, AfterViewInit, AfterViewChecked
                 flowActiveStep: 10,
                 currentStepUrl: '/config/install',
                 showStepIndicator: true,
+                pageTitle: 'Choose Installed vs. DIY',
                 nextStepFn: () => {
 
                 }
             });
-            this.config.pageTitle = '10.Choose Installed vs. DIY';
         } else {
             this.navComponent.renderNav({
                 flowType: 'resquick',
                 flowActiveStep: 6,
                 currentStepUrl: '/config/install',
                 showStepIndicator: true,
+                pageTitle: 'Choose Installed vs. DIY',
                 nextStepFn: () => {
 
                 }
-            });
-            this.config.pageTitle = '6.Choose Installed vs. DIY';
+            });            
         }
-
         this.installPrice = this.utils.utilities.itemPriceInstall;
         this.diyPrice = this.utils.utilities.itemPriceDY;
         this.selectedType = 'Installed';

@@ -83,7 +83,7 @@ export class CollectionComponent implements OnInit {
         this.utils.resFlowSession.resDoorObj.resetproduct();
         this.makeNull();
         this.collections = this.data.data;
-        this.pageNo = this.utils.utilities.currPage;
+        this.pageNo = 2;
         this.utils.resFlowSession.orderObj.QPB = false;
 
         $.each(this.data.data, function (idx, value) {

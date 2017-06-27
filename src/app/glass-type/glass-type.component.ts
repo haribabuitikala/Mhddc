@@ -43,11 +43,11 @@ export class GlassTypeComponent implements OnInit {
       flowActiveStep: 8,
       currentStepUrl: '/config/glassType',
       showStepIndicator: true,
+      pageTitle: 'Choose Your Glass Type',
       nextStepFn: () => {
 
       }
     });
-    this.config.pageTitle = '8.Choose Your Glass Type';
 
     this.loadData();
   }
