@@ -339,8 +339,15 @@ export class ResSliderComponent implements OnInit, AfterViewInit {
                     this.utils.resFlowSession.resDoorObj.construction.construction['isdefault'] = true;
                     let construction = obj['constructions'][0];
                     if (construction && construction['colors'] && construction['colors'].length > 0) {
-                        this.utils.resFlowSession.resDoorObj.color.overlay = construction['colors'][0];
-                        this.utils.resFlowSession.resDoorObj.color.base = construction['colors'][0];
+                        // Fix for 5308 defaulting color from design page
+                        var defaultColor = construction['colors'].filter(c => { return c.isdefault == true; });
+                        if (defaultColor.length > 0) {
+                            defaultColor = defaultColor[0];
+                        } else {
+                            defaultColor = construction['colors'][0];
+                        }
+                        this.utils.resFlowSession.resDoorObj.color.overlay = defaultColor;
+                        this.utils.resFlowSession.resDoorObj.color.base = defaultColor;
 
                         if (this.utils.resFlowSession.resDoorObj.product.product['item_id'] == 16) {
                             this.utils.resFlowSession.resDoorObj.color.overlay = construction['colors'][3];
@@ -382,8 +389,13 @@ export class ResSliderComponent implements OnInit, AfterViewInit {
             case 'construction':
                 this.utils.resFlowSession.resDoorObj.construction.construction = obj;
                 if (obj['colors'] && obj['colors'].length > 0) {
-                    this.utils.resFlowSession.resDoorObj.color.base = obj['colors'][0];
-                    this.utils.resFlowSession.resDoorObj.color.overlay = obj['colors'][0];
+                    // Fix for 5308 defaulting color from construction page based on isdefault property
+                    var defaultColor = obj['colors'].filter(c => { return c.isdefault == true; });
+                    if (defaultColor.length > 0) {
+                        defaultColor = defaultColor[0];
+                    } else {
+                        defaultColor = obj['colors'][0];
+                    }
 
                     if (this.utils.resFlowSession.resDoorObj.product.product['item_id'] == 16 && obj['colors'].length > 3) {
                         this.utils.resFlowSession.resDoorObj.color.overlay = obj['colors'][3];
