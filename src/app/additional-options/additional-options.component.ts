@@ -111,8 +111,7 @@ export class AdditionalOptionsComponent implements OnInit {
         this.gdoConfig.itemPrice = this.utils.calculateTotalPrice();
         var k = this.pageNo + '.Additional Options';
         $('#visualize-header').html(k);
-
-
+        this.utils.gdoFlowSession.cart[0].additional.items = this.utils.gdoOpenerAccessories;
         // this.utils.utilities.kPrice = _.sumBy(this.dataStore.gdoOpenerAccessories, function (o) {
         //     return o.price;
         // });
@@ -163,18 +162,24 @@ export class AdditionalOptionsComponent implements OnInit {
     flow = 'non-direct';
 
     showDistance(itm, flow) {
+        let obj = this.utils.gdoFlowSession.cart[0].additional.items[2];
 
         if (itm.srcElement.checked === false) {
             this.distance = 31;
             this.gdoConfig.showDistance = true;
             this.utils.utilities.distance = 31;
             this.gdoConfig.distance = 31;
+            // let distanceAns = this.utils.gdoOpenerAccessories[0].useranswer;
             if (flow === 'direct') {
                 this.flow = 'direct';
                 this.utils.utilities.distancePrice = 2.5;
                 this.distancePrice = 2.5;
                 this.gdoConfig.itemPrice = this.gdoConfig.itemPrice + 2.50;
                 this.gdoConfig.distancePrice = 2.50;
+                obj["useranswer"] = this.utils.gdoUserAnswers[2];
+                obj.QTY = 1;
+                obj.qty = 1;
+
             }
             else {
                 this.flow = 'non-direct';
@@ -191,6 +196,9 @@ export class AdditionalOptionsComponent implements OnInit {
             this.utils.utilities.distancePrice = 0;
             this.showDistancePrice = false;
             this.mileOpenPr = 0;
+            obj["useranswer"] = "";
+            obj.QTY = 0;
+            obj.qty = 0;
             $('.gdoDistance').prop('disabled', 'disabled');
         }
         this.gdoConfig.itemPrice = this.utils.calculateTotalPrice(); //this.calculateTotalPrice(this.utils.utilities.item_price, this.singleOpener, this.doubleOpener, this.mileOpenPr, this.qty);
@@ -202,6 +210,8 @@ export class AdditionalOptionsComponent implements OnInit {
     qty = this.utils.utilities.gdoOpenerQty;
 
     showSingle(itm) {
+
+        let obj = this.utils.gdoFlowSession.cart[0].additional.items[0];
         if (itm.srcElement.checked === true) {
             this.singleDrop = true;
             this.singleOpener = 50;
@@ -215,7 +225,11 @@ export class AdditionalOptionsComponent implements OnInit {
             };
             this.dataStore.gdoDirectQuestions.push(k);
             // this is for gdo shopping cart
-            this.utils.gdoFlowSession.cart[0].additional.items.push(k);
+            // this.utils.gdoFlowSession.cart[0].additional.items.push(this.utils.gdoOpenerAccessories);
+
+            obj["useranswer"] = this.utils.gdoUserAnswers[1];
+            obj.QTY = 1;
+            obj.qty = 1;
             // this.gdoConfig.itemPrice = this.calculateTotalPrice(this.utils.utilities.item_price, this.singleOpener, this.doubleOpener, this.mileOpenPr, this.qty);
         } else {
             this.singleDrop = false;
@@ -223,12 +237,17 @@ export class AdditionalOptionsComponent implements OnInit {
             this.utils.utilities.kPrice = this.removeItm(0);
             this.utils.utilities.singlep = 0;
 
+            obj["useranswer"] = "";
+            obj.QTY = 0;
+            obj.qty = 0;
+
         }
         this.gdoConfig.itemPrice = this.utils.calculateTotalPrice();
 
     }
 
     showDouble(itm) {
+        let obj = this.utils.gdoFlowSession.cart[0].additional.items[1];
         if (itm.srcElement.checked === true) {
             this.doubleDrop = true;
             this.doubleOpener = 65;
@@ -241,13 +260,21 @@ export class AdditionalOptionsComponent implements OnInit {
                 count: 1 //=== 1 ? val = 1 : val - 1
             };
             this.dataStore.gdoDirectQuestions.push(k);
-            this.utils.gdoFlowSession.cart[0].additional.items.push(k);
+            // this.utils.gdoFlowSession.cart[0].additional.items.push(k);
+            // this is for gdo shopping cart
+
+            obj["useranswer"] = this.utils.gdoUserAnswers[2];
+            obj.QTY = 1;
+            obj.qty = 1;
 
         } else {
             this.doubleDrop = false;
             this.doubleOpener = 0;
             this.utils.utilities.kPrice = this.removeItm(1);
             this.utils.utilities.doublep = 0;
+            obj["useranswer"] = "";
+            obj.QTY = 0;
+            obj.qty = 0;
         }
         this.gdoConfig.itemPrice = this.utils.calculateTotalPrice();
     }

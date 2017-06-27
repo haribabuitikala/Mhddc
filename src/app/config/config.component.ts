@@ -515,16 +515,16 @@ export class ConfigComponent implements OnInit, AfterViewInit, AfterViewChecked 
         //         detailshgt = "19vh";
         //         break;
         // }
-        if (detailshgt > 200) {
-            detailshgt = 220;
-            linearhgt = 218;
-        }
-        $('.details-modal').css({
-            "margin-top": linearhgt,
-            "width": width,
-            "left": pos.left,
-            "max-height": detailshgt
-        })
+        // if (detailshgt > 200) {
+        //     detailshgt = 220;
+        //     linearhgt = 218;
+        // }
+        // $('.details-modal').css({
+        //     "margin-top": linearhgt,
+        //     "width": width,
+        //     "left": pos.left,
+        //     "max-height": detailshgt
+        // })
         // this.details['designName'] = this.utils.resFlowSession.resDoorObj.design.dsgn['item_name'];
         detailsModal.open();
     }
