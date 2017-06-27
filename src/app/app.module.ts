@@ -39,6 +39,7 @@ import {GdoOpener} from "./opener/gdoOpener";
 import { CustomerInfoComponent } from './customer-info/customer-info.component';
 import { CustomerServiceInfoComponent } from './customer-service-info/customer-service-info.component';
 import { CartDetailsRootComponent } from './cart-details/cart-details-root.component';
+import { Four04Component } from './Four04Component';
 
 @NgModule({
     declarations: [
@@ -59,7 +60,8 @@ import { CartDetailsRootComponent } from './cart-details/cart-details-root.compo
         ShoppingCartComponent,
         CustomerInfoComponent,
         CustomerServiceInfoComponent,
-        CartDetailsRootComponent
+        CartDetailsRootComponent,
+        Four04Component
     ],
     imports: [
         BrowserModule,
