@@ -11,23 +11,25 @@ import {GdoDoorSizeComponent} from "./gdo-door-size/gdo-door-size.component";
 import {ShoppingCartComponent} from "./shopping-cart/shopping-cart.component";
 import {CustomerInfoComponent} from './customer-info/customer-info.component';
 import {CustomerServiceInfoComponent} from './customer-service-info/customer-service-info.component';
+import { Four04Component } from './Four04Component';
 
 
 export const appRoutes: Routes = [
-    {path: 'banner', component: BannerComponent},
+    { path: 'banner', component: BannerComponent },
     {
         path: 'zipResults/:zip',
         component: ZipResultsComponent
     },
-    {path: 'category', component: CategoryComponent},
-    {path: 'doorSize', component: DoorSizeComponent},
-    {path: 'collection', component: CollectionComponent},
-    {path: 'home', component: HomeComponent},
-    {path: 'shoppingCart', component: ShoppingCartComponent},
-    {path: 'customer-info', component: CustomerInfoComponent},
-    {path: 'customer-service-info', component: CustomerServiceInfoComponent},
-    {path: 'thankyou', component: ThankyouComponent},
+    { path: 'category', component: CategoryComponent },
+    { path: 'doorSize', component: DoorSizeComponent },
+    { path: 'collection', component: CollectionComponent },
+    { path: 'home', component: HomeComponent },
+    { path: 'shoppingCart', component: ShoppingCartComponent },
+    { path: 'customer-info', component: CustomerInfoComponent },
+    { path: 'customer-service-info', component: CustomerServiceInfoComponent },
+    { path: 'thankyou', component: ThankyouComponent },
     // gdo flow
-    {path: 'gdoDoorSize', component: GdoDoorSizeComponent},
-    {path: '', redirectTo: '/banner', pathMatch: 'full'}
+    { path: 'gdoDoorSize', component: GdoDoorSizeComponent },
+    { path: '', redirectTo: '/banner', pathMatch: 'full' },
+    { path: '**', component: Four04Component }
 ];

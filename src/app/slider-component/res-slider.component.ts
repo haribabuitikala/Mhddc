@@ -236,7 +236,10 @@ export class ResSliderComponent implements OnInit, AfterViewInit {
         $('.choose-design .inner-item > img').css({ 'height': 89 }); //chnaged from 108 to 89
         $('.constructionSlider .inner-item > img').css({ 'height': 140 }); //changed height from 150 to 140
         $('.colorSlider .inner-item > img').css({ 'height': 72 });
-        $('.topSectionSlider .inner-item > img').css({ 'height': 37 });
+        let topsliderHgt;
+        let product = this.utils.resFlowSession.resDoorObj.product.product['item_name'];
+        topsliderHgt = product.indexOf('Classic') !== -1 ? 18 : 37;
+        $('.topSectionSlider .inner-item > img').css({ 'height': topsliderHgt });
         $('.glass-carousel .inner-item > img').css({ 'height': 75 });
         $('.hardware_screen .inner-item > img').css({ 'height': 52 })
         if ((this.folder === 'design' || this.folder === 'topsection') && this.slideCount > 1) {
