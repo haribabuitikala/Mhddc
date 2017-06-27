@@ -83,11 +83,11 @@ export class ShoppingCartComponent implements OnInit {
     }
 
     ngAfterViewInit() {        
-        if(this.resFlowSession.cart.length === 1) {
-            this.toggleSection(0);
-        } else if(this.resFlowSession.cart.length > 1) {
-            this.toggleSection(this.resFlowSession.cart.length-1);
-        }
+        // if(this.resFlowSession.cart.length === 1) {
+        //     this.toggleSection(0);
+        // } else if(this.resFlowSession.cart.length > 1) {
+        //     this.toggleSection(this.resFlowSession.cart.length-1);
+        // }
     }
 
     getTotalCartValue() {

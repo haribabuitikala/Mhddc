@@ -140,6 +140,182 @@ export class AppUtilities {
         added: false
     }
 
+    gdoOpenerAccessories = [
+        {
+            "Answers": [
+                {
+                    "SubAnswers": [
+                        {
+                            "answerid": null,
+                            "config": "0",
+                            "isdefault": false,
+                            "item_id": 1,
+                            "item_name": "1",
+                            "item_price": 0.00,
+                            "partofdoor": false
+                        },
+                        {
+                            "answerid": null,
+                            "config": "0",
+                            "isdefault": false,
+                            "item_id": 2,
+                            "item_name": "2",
+                            "item_price": 0.00,
+                            "partofdoor": false
+                        },
+                        {
+                            "answerid": null,
+                            "config": "0",
+                            "isdefault": false,
+                            "item_id": 3,
+                            "item_name": "3",
+                            "item_price": 0.00,
+                            "partofdoor": false
+                        }
+                    ],
+                    "answerid": null,
+                    "config": "GDOI17",
+                    "isdefault": false,
+                    "item_id": 1,
+                    "item_name": "no",
+                    "item_price": 50,
+                    "partofdoor": false
+                },
+                {
+                    "SubAnswers": [],
+                    "answerid": null,
+                    "config": "0",
+                    "isdefault": false,
+                    "item_id": 2,
+                    "item_name": "yes",
+                    "item_price": 0,
+                    "partofdoor": false
+                }
+            ],
+            "item_id": 17,
+            "item_list_text": "Single Door New Opener Installation Kit. This is required when no Opener is currently installed on door less than 10' wide.",
+            "item_name": "Single Door New Opener Installation Kit. This is required when no Opener is currently installed on door less than 10' wide.",
+            "item_type": "GDO",
+            "QTY": 0,
+            "qty": 0,
+            "useranswer": {}
+        },
+        {
+            "Answers": [
+                {
+                    "SubAnswers": [
+                        {
+                            "answerid": null,
+                            "config": "0",
+                            "isdefault": false,
+                            "item_id": 1,
+                            "item_name": "1",
+                            "item_price": 0.00,
+                            "partofdoor": false
+                        },
+                        {
+                            "answerid": null,
+                            "config": "0",
+                            "isdefault": false,
+                            "item_id": 2,
+                            "item_name": "2",
+                            "item_price": 0.00,
+                            "partofdoor": false
+                        },
+                        {
+                            "answerid": null,
+                            "config": "0",
+                            "isdefault": false,
+                            "item_id": 3,
+                            "item_name": "3",
+                            "item_price": 0.00,
+                            "partofdoor": false
+                        }
+                    ],
+                    "answerid": null,
+                    "config": "GDOI18",
+                    "isdefault": false,
+                    "item_id": 1,
+                    "item_name": "no",
+                    "item_price": 65,
+                    "partofdoor": false
+                },
+                {
+                    "SubAnswers": [],
+                    "answerid": null,
+                    "config": "0",
+                    "isdefault": false,
+                    "item_id": 2,
+                    "item_name": "yes",
+                    "item_price": 0,
+                    "partofdoor": false
+                }
+            ],
+            "item_id": 18,
+            "item_list_text": "Double Door New Opener Installation Kit. This is required when no Opener is currently installed on door less than 10' wide.",
+            "item_name": "Double Door New Opener Installation Kit. This is required when no Opener is currently installed on door less than 10' wide.",
+            "item_type": "GDO",
+            "QTY": 0,
+            "qty": 0,
+            "useranswer": {}
+        },
+        {
+            "Answers": [
+                {
+                    "SubAnswers": [
+                        {
+                            "answerid": null,
+                            "config": "xxxmil",
+                            "isdefault": false,
+                            "item_id": 1,
+                            "item_name": "31TO50",
+                            "item_price": 2.50,
+                            "partofdoor": false
+                        },
+                        {
+                            "answerid": null,
+                            "config": "NOTPASSED",
+                            "isdefault": false,
+                            "item_id": 1,
+                            "item_name": "51PLUS",
+                            "item_price": 3,
+                            "partofdoor": false
+                        }
+                    ],
+                    "answerid": null,
+                    "config": "NOTPASSED",
+                    "isdefault": false,
+                    "item_id": 1,
+                    "item_name": "no",
+                    "item_price": 3,
+                    "partofdoor": false
+                },
+                {
+                    "SubAnswers": [],
+                    "answerid": null,
+                    "config": "0",
+                    "isdefault": false,
+                    "item_id": 2,
+                    "item_name": "yes",
+                    "item_price": 0,
+                    "partofdoor": false
+                }
+            ],
+            "item_id": 56,
+            "item_list_text": "yyyy miles from store (xxxx)",
+            "item_name": "Mileage Charges",
+            "item_type": "GDO",
+            "QTY": 0,
+            "qty": 0,
+            "useranswer": {}
+        }
+    ]
+    gdoUserAnswers = [
+        { "SubAnswers": [{ "answerid": null, "config": "0", "isdefault": false, "item_id": 1, "item_name": "1", "item_price": 0, "partofdoor": false }, { "answerid": null, "config": "0", "isdefault": false, "item_id": 2, "item_name": "2", "item_price": 0, "partofdoor": false }, { "answerid": null, "config": "0", "isdefault": false, "item_id": 3, "item_name": "3", "item_price": 0, "partofdoor": false }], "answerid": null, "config": "GDOI17", "isdefault": false, "item_id": 1, "item_name": "no", "item_price": 50, "partofdoor": false, "tag": "no", "QTY": 1, "qty": 1 },
+        { "SubAnswers": [{ "answerid": null, "config": "0", "isdefault": false, "item_id": 1, "item_name": "1", "item_price": 0, "partofdoor": false }, { "answerid": null, "config": "0", "isdefault": false, "item_id": 2, "item_name": "2", "item_price": 0, "partofdoor": false }, { "answerid": null, "config": "0", "isdefault": false, "item_id": 3, "item_name": "3", "item_price": 0, "partofdoor": false }], "answerid": null, "config": "GDOI18", "isdefault": false, "item_id": 1, "item_name": "no", "item_price": 65, "partofdoor": false, "tag": "no", "QTY": 1, "qty": 1 },
+        {"qty":1,"QTY":1,"item_price":2.5,"fir":[{"answerid":null,"config":"xxxmil","isdefault":false,"item_id":1,"item_name":"31TO50","item_price":2.5,"partofdoor":false,"QTY":1}],"item_id":5}
+    ]
+
     setUtils(curr, clicked) {
         this.utilities.currPage = curr;
         this.utilities.clicked = clicked;
@@ -329,7 +505,7 @@ export class ResidentialFlowSession {
     }
 
 
-    resDoorObj = {        
+    resDoorObj = {
         "QPB": false,
         "QTY": 1,
         "TYPE": 'RES',
@@ -575,7 +751,7 @@ export class ResidentialFlowSession {
     }
 
     orderObj = {
-        "QPB":false,
+        "QPB": false,
         "zipcode": "",
         "storeNumber": "",
         "associateId": "",
@@ -870,7 +1046,7 @@ export class ResidentialFlowSession {
                     item.totalPrice = item.totalPrice + openeritem['price'] * openeritem['qty'];
                 });
             }
-            
+
         }
         catch (e) {
             console.log(e);
