@@ -37,6 +37,7 @@ export class ResDoorConfigurationComponent implements OnInit {
 
     gdoOpeners = [];
     showShare = false;
+    itmTotalPrice;
 
     // for gdo the pageNo will be 4
     // for residential the pageNo will be 
@@ -87,8 +88,10 @@ export class ResDoorConfigurationComponent implements OnInit {
         this.data = this.utils.resFlowSession.resDoorObj;
         if (this.utils.resFlowSession.resDoorObj.INSTALLTYPE === 'DIY') {
             this.utils.resFlowSession.resDetails.totalPrice = this.utils.utilities.itemPriceDY;
+            this.itmTotalPrice = this.utils.utilities.itemPriceDY;
         } else {
             this.utils.resFlowSession.resDetails.totalPrice = this.utils.utilities.itemPriceInstall;
+            this.itmTotalPrice = this.utils.utilities.itemPriceInstall;
         }
     }
     shareBtn() {

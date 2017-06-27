@@ -24,7 +24,7 @@
     </router-outlet>
 </div>
 <!--<div class="tile">-->
-    <div class="design-detials--sec">
+    <div class="design-detials--sec" *ngIf="showDetailTxt" >
         <div class="col-xs-6 padding-r-7  border-white-right font-size-12 price-section">
             <p *ngIf="itemPriceInstall != 0"><span>{{itemPriceInstall | currency:'USD':true:'1.2-2'}}</span> / Installed</p>
             <p *ngIf="itemPriceDY != 0"><span>{{itemPriceDY | currency:'USD':true:'1.2-2'}}</span> / DIY</p>
@@ -40,7 +40,7 @@
                 <img src="../../assets/images/add.png" alt="" class="add-quantity" (click)="updateQuantity(1)">
             </p>
             <p class="margin-b-5">&nbsp;</p>
-            <h4 class="pull-right padding-r-7 text-orange" *ngIf="showDetailTxt" (click)="openDetailsModal(detailsModal)">DETAILS</h4>
+            <h4 class="pull-right padding-r-7 text-orange" (click)="openDetailsModal(detailsModal)">DETAILS</h4>
         </div>
     </div>
 <!--</div>-->
