@@ -63,7 +63,7 @@ export class ResDoorConfigurationComponent implements OnInit {
 
                 }
             });
-            
+
         } else {
             this.navComponent.renderNav({
                 flowType: 'resquick',
@@ -111,6 +111,7 @@ export class ResDoorConfigurationComponent implements OnInit {
     renderEmailBody(imageUrl) {
         var data = this.emailData;
         var resObj = this.utils.resFlowSession.resDoorObj;
+        var product = resObj.product.product['item_name'];
         var size = this.utils.resFlow
         var collectionName = data.collectionName;
         var constructionMdlNo = data.construction.modelNumber;
@@ -237,103 +238,122 @@ export class ResDoorConfigurationComponent implements OnInit {
 
 
         var body = `
-            <div>
-              <img src="${imageUrl}" width="300" height="200" />
-            </div>
-            <table style="border-collapse: collapse">
-            <tr style="border-bottom: 1px solid #ccc">
-                <td style="color: #f96302;padding:5px">Door Model</td>
-                <td style="border-left:1px solid #ccc">${constructionMdlNo}</td>
-                <td>${constructionPrice}</td>
-            </tr>
-            <tr style="border-bottom: 1px solid #ccc">
-                <td style="color: #f96302;padding:5px">Size</td>
-                <td style="border-left:1px solid #ccc">${widthF}'${widthI}"(w) x ${heightF}'${heightI}"(h)</td>
-                <td></td>
-            </tr>
-            <tr style="border-bottom: 1px solid #ccc">
-                <td style="color: #f96302;padding:5px">WindCode</td>
-                <td style="border-left:1px solid #ccc">${WindCode}</td>
-                <td></td>
-            </tr>
-            <tr style="border-bottom: 1px solid #ccc">
-                <td style="color: #f96302;padding:5px">Door Design</td>
-                <td style="border-left:1px solid #ccc">${doorDesign}</td>
-                <td></td>
-            </tr>
-            <tr style="border-bottom: 1px solid #ccc">
-                <td style="color: #f96302;padding:5px">Door Construction</td>
-                <td style="border-left:1px solid #ccc">${doorConstruction}</td>
-                <td></td>
-            </tr>
-            <tr style="border-bottom: 1px solid #ccc">
-                <td style="color: #f96302;padding:5px">Color</td>
-                <td style="border-left:1px solid #ccc">${color}</td>
-                <td></td>
-            </tr>
-            <tr style="border-bottom: 1px solid #ccc">
-                <td style="color: #f96302;padding:5px">Top Section</td>
-                <td style="border-left:1px solid #ccc">
-                    <div>${topSection}</div> 
-                <div>Placement: ${placement || '-'}</div>
-                </td>
-                <td></td>
-            </tr>
-            <tr style="border-bottom: 1px solid #ccc">
-                <td style="color: #f96302;padding:5px">Hardware</td>
-                <td style="border-left:1px solid #ccc">${hardware}</td>
-                <td></td>
-            </tr>
-            <tr style="border-bottom: 1px solid #ccc">
-                <td style="color: #f96302;padding:5px">Opener</td>
-                <td style="border-left:1px solid #ccc">${opener || '-'}</td>
-                <td>${openerPrice}</td>
-            </tr>
-            <tr style="border-bottom: 1px solid #ccc">
-                <td style="color: #f96302;padding:5px">Opener Accessories</td>
-                <td style="border-left:1px solid #ccc">
-                <div style="display: ${itm0display}">${itm0}</div>
-                <div style="display: ${itm1display}">${itm1}</div>
-                <div style="display: ${itm2display}">${itm2}</div>
-                <div style="display: ${itm3display}">${itm3}</div>
-                <div style="display: ${itm4display}">${itm4}</div>
-                <div style="display: ${itm5display}">${itm5}</div>
-                </td>
-                <td>
-                <div style="display: ${itm0display}">${itm0Price}</div>
-                <div style="display: ${itm1display}">${itm1Price}</div>
-                <div style="display: ${itm2display}">${itm2Price}</div>
-                <div style="display: ${itm3display}">${itm3Price}</div>
-                <div style="display: ${itm4display}">${itm4Price}</div>
-                <div style="display: ${itm5display}">${itm5Price}</div>
-                </td>
-            </tr>
-            <tr style="border-bottom: 1px solid #ccc">
-                <td style="color: #f96302">Lead Paint Test</td>
-                <td style="border-left:1px solid #ccc">
-                <div>${leadTest}</div>
-                <div style="display: ${medalian}">Medallian Hardware Upgrade</div>
-                </td>
-                <td>${leadPrice}
-                <div style="display: ${medalian}">$59.00</div>
-                </td>
-            </tr>
-            <tr style="border-bottom: 1px solid #ccc">
-                <td style="color: #f96302">Quantity</td>
-                <td style="border-left:1px solid #ccc">
-                <div>Doors    ${doorLen}</div>
-                <div>Openers   ${itemLen}</div>
-                </td>
-                <td></td>
-            </tr>
-            <tr>
-                <td></td>
-                <td>
-                <div style="text-align:right;color: #f96302;padding-right:40px">Sub Total:</div>
-                </td>
-                <td>${'$' + itemPrice.toFixed(2)}</td>
-            </tr>
+            <table style="border-collapse: collapse;width:100%">
+                <tr>
+                    <td>
+                        <a href="http://www.clopaydoor.com/">
+                            <img src="http://test-mhddc.clopay.com/assets/images/clopay-logo_s.png" height="40">
+                        </a>              
+                    </td>
+                    <td style="text-align:right">
+                        <a href="http://www.homedepot.com/">
+                            <img src="http://test-mhddc.clopay.com/assets/images/TheHomeDepot.png" height="40" />
+                        </a>
+                    </td>
+                </tr>
             </table>
+            <div style="background: #fff;">
+                <div style="border-bottom:1px solid #ccc;border-top:1px solid #ccc;padding: 0 15px">
+                    ${product}
+                </div>
+                <div>
+                <img src="${imageUrl}" width="300" height="200" />
+                </div>
+                <table style="border-collapse: collapse;width:100%">
+                <tr style="border-bottom: 1px solid #ccc">
+                    <td style="color: #f96302;padding:5px">Door Model</td>
+                    <td>${constructionMdlNo}</td>
+                    <td>${constructionPrice}</td>
+                </tr>
+                <tr style="border-bottom: 1px solid #ccc">
+                    <td style="color: #f96302;padding:5px">Size</td>
+                    <td>${widthF}'${widthI}"(w) x ${heightF}'${heightI}"(h)</td>
+                    <td></td>
+                </tr>
+                <tr style="border-bottom: 1px solid #ccc">
+                    <td style="color: #f96302;padding:5px">WindCode</td>
+                    <td>${WindCode}</td>
+                    <td></td>
+                </tr>
+                <tr style="border-bottom: 1px solid #ccc">
+                    <td style="color: #f96302;padding:5px">Door Design</td>
+                    <td>${doorDesign}</td>
+                    <td></td>
+                </tr>
+                <tr style="border-bottom: 1px solid #ccc">
+                    <td style="color: #f96302;padding:5px">Door Construction</td>
+                    <td>${doorConstruction}</td>
+                    <td></td>
+                </tr>
+                <tr style="border-bottom: 1px solid #ccc">
+                    <td style="color: #f96302;padding:5px">Color</td>
+                    <td>${color}</td>
+                    <td></td>
+                </tr>
+                <tr style="border-bottom: 1px solid #ccc">
+                    <td style="color: #f96302;padding:5px">Top Section</td>
+                    <td>
+                        <div>${topSection}</div> 
+                    <div>Placement: ${placement || '-'}</div>
+                    </td>
+                    <td></td>
+                </tr>
+                <tr style="border-bottom: 1px solid #ccc">
+                    <td style="color: #f96302;padding:5px">Hardware</td>
+                    <td>${hardware}</td>
+                    <td></td>
+                </tr>
+                <tr style="border-bottom: 1px solid #ccc">
+                    <td style="color: #f96302;padding:5px">Opener</td>
+                    <td>${opener || '-'}</td>
+                    <td>${openerPrice}</td>
+                </tr>
+                <tr style="border-bottom: 1px solid #ccc">
+                    <td style="color: #f96302;padding:5px">Opener Accessories</td>
+                    <td>
+                    <div style="display: ${itm0display}">${itm0}</div>
+                    <div style="display: ${itm1display}">${itm1}</div>
+                    <div style="display: ${itm2display}">${itm2}</div>
+                    <div style="display: ${itm3display}">${itm3}</div>
+                    <div style="display: ${itm4display}">${itm4}</div>
+                    <div style="display: ${itm5display}">${itm5}</div>
+                    </td>
+                    <td>
+                    <div style="display: ${itm0display}">${itm0Price}</div>
+                    <div style="display: ${itm1display}">${itm1Price}</div>
+                    <div style="display: ${itm2display}">${itm2Price}</div>
+                    <div style="display: ${itm3display}">${itm3Price}</div>
+                    <div style="display: ${itm4display}">${itm4Price}</div>
+                    <div style="display: ${itm5display}">${itm5Price}</div>
+                    </td>
+                </tr>
+                <tr style="border-bottom: 1px solid #ccc">
+                    <td style="color: #f96302">Lead Paint Test</td>
+                    <td>
+                    <div>${leadTest}</div>
+                    <div style="display: ${medalian}">Medallian Hardware Upgrade</div>
+                    </td>
+                    <td>${leadPrice}
+                    <div style="display: ${medalian}">$59.00</div>
+                    </td>
+                </tr>
+                <tr style="border-bottom: 1px solid #ccc">
+                    <td style="color: #f96302">Quantity</td>
+                    <td>
+                    <div>Doors    ${doorLen}</div>
+                    <div>Openers   ${itemLen}</div>
+                    </td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>
+                    <div style="text-align:right;color: #f96302;padding-right:40px">Sub Total:</div>
+                    </td>
+                    <td>${'$' + itemPrice.toFixed(2)}</td>
+                </tr>
+                </table>
+            </div>
 
         `;
         return body;
@@ -356,7 +376,7 @@ export class ResDoorConfigurationComponent implements OnInit {
                     let obj = {
                         ToEmail: this.shareEmail,
                         Body: body,
-                        Subject: 'door configuration'
+                        Subject: this.utils.resFlowSession.resDoorObj.product.product['item_name']
                     }
                     this.emailMsg = 'Mail Send Successfully';
                     this.showEmailMsg = true;
