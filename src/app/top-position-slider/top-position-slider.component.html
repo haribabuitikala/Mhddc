@@ -1,0 +1,22 @@
+<div class="_slider-container" >
+  <div class="_slider-wrapper" >
+    <div class="_slider" style="position: relative;"  [style.width.px]="sliderWidth" [style.left.px]="sliderLeft">
+      <div class="_slide" [style.width.px]="slideWidth"  *ngFor="let slide of slideData; let k = index">
+        <div class="_inner-item " [ngClass]="{'first': i == 0, 'last': i == slide.length -1 }"  [style.width.px]="slideWidth / 2" *ngFor="let slideitem of slide; let i=index">
+          <div class="inner-frame" (click)="setWindowPlacement(slideitem)" [ngClass]="{'selected': isSelected(slideitem)}" [ngStyle]="{'background-image': 'url(/assets/images/btnWinPlace' + (slideitem.img_rindex) + 'Rnumber' + slideitem.img_index + '.png)'}"> </div>
+        </div>
+      </div>
+    </div>
+
+    <a class="left carousel-control" *ngIf="slideIndex > 0" id="prev" (click)="moveSlider()" href="javascript:void(0)" role="button"
+      data-slide="prev">
+            <span class="helper"></span><img style=" transform: rotate(-180deg);" class="left-arrow" src="../../assets/images/ch-left-arrow.png"
+                alt="">
+        </a>
+    <a class="right carousel-control" *ngIf="slideIndex < slideCount - 1" id="next" (click)="moveSlider(true)" href="javascript:void(0)"
+      role="button" data-slide="next">
+            <span class="helper"></span><img class="right-arrow" src="../../assets/images/ch-right-arrow.png" alt="">
+        </a>
+
+  </div>
+</div>
