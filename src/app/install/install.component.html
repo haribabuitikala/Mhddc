@@ -182,7 +182,7 @@
   </modal-body>
 </modal>
 
-<modal #leadTest>
+<modal #leadTest [backdrop]='false'>
   <modal-header>
   </modal-header>
   <modal-body>
@@ -203,7 +203,7 @@
       </div>
   </modal-body>
 </modal>
-<modal #epa>
+<modal #epa [backdrop]='false'>
   <modal-header>
   </modal-header>
   <modal-body>
@@ -241,7 +241,7 @@
     </div>
   </modal-body>
 </modal>
-<modal #learnMore>
+<modal #learnMore [backdrop]='false'>
   <modal-header [show-close]="true" (click)='learMoreClose()'>
   </modal-header>
   <modal-body>
@@ -254,7 +254,7 @@
   </modal-body>
 </modal>
 
-<modal #notmatchdoorsize>
+<modal #notmatchdoorsize [backdrop]='false'>
   <modal-header>
   </modal-header>
   <modal-body>
@@ -264,7 +264,7 @@
     </div>
   </modal-body>
 </modal>
-<modal #florida>
+<modal #florida [backdrop]='false'>
     <modal-body class="padding10">
         <p class="font-size-14" [innerHTML]="lang.floridaPopup.modalContent">
         </p>
