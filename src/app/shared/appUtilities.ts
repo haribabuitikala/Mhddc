@@ -14,6 +14,7 @@ export class AppUtilities {
     }
 
     utilities = {
+        isCustomSize: false,
         currPage: 1,
         clicked: 1,
         currScreen: 1,

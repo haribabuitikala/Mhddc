@@ -133,7 +133,7 @@ export class DoorSizeComponent implements OnInit {
             this.utils.utilities.hf,
             this.utils.utilities.hi);
 
-
+        this.utils.utilities.isCustomSize = false;
         this.navigateTo(this.dataParams);
     }
 
@@ -265,6 +265,9 @@ export class DoorSizeComponent implements OnInit {
     nextBtn(curr, path) {
         if (this.utils.utilities.wf != null && this.utils.utilities.wi != null && this.utils.utilities.hf != null && this.utils.utilities.hi != null &&
             this.utils.utilities.hf != 0) {
+            
+            //Best place to set flag for custom size
+            this.utils.utilities.isCustomSize = true;
             this.dataParams.dwidthFt = this.utils.utilities.wf;
             this.dataParams.dwidthIn = this.utils.utilities.wi;
             this.dataParams.dheightFt = this.utils.utilities.hf;

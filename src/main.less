@@ -718,6 +718,10 @@ body.loader {
   .spinner {
     display: block;
   }
+
+  .exact-size-loader {
+    display: block;
+  }
 }
 
 .spinner {
@@ -727,7 +731,7 @@ body.loader {
   position: absolute;
   opacity: 0.5;
   display: none;
-  z-index: 15;
+  z-index: 1053;
   top: 0;
   img {
     width: 50px;
@@ -912,4 +916,18 @@ overflow: hidden!important;
 .transform-rotate-minus-270 {
   -webkit-transform: rotate(270deg);
   transform: rotate(270deg);
+}
+
+.exact-size-loader {
+  position: fixed;
+  background-color: white;
+  width: 70%;
+  text-align: center;
+  top:30%;
+  left:10%;
+  z-index: 1055;
+  padding: 20px;
+  border-radius: 4px;
+  display: none;
+  box-shadow: 0px 0px 8px 3px #eee;
 }

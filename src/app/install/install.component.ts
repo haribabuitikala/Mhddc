@@ -109,7 +109,7 @@ export class InstallComponent implements OnInit, AfterViewInit, AfterViewChecked
                 nextStepFn: () => {
 
                 }
-            });            
+            });
         }
         this.installPrice = this.utils.utilities.itemPriceInstall;
         this.diyPrice = this.utils.utilities.itemPriceDY;
@@ -124,7 +124,10 @@ export class InstallComponent implements OnInit, AfterViewInit, AfterViewChecked
             consolereporting: false,
             MAXHEIGHT: 280,
             MAXWIDTH: 315,
-            VIEW: 'door'
+            VIEW: 'door',
+            doneCallback: () => {
+                $('body').removeClass('loader');
+            }
         });
     }
 
@@ -195,7 +198,8 @@ export class InstallComponent implements OnInit, AfterViewInit, AfterViewChecked
         this.readyToNextStep = false;
         this.setOldValues();
         this.config.renderCanvas(window['cObj'], 'doorVis', '#diyDoorVis');
-        if (this.utils.resFlowSession.resDoorObj.size.height.hi !== '0' && this.utils.resFlowSession.resDoorObj.size.width.wi !== '0') {
+        // lines are only for DIY logic less scope of regression - TM
+        if (!this.utils.utilities.isCustomSize) {
             this.exactDoorsize.open();
         } else {
             this.navigateTo('/config/additionalOptions');
@@ -327,6 +331,9 @@ export class InstallComponent implements OnInit, AfterViewInit, AfterViewChecked
     notmatchdoorsize = null;
     exactDoorsizeModal = null;
     getDoorDimentions(notmatchdoorsize, exactDoorsize) {
+        //Need to refactor
+        $('body').append('<div class="exact-size-loader">Please wait while we are validating the new Dimensions</div>');
+
         this.readyToNextStep = false;
         this.notmatchdoorsize = notmatchdoorsize;
         this.exactDoorsizeModal = exactDoorsize;
@@ -338,6 +345,8 @@ export class InstallComponent implements OnInit, AfterViewInit, AfterViewChecked
             this.exactDoorsizeModal.close();
             this.notmatchdoorsize.open();
         }
+
+        $('.exact-size-loader').remove();
     }
 
     getProducts() {
@@ -378,6 +387,7 @@ export class InstallComponent implements OnInit, AfterViewInit, AfterViewChecked
             },
             error => {
                 console.log(error.statusText);
+                this.reportDataNotMatched();
             }
         );
     }
@@ -554,10 +564,10 @@ export class InstallComponent implements OnInit, AfterViewInit, AfterViewChecked
             localmarketid: this.utils.utilities.localmarketid,
             clopaymodelnumber: cData.construction.construction['ClopayModelNumber'],
             doorsize: +this.utils.utilities.homeSize,
-            dwidthFt: this.utils.utilities.wf,
-            dwidthIn: this.utils.utilities.wi,
-            dheightFt: this.utils.utilities.hf,
-            dheightIn: this.utils.utilities.hi
+            dwidthFt: +cData.size.wf,
+            dwidthIn: +cData.size.wi,
+            dheightFt: +cData.size.hf,
+            dheightIn: +cData.size.hi
         };
 
         this.collection.getHardware(hardwareParams).subscribe(res => {
@@ -599,6 +609,7 @@ export class InstallComponent implements OnInit, AfterViewInit, AfterViewChecked
                 if (handleFound && plateFound && hingeFound) {
                     this.readyToNextStep = true;
                     window['rObj'] = cData;
+                    $('.exact-size-loader').remove();
                     this.config.renderCanvas(window['rObj'], 'doorVis', '#diyDoorVis');
                 } else {
                     this.reportDataNotMatched();
