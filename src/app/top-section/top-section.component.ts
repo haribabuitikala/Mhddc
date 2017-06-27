@@ -50,12 +50,11 @@ export class TopSectionComponent implements OnInit {
       flowActiveStep: 7,
       currentStepUrl: '/config/topSection',
       showStepIndicator: true,
+      pageTitle: 'Choose Your Top Section',
       nextStepFn: () => {
 
       }
     });
-
-    this.config.pageTitle = '7.Choose Your Top Section';
 
     this.utils.resFlowSession.resDoorObj.windows.topsection = res[0];
   }

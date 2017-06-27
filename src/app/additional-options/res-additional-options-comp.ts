@@ -118,22 +118,23 @@ export class ResAdditionalOptionsComponent implements OnInit {
                 flowActiveStep: 12,
                 currentStepUrl: '/config/additionalOptions',
                 showStepIndicator: true,
+                pageTitle: 'Additional Options',
                 nextStepFn: () => {
 
                 }
             });
-            this.config.pageTitle = '12.Additional Options';
+            
         } else {
             this.navComponent.renderNav({
                 flowType: 'resquick',
                 flowActiveStep: 8,
                 currentStepUrl: '/config/additionalOptions',
                 showStepIndicator: true,
+                pageTitle: 'Additional Options',
                 nextStepFn: () => {
 
                 }
             });
-            this.config.pageTitle = '8.Additional Options';
         }
     }
 

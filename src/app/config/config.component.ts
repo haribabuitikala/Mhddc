@@ -35,9 +35,24 @@ export class ConfigComponent implements OnInit, AfterViewInit, AfterViewChecked 
     whdata;
     openerName;
     showDetailTxt = true;
+    detailsInfo = {
+        construction: false,
+        baseName: false,
+        overlayName: false,
+        topSection: false,
+        Hardware: false,
+        color: false,
+        overlayColor: false,
+        glassType: false,
+        Opener: false
+    }
+
+    isDoor = true;
+    basep;
 
     ngAfterViewChecked() {
         this.cdref.detectChanges();
+        this.pageTitle = this.navComponent.flowActiveStep + '.' + this.navComponent.pageTitle;        
         this.showDetailTxt = window.location.hash.indexOf('doorConfiguration') !== -1 ? false : true;
         if (this.utils.resFlowSession.cart.length === 0) {
             if ([10, 11, 12, 13].indexOf(this.appComponent.activeStep) !== -1) {
@@ -158,34 +173,10 @@ export class ConfigComponent implements OnInit, AfterViewInit, AfterViewChecked 
                     }
 					
                 });
-				
-				
-				
-				
-				
-				
-				
-				
             }
         });
-        // this.fitToContainer();
-
     }
 
-    detailsInfo = {
-        construction: false,
-        baseName: false,
-        overlayName: false,
-        topSection: false,
-        Hardware: false,
-        color: false,
-        overlayColor: false,
-        glassType: false,
-        Opener: false
-    }
-
-    isDoor = true;
-    basep;
     ngOnInit() {
         // set the curr screen
         this.basep = 0;

@@ -58,22 +58,23 @@ export class ResDoorConfigurationComponent implements OnInit {
                 flowActiveStep: 13,
                 currentStepUrl: '/config/doorConfiguration',
                 showStepIndicator: true,
+                pageTitle: 'Your Door Construction',
                 nextStepFn: () => {
 
                 }
             });
-            this.config.pageTitle = '13. Your Door Configuration';
+            
         } else {
             this.navComponent.renderNav({
                 flowType: 'resquick',
                 flowActiveStep: 9,
                 currentStepUrl: '/config/doorConfiguration',
                 showStepIndicator: true,
+                pageTitle: 'Your Door Construction',
                 nextStepFn: () => {
 
                 }
             });
-            this.config.pageTitle = '9.Your Door Configuration';
         }
     }
     data;
@@ -83,7 +84,6 @@ export class ResDoorConfigurationComponent implements OnInit {
 
     ngOnInit() {
         this.setNavComponent();
-        this.config.pageTitle = "13. Your Door Configuration";
         this.data = this.utils.resFlowSession.resDoorObj;
         if (this.utils.resFlowSession.resDoorObj.INSTALLTYPE === 'DIY') {
             this.utils.resFlowSession.resDetails.totalPrice = this.utils.utilities.itemPriceDY;

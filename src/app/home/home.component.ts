@@ -27,7 +27,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
 
     ngOnInit() {
         $('body').addClass('loader');
-        this.pageNo = this.utils.utilities.currPage;
+        this.pageNo = 3;
         this.navComp.activateIcon();
         this.homes = this.dataStore.homeImages;
         $('body').removeClass('loader');

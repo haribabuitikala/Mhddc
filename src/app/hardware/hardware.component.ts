@@ -429,11 +429,11 @@ export class HardwareComponent implements OnInit {
       flowActiveStep: 9,
       currentStepUrl: '/config/hardware',
       showStepIndicator: true,
+      pageTitle: 'Choose Your Hardware',
       nextStepFn: () => {
 
       }
     });
-    this.config.pageTitle = '9.Choose Your Hardware';
 
     this.loadData();
     // this.hardwareItems();

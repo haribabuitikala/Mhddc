@@ -53,10 +53,8 @@ export class DesignComponent implements OnInit {
             this.number = 12;
             this.data = _.chunk(data, 1);
         }
-
-        this.config.pageTitle = '4.Choose Your Door Design';
-
     }
+
     loadQucikDoors() {
         let utils = this.utils;
         let data = this.utils.resQuickSession.designs;
@@ -74,9 +72,6 @@ export class DesignComponent implements OnInit {
             this.number = 12;
             this.data = _.chunk(uniqueData, 1);
         }
-
-
-        this.config.pageTitle = '3.Choose Your Door Design';
     }
 
     startProcess() {
@@ -86,6 +81,7 @@ export class DesignComponent implements OnInit {
                 flowActiveStep: 4,
                 currentStepUrl: '/config/design',
                 showStepIndicator: true,
+                pageTitle: 'Choose Your Door Design',
                 nextStepFn: () => {
 
                 }
@@ -97,6 +93,7 @@ export class DesignComponent implements OnInit {
                 flowActiveStep: 3,
                 currentStepUrl: '/config/design',
                 showStepIndicator: true,
+                pageTitle: 'Choose Your Door Design',
                 nextStepFn: () => {
 
                 }

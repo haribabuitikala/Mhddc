@@ -50,25 +50,24 @@ export class ConstructionComponent implements OnInit {
                 flowActiveStep: 5,
                 currentStepUrl: '/config/construction',
                 showStepIndicator: true,
+                pageTitle: 'Choose Your Construction',
                 nextStepFn: () => {
 
                 }
             });
-            this.config.pageTitle = '5.Choose Your Construction';
+            
         } else {
             this.navComponent.renderNav({
                 flowType: 'resquick',
                 flowActiveStep: 4,
                 currentStepUrl: '/config/construction',
                 showStepIndicator: true,
+                pageTitle: 'Choose Your Construction',
                 nextStepFn: () => {
 
                 }
             });
-            this.config.pageTitle = '4.Choose Your Construction';
         }
-
-
 
         switch (this.utils.resFlowSession.resDetails.collectionName) {
             case "Coachman&#174; Collection": {
