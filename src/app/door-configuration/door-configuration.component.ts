@@ -25,6 +25,7 @@ export class DoorConfigurationComponent implements OnInit {
     store = this.dataStore.store;
     gdoOpenerTxt = this.utils.utilities.gdoOpenerText;
     gdoOpenerSelected = this.dataStore.gdoOpenerAccessories;
+    showEmailMsg = false;
 
     // t = _.sumBy(this.gdoOpenerSelected, function(o){ return o.price * o.count });
     itemPrice;
@@ -175,26 +176,26 @@ export class DoorConfigurationComponent implements OnInit {
 
         var body = `
           
-          <table style="border-collapse: collapse">
+          <table style="border-collapse: collapse;width:100%">
             <tr style="border-bottom: 1px solid #ccc">
                 <td style="color: #f96302;padding:5px">
                 Opener:
                 </td>
-                <td style="border-left:1px solid #ccc">${opener}</td>
-                <td style="border-left:1px solid #ccc">
+                <td style="padding:5px">${opener}</td>
+                <td>
                  ${openerPrice}
                 </td>
             </tr>
-            <tr style="border-bottom: 1px solid #ccc">
-                <td style="color: #f96302;padding:5px">
+            <tr style="border-bottom: 1px solid #ccc" >
+                <td style="color: #f96302;padding:5px;display: ${itm0Display}">
                 Opener Items:
                 </td>
-                <td style="padding:5px;border-left:1px solid #ccc">
+                <td style="padding:5px">
                    <div style="display: ${itm0Display}">${itm0}</div>
                    <div style="display: ${itm1Display}">${itm1}</div>
                    <div style="display: ${itm2Display}">${itm2}</div>
                 </td>
-                <td style="border-left:1px solid #ccc">
+                <td style="padding:5px">
                    <div style="display: ${itm0Display}">${itm0Price}</div>
                    <div style="display: ${itm1Display}">${itm1Price}</div>
                    <div style="display: ${itm2Display}">${itm2Price}</div>
@@ -213,6 +214,7 @@ export class DoorConfigurationComponent implements OnInit {
             Subject: 'Gdo Configuration',
             Body: body
         }
+        this.showEmailMsg = true;
         this.dataService.sendMail(obj)
             .subscribe(res => {
                 console.log('sent mail')

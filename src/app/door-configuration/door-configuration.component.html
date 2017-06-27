@@ -9,7 +9,7 @@
         <button (click)="email.open()" class="btn">EMAIL QUOTE<span
                 class="glyphicon glyphicon-envelope padding-l-3"></span></button>
     </div>
-    
+
 
 </div>
 <div class="content door-configuration" *ngIf="!isGdo">
@@ -176,6 +176,9 @@
                 <button type="submit" class="btn btn-default box-shadow text-orange margin-r-10 bold margin-b-10   text-uppercase" (click)="shareEmail()">Send Email
                 </button>
             </div>
+            <div *ngIf="showEmailMsg" class="text-center">
+                {{emailMsg}}
+            </div>
         </form>
     </modal-body>
 </modal>
@@ -191,9 +194,9 @@
         <h4 class="text-orange padding-l-30">Social Share</h4>
     </modal-header>
     <modal-body>
-    <div>
-        <share-buttons [url]="'https://murhafsousli.github.io/ngx-sharebuttons/'"></share-buttons>
-    </div>
+        <div>
+            <share-buttons [url]="'https://murhafsousli.github.io/ngx-sharebuttons/'"></share-buttons>
+        </div>
     </modal-body>
 </modal>
 <modal #checkoutPopup>
