@@ -38,6 +38,8 @@ export class DoorConfigurationComponent implements OnInit {
     gdodirectquestions = this.dataStore.gdoDirectQuestions;
     gdodirect;
     showDirectText = this.utils.utilities.directFlow;
+    shareEmailTxt;
+    emailMsg;
 
     gdoOpeners = [];
 
@@ -129,52 +131,52 @@ export class DoorConfigurationComponent implements OnInit {
         }
     }
     shareEmail() {
-       
-        var data = this.emailBody;
-        var windcode = data.windcode;
-        var opener = data.cart[0].opener.opener['item_name'];
-        var openerPrice = '$' + (data.cart[0].opener.opener['item_price']).toFixed(2);
-        var items = this.utils.gdoFlowSession.cart[0].opener.items.length;
-        var itm0, itm1, itm2, itm0Price, itm1Price, itm2Price;
-        var itm0Display = 'none';
-        var itm1Display = 'none';
-        var itm2Display = 'none';
-        let accesories = this.utils.gdoFlowSession.cart[0].opener;
-        switch (items) {
-            case 1:
-                if (accesories.items[0].QTY) {
-                    itm0 = accesories.items[0].item_name + '(x' + accesories.items[0].QTY + ')';
-                    itm0Price = '$' + (accesories.items[0].item_price * accesories.items[0].QTY).toFixed(2);
-                    itm0Display = 'block';
-                }
-                break;
-            case 2:
-                if (accesories.items[0].QTY && accesories.items[1].QTY) {
-                    itm0 = accesories.items[0].item_name + '(x' + accesories.items[0].QTY + ')';
-                    itm0Price = '$' + (accesories.items[0].item_price * accesories.items[0].QTY).toFixed(2);
-                    itm0Display = 'block';
-                    itm1 = accesories.items[1].item_name + '(x' + accesories.items[1].QTY + ')';
-                    itm1Price = '$' + (accesories.items[1].item_price * accesories.items[1].QTY).toFixed(2);
-                    itm1Display = 'block';
-                }
-                break;
-            case 3:
-                if (accesories.items[0].QTY && accesories.items[1].QTY && accesories.items[2].QTY) {
-                    itm0 = accesories.items[0].item_name + '(x' + accesories.items[0].QTY + ')';
-                    itm0Price = '$' + (accesories.items[0].item_price * accesories.items[0].QTY).toFixed(2);
-                    itm0Display = 'block';
-                    itm1 = accesories.items[1].item_name + '(x' + accesories.items[1].QTY + ')';
-                    itm1Price = '$' + (accesories.items[1].item_price * accesories.items[1].QTY).toFixed(2);
-                    itm1Display = 'block';
-                    itm2 = accesories.items[2].item_name + '(x' + accesories.items[2].QTY + ')';
-                    itm2Price = '$' + (accesories.items[2].item_price * accesories.items[2].QTY).toFixed(2);
-                    itm2Display = 'block';
-                }
-                break;
-        }
-        var itemPrice = this.gdoConfig.itemPrice;
+        if (this.shareEmailTxt !== undefined) {
+            var data = this.emailBody;
+            var windcode = data.windcode;
+            var opener = data.cart[0].opener.opener['item_name'];
+            var openerPrice = '$' + (data.cart[0].opener.opener['item_price']).toFixed(2);
+            var items = this.utils.gdoFlowSession.cart[0].opener.items.length;
+            var itm0, itm1, itm2, itm0Price, itm1Price, itm2Price;
+            var itm0Display = 'none';
+            var itm1Display = 'none';
+            var itm2Display = 'none';
+            let accesories = this.utils.gdoFlowSession.cart[0].opener;
+            switch (items) {
+                case 1:
+                    if (accesories.items[0].QTY) {
+                        itm0 = accesories.items[0].item_name + '(x' + accesories.items[0].QTY + ')';
+                        itm0Price = '$' + (accesories.items[0].item_price * accesories.items[0].QTY).toFixed(2);
+                        itm0Display = 'block';
+                    }
+                    break;
+                case 2:
+                    if (accesories.items[0].QTY && accesories.items[1].QTY) {
+                        itm0 = accesories.items[0].item_name + '(x' + accesories.items[0].QTY + ')';
+                        itm0Price = '$' + (accesories.items[0].item_price * accesories.items[0].QTY).toFixed(2);
+                        itm0Display = 'block';
+                        itm1 = accesories.items[1].item_name + '(x' + accesories.items[1].QTY + ')';
+                        itm1Price = '$' + (accesories.items[1].item_price * accesories.items[1].QTY).toFixed(2);
+                        itm1Display = 'block';
+                    }
+                    break;
+                case 3:
+                    if (accesories.items[0].QTY && accesories.items[1].QTY && accesories.items[2].QTY) {
+                        itm0 = accesories.items[0].item_name + '(x' + accesories.items[0].QTY + ')';
+                        itm0Price = '$' + (accesories.items[0].item_price * accesories.items[0].QTY).toFixed(2);
+                        itm0Display = 'block';
+                        itm1 = accesories.items[1].item_name + '(x' + accesories.items[1].QTY + ')';
+                        itm1Price = '$' + (accesories.items[1].item_price * accesories.items[1].QTY).toFixed(2);
+                        itm1Display = 'block';
+                        itm2 = accesories.items[2].item_name + '(x' + accesories.items[2].QTY + ')';
+                        itm2Price = '$' + (accesories.items[2].item_price * accesories.items[2].QTY).toFixed(2);
+                        itm2Display = 'block';
+                    }
+                    break;
+            }
+            var itemPrice = this.gdoConfig.itemPrice;
 
-        var body = `
+            var body = `
           
           <table style="border-collapse: collapse;width:100%">
             <tr style="border-bottom: 1px solid #ccc">
@@ -209,16 +211,18 @@ export class DoorConfigurationComponent implements OnInit {
             </tr>
           </table>
         `
-        let obj = {
-            ToEmail: "maddylali@gmail.com",
-            Subject: 'Gdo Configuration',
-            Body: body
+            this.showEmailMsg = true;
+            this.emailMsg = 'Mail Send Successfully';
+            let obj = {
+                ToEmail: this.shareEmailTxt,
+                Subject: 'Gdo Configuration',
+                Body: body
+            }
+            this.dataService.sendMail(obj)
+                .subscribe(res => {
+                    console.log('sent mail')
+                })
         }
-        this.showEmailMsg = true;
-        this.dataService.sendMail(obj)
-            .subscribe(res => {
-                console.log('sent mail')
-            })
     }
 
     nextBtn(path) {

@@ -227,6 +227,7 @@ export class DoorSizeComponent implements OnInit {
             }
         } else {
             this.showMeasure = !this.showMeasure;
+            $('.transform-rotate-90').toggleClass('transform-rotate-minus-270');
         }
     }
     setFloridaConfirmValue(event) {
