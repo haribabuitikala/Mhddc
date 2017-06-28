@@ -1,6 +1,9 @@
 <div class="fixed-header margin-t-5">
-<!--    <h4 class="font-size-16">{{pageNo}} csdsYour Door Configuration</h4>-->
-    <div class="flex space-around">
+    <h4 class="font-size-16">Your Door Configuration
+        <span class="pull-right">{{itmTotalPrice | currency:'USD':true:'1.2-2'}}</span>
+    </h4>
+    <div class="clearfix"></div>
+    <div class="flex space-around margin-b-15">
         <button (click)="share.open()" class="btn">SHARE<span >
                         <img src="../../assets/images/Share-26.png" width="12" height="12" alt=""/>
             </span>

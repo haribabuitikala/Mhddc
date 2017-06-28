@@ -33,6 +33,7 @@ import {ResSliderComponent} from "../slider-component/res-slider.component";
 import {ShareButtonsModule} from 'ngx-sharebuttons';
 import { EscapeHtmlPipe } from '../shared/html-entitiy';
 import { CartDetailsComponent } from '../cart-details/cart-details.component';
+import { TopPositionSliderComponent } from '../top-position-slider/top-position-slider.component';
 
 @NgModule({
     imports: [
@@ -101,7 +102,9 @@ import { CartDetailsComponent } from '../cart-details/cart-details.component';
         ResSliderComponent,
         ResUpdateComponent,
         EscapeHtmlPipe,
-        CartDetailsComponent
+        CartDetailsComponent,
+
+        TopPositionSliderComponent
     ]
 })
 export class ConfigModule {

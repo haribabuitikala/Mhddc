@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import {AppComponent} from "./app.component";
 
 @Component({
     template: `
@@ -16,11 +17,12 @@ import { Router } from '@angular/router';
 export class Four04Component implements OnInit {
 
 
-    constructor(private route: Router) {
+    constructor(private route: Router
+        , private appComponent: AppComponent) {
     }
 
     ngOnInit() {
-
+        this.appComponent.showStepIndicator = false;
     }
 
     goTo(path) {

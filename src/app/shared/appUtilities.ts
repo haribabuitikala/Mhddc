@@ -14,6 +14,7 @@ export class AppUtilities {
     }
 
     utilities = {
+        isCustomSize: false,
         currPage: 1,
         clicked: 1,
         currScreen: 1,
@@ -198,7 +199,7 @@ export class AppUtilities {
             "item_type": "GDO",
             "QTY": 0,
             "qty": 0,
-            "useranswer": {}
+            "useranswer": ""
         },
         {
             "Answers": [
@@ -257,7 +258,7 @@ export class AppUtilities {
             "item_type": "GDO",
             "QTY": 0,
             "qty": 0,
-            "useranswer": {}
+            "useranswer": ""
         },
         {
             "Answers": [
@@ -307,7 +308,7 @@ export class AppUtilities {
             "item_type": "GDO",
             "QTY": 0,
             "qty": 0,
-            "useranswer": {}
+            "useranswer": ""
         }
     ]
     gdoUserAnswers = [
@@ -899,7 +900,7 @@ export class ResidentialFlowSession {
 
                 // Calculate price if EPA
                 if (this.resDoorObj.isEPA) {
-                    price[0] = price[0] + 20 * count;
+                    price[0] = price[0] + 20;
                     this.resDetails.isEPA = true;
                 }
 
@@ -1019,9 +1020,15 @@ export class ResidentialFlowSession {
                 item.totalPrice = item.totalPrice + item.hardware.hinge.diy_price * count;
             }
 
+            //Calculate price for locks
+            if(item.hardware.lock && item.hardware.lock.price) {
+                item.totalPrice = item.totalPrice + item.hardware.lock.price * count;
+                item.hardware.lock.qty = count;
+            }
+
             // Calculate EPA price
             if (item.isEPA) {
-                item.totalPrice = item.totalPrice + 20 * count;
+                item.totalPrice = item.totalPrice + 20 ;
             }
 
             // Calculate Additional Options price

@@ -123,7 +123,7 @@ export class ResAdditionalOptionsComponent implements OnInit {
 
                 }
             });
-            
+
         } else {
             this.navComponent.renderNav({
                 flowType: 'resquick',
@@ -154,10 +154,10 @@ export class ResAdditionalOptionsComponent implements OnInit {
             "wi": this.utils.utilities.wi,
             "hf": this.utils.utilities.hf,
             "hi": this.utils.utilities.hi,
-            "model":  resDoorObj.construction.construction['ClopayModelNumber'],            
+            "model": resDoorObj.construction.construction['ClopayModelNumber'],
             "dtype": _.upperCase(this.utils.utilities.dtype),
-            "store": this.utils.utilities.storenumber,  
-            "colorConfig": resDoorObj.color.base['colorconfig'],           
+            "store": this.utils.utilities.storenumber,
+            "colorConfig": resDoorObj.color.base['colorconfig'],
             "lang": this.utils.utilities.lang
         }
         this.dataService.getInstallDiyq(dataParams).subscribe(res => {
@@ -166,20 +166,25 @@ export class ResAdditionalOptionsComponent implements OnInit {
             this.resInstallQuestions = _.filter(this.resAdditionalQuestions, ['item_type', 'INSTALL']);
 
             //console.log("one"+JSON.stringify(this.resDiyQuestions[2].Answers[1].vinyls));
-            this.vinyls = _.uniqBy(this.resDiyQuestions[2].Answers[1].vinyls, function(o){
+            this.vinyls = _.uniqBy(this.resDiyQuestions[2].Answers[1].vinyls, function (o) {
                 return o.item_name;
-            });            
+            });
             this.selectedVinyl = this.vinyls[15];
             //console.log('resDiyQuestions' + JSON.stringify(this.resDiyQuestions));
             //            if (this.resInstallQuestions.item_id == 7 && this.resInstallQuestions.item_id == 5) {
             //
             //            }
-            
-            if(!this.utils.resFlowSession.resDetails.isDIY && this.utils.resFlowSession.resDoorObj.product.product['item_id'] !== 16) {
+
+            if (!this.utils.resFlowSession.resDetails.isDIY && this.utils.resFlowSession.resDoorObj.product.product['item_id'] !== 16) {
                 this.installQuestionsOptions(true, this.resInstallQuestions[0]);
                 this.appComponent.updatePrice();
-            }            
-        });
+            }
+        },
+            error => {
+                this.utils.removeLoader();
+                this.dataService.handleError();
+            }
+        );
         if (this.installOrDiy == 'Installed') {
             this.showMedImg = true;
         }
@@ -229,7 +234,7 @@ export class ResAdditionalOptionsComponent implements OnInit {
         } else if (diyQuestions.item_id == 12) {
             this.resDiyBottomWeatherSeal.open();
         }
-    }    
+    }
 
     installQuestionsOptions(itm, obj) {
         this.itmObj = this.utils.resFlowSession.resDoorObj.additional;
@@ -238,21 +243,21 @@ export class ResAdditionalOptionsComponent implements OnInit {
             name: obj.item_name,
             price: obj.Answers[1].item_price
         }
-        let n = obj.item_list_text.split('<span class="text-orange">').join('').split('</span>').join('').replace('?','').replace('$'+k.price,'').trim();        
+        let n = obj.item_list_text.split('<span class="text-orange">').join('').split('</span>').join('').replace('?', '').replace('$' + k.price, '').trim();
         if (itm) {
             switch (obj.item_id) {
                 case 7:
                 case 4:
                 case 11:
-                    obj.item_list_text = n + '<span class="text-orange"> $'+ k.price +'</span>?';
+                    obj.item_list_text = n + '<span class="text-orange"> $' + k.price + '</span>?';
                     this.itmObj.items.push(k);
                     break;
-                case 5:    
+                case 5:
                     this.removeItmOptions(obj.item_id);
                     break;
             }
-        } else {            
-             switch (obj.item_id) {
+        } else {
+            switch (obj.item_id) {
                 case 7:
                 case 4:
                 case 11:
@@ -270,25 +275,25 @@ export class ResAdditionalOptionsComponent implements OnInit {
     }
 
     calculateMilesPrice() {
-        if(this.utils.resFlowSession.resDoorObj.TYPE === "RES") {
-            if(this.defaultMiles < 31) {
+        if (this.utils.resFlowSession.resDoorObj.TYPE === "RES") {
+            if (this.defaultMiles < 31) {
                 return 0;
-            } else if(this.defaultMiles >= 31 && this.defaultMiles < 51) {
+            } else if (this.defaultMiles >= 31 && this.defaultMiles < 51) {
                 return 51;
-            } else if(this.defaultMiles > 50) {
+            } else if (this.defaultMiles > 50) {
                 return 51 + (this.defaultMiles - 50) * 3;
             }
         } else {
-            if(this.defaultMiles < 31) {
+            if (this.defaultMiles < 31) {
                 return 0;
-            } else if(this.defaultMiles > 31) {
+            } else if (this.defaultMiles > 31) {
                 return (this.defaultMiles - 31) * 3;
             }
         }
     }
 
     updatePrice() {
-        let k = _.findIndex(this.itmObj.items, {id: 5});
+        let k = _.findIndex(this.itmObj.items, { id: 5 });
         this.itmObj.items[k].price = this.calculateMilesPrice();
         this.appComponent.updatePrice();
     }
@@ -306,32 +311,32 @@ export class ResAdditionalOptionsComponent implements OnInit {
             name: obj.item_name,
             price: obj.Answers[1].item_price
         }
-        if(obj.item_id === 1) {
-            if(event) {
+        if (obj.item_id === 1) {
+            if (event) {
                 this.selectedVinyl = this.vinyls[15];
-            }            
+            }
             k.name = this.selectedVinyl.item_name;
             k.price = this.selectedVinyl.item_price;
         }
 
-        let n = obj.item_list_text.split('<span class="text-orange">').join('').split('</span>').join('').replace('?','').replace('$'+k.price,'').trim().split('$')[0].trim();        
+        let n = obj.item_list_text.split('<span class="text-orange">').join('').split('</span>').join('').replace('?', '').replace('$' + k.price, '').trim().split('$')[0].trim();
         if (itm) {
             switch (obj.item_id) {
                 case 1:
                 case 3:
-                case 4:            
+                case 4:
                 case 11:
                 case 12:
-                    obj.item_list_text = n + '<span class="text-orange"> $'+ k.price +'</span>?';
+                    obj.item_list_text = n + '<span class="text-orange"> $' + k.price + '</span>?';
                     this.removeItmOptions(obj.item_id);
                     this.itmObj.items.push(k);
                     break;
-                case 5:                    
+                case 5:
                     this.removeItmOptions(obj.item_id);
                     break;
             }
-        } else {            
-             switch (obj.item_id) {
+        } else {
+            switch (obj.item_id) {
                 case 1:
                 case 3:
                 case 4:
@@ -349,11 +354,11 @@ export class ResAdditionalOptionsComponent implements OnInit {
         this.appComponent.updatePrice();
     }
 
-    selectedVinyls(vin, diyQuestion) {   
-        let k = _.findIndex(this.resDiyQuestions, {'item_id': diyQuestion.item_id});
-        if(vin) {
-            if(vin.item_id !== -1) {
-                this.selectedVinyl = vin;   
+    selectedVinyls(vin, diyQuestion) {
+        let k = _.findIndex(this.resDiyQuestions, { 'item_id': diyQuestion.item_id });
+        if (vin) {
+            if (vin.item_id !== -1) {
+                this.selectedVinyl = vin;
                 this.diyQuestionsOptions(true, this.resDiyQuestions[k]);
             } else {
                 this.diyQuestionsOptions(false, this.resDiyQuestions[k]);

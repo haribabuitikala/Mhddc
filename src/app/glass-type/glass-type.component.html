@@ -1,12 +1,6 @@
 <h4 class="text-orange font-size-16">Choose Your Window Location</h4>
 <div class="window-location margin-b-10">
-    <span class="ptn-rel location-item" [ngClass]="{ 'current' : isSelected(4) }" (click)="setPlacement()">
-       <img src="../../assets/images/btnWinPlace4Rnumber1.png" alt="">
-    </span>
-    <span class="pull-right ptn-rel location-item" [ngClass]="{ 'current' : isSelected(3) }" id="glass-select" (click)="setPlacement(3)">
-        <img src="../../assets/images/btnWinPlace4Rnumber2.png" alt="">
-    </span>
-
+    <app-top-position-slider [data]="windowsplacementlist"></app-top-position-slider>
 </div>
 
 <div class="clearfix margin-b-15">

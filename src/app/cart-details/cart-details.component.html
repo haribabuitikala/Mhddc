@@ -168,12 +168,12 @@
             </dd>
         </dl>
     </div>
-    <div class="text-orange">
+    <div class="text-orange" *ngIf="itemPrice">
         <dl class="door-configuration-table">
             <dd class="door-configuration-table-header">
             </dd>
         </dl>
-        <div class="pull-right" *ngIf="itemPrice">
+        <div class="pull-right">
 
             Sub-Total : {{data.totalPrice | currency:'USD':true:'1.2-2'}}
         </div>

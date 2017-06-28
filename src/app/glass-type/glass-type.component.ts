@@ -52,12 +52,44 @@ export class GlassTypeComponent implements OnInit {
     this.loadData();
   }
   selected = 0;
+  windowsplacementlist = [];
   isSelected(postion) {
     return this.selected === postion;
   }
+
+  getTenseOnRow(row?) {
+    let apr = 'th';
+    if (row == 3) {
+      apr = 'rd';
+    }
+    return row + apr + ' Row';
+  }
+
   loadData() {
     var topsection = this.utils.resFlowSession.resDoorObj.windows.topsection;
     if (topsection && topsection['glasstypes']) {
+      this.windowsplacementlist = topsection['SectionsAllowed'];
+      let sectionsAllowed = topsection['SectionsAllowed'];
+      if (sectionsAllowed.indexOf(',') >= 0) {
+        let pList = sectionsAllowed.split(',');
+        pList.reverse();
+        var plistObjects = [];
+        let rIndex = this.utils.resFlowSession.resDoorObj.design.dsgn['Rows'];
+        pList.forEach(p => {
+          plistObjects.push({
+            number: p,
+            item_name: 'Row ' + p,
+            img_index: plistObjects.length + 1,
+            img_rindex: rIndex,
+            Config: p,
+            isdefualt: 'true',
+            item_description: this.getTenseOnRow(+p) + (plistObjects.length === 0 ? '(TOP)' : ''),
+            item_id: +p,
+            item_thumbnail: 'btnWinPlace' + rIndex + 'Rnumber' + (plistObjects.length + 1) + '.png'
+          });
+        });
+        this.windowsplacementlist = _.chunk(plistObjects, 2);
+      }
       var data = topsection['glasstypes']
       if (data) {
         this.data = _.chunk(data, 3);

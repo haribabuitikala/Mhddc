@@ -185,9 +185,15 @@ export class ShoppingCartComponent implements OnInit {
     }
 
     continueShopping() {
-        $('.content').removeClass('shoppingCart');
-        this.closeModal.next();
-        this.utils.utilities.dtype = 'RES';
-        this.route.navigateByUrl('/category');
+        if(window.location.href.indexOf('shoppingCart') >= 0) {
+            $('.content').removeClass('shoppingCart');
+            this.closeModal.next();
+            this.utils.utilities.dtype = 'RES';
+            this.route.navigateByUrl('/category');
+        } else {
+            if (this.IsModal) {
+                this.closeModal.next();
+            }
+        }
     }
 }
