@@ -1,4 +1,28 @@
-<div class="row tabs fixed-header">
+<div class="row tabs fixed-header" *ngIf="showType != ''">
+  <div class="col-xs-6" *ngIf="showType === 'Installed'">
+    <input id="r1" type="radio" (click)="checkType('Installed')" name="installation-type" [checked]="showType === 'Installed'" [ngClass]="{ 'hide' : hideDIY }"
+    />
+    <div class="tab">
+      <span class="check"></span>
+      <label for="r1" (click)="checkType('Installed')">
+        <div>INSTALL</div>
+        <div>{{installPrice | currency:'USD':true:'1.2-2'}}</div>
+      </label>
+    </div>
+  </div>
+  <div class="col-xs-6" [ngClass]="{ 'hide' : hideDIY }" *ngIf="showType === 'DIY'">
+    <input id="r2" (click)="checkType('DIY')" type="radio" name="installation-type" [checked]="showType === 'DIY'">
+    <div class="tab">
+      <span class="check"></span>
+      <label for="r2" (click)="checkType('DIY')">
+        <div>DIY</div>
+        <div>{{diyPrice | currency:'USD':true:'1.2-2'}}</div>
+      </label>
+    </div>
+  </div>
+</div>
+
+<div class="row tabs fixed-header" *ngIf="showType == ''">
   <div class="col-xs-6">
     <input id="r1" type="radio" (click)="checkType('Installed')" name="installation-type" checked="checked" [ngClass]="{ 'hide' : hideDIY }"
     />
@@ -21,6 +45,8 @@
     </div>
   </div>
 </div>
+
+
 <div class="content diy-install margin-b-15">
   <div class="edit-bar">
     <button class="btn" (click)="editModal.open()">Edit<span

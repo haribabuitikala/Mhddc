@@ -1,5 +1,5 @@
 <!--<h4 class="font-size-16 text-orange">Choose Your Construction</h4>-->
-<div class="tile margin-b-15 ptn-rel" *ngIf="loaded">
+<div class="tile margin-b-15 ptn-rel " *ngIf="loaded">
     <div id="myCarousel" class="carousel slide padding5 construction-carousel carousel1" data-ride="carousel">
         <div role="listbox" class="carousel-inner constructionSlider">
             <app-res-slider [data]="data" [number]="number" [folder]="folder" [cname]="'construction'" [category]="category">
@@ -28,14 +28,14 @@
             <p class="font-size-14 margin-b-15">Buying a little more insulation now gives you years of better value: </p>
             <p class="font-size-14 margin-b-15">Better Energy Efficiency / Better Noise Control / Better Dent Resistance / Better Security</p>
         </div>
-        <div class="col6 margin-b-15" *ngIf="upSellImage">
+        <div class="col6 margin-b-15 img-center-ct" *ngIf="upSellImage">
             <img class="upsell-image" [ngStyle]="{'background-image': 'url(../../assets/images/'+currentModel+')'}"
                  alt="" />
                  <div class="upsellDetailsDefault">
                 <span>{{currentModelName}}</span>
             </div>  
         </div>
-        <div class="col6 margin-b-15 ptn-rel" *ngFor="let data of upSellData">
+        <div class="col6 margin-b-15 img-center-ct ptn-rel" *ngFor="let data of upSellData">
              <span class="pull-right promo-offer">Upgrade for Only {{ getModelPriceUpsell(data) | currency:'USD':true:'1.2-2' }} Per door</span>
             <img class="upsell-image" [ngStyle]="{'background-image': 'url(../../assets/images/'+data.upgrade_image+')'}" (click)="updateWithUpsellPrice(data)"
                  alt="" />

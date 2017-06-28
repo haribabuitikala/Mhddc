@@ -35,6 +35,7 @@ export class ConfigComponent implements OnInit, AfterViewInit, AfterViewChecked 
     whdata;
     openerName;
     showDetailTxt = true;
+    showType:string = '';
     detailsInfo = {
         construction: false,
         baseName: false,
@@ -66,12 +67,12 @@ export class ConfigComponent implements OnInit, AfterViewInit, AfterViewChecked 
             }
         } else {
             if (this.utils.resFlowSession.resDoorObj.INSTALLTYPE === 'Installed') {
-                this.itemPriceDY = 0;
-                this.itemPriceInstall = this.utils.utilities.itemPriceInstall;
+                this.showType = 'Installed';
             } else {
-                this.itemPriceInstall = 0;
-                this.itemPriceDY = this.utils.utilities.itemPriceDY;
+                this.showType = 'DIY';
             }
+            this.itemPriceDY = this.utils.utilities.itemPriceDY;
+            this.itemPriceInstall = this.utils.utilities.itemPriceInstall;
         }
     }
 
