@@ -432,7 +432,7 @@ export class ResSliderComponent implements OnInit, AfterViewInit {
                 this.config.homeImage = obj.item_thumbnail;
             }
             if (this.cname === 'construction') {
-                this.detailsInfo(obj.ClopayModelNumber);
+                this.detailsInfo(obj.DisplayModelNumber);
             }
             this.dataStore[this.category] = obj[this.category];
 
