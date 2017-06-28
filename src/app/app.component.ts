@@ -146,7 +146,7 @@ export class AppComponent implements OnInit, AfterViewChecked, OnChanges {
         let resObj = this.app.resFlowSession.orderObj;
         let qpbProduct;
         try {
-             if (this.app.resFlowSession.resDoorObj.product.apiData && this.app.resFlowSession.resDoorObj.product.apiData['filter']) {
+            if (this.app.resFlowSession.resDoorObj.product.apiData && this.app.resFlowSession.resDoorObj.product.apiData['filter']) {
                 let productQuickShip = this.app.resFlowSession.resDoorObj.product.apiData['filter'](p => {
                     return p.item_id == 13;
                 });
@@ -158,7 +158,7 @@ export class AppComponent implements OnInit, AfterViewChecked, OnChanges {
         } catch (r) {
             //swallow
         }
-       
+
         for (var i = 0; i < resObj.cart.length; i++) {
             if (resObj.QPB === true) {
                 resObj.cart[i].product.product.QPB = true;
@@ -172,7 +172,9 @@ export class AppComponent implements OnInit, AfterViewChecked, OnChanges {
             }
         }
         let gdoObj = this.app.gdoFlowSession;
+        if (this.app.utilities.isGDO) {
         gdoObj.cart[0].additional.items = this.app.gdoOpenerAccessories;
+        }
 
         let Obj = this.app.utilities.isGDO === true ? gdoObj : resObj;
 
