@@ -205,6 +205,7 @@ export class CollectionComponent implements OnInit {
                     },
                     err => {
                         this.utils.removeLoader();
+                        this.dataService.handleError();
                     });
             }, e => {
                 console.log(e);

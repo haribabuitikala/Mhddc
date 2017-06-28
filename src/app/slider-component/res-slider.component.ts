@@ -432,7 +432,7 @@ export class ResSliderComponent implements OnInit, AfterViewInit {
                 this.config.homeImage = obj.item_thumbnail;
             }
             if (this.cname === 'construction') {
-                this.detailsInfo(obj.ClopayModelNumber);
+                this.detailsInfo(obj.DisplayModelNumber);
             }
             this.dataStore[this.category] = obj[this.category];
 
@@ -464,8 +464,10 @@ export class ResSliderComponent implements OnInit, AfterViewInit {
         this.dataService.getModelInfo(id)
             .subscribe(res => {
                 if (contructionDetails) {
+                    if (res && res.length > 0) {
                     this.constructionInfo = res
                     contructionDetails.open();
+                    }
                 } else {
                     if (res && res.length > 0) {
                         let t = res[2].modeldescription ? parseFloat(res[2].modeldescription.split(' ')[0]) : 19;
@@ -474,6 +476,9 @@ export class ResSliderComponent implements OnInit, AfterViewInit {
                         }
                     }
                 }
+            },
+            err => {
+                this.dataService.handleError();
             });
     }
 }

@@ -6,6 +6,7 @@ import {ToastrService} from 'toastr-ng2';
 import {AppUtilities} from "../shared/appUtilities";
 import {CollectionService} from "../shared/data.service";
 import {CollectionData} from "../collection/collection-data";
+import { NavComponent } from "../nav/nav.component";
 
 declare var $: any;
 
@@ -26,6 +27,7 @@ export class BannerComponent implements OnInit {
         , private localize: LangEnglishService
         , private dataService: CollectionService
         , private dataStore: CollectionData
+        , private navComponent: NavComponent
         , private utils: AppUtilities) {
     }
     save(form, event) {
@@ -49,9 +51,9 @@ export class BannerComponent implements OnInit {
                 let orderObj = this.utils.resFlowSession.orderObj;
                 orderObj.windcode = res.windcode;
                 orderObj.zipcode = res.zip;
-                orderObj.locale = res;       
-                this.utils.gdoFlowSession.locale = res;    
-                this.utils.gdoFlowSession.zipcode = res.zip;    
+                orderObj.locale = res;
+                this.utils.gdoFlowSession.locale = res;
+                this.utils.gdoFlowSession.zipcode = res.zip;
 
             },
             error => {
@@ -63,14 +65,15 @@ export class BannerComponent implements OnInit {
     ngOnChanges() {
         console.log('changed');
     }
-
+   
     ngOnInit() {
         this.utils.gdoFlowSession.cart.length = 0;
         this.utils.resFlowSession.cart.length = 0;
         this.appComponent.currScreen = 0;
         this.lang = this.localize.getBanner();
-
-        this.appComponent.showStepIndicator = false;  
+        this.navComponent.renderNav({
+            showStepIndicator: false
+        });
     }
     onlyNumberKey(event) {
         let len = event.currentTarget.value.length;

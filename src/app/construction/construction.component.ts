@@ -37,7 +37,7 @@ export class ConstructionComponent implements OnInit {
     upSellImage;
     loaded = false;
     className = '';
-    isCoreAssortment = true;
+    isCoreAssortment = false;
 
     @ViewChild('upsell') upsell: ModalComponent;
 
@@ -55,7 +55,7 @@ export class ConstructionComponent implements OnInit {
 
                 }
             });
-            
+
         } else {
             this.navComponent.renderNav({
                 flowType: 'resquick',
@@ -113,7 +113,9 @@ export class ConstructionComponent implements OnInit {
         this.config.details.constructionName = res[0]['item_name'];
         let newData = [];
         if (res.length > 4) {
-            if (newData.length <= 3) {
+            this.isCoreAssortment = true;
+            
+            if (newData.length <= 3) {              
                 let defaultindex = 0;
                 for (let i = 1; i <= 4; i++) {
                     let y = _.find(res, ['best_order', i]);
@@ -190,12 +192,15 @@ export class ConstructionComponent implements OnInit {
                         this.upSellData = res;
                         // this.currentModelName = this.upSellData[0].current_model;
                         // this.currentModel = 'upsell-' + this.upSellData[0].current_model + '-1.png';
-                        this.currentModelName =  this.getDisplayModelNumber(this.upSellData[0].current_model);
-                        this.currentModel =  'upsell-'  +  this.currentModelName +  '-1.png';
+                        this.currentModelName = this.getDisplayModelNumber(this.upSellData[0].current_model);
+                        this.currentModel = 'upsell-' + this.currentModelName + '-1.png';
                         upsellModal.open();
                     } else {
                         this.route.navigateByUrl(path);
                     }
+                },
+                err => {
+                    this.dataService.handleError();
                 });
 
             console.log(this.upSellData);

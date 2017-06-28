@@ -153,6 +153,7 @@ export class DoorSizeComponent implements OnInit {
             },
             error => {
                 this.utils.removeLoader();
+                this.collection.handleError();
                 this.noSize.open();
             }
         );

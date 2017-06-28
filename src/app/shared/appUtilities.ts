@@ -199,7 +199,7 @@ export class AppUtilities {
             "item_type": "GDO",
             "QTY": 0,
             "qty": 0,
-            "useranswer": {}
+            "useranswer": ""
         },
         {
             "Answers": [
@@ -258,7 +258,7 @@ export class AppUtilities {
             "item_type": "GDO",
             "QTY": 0,
             "qty": 0,
-            "useranswer": {}
+            "useranswer": ""
         },
         {
             "Answers": [
@@ -308,7 +308,7 @@ export class AppUtilities {
             "item_type": "GDO",
             "QTY": 0,
             "qty": 0,
-            "useranswer": {}
+            "useranswer": ""
         }
     ]
     gdoUserAnswers = [

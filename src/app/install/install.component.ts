@@ -407,6 +407,7 @@ export class InstallComponent implements OnInit, AfterViewInit, AfterViewChecked
             error => {
                 console.log(error.statusText);
                 this.reportDataNotMatched();
+                this.collection.handleError();
             }
         );
     }
@@ -496,7 +497,7 @@ export class InstallComponent implements OnInit, AfterViewInit, AfterViewChecked
                         }
 
                     }, err => {
-
+                        this.collection.handleError();
                     });
                 }
             })
@@ -567,7 +568,10 @@ export class InstallComponent implements OnInit, AfterViewInit, AfterViewChecked
                     this.getHardware(cData, rData);
                 }
             }
-        });
+        },
+            err => {
+                this.collection.handleError();
+            });
     }
 
     getHardware(cData, rData) {
@@ -636,7 +640,10 @@ export class InstallComponent implements OnInit, AfterViewInit, AfterViewChecked
             } else {
                 this.reportDataNotMatched();
             }
-        });
+        },
+            err => {
+                this.collection.handleError();
+            });
     }
 
 

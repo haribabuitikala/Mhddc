@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Rx';
+import { Router } from '@angular/router';
 import { Http, Response, Request, Headers, RequestOptions } from '@angular/http';
 import { Icollection } from "../collection/iCollection";
 import 'rxjs/add/operator/catch';
@@ -18,7 +19,8 @@ export class CollectionService {
 
     constructor(private http: Http,
         private api: ApiConstants,
-        private utils: AppUtilities) {
+        private utils: AppUtilities
+        , private route: Router) {
     }
 
     url = this.api.constants.url;
@@ -134,7 +136,7 @@ export class CollectionService {
                             "_title": "Single1",
                             "_upload": "false",
                             "_size": "1"
-                        },   {
+                        }, {
                             "dcoords": {
                                 "point": {
                                     "_width": "8",
@@ -975,7 +977,7 @@ export class CollectionService {
                 this.utils.removeLoader();
             })
     }
-    
+
     sendMail(obj) {
         this.utils.setLoader();
         return this.http.post(this.url + 'SendEmail', obj)
@@ -1002,7 +1004,7 @@ export class CollectionService {
 
 
 
-     getPromotionsByMarketId(marketId) {
+    getPromotionsByMarketId(marketId) {
         this.utils.setLoader();
         return this.http.get(this.url + `promotion/${marketId}`).map(res => {
             try {
@@ -1054,5 +1056,9 @@ export class CollectionService {
         }).finally(() => {
             this.utils.removeLoader();
         });
+    }
+
+    handleError() {
+        this.route.navigateByUrl('/**');
     }
 }

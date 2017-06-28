@@ -26,7 +26,10 @@ export class ZipResolver implements Resolve<Izip> {
             .subscribe(
                 res => {
                     this.results = res;
-                }
+                },
+            err => {
+                this.dataService.handleError();
+            }
             );
         // if (this.results === undefined) {
         //     $('.zip-code').val('');

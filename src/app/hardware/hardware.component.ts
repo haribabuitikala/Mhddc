@@ -188,7 +188,7 @@ export class HardwareComponent implements OnInit {
               let arr3 = [];
               placements.forEach(h => {
                 arr3.push(h.split(':')[0]);
-                this.hingePlacements.push(h); 
+                this.hingePlacements.push(h);
               });
               this.hingesPlacementArr = arr3;
               if (hardware.hinge && hardware.hinge['item_name'] == 'None') {
@@ -404,6 +404,9 @@ export class HardwareComponent implements OnInit {
         }
 
         this.setHardwareMinMax();
+      },
+      err => {
+        this.dataService.handleError();
       }
     );
   }
