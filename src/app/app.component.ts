@@ -172,6 +172,8 @@ export class AppComponent implements OnInit, AfterViewChecked, OnChanges {
             }
         }
         let gdoObj = this.app.gdoFlowSession;
+        gdoObj.cart[0].additional.items = this.app.gdoOpenerAccessories;
+
         let Obj = this.app.utilities.isGDO === true ? gdoObj : resObj;
 
         // let price = ;
