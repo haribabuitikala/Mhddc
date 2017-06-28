@@ -82,8 +82,8 @@ export class InstallComponent implements OnInit, AfterViewInit, AfterViewChecked
     ngOnInit() {
         console.log('install init ');
         this.widthFeets = this.sizes.getWidthFeets();
-        this.lang = this.language.getDoorSize();        
-        
+        this.lang = this.language.getDoorSize();
+
         if (this.navComponent.flowType === 'res') {
             this.navComponent.renderNav({
                 flowType: 'res',
@@ -108,9 +108,9 @@ export class InstallComponent implements OnInit, AfterViewInit, AfterViewChecked
             });
         }
         this.installPrice = this.utils.utilities.itemPriceInstall;
-        this.diyPrice = this.utils.utilities.itemPriceDY;        
+        this.diyPrice = this.utils.utilities.itemPriceDY;
 
-        if (this.utils.resFlowSession.cart.length > 0) { 
+        if (this.utils.resFlowSession.cart.length > 0) {
             if (this.utils.resFlowSession.resDoorObj.INSTALLTYPE === 'Installed') {
                 this.showType = 'Installed';
                 this.utils.resFlowSession.resDetails.isDIY = false;
@@ -134,6 +134,20 @@ export class InstallComponent implements OnInit, AfterViewInit, AfterViewChecked
             }
             this.checkType('Installed');
         }
+
+        this.dataParams = {
+            dtype: this.utils.utilities.dtype,
+            windcode: this.utils.utilities.winCode,
+            dwidthFt: this.utils.utilities.wf, // width feet
+            dwidthIn: this.utils.utilities.wi, // width inches
+            dheightFt: this.utils.utilities.hf, // height feet
+            dheightIn: this.utils.utilities.hi, // height inches
+            lang: 'en',
+            NatMarketID: this.utils.utilities.natmarketid,
+            localmarketid: this.utils.utilities.localmarketid,
+            productlayout: this.utils.utilities.productlayout
+        };
+        this.resDetails = this.utils.resFlowSession.resDetails;
     }
 
 
@@ -364,13 +378,13 @@ export class InstallComponent implements OnInit, AfterViewInit, AfterViewChecked
             this.exactDoorsizeModal.close();
             this.notmatchdoorsize.open();
         }
-
         $('.exact-size-loader').remove();
     }
 
     getProducts() {
-        var cData = this.utils.resDiyData.resDoorObj;
-        var rData = this.utils.resFlowSession.resDoorObj;
+        let cData = this.utils.resDiyData.resDoorObj;
+        cData.INSTALLTYPE = 'DIY';
+        let rData = this.utils.resFlowSession.resDoorObj;
         this.dataParams.dwidthFt = this.selectedWidthFeet;
         this.dataParams.dwidthIn = this.selectedWidthInches | 0;
         this.dataParams.dheightFt = this.selectedHeightFeet;
@@ -505,17 +519,15 @@ export class InstallComponent implements OnInit, AfterViewInit, AfterViewChecked
 
 
     settopParams(cData) {
-
         let utils = this.utils.utilities;
-        var resDoorObj = this.utils.resFlowSession.resDoorObj;
         return {
             "dtype": 'RES',
-            "productid": resDoorObj.product.product['item_id'],
-            "windcode": resDoorObj.product.product['windcode'],
+            "productid": cData.product.product['item_id'],
+            "windcode": cData.product.product['windcode'],
             "NatMarketID": +utils.natmarketid,
-            "doorcolumns": resDoorObj.design.dsgn['Columns'],
-            'colorconfig': resDoorObj.color.base['colorconfig'],
-            "clopaymodelnumber": resDoorObj.construction.construction['ClopayModelNumber'],
+            "doorcolumns": cData.design.dsgn['Columns'],
+            'colorconfig': cData.color.base['colorconfig'],
+            "clopaymodelnumber": cData.construction.construction['ClopayModelNumber'],
             "dwidthFt": +cData.size.width.wf,
             "dwidthIn": +cData.size.width.wi || 0,
             "dheightFt": +cData.size.height.hf,
@@ -566,6 +578,8 @@ export class InstallComponent implements OnInit, AfterViewInit, AfterViewChecked
                 }
                 if (isMatched) {
                     this.getHardware(cData, rData);
+                } else {
+                    this.reportDataNotMatched();
                 }
             }
         },
@@ -603,6 +617,23 @@ export class InstallComponent implements OnInit, AfterViewInit, AfterViewChecked
                         if (h.item_id == rData.hardware.handle.item_id) {
                             handleFound = true;
                             cData.hardware.handle = h;
+                            
+                            //cData.hardware.handle['count'] = 1;
+                            // let handlePlacements = [];
+                            // let placements = h['placementlist'].split(';');
+
+                            // cData.hardware.handle['placement'] = 1;
+                            
+                            // var defaultCount = parseInt(h['defaultkit']);
+                            // if (defaultCount == 2 && h['placementlist'].split(';').length > 1) {
+                            //     cData.hardware.handle['count'] = 2;
+                            // }
+                            // this.utils.resFlowSession.resDoorObj.hardware.handle['placement'] = this.handlePlacements[this.countManager.handle];
+
+                            // if (hardware.handle['placement'].split(':').length > 0) {
+                            //     hardware.handle['count'] = parseInt(hardware.handle['placement'].split(':')[0]);
+                            // }
+                            
                         }
                     });
                 }
@@ -629,14 +660,38 @@ export class InstallComponent implements OnInit, AfterViewInit, AfterViewChecked
                     });
                 }
 
-                if (handleFound && plateFound && hingeFound) {
-                    this.readyToNextStep = true;
-                    window['rObj'] = cData;
-                    $('.exact-size-loader').remove();
-                    this.config.renderCanvas(window['rObj'], 'doorVis', '#diyDoorVis');
+                // Can be reduced to few lines but its better this way to add more if conditions
+                if (rData.product.product.item_id == 13) {
+                    let locks = res[0]['Locks'];
+                    let lockfound = false;
+                    if (locks.length && rData.hardware.lock) {
+                        locks.forEach(l => {
+                            if (l.item_id == rData.hardware.lock.item_id) {
+                                cData.hardware.lock = l;
+                                lockfound = true;
+                            }
+                        });
+                    }
+
+                    if (lockfound) {
+                        this.readyToNextStep = true;
+                        this.rObj = cData;
+                        $('.exact-size-loader').remove();
+                        this.config.renderCanvas(this.rObj, 'doorVis', '#diyDoorVis');
+                    } else {
+                        this.reportDataNotMatched();
+                    }
                 } else {
-                    this.reportDataNotMatched();
+                    if (handleFound && plateFound && hingeFound) {
+                        this.readyToNextStep = true;
+                        this.rObj = cData;
+                        $('.exact-size-loader').remove();
+                        this.config.renderCanvas(this.rObj, 'doorVis', '#diyDoorVis');
+                    } else {
+                        this.reportDataNotMatched();
+                    }
                 }
+
             } else {
                 this.reportDataNotMatched();
             }
@@ -645,15 +700,24 @@ export class InstallComponent implements OnInit, AfterViewInit, AfterViewChecked
                 this.collection.handleError();
             });
     }
+    rObj;
 
 
     confirmDIY() {
-        if (window['rObj']) {
-            this.utils.resFlowSession.resDoorObj = window['rObj'];
-            window['cObj'] = window['rObj'];
+        if (this.rObj) {
+            this.utils.resFlowSession.resDoorObj = this.rObj;
+            window['cObj'] = this.rObj;
+            const size = this.utils.resFlow;
+            size.wf = this.rObj.size.width.wf;
+            size.wi = this.rObj.size.width.wi;
+            size.hf = this.rObj.size.width.hf;
+            size.hi = this.rObj.size.width.hi;
+
+            this.appComponent.updatePrice();
+            this.config.renderCanvas();
         }
         this.navComponent.addDisabledStep(11);
-        this.utils.resFlowSession.resDoorObj.INSTALLTYPE = "DIY";
+        this.utils.resFlowSession.resDoorObj.INSTALLTYPE = 'DIY';
         this.navigateTo('/config/additionalOptions');
     }
 
