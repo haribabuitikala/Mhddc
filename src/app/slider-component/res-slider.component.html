@@ -32,13 +32,13 @@
 
                 <div class="_slide-items ptn-rel" *ngIf="folder==='construction'">
                     <div class="inner-item col-xs-{{number}}" *ngFor="let slideitem of slide; let i=index" [ngClass]="{ 'current' : isSeleted(slideitem, k, i)}"
-                        (click)="openerSelected(slideitem, $event)">
-                        <img (error)="onImageLoadError(slideitem, folder)" src="../../assets/images/{{slideitem.item_thumbnail.replace('.jpg', '.png')}}"
+                        >
+                        <img (click)="openerSelected(slideitem, $event)" (error)="onImageLoadError(slideitem, folder)" src="../../assets/images/{{slideitem.item_thumbnail.replace('.jpg', '.png')}}"
                             [attr.data-id]="slideitem.item_id">
                         <div class="construction-model" [hidden]="slideitem.item_thumbnail == 'btnOtherConGallery.png'">Model {{slideitem.DisplayModelNumber}}</div>
                         <div class="construciton-info">
                             <div [hidden]="slideitem.item_thumbnail == 'btnOtherConGallery.png'">
-                                <img (click)="detailsInfo(slideitem.ClopayModelNumber, contructionDetails)" class="nobdr" src="../../assets/images/Info-64.png"
+                                <img (click)="detailsInfo(slideitem.DisplayModelNumber, contructionDetails)" class="nobdr" src="../../assets/images/Info-64.png"
                                     alt="">
                             </div>
 
