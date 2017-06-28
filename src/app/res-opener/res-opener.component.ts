@@ -86,6 +86,9 @@ export class ResOpenerComponent implements OnInit {
                 this.openers = _.chunk(data, 2);
                 this.utils.resFlowSession.resDoorObj.opener.apiData = res;
                 this.isLoaded = true;
+            },
+            err => {
+                this.dataService.handleError();
             });
         this.app.updatePrice();
     }
@@ -109,7 +112,10 @@ export class ResOpenerComponent implements OnInit {
                         item['count'] = 0;
                     })
                     this.gdoOponerAccessories.open();
-                });
+                },
+            err => {
+                this.dataService.handleError();
+            });
         } else {
             this.route.navigateByUrl('/config/additionalOptions');
         }

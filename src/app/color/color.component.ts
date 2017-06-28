@@ -44,7 +44,7 @@ export class ColorComponent implements OnInit {
     }
 
     startProcess() {
-        
+
 
         // setting the details info
         this.config.detailsInfo = {
@@ -84,7 +84,7 @@ export class ColorComponent implements OnInit {
 
                 }
             });
-            
+
         } else {
             this.navComponent.renderNav({
                 flowType: 'resquick',
@@ -118,7 +118,7 @@ export class ColorComponent implements OnInit {
             this.vinylOptions = _.uniqBy(vinylOptions, 'item_name');
             this.selectedVinyl = 0;
 
-           // this.grooves = [];
+            // this.grooves = [];
             this.grooves = this.utils.resFlowSession.resDoorObj.construction.construction['centergrooves'];
             // .concat([{
             //     centergrooveconfig: "CNONE",
@@ -176,7 +176,7 @@ export class ColorComponent implements OnInit {
             resObj.product.product['productline'] == 'speciality') {
             this.utils.resFlowSession.resDoorObj.construction.cladding = this.selectedCladding;
         }
-        
+
         if (this.claddings && this.claddings.length > 1) {
             if (this.selectedCladding !== "-1") {
                 this.utils.resFlowSession.resDoorObj.construction.cladding = this.claddings[+this.selectedCladding];
@@ -191,7 +191,7 @@ export class ColorComponent implements OnInit {
     }
 
     moveToPage() {
-        
+
         if (this.navComponent.flowType === 'res') {
             let params = this.setParams();
             if (this.utils.resFlowSession.resDoorObj.product.product['item_id'] == 16) {
@@ -204,7 +204,10 @@ export class ColorComponent implements OnInit {
                     this.dataStore.topSection = res;
                     this.utils.resFlowSession.resDoorObj.windows.apiData = res;
                     this.route.navigateByUrl('config/topSection');
-                });
+                },
+                    err => {
+                        this.dataService.handleError();
+                    });
             }
         } else {
             this.route.navigateByUrl('config/install');
@@ -245,11 +248,11 @@ export class ColorComponent implements OnInit {
                     }
                     return false;
                 });
-                if (colorFilter.length > 0 ) {
+                if (colorFilter.length > 0) {
                     colorsFiltered.push(colorFilter[0]);
                 }
             });
-            
+
             this.data = _.chunk(colorsFiltered, 6);
         }
     }

@@ -387,6 +387,9 @@ export class ResDoorConfigurationComponent implements OnInit {
                         .subscribe(res => {
                             console.log('sent mail');
                         })
+                },
+                err => {
+                    this.dataService.handleError();
                 });
         }
     }

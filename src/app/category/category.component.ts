@@ -42,6 +42,7 @@ export class CategoryComponent implements OnInit {
         flow === 'residentialNavElems' ? this.utilities.utilities.dtype = 'res' : this.utilities.utilities.dtype = 'gdo';
         this.utilities.utilities.navCount = count;
         if (flow === 'residentialNavElems') {
+            this.utilities.utilities.isGDO = false;
             this.utilities.utilities.currPage = 1;
             this.utilities.utilities.currScreen += 1;
             this.navComp.setNavFlow('res');
@@ -121,6 +122,9 @@ export class CategoryComponent implements OnInit {
                     this.navComp.setNavFlow('gdo', true);
                     $('body').removeClass('loader');
                     this.route.navigateByUrl(path);
+                },
+                error => {
+                    this.dataService.handleError();
                 }
                 );
 

@@ -4,6 +4,7 @@ import { AppComponent } from "../app.component";
 import { Router, NavigationEnd } from '@angular/router';
 import { AppUtilities } from "../shared/appUtilities";
 import { ShoppingCartComponent } from '../shopping-cart/shopping-cart.component';
+import { CollectionService } from "../shared/data.service";
 
 declare var $: any;
 
@@ -24,6 +25,7 @@ export class HeaderComponent implements OnInit, AfterViewChecked {
 
     constructor(private appComponent: AppComponent
         , private route: Router
+        , private dataService: CollectionService
         , private utils: AppUtilities) {
         route.events.subscribe(r => {
             if (r instanceof NavigationEnd) {
@@ -36,7 +38,10 @@ export class HeaderComponent implements OnInit, AfterViewChecked {
                     this.showCartIcon = false;
                 }
             }
-        })
+        },
+            err => {
+                this.dataService.handleError();
+            })
     }
 
     homePage(path) {
@@ -58,7 +63,7 @@ export class HeaderComponent implements OnInit, AfterViewChecked {
         this.bindDocumentClick();
     }
     cartIcon(modal?) {
-        if(window.location.hash.indexOf('shoppingCart') == -1) {
+        if (window.location.hash.indexOf('shoppingCart') == -1) {
             this.shoppingCartComp.getItemPrice();
             $('.content').addClass('shoppingCart');
             // if(this.shoppingCartComp.resFlowSession.cart.length > 0) {

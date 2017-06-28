@@ -111,7 +111,10 @@ export class OpenerComponent implements OnInit {
                     $('body').removeClass('loader');
                     this.gdoOponerAccessories.open();
                     // this.goTo('gdoConfig' + path)
-                }
+                },
+            err => {
+                this.dataService.handleError();
+            }
                 )
 
 

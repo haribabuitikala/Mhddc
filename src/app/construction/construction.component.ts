@@ -55,7 +55,7 @@ export class ConstructionComponent implements OnInit {
 
                 }
             });
-            
+
         } else {
             this.navComponent.renderNav({
                 flowType: 'resquick',
@@ -190,12 +190,15 @@ export class ConstructionComponent implements OnInit {
                         this.upSellData = res;
                         // this.currentModelName = this.upSellData[0].current_model;
                         // this.currentModel = 'upsell-' + this.upSellData[0].current_model + '-1.png';
-                        this.currentModelName =  this.getDisplayModelNumber(this.upSellData[0].current_model);
-                        this.currentModel =  'upsell-'  +  this.currentModelName +  '-1.png';
+                        this.currentModelName = this.getDisplayModelNumber(this.upSellData[0].current_model);
+                        this.currentModel = 'upsell-' + this.currentModelName + '-1.png';
                         upsellModal.open();
                     } else {
                         this.route.navigateByUrl(path);
                     }
+                },
+                err => {
+                    this.dataService.handleError();
                 });
 
             console.log(this.upSellData);

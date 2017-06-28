@@ -221,6 +221,9 @@ export class DoorConfigurationComponent implements OnInit {
             this.dataService.sendMail(obj)
                 .subscribe(res => {
                     console.log('sent mail')
+                },
+                err => {
+                    this.dataService.handleError();
                 })
         }
     }

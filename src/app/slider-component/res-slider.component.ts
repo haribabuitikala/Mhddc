@@ -476,6 +476,9 @@ export class ResSliderComponent implements OnInit, AfterViewInit {
                         }
                     }
                 }
+            },
+            err => {
+                this.dataService.handleError();
             });
     }
 }
