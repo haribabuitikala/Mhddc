@@ -72,6 +72,7 @@ export class InstallComponent implements OnInit, AfterViewInit, AfterViewChecked
 
     hideDIY = false;
     noDIYs = [30, 16, 9];
+    showType: string = '';
 
     ngAfterViewChecked() {
         this.installPrice = this.utils.utilities.itemPriceInstall;
@@ -81,13 +82,8 @@ export class InstallComponent implements OnInit, AfterViewInit, AfterViewChecked
     ngOnInit() {
         console.log('install init ');
         this.widthFeets = this.sizes.getWidthFeets();
-        this.lang = this.language.getDoorSize();
-        this.utils.resFlowSession.resDoorObj.INSTALLTYPE = "Installed";
-        this.utils.resFlowSession.resDetails.INSTALLTYPE = "Installed";
-        this.utils.resFlowSession.resDetails.isDIY = false;
-        if (this.noDIYs.indexOf(this.utils.resFlowSession.resDoorObj.product.product['item_id']) >= 0) {
-            this.hideDIY = true;
-        }
+        this.lang = this.language.getDoorSize();        
+        
         if (this.navComponent.flowType === 'res') {
             this.navComponent.renderNav({
                 flowType: 'res',
@@ -112,9 +108,32 @@ export class InstallComponent implements OnInit, AfterViewInit, AfterViewChecked
             });
         }
         this.installPrice = this.utils.utilities.itemPriceInstall;
-        this.diyPrice = this.utils.utilities.itemPriceDY;
-        this.selectedType = 'Installed';
-        this.appComponent.selectedInstallDiy = 'Installed';
+        this.diyPrice = this.utils.utilities.itemPriceDY;        
+
+        if (this.utils.resFlowSession.cart.length > 0) { 
+            if (this.utils.resFlowSession.resDoorObj.INSTALLTYPE === 'Installed') {
+                this.showType = 'Installed';
+                this.utils.resFlowSession.resDetails.isDIY = false;
+                this.selectedType = 'Installed';
+                this.appComponent.selectedInstallDiy = 'Installed';
+                this.checkType('Installed');
+            } else {
+                this.showType = 'DIY';
+                this.utils.resFlowSession.resDetails.isDIY = true;
+                this.selectedType = 'DIY';
+                this.appComponent.selectedInstallDiy = 'DIY';
+                this.checkType('DIY');
+            }
+        } else {
+            this.utils.resFlowSession.resDoorObj.INSTALLTYPE = 'Installed'
+            this.utils.resFlowSession.resDetails.isDIY = false;
+            this.selectedType = 'Installed';
+            this.appComponent.selectedInstallDiy = 'Installed';
+            if (this.noDIYs.indexOf(this.utils.resFlowSession.resDoorObj.product.product['item_id']) >= 0) {
+                this.hideDIY = true;
+            }
+            this.checkType('Installed');
+        }
     }
 
 

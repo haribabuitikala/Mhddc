@@ -25,7 +25,14 @@
 </div>
 <!--<div class="tile">-->
     <div class="design-detials--sec" *ngIf="showDetailTxt" >
-        <div class="col-xs-6 padding-r-7  border-white-right font-size-12 price-section">
+        <div class="col-xs-6 padding-r-7  border-white-right font-size-12 price-section" *ngIf="showType != ''">
+            <p *ngIf="showType == 'Installed'"><span>{{itemPriceInstall | currency:'USD':true:'1.2-2'}}</span> / Installed</p>
+            <p *ngIf="showType == 'DIY'"><span>{{itemPriceDY | currency:'USD':true:'1.2-2'}}</span> / DIY</p>
+            <p>
+                <img src="../../assets/images/info.png" (click)="modal.open()" alt="" height="25">
+            </p>
+        </div>
+        <div class="col-xs-6 padding-r-7  border-white-right font-size-12 price-section" *ngIf="showType == ''">
             <p *ngIf="itemPriceInstall != 0"><span>{{itemPriceInstall | currency:'USD':true:'1.2-2'}}</span> / Installed</p>
             <p *ngIf="itemPriceDY != 0"><span>{{itemPriceDY | currency:'USD':true:'1.2-2'}}</span> / DIY</p>
             <p>

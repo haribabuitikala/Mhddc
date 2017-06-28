@@ -969,11 +969,11 @@ export class ResidentialFlowSession {
         }
         finally {
             itemPriceInstall = price[0];
-            if (this.noDIYs.indexOf(itemId) < 0) {
-                itemPriceDY = price[1];
-            }
-            this.utils.utilities.itemPriceInstall = itemPriceInstall;
-            this.utils.utilities.itemPriceDY = itemPriceDY;
+            // if (this.noDIYs.indexOf(itemId) < 0) {
+            //     itemPriceDY = price[1];
+            // }
+            this.utils.utilities.itemPriceInstall = price[0];
+            this.utils.utilities.itemPriceDY = price[1];
             return obj;
         }
     }
