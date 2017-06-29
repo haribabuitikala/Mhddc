@@ -88,8 +88,8 @@ const ENG =
             },
             "floridaPopup": {
                 "modalHeader": "",
-                "modalContent": "You live in a high-wind are and are required to add 2\" to the width of your door <strong> if your opening exceeds 9'2\" wide. </strong>When entering width you MUST use the following formula (door width = opening width + 2\").",
-                "confirm": "Check to confirm you understand this rule and will order your width  accordingly",
+                "modalContent": "You live in a high-wind area and are required to add 2\" to the width of your door <strong> if your opening exceeds 9'2\" wide. </strong>When entering width you MUST use the following formula (door width = opening width + 2\").",
+                "confirm": "Check to confirm you understand this rule and will order your width accordingly",
                 "enter": "Enter >"
             },
            

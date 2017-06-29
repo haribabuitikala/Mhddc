@@ -5,15 +5,18 @@
     </div>
     <div class="col-xs-5">
         <a href="http://www.clopaydoor.com/">
-            <img src="./assets/images/clopay-logo_s.png" (click)="homePage('/banner')"
-                 [ngClass]="{'padding-l-7':count < 2}" class="logo" alt="">
+            <img src="./assets/images/clopay-logo_s.png" (click)="homePage('/banner')" [ngClass]="{'padding-l-7':count < 2}" class="logo"
+                alt="">
         </a>
     </div>
     <div class="col-xs-5 pull-right cart-right">
-        <a href="http://www.homedepot.com/"><img src="./assets/images/TheHomeDepot.png" alt="" height="40"
-                                                 class="pull-right"></a>
-        <img *ngIf="showCartIcon"  src="./assets/images/shopping-cart.png" (click)="cartIcon(modal)" alt="" height="30" class="pull-right cart-icon">
-        <span *ngIf="showCartIcon"  id="shop-count" class="shop-count">{{itemsCount}}</span>
+        <a href="http://www.homedepot.com/"><img src="./assets/images/TheHomeDepot.png" alt="" height="40" class="pull-right"></a>
+        <img *ngIf="showCartIcon" src="./assets/images/shopping-cart.png" (click)="cartIcon(modal)" alt="" height="30" class="pull-right cart-icon">
+        <span *ngIf="showCartIcon" id="shop-count" class="shop-count">{{itemsCount}}</span>
+    </div>
+
+    <div class="collapse_el hide" (click)="collapseFn()">
+
     </div>
 </div>
 <modal #modal [backdrop]='false'>

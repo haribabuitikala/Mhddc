@@ -127,17 +127,17 @@ export class CollectionComponent implements OnInit {
 
         if (this.utils.resFlowSession.cart.length > 0) {
             if (this.utils.resFlowSession.resDoorObj.INSTALLTYPE === 'Installed') {
-                this.specialCollections = _.reject(_.filter(this.collections, ['productline', 'speciality']), function(o){
-                    return [9, 16, 31].indexOf(o.item_id) > -1;
-                });
-                this.popularCollections = _.reject(_.filter(this.collections, ['productline', 'popular']),function(o){
-                    return o.item_id == 30;
-                });
-            } else {
                 this.specialCollections = _.filter(_.filter(this.collections, ['productline', 'speciality']), function(o){
                     return [9, 16, 31].indexOf(o.item_id) > -1;
                 });
                 this.popularCollections = _.filter(_.filter(this.collections, ['productline', 'popular']),function(o){
+                    return o.item_id == 30;
+                });
+            } else {
+                this.specialCollections = _.reject(_.filter(this.collections, ['productline', 'speciality']), function(o){
+                    return [9, 16, 31].indexOf(o.item_id) > -1;
+                });
+                this.popularCollections = _.reject(_.filter(this.collections, ['productline', 'popular']),function(o){
                     return o.item_id == 30;
                 });
             }

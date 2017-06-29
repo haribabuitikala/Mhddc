@@ -197,6 +197,8 @@ export class ResSliderComponent implements OnInit, AfterViewInit {
             case 'opener':
                 if (this.utils.resFlowSession.resDoorObj.opener.opener) {
                     if (this.utils.resFlowSession.resDoorObj.opener.opener['item_id'] === item['item_id']) {
+                        // for door configuration qty
+                        this.utils.resFlowSession.resDetails.opener.qty = 1;
                         isSeleted = true;
                     }
                 }
@@ -328,7 +330,7 @@ export class ResSliderComponent implements OnInit, AfterViewInit {
                 break;
             case 'opener':
                 this.utils.resFlowSession.resDoorObj.opener.opener = obj;
-                this.utils.resFlowSession.resDoorObj.opener.QTY = 1;
+                this.utils.resFlowSession.resDoorObj.opener.qty = 1;
                 break;
             case 'design':
                 this.utils.resFlowSession.resDoorObj.design.dsgn = obj;

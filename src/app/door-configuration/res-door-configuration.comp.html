@@ -14,8 +14,8 @@
 </div>
 
 <!-- Res -->
-<app-cart-details></app-cart-details>
-
+<app-cart-details (callPrice)="notify($event)"></app-cart-details>
+<span class="pull-right"> Sub total: {{itmTotalPrice | currency:'USD':true:'1.2-2'}}</span>
 <!-- GDO Checkout -->
 <div id="GdoDoorConfig" *ngIf="isGdo" class="fixed-header">
     <address class="margin20tb">
@@ -105,23 +105,32 @@
         <p class="bold"> Total Price will be calculated on payment screen </p>
     </modal-body>
 </modal>
-<modal #share>
+<modal #share cssClass="share-popup">
     <modal-header [show-close]="true">
         <h4 class="text-orange padding-l-30">Social Share</h4>
     </modal-header>
     <modal-body>
-        <div>
-            <!--<share-buttons [url]="'https://murhafsousli.github.io/ngx-sharebuttons/'"></share-buttons>-->
-            <!--<share-button button="facebook" [title]="'title'" [description]="'description'" [image]="'image'" [url]="'https://murhafsousli.github.io/ngx-sharebuttons/'"></share-button>
-            <share-button button="pintrest" [url]="'https://murhafsousli.github.io/ngx-sharebuttons/'"></share-button>
-            <share-button button="google" [url]="'https://murhafsousli.github.io/ngx-sharebuttons/'"></share-button>
-            <share-button button="twitter" [url]="'https://murhafsousli.github.io/ngx-sharebuttons/'"></share-button>-->
-            <!--<button class="flex shared-button">
+        <div class="flex space-around margin-b-20">
+            <button class="flex share-button">
+                <span class="instagram"><i class="fa fa-facebook"></i></span>
+            </button>
+            <button class="flex share-button">
+                <span class="instagram"><i class="fa fa-pintrest"></i></span>
+            </button>
+            <button class="flex share-button">
+                <span class="houzz"><i class="fa fa-google"></i></span>
+            </button>
+        </div>
+        <div class="flex space-around">
+            <button class="flex share-button">
+                <span class="instagram"><i class="fa fa-twitter"></i></span>
+            </button>
+            <button class="flex share-button">
                 <span class="instagram"><i class="fa fa-instagram"></i></span>
             </button>
-            <button class="flex shared-button">
+            <button class="flex share-button">
                 <span class="houzz"><i class="fa fa-houzz"></i></span>
-            </button>-->
+            </button>
         </div>
     </modal-body>
 </modal>

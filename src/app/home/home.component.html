@@ -1,9 +1,24 @@
 <h4 class="font-size-16">{{pageNo}}.Choose Your Home</h4>
 <div class="stock clearfix">
-    <div class="col-xs-4" *ngFor="let home of homes">
-        <img [ngStyle]="{'background-image': 'url(../../assets/images/btn'+home._btnimage+')'}" (click)="selectHome(home, $event)"
+    <div class="stock clearfix homeportrait">
+    <div class="col-xs-4 " *ngFor="let home of homes">
+        <img [ngStyle]="{'background-image': 'url(../../assets/images/buttons_por/btn'+home._btnimage+')'}" (click)="selectHome(home, $event)"
         />
     </div>
+</div>
+
+<div class="stock clearfix homelandscape">
+    	
+	<div class="col-xs-4 " *ngFor="let home of homes">
+        <img [ngStyle]="{'background-image': 'url(../../assets/images/buttons_land/btn'+home._btnimage+')'}" (click)="selectHome(home, $event)"
+        />
+    </div>
+	
+</div>
+
+
+
+
 </div>
 <div class="camera-section-selection flex space-around col-xs-12">
     <div class="col-xs-4 text-center">
