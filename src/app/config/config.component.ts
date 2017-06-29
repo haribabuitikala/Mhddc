@@ -95,10 +95,7 @@ export class ConfigComponent implements OnInit, AfterViewInit, AfterViewChecked 
 			}else{
 				points = $.makeArray(selectedHome.dcoords.point);
 			}
-		
-		
-        var points = $.makeArray(selectedHome.dcoords.point);
-        points.forEach(p => {
+		     points.forEach(p => {
             var x1 = +p._UL.split(',')[0];
             var y1 = +p._UL.split(',')[1];
 
@@ -128,8 +125,8 @@ export class ConfigComponent implements OnInit, AfterViewInit, AfterViewChecked 
                 var nCanvas = $('<canvas/>');
 				var query = window.matchMedia("(orientation:landscape)");
                 if (query.matches) {
-					//nCanvas[0].setAttribute('width', selectedHome._landimgwidth);
-					//nCanvas[0].setAttribute('height', selectedHome._landimgheight);
+					nCanvas[0].setAttribute('width', selectedHome._landimgwidth);
+					nCanvas[0].setAttribute('height', selectedHome._landimgheight);
 					
 				}else{
 				nCanvas[0].setAttribute('width', selectedHome._imgwidth);
