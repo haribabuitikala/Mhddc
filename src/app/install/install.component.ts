@@ -82,8 +82,8 @@ export class InstallComponent implements OnInit, AfterViewInit, AfterViewChecked
     ngOnInit() {
         console.log('install init ');
         this.widthFeets = this.sizes.getWidthFeets();
-        this.lang = this.language.getDoorSize();        
-        
+        this.lang = this.language.getDoorSize();
+
         if (this.navComponent.flowType === 'res') {
             this.navComponent.renderNav({
                 flowType: 'res',
@@ -108,9 +108,9 @@ export class InstallComponent implements OnInit, AfterViewInit, AfterViewChecked
             });
         }
         this.installPrice = this.utils.utilities.itemPriceInstall;
-        this.diyPrice = this.utils.utilities.itemPriceDY;        
+        this.diyPrice = this.utils.utilities.itemPriceDY;
 
-        if (this.utils.resFlowSession.cart.length > 0) { 
+        if (this.utils.resFlowSession.cart.length > 0) {
             if (this.utils.resFlowSession.resDoorObj.INSTALLTYPE === 'Installed') {
                 this.showType = 'Installed';
                 this.utils.resFlowSession.resDetails.isDIY = false;
@@ -134,6 +134,20 @@ export class InstallComponent implements OnInit, AfterViewInit, AfterViewChecked
             }
             this.checkType('Installed');
         }
+
+        this.dataParams = {
+            dtype: this.utils.utilities.dtype,
+            windcode: this.utils.utilities.winCode,
+            dwidthFt: this.utils.utilities.wf, // width feet
+            dwidthIn: this.utils.utilities.wi, // width inches
+            dheightFt: this.utils.utilities.hf, // height feet
+            dheightIn: this.utils.utilities.hi, // height inches
+            lang: 'en',
+            NatMarketID: this.utils.utilities.natmarketid,
+            localmarketid: this.utils.utilities.localmarketid,
+            productlayout: this.utils.utilities.productlayout
+        };
+        this.resDetails = this.utils.resFlowSession.resDetails;
     }
 
 
@@ -214,6 +228,7 @@ export class InstallComponent implements OnInit, AfterViewInit, AfterViewChecked
         }
     }
     gotoNext() {
+        this.SizeMotMatched = false;
         this.readyToNextStep = false;
         this.setOldValues();
         this.config.renderCanvas(window['cObj'], 'doorVis', '#diyDoorVis');
@@ -349,6 +364,7 @@ export class InstallComponent implements OnInit, AfterViewInit, AfterViewChecked
     doorDimensionFound = false;
     notmatchdoorsize = null;
     exactDoorsizeModal = null;
+    SizeMotMatched = false;
     getDoorDimentions(notmatchdoorsize, exactDoorsize) {
         //Need to refactor
         $('body').append('<div class="exact-size-loader">Please wait while we are validating the new Dimensions</div>');
@@ -356,21 +372,19 @@ export class InstallComponent implements OnInit, AfterViewInit, AfterViewChecked
         this.readyToNextStep = false;
         this.notmatchdoorsize = notmatchdoorsize;
         this.exactDoorsizeModal = exactDoorsize;
+        this.SizeMotMatched = false;
         this.getProducts();
     }
 
     reportDataNotMatched() {
-        if (this.notmatchdoorsize) {
-            this.exactDoorsizeModal.close();
-            this.notmatchdoorsize.open();
-        }
-
+        this.SizeMotMatched = true;
         $('.exact-size-loader').remove();
     }
 
     getProducts() {
-        var cData = this.utils.resDiyData.resDoorObj;
-        var rData = this.utils.resFlowSession.resDoorObj;
+        let cData = this.utils.resDiyData.resDoorObj;
+        cData.INSTALLTYPE = 'DIY';
+        let rData = this.utils.resFlowSession.resDoorObj;
         this.dataParams.dwidthFt = this.selectedWidthFeet;
         this.dataParams.dwidthIn = this.selectedWidthInches | 0;
         this.dataParams.dheightFt = this.selectedHeightFeet;
@@ -505,17 +519,15 @@ export class InstallComponent implements OnInit, AfterViewInit, AfterViewChecked
 
 
     settopParams(cData) {
-
         let utils = this.utils.utilities;
-        var resDoorObj = this.utils.resFlowSession.resDoorObj;
         return {
             "dtype": 'RES',
-            "productid": resDoorObj.product.product['item_id'],
-            "windcode": resDoorObj.product.product['windcode'],
+            "productid": cData.product.product['item_id'],
+            "windcode": cData.product.product['windcode'],
             "NatMarketID": +utils.natmarketid,
-            "doorcolumns": resDoorObj.design.dsgn['Columns'],
-            'colorconfig': resDoorObj.color.base['colorconfig'],
-            "clopaymodelnumber": resDoorObj.construction.construction['ClopayModelNumber'],
+            "doorcolumns": cData.design.dsgn['Columns'],
+            'colorconfig': cData.color.base['colorconfig'],
+            "clopaymodelnumber": cData.construction.construction['ClopayModelNumber'],
             "dwidthFt": +cData.size.width.wf,
             "dwidthIn": +cData.size.width.wi || 0,
             "dheightFt": +cData.size.height.hf,
@@ -566,6 +578,8 @@ export class InstallComponent implements OnInit, AfterViewInit, AfterViewChecked
                 }
                 if (isMatched) {
                     this.getHardware(cData, rData);
+                } else {
+                    this.reportDataNotMatched();
                 }
             }
         },
@@ -580,29 +594,38 @@ export class InstallComponent implements OnInit, AfterViewInit, AfterViewChecked
             natmarketid: this.utils.utilities.natmarketid,
             windcode: cData.product.product['windcode'],
             designid: cData.design.dsgn['item_id'],
-            drows: cData.design.dsgn['Rows'],
-            dcolumns: cData.design.dsgn['Columns'],
+            doorrows: cData.design.dsgn['Rows'],
+            doorcolumns: cData.design.dsgn['Columns'],
             lang: 'en',
             marketid: this.utils.utilities.localmarketid,
             localmarketid: this.utils.utilities.localmarketid,
             clopaymodelnumber: cData.construction.construction['ClopayModelNumber'],
-            doorsize: +this.utils.utilities.homeSize,
             dwidthFt: +cData.size.wf,
             dwidthIn: +cData.size.wi,
             dheightFt: +cData.size.hf,
             dheightIn: +cData.size.hi
         };
-
+        let hardware = rData.hardware;
         this.collection.getHardware(hardwareParams).subscribe(res => {
             if (res && res.length > 0) {
                 cData.hardware.apiData = res;
                 let handles = res[0]['LHDKS'];
                 let handleFound = false;
-                if (handles && rData.hardware.handle && rData.hardware.handle.item_id) {
+                if (handles && hardware.handle && hardware.handle.item_id) {
                     handles.forEach(h => {
-                        if (h.item_id == rData.hardware.handle.item_id) {
+                        if (h.item_id == hardware.handle.item_id) {
                             handleFound = true;
                             cData.hardware.handle = h;
+                            
+                            let handlePlacements = [];
+                            let handlePlacementHash = {};
+                            let placements = h['placementlist'].split(';');
+                            placements.forEach(placement => {
+                                handlePlacements.push(placement);
+                                handlePlacementHash[placement.split(':')[0]] = placement;
+                            });
+                            cData.hardware.handle['placement'] = handlePlacementHash[h.defaultkit];
+                            cData.hardware.handle['count'] = parseInt(hardware.handle['placement'].split(':')[0]);
                         }
                     });
                 }
@@ -614,6 +637,16 @@ export class InstallComponent implements OnInit, AfterViewInit, AfterViewChecked
                         if (p.item_id == rData.hardware.stepplate.item_id) {
                             plateFound = true;
                             cData.hardware.stepplate = p;
+
+                            let stepPlacements = [];
+                            let placements = p['placementlist'].split(';');
+                            let stepPlacementHash = {};
+                            placements.forEach(placement => {
+                                stepPlacements.push(placement);
+                                stepPlacementHash[placement.split(':')[0]] = placement;
+                            });
+                            cData.hardware.stepplate['placement'] = stepPlacementHash[p.defaultkit];
+                            cData.hardware.stepplate['count'] = parseInt(hardware.stepplate['placement'].split(':')[0]);
                         }
                     });
                 }
@@ -625,18 +658,59 @@ export class InstallComponent implements OnInit, AfterViewInit, AfterViewChecked
                         if (p.item_id == rData.hardware.hinge.item_id) {
                             hingeFound = true;
                             cData.hardware.hinge = p;
+
+                            let hingePlacements = [];
+                            let placements = p['placementlist'].split(';');
+                            let hingePlacementHash = {};
+                            placements.forEach(placement => {
+                                hingePlacements.push(placement);
+                                hingePlacementHash[placement.split(':')[0]] = placement;
+                            });
+                            cData.hardware.hinge['placement'] = hingePlacementHash[p.defaultkit];
+                            if (hardware.hinge.placement) {
+                                let existingPlacement = hardware.hinge.placement.split(':')[0];
+                                if (hingePlacementHash[existingPlacement]) {
+                                    cData.hardware.hinge['placement'] = hingePlacementHash[existingPlacement];
+                                }
+                            }
+
+                            cData.hardware.hinge['count'] = parseInt(hardware.hinge['placement'].split(':')[0]);
                         }
                     });
                 }
 
-                if (handleFound && plateFound && hingeFound) {
-                    this.readyToNextStep = true;
-                    window['rObj'] = cData;
-                    $('.exact-size-loader').remove();
-                    this.config.renderCanvas(window['rObj'], 'doorVis', '#diyDoorVis');
+                // Can be reduced to few lines but its better this way to add more if conditions
+                if (rData.product.product.item_id == 13) {
+                    let locks = res[0]['Locks'];
+                    let lockfound = false;
+                    if (locks.length && rData.hardware.lock) {
+                        locks.forEach(l => {
+                            if (l.item_id == rData.hardware.lock.item_id) {
+                                cData.hardware.lock = l;
+                                lockfound = true;
+                            }
+                        });
+                    }
+
+                    if (lockfound) {
+                        this.readyToNextStep = true;
+                        this.rObj = cData;
+                        $('.exact-size-loader').remove();
+                        this.config.renderCanvas(this.rObj, 'doorVis', '#diyDoorVis');
+                    } else {
+                        this.reportDataNotMatched();
+                    }
                 } else {
-                    this.reportDataNotMatched();
+                    if (handleFound && plateFound && hingeFound) {
+                        this.readyToNextStep = true;
+                        this.rObj = cData;
+                        $('.exact-size-loader').remove();
+                        this.config.renderCanvas(this.rObj, 'doorVis', '#diyDoorVis');
+                    } else {
+                        this.reportDataNotMatched();
+                    }
                 }
+
             } else {
                 this.reportDataNotMatched();
             }
@@ -645,15 +719,31 @@ export class InstallComponent implements OnInit, AfterViewInit, AfterViewChecked
                 this.collection.handleError();
             });
     }
+    rObj;
 
 
     confirmDIY() {
-        if (window['rObj']) {
-            this.utils.resFlowSession.resDoorObj = window['rObj'];
-            window['cObj'] = window['rObj'];
+        if (this.rObj) {
+            this.utils.resFlowSession.resDoorObj = this.rObj;
+            window['cObj'] = this.rObj;
+            const size = this.utils.resFlow;
+            size.wf = this.rObj.size.width.wf;
+            size.wi = this.rObj.size.width.wi;
+            size.hf = this.rObj.size.height.hf;
+            size.hi = this.rObj.size.height.hi;
+
+            // Not sure about this lines somehow we ended up using utilities sizes instead of resObject
+            // Need to refactor the logic
+            this.utils.utilities.wf = this.rObj.size.width.wf;
+            this.utils.utilities.wi = this.rObj.size.width.wi;
+            this.utils.utilities.hf = this.rObj.size.height.hf;
+            this.utils.utilities.hi = this.rObj.size.height.hi;
+
+            this.appComponent.updatePrice();
+            this.config.renderCanvas();
         }
         this.navComponent.addDisabledStep(11);
-        this.utils.resFlowSession.resDoorObj.INSTALLTYPE = "DIY";
+        this.utils.resFlowSession.resDoorObj.INSTALLTYPE = 'DIY';
         this.navigateTo('/config/additionalOptions');
     }
 

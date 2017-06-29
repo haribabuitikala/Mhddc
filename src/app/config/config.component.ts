@@ -65,6 +65,9 @@ export class ConfigComponent implements OnInit, AfterViewInit, AfterViewChecked 
                     this.itemPriceDY = this.utils.utilities.itemPriceDY;
                 }
             }
+            if ([31, 30, 9, 16].indexOf(this.utils.resFlowSession.resDoorObj.product.product['item_id'] || 0) !== -1) {
+                this.showType = 'Installed';
+            }
         } else {
             if (this.utils.resFlowSession.resDoorObj.INSTALLTYPE === 'Installed') {
                 this.showType = 'Installed';

@@ -153,10 +153,11 @@ export class ShoppingCartComponent implements OnInit {
         this.getTotalCartValue();        
     }
 
-    checkout() {
+    checkout(install, diy) {
         if (this.utils.utilities.flow == 'residentialNavElems') {
             // this.appComp.getCheckOut(this.itemPrice);
-            this.resShoppingCartTerms.open();
+            // this.resShoppingCartTerms.open();
+            this.utils.resFlowSession.resDoorObj.INSTALLTYPE === "Installed" ? install.open() : diy.open();
 
         } else {
             // this.appComp.getCheckOut(this.itemPrice);
