@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { AppUtilities } from "../shared/appUtilities";
 
 @Component({
@@ -12,10 +12,13 @@ export class CartDetailsComponent implements OnInit {
   }
   data;
   coachman;
+  doorConfig;
 
   ngOnInit() {
     this.data = this.utils.resFlowSession.resDetails;
     this.coachman = this.utils.resFlowSession.resDoorObj.product.product['item_id'] === 11 ? true : false;
+    // show doorConfig
+    this.doorConfig = window.location.hash.indexOf('doorConfiguration') !== -1 ? true : false;
     let size = this.utils.resFlow;
     this.data.widthF = size.wf;
     this.data.widthI = size.wi;
@@ -39,4 +42,35 @@ export class CartDetailsComponent implements OnInit {
       //swallow
     }
   }
+  @Output() callPrice = new EventEmitter();
+
+  calcdoors(data, val?, propName?, qtyName?) {
+    if (val) {
+      this.qty(data, val, propName, qtyName)
+    } else {
+      this.qty(data, null, propName, qtyName)
+    }
+    this.utils.resFlowSession.resCalculateCartItemPrice(data)
+    this.callPrice.emit(this.utils.resFlowSession.resCalculateCartItemPrice(data));
+  }
+
+  qty(item, increment?, itm?, qtyName?) {
+
+    // if (increment) {
+    //   if (item.construction.qty !== 6)
+    //     item.construction.qty = item.construction.qty + 1;
+    // } else {
+    //   if (item.construction.qty !== 1)
+    //     item.construction.qty = item.construction.qty - 1;
+    // }
+
+    if (increment) {
+      if (item[itm][qtyName] !== 6)
+        item[itm][qtyName] = item[itm][qtyName] + 1;
+    } else {
+      if (item[itm][qtyName] !== 1)
+        item[itm][qtyName] = item[itm][qtyName] - 1;
+    }
+  }
+
 }
