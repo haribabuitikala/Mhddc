@@ -228,6 +228,7 @@ export class InstallComponent implements OnInit, AfterViewInit, AfterViewChecked
         }
     }
     gotoNext() {
+        this.SizeMotMatched = false;
         this.readyToNextStep = false;
         this.setOldValues();
         this.config.renderCanvas(window['cObj'], 'doorVis', '#diyDoorVis');
@@ -363,6 +364,7 @@ export class InstallComponent implements OnInit, AfterViewInit, AfterViewChecked
     doorDimensionFound = false;
     notmatchdoorsize = null;
     exactDoorsizeModal = null;
+    SizeMotMatched = false;
     getDoorDimentions(notmatchdoorsize, exactDoorsize) {
         //Need to refactor
         $('body').append('<div class="exact-size-loader">Please wait while we are validating the new Dimensions</div>');
@@ -370,14 +372,12 @@ export class InstallComponent implements OnInit, AfterViewInit, AfterViewChecked
         this.readyToNextStep = false;
         this.notmatchdoorsize = notmatchdoorsize;
         this.exactDoorsizeModal = exactDoorsize;
+        this.SizeMotMatched = false;
         this.getProducts();
     }
 
     reportDataNotMatched() {
-        if (this.notmatchdoorsize) {
-            this.exactDoorsizeModal.close();
-            this.notmatchdoorsize.open();
-        }
+        this.SizeMotMatched = true;
         $('.exact-size-loader').remove();
     }
 
@@ -606,34 +606,25 @@ export class InstallComponent implements OnInit, AfterViewInit, AfterViewChecked
             dheightFt: +cData.size.hf,
             dheightIn: +cData.size.hi
         };
-
+        let hardware = rData.hardware;
         this.collection.getHardware(hardwareParams).subscribe(res => {
             if (res && res.length > 0) {
                 cData.hardware.apiData = res;
                 let handles = res[0]['LHDKS'];
                 let handleFound = false;
-                if (handles && rData.hardware.handle && rData.hardware.handle.item_id) {
+                if (handles && hardware.handle && hardware.handle.item_id) {
                     handles.forEach(h => {
-                        if (h.item_id == rData.hardware.handle.item_id) {
+                        if (h.item_id == hardware.handle.item_id) {
                             handleFound = true;
                             cData.hardware.handle = h;
                             
-                            //cData.hardware.handle['count'] = 1;
-                            // let handlePlacements = [];
-                            // let placements = h['placementlist'].split(';');
-
-                            // cData.hardware.handle['placement'] = 1;
-                            
-                            // var defaultCount = parseInt(h['defaultkit']);
-                            // if (defaultCount == 2 && h['placementlist'].split(';').length > 1) {
-                            //     cData.hardware.handle['count'] = 2;
-                            // }
-                            // this.utils.resFlowSession.resDoorObj.hardware.handle['placement'] = this.handlePlacements[this.countManager.handle];
-
-                            // if (hardware.handle['placement'].split(':').length > 0) {
-                            //     hardware.handle['count'] = parseInt(hardware.handle['placement'].split(':')[0]);
-                            // }
-                            
+                            let handlePlacements = [];
+                            let placements = h['placementlist'].split(';');
+                            placements.forEach(placement => {
+                                handlePlacements.push(placement);
+                            });
+                            cData.hardware.handle['placement'] = handlePlacements[0];
+                            cData.hardware.handle['count'] = parseInt(hardware.handle['placement'].split(':')[0]);
                         }
                     });
                 }
@@ -645,6 +636,14 @@ export class InstallComponent implements OnInit, AfterViewInit, AfterViewChecked
                         if (p.item_id == rData.hardware.stepplate.item_id) {
                             plateFound = true;
                             cData.hardware.stepplate = p;
+
+                            let stepPlacements = [];
+                            let placements = p['placementlist'].split(';');
+                            placements.forEach(placement => {
+                                stepPlacements.push(placement);
+                            });
+                            cData.hardware.stepplate['placement'] = stepPlacements[0];
+                            cData.hardware.stepplate['count'] = parseInt(hardware.stepplate['placement'].split(':')[0]);
                         }
                     });
                 }
@@ -656,6 +655,14 @@ export class InstallComponent implements OnInit, AfterViewInit, AfterViewChecked
                         if (p.item_id == rData.hardware.hinge.item_id) {
                             hingeFound = true;
                             cData.hardware.hinge = p;
+
+                            let hingePlacements = [];
+                            let placements = p['placementlist'].split(';');
+                            placements.forEach(placement => {
+                                hingePlacements.push(placement);
+                            });
+                            cData.hardware.hinge['placement'] = hingePlacements[0];
+                            cData.hardware.hinge['count'] = parseInt(hardware.hinge['placement'].split(':')[0]);
                         }
                     });
                 }
