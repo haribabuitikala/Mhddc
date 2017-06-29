@@ -497,7 +497,8 @@ export class ResidentialFlowSession {
         opener: {
             name: '',
             price: 0,
-            items: []
+            items: [],
+            qty: 0
         },
         additionalOptions: {
             items: []
@@ -578,7 +579,7 @@ export class ResidentialFlowSession {
             "apiData": ""
         },
         "opener": {
-            "QTY": 1,
+            "qty": 1,
             "opener": "",
             "items": [],
             "apiData": ""
@@ -726,7 +727,7 @@ export class ResidentialFlowSession {
         },
         "resetopener": () => {
             this.resDoorObj['opener'] = {
-                "QTY": 0,
+                "qty": 0,
                 "opener": "",
                 "items": [],
                 "apiData": ""
@@ -734,7 +735,8 @@ export class ResidentialFlowSession {
             this.resDetails.opener = {
                 name: '',
                 price: 0,
-                items: []
+                items: [],
+                qty: 0
             };
             this.resDoorObj['reset' + this.resDoorObj['resetorder'][8]]();
         },
@@ -1044,7 +1046,7 @@ export class ResidentialFlowSession {
             // Calculate price for Openers
             let op = item.opener;
             if (op && op.price) {
-                item.totalPrice = item.totalPrice + op.price;
+                item.totalPrice = item.totalPrice + (op.price * op.qty);
             }
 
             // Calculate price for Optional Openers
