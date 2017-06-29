@@ -87,6 +87,16 @@ export class ConfigComponent implements OnInit, AfterViewInit, AfterViewChecked 
 
 
     drawDoors(selectedHome, nCanvas2d) {
+		
+		var query = window.matchMedia("(orientation:landscape)");
+		var points;
+			if (query.matches){
+				points = $.makeArray(selectedHome.dcoords.pointland);
+			}else{
+				points = $.makeArray(selectedHome.dcoords.point);
+			}
+		
+		
         var points = $.makeArray(selectedHome.dcoords.point);
         points.forEach(p => {
             var x1 = +p._UL.split(',')[0];
@@ -116,8 +126,15 @@ export class ConfigComponent implements OnInit, AfterViewInit, AfterViewChecked 
             let selectedHome = window['selectedHome'];
             if (selectedHome) {
                 var nCanvas = $('<canvas/>');
-                nCanvas[0].setAttribute('width', selectedHome._imgwidth);
+				var query = window.matchMedia("(orientation:landscape)");
+                if (query.matches) {
+					//nCanvas[0].setAttribute('width', selectedHome._landimgwidth);
+					//nCanvas[0].setAttribute('height', selectedHome._landimgheight);
+					
+				}else{
+				nCanvas[0].setAttribute('width', selectedHome._imgwidth);
                 nCanvas[0].setAttribute('height', selectedHome._imgheight);
+				}
                 var nCanvas2d = nCanvas[0].getContext('2d');
                 var himg = new Image();
                 himg.onload = () => {
@@ -132,11 +149,18 @@ export class ConfigComponent implements OnInit, AfterViewInit, AfterViewChecked 
                     }
                     res({ canvas: nCanvas[0] });
                 };
+				
+				var query = window.matchMedia("(orientation:landscape)");
                 if (selectedHome._upload && selectedHome._upload == true) {
                     himg.src = selectedHome.canvas.toDataURL();
-                } else {
-                    himg.src = window['imgFolder'] + '/homeimages/' + selectedHome._imagelg
-                }
+                } else if(query.matches){
+						 
+						 //himg.src = window['imgFolder'] + '/homeimages/' + selectedHome._imagelgland;
+						 himg.src = window['imgFolder'] + '/homeimages/landscape/' + selectedHome._imagelgland;
+						
+					}else{
+						 himg.src = window['imgFolder'] + '/homeimages/portrait/' + selectedHome._imagelg;
+					}
             }
         });
 
