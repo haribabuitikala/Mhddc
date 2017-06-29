@@ -73,6 +73,11 @@ export class HeaderComponent implements OnInit, AfterViewChecked {
         }
     }
 
+    collapseFn() {
+       this.humbergerCollapse();
+       $('.collapse_el').addClass('hide');
+    }
+
     bindDocumentClick() {
         $(document).click(function () {
             if ($('.menu-collapse').is(":visible")) {
@@ -90,7 +95,7 @@ export class HeaderComponent implements OnInit, AfterViewChecked {
         if (!$('.menu-collapse').is(":visible")) {
             $('.nav-component').animate({ width: '220px' }, function () {
                 $('.nav-component li span').removeClass('hide');
-                $('.collapse-humberger').removeClass('hide');
+                $('.collapse-humberger,.collapse_el').removeClass('hide');
                 $('.hamburger').addClass('hide');
                 $('body').addClass('menu-open');
             });
@@ -101,7 +106,7 @@ export class HeaderComponent implements OnInit, AfterViewChecked {
         if ($('.menu-collapse').is(":visible")) {
             $('.nav-component li span').addClass('hide');
             $('.nav-component').animate({ width: '60px' }, function () {
-                $('.collapse-humberger').addClass('hide');
+                $('.collapse-humberger,.collapse_el').addClass('hide');
                 $('.hamburger').removeClass('hide');
                 $('body').removeClass('menu-open');
             });
