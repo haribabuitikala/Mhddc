@@ -180,7 +180,7 @@
             <div class="row">
                 <div class="col-xs-4">Doors</div>
                 <div class="col-xs-8 pull-right">
-                    <img src="../../assets/images/substract.png" alt="" height="22" width="22" class="minus-quantity pull-left" (click)="calcdoors(data,'','construction','qty')">
+                    <img src="../../assets/images/substract.png" alt="" height="22" width="22" class="minus-quantity pull-left margin-r-5" (click)="calcdoors(data,'','construction','qty')">
                     <span>{{data.construction.qty}}</span>
                     <img src="../../assets/images/add.png" alt="" height="22" width="22" class="add-quantity" (click)="calcdoors(data,true,'construction','qty')">
                 </div>
@@ -190,9 +190,9 @@
             <div class="row">
                 <div class="col-xs-4">Openers</div>
                 <div class="col-xs-8 pull-right">
-                    <img src="../../assets/images/substract.png" alt="" height="22" width="22" class="minus-quantity pull-left" (click)="calcOpeners()">
-                    <span>{{data.opener.QTY}}</span>
-                    <img src="../../assets/images/add.png" alt="" height="22" width="22" class="add-quantity " (click)="calcdoors(data,true,'opener','QTY')">
+                    <img src="../../assets/images/substract.png" alt="" height="22" width="22" class="minus-quantity margin-r-5 pull-left" (click)="calcdoors(data,'','opener','qty')">
+                    <span>{{data.opener.qty}}</span>
+                    <img src="../../assets/images/add.png" alt="" height="22" width="22" class="add-quantity " (click)="calcdoors(data,true,'opener','qty')">
                 </div>
             </div>
         </dd>
