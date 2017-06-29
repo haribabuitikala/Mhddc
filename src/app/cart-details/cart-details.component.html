@@ -109,12 +109,12 @@
         <dd class="door-configuration-table-header">
             Hardware
         </dd>
-        <dd >
+        <dd>
             <p [innerHTML]="data.hardware.lock.name + ' (x' + data.hardware.lock.qty + ')'"></p>
             <span>{{data.hardware.lock.price * data.hardware.lock.qty  | currency:'USD':true:'1.2-2'}}</span>
         </dd>
     </dl>
-    
+
     <dl class="door-configuration-table" *ngIf="data.isEPA">
         <dd class="door-configuration-table-header">
             Lead Paint Test
@@ -167,6 +167,35 @@
                 </div>
             </dd>
         </dl>
+    </div>
+    <!-- this is for door configuration -->
+    <div *ngIf="doorConfig">
+
+        <dl class="door-configuration-table">
+            <dd class="door-configuration-table-header">
+                Quantity
+            </dd>
+        </dl>
+        <dd>
+            <div class="row">
+                <div class="col-xs-4">Doors</div>
+                <div class="col-xs-8 pull-right">
+                    <img src="../../assets/images/substract.png" alt="" height="22" width="22" class="minus-quantity pull-left" (click)="calcdoors(data,'','construction','qty')">
+                    <span>{{data.construction.qty}}</span>
+                    <img src="../../assets/images/add.png" alt="" height="22" width="22" class="add-quantity" (click)="calcdoors(data,true,'construction','qty')">
+                </div>
+            </div>
+        </dd>
+        <dd *ngIf="data.opener.items.length > 0">
+            <div class="row">
+                <div class="col-xs-4">Openers</div>
+                <div class="col-xs-8 pull-right">
+                    <img src="../../assets/images/substract.png" alt="" height="22" width="22" class="minus-quantity pull-left" (click)="calcOpeners()">
+                    <span>{{data.opener.QTY}}</span>
+                    <img src="../../assets/images/add.png" alt="" height="22" width="22" class="add-quantity " (click)="calcdoors(data,true,'opener','QTY')">
+                </div>
+            </div>
+        </dd>
     </div>
     <div class="text-orange" *ngIf="itemPrice">
         <dl class="door-configuration-table">

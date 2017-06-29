@@ -86,6 +86,12 @@ export class ResDoorConfigurationComponent implements OnInit {
     ngOnInit() {
         this.setNavComponent();
         this.data = this.utils.resFlowSession.resDoorObj;
+        this.getPrice();
+    }
+    notify(event){
+        this.itmTotalPrice = event.totalPrice;
+    }
+    getPrice() {
         if (this.utils.resFlowSession.resDoorObj.INSTALLTYPE === 'DIY') {
             this.utils.resFlowSession.resDetails.totalPrice = this.utils.utilities.itemPriceDY;
             this.itmTotalPrice = this.utils.utilities.itemPriceDY;
