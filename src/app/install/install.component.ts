@@ -594,13 +594,12 @@ export class InstallComponent implements OnInit, AfterViewInit, AfterViewChecked
             natmarketid: this.utils.utilities.natmarketid,
             windcode: cData.product.product['windcode'],
             designid: cData.design.dsgn['item_id'],
-            drows: cData.design.dsgn['Rows'],
-            dcolumns: cData.design.dsgn['Columns'],
+            doorrows: cData.design.dsgn['Rows'],
+            doorcolumns: cData.design.dsgn['Columns'],
             lang: 'en',
             marketid: this.utils.utilities.localmarketid,
             localmarketid: this.utils.utilities.localmarketid,
             clopaymodelnumber: cData.construction.construction['ClopayModelNumber'],
-            doorsize: +this.utils.utilities.homeSize,
             dwidthFt: +cData.size.wf,
             dwidthIn: +cData.size.wi,
             dheightFt: +cData.size.hf,
@@ -619,11 +618,13 @@ export class InstallComponent implements OnInit, AfterViewInit, AfterViewChecked
                             cData.hardware.handle = h;
                             
                             let handlePlacements = [];
+                            let handlePlacementHash = {};
                             let placements = h['placementlist'].split(';');
                             placements.forEach(placement => {
                                 handlePlacements.push(placement);
+                                handlePlacementHash[placement.split(':')[0]] = placement;
                             });
-                            cData.hardware.handle['placement'] = handlePlacements[0];
+                            cData.hardware.handle['placement'] = handlePlacementHash[h.defaultkit];
                             cData.hardware.handle['count'] = parseInt(hardware.handle['placement'].split(':')[0]);
                         }
                     });
@@ -639,10 +640,12 @@ export class InstallComponent implements OnInit, AfterViewInit, AfterViewChecked
 
                             let stepPlacements = [];
                             let placements = p['placementlist'].split(';');
+                            let stepPlacementHash = {};
                             placements.forEach(placement => {
                                 stepPlacements.push(placement);
+                                stepPlacementHash[placement.split(':')[0]] = placement;
                             });
-                            cData.hardware.stepplate['placement'] = stepPlacements[0];
+                            cData.hardware.stepplate['placement'] = stepPlacementHash[p.defaultkit];
                             cData.hardware.stepplate['count'] = parseInt(hardware.stepplate['placement'].split(':')[0]);
                         }
                     });
@@ -658,10 +661,19 @@ export class InstallComponent implements OnInit, AfterViewInit, AfterViewChecked
 
                             let hingePlacements = [];
                             let placements = p['placementlist'].split(';');
+                            let hingePlacementHash = {};
                             placements.forEach(placement => {
                                 hingePlacements.push(placement);
+                                hingePlacementHash[placement.split(':')[0]] = placement;
                             });
-                            cData.hardware.hinge['placement'] = hingePlacements[0];
+                            cData.hardware.hinge['placement'] = hingePlacementHash[p.defaultkit];
+                            if (hardware.hinge.placement) {
+                                let existingPlacement = hardware.hinge.placement.split(':')[0];
+                                if (hingePlacementHash[existingPlacement]) {
+                                    cData.hardware.hinge['placement'] = hingePlacementHash[existingPlacement];
+                                }
+                            }
+
                             cData.hardware.hinge['count'] = parseInt(hardware.hinge['placement'].split(':')[0]);
                         }
                     });
@@ -717,8 +729,15 @@ export class InstallComponent implements OnInit, AfterViewInit, AfterViewChecked
             const size = this.utils.resFlow;
             size.wf = this.rObj.size.width.wf;
             size.wi = this.rObj.size.width.wi;
-            size.hf = this.rObj.size.width.hf;
-            size.hi = this.rObj.size.width.hi;
+            size.hf = this.rObj.size.height.hf;
+            size.hi = this.rObj.size.height.hi;
+
+            // Not sure about this lines somehow we ended up using utilities sizes instead of resObject
+            // Need to refactor the logic
+            this.utils.utilities.wf = this.rObj.size.width.wf;
+            this.utils.utilities.wi = this.rObj.size.width.wi;
+            this.utils.utilities.hf = this.rObj.size.height.hf;
+            this.utils.utilities.hi = this.rObj.size.height.hi;
 
             this.appComponent.updatePrice();
             this.config.renderCanvas();
