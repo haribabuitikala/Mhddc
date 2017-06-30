@@ -1,5 +1,5 @@
 <div class="fixed-header margin-t-5">
-    <h4 class="font-size-16">Your Door Configuration
+    <h4 class="font-size-16 bold">Your Door Configuration
         <span class="pull-right">{{itmTotalPrice | currency:'USD':true:'1.2-2'}}</span>
     </h4>
     <div class="clearfix"></div>
@@ -15,7 +15,8 @@
 
 <!-- Res -->
 <app-cart-details (callPrice)="notify($event)"></app-cart-details>
-<span class="pull-right"> Sub total: {{itmTotalPrice | currency:'USD':true:'1.2-2'}}</span>
+<div class="clearfix margin-b-30"></div>
+<span class="pull-right text-orange bold sub-total"> Sub total: {{itmTotalPrice | currency:'USD':true:'1.2-2'}}</span>
 <!-- GDO Checkout -->
 <div id="GdoDoorConfig" *ngIf="isGdo" class="fixed-header">
     <address class="margin20tb">

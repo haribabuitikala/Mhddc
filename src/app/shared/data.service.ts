@@ -996,7 +996,7 @@ export class CollectionService {
     "_imgheight": "179",
     "_title": "Single1",
     "_upload": "false",
-    "_size": "1"
+    "_size": "2"
 },{
     "dcoords": {
       // for portrait  coordinates-PORTRAIT.doc
@@ -1538,7 +1538,7 @@ export class CollectionService {
     "_imgheight": "179",
     "_title": "Single1",
     "_upload": "false",
-    "_size": "1"
+    "_size": "2"
   },
   {
     "dcoords": {
@@ -1581,7 +1581,7 @@ export class CollectionService {
     "_imgheight": "179",
     "_title": "Single1",
     "_upload": "false",
-    "_size": "1"
+    "_size": "2"
   },{
     "dcoords": {
       // for portrait  coordinates-PORTRAIT.doc
@@ -1613,7 +1613,7 @@ export class CollectionService {
     "_imgheight": "179",
     "_title": "Single1",
     "_upload": "false",
-    "_size": "1"
+    "_size": "2"
   },{
     "dcoords": {
       // for portrait  coordinates-PORTRAIT.doc
@@ -1645,7 +1645,7 @@ export class CollectionService {
     "_imgheight": "179",
     "_title": "Single1",
     "_upload": "false",
-    "_size": "1"
+    "_size": "2"
   },
   {
     "dcoords": {
@@ -1678,7 +1678,7 @@ export class CollectionService {
     "_imgheight": "179",
     "_title": "Single1",
     "_upload": "false",
-    "_size": "1"
+    "_size": "2"
   },{
     "dcoords": {
       // for portrait  coordinates-PORTRAIT.doc
