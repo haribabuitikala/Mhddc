@@ -1,5 +1,5 @@
 <h4 class="font-size-16">{{pageNo}}.Choose Your Home</h4>
-<div class="stock clearfix">
+<div class="clearfix">
     <div class="stock clearfix homeportrait">
     <div class="col-xs-4 " *ngFor="let home of homes">
         <img [ngStyle]="{'background-image': 'url(../../assets/images/buttons_por/btn'+home._btnimage+')'}" (click)="selectHome(home, $event)"
