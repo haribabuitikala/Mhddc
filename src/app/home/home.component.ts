@@ -131,17 +131,26 @@ export class HomeComponent implements OnInit, AfterViewInit {
         return $resizer;
     };
 
-    doors = [new Door(100, 100, 50, 50)];
-    drawDoors() {
-        this.doors.forEach(d => {
-            var $d = this.getDoor(d);
-            d.$elem = $d;
-            $('.customer-home').append($d);
-            d.$resizer = this.getResizer(d);
-            $('.customer-home').append(d.$resizer);
-        });
+    resetDoorText() {
+      $('.door').each(function(i) {
+        $(this).html(i + 1);
+      });
+    }
 
-        this.bindEvents();
+    doors = [new Door(100, 100, 50, 50)];
+    doorCount = 1;
+    drawDoors() {
+      var d = new Door(100, 100, 50, 50);
+      var $d = this.getDoor(d);
+      d.$elem = $d;
+      $('.customer-home').find('.door, .resizer').remove();
+      $('.customer-home').append($d.addClass('door-' + this.doorCount).attr('doorid', this.doorCount));
+      // this line must be here due to html tag rendering issue
+      d.$resizer = this.getResizer(d);
+      $('.customer-home').append(d.$resizer.addClass('door-' + this.doorCount).attr('doorid', this.doorCount));
+
+      this.resetDoorText();
+      this.bindEvents();
     }
     dragElem;
     resizeElem;
@@ -152,12 +161,19 @@ export class HomeComponent implements OnInit, AfterViewInit {
     touchX;
     touchY;
 
+    elemToRemove = null;
     bindEvents = function () {
         var $that = this;
         $('.door').on('touchstart', function (e) {
             $that.dragElem = e.target;
+            $that.elemToRemove = e.target;
             $that.mx = $that.touchX;
             $that.my = $that.touchY;
+            $('.door, .resizer').removeClass('active');
+            let doorid = $($that.dragElem).attr('doorid');
+            if (doorid) {
+              $('.door-' + doorid).addClass('active');
+            }
         });
 
         $('.door').on('touchend', function (e) {
@@ -168,7 +184,6 @@ export class HomeComponent implements OnInit, AfterViewInit {
             $that.resizeElem = e.target;
             $that.rx = $that.touchX;
             $that.ry = $that.touchY;
-
         });
 
         $('.resizer').on('touchend', function (e) {
@@ -188,16 +203,27 @@ export class HomeComponent implements OnInit, AfterViewInit {
                         'left': ($that.touchX - offsetToSet) + 'px',
                         'top': ($that.touchY - $('.customer-home').offset().top - offsetToSet) + 'px'
                     });
-
-                    $that.setResizer();
+                    let doorid = $($that.dragElem).attr('doorid');
+                    var $resizerToSet = $('.resizer.door-' + doorid);
+                    var leftToMinus = $('.customer-home').offset().left;
+                    var topToMinus = $('.customer-home').offset().top;
+                    $resizerToSet.css({
+                      'left': ($($that.dragElem).offset().left + $($that.dragElem).width() - leftToMinus - 25) + 'px',
+                      'top': ($($that.dragElem).offset().top + $($that.dragElem).height() - topToMinus - 25) + 'px'
+                    });
                 } else if ($that.resizeElem) {
                     var offsetToSet = 15;
+                    let doorid = $($that.resizeElem).attr('doorid');
                     $($that.resizeElem).css({
                         'left': ($that.touchX - offsetToSet) + 'px',
                         'top': ($that.touchY - $('.customer-home').offset().top - offsetToSet) + 'px'
                     });
+                    var $doorToSet = $('.door.door-' + doorid);
+                    $doorToSet.css({
+                      'width': (($that.touchX - offsetToSet) - ($doorToSet.offset().left - 25)) + 'px',
+                      'height': (($that.touchY) - ($doorToSet.offset().top)) + 'px'
+                    });
 
-                    $that.setDoorSize();
                 }
             }
         });
@@ -224,12 +250,41 @@ export class HomeComponent implements OnInit, AfterViewInit {
                 nCanvas2d.save();
                 $('.customer-home').html('').append(canvas);
                 $that.uploadSelectedHome.canvas = canvas;
+                $that.doorCount = 1;
                 $that.drawDoors();
             }
             img.src = event.target['result'];
             e.target.value = null;
         }
         reader.readAsDataURL(e.target.files[0]);
+    }
+
+    addDoor() {
+        let d = new Door(100, 100, 50, 50);
+        this.doors.push(d);
+        this.doorCount = this.doorCount + 1;
+        var $d = this.getDoor(d);
+        d.$elem = $d;
+        $('.customer-home').append($d.addClass('door-' + this.doorCount).attr('doorid', this.doorCount));
+        // this line must be here due to html tag rendering issue
+        d.$resizer = this.getResizer(d);
+        $('.customer-home').append(d.$resizer.addClass('door-' + this.doorCount).attr('doorid', this.doorCount));
+        this.resetDoorText();
+        this.bindEvents();
+    }
+
+    removeDoor() {
+      let $that = this;
+      this.doors.pop();
+      if ($('.customer-home').find('.door').length > 1) {
+        if ($that.elemToRemove) {
+          var doorid = $($that.elemToRemove).attr('doorid');
+          if (doorid) {
+            $('.door-' + doorid).remove();
+            this.resetDoorText();
+          }
+        }
+      }
     }
 
 
@@ -245,19 +300,22 @@ export class HomeComponent implements OnInit, AfterViewInit {
     };
 
     setSelectedHome(homeImageModal, isSave, currScreen) {
+        var $that = this;
         if (isSave) {
-            this.doors.forEach(d => {
-                let x = d.$elem.offset().left - $('.customer-home').offset().left;
-                let y = d.$elem.offset().top - $('.customer-home').offset().top;
-                let w = d.$elem.width();
-                let h = d.$elem.height();
+            // refactoring must
+            $('.customer-home').find('.door').each(function(i, n) {
+                var $elem = $(this);
+                let x = $elem.offset().left - $('.customer-home').offset().left;
+                let y = $elem.offset().top - $('.customer-home').offset().top;
+                let w = $elem.width();
+                let h = $elem.height();
 
                 let ul = x + ',' + y;
                 let ur = (x + w) + ',' + y;
                 let ll = x + ',' + (y + h);
                 let lr = (x + w) + ',' + (y + h);
                 let point = new Point(ul, ur, ll, lr);
-                this.uploadSelectedHome.dcoords.point.push(point);
+                $that.uploadSelectedHome.dcoords.point.push(point);
             });
             window['selectedHome'] = this.uploadSelectedHome;
             homeImageModal.close();
