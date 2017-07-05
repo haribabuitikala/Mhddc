@@ -180,6 +180,8 @@ export class CollectionComponent implements OnInit {
             speciality.item_id = 30
         }
         // event.currentTarget.classList.add('selected');
+        // Re setting flow to residential if use comeback from earlier steps
+        this.navComponent.setNavFlow('res');
         this.dataService.getHomes()
             .then(res => {
                 let result = res['homes'].home;
