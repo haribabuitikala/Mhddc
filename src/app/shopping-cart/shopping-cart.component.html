@@ -10,9 +10,9 @@
     </span>
 </p>
 <div *ngIf="!resFlow && data" class="div-border div-border-radius tile padding10 margin-b-10 checkout">
-    <p class="shopping-cart-gallery-info ">{{openerType}} Door Operator (Installed)</p>
+    <p class="shopping-cart-gallery-info " *ngIf="!showDirect">{{openerType}} Door Operator (Installed)</p>
     <div class="clearfix clearfix margin-b-10">
-        <span class="col-xs-9">{{gdoOpenerTxt}}</span>
+        <span class="col-xs-9" *ngIf="!showDirect">{{gdoOpenerTxt}}</span>
         <div *ngIf="showDirect" class="clearfix margin-b-10 col-xs-9">
             Install of Purchased Opener (Installed)
         </div>
@@ -229,8 +229,8 @@
                 <li>WORK PERFORMED ON WEEKENDS OR LEGAL HOLIDAY UNLESS OTHERWISE AGREED UPON BY INSTALLER AND CUSTOMER
                 </li>
             </ul>
-            <div class="bold margin-t-20 text-center agreement" >
-                <p class="aggrement-text text-blue"><a href="http://test-hddchtml2.clopay.com/HDTermsPop.html" target="_blank">HOME IMPROVEMENT AGREEMENT <br>PLEASE READ THIS</a> </p>
+            <div class="bold margin-t-20 text-center agreement">
+                <p class="aggrement-text text-blue"><a href="http://test-hddchtml2.clopay.com/HDTermsPop.html" target="_blank">HOME IMPROVEMENT AGREEMENT <br>PLEASE READ THIS</a>                    </p>
                 <div class="form-group margin-b-20">
                     <button type="submit" class="btn btn-default box-shadow text-orange margin-r-10 bold margin-b-10 pull-right" (click)="gdoShoppingCartTerms.close()">DECLINE
                     </button>
@@ -265,7 +265,7 @@
             <p><strong>MISSING / BROKEN PARTS </strong></p>
             <p>If a door is received with missing or broken parts, call 1-800-HOMEDEPOT and the part will be immediately sent.
             </p>
-           <h4 class="bold font-size-16">Special Order DIY Notes </h4>
+            <h4 class="bold font-size-16">Special Order DIY Notes </h4>
             <ul class="bul-points1 pad-l-4">
                 <li>Home delivery within 30 "drive" miles from the store through which the door is purchased. Additional charges
                     apply if further than 30 miles.
@@ -273,7 +273,7 @@
                 <li> Easy to follow instruction book</li>
                 <li> All new hardware including track, springs, rollers, and hinges</li>
             </ul>
-           <h4 class="bold font-size-16">YOUR DO-IT-YOURSELF GARAGE DOOR WILL COME WITH </h4>
+            <h4 class="bold font-size-16">YOUR DO-IT-YOURSELF GARAGE DOOR WILL COME WITH </h4>
             <ul class="bul-points1 pad-l-4">
                 <li>
                     <p>Rear track hangar kit - Often constructed of punched angle iron, these hangers attach the end of the
@@ -302,13 +302,13 @@
                         in manual, damage caused by the opener will NOT be covered under your warranty.)</p>
                 </li>
             </ul>
-           <h4 class="bold font-size-16">WHAT TO EXPECT ONCE WE RECEIVE YOUR ORDER </h4>
+            <h4 class="bold font-size-16">WHAT TO EXPECT ONCE WE RECEIVE YOUR ORDER </h4>
             <p>Your built to order Do-It-Yourself door will be manufactured No changes or cancellations to a Do-It-Yourself
                 order after three business days from the date purchased. You will be contacted within three to four weeks
                 to schedule your FREE HOME DELIVERY</p>
         </div>
         <div class="bold margin-t-20 text-center agreement">
-            <p class="aggrement-text text-blue"><a href="http://test-hddchtml2.clopay.com/HDTermsPop.html" target="_blank">HOME IMPROVEMENT AGREEMENT <br>PLEASE READ THIS</a> </p>
+            <p class="aggrement-text text-blue"><a href="http://test-hddchtml2.clopay.com/HDTermsPop.html" target="_blank">HOME IMPROVEMENT AGREEMENT <br>PLEASE READ THIS</a>                </p>
             <div class="form-group margin-b-20">
                 <button type="submit" class="btn btn-default box-shadow text-orange margin-r-10 bold margin-b-10 pull-right" (click)="resShoppingCartTerms.close()">DECLINE
                 </button>
@@ -322,99 +322,113 @@
 
 <modal #installTerms>
     <modal-body>
-  <h4 class="bold font-size-16">   Terms & Conditions </h4>
+        <h4 class="bold font-size-16"> Terms & Conditions </h4>
 
- <h4 class="bold font-size-16">BASIC INSTALLATION PRICE INCLUDES </h4>
-   <ul class="bul-points1 pad-l-4">
-       <li>
-Pre-Installation Site Inspection to confirm measurements and determine installation conditions</li>
+        <h4 class="bold font-size-16">BASIC INSTALLATION PRICE INCLUDES </h4>
+        <ul class="bul-points1 pad-l-4">
+            <li>
+                Pre-Installation Site Inspection to confirm measurements and determine installation conditions</li>
 
-<li>Delivery of new garage door up to 30 "drive" miles from the store through which door is purchased</li>
+            <li>Delivery of new garage door up to 30 "drive" miles from the store through which door is purchased</li>
 
-<li>Take down of existing garage door</li>
+            <li>Take down of existing garage door</li>
 
-<li>Installation of Low Headroom Track (if necessary)</li>
+            <li>Installation of Low Headroom Track (if necessary)</li>
 
-<li> Installation of standard vinyl perimeter weather seals (materials included). If larger weather seal is needed, additional charges may apply.</li>
+            <li> Installation of standard vinyl perimeter weather seals (materials included). If larger weather seal is needed,
+                additional charges may apply.</li>
 
-<li>Reconnect existing U.L. approved garage door opener when replacing an existing "sectional" garage door</li>
+            <li>Reconnect existing U.L. approved garage door opener when replacing an existing "sectional" garage door</li>
 
-<li>Reinforcement of top garage door section (including materials) when attaching a garage door opener</li>
+            <li>Reinforcement of top garage door section (including materials) when attaching a garage door opener</li>
 
-<li>Final clean up and inspection of finished job with customer </li>
-   </ul>
+            <li>Final clean up and inspection of finished job with customer </li>
+        </ul>
 
-<h4 class="bold font-size-16"> WHAT TO EXPECT ONCE WE RECEIVE YOUR ORDER</h4>
-<ul class="bul-points1 pad-l-4">
-<li>You will be contacted by an installer within two business days to schedule a site inspection</li>
+        <h4 class="bold font-size-16"> WHAT TO EXPECT ONCE WE RECEIVE YOUR ORDER</h4>
+        <ul class="bul-points1 pad-l-4">
+            <li>You will be contacted by an installer within two business days to schedule a site inspection</li>
 
-<li>At the site inspection your installer will:</li>
+            <li>At the site inspection your installer will:</li>
 
-<li>Measure the garage opening to verify that the right size door was ordered</li>
+            <li>Measure the garage opening to verify that the right size door was ordered</li>
 
-<li>Determine if any additional work is necessary to complete your installation</li>
+            <li>Determine if any additional work is necessary to complete your installation</li>
 
-<li>Based on your availability the site inspection should be completed within 1 to 5 business days</li>
+            <li>Based on your availability the site inspection should be completed within 1 to 5 business days</li>
 
-<li>If it is determined that additional work is needed we will call you to review those changes and collect any additional money necessary</li>
+            <li>If it is determined that additional work is needed we will call you to review those changes and collect any additional
+                money necessary</li>
 
-<li> Once the site check is completed the installer will be able to give you an estimated lead-time based on door availability in your market
-The installer will contact you again as soon as the door is available to schedule final installation date</li>
+            <li> Once the site check is completed the installer will be able to give you an estimated lead-time based on door
+                availability in your market The installer will contact you again as soon as the door is available to schedule
+                final installation date</li>
 
-<li>You must do the following prior to the installation date:</li>
+            <li>You must do the following prior to the installation date:</li>
 
-<li>Clear out the garage a minimum of 10' back from the garage opening</li>
+            <li>Clear out the garage a minimum of 10' back from the garage opening</li>
 
-<li>Arrange so that pets and children are kept away from the installation project area</li>
+            <li>Arrange so that pets and children are kept away from the installation project area</li>
 
-<li>Disconnect any alarm systems</li>
+            <li>Disconnect any alarm systems</li>
 
-<li>Arrange to have you or a representative (at least 18 years old) home for the entire installation</li>
+            <li>Arrange to have you or a representative (at least 18 years old) home for the entire installation</li>
 
-<li>If hidden conditions exist that were not detectable on site inspection (insect damage, wood rot, etc.), installer will communicate additional work and customer will be responsible for charges</li>
+            <li>If hidden conditions exist that were not detectable on site inspection (insect damage, wood rot, etc.), installer
+                will communicate additional work and customer will be responsible for charges</li>
 
-<li>Upon completion of the installation you or your representative will be asked to sign a lien waiver verifying that service was completed
-Special Notes About Your Garage Door Opener Installation</li>
-</ul>
- <h4 class="bold font-size-16">BEFORE YOUR INSTALLATION:</h4>
-<ul class="bul-points1 pad-l-4">
+            <li>Upon completion of the installation you or your representative will be asked to sign a lien waiver verifying
+                that service was completed Special Notes About Your Garage Door Opener Installation</li>
+        </ul>
+        <h4 class="bold font-size-16">BEFORE YOUR INSTALLATION:</h4>
+        <ul class="bul-points1 pad-l-4">
 
-<li>Installer will call you within two business days from time of sale to schedule pre-installation site inspection</li>
+            <li>Installer will call you within two business days from time of sale to schedule pre-installation site inspection</li>
 
-<li>No work performed on weekends or legal holidays</li>
+            <li>No work performed on weekends or legal holidays</li>
 
-<li>Special Orders can not be changed or cancelled seventy-two hours after the completed site inspection</li>
+            <li>Special Orders can not be changed or cancelled seventy-two hours after the completed site inspection</li>
 
-<li>Only the installer can commit to a scheduled installation date. Missed installation appointments will result in additional trip fees</li>
+            <li>Only the installer can commit to a scheduled installation date. Missed installation appointments will result
+                in additional trip fees</li>
 
-<li>An adult at least 18 years old must be present while installers are working in your home for duration of project. Failure to do so will result in the technician leaving the site without completing the install and an additional trip charge fee will be needed before resuming work.</li>
+            <li>An adult at least 18 years old must be present while installers are working in your home for duration of project.
+                Failure to do so will result in the technician leaving the site without completing the install and an additional
+                trip charge fee will be needed before resuming work.</li>
 
-<li>If new GDO is being installed, Customer is responsible for having an outlet within 3' of the location of the GDO</li>
+            <li>If new GDO is being installed, Customer is responsible for having an outlet within 3' of the location of the
+                GDO</li>
 
-<li>Prior to the installation you must:</li>
+            <li>Prior to the installation you must:</li>
 
-<li>Clear out garage a minimum of 10' back from the garage opening. Shelving, materials on shelves, and any other contents of the garage that impede the installation are the customer's responsibility to move prior to the installation date. Installer's are not permitted to clean out or move contents of the garage. If garage is not cleared on scheduled date, install will need to be rescheduled and a trip fee will apply.</li>
+            <li>Clear out garage a minimum of 10' back from the garage opening. Shelving, materials on shelves, and any other
+                contents of the garage that impede the installation are the customer's responsibility to move prior to the
+                installation date. Installer's are not permitted to clean out or move contents of the garage. If garage is
+                not cleared on scheduled date, install will need to be rescheduled and a trip fee will apply.</li>
 
-<li>Ensure that pets and children are kept away from the installation area</li>
+            <li>Ensure that pets and children are kept away from the installation area</li>
 
-<li>Disconnect any alarm systems</li>
+            <li>Disconnect any alarm systems</li>
 
-<li>Installer will reconnect your existing garage door opener (if applicable) only if equipped with code-required safety beams</li>
+            <li>Installer will reconnect your existing garage door opener (if applicable) only if equipped with code-required
+                safety beams</li>
 
-<li>Unfinished wood doors must be primed / sealed on all surfaces (including edges) prior to installation or the warranty will be voided</li>
+            <li>Unfinished wood doors must be primed / sealed on all surfaces (including edges) prior to installation or the
+                warranty will be voided</li>
 
-<li>Certain restrictions apply to door availability based on door model, size and windcode (if applicable). In these instances, an alternative model will need to be selected.</li>
-</ul>
- <h4 class="bold font-size-16">ITEMS NOT PREFORMED BY GARAGE DOOR INSTALLER:</h4>
+            <li>Certain restrictions apply to door availability based on door model, size and windcode (if applicable). In these
+                instances, an alternative model will need to be selected.</li>
+        </ul>
+        <h4 class="bold font-size-16">ITEMS NOT PREFORMED BY GARAGE DOOR INSTALLER:</h4>
 
-<ul class="bul-points1 pad-l-4">
-<li>Any alteration of existing structure, carpentry work, repair work, painting / staining a door, etc.</li>
-<li>Clearing or removing of any obstructions (i.e. cars, duct work, shelving, pipes, beams, etc.)</li>
-<li>Concrete or electrical work</li>
+        <ul class="bul-points1 pad-l-4">
+            <li>Any alteration of existing structure, carpentry work, repair work, painting / staining a door, etc.</li>
+            <li>Clearing or removing of any obstructions (i.e. cars, duct work, shelving, pipes, beams, etc.)</li>
+            <li>Concrete or electrical work</li>
 
-</ul>
+        </ul>
         <div class="bold margin-t-20 text-center agreement">
-            <p class="aggrement-text text-blue"><a href="http://test-hddchtml2.clopay.com/HDTermsPop.html" target="_blank">HOME IMPROVEMENT AGREEMENT <br>PLEASE READ THIS</a> </p>
+            <p class="aggrement-text text-blue"><a href="http://test-hddchtml2.clopay.com/HDTermsPop.html" target="_blank">HOME IMPROVEMENT AGREEMENT <br>PLEASE READ THIS</a>                </p>
             <div class="form-group margin-b-20">
                 <button type="submit" class="btn btn-default box-shadow text-orange margin-r-10 bold margin-b-10 pull-right" (click)="installTerms.close()">DECLINE
                 </button>
