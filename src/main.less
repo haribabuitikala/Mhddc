@@ -802,7 +802,13 @@ canvas.vsDoor {
     .door {
         position: absolute;
         background-color: grey;
-        border: 2px solid black;
+        border: 2px transparent black;
+        font-size: 10vw;
+        overflow: hidden;
+        text-align: center;
+        &.active {
+          border: 2px solid black;
+        }
     }
     .resizer {
         width: 40px;
@@ -813,6 +819,10 @@ canvas.vsDoor {
         position: absolute;
         opacity: 0.5;
         border: 5px solid black;
+        display: none;
+        &.active {
+          display: inline;
+        }
     }
 }
 .flex {

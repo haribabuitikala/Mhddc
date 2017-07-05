@@ -1,5 +1,5 @@
 <h4 class="font-size-16">{{pageNo}}.Choose Your Home</h4>
-<div class="stock clearfix">
+<div class="clearfix">
     <div class="stock clearfix homeportrait">
     <div class="col-xs-4 " *ngFor="let home of homes">
         <img [ngStyle]="{'background-image': 'url(../../assets/images/buttons_por/btn'+home._btnimage+')'}" (click)="selectHome(home, $event)"
@@ -62,7 +62,8 @@
     <modal-body class="home-modal">
         <div class="customer-home"></div>
         <div class="text-center margin-t-15">
-            <!--<button class="btn btn-default" (click)="">Add Door</button>-->
+            <button class="btn btn-default" [ngClass]="{'hidden' : doors.length > 6}" (click)="addDoor()">Add Door</button>
+            <button class="btn btn-danger" [ngClass]="{'hidden': doors.length === 1}"  (click)="removeDoor()">Remove Door</button>
             <button class="btn btn-primary" (click)="setSelectedHome(homeImageModal, true, currScreen)"> Finished </button>
             <button class="btn btn-danger" (click)="setSelectedHome(homeImageModal, fasle, currScreen)"> Cancel </button>
         </div>

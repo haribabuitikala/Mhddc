@@ -107,7 +107,8 @@ export class AppUtilities {
         itemPriceDY: 0,
         handlePrice: 0,
         stepPlatePrice: 0,
-        hingePrice: 0
+        hingePrice: 0,
+        showGDoEmail: false
         // flow of GDO: Home, Size , Openers, Order Details, Shopping Cart
     };
 
