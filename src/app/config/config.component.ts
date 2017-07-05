@@ -78,6 +78,12 @@ export class ConfigComponent implements OnInit, AfterViewInit, AfterViewChecked 
             this.itemPriceDY = this.utils.utilities.itemPriceDY;
             this.itemPriceInstall = this.utils.utilities.itemPriceInstall;
         }
+
+        if (this.navComponent.flowType == 'resquick') {
+            $('.home-switcher').hide();
+        } else {
+            $('.home-switcher').show();
+        }
     }
 
     private fitToContainer() {
@@ -272,6 +278,7 @@ export class ConfigComponent implements OnInit, AfterViewInit, AfterViewChecked 
 
         this.openerName = this.details.opener.name + (this.details.opener.items.length);
         this.quickFlow = this.navComponent.flowType == 'resquick' ? true : false;
+        
     }
 
     renderCanvas(obj?, targ?, elemSelector?) {
