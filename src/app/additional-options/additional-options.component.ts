@@ -89,6 +89,10 @@ export class AdditionalOptionsComponent implements OnInit {
         this.showMenu = this.utils.utilities.showNav;
         this.navComp.activateIcon();
         $('body').removeClass('loader');
+        let utils = this.utils.utilities;
+        utils.kPrice = 0;
+        utils.singlep = 0;
+        utils.doublep = 0;
         if (this.utils.utilities.directFlow) {
             this.data = this.dataStore.gdoAdditionalDirect;
             this.gdoConfig.itemPrice = this.data.item_price;

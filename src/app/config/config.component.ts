@@ -49,6 +49,7 @@ export class ConfigComponent implements OnInit, AfterViewInit, AfterViewChecked 
     }
 
     isDoor = true;
+    quickFlow = false;
     basep;
 
     ngAfterViewChecked() {
@@ -149,6 +150,10 @@ export class ConfigComponent implements OnInit, AfterViewInit, AfterViewChecked 
                     }
                     res({ canvas: nCanvas[0] });
                 };
+
+                himg.onerror = () => {
+                    res({});
+                };
 				
 				var query = window.matchMedia("(orientation:landscape)");
                 if (selectedHome._upload && selectedHome._upload == true) {
@@ -166,6 +171,7 @@ export class ConfigComponent implements OnInit, AfterViewInit, AfterViewChecked 
 
     }
 
+    
     ngAfterViewInit() {
         $('#doorVis').DoorVisualization({
             NAME: 'configView',
@@ -174,30 +180,41 @@ export class ConfigComponent implements OnInit, AfterViewInit, AfterViewChecked 
             MAXWIDTH: 315,
             VIEW: 'door',
             doneCallback: () => {
-                this.generateDoorWithHome().then(({ canvas }) => {
-                    this.utils.setLoader();
-                    $('#homeVis').html('').append(canvas);
-                    $('#homeVis').find('canvas').css({
-                        height: '90%',
-                        width: '90%'
+                if (this.navComponent.flowType == 'resquick') {
+                    this.isDoor = true;
+                     $('body').removeClass('loader');
+                    $('#doorVis').removeClass('default-canvas-hide');
+                } else {
+                    this.generateDoorWithHome().then(({ canvas }) => {
+                        if (canvas) {
+                            this.utils.setLoader();
+                            $('#homeVis').html('').append(canvas);
+                            $('#homeVis').find('canvas').css({
+                                height: '90%',
+                                width: '90%'
+                            });
+                            //this.utils.removeLoader();
+                            
+                            //this.utils.removeLoader();
+                            if ($('#homeVis').hasClass('default-canvas-hide')) {
+                                //_this.isDoor
+                                $('#homeVis')
+                                this.isDoor = false;
+                                console.log("45678")
+                                setTimeout(function () {
+                                    $('body').removeClass('loader');
+                                    $('#homeVis , #doorVis').removeClass('default-canvas-hide');
+                                }, 100)
+                            } else {
+                                $('body').removeClass('loader');
+                            }
+                        } else {
+                             $('body').removeClass('loader');
+                        }
+                        
                     });
-                    //this.utils.removeLoader();
-					
-					//this.utils.removeLoader();
-                    if ($('#homeVis').hasClass('default-canvas-hide')) {
-                        //_this.isDoor
-                        $('#homeVis')
-                        this.isDoor = false;
-                        console.log("45678")
-                        setTimeout(function () {
-                            $('body').removeClass('loader');
-                            $('#homeVis , #doorVis').removeClass('default-canvas-hide')
-                        }, 100)
-                    } else {
-                        $('body').removeClass('loader');
-                    }
-					
-                });
+                }
+                
             }
         });
     }
@@ -254,6 +271,7 @@ export class ConfigComponent implements OnInit, AfterViewInit, AfterViewChecked 
         this.detailsModal();
 
         this.openerName = this.details.opener.name + (this.details.opener.items.length);
+        this.quickFlow = this.navComponent.flowType == 'resquick' ? true : false;
     }
 
     renderCanvas(obj?, targ?, elemSelector?) {
