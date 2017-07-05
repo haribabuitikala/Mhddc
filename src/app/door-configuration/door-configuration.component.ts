@@ -265,6 +265,7 @@ export class DoorConfigurationComponent implements OnInit {
             this.goTo(path)
         }
         this.appComp.currScreen = 2;
+        this.utils.resetCalc();
     }
 
     goTo(path) {
