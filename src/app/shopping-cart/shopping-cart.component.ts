@@ -41,10 +41,11 @@ export class ShoppingCartComponent implements OnInit {
     resFlowSession;
     isGdo;
     showGdo = this.utils.gdoFlowSession.cart.length === 0 ? true : false;
+    showPreTax = true;
 
     constructor(private appComp: AppComponent
         , private navComp: NavService
-        , private utils: AppUtilities   
+        , private utils: AppUtilities
         , private navComponent: NavComponent
         , private dataStore: CollectionData
         , private route: Router) {
@@ -78,11 +79,11 @@ export class ShoppingCartComponent implements OnInit {
             this.itemPrice = this.utils.calculateTotalPrice();
             this.isGdo = true;
         } else {
-            this.getTotalCartValue(); 
+            this.getTotalCartValue();
         }
     }
 
-    ngAfterViewInit() {        
+    ngAfterViewInit() {
         // if(this.resFlowSession.cart.length === 1) {
         //     this.toggleSection(0);
         // } else if(this.resFlowSession.cart.length > 1) {
@@ -120,16 +121,18 @@ export class ShoppingCartComponent implements OnInit {
             this.resFlowSession.cart.splice(index, 1);
             this.utils.resFlowSession.cart = this.resFlowSession.cart;
             $('.shop-count').text(this.resFlowSession.cart.length);
+            this.showPreTax = this.resFlowSession.cart.length > 0 ? true : false;
             this.getTotalCartValue();
         } else {
             this.utils.gdoFlowSession.cart.splice(index, 1);
             $('.shop-count').text(this.resFlowSession.cart.length);
             this.showGdo = true;
+            this.showPreTax = false;
             //this.route.navigateByUrl('/category');
             this.data = null;
         }
     }
-    gdoContinue(){
+    gdoContinue() {
         $('.content').removeClass('shoppingCart');
         this.route.navigateByUrl('/category');
     }
@@ -150,7 +153,7 @@ export class ShoppingCartComponent implements OnInit {
         }
         this.utils.resFlowSession.cart[index] = this.utils.resFlowSession.resCalculateCartItemPrice(item);
         this.utils.resFlowSession.cart[index] = this.resFlowSession.cart[index];
-        this.getTotalCartValue();        
+        this.getTotalCartValue();
     }
 
     checkout(install, diy) {
@@ -186,7 +189,7 @@ export class ShoppingCartComponent implements OnInit {
     }
 
     continueShopping() {
-        if(window.location.href.indexOf('shoppingCart') >= 0) {
+        if (window.location.href.indexOf('shoppingCart') >= 0) {
             $('.content').removeClass('shoppingCart');
             this.closeModal.next();
             this.utils.utilities.dtype = 'RES';
