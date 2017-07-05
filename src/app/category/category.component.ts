@@ -98,6 +98,7 @@ export class CategoryComponent implements OnInit {
             this.utilities.utilities.ProductType = 'gdo';
             this.utilities.utilities.visualizeHeader = true;
             this.utilities.utilities.directFlow = false;
+            this.utilities.utilities.showGDoEmail = true;
             this.navComp.setNavFlow('gdo');
             $('body').removeClass('loader');
             this.route.navigateByUrl(path);
@@ -105,6 +106,7 @@ export class CategoryComponent implements OnInit {
             // this is for additional options screen
             let utils = this.utilities.utilities;
             this.utilities.utilities.visualizeHeader = false;
+            utils.showGDoEmail = false;
             let dataparams = {
                 lang: utils.lang,
                 localmarketid: utils.localmarketid,

@@ -26,6 +26,7 @@ export class DoorConfigurationComponent implements OnInit {
     gdoOpenerTxt = this.utils.utilities.gdoOpenerText;
     gdoOpenerSelected = this.dataStore.gdoOpenerAccessories;
     showEmailMsg = false;
+    showGDoEmail;
 
     // t = _.sumBy(this.gdoOpenerSelected, function(o){ return o.price * o.count });
     itemPrice;
@@ -73,6 +74,7 @@ export class DoorConfigurationComponent implements OnInit {
         this.directFlow = this.utils.utilities.directFlow;
         this.itemPrice = this.utils.calculateTotalPrice();
         this.pageNo = this.utils.utilities.currPage;
+        this.showGDoEmail = this.utils.utilities.showGDoEmail;
 
         $('body').removeClass('loader');
         // this.appComponent.next = 'Add To Cart';
