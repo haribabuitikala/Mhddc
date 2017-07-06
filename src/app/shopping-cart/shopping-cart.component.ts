@@ -127,6 +127,7 @@ export class ShoppingCartComponent implements OnInit {
             this.utils.gdoFlowSession.cart.splice(index, 1);
             $('.shop-count').text(this.resFlowSession.cart.length);
             this.dataStore.gdoOpenerAccessories.length = 0;
+            this.utils.utilities.gdoOpenerText = '';
             this.showGdo = true;
             this.showPreTax = false;
             //this.route.navigateByUrl('/category');

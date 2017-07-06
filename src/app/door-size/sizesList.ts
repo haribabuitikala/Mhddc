@@ -14,6 +14,10 @@ export class SizeList {
         let feetArr = _.pick(SIZES.widths, feet);
         return feetArr[feet];
     }
+     getHeightInches(itm, feet) {
+        let feetArr = _.pick(SIZES.heights[itm], feet);
+        return feetArr[feet];
+    }
     getHeightFeets(itm){
         return Object.keys(SIZES.heights[itm])
     }
