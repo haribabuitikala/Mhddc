@@ -77,7 +77,7 @@
                 <div>  {{lang.sizes.feet}}</div>
                 <div>
                     <select  [(ngModel)]="selectedHeightFeet" class="form-control" (change)="getHeightInches('height')">
-                        <option value="0">0</option>
+                        <option value="0"> </option>
                         <option *ngFor="let heightFeet of heightFeets">{{heightFeet}}</option>
                     </select>
                 </div>
