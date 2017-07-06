@@ -115,7 +115,9 @@ export class CollectionService {
             res({
                 "homes": {
                     "home": [
-                        {
+					
+					
+					{
                             "dcoords": {
                                 // for portrait  coordinates-PORTRAIT.doc
                                 "point": [
@@ -156,7 +158,7 @@ export class CollectionService {
                             "_upload": "false",
                             "_size": "1"
                         },
-                        {
+						{
                             "dcoords": {
                                 // for portrait			coordinates-PORTRAIT.doc								
                                 "point": [{
@@ -192,7 +194,7 @@ export class CollectionService {
                             "_title": "Single1",
                             "_upload": "false",
                             "_size": "1"
-                        }, {
+                        },{
                             "dcoords": {
                                 // for portrait  coordinates-PORTRAIT.doc
                                 "point": [
@@ -233,10 +235,30 @@ export class CollectionService {
                             "_upload": "false",
                             "_size": "1"
                         },
-                        {
+						{
                             "dcoords": {
                                 // for portrait  coordinates-PORTRAIT.doc
-                                "point": [],
+                                "point": [
+								{
+                                        "_width": "8",
+                                        "_height": "7",
+                                        "_XY": "0,0",
+                                        "_UL": "244,53",
+                                        "_UR": "466,53",
+                                        "_LR": "466,148",
+                                        "_LL": "244,148"
+                                    },
+                                    {
+                                        "_width": "8",
+                                        "_height": "7",
+                                        "_XY": "0,0",
+                                        "_UL": "501,52",
+                                        "_UR": "608,52",
+                                        "_LR": "608,148",
+                                        "_LL": "501,148"
+                                    }
+								
+								],
                                 // for landscape HDDC-mobile-coordinates-LANDSCAPE.doc
                                 "pointland": [
                                     {
@@ -273,7 +295,7 @@ export class CollectionService {
                             "_upload": "false",
                             "_size": "1"
                         },
-                        {
+						{
                             "dcoords": {
                                 // for portrait			coordinates-PORTRAIT.doc								
                                 "point": [{
@@ -329,7 +351,7 @@ export class CollectionService {
                             "_title": "Single1",
                             "_upload": "false",
                             "_size": "1"
-                        }, {
+                        },{
                             "dcoords": {
                                 // for portrait  coordinates-PORTRAIT.doc
                                 "point": [
@@ -388,7 +410,7 @@ export class CollectionService {
                             "_upload": "false",
                             "_size": "1"
                         },
-                        {
+						{
                             "dcoords": {
                                 // for portrait  coordinates-PORTRAIT.doc
                                 "point": [
@@ -447,7 +469,7 @@ export class CollectionService {
                             "_upload": "false",
                             "_size": "1"
                         },
-                        {
+						{
                             "dcoords": {
                                 // for portrait  coordinates-PORTRAIT.doc
                                 "point": [
@@ -505,7 +527,7 @@ export class CollectionService {
                             "_title": "Single1",
                             "_upload": "false",
                             "_size": "1"
-                        }, {
+                        },{
                             "dcoords": {
                                 // for portrait  coordinates-PORTRAIT.doc
                                 "point": [
@@ -513,19 +535,10 @@ export class CollectionService {
                                         "_width": "8",
                                         "_height": "7",
                                         "_XY": "0,0",
-                                        "_UL": "48,57",
-                                        "_UR": "117,57",
-                                        "_LR": "117,134",
-                                        "_LL": "48,129"
-                                    },
-									{
-                                        "_width": "8",
-                                        "_height": "7",
-                                        "_XY": "0,0",
-                                        "_UL": "134,57",
-                                        "_UR": "218,56",
-                                        "_LR": "218,137",
-                                        "_LL": "134,134"
+                                        "_UL": "102,18",
+                                        "_UR": "266,18",
+                                        "_LR": "266,163",
+                                        "_LL": "102,163"
                                     }
                                 ],
                                 // for landscape HDDC-mobile-coordinates-LANDSCAPE.doc
@@ -534,27 +547,18 @@ export class CollectionService {
                                         "_width": "8",
                                         "_height": "7",
                                         "_XY": "0,0",
-                                        "_UL": "144,35",
-                                        "_UR": "245,34",
-                                        "_LR": "245,146",
-                                        "_LL": "144,140"
-                                    },
-									{
-                                        "_width": "8",
-                                        "_height": "7",
-                                        "_XY": "0,0",
-                                        "_UL": "271,34 ",
-                                        "_UR": "394,33",
-                                        "_LR": "394,153",
-                                        "_LL": "271,148"
+                                        "_UL": "257,13",
+                                        "_UR": "428,13",
+                                        "_LR": "428,165",
+                                        "_LL": "257,165"
                                     }
                                 ]
                             },
                             "_homeid": "10",
-                            "_btnimage": "DIShomeSngl09.png",
-                            "_imagelg": "DIShomeSngl09por.png",
-                            "_btnimageland": "DIShomeSngl09.png",
-                            "_imagelgland": "DIShomeSngl09land.png",
+                            "_btnimage": "DIShomeSngl04.png",
+                            "_imagelg": "DIShomeSngl04por.png",
+                            "_btnimageland": "DIShomeSngl04.png",
+                            "_imagelgland": "DIShomeSngl04land.png",
                             "_window": "reflect",
                             "_landimgwidth": "677",
                             "_landimgheight": "179",
@@ -564,7 +568,7 @@ export class CollectionService {
                             "_upload": "false",
                             "_size": "1"
                         },
-                        {
+						{
                             "dcoords": {
                                 // for portrait			coordinates-PORTRAIT.doc				
                                 "point": [{
@@ -639,7 +643,7 @@ export class CollectionService {
                             "_upload": "false",
                             "_size": "1"
                         },
-                        {
+						{
                             "dcoords": {
                                 // for portrait  coordinates-PORTRAIT.doc
                                 "point": [
@@ -716,9 +720,8 @@ export class CollectionService {
                             "_upload": "false",
                             "_size": "1"
                         },
-                        {
+						{
                             "dcoords": {
-								
                                 // for portrait  coordinates-PORTRAIT.doc
                                 "point": [
 								{
@@ -730,8 +733,7 @@ export class CollectionService {
                                         "_LR": "304,150",
                                         "_LL": "187,150"
                                     }
-								
-								],
+									],
                                 // for landscape HDDC-mobile-coordinates-LANDSCAPE.doc
                                 "pointland": [
                                     {
@@ -759,11 +761,10 @@ export class CollectionService {
                             "_upload": "false",
                             "_size": "2"
                         },
-                        {
+						{
                             "dcoords": {
                                 // for portrait  coordinates-PORTRAIT.doc
                                 "point": [
-								
 								{
                                         "_width": "8",
                                         "_height": "7",
@@ -773,6 +774,7 @@ export class CollectionService {
                                         "_LR": "309,158",
                                         "_LL": "185,158"
                                     }
+								
 								
 								],
                                 // for landscape HDDC-mobile-coordinates-LANDSCAPE.doc
@@ -802,7 +804,7 @@ export class CollectionService {
                             "_upload": "false",
                             "_size": "2"
                         },
-                        {
+						{
                             "dcoords": {
                                 // for portrait			coordinates-PORTRAIT.doc
                                 "point": [
@@ -843,7 +845,7 @@ export class CollectionService {
                             "_upload": "false",
                             "_size": "2"
                         },
-                        {
+						{
                             "dcoords": {
                                 // for portrait  coordinates-PORTRAIT.doc
                                 "point": [
@@ -851,10 +853,10 @@ export class CollectionService {
                                         "_width": "8",
                                         "_height": "7",
                                         "_XY": "0,0",
-                                        "_UL": "203,104",
-                                        "_UR": "315,103",
-                                        "_LR": "315,152",
-                                        "_LL": "203,154"
+                                        "_UL": "53,74  ",
+                                        "_UR": "120,74  ",
+                                        "_LR": "120,138",
+                                        "_LL": "53,138"
                                     }
                                 ],
                                 // for landscape HDDC-mobile-coordinates-LANDSCAPE.doc
@@ -884,7 +886,7 @@ export class CollectionService {
                             "_upload": "false",
                             "_size": "2"
                         },
-                        {
+						{
                             "dcoords": {
                                 // for portrait  coordinates-PORTRAIT.doc
                                 "point": [
@@ -925,7 +927,7 @@ export class CollectionService {
                             "_upload": "false",
                             "_size": "2"
                         },
-                        {
+						{
                             "dcoords": {
                                 // for portrait  coordinates-PORTRAIT.doc
                                 "point": [
@@ -967,7 +969,7 @@ export class CollectionService {
                             "_upload": "false",
                             "_size": "2"
                         },
-                        {
+						{
                             "dcoords": {
                                 // for portrait			coordinates-PORTRAIT.doc	
                                 "point": [{
@@ -1004,7 +1006,7 @@ export class CollectionService {
                             "_upload": "false",
                             "_size": "2"
                         },
-                        {
+						{
                             "dcoords": {
                                 // for portrait			coordinates-PORTRAIT.doc
                                 "point": [
@@ -1043,7 +1045,7 @@ export class CollectionService {
                             "_upload": "false",
                             "_size": "2"
                         },
-                        {
+						{
                             "dcoords": {
                                 // for portrait			coordinates-PORTRAIT.doc				
                                 "point": [{
@@ -1080,7 +1082,7 @@ export class CollectionService {
                             "_upload": "false",
                             "_size": "2"
                         },
-                        {
+						{
                             "dcoords": {
                                 // for portrait			coordinates-PORTRAIT.doc
                                 "point": [
@@ -1119,7 +1121,6 @@ export class CollectionService {
                             "_upload": "false",
                             "_size": "2"
                         }
-                    
 					
 					
                         /*  {
@@ -2758,7 +2759,7 @@ export class CollectionService {
 
     getPromotionsByMarketId(marketId) {
         this.utils.setLoader();
-        return this.http.get(this.url + `promotion/${marketId}`).map(res => {
+        return this.http.get(this.url + 'promotion/${marketId}').map(res => {
             try {
                 return res.json();
             } catch (e) {
@@ -2773,7 +2774,7 @@ export class CollectionService {
     getPromotionByProductId(reqData) {
         //
         this.utils.setLoader();
-        return this.http.post(this.url + `promotion/${reqData.marketId}`, reqData).map(res => {
+        return this.http.post(this.url + 'promotion/${reqData.marketId}', reqData).map(res => {
             try {
                 return res.json();
             } catch (e) {
@@ -2799,7 +2800,7 @@ export class CollectionService {
 
     getProductsByPromotionId(reqData) {
         this.utils.setLoader();
-        return this.http.post(this.url + `ProductByPromotion`, reqData).map(res => {
+        return this.http.post(this.url + 'ProductByPromotion', reqData).map(res => {
             try {
                 return res.json();
             } catch (e) {
