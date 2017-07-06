@@ -133,7 +133,7 @@ export class DoorSizeComponent implements OnInit {
             this.utils.utilities.hf,
             this.utils.utilities.hi);
 
-        this.utils.utilities.isCustomSize = false;
+
         this.navigateTo(this.dataParams);
     }
 
@@ -153,7 +153,6 @@ export class DoorSizeComponent implements OnInit {
             },
             error => {
                 this.utils.removeLoader();
-                this.collection.handleError();
                 this.noSize.open();
             }
         );
@@ -165,8 +164,9 @@ export class DoorSizeComponent implements OnInit {
         this.widthInches = this.sizes.getInches(itm, this.selectedWidthFeet);
         this.selectedwidth = "width_" + this.selectedWidthFeet + "_0";
         this.heightFeets = this.sizes.getHeightFeets(this.selectedwidth);
-        this.selectedHeightFeet = 0;
-        // this.heightInches = this.sizes.getInches('height', this.heightFeets[0]);
+        this.heightFeets = this.heightFeets.filter(function (hf) { return hf <= 12 });
+        this.resetWidthAndHeights();        
+
         this.utils.utilities.wi = this.widthInches[0];
         this.utils.utilities.wf = +this.selectedWidthFeet;
 
@@ -176,17 +176,31 @@ export class DoorSizeComponent implements OnInit {
         this.resDetails.widthF = this.widthInches[0];
         this.resDetails.widthI = +this.selectedWidthFeet;
 
-        // this.utils.utilities.hf = this.heightFeets[0];
-        // this.utils.utilities.hi = this.heightInches[0];
     }
 
     getHeightInches(itm) {
-        this.heightInches = this.sizes.getInches(itm, this.selectedHeightFeet);
-        // this.selectedHeight = "height_" + this.selectedHeightFeet + "_0";
-        this.utils.utilities.hf = +this.selectedHeightFeet;
+        this.heightInches = ["0"];
+        let selectedWfWi = "width_" + this.selectedWidthFeet + "_" + this.selectedWidthInches;
+        if (this.selectedHeightFeet) {
+            this.heightInches = this.sizes.getHeightInches(selectedWfWi, this.selectedHeightFeet);
+        }
+
+        if (!this.heightInches) {
+            this.heightInches = ["0"];
+        }
+      
+        this.selectedHeightInches = 0;
+        if (this.selectedHeightFeet && this.selectedHeightFeet > 0) {
+            this.utils.utilities.hf = +this.selectedHeightFeet;
+            this.utils.resFlow.hf = +this.selectedHeightFeet;
+        }
+        else {
+            this.utils.utilities.hf = null;
+            this.utils.resFlow.hf = null;
+        }
         this.utils.utilities.hi = this.heightInches[0];
 
-        this.utils.resFlow.hf = +this.selectedHeightFeet;
+
         this.utils.resFlow.hi = this.heightInches[0];
 
         this.resDetails.heightF = this.widthInches[0];
@@ -194,17 +208,31 @@ export class DoorSizeComponent implements OnInit {
     }
 
     getWidth() {
-        // this.heightFeets = this.sizes.getHeightFeets(this.selectedwidth);
-        this.utils.utilities.wi = +this.selectedWidthInches;
-        this.utils.resFlow.wi = +this.selectedWidthInches;
-        this.resDetails.widthI = +this.selectedWidthInches;
+      
+        this.heightInches = ["0"];
+        this.utils.utilities.hf = null;
+        if (this.selectedWidthInches) {
+            this.utils.utilities.wi = +this.selectedWidthInches;
+            this.utils.resFlow.wi = +this.selectedWidthInches;
+            this.resDetails.widthI = +this.selectedWidthInches;
+        }
         this.selectedHeightFeet = 0;
     }
 
     getHeight() {
-        this.utils.utilities.hi = +this.selectedHeightInches;
-        this.utils.resFlow.hi = +this.selectedHeightInches;
-        this.resDetails.heightI = +this.selectedHeightInches;
+        if (this.selectedHeightInches) {
+            this.utils.utilities.hi = +this.selectedHeightInches;
+            this.utils.resFlow.hi = +this.selectedHeightInches;
+            this.resDetails.heightI = +this.selectedHeightInches;
+        }
+    }
+
+    resetWidthAndHeights() {
+        this.heightInches = ["0"];
+        this.selectedWidthInches = 0;
+        this.selectedHeightFeet = 0;
+        this.selectedHeightInches = 0;
+        this.utils.utilities.hf = null;
     }
 
     //  check for florida to open the popup
@@ -228,7 +256,6 @@ export class DoorSizeComponent implements OnInit {
             }
         } else {
             this.showMeasure = !this.showMeasure;
-            $('.transform-rotate-90').toggleClass('transform-rotate-minus-270');
         }
     }
     setFloridaConfirmValue(event) {
@@ -249,7 +276,7 @@ export class DoorSizeComponent implements OnInit {
         }
 
     }
-    
+
     dataParams = {
         dtype: this.utils.utilities.dtype,
         windcode: this.utils.utilities.winCode,
@@ -264,11 +291,10 @@ export class DoorSizeComponent implements OnInit {
     };
 
     nextBtn(curr, path) {
+
         if (this.utils.utilities.wf != null && this.utils.utilities.wi != null && this.utils.utilities.hf != null && this.utils.utilities.hi != null &&
             this.utils.utilities.hf != 0) {
-            
-            //Best place to set flag for custom size
-            this.utils.utilities.isCustomSize = true;
+           
             this.dataParams.dwidthFt = this.utils.utilities.wf;
             this.dataParams.dwidthIn = this.utils.utilities.wi;
             this.dataParams.dheightFt = this.utils.utilities.hf;
@@ -280,21 +306,17 @@ export class DoorSizeComponent implements OnInit {
             this.utils.resFlowSession.resDoorObj.size.height['hf'] = this.utils.utilities.hf + '';
             this.utils.resFlowSession.resDoorObj.size.height['hi'] = this.utils.utilities.hi + '';
 
-
             let dimension = (this.utils.utilities.wf * 12) + this.utils.utilities.wi;
 
-            // dimension > 120 ? this.homeSize = "2" : this.homeSize = "1";
             dimension > 120 ? this.setHomeSize("2", false) : this.setHomeSize("1", true);
             // this.utils.utilities.homeSize = this.homeSize;
-
-
             console.log(this.utils.utilities.wf,
                 this.utils.utilities.wi,
                 this.utils.utilities.hf,
                 this.utils.utilities.hi);
 
             if (this.isRequired) {
-                if (this.selectedHeightFeet > 0 && this.selectedWidthFeet > 0) {
+                if ((this.selectedHeightFeet && this.selectedHeightFeet > 0) && this.selectedWidthFeet > 0) {
                     this.navigateTo(this.dataParams);
                 }
             } else {
@@ -319,6 +341,4 @@ export class DoorSizeComponent implements OnInit {
         this.utils.utilities.hf = null;
         this.utils.utilities.hi = null;
     }
-
-
 }
