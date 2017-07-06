@@ -2814,4 +2814,5 @@ export class CollectionService {
     handleError() {
         this.route.navigateByUrl('/**');
     }
+    
 }
