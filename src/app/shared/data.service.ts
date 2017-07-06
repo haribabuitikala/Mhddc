@@ -238,7 +238,27 @@ export class CollectionService {
 						{
                             "dcoords": {
                                 // for portrait  coordinates-PORTRAIT.doc
-                                "point": [],
+                                "point": [
+								{
+                                        "_width": "8",
+                                        "_height": "7",
+                                        "_XY": "0,0",
+                                        "_UL": "244,53",
+                                        "_UR": "466,53",
+                                        "_LR": "466,148",
+                                        "_LL": "244,148"
+                                    },
+                                    {
+                                        "_width": "8",
+                                        "_height": "7",
+                                        "_XY": "0,0",
+                                        "_UL": "501,52",
+                                        "_UR": "608,52",
+                                        "_LR": "608,148",
+                                        "_LL": "501,148"
+                                    }
+								
+								],
                                 // for landscape HDDC-mobile-coordinates-LANDSCAPE.doc
                                 "pointland": [
                                     {
@@ -703,7 +723,17 @@ export class CollectionService {
 						{
                             "dcoords": {
                                 // for portrait  coordinates-PORTRAIT.doc
-                                "point": [],
+                                "point": [
+								{
+                                        "_width": "8",
+                                        "_height": "7",
+                                        "_XY": "0,0",
+                                        "_UL": "187,98",
+                                        "_UR": "304,98",
+                                        "_LR": "304,150",
+                                        "_LL": "187,150"
+                                    }
+									],
                                 // for landscape HDDC-mobile-coordinates-LANDSCAPE.doc
                                 "pointland": [
                                     {
@@ -734,7 +764,19 @@ export class CollectionService {
 						{
                             "dcoords": {
                                 // for portrait  coordinates-PORTRAIT.doc
-                                "point": [],
+                                "point": [
+								{
+                                        "_width": "8",
+                                        "_height": "7",
+                                        "_XY": "0,0",
+                                        "_UL": "185,104",
+                                        "_UR": "309,104",
+                                        "_LR": "309,158",
+                                        "_LL": "185,158"
+                                    }
+								
+								
+								],
                                 // for landscape HDDC-mobile-coordinates-LANDSCAPE.doc
                                 "pointland": [
                                     {
@@ -888,7 +930,18 @@ export class CollectionService {
 						{
                             "dcoords": {
                                 // for portrait  coordinates-PORTRAIT.doc
-                                "point": [],
+                                "point": [
+								{
+                                        "_width": "8",
+                                        "_height": "7",
+                                        "_XY": "0,0",
+                                        "_UL": "58,93",
+                                        "_UR": "204,95",
+                                        "_LR": "204,157",
+                                        "_LL": "58,160"
+                                    }
+								
+								],
                                 // for landscape HDDC-mobile-coordinates-LANDSCAPE.doc
                                 "pointland": [
                                     {
