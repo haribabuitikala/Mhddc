@@ -68,18 +68,20 @@ export class ShoppingCartComponent implements OnInit {
             showStepIndicator: false,
             resetNav: true
         });
-        $('body').removeClass('loader');
+        if (this.utils.resFlowSession.resDoorObj.TYPE !== 'RES') {
+            this.getItemPrice();
+        }
         this.resFlowSession = this.utils.resFlowSession;
-        this.getItemPrice();
         this.data = this.utils.gdoFlowSession.cart[0];
     }
 
     getItemPrice() {
-        if (this.utils.resFlowSession.resDoorObj.TYPE !== 'RES') {
+        this.isGdo = true;
+        if (!this.utils.utilities.directFlow) {
             this.itemPrice = this.utils.calculateTotalPrice();
-            this.isGdo = true;
         } else {
-            this.getTotalCartValue();
+            this.data = this.dataStore.gdoAdditionalDirect;
+            this.itemPrice = this.data.item_price;
         }
     }
 
