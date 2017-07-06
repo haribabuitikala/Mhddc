@@ -72,7 +72,12 @@ export class DoorConfigurationComponent implements OnInit {
     }
     ngOnInit() {
         this.directFlow = this.utils.utilities.directFlow;
-        this.itemPrice = this.utils.calculateTotalPrice();
+        if (!this.utils.utilities.directFlow) {
+            this.itemPrice = this.utils.calculateTotalPrice();
+        } else {
+            let data = this.dataStore.gdoAdditionalDirect;
+            this.itemPrice = data['item_price'];
+        }
         this.pageNo = this.utils.utilities.currPage;
         this.showGDoEmail = this.utils.utilities.showGDoEmail;
 
