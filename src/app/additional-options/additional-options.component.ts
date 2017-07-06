@@ -101,6 +101,7 @@ export class AdditionalOptionsComponent implements OnInit {
             $('.showDetails').hide();
         } else {
             $('.showDetails').show();
+            this.gdoConfig.itemPrice = this.utils.calculateTotalPrice();
         }
         this.hidePrev = this.navComponent.subFlow ? true : false;
         if (this.appComponent) {
@@ -109,7 +110,7 @@ export class AdditionalOptionsComponent implements OnInit {
         $('.gdoCofigDetails').show();
         this.dataStore.gdoDirectQuestions = [];
         this.utils.utilities.distancePrice = 0;
-        this.gdoConfig.itemPrice = this.utils.calculateTotalPrice();
+
         var k = this.pageNo + '.Additional Options';
         $('#visualize-header').html(k);
         this.utils.gdoFlowSession.cart[0].additional.items = this.utils.gdoOpenerAccessories;
