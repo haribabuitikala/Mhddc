@@ -971,6 +971,7 @@ function writeItem(orderType) {
                     //OPENER
                     if (di == 1) {
                         if (cs.opener.opener != '') {
+                            cs.opener.QTY = (cs.opener.QTY==undefined)? cs.opener.qty:cs.opener.QTY;
                             addLineItem(cs.opener.opener.Config, cs.opener.opener.item_name, cs.opener.QTY, cs.opener.opener.item_price, 1);
                             if (cs.opener.opener.Config != "FIR270") {
                                 addLineItem("FIR500", "GDO INSTALLATION - WITH DOOR AND OPENER PURCHASE", cs.opener.QTY, "0", 1);
