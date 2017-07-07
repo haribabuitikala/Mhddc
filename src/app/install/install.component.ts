@@ -74,9 +74,40 @@ export class InstallComponent implements OnInit, AfterViewInit, AfterViewChecked
     noDIYs = [30, 16, 9];
     showType: string = '';
 
+    flowType = 'res';
+
     ngAfterViewChecked() {
         this.installPrice = this.utils.utilities.itemPriceInstall;
         this.diyPrice = this.utils.utilities.itemPriceDY;
+    }
+
+    isStepVisible(stepName) {
+        let show = true;
+        var topsection = this.utils.resFlowSession.resDoorObj.windows.topsection;
+        if (stepName === 'topSection' || stepName === 'glasstype') {
+            if (this.navComponent.flowType === 'resquick') {
+                return false;
+            }
+
+            if (this.utils.resFlowSession.resDoorObj.product.product['item_id'] == 16) {
+                return false;
+            }
+
+            if (stepName === 'glasstype' && topsection['glasstypes'] && (topsection['glasstypes'][0].item_price <= 0 || topsection['Config'] == 'GLAZ-SOL' || topsection['glasstypes'][0]['Config'] == 'GLAZ-SOL')) {
+                 return false;
+            }
+        }
+        return show;
+    }
+
+    gotoGlassStep () {
+        if (this.utils.resFlowSession.resDoorObj.product.product['item_id'] == 13 ||
+        this.utils.resFlowSession.resDoorObj.product.product['item_id'] == 14 ||
+        this.utils.resFlowSession.resDoorObj.product.product['item_id'] == 24) {
+            this.route.navigateByUrl('/config/glassType');
+        } else {
+            this.route.navigateByUrl('/config/nonClassic');
+        }
     }
 
     ngOnInit() {
@@ -107,6 +138,8 @@ export class InstallComponent implements OnInit, AfterViewInit, AfterViewChecked
                 }
             });
         }
+
+        this.flowType = this.navComponent.flowType;
         this.installPrice = this.utils.utilities.itemPriceInstall;
         this.diyPrice = this.utils.utilities.itemPriceDY;
 
