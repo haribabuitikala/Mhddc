@@ -207,8 +207,8 @@
 
       </div>
 
-      <div class="not-match-section" *ngIf="SizeMotMatched" style="position: absolute; left: 0; top: 40px;background-color: white; height: 100%;">
-        <div class="textContainer textUnselectable">Selected configuration is not valid for updated dimensions. Please <span style="color: blue;" (click)="navigateToSize('/doorSize')">click here</span>      to go back to size selection page and select exact size.</div>
+      <div class="not-match-section" *ngIf="SizeMotMatched" style="position: absolute; left: 0; top: 0;background-color: white; height: 100%;">
+        <div class="textContainer textUnselectable" style="margin-top: 40px;">Selected configuration is not valid for updated dimensions. Please <span style="color: blue;" (click)="navigateToSize('/doorSize')">click here</span>      to go back to size selection page and select exact size.</div>
         <div class="margin-t-15 text-center">
           <!--<button type="button" class="btn btn-danger" (click)="SizeMotMatched = false;">Close</button>-->
         </div>
