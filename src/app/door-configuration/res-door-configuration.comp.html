@@ -12,7 +12,6 @@
                 class="glyphicon glyphicon-envelope  padding-l-3"></span></button>
     </div>
 </div>
-
 <!-- Res -->
 <app-cart-details (callPrice)="notify($event)"></app-cart-details>
 <div class="clearfix margin-b-30"></div>
@@ -106,12 +105,19 @@
         <p class="bold"> Total Price will be calculated on payment screen </p>
     </modal-body>
 </modal>
+
 <modal #share cssClass="share-popup">
     <modal-header [show-close]="true">
         <h4 class="text-orange padding-l-30">Social Share</h4>
     </modal-header>
     <modal-body>
         <div class="flex space-around margin-b-20">
+            <share-button (click)='socialshare()' class="google" [button]='googlebtn' [url]='imageSrc'></share-button>
+            <share-button (click)='socialshare()' class="facebook" [button]="facebookbtn" [url]='imageUrl' [description]="description"></share-button>
+            <share-button (click)='socialshare()' class="twitter" [button]="twitterbtn" [url]='imageUrl' [title]="title"></share-button>
+            <share-button (click)='socialshare()' class="pinterest" [button]="pintbtn" [url]='imageUrl' [description]="description"></share-button>
+        </div>
+        <!--<div class="flex space-around margin-b-20">
             <button class="flex share-button">
                 <span class="instagram"><i class="fa fa-facebook"></i></span>
             </button>
@@ -120,9 +126,9 @@
             </button>
             <button class="flex share-button">
                 <span class="houzz"><i class="fa fa-google"></i></span>
-            </button>
-        </div>
-        <div class="flex space-around">
+           </button>
+        </div>-->
+        <!--<div class="flex space-around">
             <button class="flex share-button">
                 <span class="instagram"><i class="fa fa-twitter"></i></span>
             </button>
@@ -132,7 +138,7 @@
             <button class="flex share-button">
                 <span class="houzz"><i class="fa fa-houzz"></i></span>
             </button>
-        </div>
+        </div>-->
     </modal-body>
 </modal>
 <modal #checkoutPopup>
