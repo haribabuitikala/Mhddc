@@ -404,8 +404,10 @@ export class ResDoorConfigurationComponent implements OnInit {
                     let body = this.renderEmailBody(imageUrl || '');
                     let obj = {
                         ToEmail: this.shareEmail,
-                        Body: body,
-                        Subject: this.utils.resFlowSession.resDoorObj.product.product['item_name']
+                        //Body: body,
+                        MailType:"Residential",
+                        Subject: "Thank You For Your Interest In Clopay"
+                        //Subject: this.utils.resFlowSession.resDoorObj.product.product['item_name']
                     }
                     this.emailMsg = 'Mail Send Successfully';
                     this.showEmailMsg = true;

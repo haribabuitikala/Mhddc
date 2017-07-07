@@ -112,7 +112,7 @@
     </modal-header>
     <modal-body>
         <div class="flex space-around margin-b-20">
-            <share-button (click)='socialshare()' class="google" [button]='googlebtn' [url]='imageSrc'></share-button>
+            <share-button (click)='socialshare()' class="google" [button]='googlebtn' [url]='imageUrl'></share-button>
             <share-button (click)='socialshare()' class="facebook" [button]="facebookbtn" [url]='imageUrl' [description]="description"></share-button>
             <share-button (click)='socialshare()' class="twitter" [button]="twitterbtn" [url]='imageUrl' [title]="title"></share-button>
             <share-button (click)='socialshare()' class="pinterest" [button]="pintbtn" [url]='imageUrl' [description]="description"></share-button>
