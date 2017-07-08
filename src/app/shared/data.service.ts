@@ -49,7 +49,7 @@ export class CollectionService {
         return this.http.post(this.url + 'Opener', obj)
             .map(res => res.json())
             .finally(() => {
-                this.utils.removeLoader();
+               // this.utils.removeLoader();
             })
     }
 
@@ -83,11 +83,11 @@ export class CollectionService {
     }
 
     getGdoAdditional(obj) {
-        this.utils.setLoader();
+       // this.utils.setLoader();
         return this.http.post(this.url + 'OpenerItem', obj)
             .map(res => res.json())
             .finally(() => {
-                this.utils.removeLoader();
+                //this.utils.removeLoader();
             })
     }
 

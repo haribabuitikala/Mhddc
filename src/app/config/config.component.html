@@ -155,6 +155,12 @@
                     <span [innerHtml]="details.designName"></span>
                     </span>
                 </li>
+				
+				 <li *ngIf="details.construction.modelNumber">
+                    <span><strong> Model Number </strong>
+                    <span [innerHtml]="details.construction.modelNumber"></span>
+                    </span>
+                </li>
 
                 <li *ngIf="detailsInfo.construction">
                     <span><strong> Construction </strong>

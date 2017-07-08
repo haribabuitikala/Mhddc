@@ -204,14 +204,14 @@ export class ConfigComponent implements OnInit, AfterViewInit, AfterViewChecked 
                             });
 							
 
-							/* if(_this.utils.utilities.doubleDoor){
+							if(this.utils.utilities.doubleDoor){
 								var switchheight = $(".switcher-image-sec").height();
 								var canvasdoorheight = $(".switcher-image-sec #doorVis").height();
 								var canvasdisplayheight = $(".switcher-image-sec #doorVis canvas").height();
 								var margintopheight = canvasdoorheight - canvasdisplayheight
 								$(".switcher-image-sec #doorVis canvas").css({'margin-top': margintopheight/2})
 							}
-							*/
+							
 							$(".switcher-image-sec").height('220');
 							
                             //this.utils.removeLoader();

@@ -82,6 +82,7 @@ export class GdoConfigComponent implements OnInit, OnChanges {
 
         this.gdoOpenersTxt = strtt.join('');
         this.gdoLoaded = true;
+		//$('body').removeClass('loader');
     }
 
     toPng(itm) {
