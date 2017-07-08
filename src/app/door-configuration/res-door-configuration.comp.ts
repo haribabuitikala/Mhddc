@@ -287,6 +287,10 @@ export class ResDoorConfigurationComponent implements OnInit {
                 <div>
                 <img src="${imageUrl}" width="300" height="200" />
                 </div>
+                 <br />
+                    Thanks for your interest in purchasing a Clopay garage door through The Home Depot. Below is some basic information on the door you designed, what our program includes, and how our program works. We look forward to serving you in the near future.
+                    <hr />
+                    <br />
                 <table style="border-collapse: collapse;width:100%">
                 <tr style="border-bottom: 1px solid #ccc">
                     <td style="color: #f96302;padding:5px">Door Model</td>
@@ -382,11 +386,46 @@ export class ResDoorConfigurationComponent implements OnInit {
                 </tr>
                 </table>
             </div>
+            <div class='installCnt printPage' style="clear: both; width: 676px; height: 860px; position:relative;margin-top: 130px;">
+                    <h2>Your professionally installed garage door includes:</h2>  
+                    <ul>
+                    <li>A pre-installation site inspection  </li>
+                    <li>Delivery of new garage door up to 30 "drive" miles from the store  </li>
+                    <li>Take down existing garage door  </li>
+                    <li>Haul-Away of existing garage door (additional charges apply in some markets) </li>
+                    <li>Installation of new garage door </li>
+                    <li>Installation of vinyl perimeter/weather seal  <br />
+                    <li>Reconnect existing UL approved garage door opener (only when replacing existing sectional garage door) </li>
+                    <li>Reinforcement of top garage door section for attachment of garage door opener per manufacturer's specifications  </li>
+                    <li>Final cleanup and inspection of finished job with customer</li>
+                    <li>One year labor warranty  </li>
+                    </ul>
+                    <br />
+                    <h2>How to buy:</h2>
+                    <ul>
+                    <li>Click "Add to Cart" to purchase your door online right now </li>
+                    <li>Print this page and call 1-800-HOMEDEPOT  </li>
+                    <li>Print this page and take it to your local Home Depot store  </li>
+                    </ul>
+                    <br />
+                    <h2>What to expect once we receive your order:</h2> 
+                    <ul>
+                    <li>You will be contacted by an installer within two business days to schedule a site inspection.  </li>
+                    <li>Based on your availability the site inspection should be completed within 1 to 5 days.  </li>
+                    <li>The installer will measure your opening to verify that the right size door was ordered.  </li>
+                    <li>The installer will also determine if any additional work is needed to complete your installation. (Examples of additional work include Low Headroom kit, jamb replacement,etc... )  </li>
+                    <li>If additional work is needed we will call you after the site inspection to go over changes.  </li>
+                    <li>Once the installer has completed the site inspection he will be able to give you an estimated lead-time based upon door availability in your market.</li>
+                    </ul>
+
+
+
+            </div>
 
         `;
         return body;
     }
-    sendMail(email) {
+    sendMail(email) {     
         if (this.shareEmail !== '') {
             var imageUrl;
             var d = new Date();
@@ -404,12 +443,15 @@ export class ResDoorConfigurationComponent implements OnInit {
                     let body = this.renderEmailBody(imageUrl || '');
                     let obj = {
                         ToEmail: this.shareEmail,
-                        //Body: body,
-                        MailType:"Residential",
-                        Subject: "Thank You For Your Interest In Clopay"
-                        //Subject: this.utils.resFlowSession.resDoorObj.product.product['item_name']
+                        Body: body,
+                        MailType: "Residential",
+                        Subject: "Thank You For Your Interest In Clopay",
+                        base64String: this.utils.resFlow.imgSrc,
+                        imagename: 'res-' + timeStamp,
+                        imageformat: 'jpeg'                       
                     }
-                    this.emailMsg = 'Mail Send Successfully';
+
+                    this.emailMsg = 'Mail Sent Successfully';
                     this.showEmailMsg = true;
                     this.dataService.sendMail(obj)
                         .subscribe(res => {
@@ -422,9 +464,7 @@ export class ResDoorConfigurationComponent implements OnInit {
         }
     }
     updateQuantity(flow) {
-
     }
-
     nextBtn(path) {
         this.utils.resFlowSession.addToCart();
         $('#shop-count').text(this.utils.resFlowSession.cart.length);
@@ -434,10 +474,12 @@ export class ResDoorConfigurationComponent implements OnInit {
     prevBtn(path) {
         this.route.navigateByUrl('/config/additionalOptions');
     }
+
     socialshare() {
         var imageUrl;
         var d = new Date();
         var timeStamp = d.getTime();
+       
         let params = {
             base64String: this.utils.resFlow.imgSrc,
             imagename: 'SocialShare-' + timeStamp,
