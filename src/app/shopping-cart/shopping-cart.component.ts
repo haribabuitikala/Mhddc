@@ -68,11 +68,14 @@ export class ShoppingCartComponent implements OnInit {
             showStepIndicator: false,
             resetNav: true
         });
-        if (this.utils.resFlowSession.resDoorObj.TYPE !== 'RES') {
-            this.getItemPrice();
-        }
+        
         this.resFlowSession = this.utils.resFlowSession;
         this.data = this.utils.gdoFlowSession.cart[0];
+        if (this.utils.resFlowSession.resDoorObj.TYPE !== 'RES') {
+            this.getItemPrice();
+        } else {
+            this.getTotalCartValue();
+        }
     }
 
     getItemPrice() {

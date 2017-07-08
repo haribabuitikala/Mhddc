@@ -41,6 +41,7 @@ import { CustomerServiceInfoComponent } from './customer-service-info/customer-s
 import { CartDetailsRootComponent } from './cart-details/cart-details-root.component';
 import { Four04Component } from './Four04Component';
 
+import {ShareButtonsModule} from 'ngx-sharebuttons';
 @NgModule({
     declarations: [
         AppComponent,
@@ -61,7 +62,7 @@ import { Four04Component } from './Four04Component';
         CustomerInfoComponent,
         CustomerServiceInfoComponent,
         CartDetailsRootComponent,
-        Four04Component
+        Four04Component 
     ],
     imports: [
         BrowserModule,
@@ -71,7 +72,9 @@ import { Four04Component } from './Four04Component';
         RouterModule.forRoot(appRoutes,{ useHash: true }),
         ConfigModule,
         ToastrModule.forRoot(),
-        AccordionModule
+        AccordionModule,
+        ShareButtonsModule.forRoot()
+        
     ],
     providers: [
         ApiStoreService,

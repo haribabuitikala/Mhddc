@@ -71,9 +71,14 @@
       <dd (click)="navigateTo('/config/design')"><img src="../../assets/images/left-nav/leftnav4iconVP.png" alt="" />Design</dd>
       <dd (click)="navigateTo('/config/construction')"><img src="../../assets/images/left-nav/leftnav5iconVP.png" alt="" />Construction</dd>
       <dd (click)="navigateTo('/config/color')"><img src="../../assets/images/left-nav/leftnav6iconVP.png" alt="" />Color</dd>
-      <dd (click)="navigateTo('/config/topSection')"><img src="../../assets/images/left-nav/leftnav7iconVP.png" alt="" />Top Section</dd>
-      <dd (click)="navigateTo('/config/topSection')"><img src="../../assets/images/left-nav/leftnav8iconVP.png" alt="" />Glass Type</dd>
-      <dd (click)="navigateTo('/config/hardware')"><img src="../../assets/images/left-nav/leftnav9iconVP.png" alt="" />Hardware</dd>
+      <dd *ngIf="isStepVisible('topSection')" (click)="navigateTo('/config/topSection')"><img src="../../assets/images/left-nav/leftnav7iconVP.png" alt="" />Top Section</dd>
+      <dd *ngIf="isStepVisible('glasstype')"  (click)="gotoGlassStep()"><img src="../../assets/images/left-nav/leftnav8iconVP.png" alt="" />Glass Type</dd>
+      <dd (click)="navigateTo('/config/hardware')">
+        <img *ngIf="isStepVisible('topSection') && isStepVisible('glasstype')" src="../../assets/images/left-nav/leftnav9iconVP.png" alt="" />
+        <img *ngIf="isStepVisible('topSection') && !isStepVisible('glasstype')" src="../../assets/images/left-nav/leftnav8iconVP.png" alt="" />
+        <img *ngIf="!isStepVisible('topSection')"  src="../../assets/images/left-nav/leftnav7iconVP.png" alt="" />
+        Hardware
+      </dd>
     </dl>
   </modal-body>
 </modal>
@@ -169,7 +174,7 @@
           </li>
           <li> New Construction-Measure framed opening</li>
         </ul>
-        <h5 class="bold">Common Sizes:</h5>
+        <h4 class="bold font-size-16 margin-t-0">Common Sizes:</h4>
         <ul>
           <li>Garage Doors are generally categorized as Single or Double doors
           </li>
@@ -208,7 +213,7 @@
       </div>
 
       <div class="not-match-section" *ngIf="SizeMotMatched" style="position: absolute; left: 0; top: 0;background-color: white; height: 100%;">
-        <div class="textContainer textUnselectable">Selected configuration is not valid for updated dimensions. Please <span style="color: blue;" (click)="navigateToSize('/doorSize')">click here</span>      to go back to size selection page and select exact size.</div>
+        <div class="textContainer textUnselectable" style="margin-top: 40px;">Selected configuration is not valid for updated dimensions. Please <span style="color: blue;" (click)="navigateToSize('/doorSize')">click here</span>      to go back to size selection page and select exact size.</div>
         <div class="margin-t-15 text-center">
           <!--<button type="button" class="btn btn-danger" (click)="SizeMotMatched = false;">Close</button>-->
         </div>

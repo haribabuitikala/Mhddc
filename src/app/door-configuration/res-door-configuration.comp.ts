@@ -5,8 +5,9 @@ import { AppComponent } from "../app.component";
 import { NavService } from "../nav/nav-service";
 import { NavComponent } from "../nav/nav.component";
 import { CollectionData } from "../collection/collection-data";
-import {ConfigComponent } from "../config/config.component";
+import { ConfigComponent } from "../config/config.component";
 import { CollectionService } from "../shared/data.service";
+import { ShareButton, ShareProvider, ShareArgs } from 'ngx-sharebuttons';
 declare var $: any;
 declare var _: any;
 
@@ -16,6 +17,16 @@ declare var _: any;
     styleUrls: ['./door-configuration.component.less']
 })
 export class ResDoorConfigurationComponent implements OnInit {
+    googlebtn;
+    facebookbtn;
+    pintbtn;
+    twitterbtn;
+    instagrambtn;
+    houzzbtn;
+    imgSrc = 'https://raw.githubusercontent.com/MurhafSousli/ngx-sharebuttons/master/demo/src/assets/img/pinExample.jpg';
+    imageSrc = 'https://dev-mhddc.clopay.com/emailimages/res-1498118638696.jpeg';
+    title = "";
+    description = "";
 
     pageNo;
     isGdo = this.utils.utilities.isGDO;
@@ -87,8 +98,16 @@ export class ResDoorConfigurationComponent implements OnInit {
         this.setNavComponent();
         this.data = this.utils.resFlowSession.resDoorObj;
         this.getPrice();
+        this.googlebtn = new ShareButton(ShareProvider.GOOGLEPLUS, '<i class="fa fa-google"></i>',
+            'google-plus');
+        this.facebookbtn = new ShareButton(ShareProvider.FACEBOOK, '<i class="fa fa-facebook"></i>',
+            'facebook');
+        this.twitterbtn = new ShareButton(ShareProvider.TWITTER, '<i class="fa fa-twitter"></i>',
+            'twitter');
+        this.pintbtn = new ShareButton(ShareProvider.PINTEREST, '<i class="fa fa-pinterest-p"></i>',
+            'pinterest');
     }
-    notify(event){
+    notify(event) {
         this.itmTotalPrice = event.totalPrice;
     }
     getPrice() {
@@ -381,11 +400,14 @@ export class ResDoorConfigurationComponent implements OnInit {
                 .subscribe(
                 res => {
                     imageUrl = res;
+                    var shareImage = `<img src="${imageUrl}" width="300" height="200" />`;
                     let body = this.renderEmailBody(imageUrl || '');
                     let obj = {
                         ToEmail: this.shareEmail,
-                        Body: body,
-                        Subject: this.utils.resFlowSession.resDoorObj.product.product['item_name']
+                        //Body: body,
+                        MailType:"Residential",
+                        Subject: "Thank You For Your Interest In Clopay"
+                        //Subject: this.utils.resFlowSession.resDoorObj.product.product['item_name']
                     }
                     this.emailMsg = 'Mail Send Successfully';
                     this.showEmailMsg = true;
@@ -411,6 +433,27 @@ export class ResDoorConfigurationComponent implements OnInit {
 
     prevBtn(path) {
         this.route.navigateByUrl('/config/additionalOptions');
+    }
+    socialshare() {
+        var imageUrl;
+        var d = new Date();
+        var timeStamp = d.getTime();
+        let params = {
+            base64String: this.utils.resFlow.imgSrc,
+            imagename: 'SocialShare-' + timeStamp,
+            imageformat: 'jpeg'
+        }
+        this.dataService.getImageUrl(params)
+            .subscribe(
+            res => {
+                imageUrl = res;
+                this.imgSrc = imageUrl;
+                this.title = "";
+                this.description = "";
+            },
+            err => {
+                this.dataService.handleError();
+            });
     }
 
 

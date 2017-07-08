@@ -142,6 +142,7 @@ export class DoorConfigurationComponent implements OnInit {
             var data = this.emailBody;
             var windcode = data.windcode;
             var opener = data.cart[0].opener.opener['item_name'];
+            var GdoType: string[] = opener.split(" ");
             var openerPrice = '$' + (data.cart[0].opener.opener['item_price']).toFixed(2);
             var items = this.utils.gdoFlowSession.cart[0].opener.items.length;
             var itm0, itm1, itm2, itm0Price, itm1Price, itm2Price;
@@ -220,10 +221,22 @@ export class DoorConfigurationComponent implements OnInit {
         `
             this.showEmailMsg = true;
             this.emailMsg = 'Mail Send Successfully';
+            var sub = "";
+            var type = "";
+            switch (GdoType[0]) {
+                case "Chamberlain":
+                    sub = "Thank You For Your Interest In Garage Door Openers"
+                    type = "GdoChamberlain";
+                    break;
+                case "Genie":
+                    sub = "Thank You For Your Interest In Garage Door Openers"
+                    type = "GdoGenie";
+                    break;
+            }
             let obj = {
                 ToEmail: this.shareEmailTxt,
-                Subject: 'Gdo Configuration',
-                Body: body
+                Subject: sub,
+                MailType: type
             }
             this.dataService.sendMail(obj)
                 .subscribe(res => {
