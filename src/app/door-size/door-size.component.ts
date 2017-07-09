@@ -96,6 +96,7 @@ export class DoorSizeComponent implements OnInit {
     homeSize = "0";
     // set door
     setDoor(door, event) {
+		this.navigateErorFlag = false;
         $('.select-door').removeClass('current');
         this.utils.utilities.singleDoor = false;
         this.utils.utilities.doubleDoor = false;
