@@ -786,7 +786,7 @@ export class CollectionService {
                             },
                             "_homeid": "10",
                             //"_btnimage": "DIShomeSngl01.png",
-                            "_btnimage": "DIShomeSngl04.png",
+                            "_btnimage": "DIShomeSngl05.png",
                             "_imagelg": "DIShomeSngl01.png",
                             "_window": "reflect",
                             "_imgwidth": "700",
