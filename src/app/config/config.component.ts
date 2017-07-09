@@ -170,10 +170,10 @@ export class ConfigComponent implements OnInit, AfterViewInit, AfterViewChecked 
                 } else if(query.matches){
 						 
 						 //himg.src = window['imgFolder'] + '/homeimages/' + selectedHome._imagelgland;
-						  himg.src = window['imgFolder'] + '/homeimages/portrait/' + selectedHome._imagelg
+						  himg.src = window['imgFolder'] + '/homeimages/' + selectedHome._imagelg
 						
 					}else{
-						 himg.src = window['imgFolder'] + '/homeimages/portrait/' + selectedHome._imagelg;
+						 himg.src = window['imgFolder'] + '/homeimages/' + selectedHome._imagelg;
 					}
             }
         });
