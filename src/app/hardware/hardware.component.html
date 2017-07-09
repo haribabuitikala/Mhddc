@@ -16,7 +16,7 @@
             </div>
             <div class="col-xs-3 pull-right padding-0 margin-t-10">
                 <img (click)="updateCount('handle')" src="../../assets/images/substract.png" alt="" height="22" width="22" class="minus-quantity pull-left">
-                <span *ngIf="handlePlacementArr.length > 0">{{ handlePlacementArr[countManager.handle] }}</span>
+                <span class="hardwarespan"*ngIf="handlePlacementArr.length > 0">{{ handlePlacementArr[countManager.handle] }}</span>
                 <img (click)="updateCount('handle', true)" src="../../assets/images/add.png" alt="" height="22" width="22" class="add-quantity  ">
             </div>
         </div>
@@ -41,7 +41,7 @@
             </div>
             <div class="col-xs-3 pull-right padding-0 margin-t-10">
                 <img (click)="updateCount('stepplate')" src="../../assets/images/substract.png" alt="" height="22" width="22" class="minus-quantity pull-left">
-                <span>{{ stepplatePlacementArr[countManager.stepplate] }}</span>
+                <span class="hardwarespan">{{ stepplatePlacementArr[countManager.stepplate] }}</span>
                 <img (click)="updateCount('stepplate', true)" src="../../assets/images/add.png" alt="" height="22" width="22" class="add-quantity  ">
             </div>
         </div>
@@ -66,7 +66,7 @@
             </div>
             <div class="col-xs-3 pull-right padding-0 margin-t-10">
                 <img (click)="updateCount('hinge')" src="../../assets/images/substract.png" alt="" height="22" width="22" class="minus-quantity pull-left">
-                <span *ngIf="hingesPlacementArr.length > 0">{{ hingesPlacementArr[countManager.hinge] }}</span>
+                <span class="hardwarespan" *ngIf="hingesPlacementArr.length > 0">{{ hingesPlacementArr[countManager.hinge] }}</span>
                 <img (click)="updateCount('hinge', true)" src="../../assets/images/add.png" alt="" height="22" width="22" class="add-quantity ">
             </div>
         </div>

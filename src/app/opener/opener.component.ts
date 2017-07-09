@@ -93,8 +93,8 @@ export class OpenerComponent implements OnInit {
 
         var k = this.pageNo + '.Choose an Opener';
         $('#visualize-header').html(k);
-        $('body').removeClass('loader');
         this.setNavComponent();
+		$('body').removeClass('loader');
     }
 
     nextBtn(path) {

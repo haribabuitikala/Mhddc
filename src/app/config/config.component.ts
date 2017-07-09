@@ -101,7 +101,8 @@ export class ConfigComponent implements OnInit, AfterViewInit, AfterViewChecked 
 		var query = window.matchMedia("(orientation:landscape)");
 		var points;
 			if (query.matches){
-				points = $.makeArray(selectedHome.dcoords.pointland);
+				//points = $.makeArray(selectedHome.dcoords.pointland);
+				points = $.makeArray(selectedHome.dcoords.point);
 			}else{
 				points = $.makeArray(selectedHome.dcoords.point);
 			}
@@ -135,8 +136,10 @@ export class ConfigComponent implements OnInit, AfterViewInit, AfterViewChecked 
                 var nCanvas = $('<canvas/>');
 				var query = window.matchMedia("(orientation:landscape)");
                 if (query.matches) {
-					nCanvas[0].setAttribute('width', selectedHome._landimgwidth);
-					nCanvas[0].setAttribute('height', selectedHome._landimgheight);
+					//nCanvas[0].setAttribute('width', selectedHome._landimgwidth);
+					//nCanvas[0].setAttribute('height', selectedHome._landimgheight);
+				nCanvas[0].setAttribute('width', selectedHome._imgwidth);
+                nCanvas[0].setAttribute('height', selectedHome._imgheight);
 					
 				}else{
 				nCanvas[0].setAttribute('width', selectedHome._imgwidth);
@@ -167,7 +170,7 @@ export class ConfigComponent implements OnInit, AfterViewInit, AfterViewChecked 
                 } else if(query.matches){
 						 
 						 //himg.src = window['imgFolder'] + '/homeimages/' + selectedHome._imagelgland;
-						 himg.src = window['imgFolder'] + '/homeimages/landscape/' + selectedHome._imagelgland;
+						  himg.src = window['imgFolder'] + '/homeimages/portrait/' + selectedHome._imagelg
 						
 					}else{
 						 himg.src = window['imgFolder'] + '/homeimages/portrait/' + selectedHome._imagelg;
@@ -199,6 +202,18 @@ export class ConfigComponent implements OnInit, AfterViewInit, AfterViewChecked 
                                 height: '90%',
                                 width: '90%'
                             });
+							
+
+							if(this.utils.utilities.doubleDoor){
+								var switchheight = $(".switcher-image-sec").height();
+								var canvasdoorheight = $(".switcher-image-sec #doorVis").height();
+								var canvasdisplayheight = $(".switcher-image-sec #doorVis canvas").height();
+								var margintopheight = canvasdoorheight - canvasdisplayheight
+								$(".switcher-image-sec #doorVis canvas").css({'margin-top': margintopheight/2})
+							}
+							
+							$(".switcher-image-sec").height('220');
+							
                             //this.utils.removeLoader();
                             
                             //this.utils.removeLoader();

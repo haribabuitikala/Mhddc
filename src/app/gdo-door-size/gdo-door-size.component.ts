@@ -80,8 +80,8 @@ export class GdoDoorSizeComponent implements OnInit {
                         .subscribe(
                         res => {
                             // this.route.navigateByUrl(path);
+							 $('body').addClass('loader');
                             console.log(res);
-                            $('body').removeClass('loader');
                             this.dataStorage.gdoAdditional = res;
                             this.utils.gdoFlowSession.cart[0].opener.items = res;
                             this.route.navigateByUrl('/gdoConfig/opener');

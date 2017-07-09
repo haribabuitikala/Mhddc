@@ -29,6 +29,7 @@ export class DoorSizeComponent implements OnInit {
     isRequired = false;
     isChecked = false;
     checkboxFlag = false;
+	navigateErorFlag = false;
 
 
     widthFeets;
@@ -323,7 +324,10 @@ export class DoorSizeComponent implements OnInit {
                 this.navigateTo(this.dataParams);
             }
 
-        }
+        }else{
+			this.navigateErorFlag = true;
+		//alert("Please enter your name!");
+		}
     }
     setHomeSize(num, door) {
         let utils = this.utils.utilities;
@@ -340,5 +344,14 @@ export class DoorSizeComponent implements OnInit {
         this.utils.utilities.wi = null;
         this.utils.utilities.hf = null;
         this.utils.utilities.hi = null;
+    }
+	
+	closeNavigationError() {
+        if (!this.navigateErorFlag) {
+            return true;
+        } else {
+            this.navigateErorFlag = false;
+        }
+
     }
 }

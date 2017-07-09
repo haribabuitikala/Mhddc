@@ -1,3 +1,9 @@
+<div class="text-center margin-t-0 text-uppercase" *ngIf="navigateErorFlag">
+Please enter your name!
+            <button (click)="closeNavigationError()"
+                class="btn btn-default text-uppercase box-shadow bold text-orange">x
+            </button>
+        </div>
 <h4 class="font-size-16 door-size margin-t-0">
     <img src="../../assets/images/Info-64.png" height="25" class="pull-right info-icon" (click)="measure.open()" alt="">
 <!--    {{lang.pageHeader}}-->
