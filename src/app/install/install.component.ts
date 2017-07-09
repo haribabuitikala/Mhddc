@@ -217,6 +217,8 @@ export class InstallComponent implements OnInit, AfterViewInit, AfterViewChecked
             // this.config.renderCanvas(window['cObj'], 'doorVis', '#diyDoorVis');
             // this.exactDoorsize.open();
         }
+        //Jyothi - Promo
+         this.utils.utilities.promoSaving = this.utils.resFlowSession.calculatePromoSavings(); 
     }
 
     navigateTo(path) {

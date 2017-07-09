@@ -197,6 +197,17 @@
             </div>
         </dd>
     </div>
+
+     <div class="text-orange"  *ngIf="this.utils.utilities.isPromoEnabled">
+        <dl class="door-configuration-table">
+            <dd class="door-configuration-table-header">
+            </dd>
+        </dl>
+        <div class="pull-right">
+            Promo Savings : {{ this.utils.utilities.promoSaving | currency:'USD':true:'1.2-2'}}
+        </div>
+    </div>
+    
     <div class="text-orange" *ngIf="itemPrice">
         <dl class="door-configuration-table">
             <dd class="door-configuration-table-header">
