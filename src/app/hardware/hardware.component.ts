@@ -328,11 +328,18 @@ export class HardwareComponent implements OnInit {
     } else {
       this.utils.utilities.lockPrice = 0;
     }
-    this.utils.resFlowSession.resDoorObj.hardware.lock = obj;
-    this.utils.resFlowSession.resDetails.hardware.lock.name = obj.item_name;
-    this.utils.resFlowSession.resDetails.hardware.lock.price = obj.item_installed_price;
-    this.utils.resFlowSession.resDetails.hardware.lock.qty = 1;
-    this.app.updatePrice();
+
+    //Jyothi -Promo
+    if (obj.item_installed_price && obj.item_installed_price > 0 && this.utils.utilities.isPromoEnabled) {
+            this.getLockItemDiscount("hardware", obj.item_installed_price, obj, "lock");
+        } else {
+            this.utils.promoCalcluatedObject.lockprice = 0;
+            this.utils.resFlowSession.resDoorObj.hardware.lock = obj;
+            this.utils.resFlowSession.resDetails.hardware.lock.name = obj.item_name;
+            this.utils.resFlowSession.resDetails.hardware.lock.price = obj.item_installed_price;
+            this.utils.resFlowSession.resDetails.hardware.lock.qty = 1;
+            this.app.updatePrice();
+        }
   }
 
   isLockSelected(obj, isfirst) {
@@ -481,7 +488,47 @@ export class HardwareComponent implements OnInit {
     this.utils.resFlowSession.resDoorObj.hardware.handle = null;
     this.utils.resFlowSession.resDoorObj.hardware.stepplate = null;
     this.utils.resFlowSession.resDoorObj.hardware.hinge = null;
-  }
+  };
+
+  getLockItemDiscount(itemtype, itemprice, obj, itemSubType) {
+
+        let promoItemparams = {
+            "productid": window['cObj'].product.product.item_id,
+            "promoid": this.utils.promoObject.promotionid,
+            "promotype": this.utils.promoObject.typeOfPromo,
+            "promoitemtype": itemtype,
+            "modelnumber": window['cObj'].construction.construction.ClopayModelNumber,
+            "isinstalled": true,
+            "itemprice": itemprice,
+            "diyitemprice": 0,
+            "issingledoor": true,
+            "productlayout": this.utils.utilities.productlayout
+        };
+
+        this.dataService.getItemPromo(promoItemparams)
+            .subscribe(res => {
+
+                if (res) {
+                    this.utils.promoCalcluatedObject.lockprice = res.itemdiscountprice;                    
+                    this.utils.resFlowSession.resDoorObj.hardware.lock = obj;
+                    this.utils.resFlowSession.resDetails.hardware.lock.name = obj.item_name;
+                    this.utils.resFlowSession.resDetails.hardware.lock.price =
+                        (this.utils.promoCalcluatedObject.lockprice && this.utils.promoCalcluatedObject.lockprice) > 0 ? this.utils.promoCalcluatedObject.lockprice : obj.item_installed_price;
+                    this.utils.resFlowSession.resDetails.hardware.lock.discountPrice = obj.item_installed_price;
+                    this.utils.resFlowSession.resDetails.hardware.lock.qty = 1;
+                    this.app.updatePrice();
+
+                }
+                else {
+                    this.utils.promoCalcluatedObject.lockprice = 0;
+                }
+            },
+            err => {
+                this.dataService.handleError();
+            });
+
+
+    }
 }
 
 

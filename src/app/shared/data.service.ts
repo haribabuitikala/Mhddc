@@ -1017,9 +1017,9 @@ export class CollectionService {
 
 
 
-    getPromotionsByMarketId(marketId) {
+     getPromotionsByMarketId(marketId) {
         this.utils.setLoader();
-        return this.http.get(this.url + 'promotion/${marketId}').map(res => {
+        return this.http.get(this.url + 'promotion/' + marketId).map(res => {
             try {
                 return res.json();
             } catch (e) {
@@ -1031,7 +1031,7 @@ export class CollectionService {
     }
 
 
-    getPromotionByProductId(reqData) {
+     getPromotionByProductId(reqData) {
         //
         this.utils.setLoader();
         return this.http.post(this.url + 'promotion/${reqData.marketId}', reqData).map(res => {
@@ -1058,9 +1058,22 @@ export class CollectionService {
         });
     }
 
-    getProductsByPromotionId(reqData) {
+   getProductsByPromotionId(reqData) {
         this.utils.setLoader();
-        return this.http.post(this.url + 'ProductByPromotion', reqData).map(res => {
+        return this.http.post(this.url + 'promotionbyproduct', reqData).map(res => {
+            try {
+                return res.json();
+            } catch (e) {
+                return {};
+            }
+        }).finally(() => {
+            this.utils.removeLoader();
+        });
+    }
+
+     getItemPromo(reqData) {
+        this.utils.setLoader();
+        return this.http.post(this.url + 'itempromo', reqData).map(res => {
             try {
                 return res.json();
             } catch (e) {

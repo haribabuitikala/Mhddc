@@ -549,6 +549,8 @@ export class ConfigComponent implements OnInit, AfterViewInit, AfterViewChecked 
             this.utils.resFlowSession.resCalculatePrice();
             this.itemPriceInstall = this.utils.utilities.itemPriceInstall;
             this.itemPriceDY = this.utils.utilities.itemPriceDY;
+            //Jyothi - Promo
+            this.utils.utilities.promoSaving = this.utils.resFlowSession.calculatePromoSavings();  
         } catch (g) {
         }
     }

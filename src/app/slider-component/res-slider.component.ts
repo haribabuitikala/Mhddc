@@ -277,141 +277,55 @@ export class ResSliderComponent implements OnInit, AfterViewInit {
         this.sliderLeft = -(this.slideIndex * this.slideWidth);
     }
 
-    saveSelected(obj) {
+   saveSelected(obj) {        
         switch (this.cname) {
             case 'topsection':
-                this.utils.resFlowSession.resDoorObj.windows.topsection = obj;
+              //  this.utils.resFlowSession.resDoorObj.windows.topsection = obj;
                 if (obj['glasstypes'] && obj['glasstypes'].length > 0) {
                     let res = obj.glasstypes.filter(function (el) {
                         return el.isdefault == true
                     })
-                    this.utils.resFlowSession.resDoorObj.windows.glasstype = res[0]
+                //    this.utils.resFlowSession.resDoorObj.windows.glasstype = res[0];
+                    this.getItemDiscount("windows", res[0].item_price, obj);
                 }
+              //  this.saveSelectedPromo(obj);
                 break;
             case 'glasstype':
-                this.utils.resFlowSession.resDoorObj.windows.glasstype = obj;
+              //  this.utils.resFlowSession.resDoorObj.windows.glasstype = obj;
+                this.getItemDiscount("windows", obj.item_price, obj);
                 break;
             case 'hardware':
-                if (this.issub) {
-                    if (this.subname == 'handles') {
-                        this.utils.resFlowSession.resDoorObj.hardware.handle = obj;
-                        this.utils.resFlowSession.resDoorObj.hardware.handle['count'] = 1;
-                        if (obj['placementlist'] && obj['placementlist'].split(';').length > 0) {
-                            this.utils.resFlowSession.resDoorObj.hardware.handle['placement'] = obj['placementlist'].split(';')[0];
-                            var defaultCount = parseInt(obj.defaultkit);
-                            if (defaultCount == 2 && obj['placementlist'].split(';').length > 1) {
-                                this.utils.resFlowSession.resDoorObj.hardware.handle['placement'] = obj['placementlist'].split(';')[1];
-                            }
-                        }
-                        // this.utils.resFlowSession.resDoorObj.hardware.handle['placement'] = obj['placement'] ? obj['placement'] : obj['placementlist'];
-                    } else if (this.subname == 'stepplates') {
-                        this.utils.resFlowSession.resDoorObj.hardware.stepplate = obj;
-                        this.utils.resFlowSession.resDoorObj.hardware.stepplate['count'] = 1;
-                        if (obj['placementlist'] && obj['placementlist'].split(';').length > 0) {
-                            this.utils.resFlowSession.resDoorObj.hardware.stepplate['placement'] = obj['placementlist'].split(';')[0];
-                            var defaultCount = parseInt(obj.defaultkit);
-                            if (defaultCount == 2 && obj['placementlist'].split(';').length > 1) {
-                                this.utils.resFlowSession.resDoorObj.hardware.stepplate['placement'] = obj['placementlist'].split(';')[1];
-                            }
-                        }
-                    } else {
-                        this.utils.resFlowSession.resDoorObj.hardware.hinge = obj;
-                        this.utils.resFlowSession.resDoorObj.hardware.hinge['count'] = 1;
-                        this.utils.resFlowSession.resDoorObj.hardware.hinge['placement'] = obj['placement'] ? obj['placement'] : obj['placementlist'];
-                        if (obj['placementlist'] && obj['placementlist'].split(';').length > 0) {
-                            this.utils.resFlowSession.resDoorObj.hardware.hinge['placement'] = obj['placementlist'].split(';')[0];
-                            var defaultCount = parseInt(obj.defaultkit);
-                            if (defaultCount == 2 && obj['placementlist'].split(';').length > 1) {
-                                this.utils.resFlowSession.resDoorObj.hardware.hinge['placement'] = obj['placementlist'].split(';')[1];
-                            }
-                        }
-                    }
+               if (this.subname == 'handles') {                    
+                   this.getItemDiscount("hardware", obj.item_installed_price, obj, obj.item_price,"handles");                                       
+                } else if (this.subname == 'stepplates') {                    
+                   this.getItemDiscount("hardware", obj.item_installed_price, obj, obj.item_price, "stepplates");                   
+                } else {                    
+                   this.getItemDiscount("hardware", obj.item_installed_price, obj, obj.item_price, "hinge");                   
                 }
                 break;
             case 'opener':
-                this.utils.resFlowSession.resDoorObj.opener.opener = obj;
-                this.utils.resFlowSession.resDoorObj.opener.qty = 1;
+               this.saveSelectedPromo(obj);
                 break;
-            case 'design':
-                this.utils.resFlowSession.resDoorObj.design.dsgn = obj;
-                this.utils.resFlowSession.resDetails.designName = obj.item_name;
-                if (obj['constructions']) {
-                    this.utils.resFlowSession.resDoorObj.construction.apiData = obj['constructions'];
-                    this.utils.resFlowSession.resDoorObj.construction.construction = obj['constructions'][0];
-                    this.utils.resFlowSession.resDoorObj.construction.construction['isdefault'] = true;
-                    let construction = obj['constructions'][0];
-                    if (construction && construction['colors'] && construction['colors'].length > 0) {
-                        // Fix for 5308 defaulting color from design page
-                        var defaultColor = construction['colors'].filter(c => { return c.isdefault == true; });
-                        if (defaultColor.length > 0) {
-                            defaultColor = defaultColor[0];
-                        } else {
-                            defaultColor = construction['colors'][0];
-                        }
-                        this.utils.resFlowSession.resDoorObj.color.overlay = defaultColor;
-                        this.utils.resFlowSession.resDoorObj.color.base = defaultColor;
-
-                        if (this.utils.resFlowSession.resDoorObj.product.product['item_id'] == 16) {
-                            this.utils.resFlowSession.resDoorObj.color.overlay = construction['colors'][3];
-                            this.utils.resFlowSession.resDoorObj.color.base = construction['colors'][3];
-                        }
-                    }
+            case 'design':              
+                if (obj['constructions']) {                    
+                    this.getItemDiscount("models", obj['constructions'][0].item_price, obj);
                 }
-                let stockdoorconstructions = obj['stockdoorconstructions'];
-                if (stockdoorconstructions && stockdoorconstructions.length > 0) {
-                    this.utils.resFlowSession.resDoorObj.design.columns = obj['Columns'];
-                    this.utils.resFlowSession.resDoorObj.design.rows = obj['Rows'];
-                    this.utils.resFlowSession.resDoorObj.construction.apiData = stockdoorconstructions;
-                    this.utils.resFlowSession.resDoorObj.construction.construction = stockdoorconstructions[0];
-                    this.utils.resFlowSession.resDoorObj.construction.construction['isdefault'] = true;
-                    let colors = stockdoorconstructions[0]['colors'];
-                    if (colors && colors.length > 0) {
-
-                        this.utils.resFlowSession.resDoorObj.color.overlay = colors[0];
-                        this.utils.resFlowSession.resDoorObj.color.base = colors[0];
-                    }
-                }
-
-                this.designSelected = obj['item_thumbnail'];
+                   
                 break;
             case 'color':
-                if (this.issub) {
-                    if (this.subname == 'base') {
-                        this.utils.resFlowSession.resDoorObj.color.base = obj;
-                    } else {
-                        this.utils.resFlowSession.resDoorObj.color.overlay = obj;
-                    }
-
-                } else {
-                    this.utils.resFlowSession.resDoorObj.color.base = obj;
-                    //this.utils.resFlowSession.resDoorObj.color.overlay = obj;
-                }
+                this.getItemDiscount("coloradders", obj.item_price, obj);
+               // this.saveSelectedPromo(obj);
 
                 break;
-            case 'construction':
-                this.utils.resFlowSession.resDoorObj.construction.construction = obj;
-                if (obj['colors'] && obj['colors'].length > 0) {
-                    // Fix for 5308 defaulting color from construction page based on isdefault property
-                    var defaultColor = obj['colors'].filter(c => { return c.isdefault == true; });
-                    if (defaultColor.length > 0) {
-                        defaultColor = defaultColor[0];
-                    } else {
-                        defaultColor = obj['colors'][0];
-                    }
-
-                    if (this.utils.resFlowSession.resDoorObj.product.product['item_id'] == 16 && obj['colors'].length > 3) {
-                        this.utils.resFlowSession.resDoorObj.color.overlay = obj['colors'][3];
-                        this.utils.resFlowSession.resDoorObj.color.base = obj['colors'][3];
-                    }
-                }
+            case 'construction':                         
+                    this.getItemDiscount("models", obj.item_price,obj);
+                
                 break;
             default:
                 break;
-        }
-        this.app.updatePrice();
-        this.config.renderCanvas();
-
-    }
+        }     
+    };
+    
     openerSelected(obj, event) {
         this.utils.setLoader();
         if (obj.clickAction) {
@@ -482,5 +396,244 @@ export class ResSliderComponent implements OnInit, AfterViewInit {
             err => {
                 this.dataService.handleError();
             });
+    };
+
+    saveSelectedPromo(obj)
+    {        
+        switch (this.cname) {
+            case 'topsection':
+                this.utils.resFlowSession.resDoorObj.windows.topsection = obj;
+                if (obj['glasstypes'] && obj['glasstypes'].length > 0) {
+                    let res = obj.glasstypes.filter(function (el) {
+                        return el.isdefault == true
+                    })
+                    this.utils.resFlowSession.resDoorObj.windows.glasstype = res[0]
+                }
+                break;
+            case 'glasstype':
+                this.utils.resFlowSession.resDoorObj.windows.glasstype = obj;
+                break;
+            case 'hardware':
+                if (this.issub) {
+                    if (this.subname == 'handles') {
+                        this.utils.resFlowSession.resDoorObj.hardware.handle = obj;
+                        this.utils.resFlowSession.resDoorObj.hardware.handle['count'] = 1;
+                        if (obj['placementlist'] && obj['placementlist'].split(';').length > 0) {
+                            this.utils.resFlowSession.resDoorObj.hardware.handle['placement'] = obj['placementlist'].split(';')[0];
+                            var defaultCount = parseInt(obj.defaultkit);
+                            if (defaultCount == 2 && obj['placementlist'].split(';').length > 1) {
+                                this.utils.resFlowSession.resDoorObj.hardware.handle['placement'] = obj['placementlist'].split(';')[1];
+                            }
+                        }
+                        // this.utils.resFlowSession.resDoorObj.hardware.handle['placement'] = obj['placement'] ? obj['placement'] : obj['placementlist'];
+                    } else if (this.subname == 'stepplates') {
+                        this.utils.resFlowSession.resDoorObj.hardware.stepplate = obj;
+                        this.utils.resFlowSession.resDoorObj.hardware.stepplate['count'] = 1;
+                        if (obj['placementlist'] && obj['placementlist'].split(';').length > 0) {
+                            this.utils.resFlowSession.resDoorObj.hardware.stepplate['placement'] = obj['placementlist'].split(';')[0];
+                            var defaultCount = parseInt(obj.defaultkit);
+                            if (defaultCount == 2 && obj['placementlist'].split(';').length > 1) {
+                                this.utils.resFlowSession.resDoorObj.hardware.stepplate['placement'] = obj['placementlist'].split(';')[1];
+                            }
+                        }
+                    } else {
+                        this.utils.resFlowSession.resDoorObj.hardware.hinge = obj;
+                        this.utils.resFlowSession.resDoorObj.hardware.hinge['count'] = 1;
+                        this.utils.resFlowSession.resDoorObj.hardware.hinge['placement'] = obj['placement'] ? obj['placement'] : obj['placementlist'];
+                        if (obj['placementlist'] && obj['placementlist'].split(';').length > 0) {
+                            this.utils.resFlowSession.resDoorObj.hardware.hinge['placement'] = obj['placementlist'].split(';')[0];
+                            var defaultCount = parseInt(obj.defaultkit);
+                            if (defaultCount == 2 && obj['placementlist'].split(';').length > 1) {
+                                this.utils.resFlowSession.resDoorObj.hardware.hinge['placement'] = obj['placementlist'].split(';')[1];
+                            }
+                        }
+                    }
+                }
+                break;
+            case 'opener':
+                this.utils.resFlowSession.resDoorObj.opener.opener = obj;
+                this.utils.resFlowSession.resDoorObj.opener.qty = 1;
+                break;
+            case 'design':
+                this.utils.resFlowSession.resDoorObj.design.dsgn = obj;
+                this.utils.resFlowSession.resDetails.designName = obj.item_name;
+                if (obj['constructions']) {
+                    this.utils.resFlowSession.resDoorObj.construction.apiData = obj['constructions'];
+                    this.utils.resFlowSession.resDoorObj.construction.construction = obj['constructions'][0];
+                    this.utils.resFlowSession.resDoorObj.construction.construction['isdefault'] = true;                 
+                    let construction = obj['constructions'][0];
+                    if (construction && construction['colors'] && construction['colors'].length > 0) {
+                        // Fix for 5308 defaulting color from design page
+                        var defaultColor = construction['colors'].filter(c => { return c.isdefault == true; });
+                        if (defaultColor.length > 0) {
+                            defaultColor = defaultColor[0];
+                        } else {
+                            defaultColor = construction['colors'][0];
+                        }
+                        this.utils.resFlowSession.resDoorObj.color.overlay = defaultColor;
+                        this.utils.resFlowSession.resDoorObj.color.base = defaultColor;
+
+                        if (this.utils.resFlowSession.resDoorObj.product.product['item_id'] == 16) {
+                            this.utils.resFlowSession.resDoorObj.color.overlay = construction['colors'][3];
+                            this.utils.resFlowSession.resDoorObj.color.base = construction['colors'][3];
+                        }
+                    }
+                }
+                let stockdoorconstructions = obj['stockdoorconstructions'];
+                if (stockdoorconstructions && stockdoorconstructions.length > 0) {
+                    this.utils.resFlowSession.resDoorObj.design.columns = obj['Columns'];
+                    this.utils.resFlowSession.resDoorObj.design.rows = obj['Rows'];
+                    this.utils.resFlowSession.resDoorObj.construction.apiData = stockdoorconstructions;
+                    this.utils.resFlowSession.resDoorObj.construction.construction = stockdoorconstructions[0];
+                    this.utils.resFlowSession.resDoorObj.construction.construction['isdefault'] = true;
+                    let colors = stockdoorconstructions[0]['colors'];
+                    if (colors && colors.length > 0) {
+
+                        this.utils.resFlowSession.resDoorObj.color.overlay = colors[0];
+                        this.utils.resFlowSession.resDoorObj.color.base = colors[0];
+                    }
+                }
+
+                this.designSelected = obj['item_thumbnail'];
+                break;
+            case 'color':
+                if (this.issub) {
+                    if (this.subname == 'base') {
+                        this.utils.resFlowSession.resDoorObj.color.base = obj;
+                      //  this.utils.resFlowSession.resDoorObj.color.base.
+                    } else {
+                        this.utils.resFlowSession.resDoorObj.color.overlay = obj;
+                    }
+
+                } else {
+                    this.utils.resFlowSession.resDoorObj.color.base = obj;
+                    //this.utils.resFlowSession.resDoorObj.color.overlay = obj;
+                }
+
+                break;
+            case 'construction':
+                this.utils.resFlowSession.resDoorObj.construction.construction = obj;                        
+                if (obj['colors'] && obj['colors'].length > 0) {
+                    // Fix for 5308 defaulting color from construction page based on isdefault property
+                    var defaultColor = obj['colors'].filter(c => { return c.isdefault == true; });
+                    if (defaultColor.length > 0) {
+                        defaultColor = defaultColor[0];
+                    } else {
+                        defaultColor = obj['colors'][0];
+                    }
+
+                    if (this.utils.resFlowSession.resDoorObj.product.product['item_id'] == 16 && obj['colors'].length > 3) {
+                        this.utils.resFlowSession.resDoorObj.color.overlay = obj['colors'][3];
+                        this.utils.resFlowSession.resDoorObj.color.base = obj['colors'][3];
+                    }
+                }
+                break;
+            default:
+                break;
+        }
+        this.app.updatePrice();
+        this.config.renderCanvas();
+    };
+
+
+    getItemDiscount(itemtype,itemprice,obj,hardwareDIYPrice = 0,itemSubType = " ") {
+
+        let promoItemparams = {
+            "productid": window['cObj'].product.product.item_id,
+            "promoid": this.utils.promoObject.promotionid,
+            "promotype": this.utils.promoObject.typeOfPromo,
+            "promoitemtype": itemtype,
+            "modelnumber": window['cObj'].construction.construction.ClopayModelNumber,
+            "isinstalled": true,
+            "itemprice": itemprice,
+            "diyitemprice":  hardwareDIYPrice,
+            "issingledoor": true,
+            "productlayout": this.utils.utilities.productlayout 
+        };
+
+        if (itemprice && itemprice > 0 && this.utils.utilities.isPromoEnabled) {
+            this.dataService.getItemPromo(promoItemparams)
+                .subscribe(res => {
+
+                    if (res) {
+                        if (itemtype === "models") {
+                            this.utils.promoCalcluatedObject.modelprice = res.itemdiscountprice  ;
+                        }
+
+                        if (itemtype === "coloradders") {
+                            this.utils.promoCalcluatedObject.colorprice =  res.itemdiscountprice ;
+                        }
+
+                        if (itemtype === "windows") {
+                            this.utils.promoCalcluatedObject.windowsprice = res.itemdiscountprice ;
+                        }
+
+                        if (itemtype === "hardware") {
+                            switch (itemSubType) {
+                                case "handles":
+                                    this.utils.promoCalcluatedObject.handles_ins =  res.itemdiscountprice ;
+                                    this.utils.promoCalcluatedObject.handles_diy = res.diyitemdiscountprice;
+                                    break
+                                case "stepplates":
+                                    this.utils.promoCalcluatedObject.stepplates_ins =  res.itemdiscountprice ;
+                                    this.utils.promoCalcluatedObject.stepplates_diy = res.diyitemdiscountprice ;
+                                    break
+                                case "hinge":
+                                    this.utils.promoCalcluatedObject.hinge_ins =  res.itemdiscountprice ;
+                                    this.utils.promoCalcluatedObject.hinge_diy =  res.diyitemdiscountprice ;
+                                    break                               
+                                default:
+                                    this.utils.promoCalcluatedObject.hardwareprice = 0;
+                            } 
+                       //     this.utils.promoCalcluatedObject.hardwareprice = res.itemdiscountprice;
+                        }
+
+                        this.saveSelectedPromo(obj);
+                    }
+                    else {
+
+                    }
+                },
+                err => {
+                    this.dataService.handleError();
+                });
+        } else {
+            if (itemtype === "models") {
+                this.utils.promoCalcluatedObject.modelprice = 0;
+            }
+
+            if (itemtype === "coloradders") {
+                this.utils.promoCalcluatedObject.colorprice = 0;
+            }
+
+            if (itemtype === "windows") {
+                this.utils.promoCalcluatedObject.windowsprice = 0;
+            }
+
+            if (itemtype === "hardware") {
+                switch (itemSubType) {
+                    case "handles":
+                        this.utils.promoCalcluatedObject.handles_ins = 0;
+                        this.utils.promoCalcluatedObject.handles_diy = 0;
+                        break
+                    case "stepplates":
+                        this.utils.promoCalcluatedObject.stepplates_ins = 0;
+                        this.utils.promoCalcluatedObject.stepplates_diy = 0;
+                        break
+                    case "hinge":
+                        this.utils.promoCalcluatedObject.hinge_ins = 0;
+                        this.utils.promoCalcluatedObject.hinge_diy = 0;
+                        break                    
+                    default:
+                        this.utils.promoCalcluatedObject.hardwareprice = 0;
+                } 
+            }
+
+            this.saveSelectedPromo(obj);
+
+        }
+
+       
     }
+
 }

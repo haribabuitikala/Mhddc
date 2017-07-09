@@ -74,6 +74,7 @@ export class BannerComponent implements OnInit {
         this.navComponent.renderNav({
             showStepIndicator: false
         });
+        this.getPromo();
     }
     onlyNumberKey(event) {
         let len = event.currentTarget.value.length;
@@ -91,5 +92,44 @@ export class BannerComponent implements OnInit {
         // return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57;
 
     }
+
+    getPromo()
+    {      
+      
+        let id = 0;
+        this.dataService.getPromotionsByMarketId(id)
+            .subscribe(
+            res => {
+                if (res && res.length > 0) {
+                    var promo = res[0];
+                    this.utils.promoObject = res;
+                    this.utils.promoObject.promotionid = res.promotionid;
+                  //  this.utils.promoObject. = res.promotionid;
+
+                    this.utils.promoObject.bullet0 = promo.bullet0;
+                    this.utils.promoObject.bullet1 = promo.bullet1;
+                    this.utils.promoObject.dogEarsImageDouble = promo.dogEarsImageDouble;
+                    this.utils.promoObject.dogEarsImageSingle = promo.dogEarsImageSingle;
+                    this.utils.promoObject.enddate = promo.enddate;
+                    this.utils.promoObject.isDogEars = promo.isDogEars;
+                    this.utils.promoObject.isHeroGraphic = promo.isHeroGraphic;
+                    this.utils.promoObject.promotionid = promo.promotionid;
+                    this.utils.promoObject.promotiontype = promo.promotiontype;
+                    this.utils.promoObject.storeHeroImage = promo.storeHeroImage;
+                    this.utils.promoObject.typeOfPromo = promo.typeOfPromo;
+                
+                    this.utils.utilities.isPromoEnabled = true;
+                }
+                else
+                {
+                    this.utils.utilities.isPromoEnabled = false;
+                }
+                $('body').removeClass('loader');             
+            },
+            error => {
+                this.utils.utilities.isPromoEnabled = false;               
+                $('body').removeClass('loader');
+            });
+    };
 
 }

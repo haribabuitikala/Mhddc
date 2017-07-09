@@ -16,6 +16,7 @@ export class CartDetailsComponent implements OnInit {
 
   ngOnInit() {
     this.data = this.utils.resFlowSession.resDetails;
+    this.utils.utilities.promoSaving = this.utils.resFlowSession.calculatePromoSavings(); 
     this.coachman = this.utils.resFlowSession.resDoorObj.product.product['item_id'] === 11 ? true : false;
     // show doorConfig
     this.doorConfig = window.location.hash.indexOf('doorConfiguration') !== -1 ? true : false;
@@ -52,6 +53,8 @@ export class CartDetailsComponent implements OnInit {
     }
     this.utils.resFlowSession.resCalculateCartItemPrice(data)
     this.callPrice.emit(this.utils.resFlowSession.resCalculateCartItemPrice(data));
+     //Jyothi - Promo
+    this.utils.utilities.promoSaving = this.utils.resFlowSession.calculatePromoSavings();  
   }
 
   qty(item, increment?, itm?, qtyName?) {
