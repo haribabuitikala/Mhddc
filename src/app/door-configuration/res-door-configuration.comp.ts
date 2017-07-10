@@ -263,7 +263,7 @@ export class ResDoorConfigurationComponent implements OnInit {
         var medalian = true;
         var itemPrice = resObj.INSTALLTYPE === 'Installed' ? this.utils.utilities.itemPriceInstall : this.utils.utilities.itemPriceDY;
 
-
+ 
 
         var body = `
 		 <style type="text/css">
