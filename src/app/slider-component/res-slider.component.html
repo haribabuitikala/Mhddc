@@ -1,4 +1,4 @@
-<div  class="_slider-container m20-top ">
+<div class="_slider-container m20-top ">
     <div class="_slider-wrapper">
         <div class="_slider unique-{{uniqueId}}" [style.width.px]="sliderWidth" [style.left.px]="sliderLeft">
             <div class="_slide" [style.width.px]="slideWidth" *ngFor="let slide of data; let k = index">
@@ -31,21 +31,21 @@
                 </div>
 
                 <div class="_slide-items ptn-rel" *ngIf="folder==='construction'">
-                    <div class="inner-item col-xs-{{number}}" *ngFor="let slideitem of slide; let i=index" [ngClass]="{ 'current' : isSeleted(slideitem, k, i)}"
-                        >
+
+                    <div class="inner-item col-xs-{{number}}" *ngFor="let slideitem of slide; let i=index" [ngClass]="{ 'current' : isSeleted(slideitem, k, i)}">
                         <img (click)="openerSelected(slideitem, $event)" (error)="onImageLoadError(slideitem, folder)" src="../../assets/images/{{slideitem.item_thumbnail.replace('.jpg', '.png')}}"
                             [attr.data-id]="slideitem.item_id">
+
                         <div class="construction-model" [hidden]="slideitem.item_thumbnail == 'btnOtherConGallery.png'">Model {{slideitem.DisplayModelNumber}}</div>
+
                         <div class="construciton-info">
                             <div [hidden]="slideitem.item_thumbnail == 'btnOtherConGallery.png'">
                                 <img (click)="detailsInfo(slideitem.DisplayModelNumber, contructionDetails)" class="nobdr" src="../../assets/images/Info-64.png"
                                     alt="">
+                                <img *ngIf="this.utils.utilities.isPromoEnabled" src="../../assets/images/promoGraphics/{{this.utils.promoObject.dogEarsImageSingle}}"
+                                    alt="">
                             </div>
 
-
-                            <!--                            <span>
-                                product <br/>  details
-                                </span>-->
                         </div>
 
                     </div>
@@ -78,7 +78,7 @@
             <ul class="constructionInfoList">
                 <li *ngFor="let info of constructionInfo">
                     <p [innerHtml]="info.modeldescription">
-                        
+
                     </p>
                 </li>
 
