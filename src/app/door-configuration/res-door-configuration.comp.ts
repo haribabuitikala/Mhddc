@@ -267,25 +267,28 @@ export class ResDoorConfigurationComponent implements OnInit {
         var medalian = true;
         var itemPrice = resObj.INSTALLTYPE === 'Installed' ? this.utils.utilities.itemPriceInstall : this.utils.utilities.itemPriceDY;
 
-
+ 
 
         var body = `
-            <table style="border-collapse: collapse;width:100%">
-                <tr>
-                    <td>
+		 <style type="text/css">
+
+body {
+            color: #000;
+            font-family: Helvetica, Arial, sans-serif;
+            font-size: 15px;
+            width: 100%;
+        }
+
+ </style>
+		
+		
+            <div style="text-align: center; break-after: page;">
                         <a href="http://www.clopaydoor.com/">
                             <img src="http://test-mhddc.clopay.com/assets/images/clopay-logo_s.png" height="40">
-                        </a>              
-                    </td>
-                    <td style="text-align:right">
-                        <a href="http://www.homedepot.com/">
-                            <img src="http://test-mhddc.clopay.com/assets/images/TheHomeDepot.png" height="40" />
-                        </a>
-                    </td>
-                </tr>
-            </table>
+                        </a> 
+						</div>
             <div style="background: #fff;">
-                <div style="border-bottom:1px solid #ccc;border-top:1px solid #ccc;padding: 0 15px">
+                <div style="padding: 15px">
                     ${product}
                 </div>
                 <div>
@@ -295,7 +298,7 @@ export class ResDoorConfigurationComponent implements OnInit {
                     Thanks for your interest in purchasing a Clopay garage door through The Home Depot. Below is some basic information on the door you designed, what our program includes, and how our program works. We look forward to serving you in the near future.
                     <hr />
                     <br />
-                <table style="border-collapse: collapse;width:100%">
+                <table style="border-collapse: collapse;width:100%;position:relative;">
                 <tr style="border-bottom: 1px solid #ccc">
                     <td style="color: #f96302;padding:5px">Door Model</td>
                     <td>${constructionMdlNo}</td>
@@ -388,9 +391,16 @@ export class ResDoorConfigurationComponent implements OnInit {
                     </td>
                     <td>${'$' + itemPrice.toFixed(2)}</td>
                 </tr>
+				
+				<div style="position:absolute; bottom:10px; width: 95% ; text-align: right; margin:0px auto;">
+     <img src="http://test-hddchtml2.clopay.com/content/images/HD_NOTAG.png"><hr>   
+    
+    </div>
+				
                 </table>
+				
             </div>
-            <div class='installCnt printPage' style="clear: both; width: 676px; height: 860px; position:relative;margin-top: 130px;">
+            <div class='installCnt printPage' style="clear: both; width: 676px; height: 860px; position:relative;margin-top: 130px;page-break-inside:avoid;">
                     <h2>Your professionally installed garage door includes:</h2>  
                     <ul>
                     <li>A pre-installation site inspection  </li>
