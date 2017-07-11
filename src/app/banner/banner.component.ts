@@ -1,11 +1,11 @@
-import {Component, OnInit, OnChanges} from '@angular/core';
-import {Router} from '@angular/router';
-import {LangEnglishService} from "../shared/english";
-import {AppComponent} from "../app.component";
-import {ToastrService} from 'toastr-ng2';
-import {AppUtilities} from "../shared/appUtilities";
-import {CollectionService} from "../shared/data.service";
-import {CollectionData} from "../collection/collection-data";
+import { Component, OnInit, OnChanges } from '@angular/core';
+import { Router } from '@angular/router';
+import { LangEnglishService } from "../shared/english";
+import { AppComponent } from "../app.component";
+import { ToastrService } from 'toastr-ng2';
+import { AppUtilities } from "../shared/appUtilities";
+import { CollectionService } from "../shared/data.service";
+import { CollectionData } from "../collection/collection-data";
 import { NavComponent } from "../nav/nav.component";
 
 declare var $: any;
@@ -65,7 +65,7 @@ export class BannerComponent implements OnInit {
     ngOnChanges() {
         console.log('changed');
     }
-   
+
     ngOnInit() {
         this.utils.gdoFlowSession.cart.length = 0;
         this.utils.resFlowSession.cart.length = 0;
@@ -103,9 +103,19 @@ if (!value) {
         }
 }
 
-    getPromo()
-    {      
-      
+    onChange(value) {
+
+        if (!value) {
+            $(".form-control input").val("")
+            $(".form-control input").focus();
+            $(".form-control input").setSelectionRange(0, 0)
+        }
+
+
+    }
+
+    getPromo() {
+
         let id = 0;
         this.dataService.getPromotionsByMarketId(id)
             .subscribe(
@@ -114,7 +124,7 @@ if (!value) {
                     var promo = res[0];
                     this.utils.promoObject = res;
                     this.utils.promoObject.promotionid = res.promotionid;
-                  //  this.utils.promoObject. = res.promotionid;
+                    //  this.utils.promoObject. = res.promotionid;
 
                     this.utils.promoObject.bullet0 = promo.bullet0;
                     this.utils.promoObject.bullet1 = promo.bullet1;
@@ -127,17 +137,16 @@ if (!value) {
                     this.utils.promoObject.promotiontype = promo.promotiontype;
                     this.utils.promoObject.storeHeroImage = promo.storeHeroImage;
                     this.utils.promoObject.typeOfPromo = promo.typeOfPromo;
-                
+
                     this.utils.utilities.isPromoEnabled = true;
                 }
-                else
-                {
+                else {
                     this.utils.utilities.isPromoEnabled = false;
                 }
-                $('body').removeClass('loader');             
+                $('body').removeClass('loader');
             },
             error => {
-                this.utils.utilities.isPromoEnabled = false;               
+                this.utils.utilities.isPromoEnabled = false;
                 $('body').removeClass('loader');
             });
     };

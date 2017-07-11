@@ -206,7 +206,7 @@
                         <span>Required</span>
                     </span>
                 </li>
-                <li *ngIf="detailsInfo.Opener">
+                <li *ngIf="details.opener && details.opener.name">
                     <span>
                         <strong>Opener</strong>
                         <span [innerHTML]="details.opener.name + ' ('+ details.opener.items.length + ')'"></span>
