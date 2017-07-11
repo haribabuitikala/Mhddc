@@ -92,9 +92,8 @@ export class BannerComponent implements OnInit {
         // return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57;
 
     }
-	
-	onChange(value){
-	  
+
+onChange(value){   
 if (!value) {
 			//alert("123")
 			$(".form-control input").val("")

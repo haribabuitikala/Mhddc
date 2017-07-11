@@ -368,27 +368,38 @@ export class InstallComponent implements OnInit, AfterViewInit, AfterViewChecked
     }
 
 
+    resetWidthAndHeights() {
+        this.heightInches = ["0"];
+        this.selectedWidthInches = 0;
+        this.selectedHeightFeet = 0;
+        this.selectedHeightInches = 0;
+        this.utils.utilities.hf = null;
+    }
+
     getWidthInches(itm) {
         this.widthInches = this.sizes.getInches(itm, this.selectedWidthFeet);
         this.selectedwidth = "width_" + this.selectedWidthFeet + "_0";
         this.heightFeets = this.sizes.getHeightFeets(this.selectedwidth);
         this.heightInches = [];
+        this.selectedWidthInches = 0;
+        this.selectedHeightFeet = 0;
+        this.selectedHeightInches = 0;
         this.compareOldValues();
     }
 
     getHeightInches(itm) {
         this.heightInches = this.sizes.getInches(itm, this.selectedHeightFeet);
         this.selectedHeight = "height_" + this.selectedHeightFeet + "_0";
+        this.selectedHeightInches = null;
         this.compareOldValues();
     }
 
     getWidth() {
 
         this.heightFeets = this.sizes.getHeightFeets(this.selectedwidth);
-        this.selectedHeightFeet = null;
-
         this.heightInches = [];
-
+        this.selectedHeightFeet = null;
+        this.selectedHeightInches = null;
         this.compareOldValues();
     }
 
