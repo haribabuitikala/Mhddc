@@ -10,7 +10,7 @@
       <div class="ptn-rel">
         <div class="form-control">
           <input type="number" oncopy="return false" onpaste="return false" placeholder="{{lang.placeholder}}" minlength="5" maxlength="5" name="zip" class="zip-code" autocomplete="off"
-            (keypress)="onlyNumberKey($event)" ngModel #zipCode="ngModel" required>
+            (keypress)="onlyNumberKey($event)" (ngModelChange)="onChange($event)" ngModel #zipCode="ngModel" required>
         </div>
         <span *ngIf="zipCode.errors?.required && zipCode.touched" class="error ptn-abs">
          {{lang.zipcodeMessage}}

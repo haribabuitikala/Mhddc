@@ -50,6 +50,8 @@ export class ResDoorConfigurationComponent implements OnInit {
     showShare = false;
     itmTotalPrice;
 
+    socialImageUrl = "";
+
     // for gdo the pageNo will be 4
     // for residential the pageNo will be 
 
@@ -106,6 +108,8 @@ export class ResDoorConfigurationComponent implements OnInit {
             'twitter');
         this.pintbtn = new ShareButton(ShareProvider.PINTEREST, '<i class="fa fa-pinterest-p"></i>',
             'pinterest');
+
+        this.socialshare();
     }
     notify(event) {
         this.itmTotalPrice = event.totalPrice;
@@ -425,7 +429,7 @@ export class ResDoorConfigurationComponent implements OnInit {
         `;
         return body;
     }
-    sendMail(email) {     
+    sendMail(email) {
         if (this.shareEmail !== '') {
             var imageUrl;
             var d = new Date();
@@ -446,9 +450,9 @@ export class ResDoorConfigurationComponent implements OnInit {
                         Body: body,
                         MailType: "Residential",
                         Subject: "Thank You For Your Interest In Clopay",
-                        base64String: this.utils.resFlow.imgSrc,
+                        base64String: this.utils.resFlow.selectedImg,
                         imagename: 'res-' + timeStamp,
-                        imageformat: 'jpeg'                       
+                        imageformat: 'jpeg'
                     }
 
                     this.emailMsg = 'Mail Sent Successfully';
@@ -479,7 +483,7 @@ export class ResDoorConfigurationComponent implements OnInit {
         var imageUrl;
         var d = new Date();
         var timeStamp = d.getTime();
-       
+
         let params = {
             base64String: this.utils.resFlow.imgSrc,
             imagename: 'SocialShare-' + timeStamp,
@@ -488,8 +492,7 @@ export class ResDoorConfigurationComponent implements OnInit {
         this.dataService.getImageUrl(params)
             .subscribe(
             res => {
-                imageUrl = res;
-                this.imgSrc = imageUrl;
+                this.socialImageUrl = res;
                 this.title = "";
                 this.description = "";
             },
