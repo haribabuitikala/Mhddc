@@ -136,6 +136,10 @@ export class DoorConfigurationComponent implements OnInit {
                 itmDisplay = 'block';
             }
         }
+    };
+    toPng(itm) {
+        let t = itm.split('.')[0];
+        return t + '.png';
     }
     shareEmail() {
         if (this.shareEmailTxt !== undefined) {
@@ -183,9 +187,25 @@ export class DoorConfigurationComponent implements OnInit {
                     break;
             }
             var itemPrice = this.gdoConfig.itemPrice;
-
+            var gdoBanner = this.toPng(this.utils.utilities.gdoBanner);
+            var appInstance = "http://dev-mhddc.clopay.com";
             var body = `
-          
+           <div style="text-align: center; break-after: page;">
+                        <a href="#">
+                            <img src="${appInstance}/assets/images/ClopayLogo.png" width="180" height="93">
+                             </a>                            
+						</div>
+                          <div style="background: #fff;">  
+                          <div style=' width: 676px; height: 250px; position: relative; display:inline-block'>
+                     <img id='printIMG' src='${appInstance}/assets/images/openers/banner${gdoBanner}' style='max-width: 280px' >
+                   
+                 </div>
+
+                 <br />
+                    Thanks for your interest in purchasing a Clopay garage door opener through The Home Depot. Below is some basic information on the door opener you selected, what our program includes, and how our program works. We look forward to serving you in the near future.
+                    <hr />
+                    <br />
+                <div id="ourCfg" style="padding: 0px 0px 3px 8px; border-bottom: thin solid #bbb;">YOUR OPENER CONFIGURATION</div>
           <table style="border-collapse: collapse;width:100%">
             <tr style="border-bottom: 1px solid #ccc">
                 <td style="color: #f96302;padding:5px">
@@ -218,9 +238,9 @@ export class DoorConfigurationComponent implements OnInit {
                 <td>${'$' + itemPrice.toFixed(2)}</td>
             </tr>
           </table>
-        `
-            this.showEmailMsg = true;
-            this.emailMsg = 'Mail Send Successfully';
+          </div>
+        `;
+           
             var sub = "";
             var type = "";
             switch (GdoType[0]) {
@@ -235,9 +255,12 @@ export class DoorConfigurationComponent implements OnInit {
             }
             let obj = {
                 ToEmail: this.shareEmailTxt,
+                Body: body,
                 Subject: sub,
                 MailType: type
             }
+             this.emailMsg = 'Mail Sent Successfully';
+                this.showEmailMsg = true;
             this.dataService.sendMail(obj)
                 .subscribe(res => {
                     console.log('sent mail')
@@ -246,7 +269,7 @@ export class DoorConfigurationComponent implements OnInit {
                     this.dataService.handleError();
                 })
         }
-    }
+    };
 
     nextBtn(path) {
         if (this.utils.resFlowSession.resDoorObj.INSTALLTYPE === 'DIY') {

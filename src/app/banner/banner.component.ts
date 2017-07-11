@@ -101,18 +101,7 @@ if (!value) {
             $(".form-control input").focus();
 			$(".form-control input").setSelectionRange(0, 0)
         }
-}
-
-    onChange(value) {
-
-        if (!value) {
-            $(".form-control input").val("")
-            $(".form-control input").focus();
-            $(".form-control input").setSelectionRange(0, 0)
-        }
-
-
-    }
+}  
 
     getPromo() {
 
