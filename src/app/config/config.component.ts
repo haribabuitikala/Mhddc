@@ -193,6 +193,16 @@ export class ConfigComponent implements OnInit, AfterViewInit, AfterViewChecked 
                     this.isDoor = true;
                      $('body').removeClass('loader');
                     $('#doorVis').removeClass('default-canvas-hide');
+					$(".switcher-image-sec").css('min-height', '220px');
+                            if (this.utils.utilities.doubleDoor) {
+                                var switchheight = $(".switcher-image-sec").height();
+                                var canvasdoorheight = $(".switcher-image-sec #doorVis").height();
+                                var canvasdisplayheight = $(".switcher-image-sec #doorVis canvas").height();
+                                var margintopheight = switchheight - canvasdoorheight;
+                                $(".switcher-image-sec #doorVis canvas").css({ 'margin-top': margintopheight / 2 });
+                            }
+					
+					
                 } else {
                     this.generateDoorWithHome().then(({ canvas }) => {
                         if (canvas) {
@@ -202,7 +212,7 @@ export class ConfigComponent implements OnInit, AfterViewInit, AfterViewChecked 
                                 height: '90%',
                                 width: '90%'
                             });
-							$(".switcher-image-sec").height('220');
+							$(".switcher-image-sec").css('min-height', '220px');
                             if (this.utils.utilities.doubleDoor) {
                                 var switchheight = $(".switcher-image-sec").height();
                                 var canvasdoorheight = $(".switcher-image-sec #doorVis").height();

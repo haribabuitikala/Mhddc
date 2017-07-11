@@ -25,6 +25,7 @@ export class CollectionComponent implements OnInit {
     popular = true;
     pageNo;
     quickFlow = false;
+	navigateErorFlag = false;
 
     showSpeciality() {
         this.specialityBtn = false;
@@ -358,7 +359,18 @@ export class CollectionComponent implements OnInit {
         this.utils.setUtils(3, 1);
         if (this.selected) {
             this.goToHome(this.selected);
+        }else{
+		this.navigateErorFlag = true;
+		}
+    }
+	
+	closeNavigationError() {
+        if (!this.navigateErorFlag) {
+            return true;
+        } else {
+            this.navigateErorFlag = false;
         }
+
     }
 
     prevBtn(curr, path) {

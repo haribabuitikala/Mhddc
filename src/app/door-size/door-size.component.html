@@ -44,10 +44,10 @@
   <img src="../../assets/images/Forward-50.png"  *ngIf="!isValid" alt="" height="13" class="margin-l-15 transform-rotate-minus-90"> 
 </button>
 
-<div class="text-center margin-t-0 selectdoorSizetoster" *ngIf="navigateErorFlag">
+<div class="text-center margin-t-0 selectdoorSizetoster " *ngIf="navigateErorFlag">
 				<span _ngcontent-gdw-45="" class = "selectdoorSizetosterspan"> Select Single or Double Door  </span>
-            <button (click)="closeNavigationError()"
-                class="btn btn-default text-uppercase box-shadow bold text-orange">x
+            <button (click)="closeNavigationError()"class="close">
+			 <span aria-hidden="true">×</span>
             </button>
         </div>
 <div class="tile col-xs-12 padding10" *ngIf="showMeasure">
@@ -125,7 +125,7 @@
         <ul>
             <li>Garage Doors are generally categorized as Single or Double doors
             </li>
-            <li class="bold">Common Single door sizes: 8' wide by 7' tall or 9'wide by 7' tall</li>
+            <li>Common Single door sizes: 8' wide by 7' tall or 9'wide by 7' tall</li>
             <li>Common Double door sizes: 16' wide by 7' tall</li>
         </ul>
         <h4 class="text-orange roboto-medium font-size-16 text-uppercase padding-t-7">How To Measure</h4>
