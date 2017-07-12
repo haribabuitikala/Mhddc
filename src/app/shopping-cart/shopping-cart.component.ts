@@ -86,7 +86,7 @@ getItemPrice() {
         this.itemPrice = this.utils.calculateTotalPrice();
     } else {
         this.data = this.dataStore.gdoAdditionalDirect;
-        this.itemPrice = this.data.item_price;
+        this.itemPrice = this.data.item_price * this.qty;
     }
 }
 

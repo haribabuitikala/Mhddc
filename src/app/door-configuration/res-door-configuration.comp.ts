@@ -51,6 +51,8 @@ export class ResDoorConfigurationComponent implements OnInit {
     itmTotalPrice;
 
     socialImageUrl = "";
+    doorWithHome = "";
+    doorWithHomeUrl = "";
 
     // for gdo the pageNo will be 4
     // for residential the pageNo will be 
@@ -108,7 +110,7 @@ export class ResDoorConfigurationComponent implements OnInit {
             'twitter');
         this.pintbtn = new ShareButton(ShareProvider.PINTEREST, '<i class="fa fa-pinterest-p"></i>',
             'pinterest');
-
+        this.doorWithHome = document.querySelector('#homeVis canvas')['toDataURL']();
         this.socialshare();
     }
     notify(event) {
@@ -177,6 +179,7 @@ export class ResDoorConfigurationComponent implements OnInit {
         var itm3display = 'none';
         var itm4display = 'none';
         var itm5display = 'none';
+        var doorSelectedImage = this.socialImageUrl;
         // opener accessories 
         switch (resObj.opener.items.length) {
             case 1:
@@ -266,9 +269,8 @@ export class ResDoorConfigurationComponent implements OnInit {
         var leadPrice = resObj.LEADTEST === true ? '$20.00' : "";
         var medalian = true;
         var itemPrice = resObj.INSTALLTYPE === 'Installed' ? this.utils.utilities.itemPriceInstall : this.utils.utilities.itemPriceDY;
-
- 
-
+        var doorInstallType = resObj.INSTALLTYPE;
+        var appInstance = "http://dev-mhddc.clopay.com";
         var body = `
 		 <style type="text/css">
 
@@ -283,21 +285,23 @@ body {
 		
 		
             <div style="text-align: center; break-after: page;">
-                        <a href="http://www.clopaydoor.com/">
-                            <img src="http://test-mhddc.clopay.com/assets/images/clopay-logo_s.png" height="40">
-                        </a> 
+                        <a href="#">
+                            <img src="${appInstance}/assets/images/ClopayLogo.png" width="180" height="93">
+                             </a>                            
 						</div>
-            <div style="background: #fff;">
-                <div style="padding: 15px">
-                    ${product}
-                </div>
-                <div>
-                <img src="${imageUrl}" width="300" height="200" />
-                </div>
+            <div style="background: #fff;">               
+                <div style=' width: 676px; height: 250px; position: relative; display:inline-block'>
+                    <img id='printIMG' src="${doorSelectedImage}" style='max-width: 280px' >
+                    <!-- Canvas image - URL -->	
+                    <img id='printHomeIMG' style='margin-left: 10px; max-width: 280px' src="${imageUrl}">
+                 </div>
+
                  <br />
                     Thanks for your interest in purchasing a Clopay garage door through The Home Depot. Below is some basic information on the door you designed, what our program includes, and how our program works. We look forward to serving you in the near future.
                     <hr />
                     <br />
+                <div id="ourCfg" style="padding: 0px 0px 3px 8px; border-bottom: thin solid #bbb;">YOUR DOOR CONFIGURATION</div>
+                <div style="" id="selName"> ${product}  (${doorInstallType})</div>
                 <table style="border-collapse: collapse;width:100%;position:relative;">
                 <tr style="border-bottom: 1px solid #ccc">
                     <td style="color: #f96302;padding:5px">Door Model</td>
@@ -390,13 +394,7 @@ body {
                     <div style="text-align:right;color: #f96302;padding-right:40px">Sub Total:</div>
                     </td>
                     <td>${'$' + itemPrice.toFixed(2)}</td>
-                </tr>
-				
-				<div style="position:absolute; bottom:10px; width: 95% ; text-align: right; margin:0px auto;">
-     <img src="http://test-hddchtml2.clopay.com/content/images/HD_NOTAG.png"><hr>   
-    
-    </div>
-				
+                </tr>			
                 </table>
 				
             </div>
@@ -445,40 +443,71 @@ body {
             var d = new Date();
             var timeStamp = d.getTime();
             let params = {
-                base64String: this.utils.resFlow.imgSrc,
+                base64String: this.doorWithHome,
                 imagename: 'res-' + timeStamp,
                 imageformat: 'jpeg'
             }
-            this.dataService.getImageUrl(params)
-                .subscribe(
-                res => {
-                    imageUrl = res;
-                    var shareImage = `<img src="${imageUrl}" width="300" height="200" />`;
-                    let body = this.renderEmailBody(imageUrl || '');
-                    let obj = {
-                        ToEmail: this.shareEmail,
-                        Body: body,
-                        MailType: "Residential",
-                        Subject: "Thank You For Your Interest In Clopay",
-                        base64String: this.utils.resFlow.selectedImg,
-                        imagename: 'res-' + timeStamp,
-                        imageformat: 'jpeg'
-                    }
 
-                    this.emailMsg = 'Mail Sent Successfully';
-                    this.showEmailMsg = true;
-                    this.dataService.sendMail(obj)
-                        .subscribe(res => {
-                            console.log('sent mail');
-                        })
-                },
+
+            if (this.doorWithHomeUrl) {
+                imageUrl = this.doorWithHomeUrl;
+                var shareImage = `<img src="${imageUrl}" width="300" height="200" />`;
+                let body = this.renderEmailBody(imageUrl || '');
+                let obj = {
+                    ToEmail: this.shareEmail,
+                    Body: body,
+                    MailType: "Residential",
+                    Subject: "Thank You For Your Interest In Clopay",
+                    base64String: this.utils.resFlow.selectedImg,
+                    imagename: 'res-' + timeStamp,
+                    imageformat: 'jpeg'
+                }
+                this.emailMsg = 'Mail Sent Successfully';
+                this.showEmailMsg = true;
+                this.dataService.sendMail(obj)
+                    .subscribe(res => {
+                        console.log('sent mail');
+                    })
+
                 err => {
                     this.dataService.handleError();
-                });
+                };
+            } else {
+
+                this.dataService.getImageUrl(params)
+                    .subscribe(
+                    res => {
+                        this.doorWithHomeUrl = res;
+                        imageUrl = res;
+                        var shareImage = `<img src="${imageUrl}" width="300" height="200" />`;
+                        let body = this.renderEmailBody(imageUrl || '');
+                        let obj = {
+                            ToEmail: this.shareEmail,
+                            Body: body,
+                            MailType: "Residential",
+                            Subject: "Thank You For Your Interest In Clopay",
+                            base64String: this.utils.resFlow.selectedImg,
+                            imagename: 'res-' + timeStamp,
+                            imageformat: 'jpeg'
+                        }
+
+                        this.emailMsg = 'Mail Sent Successfully';
+                        this.showEmailMsg = true;
+                        this.dataService.sendMail(obj)
+                            .subscribe(res => {
+                                console.log('sent mail');
+                            })
+                    },
+                    err => {
+                        this.dataService.handleError();
+                    });
+            }
         }
-    }
+    };
+
     updateQuantity(flow) {
-    }
+    };
+
     nextBtn(path) {
         this.utils.resFlowSession.addToCart();
         $('#shop-count').text(this.utils.resFlowSession.cart.length);
