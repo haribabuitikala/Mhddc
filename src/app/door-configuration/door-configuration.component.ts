@@ -141,6 +141,84 @@ export class DoorConfigurationComponent implements OnInit {
         let t = itm.split('.')[0];
         return t + '.png';
     }
+
+
+    renderAccesoriesDiv()
+    {
+        if(this.accessories)
+        {
+                var OpnerAcc = "";
+               var itemHead = "Opener Accessories";
+               var itemValue = "";
+               var itemPrice = "";
+                var temptr = "";
+                temptr = ` <tr style="border-bottom: 1px solid #ccc">
+                            <td style="color: #f96302;padding:5px">${itemHead}</td>
+                            <td>${itemValue}</td>
+                            <td>${itemPrice}</td>
+                        </tr>`;
+
+                OpnerAcc += temptr;
+                $.each( this.gdoOpeners, function( arrayID, gdoOpener ) {
+                itemHead = "";
+                itemValue = gdoOpener.name + "(" +gdoOpener.count +")";
+                itemPrice =  Number(gdoOpener.price * gdoOpener.count).toLocaleString('en-US', { style: 'currency', currency: 'USD' });       
+                temptr = ` <tr style="border-bottom: 1px solid #ccc">
+                            <td style="color: #f96302;padding:5px">${itemHead}</td>
+                            <td>${itemValue}</td>
+                            <td>${itemPrice}</td>
+                        </tr>`;
+
+                OpnerAcc += temptr;               
+            });
+            
+             return OpnerAcc;
+        }
+            else
+            {
+                return "";
+            }
+};
+
+renderDistance()
+{
+    var temptr="";
+     if(this.showDistancePrice)
+        {
+
+      var   itemHead = "Additional Options";
+      var  itemValue =this.distance;
+      var  itemPrice =Number(this.distancePrice).toLocaleString('en-US', { style: 'currency', currency: 'USD' });
+         temptr = ` <tr style="border-bottom: 1px solid #ccc">
+                    <td style="color: #f96302;padding:5px">${itemHead}</td>
+                    <td>${itemValue} miles from store </td>
+                    <td>${itemPrice}</td>
+                </tr>`;
+
+                return temptr;
+        }
+        else
+        {
+            return "";
+        }       
+    
+};
+
+  renderTotalDiv()
+    {        
+        var totalPrice = Number(this.itemPrice).toLocaleString('en-US', { style: 'currency', currency: 'USD' });     
+        var temptrp = "";
+        var temptr = `<div class="sub-total"><strong>Sub-Total${totalPrice}</strong><br/>
+                     <i>Tax not included if applicable</i>
+                      </div>`;
+
+
+        
+
+        return (temptr);
+    };
+
+
     shareEmail() {
         if (this.shareEmailTxt !== undefined) {
             var data = this.emailBody;
@@ -153,43 +231,52 @@ export class DoorConfigurationComponent implements OnInit {
             var itm0Display = 'none';
             var itm1Display = 'none';
             var itm2Display = 'none';
-            let accesories = this.utils.gdoFlowSession.cart[0].opener;
-            switch (items) {
-                case 1:
-                    if (accesories.items[0].QTY) {
-                        itm0 = accesories.items[0].item_name + '(x' + accesories.items[0].QTY + ')';
-                        itm0Price = '$' + (accesories.items[0].item_price * accesories.items[0].QTY).toFixed(2);
-                        itm0Display = 'block';
-                    }
-                    break;
-                case 2:
-                    if (accesories.items[0].QTY && accesories.items[1].QTY) {
-                        itm0 = accesories.items[0].item_name + '(x' + accesories.items[0].QTY + ')';
-                        itm0Price = '$' + (accesories.items[0].item_price * accesories.items[0].QTY).toFixed(2);
-                        itm0Display = 'block';
-                        itm1 = accesories.items[1].item_name + '(x' + accesories.items[1].QTY + ')';
-                        itm1Price = '$' + (accesories.items[1].item_price * accesories.items[1].QTY).toFixed(2);
-                        itm1Display = 'block';
-                    }
-                    break;
-                case 3:
-                    if (accesories.items[0].QTY && accesories.items[1].QTY && accesories.items[2].QTY) {
-                        itm0 = accesories.items[0].item_name + '(x' + accesories.items[0].QTY + ')';
-                        itm0Price = '$' + (accesories.items[0].item_price * accesories.items[0].QTY).toFixed(2);
-                        itm0Display = 'block';
-                        itm1 = accesories.items[1].item_name + '(x' + accesories.items[1].QTY + ')';
-                        itm1Price = '$' + (accesories.items[1].item_price * accesories.items[1].QTY).toFixed(2);
-                        itm1Display = 'block';
-                        itm2 = accesories.items[2].item_name + '(x' + accesories.items[2].QTY + ')';
-                        itm2Price = '$' + (accesories.items[2].item_price * accesories.items[2].QTY).toFixed(2);
-                        itm2Display = 'block';
-                    }
-                    break;
-            }
+            let accesories = this.utils.gdoFlowSession.cart[0].opener;            
             var itemPrice = this.gdoConfig.itemPrice;
             var gdoBanner = this.toPng(this.utils.utilities.gdoBanner);
+            var opnerAcc = this. renderAccesoriesDiv();
+            var distDiv = this.renderDistance();
+            var totalBody = this.renderTotalDiv();
             var appInstance = "http://dev-mhddc.clopay.com";
             var body = `
+             <style type="text/css">
+
+body {
+            color: #000;
+            font-family: Helvetica, Arial, sans-serif;
+            font-size: 15px;
+            width: 100%;
+        }
+		
+		.div70 {
+    float: left;
+    width: 70%;
+}
+
+.div30 {
+    float: right;
+    width: 260px;
+    height: 130px;
+    border: 1px solid #ccc;
+    display: block;
+    overflow: hidden;
+    padding: 10px;		
+}
+
+.sub-total {
+    float: right;
+    text-align: right;
+    padding-top: 15px;padding-bottom: 10px;
+    width: 100%;
+}
+
+.div70 table tr td:last-child {
+    text-align: right;
+
+
+} 
+
+ </style>	
            <div style="text-align: center; break-after: page;">
                         <a href="#">
                             <img src="${appInstance}/assets/images/ClopayLogo.png" width="180" height="93">
@@ -206,38 +293,16 @@ export class DoorConfigurationComponent implements OnInit {
                     <hr />
                     <br />
                 <div id="ourCfg" style="padding: 0px 0px 3px 8px; border-bottom: thin solid #bbb;">YOUR OPENER CONFIGURATION</div>
-          <table style="border-collapse: collapse;width:100%">
+          <table style="border-collapse: collapse;width:100%">           
+
             <tr style="border-bottom: 1px solid #ccc">
-                <td style="color: #f96302;padding:5px">
-                Opener:
-                </td>
-                <td style="padding:5px">${opener}</td>
-                <td>
-                 ${openerPrice}
-                </td>
-            </tr>
-            <tr style="border-bottom: 1px solid #ccc" >
-                <td style="color: #f96302;padding:5px;display: ${itm0Display}">
-                Opener Items:
-                </td>
-                <td style="padding:5px">
-                   <div style="display: ${itm0Display}">${itm0}</div>
-                   <div style="display: ${itm1Display}">${itm1}</div>
-                   <div style="display: ${itm2Display}">${itm2}</div>
-                </td>
-                <td style="padding:5px">
-                   <div style="display: ${itm0Display}">${itm0Price}</div>
-                   <div style="display: ${itm1Display}">${itm1Price}</div>
-                   <div style="display: ${itm2Display}">${itm2Price}</div>
-                </td>
-            </tr><tr>
-                <td></td>
-                <td>
-                <div style="text-align:right;color: #f96302;padding-right:40px">Sub Total:</div>
-                </td>
-                <td>${'$' + itemPrice.toFixed(2)}</td>
-            </tr>
-          </table>
+                    <td style="color: #f96302;padding:5px">Opener</td>
+                    <td>${opener}</td>
+                    <td>${openerPrice}</td>
+                </tr>    
+                ${opnerAcc}
+                ${distDiv}
+          </table>${totalBody}
           </div>
         `;
            

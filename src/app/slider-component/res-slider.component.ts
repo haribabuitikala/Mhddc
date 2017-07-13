@@ -307,7 +307,8 @@ export class ResSliderComponent implements OnInit, AfterViewInit {
                this.saveSelectedPromo(obj);
                 break;
             case 'design':              
-                if (obj['constructions']) {                    
+                if (obj['constructions']) {    
+                     this.utils.resFlowSession.resDoorObj.construction.construction = obj['constructions'][0];                  
                     this.getItemDiscount("models", obj['constructions'][0].item_price, obj);
                 }
                    
