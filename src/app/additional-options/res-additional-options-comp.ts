@@ -1,13 +1,13 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
-import {Router, ActivatedRoute} from '@angular/router';
-import {AppComponent} from "../app.component";
-import {AppUtilities} from "../shared/appUtilities";
-import {NavService} from "../nav/nav-service";
-import {NavComponent} from "../nav/nav.component";
-import {CollectionData} from "../collection/collection-data";
-import {CollectionService} from "../shared/data.service";
-import {ConfigComponent} from "../config/config.component";
-import {ModalComponent} from "ng2-bs3-modal/ng2-bs3-modal";
+import { Component, OnInit, ViewChild, HostListener } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
+import { AppComponent } from "../app.component";
+import { AppUtilities } from "../shared/appUtilities";
+import { NavService } from "../nav/nav-service";
+import { NavComponent } from "../nav/nav.component";
+import { CollectionData } from "../collection/collection-data";
+import { CollectionService } from "../shared/data.service";
+import { ConfigComponent } from "../config/config.component";
+import { ModalComponent } from "ng2-bs3-modal/ng2-bs3-modal";
 declare var $: any;
 declare var _: any;
 
@@ -303,6 +303,19 @@ export class ResAdditionalOptionsComponent implements OnInit {
             return el.id != id;
         });
     }
+
+    @HostListener('document:keypress', ['$event'])
+    handleKeyboardEvent(event: KeyboardEvent) {
+        console.log(event);
+        const pattern = /[0-9\+\-\ ]/;
+        //let inputChar = String.fromCharCode(event.charCode);
+        let inputChar = event.key;
+        if (!pattern.test(inputChar)) {
+            event.preventDefault();
+            console.log('KeyDown!');
+        }
+    }
+
 
     diyQuestionsOptions(itm, obj, event?) {
         this.itmObj = this.utils.resFlowSession.resDoorObj.additional;
