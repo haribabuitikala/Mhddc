@@ -524,7 +524,7 @@ body {
         var timeStamp = d.getTime();
 
         let params = {
-            base64String: this.utils.resFlow.imgSrc,
+            base64String:this.doorWithHome,//this.utils.resFlow.imgSrc,
             imagename: 'SocialShare-' + timeStamp,
             imageformat: 'jpeg'
         }
@@ -533,7 +533,7 @@ body {
             res => {
                 this.socialImageUrl = res;
                 this.title = "";
-                this.description = "'My Clopay Garage Door design! Door shown is a Clopay'"+this.utils.resFlowSession.resDoorObj.design.dsgn['item_name'] +", "+this.utils.resFlowSession.resDoorObj.construction.construction['ClopayModelNumber']+"'. Design your door today!'";
+                this.description = "'My Clopay Garage Door design! Door shown is a Clopay'"+this.utils.resFlowSession.resDoorObj.construction.construction['product_name'] +", "+this.utils.resFlowSession.resDoorObj.construction.construction['ClopayModelNumber']+"'. Design your door today!'";
             },
             err => {
                 this.dataService.handleError();
