@@ -112,9 +112,9 @@
     </modal-header>
     <modal-body>
         <div class="flex space-around margin-b-20">
-            <share-button class="facebook" [button]="facebookbtn" [url]='socialImageUrl' [description]="description"></share-button>
-            <share-button class="twitter" [button]="twitterbtn" [url]='socialImageUrl' [title]="title"></share-button>
-            <share-button class="pinterest" [button]="pintbtn" [image]='socialImageUrl'></share-button>
+            <share-button class="facebook" [button]="facebookbtn" [url]='socialImageUrl' [image]='socialImageUrl' [description]="description" ></share-button>
+            <share-button class="twitter" [button]="twitterbtn" [url]='socialImageUrl' [title]="description" [description]="description"></share-button>
+            <share-button class="pinterest" [button]="pintbtn" [image]='socialImageUrl' [description]="description" ></share-button>
         </div>
         <!--<div class="flex space-around margin-b-20">
             <button class="flex share-button">
