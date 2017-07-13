@@ -102,8 +102,8 @@ export class ResDoorConfigurationComponent implements OnInit {
         this.setNavComponent();
         this.data = this.utils.resFlowSession.resDoorObj;
         this.getPrice();
-        this.googlebtn = new ShareButton(ShareProvider.GOOGLEPLUS, '<i class="fa fa-google"></i>',
-            'google-plus');
+        // this.googlebtn = new ShareButton(ShareProvider.GOOGLEPLUS, '<i class="fa fa-google"></i>',
+        //     'google-plus');
         this.facebookbtn = new ShareButton(ShareProvider.FACEBOOK, '<i class="fa fa-facebook"></i>',
             'facebook');
         this.twitterbtn = new ShareButton(ShareProvider.TWITTER, '<i class="fa fa-twitter"></i>',
@@ -518,7 +518,7 @@ body {
         this.route.navigateByUrl('/config/additionalOptions');
     }
 
-    socialshare() {
+    socialshare() {  console.log("calling social share method");
         var imageUrl;
         var d = new Date();
         var timeStamp = d.getTime();
@@ -533,7 +533,7 @@ body {
             res => {
                 this.socialImageUrl = res;
                 this.title = "";
-                this.description = "";
+                this.description = "'My Clopay Garage Door design! Door shown is a Clopay'"+this.utils.resFlowSession.resDoorObj.design.dsgn['item_name'] +", "+this.utils.resFlowSession.resDoorObj.construction.construction['ClopayModelNumber']+"'. Design your door today!'";
             },
             err => {
                 this.dataService.handleError();
