@@ -318,7 +318,9 @@ table td {
           </table>${totalBody}
           </div>
           <div class="div30"></div>
+
     <div style="position: relative; top: 0px; left: 0px; width: 550px; font-family: Arial, Helvetica, sans-serif; color: #555;" id="termsholder">
+    <div style="text-align: center; break-after: page;">
         <h3 style="font-size:14px; font-weight: bold;">Terms & Conditions</h3>
         <h4 style="font-weight: bold;color:#f96302;">BASIC INSTALLATION PRICE INCLUDES</h4>
         <ul style="font-size:12px;">
@@ -363,7 +365,7 @@ table td {
         <li>Upon completion of the installation you or your representative will be asked to sign a lien waiver verifying 
         service completed</li>
         </ul>
-
+</div>
 
         <h4 style="font-size:12px; font-weight: bold;" align="center">Special Notes About Your Garage Door Opener Installation</h4>
         <h4 style="font-weight: bold;color:#f96302;">BEFORE YOUR INSTALLATION:</h4>
