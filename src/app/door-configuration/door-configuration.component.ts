@@ -436,7 +436,7 @@ table td {
             this.showEmailMsg = true;
             this.dataService.sendMail(obj)
                 .subscribe(res => {
-                    console.log('sent mail')
+                    console.log('sent mail');
                 },
                 err => {
                     this.dataService.handleError();
