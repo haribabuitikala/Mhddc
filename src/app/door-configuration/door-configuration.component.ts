@@ -320,7 +320,7 @@ table td {
           <div class="div30"></div>
     <div style="position: relative; top: 0px; left: 0px; width: 550px; font-family: Arial, Helvetica, sans-serif; color: #555;" id="termsholder">
         <h3 style="font-size:14px; font-weight: bold;">Terms & Conditions</h3>
-        <h4 style="font-weight: bold;">BASIC INSTALLATION PRICE INCLUDES</h4>
+        <h4 style="font-weight: bold;color:#f96302;">BASIC INSTALLATION PRICE INCLUDES</h4>
         <ul style="font-size:12px;">
         <li>Delivery of operator (within 30 miles of store)</li>
         <li>Take down and haul away of existing opener</li>
@@ -344,7 +344,7 @@ table td {
         </ul>
 
 
-        <h4 style="font-weight: bold;">WHAT TO EXPECT ONCE WE RECEIVE YOUR ORDER</h4>
+        <h4 style="font-weight: bold;color:#f96302;">WHAT TO EXPECT ONCE WE RECEIVE YOUR ORDER</h4>
         <ul style="font-size:12px;">
         <li>Installer will call customer to schedule appointment</li>
         <li>Once installer arrives at jobsite, he/she will inspect for additional work that may be required</li>
@@ -366,7 +366,7 @@ table td {
 
 
         <h4 style="font-size:12px; font-weight: bold;" align="center">Special Notes About Your Garage Door Opener Installation</h4>
-        <h4 style="font-weight: bold;">BEFORE YOUR INSTALLATION:</h4>
+        <h4 style="font-weight: bold;color:#f96302;">BEFORE YOUR INSTALLATION:</h4>
         <ul style="font-size:12px;">
         <li>THE INSTALLER WILL CALL YOU WITHIN 3 BUSINESS DAYS TO SCHEDULE THE INSTALLATION DATE AND DISCUSS 
         JOBSITE CONDITIONS INCLUDING EXISTING DOOR MEASUREMENTS, TYPE & CONDITION OF DOOR, HEADROOM & 
@@ -380,7 +380,7 @@ table td {
         </ul>
         
         
-        <h4 style="font-weight: bold;">DURING THE INSTALLATION:</h4>
+        <h4 style="font-weight: bold;color:#f96302;">DURING THE INSTALLATION:</h4>
         <ul style="font-size:12px;">
         <li>AN ADULT OVER 18 YEARS OF AGE WITH THE AUTHORITY TO MAKE DECISIONS ABOUT YOUR INSTALLATION MUST 
         BE PRESENT DURING THE JOBSITE INSPECTION AND INSTALLATION.</li>
@@ -389,7 +389,7 @@ table td {
         </li></ul>
 
 
-        <h4 style="font-weight: bold;">FACTORS TO CONSIDER:</h4>
+        <h4 style="font-weight: bold;color:#f96302;">FACTORS TO CONSIDER:</h4>
         <ul style="font-size:12px;">
         <li>DANGEROUS WEATHER CONDITIONS MAY CAUSE THE INSTALLATION TO BE RE-SCHEDULED.</li>
         <li>CANCELING APPOINTMENTS WITH INSTALLERS WITHOUT 24 HOUR NOTICE OR MISSING SCHEDULED 
@@ -400,7 +400,7 @@ table td {
         PROBLEMS) THERE WILL BE EXTRA CHARGES. IN SOME CASES, THIS LABOR MAY NOT BE AVAILABLE FROM THE  
         HOME DEPOT, SO THE  CUSTOMER MUST HIRE THEIR OWN REPAIR MAN </li></ul>
 
-        <h4 style="font-weight: bold;">SERVICE NOT AVAILABLE WITH THIS INSTALLATION PROGRAM:</h4>
+        <h4 style="font-weight: bold;color:#f96302;">SERVICE NOT AVAILABLE WITH THIS INSTALLATION PROGRAM:</h4>
         <ul style="font-size:12px;">
         <li>ANY ELECTRICAL WORK (OTHER THAN CONTENTS OF PACKAGED OPENER**) <p style="color:#434343;">
         ** The Model 920EV comes standard with a Remote Light Switch that will need to be installed by a licensed electrician or homeowner, Clopay Installers will not install the Remote Light Switch</p></li>
