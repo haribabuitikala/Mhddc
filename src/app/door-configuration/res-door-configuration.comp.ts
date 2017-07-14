@@ -522,18 +522,19 @@ body {
         var imageUrl;
         var d = new Date();
         var timeStamp = d.getTime();
-
+        
         let params = {
-            base64String:this.doorWithHome,//this.utils.resFlow.imgSrc,
+            base64String:this.doorWithHome,
             imagename: 'SocialShare-' + timeStamp,
             imageformat: 'jpeg'
         }
+
         this.dataService.getImageUrl(params)
             .subscribe(
             res => {
                 this.socialImageUrl = res;
                 this.title = "";
-                this.description = "My Clopay Garage Door design! Door shown is a Clopay "+ this.utils.resFlowSession.resDetails.windcode +", "+ this.utils.resFlowSession.resDoorObj.construction.construction['ClopayModelNumber'] +". Design your door today!";
+                this.description = "My Clopay Garage Door design! Door shown is a Clopay "+ this.utils.resFlowSession.resDetails.collectionName.replace(/[^a-zA-Z ]/g, "")  +", "+ this.utils.resFlowSession.resDoorObj.construction.construction['ClopayModelNumber'] +". Design your door today!";
             },
             err => {
                 this.dataService.handleError();
