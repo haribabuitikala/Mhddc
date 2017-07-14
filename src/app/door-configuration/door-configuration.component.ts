@@ -220,7 +220,7 @@ renderDistance()
 
 
 
-    shareEmail() {
+    shareGDOEmail() {
         if (this.shareEmailTxt !== undefined) {
             var data = this.emailBody;
             var windcode = data.windcode;
