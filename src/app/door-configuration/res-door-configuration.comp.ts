@@ -421,7 +421,7 @@ return fromColorBody;
         var totalPrice = this.covertToUSD(resData.totalPrice);
         var promoprice = this.utils.utilities.promoSaving;
         var temptrp = "";
-        var temptr = `<div class="sub-total"><strong>Sub-Total${totalPrice}</strong><br/>
+        var temptr = `<div class="sub-total"><strong>Sub-Total ${totalPrice}</strong><br/>
                      <i>Tax not included if applicable</i>
                       </div>`;
 
@@ -429,7 +429,7 @@ return fromColorBody;
         if(this.utils.utilities.isPromoEnabled && promoprice && promoprice > 0 )              
         {
             var itemPromo = this.covertToUSD(promoprice);
-            var endDt = this.utils.promoObject.enddate;
+            var endDt = this.utils.promoObject.enddate.trim().split(" ")[0];
           //  <p>Your price includes a promotional discount of </p>
 
              temptrp = `<p> Your price includes a promotional discount of ${itemPromo} </p> <br/>
@@ -453,6 +453,12 @@ return fromColorBody;
         }
     };
 
+
+    decodeHtml(html) {
+    var txt = document.createElement("textarea");
+    txt.innerHTML = html;
+    return txt.value;
+};
 
     
 
@@ -555,9 +561,9 @@ body {
 						</div>
             <div style="background: #fff;">               
                 <div style=' width: 676px; height: 250px; position: relative; display:inline-block'>
-                    <img id='printIMG' src="${doorSelectedImage}" style='max-width: 280px' >
+                    <img id='printIMG' src="${imageUrl}" style='max-width: 280px' >
                     <!-- Canvas image - URL -->	
-                    <img id='printHomeIMG' style='margin-left: 10px; max-width: 280px' src="${imageUrl}">
+                    <img id='printHomeIMG' style='margin-left: 10px; max-width: 280px' src="${doorSelectedImage}">
                  </div>
 
                  <br />
@@ -567,7 +573,7 @@ body {
 					<div class="div70">
 					<div id="ourCfg" style="padding: 0px 0px 3px 8px; border-bottom: thin solid #bbb;">YOUR DOOR CONFIGURATION</div>
                 <div style="" id="selName"> ${product}  (${doorInstallType})</div>
-                <table style="border-collapse: collapse;width:100%;position:relative;">
+                <table style="border-collapse: collapse;width:100%;position:relative;padding:10px;">
                 <tr style="border-bottom: 1px solid #ccc">
                     <td style="color: #f96302;padding:5px">Door Model</td>
                     <td>${constructionMdlNo}</td>
@@ -646,20 +652,23 @@ body {
             var d = new Date();
             var timeStamp = d.getTime();
             let params = {
-                base64String: this.doorWithHome,
+                base64String: this.utils.resFlow.imgSrc,
                 imagename: 'res-' + timeStamp,
                 imageformat: 'jpeg'
-            }      
+            }     
+
+              var resObj = this.utils.resFlowSession.resDoorObj;
+              var productName = this.decodeHtml(resObj.product.product['item_name'] + "(" + resObj.INSTALLTYPE + ")"); 
 
             if (this.doorWithHomeUrl) {
                 imageUrl = this.doorWithHomeUrl;
-                var shareImage = `<img src="${imageUrl}" width="300" height="200" />`;
+                var shareImage = `<img src="${imageUrl}"  />`;
                 let body = this.renderEmailBody(imageUrl || '');
                 let obj = {
                     ToEmail: this.shareEmail,
                     Body: body,
                     MailType: "Residential",
-                    Subject: "Thank You For Your Interest In Clopay",
+                    Subject: "Thank You Email - Residential - " + productName,
                     base64String: this.utils.resFlow.selectedImg,
                     imagename: 'res-' + timeStamp,
                     imageformat: 'jpeg'
@@ -681,13 +690,13 @@ body {
                     res => {
                         this.doorWithHomeUrl = res;
                         imageUrl = res;
-                        var shareImage = `<img src="${imageUrl}" width="300" height="200" />`;
+                        var shareImage = `<img src="${imageUrl}" />`;
                         let body = this.renderEmailBody(imageUrl || '');
                         let obj = {
                             ToEmail: this.shareEmail,
                             Body: body,
                             MailType: "Residential",
-                            Subject: "Thank You For Your Interest In Clopay",
+                            Subject: "Thank You Email - Residential - " + productName,
                             base64String: this.utils.resFlow.selectedImg,
                             imagename: 'res-' + timeStamp,
                             imageformat: 'jpeg'

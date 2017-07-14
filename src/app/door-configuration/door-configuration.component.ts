@@ -208,7 +208,7 @@ renderDistance()
     {        
         var totalPrice = Number(this.itemPrice).toLocaleString('en-US', { style: 'currency', currency: 'USD' });     
         var temptrp = "";
-        var temptr = `<div class="sub-total"><strong>Sub-Total${totalPrice}</strong><br/>
+        var temptr = `<div class="sub-total"><strong>Sub-Total ${totalPrice}</strong><br/>
                      <i>Tax not included if applicable</i>
                       </div>`;
 
@@ -217,6 +217,7 @@ renderDistance()
 
         return (temptr);
     };
+
 
 
     shareEmail() {
@@ -256,8 +257,7 @@ body {
 .div30 {
     float: right;
     width: 260px;
-    height: 130px;
-    border: 1px solid #ccc;
+    height: 130px; 
     display: block;
     overflow: hidden;
     padding: 10px;		
@@ -289,9 +289,10 @@ body {
                  </div>
 
                  <br />
-                    Thanks for your interest in purchasing a Clopay garage door opener through The Home Depot. Below is some basic information on the door opener you selected, what our program includes, and how our program works. We look forward to serving you in the near future.
+                    Thanks for your interest in purchasing a Clopay garage door through The Home Depot. Below is some basic information on the door you designed, what our program includes, and how our program works. We look forward to serving you in the near future.
                     <hr />
                     <br />
+                    <div class="div70">
                 <div id="ourCfg" style="padding: 0px 0px 3px 8px; border-bottom: thin solid #bbb;">YOUR OPENER CONFIGURATION</div>
           <table style="border-collapse: collapse;width:100%">           
 
@@ -304,17 +305,18 @@ body {
                 ${distDiv}
           </table>${totalBody}
           </div>
+          <div class="div30"></div>
         `;
            
             var sub = "";
             var type = "";
             switch (GdoType[0]) {
                 case "Chamberlain":
-                    sub = "Thank You For Your Interest In Garage Door Openers"
+                    sub = "Thank you email-GDO-Chamberlain"
                     type = "GdoChamberlain";
                     break;
                 case "Genie":
-                    sub = "Thank You For Your Interest In Garage Door Openers"
+                    sub = "Thank you email-GDO-Genie"
                     type = "GdoGenie";
                     break;
             }
