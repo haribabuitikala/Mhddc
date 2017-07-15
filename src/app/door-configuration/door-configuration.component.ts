@@ -150,10 +150,10 @@ export class DoorConfigurationComponent implements OnInit {
             var itemValue = "";
             var itemPrice = "";
             var temptr = "";
-            temptr = ` <tr style="border-bottom: 1px solid #ccc">
-                            <td style="color: #f96302;padding:5px">${itemHead}</td>
-                            <td>${itemValue}</td>
-                            <td>${itemPrice}</td>
+            temptr = ` <tr class="tabletr">
+                            <td class="allfontMediumOrangeColor">${itemHead}</td>
+                            <td class="allfontMedium">${itemValue}</td>
+                            <td class="allfontMedium" >${itemPrice}</td>
                         </tr>`;
 
             OpnerAcc += temptr;
@@ -161,10 +161,10 @@ export class DoorConfigurationComponent implements OnInit {
                 itemHead = "";
                 itemValue = gdoOpener.name + "(" + gdoOpener.count + ")";
                 itemPrice = Number(gdoOpener.price * gdoOpener.count).toLocaleString('en-US', { style: 'currency', currency: 'USD' });
-                temptr = ` <tr style="border-bottom: 1px solid #ccc">
-                            <td style="color: #f96302;padding:5px">${itemHead}</td>
-                            <td>${itemValue}</td>
-                            <td>${itemPrice}</td>
+                temptr = ` <tr class="tabletr">
+                            <td class="allfontMediumOrangeColor">${itemHead}</td>
+                            <td class="allfontMedium">${itemValue}</td>
+                            <td class="allfontMedium">${itemPrice}</td>
                         </tr>`;
 
                 OpnerAcc += temptr;
@@ -184,10 +184,10 @@ export class DoorConfigurationComponent implements OnInit {
             var itemHead = "Additional Options";
             var itemValue = this.distance;
             var itemPrice = Number(this.distancePrice).toLocaleString('en-US', { style: 'currency', currency: 'USD' });
-            temptr = ` <tr style="border-bottom: 1px solid #ccc">
-                    <td style="color: #f96302;padding:5px">${itemHead}</td>
-                    <td>${itemValue} miles from store </td>
-                    <td>${itemPrice}</td>
+            temptr = ` <tr class="tabletr">
+                    <td class="allfontMediumOrangeColor">${itemHead}</td>
+                    <td class="allfontMedium">${itemValue} miles from store </td>
+                    <td class="allfontMedium">${itemPrice}</td>
                 </tr>`;
 
             return temptr;
@@ -250,6 +250,7 @@ body {
 		.div70 {
     float: left;
     width: 70%;
+    page-break-after: always;
 }
 
 .div30 {
@@ -267,6 +268,8 @@ body {
     text-align: right;
     padding-top: 15px;padding-bottom: 10px;
     width: 100%;
+    color: #333;    
+    font-size:14px;
 }
 
 .div70 table tr td:last-child {
@@ -281,13 +284,29 @@ table td {
  font-size: 12px!important;
 }
 
+.allfontMedium
+{
+    color: #333;    
+    font-size:14px;
+}
+
+
+.allfontMediumOrangeColor
+{
+    color: #f96302;    
+    font-size:14px;
+    padding:5px; 
+}
+
+.tabletr
+{
+   border-bottom: 1px solid #ccc;
+}
+
  </style>
 </head>
    <body style="font-family: Helvetica, Arial, sans-serif;width: 100%; color: #333;  font-weight: normal; font-size: 14px; ">
-</body>
-</html>
-
-           <div style="text-align: center; break-after: page;">
+      <div style="text-align: center; break-after: page;">
                         <a href="#">
                             <img src="${appInstance}/assets/images/ClopayLogo.png" width="180" height="93">
                              </a>                            
@@ -308,7 +327,7 @@ table td {
                     <div class="div70">
                 <div id="ourCfg" style="padding:6px; border-bottom: thin solid #bbb;">YOUR OPENER CONFIGURATION</div>
             <table style="border-collapse: collapse;width:100%">          
-            <tr style="border-bottom: 1px solid #ccc">
+            <tr class="tabletr">
                     <td style="color: #f96302;padding:5px">Opener</td>
                     <td>${opener}</td>
                     <td>${openerPrice}</td>
@@ -319,8 +338,8 @@ table td {
           </div>
           <div class="div30"></div>
 
-    <div style="position: relative; top: 0px; left: 0px; width: 550px; font-family: Arial, Helvetica, sans-serif; color: #555;" id="termsholder">
-    <div style="text-align: center; break-after: page;">
+    <div style="position: relative; top: 0px; left: 0px; width: 550px; font-family:Helvetica, Arial, sans-serif; color: #555;" id="termsholder">
+    <div style="page-break-after: always;">
         <h3 style="font-size:14px; font-weight: bold;">Terms & Conditions</h3>
         <h4 style="font-weight: bold;color:#f96302;">BASIC INSTALLATION PRICE INCLUDES</h4>
         <ul style="font-size:12px;">
@@ -365,7 +384,7 @@ table td {
         <li>Upon completion of the installation you or your representative will be asked to sign a lien waiver verifying 
         service completed</li>
         </ul>
-</div>
+
 
         <h4 style="font-size:12px; font-weight: bold;" align="center">Special Notes About Your Garage Door Opener Installation</h4>
         <h4 style="font-weight: bold;color:#f96302;">BEFORE YOUR INSTALLATION:</h4>
@@ -390,6 +409,7 @@ table td {
         <li>THE CUSTOMER WILL BE REQUIRED TO SIGN A WAIVER UPON THE COMPLETION OF THE JOB.
         </li></ul>
 
+</div>
 
         <h4 style="font-weight: bold;color:#f96302;">FACTORS TO CONSIDER:</h4>
         <ul style="font-size:12px;">
@@ -413,6 +433,8 @@ table td {
         CUSTOMER</li></ul>
 
 </div>
+</body>
+</html>
 
         `;
 
