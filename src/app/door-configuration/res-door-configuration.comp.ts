@@ -28,6 +28,7 @@ export class ResDoorConfigurationComponent implements OnInit {
     title = "";
     description = "";
     fbDescription ="";
+    twitterDescription = "";
 
     pageNo;
     isGdo = this.utils.utilities.isGDO;
@@ -758,8 +759,9 @@ table td {
             res => {
                 this.socialImageUrl = res;
                 this.title = "";
-                this.fbDescription = "Door shown is a Clopay " + this.utils.resFlowSession.resDetails.collectionName.replace(/[^a-zA-Z ]/g, "") + ", " + this.utils.resFlowSession.resDoorObj.construction.construction['ClopayModelNumber'] + ". Design your door today!";
-                this.description  = "My Clopay Garage Door design! Door shown is a Clopay " + this.utils.resFlowSession.resDetails.collectionName.replace(/[^a-zA-Z ]/g, "") + ", " + this.utils.resFlowSession.resDoorObj.construction.construction['ClopayModelNumber'] + ". Design your door today!";
+                this.fbDescription = "Door shown is the Clopay " + this.utils.resFlowSession.resDetails.collectionName.replace(/[^a-zA-Z ]/g, "") + ", Model " + this.utils.resFlowSession.resDoorObj.construction.construction['ClopayModelNumber'] + ". Design your door today!";
+                this.twitterDescription = "Check out My @ClopayGarageDoor design! Door shown is the Clopay " + this.utils.resFlowSession.resDetails.collectionName.replace(/[^a-zA-Z ]/g, "") + ", Model " + this.utils.resFlowSession.resDoorObj.construction.construction['ClopayModelNumber'] + ". Design yours!";
+                this.description  = "My Clopay Garage Door design! Door shown is a Clopay " + this.utils.resFlowSession.resDetails.collectionName.replace(/[^a-zA-Z ]/g, "") + ", Model " + this.utils.resFlowSession.resDoorObj.construction.construction['ClopayModelNumber'] + ". Design your door today!";
             },
             err => {
                 this.dataService.handleError();
