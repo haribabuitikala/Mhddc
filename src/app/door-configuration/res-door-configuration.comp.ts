@@ -27,6 +27,7 @@ export class ResDoorConfigurationComponent implements OnInit {
     imageSrc = 'https://dev-mhddc.clopay.com/emailimages/res-1498118638696.jpeg';
     title = "";
     description = "";
+    fbDescription ="";
 
     pageNo;
     isGdo = this.utils.utilities.isGDO;
@@ -422,7 +423,7 @@ export class ResDoorConfigurationComponent implements OnInit {
     renderPromoDiv() {
         if (this.utils.utilities.isPromoEnabled) {
             var promorText = this.utils.promoObject.bullet0;
-            var temptr = `<p> Current Promotion </p>${promorText}`;
+            var temptr = `<div class="div30"><p> Current Promotion </p>${promorText}</div>`;
             return temptr;
         }
         else {
@@ -613,8 +614,7 @@ table td {
                 </tr>  
                 ${fromColorBody}              		
                 </table> ${totalBody}</div>
-				<div class="div30">${promoBodyText}</div>
-                
+				<div>${promoBodyText}</div>                
 				
             </div>
             
@@ -758,7 +758,8 @@ table td {
             res => {
                 this.socialImageUrl = res;
                 this.title = "";
-                this.description = "My Clopay Garage Door design! Door shown is a Clopay " + this.utils.resFlowSession.resDetails.collectionName.replace(/[^a-zA-Z ]/g, "") + ", " + this.utils.resFlowSession.resDoorObj.construction.construction['ClopayModelNumber'] + ". Design your door today!";
+                this.fbDescription = "Door shown is a Clopay " + this.utils.resFlowSession.resDetails.collectionName.replace(/[^a-zA-Z ]/g, "") + ", " + this.utils.resFlowSession.resDoorObj.construction.construction['ClopayModelNumber'] + ". Design your door today!";
+                this.description  = "My Clopay Garage Door design! Door shown is a Clopay " + this.utils.resFlowSession.resDetails.collectionName.replace(/[^a-zA-Z ]/g, "") + ", " + this.utils.resFlowSession.resDoorObj.construction.construction['ClopayModelNumber'] + ". Design your door today!";
             },
             err => {
                 this.dataService.handleError();
