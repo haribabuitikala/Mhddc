@@ -235,21 +235,15 @@ export class HomeComponent implements OnInit, AfterViewInit {
         reader.onload = function (event) {
             var img = new Image();
             img.onload = function () {
-                var canvasTags = $('<canvas/>');
-                var canvas = canvasTags[0];
-                let w = $(window).width();
-                let h = $(window).width();
+                // To set the uploaded image as aspect ratio in canvas
+                $that.uploadSelectedHome._imgwidth = img.width;
+                $that.uploadSelectedHome._imgheight = img.height;
 
-                $that.uploadSelectedHome._imgwidth = w;
-                $that.uploadSelectedHome._imgheight = h;
-
-                canvas.setAttribute('width', w);
-                canvas.setAttribute('height', h);
-                var nCanvas2d = canvas.getContext('2d');
-                nCanvas2d.drawImage(img, 0, 0, w, h);
-                nCanvas2d.save();
-                $('.customer-home').html('').append(canvas);
-                $that.uploadSelectedHome.canvas = canvas;
+                let $homeCore = document.querySelector('.home-image-core');
+                if ($homeCore && img['src']) {
+                    document.querySelector('.home-image-core')['src'] = img['src'];
+                    $that.uploadSelectedHome.imgSrc = img['src'];
+                }
                 $that.doorCount = 1;
                 $that.drawDoors();
             }
@@ -294,8 +288,9 @@ export class HomeComponent implements OnInit, AfterViewInit {
             point: []
         },
         canvas: null,
-        _imgwidth: "700",
-        _imgheight: "500",
+        imgSrc: null,
+        _imgwidth: 700,
+        _imgheight: 500,
         _upload: true
     };
 
@@ -317,6 +312,8 @@ export class HomeComponent implements OnInit, AfterViewInit {
                 let point = new Point(ul, ur, ll, lr);
                 $that.uploadSelectedHome.dcoords.point.push(point);
             });
+            this.uploadSelectedHome._imgwidth = $('.home-image-core').width();
+            this.uploadSelectedHome._imgheight = $('.home-image-core').height();
             window['selectedHome'] = this.uploadSelectedHome;
             homeImageModal.close();
             this.nextBtn(currScreen,'/config/design');

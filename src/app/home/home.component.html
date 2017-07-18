@@ -57,10 +57,10 @@
 
 
 <modal #homeImageModal class="home-choose-modal">
-    <modal-header >
-    </modal-header>
     <modal-body class="home-modal">
-        <div class="customer-home"></div>
+        <div class="customer-home">
+            <img class="home-image-core" />
+        </div>
         <div class="text-center margin-t-15">
             <button class="btn btn-default" [ngClass]="{'hidden' : doors.length > 6}" (click)="addDoor()">Add Door</button>
             <button class="btn btn-danger" [ngClass]="{'hidden': doors.length === 1}"  (click)="removeDoor()">Remove Door</button>
