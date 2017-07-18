@@ -90,6 +90,9 @@ export class CategoryComponent implements OnInit {
 
     gdoGoTo(path, id) {
         this.utilities.utilities.isGDO = true;
+        this.dataStore.gdoOpenerAccessories.length = 0;
+        this.dataStore.gdoOpener = null;
+        this.utilities.utilities.gdoOpenerText = '';
         $('body').addClass('loader');
         if (id === 'size') {
             this.utilities.utilities.currPage = 3;

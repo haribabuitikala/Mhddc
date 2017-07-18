@@ -81,6 +81,7 @@ export class DoorConfigurationComponent implements OnInit {
         this.pageNo = this.utils.utilities.currPage;
         this.showGDoEmail = this.utils.utilities.showGDoEmail;
 
+        this.gdoOpenerSelected = this.dataStore.gdoOpenerAccessories;
         $('body').removeClass('loader');
         // this.appComponent.next = 'Add To Cart';
         this.navComp.activateIcon();
