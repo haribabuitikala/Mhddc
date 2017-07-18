@@ -380,6 +380,7 @@ export class InstallComponent implements OnInit, AfterViewInit, AfterViewChecked
         this.widthInches = this.sizes.getInches(itm, this.selectedWidthFeet);
         this.selectedwidth = "width_" + this.selectedWidthFeet + "_0";
         this.heightFeets = this.sizes.getHeightFeets(this.selectedwidth);
+        this.heightFeets = this.heightFeets.filter(function (hf) { return hf <= 12 });
         this.heightInches = [];
         this.selectedWidthInches = 0;
         this.selectedHeightFeet = 0;
