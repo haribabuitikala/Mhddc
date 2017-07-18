@@ -320,7 +320,7 @@ table td {
                  <br />
                  <p style="padding: 5px;">
                     Thanks for your interest in purchasing a Clopay garage door opener through The Home Depot. Below is some basic information on the door opener 
-                    you designed, what our program includes, and how our program works. We look forward to serving you in the near future.
+                    you designed, what our program includes, and how our program works. We look forward to serve you in the near future.
                     </p>
                     <hr />
                     <br />
