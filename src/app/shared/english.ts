@@ -57,7 +57,7 @@ const ENG =
             "categoryThree": "Service and Repair",
             "modal": {
                 "modalContent": "You will now be directed to The Home Depot's Service and Repair site. From this site, you  can request a call from a service technician to assist you in service or repair",
-                "Proceed": "Proceed to Service",
+                "Proceed": "Proceed to Service and Repair Site",
                 "StayOnCurrentSite": "Stay on current site"
             }
         }],
