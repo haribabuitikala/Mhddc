@@ -507,6 +507,7 @@ export class ResidentialFlowSession {
             qty: 0,
             laborcost: 0,
             modelNumber: '',
+            displayModelNumber: '',
             discountPrice: 0
         },
         color: {
@@ -702,6 +703,7 @@ export class ResidentialFlowSession {
                 qty: 0,
                 laborcost: 0,
                 modelNumber: '',
+                 displayModelNumber: '',
                  discountPrice: 0
             };
             this.resDoorObj['reset' + this.resDoorObj['resetorder'][4]]();
@@ -889,6 +891,7 @@ export class ResidentialFlowSession {
                     this.resDetails.construction.qty = count;
                     this.resDetails.construction.laborcost = dc['laborcodeprice'];
                     this.resDetails.construction.modelNumber = dc['ClopayModelNumber'];
+                    this.resDetails.construction.displayModelNumber = dc['DisplayModelNumber'];
                 } else {
                     let dc = obj.construction['construction'];
                    //promo
@@ -905,6 +908,7 @@ export class ResidentialFlowSession {
                     this.resDetails.construction.qty = count;
                     this.resDetails.construction.laborcost = dc['laborcodeprice'];
                     this.resDetails.construction.modelNumber = dc['ClopayModelNumber'];
+                    this.resDetails.construction.displayModelNumber = dc['DisplayModelNumber'];
                 }
 
                 // Calculate price for Overlay Color
