@@ -106,6 +106,10 @@ export class SliderComponentComponent implements OnInit {
             this.touchX = 0;
             this.setSlide();
         });
+
+        $(window).resize(() => {
+            this.renderSlider();
+        });
     }
 
 
