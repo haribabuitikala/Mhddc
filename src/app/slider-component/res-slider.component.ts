@@ -269,6 +269,10 @@ export class ResSliderComponent implements OnInit, AfterViewInit {
             this.touchX = 0;
             this.setSlide();
         });
+
+        $(window).resize(() => {
+            this.renderSlider();
+        });
     }
 
 
