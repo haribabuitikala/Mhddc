@@ -660,6 +660,13 @@ table td {
         `;
         return body;
     }
+
+    closeEmailPopup(){
+        console.log("email close icon clicked");
+        this.emailMsg = '';
+        this.shareEmail = "";
+    }
+    
     sendMail(email) {
         if (this.shareEmail !== '') {
             var imageUrl;
