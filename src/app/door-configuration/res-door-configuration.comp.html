@@ -1,0 +1,728 @@
+<div class="fixed-header margin-t-5">
+    <h4 class="font-size-16 bold">Your Door Configuration
+        <span class="pull-right">{{itmTotalPrice | currency:'USD':true:'1.2-2'}}</span>
+    </h4>
+    <div class="clearfix"></div>
+    <div class="flex space-around margin-b-15">
+        <button (click)="share.open()" class="btn">SHARE<span >
+                        <img src="../../assets/images/Share-26.png" width="12" height="12" alt=""/>
+            </span>
+        </button>
+        <button (click)="email.open()" class="btn">EMAIL QUOTE<span
+                class="glyphicon glyphicon-envelope  padding-l-3"></span></button>
+    </div>
+</div>
+<!-- Res -->
+<app-cart-details (callPrice)="notify($event)"></app-cart-details>
+<div class="clearfix margin-b-30"></div>
+<span class="pull-right text-orange bold sub-total"> Sub total: {{itmTotalPrice | currency:'USD':true:'1.2-2'}}</span>
+<!-- GDO Checkout -->
+<div id="GdoDoorConfig" *ngIf="isGdo" class="fixed-header">
+    <address class="margin20tb">
+        <span>
+                <span class="bold">{{store.storename}} ({{store.storenumber}})</span>
+        <br>{{store.address1}}
+        <br>{{store.city}}, {{store.state}} {{store.zip}}
+        <br> {{store.storephonenumber}}
+        </span>
+    </address>
+    <p class="bold">
+        {{gdoOpenerTxt}}
+    </p>
+    <p *ngIf="gdodirect">
+        Install of Purchased Opener (Installed)
+    </p>
+    <div class="margin-b-20" *ngIf="accessories">
+        <span class="bold">Opener Accessories</span><br>
+        <p *ngFor="let opener of gdoOpeners">
+            {{opener.count}} - {{opener.name}} ({{opener.price | currency:'USD':true:'1.2-2'}} each)
+        </p>
+    </div>
+    <div class="margin-b-20" *ngIf="gdodirect">
+        <p *ngFor="let opener of gdodirectquestions">
+            {{opener.count}} - {{opener.name}}
+            <br>
+            <span class="padding-l-15">({{opener.price | currency:'USD':true:'1.2-2'}})</span>
+        </p>
+    </div>
+    <p *ngIf="showDistancePrice">
+        {{distance}} miles from store ({{distancePrice | currency:'USD':true:'1.2-2'}})
+    </p>
+    <div class="margin-b-10  padding10 shopping-cart-info margin-b-20">
+        <span class="padding-l-10 bold"> Quantity
+                <img class="minus-quantity" src="../../assets/images/substract.png" alt="" (click)="updateQuantity(0)">
+                <span class="accessory-quantity">{{qty}}</span>
+        <img class="add-quantity" src="../../assets/images/add.png" alt="" (click)="updateQuantity(1)">
+        </span>
+        <span class="pull-right padding-r-7 bold">Sub-Total<span> {{itemPrice | currency:'USD':true:'1.2-2'}}</span> </span>
+    </div>
+</div>
+<div class="hide">
+    <button (click)="discardDetails.open()" class="btn">discardDetails<span
+            class="glyphicon glyphicon-share padding-l-3"></span></button>
+    <button (click)="paymentBilling.open()" class="btn">Payment Billing<span
+            class="glyphicon glyphicon-share padding-l-3"></span></button>
+    <button (click)="shoppingCart.open()" class="btn">Shopping cart <span
+            class="glyphicon glyphicon-share padding-l-3"></span></button>
+    <button (click)="customerInfo.open()" class="btn">customer Info <span
+            class="glyphicon glyphicon-share padding-l-3"></span></button>
+    <button (click)="customerInfoSoldTo.open()" class="btn">customer Info Sold to<span
+            class="glyphicon glyphicon-share padding-l-3"></span></button>
+    <button (click)="openingHeight.open()" class="btn">Opening Height<span
+            class="glyphicon glyphicon-share padding-l-3"></span></button>
+    <button (click)="checkoutPopup.open()" class="btn">Checkout<span
+            class="glyphicon glyphicon-share padding-l-3"></span></button>
+    <button (click)="shoppingCartTerms.open()" class="btn">Shopping cart terms and conditions<span
+            class="glyphicon glyphicon-share padding-l-3"></span></button>
+    <button (click)="gdoShoppingCartTerms.open()" class="btn">GDO Shopping cart terms and conditions<span
+            class="glyphicon glyphicon-share padding-l-3"></span></button>
+    <button (click)="totalPrice.open()" class="btn">GDO Shopping cart terms and conditions<span
+            class="glyphicon glyphicon-share padding-l-3"></span></button>
+</div>
+<modal #email>
+    <modal-header>
+        <button aria-label="Close" class="close" data-dismiss="modal" (click)="closeEmailPopup()" type="button">
+                <span aria-hidden="true">×</span>
+            </button>
+    </modal-header>
+    <modal-body>
+        <form class="form-horizontal col-sm-12 " name="share-email-form">
+            <div class="form-group margin-t-20"><label>Please Insert Email Address </label>
+                <input name="shareemail" class="form-control email" [(ngModel)]="shareEmail" placeholder="email@example.com" data-placement="top"
+                    data-trigger="manual" data-content="Must be a valid e-mail address (user@gmail.com)" type="text" />
+            </div>
+            <div class="form-group text-center  padding-t-15">
+                <button type="submit" class="btn btn-default box-shadow text-orange margin-r-10 bold margin-b-10 text-uppercase" (click)="sendMail(email)">Send Email
+                </button>
+            </div>
+            <div *ngIf="showEmailMsg" class="text-center">
+                {{emailMsg}}
+            </div>
+        </form>
+    </modal-body>
+</modal>
+<modal #totalPrice>
+    <modal-header [show-close]="true">
+    </modal-header>
+    <modal-body>
+        <p class="bold"> Total Price will be calculated on payment screen </p>
+    </modal-body>
+</modal>
+
+<modal #share cssClass="share-popup">
+    <modal-header [show-close]="true">
+        <h4 class="text-orange padding-l-30">Social Share</h4>
+    </modal-header>
+    <modal-body>
+        <div class="flex space-around share-btn margin-b-20">
+            <share-button class="facebook fb-icon" [button]="facebookbtn" [url]='"http://homedepot.com/garagedoors"' [title]='"Check out my Clopay Garage Door design!"' [image]='socialImageUrl' [description]="fbDescription" ></share-button>
+            <share-button class="twitter twit-icon" [button]="twitterbtn" [url]='"http://homedepot.com/garagedoors"' [title]="twitterDescription" [description]= "twitterDescription"></share-button>
+            <share-button class="pinterest pint-icon" [button]="pintbtn" [url]='"http://homedepot.com/garagedoors"' [image]='socialImageUrl' [title]="description" [description]="description" ></share-button>
+        </div>
+        <!--<div class="a2a_kit a2a_kit_size_32 a2a_default_style">
+            <a class="a2a_dd" href="https://www.addtoany.com/share"></a>
+            <a class="a2a_button_facebook"></a>
+            <a class="a2a_button_twitter"></a>
+            <a class="a2a_button_google_plus"></a>
+        </div>
+        <script async src="https://static.addtoany.com/menu/page.js"></script>-->
+        <!--<div class="flex space-around margin-b-20">
+            <button class="flex share-button">
+                <span class="instagram"><i class="fa fa-facebook"></i></span>
+            </button>
+            <button class="flex share-button">
+                <span class="instagram"><i class="fa fa-pintrest"></i></span>
+            </button>
+            <button class="flex share-button">
+                <span class="houzz"><i class="fa fa-google"></i></span>
+           </button>
+        </div>-->
+        <!--<div class="flex space-around">
+            <button class="flex share-button">
+                <span class="instagram"><i class="fa fa-twitter"></i></span>
+            </button>
+            <button class="flex share-button">
+                <span class="instagram"><i class="fa fa-instagram"></i></span>
+            </button>
+            <button class="flex share-button">
+                <span class="houzz"><i class="fa fa-houzz"></i></span>
+            </button>
+        </div>-->
+    </modal-body>
+</modal>
+<modal #checkoutPopup>
+    <modal-header [show-close]="true">
+        <p class="text-orange font-size-16  bold padding-l-30">
+            <font color="#f96302" face="G-Roboto-n5, Arial">Checkout</font>
+        </p>
+    </modal-header>
+    <modal-body>
+        <div class="col-xs-12 font-size-14  pull-left">
+            <p>Almost done. Please review your final purchase price below and click "Approve Order Totals and Proceed to Payment"
+                to enter payment information.</p>
+            <p>The Home Depot and Clopay want to thank you for trusting us with your Garage Door project. </p>
+            <p>
+                The Home Depot Customer Order Number: &nbsp;H1934-21045
+            </p>
+            <div class="bold margin-t-20">
+                <div><span>Sub Total:</span> <span class="pull-right">961.35</span></div>
+                <div><span>Estimated Tax</span> <span class="pull-right">79.31</span></div>
+                <hr class="hr-radius">
+                <div><span>Total:</span> <span class="pull-right">1040.35</span></div>
+            </div>
+        </div>
+    </modal-body>
+</modal>
+<modal #shoppingCartTerms>
+    <modal-header [show-close]="true">
+    </modal-header>
+    <modal-body>
+        <div class="col-xs-12 font-size-14  pull-left pad-l-4">
+            <p class="font-size-16"><strong>Do-It -Yourself Terms & Conditions </strong></p>
+            <p><strong>CANCELLATIONS, RETURNED GOODS AND CHANGE ORDERS </strong></p>
+            <p>DO IT YOURSELF DOORS ARE NOT RETURNABLE. Because Do-It-Yourself doors are built to order, these doors cannot
+                be returned. Clopay cannot be responsible for improper measurement or installation of its products for Do-It-Yourself
+                installations. Consult our How-To-Measure instructions or call 1-800-HOMEDEPOT for how to measure and installation
+                assistance. It is your responsibility to ensure that all measurements (opening, side room, headroom, backroom)
+                are correct before ordering a Do-It-Yourself door(s).
+            </p>
+            <p>The Home Depot and Clopay want to thank you for trusting us with your Garage Door project. </p>
+            <p>
+                CLOPAY CANNOT ACCEPT ANY CHANGES TO OR CANCEL ANY DO-IT-YOURSELF ORDERS AFTER THREE BUSINESS DAYS FROM THE DATE PURCHASED.
+                If order needs to be changed or cancelled within the applicable three day period, immediately call the store
+                through which your order is placed and notify them of the change/cancellation. (See above for store address
+                and phone #)
+            </p>
+            <p><strong>MISSING / BROKEN PARTS </strong></p>
+            <p>If a door is received with missing or broken parts, call 1-800-HOMEDEPOT and the part will be immediately sent.
+            </p>
+            <p><strong>Special Order DIY Notes </strong></p>
+            <ul class="pad-l-4">
+                <li>Home delivery within 30 "drive" miles from the store through which the door is purchased. Additional charges
+                    apply if further than 30 miles.
+                </li>
+                <li> Easy to follow instruction book</li>
+                <li> All new hardware including track, springs, rollers, and hinges</li>
+            </ul>
+            <p><strong>YOUR DO-IT-YOURSELF GARAGE DOOR WILL COME WITH </strong></p>
+            <ul class="pad-l-4">
+                <li>
+                    <p>Rear track hangar kit - Often constructed of punched angle iron, these hangers attach the end of the
+                        horizontal track to the garage ceiling. You may be able to use existing rear track hanger if replacing
+                        an existing door.</p>
+                </li>
+                <li>
+                    <p>Vinyl Perimeter Seal - This is the weather seal on the top and sides of your jambs. They help seal out
+                        the elements when your door is closed. We recommend you replace this seal but you may be able to
+                        use the existing perimeter seal if replacing an existing door.</p>
+                </li>
+                <li>
+                    <p>Low Headroom Track - May be required in situations with limited headroom. This is the distance from the
+                        top of the door opening upwards to the lowest obstruction on the inside of the garage. Refer to our
+                        How to Measure guide to determine if low headroom track is required for your application.
+                    </p>
+                </li>
+                <li>
+                    <p>Garage Door Opener - Although not required we recommend that you replace your garage door opener at the
+                        same time you replace your Garage Door. Do-It-Yourself garage door openers can be purchased at The
+                        Home Depot.</p>
+                </li>
+                <li>
+                    <p>Operator reinforcement bracket - Used to reinforce top section of door for operator attachment. (If top
+                        panel is not reinforced by either an operator reinforcement bracket or according to instructions
+                        in manual, damage caused by the opener will NOT be covered under your warranty.)</p>
+                </li>
+            </ul>
+            <p><strong>WHAT TO EXPECT ONCE WE RECEIVE YOUR ORDER </strong></p>
+            <p>Your built to order Do-It-Yourself door will be manufactured No changes or cancellations to a Do-It-Yourself
+                order after three business days from the date purchased. You will be contacted within three to four weeks
+                to schedule your FREE HOME DELIVERY</p>
+        </div>
+        <div class="bold margin-t-20 text-center">
+            <p class="aggrement-text ">HOME IMPROVEMENT AGREEMENT <br>PLEASE READ THIS </p>
+            <div class="form-group margin-b-20">
+                <button type="submit" class="btn btn-default box-shadow text-orange margin-r-10 bold margin-b-10 pull-right" (click)="email.close()">DECLINE
+                </button>
+                <button type="submit" class="btn btn-default box-shadow text-orange margin-r-10 bold margin-b-10 pull-left" (click)="email.close()">ACCEPT
+                </button>
+            </div>
+        </div>
+    </modal-body>
+
+</modal>
+<modal #openingHeight>
+    <modal-header [show-close]="true">
+    </modal-header>
+    <modal-body>
+        <div class="col-xs-12">
+            <p class="margin-b-10">Select a garage door height range below. If you do not know the height of your garage door, simply select "DO
+                NOT KNOW HEIGHT".</p>
+            <div class="tile padding10 box-shadow col-xs-12">
+                <div class="col-xs-9 padding-0 ">
+                    <p class="margin-t-5 bold">Door or Opening height</p>
+                    <select class="margin-b-15 form-control">
+                        <option selected>select garage door height</option>
+                        <option>11</option>
+                        <option>12</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </modal-body>
+</modal>
+<modal #customerInfo>
+    <modal-header [show-close]="true">
+    </modal-header>
+    <modal-body>
+        <p><span class="text-orange font-size-16">Checkout</span> <span class="bold pull-right font-size-16">Sold To :</span></p>
+        <!--<form class="form-label" name="checkout-form">
+            <div class="form-group">
+                <label for="inputEmail">First Name:</label>
+                <input type="text" class="form-control" id="inputEmail" placeholder="">
+            </div>
+            <div class="form-group">
+                <label for="inputPassword">Last Name:</label>
+                <input type="text" class="form-control" id="inputPassword" placeholder="">
+            </div>
+            <div class="form-group">
+                <label for="inputPassword">Address 1:</label>
+                <input type="text" class="form-control" id="inputPassword" placeholder="">
+            </div>
+            <div class="form-group">
+                <label for="inputPassword">Address 2:</label>
+                <input type="text" class="form-control" id="inputPassword" placeholder="">
+            </div>
+            <div class="form-group col-xs-6 padding-0-l">
+                <label for="inputPassword">City:</label>
+                <input type="text" class="form-control" id="inputPassword" placeholder="">
+            </div>
+            <div class="form-group col-xs-6 padding-0-r">
+                <label for="inputPassword">State:</label>
+                <input type="text" class="form-control" id="inputPassword" placeholder="">
+            </div>
+            <div class="form-group col-xs-6 padding-0-l">
+                <label for="inputPassword">Zipcode:</label>
+                <input type="number" class="form-control" id="inputPassword" placeholder="">
+            </div>
+            <div class="form-group col-xs-6 padding-0-r">
+                <label for="inputPassword">Country:</label>
+                <input type="text" class="form-control" id="inputPassword" placeholder="">
+            </div>
+            <div class="form-group col-xs-6 padding-0-l">
+                <label for="inputPassword">Primary Phone No:</label>
+                <input type="number" class="form-control" id="inputPassword" placeholder="">
+            </div>
+            <div class="form-group col-xs-6 padding-0-r">
+                <label for="inputPassword">Secondary Phone No:</label>
+                <input type="number" class="form-control" id="inputPassword" placeholder="">
+            </div>
+            <div class="form-group">
+                <label for="inputEmail">Email Address: (Used for order confirmation only)</label>
+                <input type="text" class="form-control" id="inputEmail" placeholder="">
+            </div>
+        </form>-->
+    </modal-body>
+</modal>
+<modal #customerInfoSoldTo>
+    <modal-header [show-close]="true">
+    </modal-header>
+    <modal-body>
+        <p><span class="text-orange font-size-16">Checkout</span> <span class="bold pull-right font-size-16">Service Site :</span>
+        </p>
+        <!--<form class="form-label" name="checkout">
+            <div class="checkbox">
+                <label><input type="checkbox">
+                    <p><font color="#333333">Same as <strong>Sold To</strong> Address</font></p></label>
+            </div>
+            <div class="form-group">
+                <label for="inputEmail">First Name:</label>
+                <input type="text" class="form-control" id="inputEmail" placeholder="">
+            </div>
+            <div class="form-group">
+                <label for="inputPassword">Last Name:</label>
+                <input type="text" class="form-control" id="inputPassword" placeholder="">
+            </div>
+            <div class="form-group">
+                <label for="inputPassword">Address 1:</label>
+                <input type="text" class="form-control" id="inputPassword" placeholder="">
+            </div>
+            <div class="form-group">
+                <label for="inputPassword">Address 2:</label>
+                <input type="text" class="form-control" id="inputPassword" placeholder="">
+            </div>
+            <div class="form-group col-xs-6 padding-0-l">
+                <label for="inputPassword">City:</label>
+                <input type="text" class="form-control" id="inputPassword" placeholder="">
+            </div>
+            <div class="form-group col-xs-6 padding-0-r">
+                <label for="inputPassword">State:</label>
+                <input type="text" class="form-control" id="inputPassword" placeholder="">
+            </div>
+            <div class="form-group col-xs-6 padding-0-l">
+                <label for="inputPassword">Zipcode:</label>
+                <input type="number" class="form-control" id="inputPassword" placeholder="">
+            </div>
+            <div class="form-group col-xs-6 padding-0-r">
+                <label for="inputPassword">Country:</label>
+                <input type="text" class="form-control" id="inputPassword" placeholder="">
+            </div>
+            <p class="bold font-size-12 pull-left checkout-start-over">City,State,Zip and County can not be changed.If change to these fields is required pleas <span class="start-over"> Start Over.</span></p>
+            <div class="form-group col-xs-6 padding-0-l">
+                <label for="inputPassword">Primary Phone No:</label>
+                <input type="number" class="form-control" id="inputPassword" placeholder="">
+            </div>
+            <div class="form-group col-xs-6 padding-0-r">
+                <label for="inputPassword">Secondary Phone No:</label>
+                <input type="number" class="form-control" id="inputPassword" placeholder="">
+            </div>
+            <div class="form-group margin-b-20 text-center">
+                <button type="submit" class="btn btn-default box-shadow text-orange margin-r-10 bold margin-b-10  text-uppercase">
+                    Submit customer information
+                </button>
+            </div>
+        </form>-->
+    </modal-body>
+</modal>
+<modal #shoppingCart>
+    <modal-header [show-close]="true">
+    </modal-header>
+    <modal-body>
+        <h4 class="text-orange">Your Shopping Cart </h4>
+        <p><img src="../../assets/images/Info-64.png" height="26" alt="">
+            <span class="bold">
+                Estimated Pre Tax Sub-Total :
+            </span>
+            <span class="pull-right bold">
+                $475.00
+            </span>
+        </p>
+        <div class="div-border div-border-radius tile margin-b-10">
+
+            <div class="content shopping-cart margin-b-15 padding-t-15 padding10">
+                <p class="shopping-cart-gallery-info">Gallery®&nbsp;Collection -&nbsp;16'&nbsp;0"&nbsp;x 7'&nbsp;0"&nbsp;-&nbsp;(DIY)</p>
+                <dl class="shopping-cart-table">
+                    <dd class="shopping-cart-table-header">
+                        Size
+                    </dd>
+                    <dd>9' 0"(w) x 7' 0"(h)</dd>
+                    <dd class="shopping-cart-table-header">
+                        WindCode
+                    </dd>
+                    <dd>W0</dd>
+                </dl>
+                <dl class="shopping-cart-table">
+                    <dd class="shopping-cart-table-header">
+                        Collection
+                    </dd>
+                    <dd>Classic™ Collection - Premium Series</dd>
+                    <dd class="shopping-cart-table-header">
+                        Door Design
+                    </dd>
+                    <dd><span class="door-design-txt text-capitalize">Short</span> Panel</dd>
+                    <dd class="shopping-cart-table-header">
+                        Door Model
+                    </dd>
+                    <dd>HDP20<span class="pull-right">$876.95</span></dd>
+                    <dd class="shopping-cart-table-header">
+                        Door Construction
+                    </dd>
+                    <dd>3-layer 2" Intellicore® Insul. R-Value 18.4</dd>
+                </dl>
+                <dl class="shopping-cart-table">
+                    <dd class="shopping-cart-table-header">
+                        Color
+                    </dd>
+                    <dd><span class="selected-color text-capitalize">Standard White</span><span class="pull-right">$0.00</span></dd>
+                </dl>
+                <dl class="shopping-cart-table">
+                    <dd class="shopping-cart-table-header">
+                        Top Section
+                    </dd>
+                    <dd><span>Solid Short Elegant</span></dd>
+                    <dd>Placement : 4th Row (TOP)</dd>
+                </dl>
+                <dl class="shopping-cart-table">
+                    <dd class="shopping-cart-table-header">
+                        Hardware
+                    </dd>
+                    <dd>Lock : Inside Slide Lock (Retail)<span class="pull-right">$0.00</span></dd>
+                </dl>
+            </div>
+        </div>
+        <div class="clearfix margin-b-40">
+            <button type="submit" class=" font-size-16 pull-left btn btn-default box-shadow text-orange margin-r-10 bold margin-b-10  text-uppercase">
+                REMOVE ITEM
+            </button>
+            <span class="pull-right margin-b-10 font-size-16">
+                Quantity
+                <img src="../../assets/images/substract.png" alt="" class="minus-quantity">
+                <span>1</span>
+            <img src="../../assets/images/add.png" alt="" class="add-quantity">
+            </span>
+        </div>
+        <div class="text-center">
+            <button type="submit" class="btn btn-default box-shadow text-orange bold   text-uppercase text-center margin-b-10"><img
+                    src="../../assets/images/add.png" alt="" class="add-quantity padding-r-7">Add Another Door
+            </button>
+            <br>
+            <button type="submit" class="btn btn-default box-shadow text-orange bold   text-uppercase text-center">
+                Checkout >
+            </button>
+        </div>
+        <div class="content">
+            <h4 class="text-orange"> 4.Your Shopping Cart </h4>
+            <p><img src="../../assets/images/Info-64.png" height="26" alt="">
+                <span class="bold">
+                    Estimated Pre Tax Sub-Total :
+                </span>
+                <span class="pull-right bold">
+                    $475.00
+                </span>
+            </p>
+            <div class="div-border div-border-radius tile padding10 margin-b-10">
+                <p class="shopping-cart-gallery-info ">Chamberlain Door Operator (Installed)</p>
+                <p>Chamberlain HD950WF Wi-Fi Connected MyQ Belt Drive with Battery Back-up with 7' rail (x1)</p>
+                <ul class="">Opener Accessories (x1)
+                    <li>
+                        <p>Chamberlain Wireless Keypad <br> (x1 $30.00 each)</p>
+                    </li>
+                    <li>
+                        <p> Chamberlain 3 Button Remote <br>($25.00 each)</p>
+                    </li>
+                </ul>
+            </div>
+            <div class="clearfix  margin-b-40">
+                <button type="submit" class=" font-size-16 pull-left btn btn-default box-shadow text-orange margin-r-10 bold margin-b-10  text-uppercase">
+                    REMOVE ITEM
+                </button>
+                <span class="pull-right margin-b-10 font-size-16">
+                    Quantity
+                    <img src="../../assets/images/substract.png" alt="" class="minus-quantity">
+                    <span>1</span>
+                <img src="../../assets/images/add.png" alt="" class="add-quantity">
+                </span>
+            </div>
+            <div class="text-center">
+                <button type="submit" class="btn btn-default box-shadow text-orange bold   text-uppercase ">CHECKOUT
+                    NOW
+                </button>
+            </div>
+        </div>
+    </modal-body>
+</modal>
+<modal #paymentBilling>
+    <modal-header [show-close]="true">
+        <p class="text-orange font-size-16 padding-l-15 bold">Payment $ Billing </p>
+    </modal-header>
+    <modal-body>
+        <p class="bold  font-size-16 ">Credit Card</p>
+        <img src="../../assets/images/card-6.png" alt="" />
+        <!--<form class="form-label">
+            <div class="form-group">
+                <label for="inputEmail">Card Number:</label>
+                <input type="text" class="form-control" id="inputEmail" placeholder="">
+            </div>
+            <div class="form-group">
+                <label for="inputPassword">Security Code:</label>
+                <input type="text" class="form-control" id="inputPassword" placeholder="">
+            </div>
+            <div class="form-group col-xs-6 padding-0-l">
+                <label for="inputPassword">First Name</label>
+                <input type="text" class="form-control" id="inputPassword" placeholder="">
+            </div>
+            <div class="form-group col-xs-6 padding-0-r">
+                <label for="inputPassword">Last Name:</label>
+                <input type="text" class="form-control" id="inputPassword" placeholder="">
+            </div>
+            <div class="form-group col-xs-6 padding-0-l">
+                <label for="inputPassword">Middle Name:</label>
+                <input type="number" class="form-control" id="inputPassword" placeholder="">
+            </div>
+            <div class="clearfix"></div>
+            <br/>
+            <p class="bold font-size-16">Billing Address </p>
+            <hr class="hr-radius">
+            <div class="form-group">
+                <label for="inputEmail">Address Line 1*:</label>
+                <input type="text" class="form-control" id="inputEmail" placeholder="">
+            </div>
+            <div class="form-group">
+                <label for="inputPassword">Address Line 2:</label>
+                <input type="text" class="form-control" id="inputPassword" placeholder="">
+            </div>
+            <div class="form-group">
+                <label for="inputPassword">City:</label>
+                <input type="text" class="form-control" id="inputPassword" placeholder="">
+            </div>
+            <div class="form-group col-xs-6 padding-0-l">
+                <label for="inputPassword">State/Province/Region:</label>
+                <input type="text" class="form-control" id="inputPassword" placeholder="">
+            </div>
+            <div class="form-group col-xs-6 padding-0-r">
+                <label for="inputPassword">Postal Code/Zip:</label>
+                <input type="text" class="form-control" id="inputPassword" placeholder="">
+            </div>
+            <div class="bold padding10 div-border col-xs-12  margin-b-40 tile">
+                <p class="text-orange "> Order Summary</p>
+                <div><span>Sub Total:</span> <span class="pull-right">961.35</span></div>
+                <div><span>Estimated Tax</span> <span class="pull-right">79.31</span></div>
+                <hr class="hr-radius">
+                <div><span>Total:</span> <span class="pull-right">1040.35</span></div>
+            </div>
+            <div class="form-group margin-b-20 text-center margin-t-20">
+                <button type="submit" class="btn btn-default box-shadow text-orange margin-r-10 bold margin-b-10  text-uppercase">
+                    Submit
+                </button>
+            </div>
+        </form>-->
+    </modal-body>
+</modal>
+<modal #discardDetails>
+    <modal-header [show-close]="true">
+    </modal-header>
+    <modal-body class="text-center">
+        <img class="margin-b-20 alert-image" src="../../assets/images/alert-1.png" alt="" />
+        <p class=" margin-t-20 bold">
+            <span class="margin-b-20 margin-t-20">Navigating to Home Page will discard<br>all available Cart Items.</span>
+            <br>
+
+        </p>
+        <p class="margin-b-40 margin-t-10 bold">
+            <span>Do you want to continue ?</span>
+        </p>
+        <div class="text-center">
+            <button class="btn btn-default btn-lg box-shadow text-orange bold text-uppercase margin-r-25" routerLink="/installQuestion">
+                YES
+            </button>
+            <button class="btn btn-default btn-lg box-shadow text-orange bold text-uppercase" routerLink="/config/opener">
+                NO
+            </button>
+        </div>
+    </modal-body>
+</modal>
+<modal #gdoShoppingCartTerms>
+    <modal-header [show-close]="true">
+    </modal-header>
+    <modal-body>
+        <div class="col-xs-12  pull-left  ">
+            <h4 class="bold font-size-16"> Terms & Conditions </h4>
+            <h4 class="bold font-size-16">BASIC INSTALLATION PRICE INCLUDES</h4>
+            <ul class="pad-l-4">
+                <li>Delivery of operator (within 30 miles of store)</li>
+                <li>Take down and haul away of existing opener</li>
+                <li>Installation to manufacturer's specifications of (1) new garage door opener up to 8' from floor and within
+                    3' of ceiling using installer provided angle iron
+                </li>
+                <li>Detailed inspection of existing garage door for proper operation</li>
+                <li>Install garage door mounting bracket (included with opener)</li>
+                <li>Install drawbar plate on all steel doors</li>
+                <li>Install extension kit for 8' door (if required)</li>
+                <li>Install quick turn brackets for low headroom installs (if required)</li>
+                <li>Shorten rail (if required)</li>
+                <li>Install push button and safety beam system included with opener</li>
+                <li>Install light bulbs in garage door opener unit (provided by homeowner)</li>
+                <li>Install emergency release (if required by code)</li>
+                <li>Program opener and applicable remote control devices (when included with opener)</li>
+                <li>Install wireless keypad (when included with opener)</li>
+                <li>Adjust torsion or extension springs for proper balance (if applicable)</li>
+                <li>Minor adjustments and lubrication of existing garage door</li>
+                <li>Demonstrate new opener and accessories to customer</li>
+                <li>Job site clean up</li>
+            </ul>
+            <h4 class="bold font-size-16">WHAT TO EXPECT ONCE WE RECEIVE YOUR ORDER</h4>
+            <ul class="pad-l-4">
+                <li>Installer will call customer to schedule appointment</li>
+                <li>Once installer arrives at jobsite, he/she will inspect for additional work that may be required</li>
+                <li>Installer will notify you of additional work, if required, and any applicable charges</li>
+                <li>If you approve additional charges, the installer will complete an authorization form and have you sign with
+                    credit card number
+                </li>
+                <li>Installer will install opener, make necessary adjustments, and/or agreed upon repairs</li>
+                <li>After the opener is installed and repairs/adjustments made, installer will review operating and programming
+                    procedures with you to ensure proper operation and remote programming
+                </li>
+                <li>Installer will leave operator manual with you as well as GDO trouble-shooting tip sheet</li>
+                <li>You must do the following prior to the installation date:</li>
+                <li>Clear out the garage a minimum of 10' back from the garage opening</li>
+                <li>Arrange so that pets and children are kept away from the installation project area</li>
+                <li>Disconnect any alarm systems</li>
+                <li>Arrange to have you or a representative (at least 18 years old) home for the entire installation
+                </li>
+                <li>Upon completion of the installation you or your representative will be asked to sign a lien waiver verifying
+                    service completed
+                </li>
+            </ul>
+
+            <h4 class="bold font-size-16  text-center">Special Notes About Your Garage Door Opener Installation</h4>
+            <h4 class="bold font-size-16  ">BEFORE YOUR INSTALLATION:</h4>
+            <ul class="text-uppercase pad-l-4">
+                <li>THE INSTALLER WILL CALL YOU WITHIN 2 BUSINESS DAYS TO SCHEDULE THE INSTALLATION DATE AND DISCUSS JOBSITE
+                    CONDITIONS INCLUDING EXISTING DOOR MEASUREMENTS, TYPE &amp; CONDITION OF DOOR, HEADROOM &amp; ELECTRICAL
+                    REQUIREMENTS, ETC...
+                </li>
+                <li>FOR A COMPLETE INSTALLATION, THERE SHOULD BE AN APPROVED 110 VOLT ELECTRICAL OUTLET WITHIN 3' OF THE POWER
+                    HEAD OF THE OPENER. IF NO OUTLET IS IN PLACE, BUT POWER IS AVAILABLE THROUGH AN EXTENSION CORD, THE INSTALLER
+                    WILL USE IT TO TEST AND ADJUST THE OPENER BUT WILL NOT LEAVE THE EXTENSION CORD IN PLACE.
+                </li>
+                <li>CUSTOMER IS RESPONSIBLE FOR CLEARING THE GARAGE FLOOR 10' BACK FROM THE OPENING PRIOR TO THE INSTALLATION
+                    DATE TO ALLOW AMPLE SPACE FOR INSTALLATION.
+                </li>
+            </ul>
+            <h4 class="bold font-size-16  ">DURING THE INSTALLATION:</h4>
+
+            <ul class="text-uppercase pad-l-4">
+                <li>AN ADULT OVER 18 YEARS OF AGE WITH THE AUTHORITY TO MAKE DECISIONS ABOUT YOUR INSTALLATION MUST BE PRESENT
+                    DURING THE JOBSITE INSPECTION AND INSTALLATION.
+                </li>
+                <li>CHILDREN AND PETS MUST BE KEPT AWAY FROM THE WORK AREA</li>
+                <li>THE CUSTOMER WILL BE REQUIRED TO SIGN A WAIVER UPON THE COMPLETION OF THE JOB.
+                </li>
+            </ul>
+            <h4 class="bold font-size-16  ">FACTORS TO CONSIDER:</h4>
+            <ul class="text-uppercase pad-l-4">
+                <li>DANGEROUS WEATHER CONDITIONS MAY CAUSE THE INSTALLATION TO BE RE-SCHEDULED.</li>
+                <li>CANCELING APPOINTMENTS WITH INSTALLERS WITHOUT 24 HOUR NOTICE OR MISSING SCHEDULED APPOINTMENTS WILL LEAD
+                    TO ADDITIONAL TRIP CHARGES
+                </li>
+                <li>ONLY THE INSTALLER CAN SCHEDULE AN INSTALLATION DATE.</li>
+                <li>HOME DEPOT WILL ONLY INSTALL GARAGE DOOR OPENERS IN RESIDENTIAL BUILDINGS</li>
+                <li>IF UNFORESEEN LABOR IS NEEDED (E.G.. REPAIR DAMAGE FROM TERMITES, ELECTRICAL, OR PLUMBING PROBLEMS) THERE
+                    WILL BE EXTRA CHARGES. IN SOME CASES, THIS LABOR MAY NOT BE AVAILABLE FROM THE HOME DEPOT, SO THE CUSTOMER
+                    MUST HIRE THEIR OWN REPAIR MAN
+                </li>
+            </ul>
+            <h4 class="bold font-size-16">SERVICE NOT AVAILABLE WITH THIS INSTALLATION PROGRAM:</h4>
+            <ul class="pad-l-4">
+                <li>ANY ELECTRICAL WORK (OTHER THAN CONTENTS OF PACKAGED OPENER**)
+                    <p style="color:#434343;">
+                        ** The Model 920EV comes standard with a Remote Light Switch that will need to be installed by a licensed electrician or
+                        homeowner, Clopay Installers will not install the Remote Light Switch</p>
+                </li>
+                <li>COMPLETE TRACK REPLACEMENT</li>
+                <li>ANY GARAGE DOOR SECTION ON SITE REPAIR</li>
+                <li>STRUCTURAL MODIFICATIONS TO GARAGE</li>
+                <li>WORK PERFORMED ON WEEKENDS OR LEGAL HOLIDAY UNLESS OTHERWISE AGREED UPON BY INSTALLER AND CUSTOMER
+                </li>
+            </ul>
+            <div class="bold margin-t-20 text-center">
+                <p class="aggrement-text ">HOME IMPROVEMENT AGREEMENT <br>PLEASE READ THIS </p>
+                <div class="form-group margin-b-20">
+                    <button type="submit" class="btn btn-default box-shadow text-orange margin-r-10 bold margin-b-10 pull-right" (click)="email.close()">DECLINE
+                    </button>
+                    <button type="submit" class="btn btn-default box-shadow text-orange margin-r-10 bold margin-b-10 pull-left" (click)="email.close()">ACCEPT
+                    </button>
+                </div>
+            </div>
+        </div>
+    </modal-body>
+</modal>
+<div id="footer" class="col-xs-12 padding-t-10 padding-b-10">
+    <a href="javascript:void(0)" class="pull-left previous-btn" (click)="prevBtn('/additionalOptions')" data-id="currScreen">
+        <img src="../../assets/images/back-48-thick.png" height="15px"> Prev
+    </a>
+
+    <a href="javascript:void(0)" class="pull-right nextBtn" (click)="nextBtn('/shoppingCart')" data-id="currScreen">
+        Add To Cart
+        <img src="../../assets/images/Forward-48-thick.png" height="15px">
+    </a>
+</div>

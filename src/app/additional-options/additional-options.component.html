@@ -1,45 +1,331 @@
-<h4 class="text-orange font-size-16">Additional Options</h4>
-<div class="content additional-options">
+<div class="content additional-options margin-top-5" id="resFlow" *ngIf="!gdoFlow">
+    <!--<h4 class="text-orange font-size-16">Additional Options</h4>-->
     <dl>
         <dd>
-     <p>Medallion Hardware Upgrade for <span class="text-orange">$59.00</span>?</p>
-      <div id="upgrade">
-        <img src="../../assets/images/medallionlogo.png">
-        <img src="../../assets/images/MedallionUpgrades_warranties.png">
-      </div>
-      <div class="flex-right">
-        <span class="text-orange">Yes</span>
-        <label class="switch">
-          <input type="checkbox" checked="checked">
-          <div class="slider round"></div>
-        </label>
-        <span class="text-orange">No</span>
-      </div>
-    </dd>
-    <dd>
-      <p>Is this job site within 30 drive miles of this store?</p>
-      <div class="flex-right">
-        <span class="text-orange">Yes</span>
-        <label class="switch">
-          <input type="checkbox" checked="checked">
-          <div class="slider round"></div>
-        </label>
-        <span class="text-orange">No</span>
-      </div>
-      <div class="align-right">
-        <p id="distance">Distance of job site is <input type="text" /> drive miles from store</p>
-      </div>
-    </dd>
-    <dd>
-      <p>Do you need Double Track Low Head Room Conversion Kit <span class="text-orange">$59.00</span>?</p>
-      <div class="flex-right">
-        <span class="text-orange">Yes</span>
-        <label class="switch">
-          <input type="checkbox">
-          <div class="slider round"></div>
-        </label>
-        <span class="text-orange">No</span>
-      </div>
-    </dd>
-  </dl>
+            <div class="clearfix">
+                <p class="col-xs-11"> Medallion Hardware Upgrade for <span class="text-orange">$59.00</span>?
+                </p>
+                <img (click)="resFlowMed.open()" class="pull-right " alt="" height="25" src="../../assets/images/info.png">
+            </div>
+            <div id="upgrade">
+                <img src="../../assets/images/Medallionlogo.png" alt="" />
+                <img src="../../assets/images/MedallionUpgrades_warranties.png" alt="" />
+            </div>
+            <div class="flex-right">
+                <span class="text-orange">Yes</span>
+                <label class="switch">
+                    <input type="checkbox" checked="checked">
+                    <div class="slider round"></div>
+                </label>
+                <span class="text-orange">No</span>
+            </div>
+        </dd>
+        <dd>
+            <div class="clearfix">
+                <p (click)="resFlowMiles.open()" class="col-xs-11">Is this job site within 30 drive miles of this store? </p>
+                <img class="pull-right" alt="" height="25" src="../../assets/images/info.png">
+            </div>
+            <div class="flex-right">
+                <span class="text-orange">Yes</span>
+                <label class="switch">
+                    <input type="checkbox" checked="checked">
+                    <div class="slider round"></div>
+                </label>
+                <span class="text-orange">No</span>
+            </div>
+            <div class="align-right ">
+                <p id="distance">Distance of job site is <input type="text" /> drive miles from store</p>
+            </div>
+        </dd>
+        <dd>
+            <div class="clearfix">
+                <p class="col-xs-11">Do you need Double Track Low Head Room Conversion Kit <span class="text-orange">$59.00</span>?
+                </p>
+                <img (click)="resFlowHeadRoom.open()" class="pull-right" alt="" height="25" src="../../assets/images/info.png">
+            </div>
+            <div class="flex-right">
+                <span class="text-orange">Yes</span>
+                <label class="switch">
+                    <input type="checkbox">
+                    <div class="slider round"></div>
+                </label>
+                <span class="text-orange">No</span>
+            </div>
+        </dd>
+        <dd>
+            <div class="clearfix">
+                <p class="col-xs-11">Do you need an <strong>Emergency Release Kit</strong>? <span class="text-orange">$35.00</span>?
+                </p>
+                <img (click)="resFlowReleaseKit.open()" class="pull-right" alt="" height="25" src="../../assets/images/info.png">
+            </div>
+            <div class="flex-right">
+                <span class="text-orange">Yes</span>
+                <label class="switch">
+                    <input type="checkbox">
+                    <div class="slider round"></div>
+                </label>
+                <span class="text-orange">No</span>
+            </div>
+        </dd>
+    </dl>
 </div>
+<div class="content additional-options" id="gdoFlow" *ngIf="gdoFlow">
+    <div *ngIf="!directFlow" class="content additional-options">
+        <!--<h4 class="text-orange font-size-16">Additional Options</h4>-->
+        <dl>
+            <dd>
+                <div class="clearfix">
+                    <div class="col-xs-10">
+                        Does your current door work manually without a garage door opener attached?
+                    </div>
+                    <div class="col-xs-2 padding-0">
+                        <img (click)="gdoFlowManualDoor.open()" class="pull-right " alt="" height="25" src="../../assets/images/info.png">
+                    </div>
+                </div>
+
+                <div class="flex-right">
+                    <span class="text-orange">Yes</span>
+                    <label class="switch">
+                        <input  type="checkbox" checked="checked"  (change)="showManual($event)">
+                        <div class="slider round"></div>
+                    </label>
+                    <span class="text-orange">No</span>
+
+                </div>
+                <p class="margin-b-10 additionl-openers-note " *ngIf="gdoFlowManualDoorInfo">
+                    If door does not operate manually without opener attached then a new opener may not be able to operate the door. You should
+                    be able to open and close door manually without the opener attached. If it does not operate manually
+                    then you may need to consider spring replacement or purchasing a new Garage Door.
+
+                </p>
+            </dd>
+            <dd>
+                <div class="clearfix">
+                    <div class="col-xs-10">Is there an outlet in the celing approx. 10' back-center of the door or within 3' of where the opener
+                        powerhead will be installed?
+                    </div>
+                    <div class="col-xs-2 padding-0">
+                        <img (click)="gdoFlowPowerHead.open()" class="pull-right" alt="" height="25" src="../../assets/images/info.png">
+                    </div>
+                </div>
+                <div class="flex-right">
+                    <span class="text-orange">Yes</span>
+                    <label class="switch">
+                        <input type="checkbox" checked="checked" (change)="showPowerHead($event)">
+                        <div class="slider round"></div>
+                    </label>
+                    <span class="text-orange">No</span>
+                </div>
+                <p class="margin-b-10  additionl-openers-note" *ngIf="gdoFlowPowerHeadInfo">For a complete installation. there should be an approved 110 volt electrical outlet within 3' of the power
+                    head of the opener. If no outlet is in place, but power is available through an extension cord, the installer
+                    will test and adjust the opener but will not leave the extension cord in place.
+                </p>
+            </dd>
+            <dd>
+                <div class="clearfix">
+                    <div class="col-xs-10">Is this job site within 30 drive miles of this store?</div>
+                    <div class="col-xs-2 padding-0">
+                        <img (click)="gdoFlowMiles.open()" class="pull-right" alt="" height="25" src="../../assets/images/info.png">
+                    </div>
+                </div>
+                <div class="flex-right">
+                    <span class="text-orange">Yes</span>
+                    <label class="switch">
+                        <input type="checkbox" checked="checked" (change)="showDistance($event,'non-direct')">
+                        <div class="slider round"></div>
+                    </label>
+                    <span class="text-orange">No</span>
+                </div>
+                <div class="clearfix margin-b-10"></div>
+                <div class="align-right padding-l-15">
+                    <div>
+                        Distance of job site is
+                        <form class="inline-block">
+                            <input type="number" pattern="^[a-zA-Z0-9]+$" (keydown)="updateDistance($event,null)" name="gdoDistance" class="gdoDistance" [(ngModel)]="distance"
+                                disabled/>
+                        </form>
+                        drive miles from store
+                    </div>
+
+                    <p *ngIf="showDistancePrice">{{distance}} miles from store ({{distancePrice | currency:'USD':true:'1.2-2'}})
+                    </p>
+
+                </div>
+
+            </dd>
+        </dl>
+    </div>
+    <div *ngIf="directFlow" class="content additional-options">
+        <h4 class="font-size-16">3.Additional Options</h4>
+        <dl>
+            <dd>
+                <div class="clearfix">
+                    <div class="col-xs-10">Single Door New Opener Installation Kit. This is required when no Opener is currently installed on door
+                        less than 10' wide.
+                    </div>
+                    <div class="col-xs-2">
+                        <select name="" (change)="directDoor($event,0)" *ngIf="singleDrop">
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="flex-right">
+                    <span class="text-orange">Yes</span>
+                    <label class="switch">
+                        <input type="checkbox" (change)="showSingle($event)">
+                        <div class="slider round"></div>
+                    </label>
+                    <span class="text-orange">No</span>
+                </div>
+            </dd>
+            <dd>
+                <div class="clearfix">
+                    <p class="col-xs-10">Double Door New Opener Installation Kit. This is required when no Opener is currently installed on door
+                        less than 10' wide.</p>
+                    <div class="col-xs-2">
+                        <select name="" (change)="directDoor($event,1)" *ngIf="doubleDrop">
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="flex-right">
+                    <span class="text-orange">Yes</span>
+                    <label class="switch" (change)="showDouble($event)">
+                        <input type="checkbox">
+                        <div class="slider round"></div>
+                    </label>
+                    <span class="text-orange">No</span>
+                </div>
+            </dd>
+            <dd>
+                <div class="clearfix">
+                    <p class="col-xs-11">Is this job site within 30 drive miles of this store? </p>
+                </div>
+                <div class="flex-right">
+                    <span class="text-orange">Yes</span>
+                    <label class="switch">
+                        <input type="checkbox" checked="checked" (change)="showDistance($event,'direct')">
+                        <div class="slider round"></div>
+                    </label>
+                    <span class="text-orange">No</span>
+                </div>
+                <div class="clearfix margin-b-10"></div>
+                <div class="align-right padding-l-15">
+                    <div>
+                        Distance of job site is
+                        <form class="inline-block">
+                            <input type="number" pattern="^[a-zA-Z0-9]+$" (keyup)="updateDistance($event,'direct')" name="gdoDistance" (paste)="onPaste($event)"
+                                [(ngModel)]="distance" disabled class="gdoDistance" />
+                        </form>
+                        drive miles from store
+                    </div>
+
+                    <p *ngIf="showDistancePrice">{{distance}} miles from store ({{distancePrice | currency:'USD':true:'1.2-2'}})
+                    </p>
+
+                </div>
+                <p class="additionl-note">
+                    Please Note: Is your Garage Door over 7' Tall? If yes, you must purchase the appropriate extension kit from the store or
+                    on homedepot.com and have it on site at time of installation
+                </p>
+            </dd>
+        </dl>
+    </div>
+</div>
+
+<div id="footer" class="col-xs-12 padding-t-10 padding-b-10">
+    <a href="javascript:void(0)" *ngIf="!hidePrev" class="pull-left previous-btn" (click)="prevBtn('/opener')" data-id="currScreen">
+        <img src="../../assets/images/back-48-thick.png" height="15px"> Prev
+    </a>
+
+    <a href="javascript:void(0)" class="pull-right nextBtn" (click)="nextBtn('/doorConfiguration')" data-id="currScreen">
+       Next
+       <img src="../../assets/images/Forward-48-thick.png" height="15px">
+    </a>
+</div>
+
+<modal #resFlowMed>
+    <modal-header [show-close]="true">
+    </modal-header>
+    <modal-body>
+        <img src="../../assets/images/additionalOptions/R_med.png" alt="" />
+    </modal-body>
+</modal>
+<modal #resFlowMiles>
+    <modal-header [show-close]="true">
+    </modal-header>
+    <modal-body class="bold text-left padding10">
+        <p>Distance From Store? </p>
+        <p>Prices INCLUDE Home Delivery withIn a 30 mile driving distance from the store.</p> 
+        <p>If job site location is greater than
+            30 drive miles from store then the following mileage fees apply:</p>
+        <ul>
+            <li><span>31 - 50 miles from store - flat rate of $51</span></li>
+            <li><span>Greater than 50 miles from store - ﬂat rate of $51 + $3.00 for every drive mile over 50</span></li>
+        </ul>
+    </modal-body>
+</modal>
+<modal #resFlowHeadRoom>
+    <modal-header [show-close]="true">
+    </modal-header>
+    <modal-body class="text-left padding10">
+        <h4 class="margin-b-10 bold">What is a Low Headroom Conversion Kit? </h4>
+        <p class="margin-b-10">Low Headroom track reduces the amount of headroom required 0 Backroom Ceiling for a normal installation Headroom
+            is the space needed above the top of the door upwards to the first obstruction within the path of the door inside
+            the garage.</p>
+        <img src="../../assets/images/how_to_measure-drawing.png" class="img-rounded measure margin-r-10" alt=" " width="304" height="236">
+    </modal-body>
+</modal>
+<modal #resFlowReleaseKit>
+    <modal-header [show-close]="true">
+    </modal-header>
+    <modal-body class="text-left padding10">
+        <p class="margin-b-10 ">The Clopay Emergency Release Kit allows you to disengage the Garage Door Opener. from the outside of the garage.
+            This allows you to open the door in the event of a power outage or opener failure. The Clopay Emergency Release
+            Kit may be required if the Garage Door is the only am to the stmcture. Please check local building codes for
+            clarification.
+        </p>
+        <span class="padding10">Installation required for DIY orders  </span>
+    </modal-body>
+</modal>
+<modal #gdoFlowManualDoor>
+    <modal-header [show-close]="true">
+    </modal-header>
+    <modal-body class="text-left padding10">
+        <p class="margin-b-10 ">
+            If door does not operate manually without opener attached then a new opener may not be able to operate the door. You should
+            be able to open and close door manually without the opener attached. If it does not operate manually then you
+            may need to consider spring replacement or purchasing a new Garage Door.
+
+        </p>
+    </modal-body>
+</modal>
+<modal #gdoFlowPowerHead>
+    <modal-header [show-close]="true">
+    </modal-header>
+    <modal-body class="text-left padding10">
+        <p class="margin-b-10  ">For a complete installation. there should be an approved 110 volt electrical outlet within 3' of the power head of
+            the opener. If no outlet is in place, but power is available through an extension cord, the installer will test
+            and adjust the opener but will not leave the extension cord in place.
+        </p>
+    </modal-body>
+</modal>
+<modal #gdoFlowMiles>
+    <modal-header [show-close]="true">
+    </modal-header>
+    <modal-body class="text-left padding10">
+        <p>
+            Prices INCLUDE Home Delivery within a 30 mile driving distance from the store.If job site location is greater than 30 drive
+            miles from store then the following mileage fees apply:
+        </p>
+        <p style="text-indent: 40px;">31 - 50 miles from store - flat rate of $51 </p>
+        <p style="text-indent: 40px;">
+            Greater than 50 miles from store - flat rate of $51 + $3.00 for every drive mile over 50
+        </p>
+    </modal-body>
+</modal>

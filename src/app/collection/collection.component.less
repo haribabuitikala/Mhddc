@@ -4,62 +4,175 @@
 @border_color_1: #c0c0c0;
 
 .collection-img {
-	padding: 5px;
-  iframe{
+  padding: 5px;
+  iframe, img {
     width: 100%;
   }
 }
+
 .collection-btn-sec {
-	padding: 6px 5px 10px 10px;
-	button.collection-select {
-		width: 90px;
-	}
-	button.collection-selected {
-		background-color: @background_color_1;
-		color: @color_1;
-	}
-	.coming-soon {
-		button {
-			border-color: @border_color_1;
-			color: @color_2;
-		}
-	}
+  padding: 6px 5px 10px 10px;
+  button.collection-select {
+    width: 90px;
+  }
+  button.collection-selected {
+    background-color: @background_color_1;
+    color: @color_1;
+  }
+  .coming-soon {
+    button {
+      border-color: @border_color_1;
+      color: @color_2;
+    }
+  }
 }
+
 .collection-btn-sec.coming-soon {
-	button {
-		border-color: @border_color_1;
-		color: @color_2;
-	}
+  button {
+    border-color: @border_color_1;
+    color: @color_2;
+  }
 }
+
 .box-shadow {
-	box-shadow: 0 0 5px #888;
+  box-shadow: 0 0 5px #888;
 }
 
 .btn-big {
-	padding: 10px 30px;
+  padding: 10px 30px;
 }
+
 .btn {
-	display: inline-block;
-	padding: 6px 12px;
-	margin-bottom: 0;
-	font-size: 14px;
-	font-weight: 400;
-	line-height: 1.42857143;
-	text-align: center;
-	white-space: nowrap;
-	vertical-align: middle;
-	cursor: pointer;
-	-webkit-user-select: none;
-	-moz-user-select: none;
-	-ms-user-select: none;
-	user-select: none;
-	background-image: none;
-	border: 1px solid transparent;
-	border-radius: 4px;
+  display: inline-block;
+  padding: 6px 12px;
+  margin-bottom: 0;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.42857143;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  background-image: none;
+  border: 1px solid transparent;
+  border-radius: 4px;
 }
+
 .text-uppercase {
-	text-transform: uppercase;
+  text-transform: uppercase;
 }
+
 .button-margin {
-    margin-bottom: 35px;
+  margin-bottom: 35px;
 }
+
+.products-details {
+  .small {
+    font-size: 11px;
+  }
+  .color-sec > div {
+    > div {
+      border: 1px solid rgb(200, 200, 200);
+      height: 50px;
+      width: 100%;
+    }
+  }
+  .color-sec {
+    .white {
+      background-color: rgb(243, 243, 243);
+    }
+    .almond {
+      background-color: rgb(247, 240, 222);
+    }
+    .desert-tan {
+      background-color: rgb(219, 214, 194);
+    }
+    .sand-stone {
+      background-color: rgb(187, 178, 161);
+    }
+    .bronze {
+      background-color: rgb(114, 107, 99);
+    }
+    .chocolate {
+      background-color: rgb(66, 58, 37);
+    }
+    .gray {
+      background-color: rgb(200, 201, 203);
+    }
+    .hunter-green {
+      background-color: rgb(48, 79, 61);
+    }
+  }
+  .details-img {
+    height: 105px;
+    margin-right: 10px;
+  }
+  ul {
+    padding: 0;
+    li {
+      list-style: disc;
+    }
+  }
+  ol {
+    padding-left: 17px;
+    li {
+      list-style: decimal;
+    }
+  }
+}
+
+.selected {
+  border: 1px solid @background_color_1;
+}
+.iframe{
+  width: 95%;
+    height: 127px;
+    position: absolute;
+    left: 6px;
+    top: 6px;
+}
+.selectdoorSizetoster{
+background-color: #fff;padding: 0px;
+width: 100%;
+-moz-border-radius: 3px 3px 3px 3px;
+-webkit-border-radius: 3px 3px 3px 3px;
+border-radius: 3px 3px 3px 3px;
+background-repeat: no-repeat;
+-moz-box-shadow: 0 0 12px #999999;
+-webkit-box-shadow: 0 0 12px #999999;
+box-shadow: 0 0 12px #999999;
+color: #000;
+margin: 0px auto;
+-ms-filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=80);
+filter: alpha(opacity=80);
+position: fixed;
+    top: 56px !important;
+    left: 0;
+    height: 100%;
+	z-index: 99;
+}
+.selectdoorSizetosterspan{
+display: inline-block;
+position: relative;
+top: 40%;
+transform: translateY(-50%); 
+font-size: 16px;
+}
+.selectdoorSizetoster button{
+    float: right;
+	margin-top: 5px;
+    margin-right: 14px;
+}
+.tile.margin-t-10 {
+position:relative;
+}
+.ad-sec.margin-t-10{
+float: right;
+position: absolute;
+right: 1%;
+top: 40%;
+}  

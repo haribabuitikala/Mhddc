@@ -1,21 +1,85 @@
 
 ._slider-container {
-  height: 200px;
-  ._slider-wrapper {
-    height: 100%;
-    overflow: hidden;
-    ._slider {
-      height: 100%;
-      clear: both;
-      position: relative;
-      ._slide {
+    position: relative;
+    padding: 5px 0;
+    ._slider-wrapper {
         height: 100%;
-        float: left;
-        ._slide-img {
-          width: 100%;
-          height: auto;
+        overflow: hidden;
+        ._slider {
+            height: 100%;
+            clear: both;
+            position: relative;
+            ._slide {
+                height: 100%;
+                float: left;
+                ._slide-img {
+                    width: 100%;
+                    height: auto;
+                }
+            }
         }
-      }
     }
-  }
+    .slideright, .slideleft {
+        position: absolute;
+        top: 50%;
+        margin-top: -15px;
+    }
+    .slideright {
+        right: 0;
+    }
+    .slideleft {
+        left: 0;
+    }
+}
+.home-carousal {
+    .coming-soon {
+        right: 0;
+        height: 25px;
+        top: 10px;
+    }
+}
+.trending-text-sec {
+    height: 70px !important;
+    
+}
+.trending-now-div {
+    height: 100.465px;
+} 
+
+.text-sec {
+	padding: 7px;
+	padding: 7px 5px;
+	border: 1px solid #ccc;
+	font-size: 13px !important; 
+	line-height: 14px;
+	.text { 
+		width: 80%;
+	}
+}
+ 
+.box-shadow-div {
+    box-shadow: 0 0 5px #888 !important;
+}
+.home {
+	.carousel-inner {
+		height: 155px;
+	}
+}
+.carousel-inner {
+	position: relative;
+	width: 100%;
+	overflow: hidden;
+}
+.box-shadow {
+    box-shadow: 0 0 5px #888;
+}
+ 
+.bg-white {
+    background-color: #fff;
+}
+
+.trending-now-text-size {
+    margin-top: 0px !important;
+    clear: both;
+    margin-bottom: 1px;
 }

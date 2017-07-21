@@ -1,0 +1,146 @@
+<div>
+    <br>     
+    <p><span class="text-orange font-size-16">Checkout</span> <span class="bold pull-right font-size-16">Service Site :</span>
+    </p>
+    <form class="form-label" #customerFormServiceSite="ngForm" novalidate (ngSubmit)="save(customerFormServiceSite.value, customerFormServiceSite.valid)">
+
+          <div class="checkbox">
+            <label><input type="checkbox">
+                <p><font color="#333333">Same as <strong>Sold To</strong> Address</font></p></label>
+        </div>
+        <div class="form-group">
+            <label for="txtFirstName_ServiceSite">First Name:</label>
+            <input type="text" class="form-control" 
+                   name="txtFirstName_ServiceSite"
+                   [(ngModel)]="user.txtFirstName_ServiceSite" 
+                   #txtFirstName_ServiceSite="ngModel" required   (keypress)="onlyNumberKey($event)">
+                   <div [hidden]="txtFirstName_ServiceSite.valid || (txtFirstName_ServiceSite.pristine && !customerFormServiceSite.submitted)" class="text-danger">
+                Required  
+            </div>
+
+        </div>
+
+        <div class="form-group">
+            <label for="txtLastName_ServiceSite">Last Name:</label>
+            <input type="text" class="form-control" 
+                   name="txtLastName_ServiceSite" 
+                   [(ngModel)]="user.txtLastName_ServiceSite" 
+                   #txtLastName_ServiceSite="ngModel" required placeholder="" (keypress)="onlyNumberKey($event)">
+            <div [hidden]="txtLastName_ServiceSite.valid || (txtLastName_ServiceSite.pristine && !customerFormServiceSite.submitted)" class="text-danger">
+                Required  
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="txtAddress1_ServiceSite">Address 1:</label>
+            <input type="text" class="form-control" name="txtAddress1_ServiceSite" [(ngModel)]="user.txtAddress1_ServiceSite" 
+                   #txtAddress1_ServiceSite="ngModel" required placeholder="" (keypress)="onlyNumberKey($event)">
+            <div [hidden]="txtAddress1_ServiceSite.valid || (txtAddress1_ServiceSite.pristine && !customerFormServiceSite.submitted)" class="text-danger">
+                Required  
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="txtAddress2_ServiceSite">Address 2:</label>
+            <input type="text" class="form-control" name="txtAddress2_ServiceSite" [(ngModel)]="user.txtAddress2_ServiceSite" 
+                   #txtAddress2_ServiceSite="ngModel" required placeholder="" (keypress)="onlyNumberKey($event)">
+            <div [hidden]="txtAddress2_ServiceSite.valid || (txtAddress2_ServiceSite.pristine && !customerFormServiceSite.submitted)" class="text-danger">
+                Required  
+            </div>
+        </div>
+        <div class="form-group col-xs-6 padding-0-l">
+            <label for="txtCity_ServiceSite">City:</label>
+            <input type="text" class="form-control" name="txtCity_ServiceSite" [(ngModel)]="user.txtCity_ServiceSite" 
+                   #txtCity_ServiceSite="ngModel" required placeholder=""  (keypress)="onlyNumberKey($event)">
+            <div [hidden]="txtCity_ServiceSite.valid || (txtCity_ServiceSite.pristine && !customerFormServiceSite.submitted)" class="text-danger">
+                Required  
+            </div>
+        </div>
+        <div class="form-group col-xs-6 padding-0-r">
+            <label for="txtState_ServiceSite">State:</label>
+            <input type="text" class="form-control" name="txtState_ServiceSite" [(ngModel)]="user.txtState_ServiceSite" 
+                   #txtState_ServiceSite="ngModel" required  placeholder="" (keypress)="disAllowNumbers($event)">
+            <div [hidden]="txtState_ServiceSite.valid || (txtState_ServiceSite.pristine && !customerFormServiceSite.submitted)" class="text-danger">
+                Required  
+            </div>
+        </div>
+        <div class="form-group col-xs-6 padding-0-l">
+            <label for="txtZipCode_ServiceSite">Zipcode:</label>
+            <input type="number" class="form-control" name="txtZipCode_ServiceSite" [(ngModel)]="user.txtZipCode_ServiceSite" 
+                   #txtZipCode_ServiceSite="ngModel" required  placeholder="">
+            <div [hidden]="txtZipCode_ServiceSite.valid || (txtZipCode_ServiceSite.pristine && !customerFormServiceSite.submitted)" class="text-danger">
+                Required  
+            </div>
+        </div>
+        <div class="form-group col-xs-6 padding-0-r">
+            <label for="txtCounty_ServiceSite">Country:</label>
+            <input type="text" class="form-control" name="txtCounty_ServiceSite" [(ngModel)]="user.txtCounty_ServiceSite" 
+                   #txtCounty_ServiceSite="ngModel" required placeholder=""  (keypress)="disAllowNumbers($event)">
+            <div [hidden]="txtCounty_ServiceSite.valid || (txtCounty_ServiceSite.pristine && !customerFormServiceSite.submitted)" class="text-danger">
+                Required 
+
+            </div>
+
+        </div>
+        <div class="form-group col-xs-6 padding-0-l">
+            <label for="txtPhoneNumber_ServiceSite">Primary Phone No:</label>
+            <input type="number" class="form-control" name="txtPhoneNumber_ServiceSite" [(ngModel)]="user.txtPhoneNumber_ServiceSite" 
+                   #txtPhoneNumber_ServiceSite="ngModel" required  minlength="10" placeholder="" >
+            <div [hidden]="txtPhoneNumber_ServiceSite.valid || (txtPhoneNumber_ServiceSite.pristine && !customerFormServiceSite.submitted)" class="text-danger">
+                Required
+                <span *ngIf="txtPhoneNumber_ServiceSite.errors?.minlength" class="text-danger">
+                    Phone # must be 
+                    10 digits (inc area code)
+                </span>
+            </div>
+
+        </div>
+        <div class="form-group col-xs-6 padding-0-r">
+            <label for="txtSecondaryNumber_ServiceSite">Secondary Phone No:</label>
+            <input type="number" class="form-control" name="txtSecondaryNumber_ServiceSite" [(ngModel)]="user.txtSecondaryNumber_ServiceSite" 
+                   #txtSecondaryNumber_ServiceSite="ngModel" required placeholder="">
+            <div [hidden]="txtSecondaryNumber_ServiceSite.valid || (txtSecondaryNumber_ServiceSite.pristine && !customerFormServiceSite.submitted)" class="text-danger">
+                Required  
+                <span *ngIf="txtSecondaryNumber_ServiceSite.errors?.minlength" class="text-danger">
+                    Phone # must be 
+                    10 digits (inc area code)
+                </span>
+            </div>
+
+        </div>
+
+
+        <p class="pager" style="line-height: 70px;">
+            <button class="col-md-3 text-center" type="submit" style=" text-align: center !important;"
+                    class=" text-center btn btn-default box-shadow text-orange margin-r-10 bold margin-b-10  "
+                    > Submit customer information
+            </button>
+        </p>
+
+    </form>   
+</div>
+
+
+<modal #checkoutPopup>
+    <modal-header >
+        <p class="text-orange font-size-16  bold padding-l-30 pull-left"> Checkout </p> 
+    </modal-header>
+    <modal-body>
+        <div class="col-xs-12 font-size-14  pull-left">
+            <p>Almost done. Please review your final purchase price below and click "Approve Order Totals and Proceed to
+                Payment" to enter payment information.</p>
+            <p>The Home Depot and Clopay want to thank you for trusting us with your Garage Door project. </p>
+            <p>
+                The Home Depot Customer Order Number: &nbsp;H1934-21045
+            </p>
+            <div class="bold margin-t-20 margin-b-25">
+                <div><span>Sub Total:</span> <span class="pull-right">961.35</span></div>
+                <div><span>Estimated Tax</span> <span class="pull-right">79.31</span></div>
+                <hr class="hr-radius">
+                <div><span>Total:</span> <span class="pull-right">1040.35</span></div>
+            </div>
+            <button type="submit"
+                    class="text-center btn btn-default box-shadow text-orange margin-r-10 bold margin-b-25  "
+                    (click)="goToPaymentBilling()" >APPROVE ORDER TOTALS AND PROCEED 
+            </button>
+        </div>
+    </modal-body>
+</modal>

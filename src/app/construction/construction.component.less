@@ -1,4 +1,90 @@
 
-li{
+li {
   list-style-type: disc;
+}
+
+.construction-carousel {
+  .col-xs-6 {
+    padding: 0 5px;
+    > img {
+      width: 100%;
+    }
+  }
+  .selected-icon {
+    right: 13px;
+  }
+}
+
+@background_color_1: rgb(34, 34, 34);
+@border_color_1: rgb(200, 200, 200);
+
+.promo-offer {
+  border: 1px solid @border_color_1;
+  background-color: @background_color_1;
+  color: white;
+}
+
+.upsellDetailsDefault{
+  position: absolute;
+    z-index: 2;
+    top: 280px;
+    left: 55%;
+    font-weight: bold;
+    margin-right: 40px;
+}
+.default-upsell-image {
+    position: relative;
+}
+
+
+
+
+@media only screen and (min-width: 568px) {
+  .col6 {
+    width: 50%;
+  }
+  .col-xs-8{
+    width: 100%;
+  }
+  .upsellDetailsDefault{
+   top:190px;   
+   left:53%;   
+  }
+
+  .upsellDetails{
+    left:53% !important;
+  }
+}
+
+@media only screen and (min-width: 640px) {
+ .upsellDetailsDefault{
+    top: 260px;
+ }
+}
+
+@media only screen and (min-width: 667px) {
+  .col6 {
+    width: 100%;
+  }
+}
+.upsellDetails{
+    position: absolute;
+    z-index: 2;
+    top: 55px;
+    left: 55%;
+    font-weight: bold;
+}
+
+.upsell-image{
+    position: relative;
+    height: 190px;
+    width: 100%;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: 50% 50%;
+}
+
+.chose-construct1 {
+
+  padding: 0px 10px!important;
 }

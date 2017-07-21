@@ -1,0 +1,48 @@
+<div *ngIf="isLoaded" class="tile text-center choose-your-design--sec margin-b-15 ptn-rel " style="height: 190px; position: relative;">
+    <app-res-slider 
+        [data]="openers" 
+        [number]="number" 
+        [category]="'openers'" 
+        [cname]="'opener'" 
+        [uniqueId]="3" 
+        [folder]="'opener'">
+    </app-res-slider>
+
+    <div id="footer" class="col-xs-12 padding-t-10 padding-b-10">
+        <a href="javascript:void(0)" class="pull-left previous-btn" (click)="prevBtn('/gdoDoorSize')" data-id="currScreen">
+            <img src="../../assets/images/back-48-thick.png" height="15px"> Prev
+        </a>
+
+        <a href="javascript:void(0)" class="pull-right nextBtn" (click)="nextBtn()" data-id="currScreen">
+        Next
+        <img src="../../assets/images/Forward-48-thick.png" height="15px">
+        <!--(click)="nextBtn('/additionalOptions')"-->
+    </a>
+    </div>
+
+    <modal #gdoOponerAccessories>
+        <modal-body>
+
+            <div class="opener-accessories   margin-b-10">
+                <h4 class="text-orange font-size-16">Selected Opener</h4>
+                <p class="lead margin-b-20" *ngIf="selectedOpener">{{selectedOpener.item_name}}</p>
+                <h4 class="text-orange font-size-16  margin-b-10">Optional Opener Accessories</h4>
+                <div class="accessory-sec margin-b-20" *ngFor="let obj of additionalItems; let k = index">
+                    {{obj.item_name}}
+                    <p class="margin-b-0">
+                        <res-update-qty [data]="obj"></res-update-qty>
+                        + <span class="text-orange">{{obj.item_price | currency:'USD':true:'1.2-2'}} Each</span>
+                    </p>
+                </div>
+                <div class="text-center button-margin margin-b-20 margin-t-20">
+                    <button class="btn btn-default box-shadow text-orange bold text-uppercase" (click)="accessoriesModalClose()">SELECT OTHER OPENER
+                </button>
+                </div>
+                <div class="text-center button-margin margin-b-20 margin-t-20">
+                    <button class="btn btn-default  box-shadow text-orange bold text-uppercase" (click)="accessoriesModalNext()">Next Step
+                </button>
+                </div>
+            </div>
+
+        </modal-body>
+    </modal>

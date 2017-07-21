@@ -1,0 +1,42 @@
+ ._slider-container {
+     position: relative;
+     ._slider-wrapper {
+         position: relative; overflow: hidden;
+         ._slider {
+             position: relative;
+             ._slide {
+                float: left;
+                ._inner-item {
+                    float:left; height:98px;
+                     .inner-frame {
+                        border: 1px solid #ccc; 
+                        width: 100%; 
+                        height: 100%;
+
+                        background-repeat: no-repeat;
+                        background-size: contain;
+                        background-position: center center;
+
+                        &.selected {
+                            border: 1px solid #f96302;
+                        }
+                     }
+                     &.first {
+                         padding-right: 5px;
+                     }
+                     &.last {
+                        padding-left: 5px;
+                     }
+                 }
+             }
+         }
+     }
+ }
+ 
+ .left-arrow {
+     height: 40px;
+ }
+
+ .right-arrow {
+     height: 40px;
+ }

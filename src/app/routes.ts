@@ -5,44 +5,31 @@ import {CategoryComponent} from "./category/category.component";
 import {DoorSizeComponent} from "./door-size/door-size.component";
 import {CollectionComponent} from "./collection/collection.component";
 import {HomeComponent} from "./home/home.component";
-import {DesignComponent} from "./design/design.component";
-import {ConstructionComponent} from "./construction/construction.component";
-import {ColorComponent} from "./color/color.component";
-import {TopSectionComponent} from "./top-section/top-section.component";
-import {LockComponent} from "./lock/lock.component";
-import {GlassTypeComponent} from "./glass-type/glass-type.component";
-import {InstallComponent} from "./install/install.component";
-import {OpenerComponent} from "./opener/opener.component";
-import {AdditionalOptionsComponent} from "./additional-options/additional-options.component";
-import {DoorConfigurationComponent} from "./door-configuration/door-configuration.component";
 import {ThankyouComponent} from "./thankyou/thankyou.component";
-import {ConfigComponent} from "./config/config.component";
-import {OpenerSelectedComponent} from "./opener-selected/opener-selected.component";
+import {ZipResolver} from "./zip-results/zip-resolver.service";
+import {GdoDoorSizeComponent} from "./gdo-door-size/gdo-door-size.component";
+import {ShoppingCartComponent} from "./shopping-cart/shopping-cart.component";
+import {CustomerInfoComponent} from './customer-info/customer-info.component';
+import {CustomerServiceInfoComponent} from './customer-service-info/customer-service-info.component';
+import { Four04Component } from './Four04Component';
 
-export const appRoutes:Routes = [
-  {path: 'banner', component: BannerComponent},
-  {path: 'zipResults', component: ZipResultsComponent},
-  {path: 'category', component: CategoryComponent},
-  {path: 'doorSize', component: DoorSizeComponent},
-  {path: 'collection', component: CollectionComponent},
-  {path: 'home', component: HomeComponent},
-  {
-    path: 'config', component: ConfigComponent,
-    children: [
-      {path: 'design', component: DesignComponent},
-      {path: 'construction', component: ConstructionComponent},
-      {path: 'color', component: ColorComponent},
-      {path: 'topSection', component: TopSectionComponent},
-      {path: 'glassType', component: GlassTypeComponent},
-      {path: 'lock', component: LockComponent},
-      {path: 'install', component: InstallComponent},
-      {path: 'opener', component: OpenerComponent},
-      {path: 'openerSelected', component: OpenerSelectedComponent},
-      {path: 'additionalOptions', component: AdditionalOptionsComponent},
-      {path: 'doorConfiguration', component: DoorConfigurationComponent},
-      {path: '', redirectTo: 'design', pathMatch: 'full'}
-    ]
-  },
-  {path: 'thankyou', component: ThankyouComponent},
-  {path: '', redirectTo: '/banner', pathMatch: 'full'}
+
+export const appRoutes: Routes = [
+    { path: 'banner', component: BannerComponent },
+    {
+        path: 'zipResults/:zip',
+        component: ZipResultsComponent
+    },
+    { path: 'category', component: CategoryComponent },
+    { path: 'doorSize', component: DoorSizeComponent },
+    { path: 'collection', component: CollectionComponent },
+    { path: 'home', component: HomeComponent },
+    { path: 'shoppingCart', component: ShoppingCartComponent },
+    { path: 'customer-info', component: CustomerInfoComponent },
+    { path: 'customer-service-info', component: CustomerServiceInfoComponent },
+    { path: 'thankyou', component: ThankyouComponent },
+    // gdo flow
+    { path: 'gdoDoorSize', component: GdoDoorSizeComponent },
+    { path: '', redirectTo: '/banner', pathMatch: 'full' },
+    { path: '**', component: Four04Component }
 ];

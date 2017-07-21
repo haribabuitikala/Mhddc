@@ -1,26 +1,251 @@
-import {Component, OnInit} from '@angular/core';
-declare var _:any;
+import { Component, OnInit, ViewChild } from '@angular/core';
+
+import { Router } from '@angular/router';
+import { CollectionData } from "../collection/collection-data";
+import { ConfigComponent } from "../config/config.component";
+import { NavComponent } from "../nav/nav.component";
+import { AppUtilities } from "../shared/appUtilities";
+import { ModalComponent } from "ng2-bs3-modal/ng2-bs3-modal";
+import { CollectionService } from "../shared/data.service";
+
+declare var _: any;
 @Component({
-  selector: 'app-construction',
-  templateUrl: './construction.component.html',
-  styleUrls: ['./construction.component.less']
+    selector: 'app-construction',
+    templateUrl: './construction.component.html',
+    styleUrls: ['./construction.component.less']
 })
 export class ConstructionComponent implements OnInit {
 
-  slideWidth;
-  sliderLeft;
-  sliderWidth;
+    constructor(private dataStore: CollectionData
+        , private route: Router
+        , private utils: AppUtilities
+        , private config: ConfigComponent
+        , private navComponent: NavComponent
+        , private dataService: CollectionService) {
 
-  constructor() {
-  }
+    }
 
-  data:any;
-  sliderCount:any;
+    number: number = 6;
+    folder = 'construction';
+    category = 'colors';
+    data;
+    showUpsell: boolean = false;
+    upSellData;
+    currentModel;
+    currentModelName;
+    upSellShowCollection = [11, 12, 13, 14, 24, 170];
+    upSellImage;
+    loaded = false;
+    className = '';
+    isCoreAssortment = false;
 
-  ngOnInit() {
-    this.data = ["a1", "a2", "a3", "a4", "a5", "a6", "a7", "a8", "a9", "a10", "a11", "a12", "a13"];
-    this.data = _.chunk(this.data, 3);
-    this.sliderCount = _.times(this.data.length, _.constant(null));
-  }
+    @ViewChild('upsell') upsell: ModalComponent;
+
+    ngOnInit() {
+        this.resetConstruction();
+        this.startProcess();
+        if (this.navComponent.flowType === 'res') {
+            this.navComponent.renderNav({
+                flowType: 'res',
+                flowActiveStep: 5,
+                currentStepUrl: '/config/construction',
+                showStepIndicator: true,
+                pageTitle: 'Choose Your Construction',
+                nextStepFn: () => {
+
+                }
+            });
+
+        } else {
+            this.navComponent.renderNav({
+                flowType: 'resquick',
+                flowActiveStep: 4,
+                currentStepUrl: '/config/construction',
+                showStepIndicator: true,
+                pageTitle: 'Choose Your Construction',
+                nextStepFn: () => {
+
+                }
+            });
+        }
+
+        switch (this.utils.resFlowSession.resDetails.collectionName) {
+            case "Coachman&#174; Collection": {
+                this.className = 'classic-collection';
+                break;
+            }
+            case "Gallery&#174; Collection":
+            case "Classic&#8482; Collection - Premium Series": {
+                this.className = 'gallery-collection';
+                break;
+            }
+            case "Modern Steel Collection": {
+                this.className = 'more-steel-collection';
+                break;
+            }
+        }
+    }
+
+    resetConstruction() {
+        this.utils.resFlowSession.resDoorObj.resetconstruction();
+        this.utils.resFlowSession.resDoorObj.construction.construction = this.utils.resFlowSession.resDoorObj.design.dsgn["constructions"][0];
+        this.utils.resFlowSession.resDoorObj.construction.apiData = this.utils.resFlowSession.resDoorObj.design.dsgn["constructions"];
+    }
+
+    startProcess() {
+
+        // setting the details info
+        this.config.detailsInfo = {
+            construction: true,
+            baseName: false,
+            overlayName: false,
+            topSection: false,
+            Hardware: false,
+            color: false,
+            overlayColor: false,
+            glassType: false,
+            Opener: false
+        }
+
+        // let res = this.dataStore.constructions;
+        let res = this.utils.resFlowSession.resDoorObj.construction.apiData;
+        // this is for loading construction name in details popup
+        this.config.details.constructionName = res[0]['item_name'];
+        let newData = [];
+        if (res.length > 4) {
+            this.isCoreAssortment = true;
+            
+            if (newData.length <= 3) {              
+                let defaultindex = 0;
+                for (let i = 1; i <= 4; i++) {
+                    let y = _.find(res, ['best_order', i]);
+                    if (y) {
+                        newData.push(y);
+                    } else {
+                        let g = _.filter(res, function (r) {
+                            return r.best_order == 0;
+                        });
+                        if (g.length > 0) {
+                            newData.push(g[defaultindex]);
+                            defaultindex = defaultindex + 1;
+                        }
+                    }
+                }
+                let t = {
+                    item_thumbnail: 'btnOtherConGallery.png',
+                    action: 'add',
+                    clickAction: () => {
+                        this.data.length = 0;
+                        this.data = _.chunk(res, 2);
+                        this.isCoreAssortment = false;
+                    }
+                }
+                newData.push(t)
+                this.data = _.chunk(newData, 2)
+            }
+        } else {
+            this.data = _.chunk(res, 2);
+
+            // for (var i = 0; i < this.data.length; i++) {
+            //     res[i]['itemClick'] = function() {
+            //         console.log('hi')
+            //     }
+            // }
+        }
+
+        this.utils.resFlowSession.resDoorObj.construction.construction = res[0];
+
+        this.loaded = true;
+    }
+
+
+    nextBtn(path, upsellModal) {
+        // if (this.utils.resFlowSession.collection.selectedCollection.item_id == 11 || 12 || 13 || 170) {
+        //     upsellModal.open();
+        // } else {
+        //     this.route.navigateByUrl(path);
+        // }
+        // windcode: this.utils.utilities.winCode,
+
+        let coreAssortment = this.isCoreAssortment;
+        if (this.utils.resFlowSession.resDoorObj.product.product['item_id'] == '11') {
+            coreAssortment = false;
+        }
+        let params = {
+            "NatMarketID": this.utils.utilities.natmarketid,
+            "model": this.utils.resFlowSession.resDoorObj.construction.construction['ClopayModelNumber'],//"HDB",//
+            "dheightFt": this.utils.utilities.hf,
+            "dheightIn": this.utils.utilities.hi,
+            "dwidthFt": this.utils.utilities.wf,
+            "dwidthIn": this.utils.utilities.wi,
+            "dtype": this.utils.utilities.dtype,
+            "windcode": this.utils.utilities.winCode,
+            "isCoreAssortment": coreAssortment
+        }
+        if (_.includes(this.upSellShowCollection, this.utils.resFlowSession.resDoorObj.product.product['item_id']) && this.utils.resFlow.isUpsellSet) {
+            this.upSellImage = this.utils.resFlowSession.resDoorObj.construction.construction['item_thumbnail'];
+            this.dataService.getUpsellData(params)
+                .subscribe(
+                res => {
+                    console.log('updell length ', res);
+                    if (res.length > 0) {
+                        this.upSellData = res;
+                        // this.currentModelName = this.upSellData[0].current_model;
+                        // this.currentModel = 'upsell-' + this.upSellData[0].current_model + '-1.png';
+                        this.currentModelName = this.getDisplayModelNumber(this.upSellData[0].current_model);
+                        this.currentModel = 'upsell-' + this.currentModelName + '-1.png';
+                        upsellModal.open();
+                    } else {
+                        this.route.navigateByUrl(path);
+                    }
+                },
+                err => {
+                    this.dataService.handleError();
+                });
+
+            console.log(this.upSellData);
+        } else {
+            this.route.navigateByUrl(path);
+        }
+
+    }
+
+    prevBtn() {
+        this.utils.resFlowSession.resDoorObj.resetFromStep(3);
+        this.route.navigateByUrl('/config/design');
+    }
+
+    moveNext() {
+        this.upsell.close();
+        this.route.navigateByUrl('config/color');
+        // this.goToHome(this.selected);
+
+    }
+
+    getModelPriceUpsell(updata) {
+        var currentConstruction = this.utils.resFlowSession.resDoorObj.construction.construction;
+        var filtermodel = window['cObj'].construction.apiData.filter(c => { return c.ClopayModelNumber == updata.upgrade_model; });
+        if (filtermodel.length > 0) {
+            filtermodel = filtermodel[0];
+            return (filtermodel.item_price - currentConstruction['item_price']);
+        }
+        return 0;
+    }
+
+    updateWithUpsellPrice(data) {
+        //this.utils.resFlowSession.resDetails.upsellPrice = this.getModelPriceUpsell(data);
+        var filtermodel = window['cObj'].construction.apiData.filter(c => { return c.ClopayModelNumber == data.upgrade_model; });
+        if (filtermodel.length > 0) {
+            filtermodel = filtermodel[0];
+            this.utils.resFlowSession.resDoorObj.construction.construction = filtermodel;
+        }
+        this.config.calculatePrice();
+        this.moveNext();
+    }
+    getDisplayModelNumber(clopayNumber) {
+        var filterItem = window['cObj'].design.dsgn.constructions.filter(c => { return c.ClopayModelNumber == clopayNumber });
+        filterItem = filterItem[0];
+        return filterItem.DisplayModelNumber;
+    }
 
 }

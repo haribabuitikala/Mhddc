@@ -1,0 +1,88 @@
+<div  class="_slider-container m20-top ">
+    <div class="_slider-wrapper">
+        <div class="_slider unique-{{uniqueId}}" [style.width.px]="sliderWidth" [style.left.px]="sliderLeft">
+            <div class="_slide" [style.width.px]="slideWidth" *ngFor="let slide of data; let k = index">
+                <!--<div class="_slide-items" *ngIf="folder==='design'">
+                    <div class="inner-item col-xs-{{number}}" *ngFor="let slideitem of slide; let i=index" [ngClass]="{ 'current' : isSeleted(slideitem, k, i)}"
+                        (click)="openerSelected(slideitem, $event)">
+                        <img (error)="onImageLoadError(slideitem, folder)" src="../../assets/images/{{folder}}/{{slideitem.item_thumbnail.replace('.jpg', '.png')}}"
+                            [attr.data-id]="slideitem.item_id">
+
+
+                    </div>
+                </div>-->
+
+                <div class="_slide-items" *ngIf="folder!=='construction'">
+                    <div class="inner-item col-xs-{{number}}" *ngFor="let slideitem of slide; let i=index" [ngClass]="{ 'current' : isSeleted(slideitem, k, i)}"
+                        (click)="openerSelected(slideitem, $event)"> 
+                        <img (error)="onImageLoadError(slideitem, folder)" [ngStyle]="{'background-image': 'url(http://dev-mhddc.clopay.com/assets/images/'+slideitem.item_thumbnail.replace('.jpg', '.png')+')'}"
+                            [attr.data-id]="slideitem.item_id">
+
+
+                        <div *ngIf="folder=='color'" class="text-blue font-size-10 text-center">
+                            <span [innerHtml]="slideitem.item_name"></span>
+                            <span *ngIf="slideitem.item_price!==0">  +{{slideitem.item_price | currency:'USD':true:'1.2-2'}} </span>
+                        </div>
+                        <div *ngIf="showGlassDetails" class="text-blue font-size-10 text-center">
+                            <span [innerHtml]="slideitem.item_name"></span>
+                            <span *ngIf="slideitem.item_price!==0">  +${{slideitem.item_price }} </span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="_slide-items ptn-rel" *ngIf="folder==='construction'">
+                    <div class="inner-item col-xs-{{number}}" *ngFor="let slideitem of slide; let i=index" [ngClass]="{ 'current' : isSeleted(slideitem, k, i)}"
+                        (click)="openerSelected(slideitem, $event)">
+                        <img (error)="onImageLoadError(slideitem, folder)" src="../../assets/images/{{slideitem.item_thumbnail.replace('.jpg', '.png')}}"
+                            [attr.data-id]="slideitem.item_id">
+                        <div class="construction-model" [hidden]="slideitem.item_thumbnail == 'btnOtherConGallery.png'">Model {{slideitem.DisplayModelNumber}}</div>
+                        <div class="construciton-info">
+                            <div [hidden]="slideitem.item_thumbnail == 'btnOtherConGallery.png'">
+                                <img (click)="detailsInfo(slideitem.DisplayModelNumber, contructionDetails)" class="nobdr" src="../../assets/images/Info-64.png"
+                                    alt="">
+                            </div>
+
+
+                            <!--                            <span>
+                                product <br/>  details
+                                </span>-->
+                        </div>
+
+                    </div>
+                </div>
+
+
+
+            </div>
+        </div>
+        <a class="left carousel-control" *ngIf="slideIndex > 0" id="prev" (click)="moveSlider()" href="javascript:void(0)" role="button"
+            data-slide="prev">
+            <span class="helper"></span><img style=" transform: rotate(-180deg);" class="left-arrow" src="../../assets/images/ch-left-arrow.png"
+                alt="">
+        </a>
+        <a class="right carousel-control" *ngIf="slideIndex < slideCount - 1" id="next" (click)="moveSlider(true)" href="javascript:void(0)"
+            role="button" data-slide="next">
+            <span class="helper"></span><img class="right-arrow" src="../../assets/images/ch-right-arrow.png" alt="">
+        </a>
+
+    </div>
+</div>
+
+
+
+<modal #contructionDetails>
+    <modal-header [show-close]="true">
+    </modal-header>
+    <modal-body>
+        <div class="margin-b-10 margin-top-30">
+            <ul class="constructionInfoList">
+                <li *ngFor="let info of constructionInfo">
+                    <p>
+                        {{info.modeldescription}}
+                    </p>
+                </li>
+
+            </ul>
+        </div>
+    </modal-body>
+</modal>

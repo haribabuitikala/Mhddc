@@ -1,0 +1,39 @@
+.checkout {
+    .item {
+        display: flex;
+        justify-content: space-between;
+    }
+}
+
+.section {
+    padding: 5px;
+    border: 1px solid #ccc;
+    .subsection {
+        padding: 5px;        
+    }
+    .subsection:first-child {
+        background: #ededed;
+        border: 1px solid #ccc;
+    }
+    .subsection:last-child {
+        max-height: 50vh;
+        overflow: auto;
+        display: none;
+    }
+    .subsection.in {
+        display: block;
+    }
+}
+.margin-r-4 {
+    margin-right: 4px;
+}
+.margin-l-4 {
+    margin-left: 4px;
+}
+.agreement{
+    clear: both;
+    height: 150px;
+}
+.section-header{
+    width: 79%;
+}

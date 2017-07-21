@@ -1,36 +1,71 @@
+
+.category-type {
+  border-top: 1px solid #ccc;
+  padding: 11px 0 11px 6px;
+  color: #304a90;
+  font-size: 13px;
+}
+
+.padding-l-1 {
+  padding-left: 1px;
+}
+
+//.category-sec img.category-coming-soon, .comingSoon {
+//  height: 25px;
+//  right: 0;
+//  top: 5px;
+//  width: auto;
+//  margin: 0;
+//}
+
+//
+//.hamburger_icon {
+//  margin: 0 8px 0 5px;
+//}
+
+.disabled {
+  opacity: 0.4;
+}
+
 .category-sec {
-    > div:nth-child(2n+1) {
+  margin-top: 10px;
+  > div {
+    margin-bottom: 9px;
+  }
+  > div:nth-child(2n+1) {
     clear: both;
   }
-  .category-type {
-    font-size: 11px;
+  .image-sec{
+    height: 108px;
+     
+  }
+  .category-type { 
     padding: 11px 0 11px 10px;
   }
-}
+  .residential-garrage { 
+    padding-bottom: 12px;
+  }
+  .residential-garrage-icon {
+    height: 129px;
+    margin: -10px 0 0;
+    margin-bottom: -14px;
+  }
+  .service-repair-icon {
+    height: 86px;
+    width: 120px;
+    margin: -9px 9px 9px 9px;
+  }
 
-.residential-garrage-icon {
-  height: 129px;
-  margin: -10px 0 0;
-  margin-bottom: -14px;
+  .garage-opener-icon {
+    height: 84px;
+    width: 120px;
+    margin: 0;
+  }
 }
-
-.service-repair-icon {
-  height: 96px;
-  width: 120px;
-  margin: 9px;
-}
-
-.garage-opener-icon {
-  height: 104px;
-  width: 130px;
-  margin: 0;
-}
-
 .category-height {
-  height: 125.723px;
+  height: 96.723px;
 
 }
-
 .modal-open {
   .modal {
     top: 66% !important;;
@@ -38,4 +73,32 @@
       padding: 15px !important;
     }
   }
+}
+
+.margin-t-60 {
+	margin-top: 60px !important;
+}
+
+.margin-t-20 {
+     margin-top: 5px !important
+}
+
+@media only screen and (max-width: 320px) {
+  .category-type {
+    font-size: 11px;
+    padding-left: 0!important;
+  }
+}
+
+@media only screen and (min-width: 375px) and (max-width: 413px) {
+  .category-type {
+    font-size: 13px;
+  }
+}
+
+
+h4, h4.font-size-16 {
+    font-size: 16px !important;
+    margin-bottom: 6px;
+    margin-top: 0px;
 }

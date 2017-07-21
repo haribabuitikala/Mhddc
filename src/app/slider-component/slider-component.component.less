@@ -1,0 +1,125 @@
+
+._slider-container {
+   /* padding: 10px 0px;*/
+ padding: 2px 4px;
+
+    ._slider-wrapper {
+        height: 100%;
+        overflow: hidden;
+        ._slider {
+            height: 100%;
+            clear: both;
+            position: relative;
+
+            ._slide {
+                height: 100%;
+                float: left;
+                ._slide-img {
+                    width: 100%;
+                    height: auto;
+                }
+
+                ._slide-items {
+                    height: 100%;
+                    .inner-item{
+                        position: relative;
+                        .construciton-info{
+                                    position: absolute;
+                                    right: 6px;
+                                    bottom: 10px;
+                                    font-size: 8px;
+                                    font-weight: bold;
+                                    text-align: center;
+                            img{
+                                width: 28px;
+                                height: 28px;
+                            }
+                        }
+                        .construction-model{
+                                position: absolute;
+                                left: 15px;
+                                top: 32px;
+                                font-size: 9px;
+                                font-weight: bold;
+                        }
+                        padding: 4px;
+                        img{
+                            border: 1px solid #fff;
+                            width: 100%;
+                            height: 150px;
+                            background-size: contain;
+                            background-position: 50% 50%;
+                            background-repeat: no-repeat;
+                        }
+                        img.current{
+                            border: 1px solid #f96302;
+                        }
+                        img.nobdr{
+                            border: none!important;
+                        }
+                        &.current {
+                            img {
+                                border: 1px solid #f96302;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+.constructionInfoList{
+    li{
+        list-style: disc;
+    }
+}
+.animate-me {
+    transition: all .2s linear;
+}
+ 
+.left-arrow {
+  height: 40px;
+}
+
+.right-arrow {
+  height: 40px;
+}
+
+.info-icon {
+    display: none;
+}
+
+.gallery-collection .info-icon,
+.coachman-collection .info-icon,
+.modern-steel-collection .info-icon,
+.classic-collection .info-icon {
+    display: block;
+    width: 13px !important;
+    position: absolute;
+    bottom: 12px;
+    right: 8px;
+}
+
+
+
+
+
+
+#nonClassicSlider {
+    ._slider-container {
+        ._slider-wrapper {
+            ._slider {
+                 ._slide {
+                    ._slide-items {
+                         .inner-item {
+                             img {
+                                height: 100px;
+                             }
+                         }
+                    }
+                 }  
+            } 
+        }
+    } 
+}
+

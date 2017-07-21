@@ -1,0 +1,452 @@
+<h4 class="text-orange">Your Shopping Cart </h4>
+
+<p *ngIf="showPreTax">
+    <!--<img src="../../assets/images/Info-64.png" height="26" alt="" (click)="totalPrice.open()">-->
+    <span class="bold">
+        Estimated Pre Tax Sub-Total :
+    </span>
+    <span class="bold">
+        {{itemPrice | currency:'USD':true:'1.2-2'}}
+    </span>
+</p>
+<div *ngIf="!resFlow && data" class="div-border div-border-radius tile padding10 margin-b-10 checkout">
+    <p class="shopping-cart-gallery-info " *ngIf="!showDirect">{{openerType}} Door Operator (Installed)</p>
+    <div class="clearfix clearfix margin-b-10">
+        <span class="col-xs-9" *ngIf="!showDirect">{{gdoOpenerTxt}}</span>
+        <div *ngIf="showDirect" class="clearfix margin-b-10 col-xs-9">
+            Install of Purchased Opener (x{{qty}})
+        </div>
+        <span class="col-xs-3 padding-0 text-right">{{baseItmPrice | currency:'USD':true:'1.2-2'}}</span>
+    </div>
+    <div *ngIf="accessories" class="clearfix margin-b-10">
+        Opener Accessories
+        <ul>
+            <li *ngFor="let opener of gdoOpenerSelected">
+                <p>{{opener.name}} <br> (x{{opener.count}} {{opener.price | currency:'USD':true:'1.2-2'}} )
+
+                    <span class="pull-right">{{opener.count * opener.price | currency:'USD':true:'1.2-2'}}</span>
+                </p>
+            </li>
+        </ul>
+    </div>
+    <div *ngIf="showDirect">
+        <div *ngFor="let opener of directItm">
+            <div class="clearfix">
+                <p class="col-xs-10 pull-left">{{opener.count}}-{{opener.name}} </p>
+                <span class="col-xs-2 padding-0 text-right">   {{opener.price | currency:'USD':true:'1.2-2'}}</span>
+            </div>
+        </div>
+    </div>
+    <p class="clearfix margin-b-10 padding-l-15" *ngIf="showDistancePrice">
+        {{distance}} miles from store <span class="pull-right">{{distancePrice | currency:'USD':true:'1.2-2'}}</span>
+    </p>
+</div>
+<div *ngIf="resFlow" class="checkout">
+    <div class="section margin-b-10" *ngFor="let data of resFlowSession.cart; let i = index;">
+        <div id="section-header-{{i}}" class="flex space-between subsection" (click)="toggleSection(i)">
+            <div class="section-header">
+                <div [innerHTML]="data.collectionName"></div>
+                <div>{{data.widthF}}'{{data.widthI}}'' X {{data.heightF}}'{{data.heightI}}'' - ({{data.INSTALLTYPE}})</div>
+            </div>
+            <span>{{data.totalPrice | currency:'USD':true:'1.2-2'}}</span>
+            <span><i class="fa fa-chevron-down"></i></span>
+        </div>
+        <div class="flex space-between margin-t-10 subsection">
+            <button class="btn btn-default text-orange" (click)="removeItem(data, i)">REMOVE ITEM</button>
+            <div class="flex">
+                <span class="margin-r-4">QTY:</span>
+                <img (click)="updateQty(data, i)" src="../../assets/images/substract.png" alt="" height="22" width="22" class="minus-quantity margin-r-4">
+                <span>{{data.construction.qty}}</span>
+                <img (click)="updateQty(data, i, true)" src="../../assets/images/add.png" alt="" height="22" width="22" class="add-quantity margin-l-4">
+            </div>
+        </div>
+        <div id="section-body-{{i}}" class="subsection">
+            <app-cart-root-details [Item]="data"></app-cart-root-details>
+        </div>
+    </div>
+</div>
+<div *ngIf="resFlowSession.cart.length > 0 && resFlow">
+    <div class="text-center margin-b-20">
+        <button  type="submit" class="btn btn-default box-shadow text-orange bold text-uppercase " (click)="AddAnother()">ADD ANOTHER DOOR
+        </button>
+    </div>
+    <div class="text-center margin-b-20">
+        <button type="submit" class="btn btn-default box-shadow text-orange bold text-uppercase " (click)="checkout(installTerms, resShoppingCartTerms)">CHECKOUT NOW
+        </button>
+    </div>
+</div>
+
+<div *ngIf="utils.gdoFlowSession.added > 0 && isGdo">
+    <div class="flex space-between margin-t-10 subsection margin-b-20">
+        <button class="btn btn-default text-orange" (click)="removeItem(data, i)">REMOVE ITEM</button>
+        <div class="flex">
+            <span class="margin-r-4">QTY:</span>
+            <img (click)="updateQuantity(0)" src="../../assets/images/substract.png" alt="" height="22" width="22" class="minus-quantity margin-r-4">
+            <span>{{qty}}</span>
+            <img (click)="updateQuantity(1)" src="../../assets/images/add.png" alt="" height="22" width="22" class="add-quantity margin-l-4">
+        </div>
+    </div>
+    <div class="text-center margin-b-20">
+        <button type="submit" class="btn btn-default box-shadow text-orange bold text-uppercase " (click)="checkout()">CHECKOUT NOW
+        </button>
+    </div>
+</div>
+
+<div class="text-center" *ngIf="resFlowSession.cart.length === 0 && resFlow">
+    <div class="margin-t-20 margin-b-20">Your Shopping Cart Is Empty</div>
+    <div>
+        <button class="btn btn-default text-orange" (click)="continueShopping()">Continue Shopping</button>
+    </div>
+</div>
+<div class="text-center" *ngIf="!resFlow && showGdo">
+    <div class="margin-t-20 margin-b-20">Your Shopping Cart Is Empty</div>
+    <div>
+        <button class="btn btn-default text-orange" (click)="gdoContinue()">Continue Shopping</button>
+    </div>
+</div>
+
+<modal #totalPrice>
+    <modal-header [show-close]="true">
+    </modal-header>
+    <modal-body>
+        <p class="bold"> Total Price will be calculated on payment screen </p>
+    </modal-body>
+</modal>
+
+<modal #continue>
+    <modal-header>
+        <h4 class="padding-l-20">Your Shopping Cart is Empty </h4>
+    </modal-header>
+    <modal-body class="text-center">
+        <div class="margin-t-100">
+            <button class="btn btn-default btn-lg box-shadow text-orange bold text-uppercase" (click)="removeItem()">Continue Shopping
+            </button>
+        </div>
+    </modal-body>
+</modal>
+
+<modal #gdoShoppingCartTerms>
+    <modal-header>
+    </modal-header>
+    <modal-body>
+        <div class="col-xs-12  pull-left  ">
+            <h4 class="bold font-size-16"> Terms & Conditions </h4>
+            <h4 class="bold font-size-16">BASIC INSTALLATION PRICE INCLUDES</h4>
+            <ul class="pad-l-4 bul-points">
+                <li>Delivery of operator (within 30 miles of store)</li>
+                <li>Take down and haul away of existing opener</li>
+                <li>Installation to manufacturer's specifications of (1) new garage door opener up to 8' from floor and within
+                    3' of ceiling using installer provided angle iron
+                </li>
+                <li>Detailed inspection of existing garage door for proper operation</li>
+                <li>Install garage door mounting bracket (included with opener)</li>
+                <li>Install drawbar plate on all steel doors</li>
+                <li>Install extension kit for 8' door (if required)</li>
+                <li>Install quick turn brackets for low headroom installs (if required)</li>
+                <li>Shorten rail (if required)</li>
+                <li>Install push button and safety beam system included with opener</li>
+                <li>Install light bulbs in garage door opener unit (provided by homeowner)</li>
+                <li>Install emergency release (if required by code)</li>
+                <li>Program opener and applicable remote control devices (when included with opener)</li>
+                <li>Install wireless keypad (when included with opener)</li>
+                <li>Adjust torsion or extension springs for proper balance (if applicable)</li>
+                <li>Minor adjustments and lubrication of existing garage door</li>
+                <li>Demonstrate new opener and accessories to customer</li>
+                <li>Job site clean up</li>
+            </ul>
+            <h4 class="bold font-size-16">WHAT TO EXPECT ONCE WE RECEIVE YOUR ORDER</h4>
+            <ul class="bul-points pad-l-4">
+                <li>Installer will call customer to schedule appointment</li>
+                <li>Once installer arrives at jobsite, he/she will inspect for additional work that may be required</li>
+                <li>Installer will notify you of additional work, if required, and any applicable charges</li>
+                <li>If you approve additional charges, the installer will complete an authorization form and have you sign with
+                    credit card number
+                </li>
+                <li>Installer will install opener, make necessary adjustments, and/or agreed upon repairs</li>
+                <li>After the opener is installed and repairs/adjustments made, installer will review operating and programming
+                    procedures with you to ensure proper operation and remote programming
+                </li>
+                <li>Installer will leave operator manual with you as well as GDO trouble-shooting tip sheet</li>
+                <li>You must do the following prior to the installation date:</li>
+                <li>Clear out the garage a minimum of 10' back from the garage opening</li>
+                <li>Arrange so that pets and children are kept away from the installation project area</li>
+                <li>Disconnect any alarm systems</li>
+                <li>Arrange to have you or a representative (at least 18 years old) home for the entire installation
+                </li>
+                <li>Upon completion of the installation you or your representative will be asked to sign a lien waiver verifying
+                    service completed
+                </li>
+            </ul>
+
+            <h4 class="bold font-size-16">Special Notes About Your Garage Door Opener Installation</h4>
+            <h4 class="bold font-size-16  ">BEFORE YOUR INSTALLATION:</h4>
+            <ul class="text-uppercase pad-l-4">
+                <li>THE INSTALLER WILL CALL YOU WITHIN 2 BUSINESS DAYS TO SCHEDULE THE INSTALLATION DATE AND DISCUSS JOBSITE
+                    CONDITIONS INCLUDING EXISTING DOOR MEASUREMENTS, TYPE &amp; CONDITION OF DOOR, HEADROOM &amp; ELECTRICAL
+                    REQUIREMENTS, ETC...
+                </li>
+                <li>FOR A COMPLETE INSTALLATION, THERE SHOULD BE AN APPROVED 110 VOLT ELECTRICAL OUTLET WITHIN 3' OF THE POWER
+                    HEAD OF THE OPENER. IF NO OUTLET IS IN PLACE, BUT POWER IS AVAILABLE THROUGH AN EXTENSION CORD, THE INSTALLER
+                    WILL USE IT TO TEST AND ADJUST THE OPENER BUT WILL NOT LEAVE THE EXTENSION CORD IN PLACE.
+                </li>
+                <li>CUSTOMER IS RESPONSIBLE FOR CLEARING THE GARAGE FLOOR 10' BACK FROM THE OPENING PRIOR TO THE INSTALLATION
+                    DATE TO ALLOW AMPLE SPACE FOR INSTALLATION.
+                </li>
+            </ul>
+            <h4 class="bold font-size-16  ">DURING THE INSTALLATION:</h4>
+
+            <ul class="text-uppercase pad-l-4">
+                <li>AN ADULT OVER 18 YEARS OF AGE WITH THE AUTHORITY TO MAKE DECISIONS ABOUT YOUR INSTALLATION MUST BE PRESENT
+                    DURING THE JOBSITE INSPECTION AND INSTALLATION.
+                </li>
+                <li>CHILDREN AND PETS MUST BE KEPT AWAY FROM THE WORK AREA</li>
+                <li>THE CUSTOMER WILL BE REQUIRED TO SIGN A WAIVER UPON THE COMPLETION OF THE JOB.
+                </li>
+            </ul>
+            <h4 class="bold font-size-16  ">FACTORS TO CONSIDER:</h4>
+            <ul class="text-uppercase pad-l-4">
+                <li>DANGEROUS WEATHER CONDITIONS MAY CAUSE THE INSTALLATION TO BE RE-SCHEDULED.</li>
+                <li>CANCELING APPOINTMENTS WITH INSTALLERS WITHOUT 24 HOUR NOTICE OR MISSING SCHEDULED APPOINTMENTS WILL LEAD
+                    TO ADDITIONAL TRIP CHARGES
+                </li>
+                <li>ONLY THE INSTALLER CAN SCHEDULE AN INSTALLATION DATE.</li>
+                <li>HOME DEPOT WILL ONLY INSTALL GARAGE DOOR OPENERS IN RESIDENTIAL BUILDINGS</li>
+                <li>IF UNFORESEEN LABOR IS NEEDED (E.G.. REPAIR DAMAGE FROM TERMITES, ELECTRICAL, OR PLUMBING PROBLEMS) THERE
+                    WILL BE EXTRA CHARGES. IN SOME CASES, THIS LABOR MAY NOT BE AVAILABLE FROM THE HOME DEPOT, SO THE CUSTOMER
+                    MUST HIRE THEIR OWN REPAIR MAN
+                </li>
+            </ul>
+            <h4 class="bold font-size-16">SERVICE NOT AVAILABLE WITH THIS INSTALLATION PROGRAM:</h4>
+            <ul class="pad-l-4">
+                <li>ANY ELECTRICAL WORK (OTHER THAN CONTENTS OF PACKAGED OPENER**)
+                    <p style="color:#434343;">
+                        ** The Model 920EV comes standard with a Remote Light Switch that will need to be installed by a licensed electrician or
+                        homeowner, Clopay Installers will not install the Remote Light Switch</p>
+                </li>
+                <li>COMPLETE TRACK REPLACEMENT</li>
+                <li>ANY GARAGE DOOR SECTION ON SITE REPAIR</li>
+                <li>STRUCTURAL MODIFICATIONS TO GARAGE</li>
+                <li>WORK PERFORMED ON WEEKENDS OR LEGAL HOLIDAY UNLESS OTHERWISE AGREED UPON BY INSTALLER AND CUSTOMER
+                </li>
+            </ul>
+            <div class="bold margin-t-20 text-center agreement">
+                <p class="aggrement-text text-blue"><a href="http://test-hddchtml2.clopay.com/HDTermsPop.html" target="_blank">HOME IMPROVEMENT AGREEMENT <br>PLEASE READ THIS</a>                    </p>
+                <div class="form-group margin-b-20">
+                    <button type="submit" class="btn btn-default box-shadow text-orange margin-r-10 bold margin-b-10 pull-right" (click)="gdoShoppingCartTerms.close()">DECLINE
+                    </button>
+                    <button type="submit" class="btn btn-default box-shadow text-orange margin-r-10 bold margin-b-10 pull-left" (click)="secureRedirection()">ACCEPT
+                    </button>
+                </div>
+            </div>
+        </div>
+    </modal-body>
+</modal>
+
+<modal #resShoppingCartTerms>
+    <modal-header>
+    </modal-header>
+    <modal-body>
+        <div class="col-xs-12 font-size-14  pull-left pad-l-4">
+            <p class="font-size-16"><strong>Do-It -Yourself Terms & Conditions </strong></p>
+            <h4 class="bold font-size-16">CANCELLATIONS, RETURNED GOODS AND CHANGE ORDERS </h4>
+            <p>DO IT YOURSELF DOORS ARE NOT RETURNABLE. Because Do-It-Yourself doors are built to order, these doors cannot
+                be returned. Clopay cannot be responsible for improper measurement or installation of its products for Do-It-Yourself
+                installations. Consult our How-To-Measure instructions or call 1-800-HOMEDEPOT for how to measure and installation
+                assistance. It is your responsibility to ensure that all measurements (opening, side room, headroom, backroom)
+                are correct before ordering a Do-It-Yourself door(s).
+            </p>
+            <p>The Home Depot and Clopay want to thank you for trusting us with your Garage Door project. </p>
+            <p>
+                CLOPAY CANNOT ACCEPT ANY CHANGES TO OR CANCEL ANY DO-IT-YOURSELF ORDERS AFTER THREE BUSINESS DAYS FROM THE DATE PURCHASED.
+                If order needs to be changed or cancelled within the applicable three day period, immediately call the store
+                through which your order is placed and notify them of the change/cancellation. (See above for store address
+                and phone #)
+            </p>
+            <p><strong>MISSING / BROKEN PARTS </strong></p>
+            <p>If a door is received with missing or broken parts, call 1-800-HOMEDEPOT and the part will be immediately sent.
+            </p>
+            <h4 class="bold font-size-16">Special Order DIY Notes </h4>
+            <ul class="bul-points1 pad-l-4">
+                <li>Home delivery within 30 "drive" miles from the store through which the door is purchased. Additional charges
+                    apply if further than 30 miles.
+                </li>
+                <li> Easy to follow instruction book</li>
+                <li> All new hardware including track, springs, rollers, and hinges</li>
+            </ul>
+            <h4 class="bold font-size-16">YOUR DO-IT-YOURSELF GARAGE DOOR WILL COME WITH </h4>
+            <ul class="bul-points1 pad-l-4">
+                <li>
+                    <p>Rear track hangar kit - Often constructed of punched angle iron, these hangers attach the end of the
+                        horizontal track to the garage ceiling. You may be able to use existing rear track hanger if replacing
+                        an existing door.</p>
+                </li>
+                <li>
+                    <p>Vinyl Perimeter Seal - This is the weather seal on the top and sides of your jambs. They help seal out
+                        the elements when your door is closed. We recommend you replace this seal but you may be able to
+                        use the existing perimeter seal if replacing an existing door.</p>
+                </li>
+                <li>
+                    <p>Low Headroom Track - May be required in situations with limited headroom. This is the distance from the
+                        top of the door opening upwards to the lowest obstruction on the inside of the garage. Refer to our
+                        How to Measure guide to determine if low headroom track is required for your application.
+                    </p>
+                </li>
+                <li>
+                    <p>Garage Door Opener - Although not required we recommend that you replace your garage door opener at the
+                        same time you replace your Garage Door. Do-It-Yourself garage door openers can be purchased at The
+                        Home Depot.</p>
+                </li>
+                <li>
+                    <p>Operator reinforcement bracket - Used to reinforce top section of door for operator attachment. (If top
+                        panel is not reinforced by either an operator reinforcement bracket or according to instructions
+                        in manual, damage caused by the opener will NOT be covered under your warranty.)</p>
+                </li>
+            </ul>
+            <h4 class="bold font-size-16">WHAT TO EXPECT ONCE WE RECEIVE YOUR ORDER </h4>
+            <p>Your built to order Do-It-Yourself door will be manufactured No changes or cancellations to a Do-It-Yourself
+                order after three business days from the date purchased. You will be contacted within three to four weeks
+                to schedule your FREE HOME DELIVERY</p>
+        </div>
+        <div class="bold margin-t-20 text-center agreement">
+            <p class="aggrement-text text-blue"><a href="http://test-hddchtml2.clopay.com/HDTermsPop.html" target="_blank">HOME IMPROVEMENT AGREEMENT <br>PLEASE READ THIS</a>                </p>
+            <div class="form-group margin-b-20">
+                <button type="submit" class="btn btn-default box-shadow text-orange margin-r-10 bold margin-b-10 pull-right" (click)="resShoppingCartTerms.close()">DECLINE
+                </button>
+                <button type="submit" class="btn btn-default box-shadow text-orange margin-r-10 bold margin-b-10 pull-left" (click)="secureRedirection()">ACCEPT
+                </button>
+            </div>
+        </div>
+    </modal-body>
+
+</modal>
+
+<modal #installTerms>
+    <modal-body>
+        <h4 class="bold font-size-16"> Terms & Conditions </h4>
+
+        <h4 class="bold font-size-16">BASIC INSTALLATION PRICE INCLUDES </h4>
+        <ul class="bul-points1 pad-l-4">
+            <li>
+                Pre-Installation Site Inspection to confirm measurements and determine installation conditions</li>
+
+            <li>Delivery of new garage door up to 30 "drive" miles from the store through which door is purchased</li>
+
+            <li>Take down of existing garage door</li>
+
+            <li>Installation of Low Headroom Track (if necessary)</li>
+
+            <li> Installation of standard vinyl perimeter weather seals (materials included). If larger weather seal is needed,
+                additional charges may apply.</li>
+
+            <li>Reconnect existing U.L. approved garage door opener when replacing an existing "sectional" garage door</li>
+
+            <li>Reinforcement of top garage door section (including materials) when attaching a garage door opener</li>
+
+            <li>Final clean up and inspection of finished job with customer </li>
+        </ul>
+
+        <h4 class="bold font-size-16"> WHAT TO EXPECT ONCE WE RECEIVE YOUR ORDER</h4>
+        <ul class="bul-points1 pad-l-4">
+            <li>You will be contacted by an installer within two business days to schedule a site inspection</li>
+
+            <li>At the site inspection your installer will:</li>
+
+            <li>Measure the garage opening to verify that the right size door was ordered</li>
+
+            <li>Determine if any additional work is necessary to complete your installation</li>
+
+            <li>Based on your availability the site inspection should be completed within 1 to 5 business days</li>
+
+            <li>If it is determined that additional work is needed we will call you to review those changes and collect any additional
+                money necessary</li>
+
+            <li> Once the site check is completed the installer will be able to give you an estimated lead-time based on door
+                availability in your market The installer will contact you again as soon as the door is available to schedule
+                final installation date</li>
+
+            <li>You must do the following prior to the installation date:</li>
+
+            <li>Clear out the garage a minimum of 10' back from the garage opening</li>
+
+            <li>Arrange so that pets and children are kept away from the installation project area</li>
+
+            <li>Disconnect any alarm systems</li>
+
+            <li>Arrange to have you or a representative (at least 18 years old) home for the entire installation</li>
+
+            <li>If hidden conditions exist that were not detectable on site inspection (insect damage, wood rot, etc.), installer
+                will communicate additional work and customer will be responsible for charges</li>
+
+            <li>Upon completion of the installation you or your representative will be asked to sign a lien waiver verifying
+                that service was completed Special Notes About Your Garage Door Opener Installation</li>
+        </ul>
+        <h4 class="bold font-size-16">BEFORE YOUR INSTALLATION:</h4>
+        <ul class="bul-points1 pad-l-4">
+
+            <li>Installer will call you within two business days from time of sale to schedule pre-installation site inspection</li>
+
+            <li>No work performed on weekends or legal holidays</li>
+
+            <li>Special Orders can not be changed or cancelled seventy-two hours after the completed site inspection</li>
+
+            <li>Only the installer can commit to a scheduled installation date. Missed installation appointments will result
+                in additional trip fees</li>
+
+            <li>An adult at least 18 years old must be present while installers are working in your home for duration of project.
+                Failure to do so will result in the technician leaving the site without completing the install and an additional
+                trip charge fee will be needed before resuming work.</li>
+
+            <li>If new GDO is being installed, Customer is responsible for having an outlet within 3' of the location of the
+                GDO</li>
+
+            <li>Prior to the installation you must:</li>
+
+            <li>Clear out garage a minimum of 10' back from the garage opening. Shelving, materials on shelves, and any other
+                contents of the garage that impede the installation are the customer's responsibility to move prior to the
+                installation date. Installer's are not permitted to clean out or move contents of the garage. If garage is
+                not cleared on scheduled date, install will need to be rescheduled and a trip fee will apply.</li>
+
+            <li>Ensure that pets and children are kept away from the installation area</li>
+
+            <li>Disconnect any alarm systems</li>
+
+            <li>Installer will reconnect your existing garage door opener (if applicable) only if equipped with code-required
+                safety beams</li>
+
+            <li>Unfinished wood doors must be primed / sealed on all surfaces (including edges) prior to installation or the
+                warranty will be voided</li>
+
+            <li>Certain restrictions apply to door availability based on door model, size and windcode (if applicable). In these
+                instances, an alternative model will need to be selected.</li>
+        </ul>
+        <h4 class="bold font-size-16">ITEMS NOT PREFORMED BY GARAGE DOOR INSTALLER:</h4>
+
+        <ul class="bul-points1 pad-l-4">
+            <li>Any alteration of existing structure, carpentry work, repair work, painting / staining a door, etc.</li>
+            <li>Clearing or removing of any obstructions (i.e. cars, duct work, shelving, pipes, beams, etc.)</li>
+            <li>Concrete or electrical work</li>
+
+        </ul>
+        <div class="bold margin-t-20 text-center agreement">
+            <p class="aggrement-text text-blue"><a href="http://test-hddchtml2.clopay.com/HDTermsPop.html" target="_blank">HOME IMPROVEMENT AGREEMENT <br>PLEASE READ THIS</a>                </p>
+            <div class="form-group margin-b-20">
+                <button type="submit" class="btn btn-default box-shadow text-orange margin-r-10 bold margin-b-10 pull-right" (click)="installTerms.close()">DECLINE
+                </button>
+                <button type="submit" class="btn btn-default box-shadow text-orange margin-r-10 bold margin-b-10 pull-left" (click)="secureRedirection()">ACCEPT
+                </button>
+            </div>
+        </div>
+    </modal-body>
+</modal>
+
+<modal #secureRedirectionTerms>
+    <modal-body class="text-center">
+        <p class="font-size-16 margin-t-20 color-black" style="font-size:20px !important;">You will be redirected to a secure website to process your payment and order. </p>
+        <div class="form-group margin-t-20 text-center">
+            <button type="submit" class="btn btn-default box-shadow text-orange margin-r-10 bold margin-b-10" (click)="goToCustomerInfo()">OK
+            </button>
+            <button type="submit" class="btn btn-default box-shadow text-orange margin-r-10 bold margin-b-10" (click)="goToHome()">DECLINE
+            </button>
+        </div>
+    </modal-body>
+</modal>

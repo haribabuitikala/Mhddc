@@ -1,44 +1,26 @@
 <!-- Begin Header -->
 <div class="row banner-image ptn-rel margin-b-10">
-  <div class="ad-sec margin-t-10">
-    <img src="../../assets/images/AdBannerMobile.png" alt="">
+   <div class="ad-sec margin-t-10">
+    <img *ngIf="this.utils.utilities.isPromoEnabled"  src="../../assets/images/promoGraphics/{{this.utils.promoObject.storeHeroImage}}" alt="">
   </div>
+
   <!-- Begin Header form -->
-  <div class="row bg-orange padding-t-7 form-inline ptn-abs zip-search-form">
-    <form novalidate #form="ngForm" (ngSubmit)="save(form)" class="col-xs-10 form-group banner-zip-search ptn-rel">
-      <div class="col-xs-10 pad-r-0">
-        <div class="form-control"></div>
-        <!--<input-->
-          <!--type="number"-->
-          <!--id="zipCode"-->
-          <!--name="zip"-->
-          <!--[(ngModel)]="zip"-->
-          <!--#zipCode="ngModel"-->
-          <!--required-->
-          <!--minlength="5"-->
-          <!--class="zip-code ptn-abs roboto-regular"-->
-          <!--placeholder="Enter Zip Code">-->
-
-        <input
-          type="text"
-          placeholder="Enter Zip Code"
-          name="zip"
-          ngModel
-          #zipCode="ngModel"
-          minlength="5"
-          maxlength="6"
-          class="zip-code ptn-abs roboto-regular"
-          required autocomplete="off">
-        <span *ngIf="zipCode.errors?.required && zipCode.touched" class="error">
-         Please Enter Valid ZipCode
+  <div class="row bg-orange form-inline ptn-abs zip-search-form">
+    <form novalidate #form="ngForm" (ngSubmit)="save(form, $event)" class="form-group banner-zip-search ptn-rel">
+      <div class="ptn-rel">
+        <div class="form-control">
+          <input type="number" oncopy="return false" onpaste="return false" placeholder="{{lang.placeholder}}" minlength="5" maxlength="5" name="zip" class="zip-code" autocomplete="off"
+            (keypress)="onlyNumberKey($event)" (ngModelChange)="onChange($event)" ngModel #zipCode="ngModel" required>
+        </div>
+        <span *ngIf="zipCode.errors?.required && zipCode.touched" class="error ptn-abs">
+         {{lang.zipcodeMessage}}
         </span>
-        <span *ngIf="zipCode.errors?.minlength && zipCode.touched" class="error">
-          Please Enter Valid ZipCode
+        <span *ngIf="zipCode.errors?.minlength && zipCode.touched" class="error ptn-abs">
+          {{lang.zipcodeMessage}} 
         </span>
-
       </div>
-      <div class="col-xs-2 padding-l-3">
-        <button class="btn btn-sm border-white text-white show-zip-results go-btn" routerLink="/zipResults" (click)="addressList()" [disabled]="form.invalid" type="submit">GO</button>
+      <div class="btn-sec">
+        <button class="btn btn-sm border-white text-white show-zip-results go-btn" [disabled]="form.invalid">{{lang.Go}}</button>
       </div>
     </form>
   </div>

@@ -1,25 +1,239 @@
-<div class="linear-bg">
-  <h3 class="font-size-16 margin-t-10 visualize-header">
-    <div class="pull-right switcher-sec text-orange text-uppercase home-image"  >
-       <span  class="switcher-text">Home</span>
-      <span class="switcher margin-b-10"></span>
-            <span class="switcher-box switcher-icon hide"  >
-                <img src="../../assets/images/door_icon.png" height="17">
-            </span>
-            <span class="switcher-box-home switcher-icon"  >
-                <img src="../../assets/images/home_icon.png" height="17">
-            </span>  
-               <span class="switcher-text"> Door</span>
+<div class="clearfix res-config">
+    <h3 class="font-size-14 margin-t-10 visualize-header swicher-align" >
+        {{ pageTitle }} 
+    </h3>
+    <div class="switcher-sec text-orange text-uppercase home-image home-switcher">
+        <span class="switcher-text">Home</span>
+        <span class="switcher margin-b-10"></span>
+        <span class="switcher-box switcher-icon hide">
+            <img src="../../assets/images/door_icon.png" height="14">
+        </span>
+        <span class="switcher-box-home switcher-icon ">
+            <img src="../../assets/images/home_icon.png" height="14">
+        </span>
+        <span class="switcher-text">Door</span>
     </div>
-  </h3>
-  <div class="text-center switcher-image-sec col-xs-12">
-    <img src="../../assets/images/home-1/white-short.png" alt="" class="switcher-image homeImage img-rounded">
-  </div>
+    <div class="text-center switcher-image-sec linear-bg" style="position: relative;">
+        <div id="doorVis" class="default-canvas-hide" [ngClass]="{ 'hide': !isDoor}"></div>
+        <div id="homeVis"  class="default-canvas-hide" [ngClass]="{ 'hide': isDoor}"></div>
+    </div>
 </div>
 <div class="inner-router">
-<router-outlet>
+    <router-outlet>
 
-</router-outlet>
+    </router-outlet>
 </div>
-<app-details></app-details>
+<!--<div class="tile">-->
+    <div class="design-detials--sec" *ngIf="showDetailTxt" >
+        <div class="col-xs-6 padding-r-7  border-white-right font-size-12 price-section" *ngIf="showType != ''">
+            <p *ngIf="showType == 'Installed'"><span>{{itemPriceInstall | currency:'USD':true:'1.2-2'}}</span> / Installed</p>
+            <p *ngIf="showType == 'DIY'"><span>{{itemPriceDY | currency:'USD':true:'1.2-2'}}</span> / DIY</p>
+            <p>
+                <img src="../../assets/images/info.png" (click)="modal.open()" alt="" height="25">
+            </p>
+        </div>
+        <div class="col-xs-6 padding-r-7  border-white-right font-size-12 price-section" *ngIf="showType == ''">
+            <p *ngIf="itemPriceInstall != 0"><span>{{itemPriceInstall | currency:'USD':true:'1.2-2'}}</span> / Installed</p>
+            <p *ngIf="itemPriceDY != 0"><span>{{itemPriceDY | currency:'USD':true:'1.2-2'}}</span> / DIY</p>
+            <p>
+                <img src="../../assets/images/info.png" (click)="modal.open()" alt="" height="25">
+            </p>
+        </div>
+        <div class="col-xs-6 padding-0-r  font-size-12">
+            <p>
+                Quantity
+                <img src="../../assets/images/substract.png" alt="" class="minus-quantity" (click)="updateQuantity()">
+                <span>{{ quantity }}</span>
+                <img src="../../assets/images/add.png" alt="" class="add-quantity" (click)="updateQuantity(1)">
+            </p>
+            <p class="margin-b-5">&nbsp;</p>
+            <h4 class="pull-right padding-r-7 text-orange" (click)="openDetailsModal(detailsModal)">DETAILS</h4>
+        </div>
+    </div>
+<!--</div>-->
+<!-- product info modal -->
+<modal #modal>
+    <modal-header [show-close]="true">
+    </modal-header>
+    <modal-body>
+        <h4 class="color-black font-size-16 bold"> Professionally Installed Vs. Do-lt-Yourself </h4>
+        <p class="padding-b-10"> Clopay Building Products and The Home Depot always recommend that you have your new garage door professionally installed.
+            <span style="color:#808080 !important;">(required on Canyon Ridge, Avante, & Reserve Collection doors)</span>
+        </p>
+        <p class="padding-b-10">
+            It's important to consider the following factors when deciding on your installation options.
+        </p>
+        <p class="padding-b-10">
+            <strong class="color-black">Time</strong> - To install it yourself, you should plan on a minimum of 9-12 hours
+            of time plus another 3-4 hours if installing a new garage door opener. A professional installer, under normal
+            circumstances, can install your door and opener in 2-3 hours.
+        </p>
+        <p class="padding-b-10">
+            <strong class="color-black">Safety</strong> - To protect yourself from injury on Do-lt-Yourself Installations,
+            you must carefully read all safety information contained in the instruction manual before you install or use
+            your new garage door. Removal of old spring system may require professional assistance.
+        </p>
+        <p class="padding-b-10">
+            <strong class="color-black">Weight</strong> - Assistance may be required if you are removing an old door. Unsprung
+            doors can weigh 175-400 pounds. The professional installation program includes take down and removal of old door
+            in most markets (additional haul-away charges apply in most northeast markets).
+        </p>
+        <p class="">
+            <strong class="color-black">Additional Items Needed</strong> - In some cases additional items will be needed
+            for a Do-It-Yourself Installation that are not included with the door. All of these items are included in the
+            professional installation program. These items include:
+        </p>
+        <ul class="padding-b-10 dashed">
+            <li> Light household oil</li>
+            <li> Punched angle — For rear track hangers. You may be able to use existing rear track hangers if replacing an
+                existing door.
+            </li>
+            <li> Lag screws and bolts for rear track hangers.</li>
+            <li> Stop molding - Used to seal top and sides of door against jamb. You may be able to use existing stop molding
+                if replacing an existing door.
+            </li>
+            <li> Operator Reinforcement Bracket - Used to reinforce and prevent damage to the top section of the door when attaching
+                a garage door opener.
+            </li>
+        </ul>
+        <p class="padding-b-10">
+            <strong class="color-black">Peace of Mind</strong> - With the professional installation program you have the
+            peace of mind knowing that the job is done right. It includes a pre-installation site inspection to verify measurements
+            and ensure the opening is ready for installation. The professional installation program also includes a 1 year
+            workmanship warranty. If anything goes wrong with your door due to an incorrect installation we will come out
+            to ﬁx it at no charge.
+        </p>
+    </modal-body>
+</modal>
+
+<!-- product details sec -->
+<modal #detailsModal class="details-modal bonusPage">
+    <modal-header [show-close]="true">
+        <h3 class="modal-title">View Details</h3>
+    </modal-header>
+    <modal-body>
+        <div class="quantity-view-details">
+            <ul>
+                <li>
+                    <span>
+                        <strong>Zip Code/Location</strong>
+                        {{details.zip}} - {{details.storeName}} ,{{details.county}} COUNTY
+                    </span>
+                </li>
+
+                <li>
+                    <span>
+                        <strong>Store</strong>
+                        <span [innerHtml]="details.storeName"></span>
+                    </span>
+                </li>
+
+                <li>
+                    <span>
+                        <strong>Size</strong>
+                        {{details.widthF}}' {{details.widthI}}"(w) x {{details.heightF}}' {{details.heightI}}"(h)
+                    </span>
+                </li>
+
+                <li>
+                    <span>
+                        <strong>WindCode </strong>
+                        {{details.windcode}}
+                    </span>
+                </li>
+
+                <li>
+                    <span>
+                        <strong> Collection </strong>
+                        <span [innerHtml]="details.collectionName"></span>
+                    </span>
+                </li>
+
+                <li *ngIf="details.designName">
+                    <span><strong> Design </strong>
+                    <span [innerHtml]="details.designName"></span>
+                    </span>
+                </li>
+				
+				 <li *ngIf="details.construction.displayModelNumber">
+                    <span><strong> Model Number </strong>
+                    <span [innerHtml]="details.construction.displayModelNumber"></span>
+                    </span>
+                </li>
+
+                <li *ngIf="detailsInfo.construction">
+                    <span><strong> Construction </strong>
+                    <span [innerHtml]="details.constructionName"></span>
+                    </span>
+                </li>
+                <li *ngIf="detailsInfo.color">
+                    <span>
+                        <strong>Color</strong>
+                        <span [innerHTML]="details.color.base.name"></span>
+                    </span>
+                </li>
+                <li *ngIf="detailsInfo.overlayName">
+                    <span>
+                        <strong>Overlay Color</strong>
+                        <span [innerHTML]="details.color.overlay.name"></span>
+                    </span>
+                </li>
+                <li *ngIf="detailsInfo.topSection">
+                    <span>
+                        <strong>Top Section</strong>
+                        <span [innerHTML]="details.topSection.name"></span>
+                    </span>
+                </li>
+                <li *ngIf="detailsInfo.glassType">
+                    <span>
+                        <strong>Glass Type</strong>
+                        <span [innerHTML]="details.topSection.glassType.name"></span>
+                    </span>
+                </li>
+                <li *ngIf="detailsInfo.Hardware">
+                    <span>
+                        <strong>Hardware</strong>
+                        <span *ngIf="details.hardware.handle.qty > 0" [innerHTML]="details.hardware.handle.name + ' (x' + details.hardware.handle.qty + ' Per Door)'"></span>
+                        <span *ngIf="details.hardware.stepPlate.qty > 0" [innerHTML]="details.hardware.stepPlate.name + ' (x' + details.hardware.stepPlate.qty + ' Per Door)'"></span>
+                        <span *ngIf="details.hardware.hinge.name != 'None' && details.hardware.hinge.qty > 0" [innerHTML]="details.hardware.hinge.name + ' (x' + details.hardware.hinge.qty + ' Per Door)'"></span>
+                        <span *ngIf="details.hardware.lock.qty > 0" [innerHTML]="details.hardware.lock.name + ' (x' + details.hardware.lock.qty + ' Per Door)'"></span>
+                    </span>
+                </li>
+                <li *ngIf="details.isEPA">
+                    <span>
+                        <strong>Lead Paint Test</strong>
+                        <span>Required</span>
+                    </span>
+                </li>
+                <li *ngIf="details.opener && details.opener.name">
+                    <span>
+                        <strong>Opener</strong>
+                        <span [innerHTML]="details.opener.name + ' ('+ details.opener.items.length + ')'"></span>
+
+                    </span>
+
+                </li>
+                <li *ngIf="details.opener.items.length > 0">
+                    <span>
+                        <strong>Opener Accessories</strong>
+                        <span *ngFor="let item of details.opener.items; let i=index">
+                            {{item.name}} (x{{item.qty}})
+                        </span>
+                    </span>
+                </li>
+                <li *ngIf="details.additionalOptions.items.length > 0">
+                    <span>
+                        <strong>Additional Options</strong>
+                        <span *ngFor="let item of details.additionalOptions.items; let i=index">
+                            {{item.name}}
+                        </span>
+                    </span>
+                </li>
+            </ul>
+        </div>
+    </modal-body>
+</modal>
 <div class="row margin-b-15"></div>
+<div *ngIf="!loaded" class="res-loader">
+
+</div>

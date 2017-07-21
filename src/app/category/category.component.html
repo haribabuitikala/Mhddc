@@ -1,50 +1,73 @@
-<div class="category-sec clearfix">
-  <div class="col-xs-6 padding-r-7 show-category">
-    <div class="bg-white box-shadow" routerLink="/doorSize">
-      <div class="image-sec text-center padding-t-10">
-        <span class="helper"></span>
-        <img src="../../assets/images/IconResidentialdoor.png" class="margin-b-15 residential-garrage-icon"
-             alt="">
-      </div>
-      <p class="category-type residential-garrage text-center">Residential Garage Door</p>
+<h4 class="font-size-16  padding-l-20  padding-t-10 text-orange">Design Your Garage Door</h4>
+<div class="ad-sec margin-t-10 box-shadow">
+    <img  alt="" src="../../assets/images/AdBannerMobile.png">
+</div>
+<div class="category-sec clearfix font-size-13 ">
+    <div class="col-xs-6 padding-r-7 show-category">
+        <div class="bg-white box-shadow"  (click)="navigateTo('/doorSize','residentialNavElems',12)">
+            <div class="image-sec text-center padding-t-10">
+                <span class="helper"></span>
+                <img src="../../assets/images/IconResidentialdoor.png" class="margin-b-15 residential-garrage-icon"
+                     alt="">
+            </div>
+            <p class="category-type residential-garrage text-center ">{{lang.categoryOne}}</p>
+        </div>
     </div>
-  </div>
-
-  <div class="col-xs-6 padding-l-7">
-    <div class="bg-white box-shadow" routerLink="/doorSize">
-      <div class="../../assets/image-sec text-center padding-t-10 ptn-rel">
-        <!--<img src="../../assets/images/coming-soon.png" class="ptn-abs category-coming-soon" alt="">-->
-        <img src="../../assets/images/IconGDO.png" class="margin-b-15 margin-r-25 garage-opener-icon"
-             alt="" width="80">
-      </div>
-      <p class="category-type text-center">Garage Door Opener</p>
+    <div class="col-xs-6 padding-l-7">
+        <div class="bg-white box-shadow" (click)="navigateTo('/doorSize','gdoNavElems',4)">
+            <!--        routerLink="/doorSize"-->
+            <div class="../../assets/image-sec text-center padding-t-10 ptn-rel">
+                <!--<img src="../../assets/images/coming-soon.png" class="ptn-abs category-coming-soon" alt="">-->
+                <img src="../../assets/images/IconGDO.png" class="margin-b-15 margin-r-25 garage-opener-icon"
+                     alt="" width="80">
+            </div>
+            <p class="category-type text-center">{{lang.categoryTwo}}</p>
+        </div>
     </div>
-  </div>
-  <div class="col-xs-6 padding-r-7" (click)="showModal()">
-    <div class="bg-white box-shadow">
-      <div class="../../assets/image-sec text-center padding-t-10 ptn-rel category-height">
-        <!--<img src="../../assets/images/coming-soon.png" class="ptn-abs category-coming-soon" alt="">-->
-        <img src="../../assets/images/IconRepair.png" class="margin-b-15 margin-r-25 service-repair-icon"
-             alt="">
-      </div>
-      <p class="category-type text-center">Service and Repair</p>
+    <div class="col-xs-6 padding-r-7" (click)="showModal()" *ngIf="isService">
+        <div class="bg-white box-shadow">
+            <div class="../../assets/image-sec text-center padding-t-10 ptn-rel category-height">
+                <!--<img src="../../assets/images/coming-soon.png" class="ptn-abs category-coming-soon" alt="">-->
+                <img src="../../assets/images/IconRepair.png" class="margin-b-15 margin-r-25 service-repair-icon"
+                     alt="">
+            </div>
+            <p class="category-type text-center">{{lang.categoryThree}}</p>
+        </div>
     </div>
-  </div>
 </div>
 <app-trending-now></app-trending-now>
 <modal #modal>
-  <modal-header [show-close]="true">
-  </modal-header>
-  <modal-body>
-    <p>You will now be directed to The Home Depot's Service and Repair site. From this site, you
-      can request a call from a service technician to assist you in service or repair.
-    </p>
-    <div>
-      <button class="btn btn-default box-shadow text-orange margin-r-10 bold margin-b-10" (click)="serviceRepair()">
-        Proceed
-      </button>
-      <button class="btn btn-default box-shadow text-orange bold" (click)="modal.close()">Stay on Current site
-      </button>
-    </div>
-  </modal-body>
+    <modal-header>
+    </modal-header>
+    <modal-body >
+        <p class="padding20 margin-top-30">You will now be directed to The Home Depot's Service and Repair's page. From this site, you can request a call from a service technician to assist you with service or repair.</p>
+        <div class="text-center">
+            <button class="btn btn-default box-shadow text-orange  bold margin-b-30 text-uppercase" (click)="serviceRepair()">
+                {{lang.modal.Proceed}}
+            </button> 
+            <br>
+            <button class="btn btn-default box-shadow text-orange bold text-uppercase" (click)="modal.close()">
+                {{lang.modal.StayOnCurrentSite}}
+            </button>
+        </div>
+    </modal-body>
 </modal>
+<modal #gdo>
+    <modal-body>
+        <div class="col-xs-12 margin-b-10 margin-top-30">
+            <div class="tile padding10 text-center box-shadow margin-b-20">
+                <p class="margin-b-10 margin-top-10 margin-r-10 padding-t-10 bold margin-b-30"> Are you shopping for a NEW Delivered and Installed Garage Door Opener?</p>
+                <button (click)="gdoGoTo('/gdoDoorSize', 'size')" class="btn btn-default bold text-orange bold margin-b-10">
+                    NEXT <img src="../../assets/images/Forward-48-thick.png" alt="" class="forward-img">
+                </button>
+            </div>
+            <div class="tile padding10 text-center box-shadow">
+                <p class="margin-b-10 margin-top-10 padding-t-10 bold margin-b-30"> Already have a Garage Door Opener purchased from Home Depot that needs to be installed ?</p>
+                <button (click)="gdoGoTo('/gdoConfig/additionalOptions/alreadyexistsgdo','add')" class="btn btn-default text-orange bold margin-b-10">
+                    NEXT <img src="../../assets/images/Forward-48-thick.png" class="forward-img" alt="">
+                </button>
+            </div>
+        </div>
+    </modal-body>
+</modal>
+

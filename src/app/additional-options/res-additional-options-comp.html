@@ -1,0 +1,222 @@
+<div class="content additional-options" id="resInstallFlow" *ngIf="installOrDiy=='Installed'">
+<!--    <h4 class="text-orange font-size-16">Additional Options</h4>-->
+    <div *ngFor="let installQuestions  of resInstallQuestions ;let i = index; let first = first; let last = last">
+        <dl [hidden]="last">
+            <dd>
+                <div class="question">
+                    <p [innerHTML]="installQuestions.item_list_text"></p>
+                    <img (click)="installQuestionsPopup(installQuestions)" height="25" src="../../assets/images/info.png">
+                </div>
+                <div *ngIf="i===0">
+                    <img src="../../assets/images/Medallionlogo.png" alt="" />
+                    <img src="../../assets/images/MedallionUpgrades_warranties.png" alt="" />
+                </div>
+                <div class="flex space-between">
+                    <div *ngIf="installQuestions.item_id === 5 && !installQuestions.Answers[0].isdefault">
+                        <p id="distance text-orange">it's <input type="number" pattern="[0-9]*" inputmode="numeric" style="width: 32px;" [(ngModel)]="defaultMiles" (blur)="updatePrice()" name="defaultMiles" oncopy="return false" onpaste="return false"
+                            /> miles away</p>
+                    </div>
+                    <span></span>
+                    <div class="flex-right">
+                        <div class="text-orange">Yes</div>
+                        <label class="switch">
+                            <input *ngIf="installQuestions.item_id !== 7" type="checkbox" [(ngModel)]="installQuestions.Answers[0].isdefault" (change)="installQuestionsOptions(installQuestions.Answers[0].isdefault,installQuestions)">
+                            <input *ngIf="installQuestions.item_id === 7 && utils.resFlowSession.resDoorObj.product.product['item_id'] !== 16" type="checkbox" [(ngModel)]="installQuestions.Answers[1].isdefault" (change)="installQuestionsOptions(installQuestions.Answers[1].isdefault,installQuestions)">
+                            <input *ngIf="installQuestions.item_id === 7 && utils.resFlowSession.resDoorObj.product.product['item_id'] === 16" type="checkbox" [(ngModel)]="installQuestions.Answers[0].isdefault" (change)="installQuestionsOptions(installQuestions.Answers[0].isdefault,installQuestions)">
+                            <div class="slider round"></div>
+                        </label>
+                        <div class="text-orange">No</div>
+                    </div>
+                </div>  
+            </dd>
+        </dl>
+    </div>
+</div>
+<div class="content additional-options" id="resDiyFlow" *ngIf="installOrDiy=='DIY'">
+<!--    <h4 class="text-orange font-size-16">Additional Options</h4>-->
+    <div *ngFor="let diyQuestions  of resDiyQuestions;let i = index; let first = first; let last = last">        
+        <dl [hidden]="first">
+            <dd>
+                <div class="question ">
+                    <p [innerHTML]="diyQuestions.item_list_text"></p>
+                    <img (click)="diyQuestionsPopup(diyQuestions)" height="25" src="../../assets/images/info.png">
+                </div>
+                <div class="flex space-between">
+                    <div *ngIf="diyQuestions.item_id === 5 && !diyQuestions.Answers[0].isdefault">
+                        <p id="distance text-orange">it's <input type="text" (keypress)="handleKeyboardEvent($event)" [(ngModel)]="defaultMiles" (blur)="updatePrice()" name="defaultMiles" oncopy="return false" onpaste="return false"
+                            /> miles away</p>
+                    </div>
+                    <select [ngModel]="selectedVinyl" *ngIf="diyQuestions.item_id === 1 && diyQuestions.Answers[0].isdefault" (ngModelChange)="selectedVinyls($event, diyQuestions)">
+                        <option *ngFor="let vin of vinyls"  [ngValue]="vin">{{vin.item_name}}</option>
+                    </select>                    
+                    <span></span>
+                    <div class="flex-right">
+                        <div class="text-orange">Yes</div>
+                        <label class="switch">
+                        <input type="checkbox" [(ngModel)]="diyQuestions.Answers[0].isdefault" (change)="diyQuestionsOptions(diyQuestions.Answers[0].isdefault,diyQuestions,$event)">
+                        <div class="slider round"></div>
+                    </label>
+                        <div class="text-orange">No</div>
+                    </div>
+                </div> 
+            </dd>
+        </dl>
+    </div>
+</div>
+<div id="footer" class="col-xs-12 padding-t-10 padding-b-10">
+    <a href="javascript:void(0)" *ngIf="!hidePrev" class="pull-left previous-btn" (click)="prevBtn('/config/opener')" data-id="currScreen">
+        <img src="../../assets/images/back-48-thick.png" height="15px"> Prev
+    </a>
+
+    <a href="javascript:void(0)" class="pull-right nextBtn" (click)="nextBtn('/config/doorConfiguration')" data-id="currScreen">
+       Next
+       <img src="../../assets/images/Forward-48-thick.png" height="15px">
+    </a>
+</div>
+<modal #resInstallFlowMed>
+    <modal-header [show-close]="true">
+    </modal-header>
+    <modal-body>
+        <img class="margin-top-20" src="../../assets/images/additionalOptions/medallion.jpg" alt="" />
+        <!--        <img src="../../assets/images/additionalOptions/R_med.png" alt=""/>-->
+    </modal-body>
+</modal>
+<modal #resInstallFlowMiles>
+    <modal-header [show-close]="true">
+    </modal-header>
+    <modal-body class="bold text-left padding10">
+        <p>Distance From Store? </p>
+        <p>Prices INCLUDE Home Delivery withIn a 30 mile driving distance from the store.if job site location is greater than
+            30 drive miles from store then the following mileage fees apply:</p>
+        <ul>
+            <li><span>31 - 50 miles from store - flat rate of $51</span></li>
+            <li><span>Greater than 50 miles from store - ﬂat rate of $51 + $3.00 for every drive mile over50</span></li>
+        </ul>
+    </modal-body>
+</modal>
+<modal #resInstallFlowHeadRoom>
+    <modal-header [show-close]="true">
+    </modal-header>
+    <modal-body class="text-left padding10">
+        <h4 class="margin-b-10 bold">What is a Low Headroom Conversion Kit? </h4>
+        <p class="margin-b-10">Low Headroom track reduces the amount of headroom required 0 Backroom Ceiling for a normal installation Headroom
+            is the space needed above the top of the door upwards to the first obstruction within the path of the door inside
+            the garage.</p>
+        <!--<img src="../../assets/images/additionalOptions/lowHeadRoom.jpg" alt=""/>-->
+        <div class="col-xs-12">
+            <img src="../../assets/images/how_to_measure-drawing.png" class="img-rounded measure margin-r-10" alt=" " width="304" height="236">
+        </div>
+    </modal-body>
+</modal>
+<modal #resFlowReleaseKit>
+    <modal-header [show-close]="true">
+    </modal-header>
+    <modal-body class="text-left padding10">
+        <p class="margin-b-10 ">The Clopay Emergency Release Kit allows you to disengage the Garage Door Opener. from the outside of the garage.
+            This allows you to open the door in the event of a power outage or opener failure. The Clopay Emergency Release
+            Kit may be required if the Garage Door is the only am to the stmcture. Please check local building codes for
+            clarification.
+        </p>
+        <span class="padding10">Installation required for DIY orders  </span>
+    </modal-body>
+</modal>
+<modal #resDiyBottomWeatherSeal>
+    <modal-header [show-close]="true">
+    </modal-header>
+    <modal-body class="text-left padding10">
+        <p class="font-size-16 bold">Bottom Weatherseal</p>
+        <!--        <p>
+        All Clopay garage doors come standard with bottom weather seal.Bottom weather seal is a black vinyl strip that extends the width of the door underneath the bootm section.It provides a seal between the garage door and the garage floor acting as a barrier against the elements.The standard bottom weather seal accounts for most gaps found in a standard application.In some cases where there is an excessively uneven or unlevel floora thicker bottom weather seal is required to cover the larger gaps
+        </p>-->
+
+        <div class="col-xs-12">
+            <img src="../../assets/images/additionalOptions/bottomWeatherSeal.jpg" alt="" />
+
+        </div>
+        <!--<img src="../../assets/images/additionalOptions/sumpop12.png" width="310" height="180px" alt=""/></div>-->
+    </modal-body>
+</modal>
+<modal #resDiyReleaseKit>
+    <modal-header [show-close]="true">
+    </modal-header>
+    <modal-body class="text-left padding10">
+        <p class="margin-b-10 ">The Clopay Emergency Release Kit allows you to disengage the Garage Door Opener. from the outside of the garage.
+            This allows you to open the door in the event of a power outage or opener failure. The Clopay Emergency Release
+            Kit may be required if the Garage Door is the only am to the stmcture. Please check local building codes for
+            clarification.
+        </p>
+        <span class="padding10">Installation required for DIY orders  </span>
+    </modal-body>
+</modal>
+<modal #resDiyHangerKit>
+    <modal-header [show-close]="true">
+    </modal-header>
+    <modal-body class="text-left padding10">
+        <p class="font-size-16 bold"> What is a Rear Track Hanger Kit? </p>
+        <!--        <p>
+        The Clopay Rear Track Hanger Kit has all the parts necessary to attach your new track to the ceiling. It proVIdes an attachment
+        point for the door track while supporting the majority of the door weight when it is in the up position. It also helps keep the track
+        square to the door. which is required for proper operation. If you are replacing an existing door. please inspect your rear track
+        hangers. If they are wood, look rusted or are damaged we recommend you replace them. The Clopay Rear Track Hanger Kit will
+        work on most residential applications where the track is not more than two feet from the ceiling. If a rear hanger is needed for
+        distances greater than two feet. custom hangers will be required. Rear Track Hangers can be easily made with 13 gauge 1 ‘/.' x
+        1 V." punched angle iron available at Home Depot in the Hardware Department. Your installation manual will include a diagram to
+        help you design your rear hanger.</p>-->
+        <div class="col-xs-12">
+            <img src="../../assets/images/additionalOptions/rearTrackHangerKit.jpg" alt="" />
+        </div>
+    </modal-body>
+</modal>
+<modal #resDiyPerimeterSeal>
+    <modal-header [show-close]="true">
+    </modal-header>
+    <modal-body>
+        <!--<p class="font-size-16 bold"> What is Perimeter weather seal?</p>-->
+        <!--        <p class="margin-b-10"> Clopay perimeter weather seal is designed to help keep
+        the elements out of your garae. This vinyl weather
+        seal attaches to the side and top door jambs and ﬁts up
+        against your new Clopay garage door. it creates a wind
+        and water barrier which improves overall energy
+        efﬁciency. If your current weather seal is as old as your
+        existing door you may want to check it for brittleness or
+        damage as this can reduce it‘s eﬂectiveness. Clopay
+        recommends replacing the weather seal to ensure you
+        are getting the maximum benefit from your new door. 
+        </p>-->
+        <div class="col-xs-12">
+            <img src="../../assets/images/additionalOptions/perimeterWeatherSeal.jpg" alt="" />
+        </div>
+        <!--        <img class="margin-b-10" src="../../assets/images/additionalOptions/sumpop1.png" alt=""/> 
+        <p class="margin-top-20">Color Options:
+        </p>
+        <img src="../../assets/images/additionalOptions/sumpop1_1.png" alt=""/>-->
+
+    </modal-body>
+</modal>
+<modal #resDiyFlowMiles>
+    <modal-header [show-close]="true">
+    </modal-header>
+    <modal-body class="bold text-left padding10">
+        <p class="bold">Distance From Store? </p>
+        <p class="margin-top-30">Prices INCLUDE Home Delivery withIn a 30 mile driving distance from the store </p>
+        <p>If delivery location is greater than a 30 mile driving distance from the store then a $3.00 fee applies for each
+            additional mile. </p>
+    </modal-body>
+</modal>
+<modal #resDiyFlowHeadRoom>
+    <modal-header [show-close]="true">
+    </modal-header>
+    <modal-body class="text-left padding10">
+        <!--        <h4 class="margin-b-10 bold"> What is a Low Headroom Conversion Kit? </h4>
+        <p class="margin-b-10">Low Headroom track reduces the amount of headroom required 0 Backroom ceiling
+        for a normal installation. Headroom is the space needed above 
+        the top of the door upwards to the first obstruction within the
+        path 0! the door inside the garage. a Headroom </p> -->
+        <div class="col-xs-12">
+            <img src="../../assets/images/additionalOptions/lowHeadRoom.jpg" alt="" />
+        </div>
+        <!--        <img src="../../assets/images/how_to_measure-drawing.png" class="img-rounded measure margin-r-10" alt=" "
+        width="304"
+        height="236">-->
+    </modal-body>
+</modal>

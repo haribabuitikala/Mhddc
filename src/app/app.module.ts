@@ -1,9 +1,11 @@
 import {BrowserModule} from '@angular/platform-browser';
-import {NgModule} from '@angular/core';
+import {NgModule, animate} from '@angular/core';
 import {FormsModule} from '@angular/forms';
 import {HttpModule} from '@angular/http';
 import {RouterModule} from '@angular/router';
 import {Ng2Bs3ModalModule} from 'ng2-bs3-modal/ng2-bs3-modal';
+import {ToastrModule} from 'toastr-ng2';
+import { AccordionModule } from 'ngx-accordion';
 
 import {AppComponent} from './app.component';
 import {appRoutes} from './routes';
@@ -18,60 +20,77 @@ import {ServiceRepairComponent} from './modals/service-repair/service-repair.com
 import {DoorSizeComponent} from './door-size/door-size.component';
 import {CollectionComponent} from './collection/collection.component';
 import {HomeComponent} from './home/home.component';
-import {DesignComponent} from './design/design.component';
-import {ConstructionComponent} from './construction/construction.component';
-import {ColorComponent} from './color/color.component';
-import {TopSectionComponent} from './top-section/top-section.component';
-import {LockComponent} from './lock/lock.component';
-import {GlassTypeComponent} from './glass-type/glass-type.component';
-import {InstallComponent} from './install/install.component';
-import {OpenerComponent} from './opener/opener.component';
-import {AdditionalOptionsComponent} from './additional-options/additional-options.component';
-import {DoorConfigurationComponent} from './door-configuration/door-configuration.component';
-import {ThankyouComponent} from './thankyou/thankyou.component';
-import {DetailsComponent} from './details/details.component';
-import {ConfigComponent} from './config/config.component';
-import { OpenerSelectedComponent } from './opener-selected/opener-selected.component';
-import { SliderComponentComponent } from './shared/slider-component/slider-component.component';
+import {NavigateService} from "./shared/navigate.service";
+import {ConfigModule} from "./config/config.module";
+import {ZipResults} from "./shared/zipresults";
+import {AppUtilities} from "./shared/appUtilities";
+import {ZipResolver} from "./zip-results/zip-resolver.service";
+import {LangEnglishService} from "./shared/english";
+import {SizeList} from "./door-size/sizesList";
+import {CollectionService} from "./shared/data.service";
+import {CollectionData} from "./collection/collection-data";
+import {CollectionPopup} from "./collection/collection-popup";
+import {GdoDoorSizeComponent} from './gdo-door-size/gdo-door-size.component';
+import {GdoConfigComponent} from './gdo-config/gdo-config.component';
+import {NavService} from "./nav/nav-service";
+import {ShoppingCartComponent} from './shopping-cart/shopping-cart.component';
+import {ApiConstants} from "./shared/api-constants";
+import {GdoOpener} from "./opener/gdoOpener";
+import { CustomerInfoComponent } from './customer-info/customer-info.component';
+import { CustomerServiceInfoComponent } from './customer-service-info/customer-service-info.component';
+import { CartDetailsRootComponent } from './cart-details/cart-details-root.component';
+import { Four04Component } from './Four04Component';
 
+import {ShareButtonsModule} from 'ngx-sharebuttons';
 @NgModule({
-  declarations: [
-    AppComponent,
-    NavComponent,
-    HeaderComponent,
-    BannerComponent,
-    TrendingNowComponent,
-    ZipResultsComponent,
-    CategoryComponent,
-    ServiceRepairComponent,
-    DoorSizeComponent,
-    CollectionComponent,
-    HomeComponent,
-    DesignComponent,
-    ConstructionComponent,
-    ColorComponent,
-    TopSectionComponent,
-    LockComponent,
-    GlassTypeComponent,
-    InstallComponent,
-    OpenerComponent,
-    AdditionalOptionsComponent,
-    DoorConfigurationComponent,
-    ThankyouComponent,
-    DetailsComponent,
-    ConfigComponent,
-    OpenerSelectedComponent,
-    SliderComponentComponent
-  ],
-  imports: [
-    BrowserModule,
-    FormsModule,
-    HttpModule,
-    Ng2Bs3ModalModule,
-    RouterModule.forRoot(appRoutes)
-  ],
-  providers: [ApiStoreService],
-  bootstrap: [AppComponent]
+    declarations: [
+        AppComponent,
+        NavComponent,
+        HeaderComponent,
+        BannerComponent,
+        TrendingNowComponent,
+        ZipResultsComponent,
+        CategoryComponent,
+        ServiceRepairComponent,
+        DoorSizeComponent,
+        CollectionComponent,
+        HomeComponent,
+        CollectionPopup,
+        GdoDoorSizeComponent,
+        GdoConfigComponent,
+        ShoppingCartComponent,
+        CustomerInfoComponent,
+        CustomerServiceInfoComponent,
+        CartDetailsRootComponent,
+        Four04Component 
+    ],
+    imports: [
+        BrowserModule,
+        FormsModule,
+        HttpModule,
+        Ng2Bs3ModalModule,
+        RouterModule.forRoot(appRoutes,{ useHash: true }),
+        ConfigModule,
+        ToastrModule.forRoot(),
+        AccordionModule,
+        ShareButtonsModule.forRoot()
+        
+    ],
+    providers: [
+        ApiStoreService,
+        NavigateService,
+        ZipResults,
+        AppUtilities, 
+        ZipResolver,
+        LangEnglishService,
+        SizeList,
+        CollectionService,
+        CollectionData,
+        NavService,
+        ApiConstants,
+        GdoOpener
+    ],
+    bootstrap: [AppComponent]
 })
 export class AppModule {
 }

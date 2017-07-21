@@ -3,6 +3,7 @@
     "version": "1.0.0-beta.28.3",
     "name": "hddc"
   },
+
   "apps": [{
     "root": "src",
     "outDir": "dist",
@@ -30,6 +31,7 @@
     "environments": {
       "dev": "environments/environment.ts",
       "prod": "environments/environment.prod.ts"
+
     }
   }],
   "e2e": {
