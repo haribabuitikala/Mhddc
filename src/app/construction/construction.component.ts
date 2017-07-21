@@ -144,29 +144,58 @@ export class ConstructionComponent implements OnInit {
                 this.data = _.chunk(newData, 2)
             }
         } else {
-            this.data = _.chunk(res, 2);
-
-            // for (var i = 0; i < this.data.length; i++) {
-            //     res[i]['itemClick'] = function() {
-            //         console.log('hi')
-            //     }
-            // }
+        //for modern steel
+            if(this.utils.resFlowSession.resDetails.collectionName === "Modern Steel Collection" && res.length === 4 )
+            {   
+                this.isCoreAssortment = true;                    
+                let defaultindex = 0;
+                res = this.arraymove(res,3,2);
+                for (let i = 1; i <= 3; i++) {
+                    let y = _.find(res, ['best_order', i]);
+                    if (y) {
+                        newData.push(y);
+                    } else {
+                        let g = _.filter(res, function (r) {
+                            return r.best_order == 0;
+                        });
+                        if (g.length > 0) {
+                            newData.push(g[defaultindex]);
+                            defaultindex = defaultindex + 1;
+                        }
+                    }
+                }
+                let t = {
+                    item_thumbnail: 'btnOtherConGallery.png',
+                    action: 'add',
+                    clickAction: () => {
+                        this.data.length = 0;
+                        this.data = _.chunk(res, 2);
+                        this.isCoreAssortment = false;
+                    }
+                }
+                newData.push(t)
+                this.data = _.chunk(newData, 2);            
+            }
+            else
+            {
+              this.data = _.chunk(res, 2);
+            }                  
         }
 
         this.utils.resFlowSession.resDoorObj.construction.construction = res[0];
-
         this.loaded = true;
     }
 
 
-    nextBtn(path, upsellModal) {
-        // if (this.utils.resFlowSession.collection.selectedCollection.item_id == 11 || 12 || 13 || 170) {
-        //     upsellModal.open();
-        // } else {
-        //     this.route.navigateByUrl(path);
-        // }
-        // windcode: this.utils.utilities.winCode,
 
+arraymove(arr, fromIndex, toIndex) {
+    var element = arr[fromIndex];
+    arr.splice(fromIndex, 1);
+    arr.splice(toIndex, 0, element);
+    return arr;
+}
+
+    nextBtn(path, upsellModal) {
         let coreAssortment = this.isCoreAssortment;
         if (this.utils.resFlowSession.resDoorObj.product.product['item_id'] == '11') {
             coreAssortment = false;
@@ -189,9 +218,7 @@ export class ConstructionComponent implements OnInit {
                 res => {
                     console.log('updell length ', res);
                     if (res.length > 0) {
-                        this.upSellData = res;
-                        // this.currentModelName = this.upSellData[0].current_model;
-                        // this.currentModel = 'upsell-' + this.upSellData[0].current_model + '-1.png';
+                        this.upSellData = res;                       
                         this.currentModelName = this.getDisplayModelNumber(this.upSellData[0].current_model);
                         this.currentModel = 'upsell-' + this.currentModelName + '-1.png';
                         upsellModal.open();
@@ -218,8 +245,6 @@ export class ConstructionComponent implements OnInit {
     moveNext() {
         this.upsell.close();
         this.route.navigateByUrl('config/color');
-        // this.goToHome(this.selected);
-
     }
 
     getModelPriceUpsell(updata) {
@@ -232,8 +257,7 @@ export class ConstructionComponent implements OnInit {
         return 0;
     }
 
-    updateWithUpsellPrice(data) {
-        //this.utils.resFlowSession.resDetails.upsellPrice = this.getModelPriceUpsell(data);
+    updateWithUpsellPrice(data) {     
         var filtermodel = window['cObj'].construction.apiData.filter(c => { return c.ClopayModelNumber == data.upgrade_model; });
         if (filtermodel.length > 0) {
             filtermodel = filtermodel[0];
