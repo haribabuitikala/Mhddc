@@ -6,7 +6,6 @@ import { CollectionService } from "../shared/data.service";
 import { CollectionData } from "../collection/collection-data";
 import { ConfigComponent } from "../config/config.component";
 import { NavComponent } from "../nav/nav.component";
-import { DetailsComponent } from "../details/details.component";
 declare var _: any;
 declare var $: any;
 

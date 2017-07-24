@@ -8,7 +8,7 @@ import { Router, NavigationEnd } from '@angular/router';
 @Component({
     selector: 'app-gdo-config',
     templateUrl: './gdo-config.component.html',
-    styleUrls: ['../config/config.component.less', '../details/details.component.less', './gdo-config.component.less']
+    styleUrls: ['../config/config.component.less', './gdo-config.component.less']
 })
 export class GdoConfigComponent implements OnInit, OnChanges {
 
