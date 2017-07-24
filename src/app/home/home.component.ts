@@ -271,14 +271,13 @@ export class HomeComponent implements OnInit, AfterViewInit {
 
     removeDoor() {
       let $that = this;
-      this.doors.pop();
-      if ($('.customer-home').find('.door').length > 1) {
-        if ($that.elemToRemove) {
-          var doorid = $($that.elemToRemove).attr('doorid');
-          if (doorid) {
+      let $activeDoors = $('.customer-home').find('.door.active');
+      if ($activeDoors.length > 0) {
+        var doorid = $($activeDoors[0]).attr('doorid');
+        if (doorid) {
+            this.doors.pop();
             $('.door-' + doorid).remove();
             this.resetDoorText();
-          }
         }
       }
     }
