@@ -232,6 +232,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
     handleImage(e) {
         var reader = new FileReader();
         var $that = this;
+        $that.uploadSelectedHome.imgSrc = '';
         reader.onload = function (event) {
             var img = new Image();
             img.onload = function () {
@@ -245,6 +246,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
                     $that.uploadSelectedHome.imgSrc = img['src'];
                 }
                 $that.doorCount = 1;
+                $that.doors = [new Door(100, 100, 50, 50)];
                 $that.drawDoors();
             }
             img.src = event.target['result'];

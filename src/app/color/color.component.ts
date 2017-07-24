@@ -176,10 +176,11 @@ export class ColorComponent implements OnInit {
             resObj.product.product['productline'] == 'speciality') {
             this.utils.resFlowSession.resDoorObj.construction.cladding = this.selectedCladding;
         }
-
+        this.utils.resFlowSession.resDetails.color.claddingName = '';
         if (this.claddings && this.claddings.length > 1) {
             if (this.selectedCladding !== "-1") {
                 this.utils.resFlowSession.resDoorObj.construction.cladding = this.claddings[+this.selectedCladding];
+               this.utils.resFlowSession.resDetails.color.claddingName = this.claddings[+this.selectedCladding].item_name;
                 this.moveToPage();
             } else {
                 this.errorMsg = 'Please Select Cladding and Overlay';

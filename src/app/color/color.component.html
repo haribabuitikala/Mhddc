@@ -49,7 +49,7 @@
 
 
 <div class="margin-t-20 margin-b-20" *ngIf="showcladding && claddings && claddings.length > 1">
-    <label>Choose Your Cladding & Overlay:</label>
+    <label>Choose Your Cladding & Overlay:</label><span style="float:right"> <img src="../../assets/images/Info-64.png" height="25" class="pull-right info-icon" (click)="modalCladdingOverlay.open()" alt=""></span>
     <select [(ngModel)]="selectedCladding" class="form-control" name="color-cladding" (change)="claddingUpdated()">
         <option value="-1">Select Cladding and Overlay</option>
         <option *ngFor="let cladding of claddings; let index = index" [attr.value]="index">{{ cladding.item_name}}</option>
@@ -116,6 +116,14 @@
         <div class="text-center">
             <button (click)="warning.close()" class="btn btn-default box-shadow text-orange margin-t-20 margin-b-10 ">CLOSE</button>
         </div>
+    </modal-body>
+</modal>
+
+<modal #modalCladdingOverlay>
+    <modal-header [show-close]="true">
+    </modal-header>
+    <modal-body>
+        <img src="../../assets/images/cladding.png" alt="" />
     </modal-body>
 </modal>
 

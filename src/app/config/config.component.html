@@ -166,6 +166,12 @@
                     <span [innerHtml]="details.constructionName"></span>
                     </span>
                 </li>
+                <li *ngIf="details.color.claddingName">
+                    <span>
+                        <strong> Cladding & Overlay </strong>
+                        <span [innerHTML]="details.color.claddingName"></span>
+                    </span>
+                </li>
                 <li *ngIf="detailsInfo.color">
                     <span>
                         <strong>Color</strong>

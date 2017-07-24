@@ -521,7 +521,8 @@ export class ResidentialFlowSession {
                 price: 0,
                 discountPrice: 0,
                 qty: 0
-            }
+            },
+            claddingName: ''
         },
         topSection: {
             name: '',
@@ -607,6 +608,7 @@ export class ResidentialFlowSession {
             "dsgn": "",
             "apiData": ""
         },
+
         "construction": {
             "construction": {},
             "cladding": "",
@@ -725,12 +727,13 @@ export class ResidentialFlowSession {
                     price: 0,
                     discountPrice: 0,
                     qty: 0
-                }
+                },
+                claddingName: ''
             };
             this.resDoorObj['reset' + this.resDoorObj['resetorder'][5]]();
         },
         "resetwindows": () => {
-            this.resDoorObj['this.windows'] = {
+            this.resDoorObj['windows'] = {
                 "topsection": "",
                 "placement": null,
                 "glasstype": "",
