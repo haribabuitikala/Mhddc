@@ -277,7 +277,7 @@ export class InstallComponent implements OnInit, AfterViewInit, AfterViewChecked
         }
     }
 
-    prevBtn() {
+    prevBtn(url?) {
         if (this.appComponent.flowType === 'resquick') {
             this.navigateTo('/config/color');
         } else {

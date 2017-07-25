@@ -42,7 +42,7 @@ export class OpenerComponent implements OnInit {
     }
 
     // for gdo flow the pageNo will be 2
-    onNotify () {
+    onNotify (event?) {
 
     }
     setNavComponent() {
@@ -150,7 +150,7 @@ export class OpenerComponent implements OnInit {
     //     this.dataStrorage.gdoOpenerAccessories.push(k);
     // }
 
-    updateQuantity(obj, flow?) {
+    updateQuantity(obj?, flow?) {
         if (flow === 1 && this.quantity < 6) {
             this.quantity++
         }
@@ -171,7 +171,7 @@ export class OpenerComponent implements OnInit {
         this.utils.utilities.gdoOpenerQty = this.quantity;
 
         this.utils.utilities.kPrice = this.utils.sumBy(this.dataStrorage.gdoOpenerAccessories);
-        this.gdoConfig.itemPrice = this.utils.calculateTotalPrice()
+        this.gdoConfig.itemPrice = this.utils.calculateTotalPrice();
 
 
         // this.itemPrice = (this.itmPrice * this.quantity) +

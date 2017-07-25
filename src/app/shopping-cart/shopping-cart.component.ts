@@ -122,7 +122,7 @@ export class ShoppingCartComponent implements OnInit {
         this.route.navigateByUrl('/doorSize');
     }
 
-    removeItem(item, index) {
+    removeItem(item, index?) {
         this.utils.gdoFlowSession.added = false;
         if (this.resFlow) {
             this.resFlowSession.cart.splice(index, 1);
@@ -146,13 +146,13 @@ export class ShoppingCartComponent implements OnInit {
         this.route.navigateByUrl('/category');
     }
 
-    updateQuantity(flow) {
+    updateQuantity(flow?) {
         this.itemPrice = this.utils.updateQty(flow, this.utils.utilities.gdoOpenerQty);
         this.baseItmPrice = this.utils.utilities.item_price * this.utils.utilities.gdoOpenerQty;
         this.qty = this.utils.utilities.gdoOpenerQty;
     }
 
-    updateQty(item, index, increment?) {
+    updateQty(item, index?, increment?) {
         if (increment) {
             if (item.construction.qty !== 6)
                 item.construction.qty = item.construction.qty + 1;
