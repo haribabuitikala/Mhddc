@@ -22,16 +22,6 @@ declare var $: any;
 })
 export class InstallComponent implements OnInit, AfterViewInit, AfterViewChecked {
 
-    constructor(private appComponent: AppComponent
-        , private navComponent: NavComponent
-        , private config: ConfigComponent
-        , private route: Router
-        , private utils: AppUtilities
-        , private sizes: SizeList
-        , private language: LangEnglishService
-        , private data: CollectionData
-        , private collection: CollectionService) {
-    }
     @ViewChild('exactDoorsize') exactDoorsize: ModalComponent;
     @ViewChild('leadTest') leadTest: ModalComponent;
     @ViewChild('epa') epa: ModalComponent;
@@ -72,16 +62,28 @@ export class InstallComponent implements OnInit, AfterViewInit, AfterViewChecked
 
     hideDIY = false;
     noDIYs = [30, 16, 9];
-    showType: string = '';
+    showType = '';
 
     flowType = 'res';
+
+    constructor(private appComponent: AppComponent
+        , private navComponent: NavComponent
+        , private config: ConfigComponent
+        , private route: Router
+        , private utils: AppUtilities
+        , private sizes: SizeList
+        , private language: LangEnglishService
+        , private data: CollectionData
+        , private collection: CollectionService) {
+    }
+
 
     ngAfterViewChecked() {
         this.installPrice = this.utils.utilities.itemPriceInstall;
         this.diyPrice = this.utils.utilities.itemPriceDY;
     }
 
-    isStepVisible(stepName) {
+    isStepVisible(stepName?) {
         let show = true;
         var topsection = this.utils.resFlowSession.resDoorObj.windows.topsection;
         if (stepName === 'topSection' || stepName === 'glasstype') {
@@ -198,7 +200,7 @@ export class InstallComponent implements OnInit, AfterViewInit, AfterViewChecked
     }
 
     selectedType = 'Installed';
-    checkType(txt) {
+    checkType(txt?) {
         this.selectedType = txt;
         this.appComponent.selectedInstallDiy = txt;
         if (txt == 'DIY') {
@@ -221,13 +223,13 @@ export class InstallComponent implements OnInit, AfterViewInit, AfterViewChecked
          this.utils.utilities.promoSaving = this.utils.resFlowSession.calculatePromoSavings(); 
     }
 
-    navigateTo(path) {
+    navigateTo(path?) {
         // this.appComponent.currScreen = this.appComponent.navElems.indexOf(path);
         this.route.navigateByUrl(path);
     }
 
 
-    nextBtn(path) {
+    nextBtn(path?) {
         //Best place to set collection name in quickship flow
         if (this.appComponent.flowType == 'resquick') {
             let construction = this.utils.resFlowSession.resDoorObj.construction.construction;
@@ -255,7 +257,7 @@ export class InstallComponent implements OnInit, AfterViewInit, AfterViewChecked
             }
         }
     }
-    setFloridaConfirmValue(event) {
+    setFloridaConfirmValue(event?) {
         if (event.currentTarget.checked) {
             this.isChecked = false;
         } else {
@@ -282,7 +284,7 @@ export class InstallComponent implements OnInit, AfterViewInit, AfterViewChecked
             this.navigateTo('/config/hardware');
         }
     }
-    leadTestValue(buttonValue) {
+    leadTestValue(buttonValue?) {
         if (buttonValue == "YES") {
             this.epa.open();
 
@@ -291,7 +293,7 @@ export class InstallComponent implements OnInit, AfterViewInit, AfterViewChecked
             this.navigateTo('/config/opener');
         }
     }
-    epaValue(epaStatus) {
+    epaValue(epaStatus?) {
         if (epaStatus == 'learn') {
             this.leadTest.close();
             this.epa.close();
@@ -314,7 +316,7 @@ export class InstallComponent implements OnInit, AfterViewInit, AfterViewChecked
         this.epa.open();
     }
     checkValue;
-    checkboxValue(event) {
+    checkboxValue(event?) {
 
         this.checkValue = event.currentTarget.checked;
     }

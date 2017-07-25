@@ -59,11 +59,11 @@ export class NonClassicComponent implements OnInit {
     this.loadData();
   }
 
-  nextBtn() {
+  nextBtn(url?) {
     this.route.navigateByUrl('/config/hardware');
   }
 
-  prevBtn() {
+  prevBtn(url?) {
     this.route.navigateByUrl('/config/topSection');
   }
 

@@ -7,12 +7,16 @@ import { AppUtilities } from "../shared/appUtilities";
   styleUrls: ['./cart-details.component.less', '../install//install.component.less']
 })
 export class CartDetailsComponent implements OnInit {
-  constructor(private utils: AppUtilities) {
+  data: any;
+  coachman: any;
+  doorConfig: any;
+  itemPrice: any;
+  additional: any;
+
+  constructor(public utils: AppUtilities) {
 
   }
-  data;
-  coachman;
-  doorConfig;
+
 
   ngOnInit() {
     this.data = this.utils.resFlowSession.resDetails;
@@ -20,13 +24,13 @@ export class CartDetailsComponent implements OnInit {
     this.coachman = this.utils.resFlowSession.resDoorObj.product.product['item_id'] === 11 ? true : false;
     // show doorConfig
     this.doorConfig = window.location.hash.indexOf('doorConfiguration') !== -1 ? true : false;
-    let size = this.utils.resFlow;
+    const size = this.utils.resFlow;
     this.data.widthF = size.wf;
     this.data.widthI = size.wi;
     this.data.heightF = size.hf;
     this.data.heightI = size.hi;
-    //it is not recommended place to write this code here
-    let hardware = this.utils.resFlowSession.resDoorObj.hardware;
+    // it is not recommended place to write this code here
+    const hardware = this.utils.resFlowSession.resDoorObj.hardware;
     try {
       if (hardware.hinge && hardware.hinge['placement'].indexOf(':') >= 0) {
         this.data.hardware.hinge.qty = parseInt(hardware.hinge['placement'].split(':')[0]);

@@ -12,10 +12,10 @@
           <input type="number" oncopy="return false" onpaste="return false" placeholder="{{lang.placeholder}}" minlength="5" maxlength="5" name="zip" class="zip-code" autocomplete="off"
             (keypress)="onlyNumberKey($event)" (ngModelChange)="onChange($event)" ngModel #zipCode="ngModel" required>
         </div>
-        <span *ngIf="zipCode.errors?.required && zipCode.touched" class="error ptn-abs">
+        <span *ngIf="zipCode.hasErrors('required') && zipCode.touched" class="error ptn-abs">
          {{lang.zipcodeMessage}}
         </span>
-        <span *ngIf="zipCode.errors?.minlength && zipCode.touched" class="error ptn-abs">
+        <span *ngIf="zipCode.hasErrors('minlength') && zipCode.touched" class="error ptn-abs">
           {{lang.zipcodeMessage}} 
         </span>
       </div>

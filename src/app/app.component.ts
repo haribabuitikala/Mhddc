@@ -45,7 +45,7 @@ export class AppComponent implements OnInit, AfterViewChecked, OnChanges {
 
 
 
-    ngOnChanges() {
+    ngOnChanges(changes: any) {
         this.currScreen = this.app.utilities.currScreen;
     }
 

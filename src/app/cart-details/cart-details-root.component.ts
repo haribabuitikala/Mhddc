@@ -7,10 +7,17 @@ import { AppUtilities } from "../shared/appUtilities";
   styleUrls: ['./cart-details.component.less', '../install//install.component.less']
 })
 export class CartDetailsRootComponent implements OnInit {
-  constructor(private utils: AppUtilities) { }  
   @Input() Item;
-  data;
+  data: any;
+  coachman: any;
+  additional: any;
+  doorConfig: any;
   itemPrice = this.utils.resFlowSession.cart[0].totalPrice;
+
+  constructor(public utils: AppUtilities) {
+
+  }
+
   ngOnInit() {
     this.data = this.Item || this.utils.resFlowSession.resDoorObj;
   }

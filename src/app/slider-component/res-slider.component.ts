@@ -227,7 +227,7 @@ export class ResSliderComponent implements OnInit, AfterViewInit {
         this.sliderWidth = (this.data.length * this.slideWidth) + this.slideWidth;
     }
 
-    ngOnChanges() {
+    ngOnChanges(change: any) {
         if (this.cname === 'construction') {
             this.renderSlider();
             this.slideCount = this.data ? this.data.length : 0;

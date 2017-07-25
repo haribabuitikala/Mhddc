@@ -18,14 +18,6 @@ declare var $: any;
 export class OpenerComponent implements OnInit {
     @ViewChild('gdoOponerAccessories') gdoOponerAccessories: ModalComponent;
 
-    constructor(private utils: AppUtilities
-        , private navComp: NavService
-        , private navComponent: NavComponent
-        , private route: Router
-        , private dataStrorage: CollectionData
-        , private dataService: CollectionService
-        , private gdoConfig: GdoConfigComponent) {
-    }
 
     pageNo;
     data;
@@ -40,9 +32,19 @@ export class OpenerComponent implements OnInit {
         openerid: null
     };
 
+    constructor(private utils: AppUtilities
+        , private navComp: NavService
+        , private navComponent: NavComponent
+        , private route: Router
+        , private dataStrorage: CollectionData
+        , private dataService: CollectionService
+        , private gdoConfig: GdoConfigComponent) {
+    }
+
     // for gdo flow the pageNo will be 2
+    onNotify () {
 
-
+    }
     setNavComponent() {
         this.navComponent.renderNav({
             flowType: 'gdo',
@@ -97,7 +99,7 @@ export class OpenerComponent implements OnInit {
 		$('body').removeClass('loader');
     }
 
-    nextBtn(path) {
+    nextBtn(path?) {
         $('body').addClass('loader');
         if (this.utils.utilities.flow === 'gdoNavElems') {
             this.utils.setUtils(3, 1);
@@ -148,7 +150,7 @@ export class OpenerComponent implements OnInit {
     //     this.dataStrorage.gdoOpenerAccessories.push(k);
     // }
 
-    updateQuantity(obj, flow) {
+    updateQuantity(obj, flow?) {
         if (flow === 1 && this.quantity < 6) {
             this.quantity++
         }
@@ -178,7 +180,7 @@ export class OpenerComponent implements OnInit {
         // this.utils.utilities.gdoOpenerQty = this.quantity;
     }
 
-    getOpenerId(data) {
+    getOpenerId(data?) {
         this.dataParams.openerid = data.item_id;
         this.utils.utilities.openerType = data.brand;
         this.gdoOpenertext = data.item_name;
@@ -187,7 +189,7 @@ export class OpenerComponent implements OnInit {
         // this.gdoOpenerObj = data;
     }
 
-    prevBtn(path) {
+    prevBtn(path?) {
         if (this.utils.utilities.flow === 'gdoNavElems') {
             this.utils.setUtils(1, 0);
             this.goTo(path)
@@ -198,11 +200,11 @@ export class OpenerComponent implements OnInit {
         this.utils.resFlowSession.resDoorObj.resetFromStep(8);
     }
 
-    goTo(path) {
+    goTo(path?) {
         this.route.navigateByUrl(path);
     }
 
-    resetPrice() {
+    resetPrice(d1?) {
         this.utils.resFlowSession.resDoorObj.opener.opener = null;
         this.utils.resFlowSession.resDoorObj.opener.items = [];
     }

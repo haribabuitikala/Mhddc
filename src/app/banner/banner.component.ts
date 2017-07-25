@@ -21,7 +21,7 @@ export class BannerComponent implements OnInit {
     lang: any;
 
 
-    constructor(private appComponent: AppComponent
+    constructor(public appComponent: AppComponent
         , private route: Router
         , private toastr: ToastrService
         , private localize: LangEnglishService
@@ -30,7 +30,7 @@ export class BannerComponent implements OnInit {
         , private navComponent: NavComponent
         , private utils: AppUtilities) {
     }
-    save(form, event) {
+    save(form, event?) {
         event.preventDefault();
         $('body').addClass('loader');
         let len = form.value.zip.length;
@@ -62,7 +62,7 @@ export class BannerComponent implements OnInit {
                 $('body').removeClass('loader');
             });
     }
-    ngOnChanges() {
+    ngOnChanges(change: any) {
         console.log('changed');
     }
 
@@ -76,7 +76,7 @@ export class BannerComponent implements OnInit {
         });
         this.getPromo();
     }
-    onlyNumberKey(event) {
+    onlyNumberKey(event?) {
         let len = event.currentTarget.value.length;
         if (len === 0) $('.show-zip-results').prop('disabled', true);
         if (event.charCode === 13) {
@@ -93,14 +93,14 @@ export class BannerComponent implements OnInit {
 
     }
 
-onChange(value){   
-if (!value) {
-			//alert("123")
-			$(".form-control input").val("")
+    onChange(value?) {
+        if (!value) {
+            //alert("123")
+            $(".form-control input").val("");
             $(".form-control input").focus();
-			$(".form-control input").setSelectionRange(0, 0)
+            $(".form-control input").setSelectionRange(0, 0);
         }
-}  
+    }
 
     getPromo() {
 

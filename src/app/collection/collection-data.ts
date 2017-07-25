@@ -17,7 +17,10 @@ export class CollectionData {
     gdoOpener = {};
     zip = {};
     zipResults = {
-        state :''
+        state :'',
+        zip:'',
+        county:'',
+        city: ''
     };
     gdoAdditional = {};
     gdoAdditionalDirect = {};

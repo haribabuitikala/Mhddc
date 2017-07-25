@@ -47,7 +47,7 @@ export class NavComponent implements OnInit {
     resDisableSteps = [];
     pageTitle = '';
 
-    ngOnChanges() {
+    ngOnChanges(changes: any) {
         this.menuArray = this.buildMenu();
     }
 

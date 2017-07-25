@@ -12,16 +12,6 @@ import { Router, NavigationEnd } from '@angular/router';
 })
 export class GdoConfigComponent implements OnInit, OnChanges {
 
-    constructor(private appComponent: AppComponent
-        , private utils: AppUtilities
-        , private router: Router
-        , private dataStore: CollectionData) {
-        router.events.subscribe(s => {
-            if (s instanceof NavigationEnd) {
-            }
-        })
-    }
-
     data;
     itemPrice;
     itmPrice; // this is for holding the single quantity price
@@ -32,7 +22,7 @@ export class GdoConfigComponent implements OnInit, OnChanges {
     calulateAmt;
     openerTxt = this.utils.utilities.item_name;
     detailObj = this.dataStore.zipResults;
-    storeName = this.dataStore.store;
+    storeName: any = this.dataStore.store;
 
     gdoOpenerSelected = this.dataStore.gdoOpenerAccessories;
     gdoOpeners = [];
@@ -42,7 +32,17 @@ export class GdoConfigComponent implements OnInit, OnChanges {
     distancePrice;
     distance;
 
-    ngOnChanges() {
+
+    constructor(private appComponent: AppComponent
+        , private utils: AppUtilities
+        , private router: Router
+        , private dataStore: CollectionData) {
+        router.events.subscribe(s => {
+            if (s instanceof NavigationEnd) {
+            }
+        })
+    }
+    ngOnChanges(changes: any) {
         console.log('changed', this.showDetails);
     }
 

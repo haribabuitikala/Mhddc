@@ -211,7 +211,7 @@ export class HardwareComponent implements OnInit {
     }
 
   }
-  onHardwareSelected($event) {
+  onHardwareSelected($event?) {
     if ($event.subname) {
       this.setHardwareMinMax($event.subname);
     }
@@ -249,7 +249,7 @@ export class HardwareComponent implements OnInit {
     this.config.renderCanvas();
   }
 
-  updateCount(type, isincrement) {
+  updateCount(type, isincrement?) {
     if (!isincrement) {
       switch (type) {
         case 'handle':
@@ -342,7 +342,7 @@ export class HardwareComponent implements OnInit {
         }
   }
 
-  isLockSelected(obj, isfirst) {
+  isLockSelected(obj, isfirst?) {
     var lockSelected = this.utils.resFlowSession.resDoorObj.hardware.lock;
     if (lockSelected && lockSelected['item_id'] == obj.item_id) {
       return true;
@@ -417,7 +417,7 @@ export class HardwareComponent implements OnInit {
       }
     );
   }
-  hardwareItems(obj, id) {
+  hardwareItems(obj?, id?) {
     if (obj[0]) {
       let hardware = this.utils.resFlowSession.resDoorObj.hardware;
       id = {
@@ -448,14 +448,14 @@ export class HardwareComponent implements OnInit {
     this.loadData();
     // this.hardwareItems();
   }
-  navigateTo(path) {
+  navigateTo(path?) {
     // this.appComponent.currScreen = this.appComponent.navElems.indexOf(path);
     this.route.navigateByUrl(path);
   }
 
 
 
-  nextBtn(path) {
+  nextBtn(path?) {
     if (document.querySelector('.vsDoor') && document.querySelector('.vsDoor')['toDataURL']) {
       this.utils.resFlow.imgSrc = document.querySelector('.vsDoor')['toDataURL']();
     } else if (document.querySelector('#homeVis canvas') && document.querySelector('#homeVis canvas')['toDataURL']) {
@@ -465,7 +465,7 @@ export class HardwareComponent implements OnInit {
     this.navigateTo('/config/install');
   }
 
-  prevBtn() {
+  prevBtn(url?) {
     this.resetPrice();
     if (this.utils.resFlowSession.resDoorObj.product.product['item_id'] === 16) {
       this.utils.resFlowSession.resDoorObj.resetFromStep(4);
