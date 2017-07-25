@@ -16,6 +16,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
     pageNo;
     homes;
     selected;
+    currScreen;
 
     constructor(private utils: AppUtilities
         , private navComp: NavService

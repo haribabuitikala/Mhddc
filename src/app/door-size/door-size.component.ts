@@ -43,6 +43,7 @@ export class DoorSizeComponent implements OnInit {
     selectedHeightFeet;
     selectedHeightInches;
     selectedHeight;
+    currScreen;
 
     // if user did'nt selected door size the default widths should be singleDoorWidth, singleDoorHeight, doubleDoorWidth and doubleDoorHeight
     // based on the selection either single car door or double car door
@@ -293,7 +294,7 @@ export class DoorSizeComponent implements OnInit {
         productlayout: this.utils.utilities.productlayout //
     };
 
-    nextBtn(curr, path) {
+    nextBtn(curr, path?) {
 
         if (this.utils.utilities.wf != null && this.utils.utilities.wi != null && this.utils.utilities.hf != null && this.utils.utilities.hi != null &&
             this.utils.utilities.hf != 0) {
@@ -337,7 +338,7 @@ export class DoorSizeComponent implements OnInit {
         utils.singleDoor = door;
     }
 
-    prevBtn(curr, path) {
+    prevBtn(curr, path?) {
         this.navComponent.openModal();
     }
 

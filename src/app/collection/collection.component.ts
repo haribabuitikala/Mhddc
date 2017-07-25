@@ -25,7 +25,8 @@ export class CollectionComponent implements OnInit {
     popular = true;
     pageNo;
     quickFlow = false;
-	navigateErorFlag = false;
+    navigateErorFlag = false;
+    currScreen;
 
     showSpeciality() {
         this.specialityBtn = false;
@@ -355,7 +356,7 @@ export class CollectionComponent implements OnInit {
         this.utils.utilities.laborcode = null;
     }
 
-    nextBtn(curr, path) {
+    nextBtn(curr, path?) {
         this.utils.setUtils(3, 1);
         if (this.selected) {
             this.goToHome(this.selected);
@@ -373,7 +374,7 @@ export class CollectionComponent implements OnInit {
 
     }
 
-    prevBtn(curr, path) {
+    prevBtn(curr, path?) {
         this.makeNull();
         this.utils.setUtils(1, 0);
         this.utils.resFlowSession.resDoorObj.resetFromStep(1);

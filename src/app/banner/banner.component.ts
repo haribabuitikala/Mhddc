@@ -28,7 +28,7 @@ export class BannerComponent implements OnInit {
         , private dataService: CollectionService
         , private dataStore: CollectionData
         , private navComponent: NavComponent
-        , private utils: AppUtilities) {
+        , public utils: AppUtilities) {
     }
     save(form, event?) {
         event.preventDefault();
