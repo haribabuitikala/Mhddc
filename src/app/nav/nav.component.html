@@ -3,13 +3,13 @@
         <ul class="padding-0">
             <li *ngFor="let step of steps" [ngClass]="{'current': step.No == activeStep, 'visited': step.visited, 'disabled': step.disabled }">
                 <div *ngIf="step.No > 0 && !step.visited" (click)="goToStep(step, true)">
-                    <img *ngIf="  step.No != activeStep" src="../../assets/images/left-nav/leftnav{{step.No}}iconNVP.png" alt="" />
-                    <img *ngIf=" step.No == activeStep" src="../../assets/images/left-nav/leftnav{{step.No}}iconCP.png" alt="" />
+                    <div class="leftnavContainer"><span *ngIf="step.No != activeStep" class="leftnav-iconNVP">{{step.No}}</span></div> <!-- white 1px border -->
+                    <div class="leftnavContainer"><span *ngIf="step.No == activeStep" class="leftnav-iconCP">{{step.No}}</span></div> <!-- white 2px border -->
                     <span class="hide">{{ step.Name }}</span>
                 </div>
                 <div *ngIf="step.No > 0 && step.visited" (click)="goToStep(step)">
-                    <img *ngIf="step.No != activeStep" src="../../assets/images/left-nav/leftnav{{step.No}}iconVP.png" alt="" />
-                    <img *ngIf=" step.No == activeStep" src="../../assets/images/left-nav/leftnav{{step.No}}iconCP.png" alt="" />
+                    <div class="leftnavContainer"><span *ngIf="step.No != activeStep" class="leftnav-iconVP">{{step.No}}</span></div> <!-- orange 1px border -->
+                    <div class="leftnavContainer"><span *ngIf=" step.No == activeStep" class="leftnav-iconCP">{{step.No}}</span></div> <!-- white 2px border -->
                     <span class="hide">{{ step.Name }}</span>
                 </div>
                 <div *ngIf="step.No == 0" (click)="home.open()">
