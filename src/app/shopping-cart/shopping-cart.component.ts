@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, Directive, Input, Output, EventEmitter, AfterViewInit } from '@angular/core';
+import { Component, OnInit, ViewChild, Directive, Input, Output, EventEmitter, AfterViewInit, AfterViewChecked, ChangeDetectorRef } from '@angular/core';
 import { ModalComponent } from "ng2-bs3-modal/ng2-bs3-modal";
 import { AppComponent } from "../app.component";
 import { Router } from '@angular/router';
@@ -15,7 +15,7 @@ declare var _: any;
     templateUrl: './shopping-cart.component.html',
     styleUrls: ['./shopping-cart.component.less', '../install//install.component.less']
 })
-export class ShoppingCartComponent implements OnInit {
+export class ShoppingCartComponent implements OnInit, AfterViewChecked {
     @ViewChild('continue') continue: ModalComponent;
     @ViewChild('resShoppingCartTerms') resShoppingCartTerms: ModalComponent;
     @ViewChild('gdoShoppingCartTerms') gdoShoppingCartTerms: ModalComponent;
@@ -44,13 +44,24 @@ export class ShoppingCartComponent implements OnInit {
     cartlen = this.utils.gdoFlowSession.cart.length || this.utils.resFlowSession.cart.length;
     showPreTax = this.cartlen > 0 ? true : false;
 
+ngAfterViewChecked() {
+    this.cdref.detectChanges();
+    this.cartlen = this.utils.gdoFlowSession.cart.length || this.utils.resFlowSession.cart.length;
+    this.showPreTax = this.cartlen > 0 ? true : false;
+    if (this.utils.resFlowSession.resDoorObj.TYPE !== 'RES') {
+        this.getItemPrice();
+    } else {
+        this.getTotalCartValue();
+    }
+}
 
 constructor(private appComp: AppComponent
     , private navComp: NavService
     , private utils: AppUtilities
     , private navComponent: NavComponent
     , private dataStore: CollectionData
-    , private route: Router) {
+    , private route: Router
+    , private cdref: ChangeDetectorRef) {
 }
 
 ngOnInit() {       
