@@ -580,6 +580,7 @@ export class ConfigComponent implements OnInit, AfterViewInit, AfterViewChecked 
         this.details.widthI = this.utils.resFlow.wi;
         this.details.heightF = this.utils.resFlow.hf;
         this.details.heightI = this.utils.resFlow.hi;
+        this.details.collectionId = this.utils.resFlowSession.resDoorObj.product.product['item_id'];
         // switch (bodyWdt) {
         //     case 414:
         //         detailshgt = "18vh";
