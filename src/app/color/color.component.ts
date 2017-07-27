@@ -145,9 +145,10 @@ export class ColorComponent implements OnInit {
 
         let utils = this.utils.utilities;
         var resDoorObj = this.utils.resFlowSession.resDoorObj;
+       var modelBasedProductId =   this.setProductID();
         return {
             "dtype": 'RES',
-            "productid": resDoorObj.product.product['item_id'],
+            "productid": modelBasedProductId,
             "windcode": "W0",
             "NatMarketID": +utils.natmarketid,
             "doorcolumns": resDoorObj.design.dsgn['Columns'],
@@ -161,6 +162,23 @@ export class ColorComponent implements OnInit {
             "marketID": +utils.localmarketid,
             "doorsize": +utils.homeSize
         };
+    }
+
+    setProductID() {
+        let utils = this.utils.utilities;
+        var resDoorObj = this.utils.resFlowSession.resDoorObj;
+        var selectedClopayModelNumber = resDoorObj.construction.construction['ClopayModelNumber'];
+        var modelBasedProductId = selectedClopayModelNumber;
+        if (!resDoorObj.QPB) {
+            if (selectedClopayModelNumber == "HDS" || selectedClopayModelNumber == "HDSL") {
+                modelBasedProductId = '14'
+            }
+            else if (selectedClopayModelNumber == "HDB" || selectedClopayModelNumber == "HDB4" || selectedClopayModelNumber == "HDBL") {
+                modelBasedProductId= '24'
+            }
+
+        }
+        return modelBasedProductId;
     }
 
 
@@ -180,7 +198,7 @@ export class ColorComponent implements OnInit {
         if (this.claddings && this.claddings.length > 1) {
             if (this.selectedCladding !== "-1") {
                 this.utils.resFlowSession.resDoorObj.construction.cladding = this.claddings[+this.selectedCladding];
-               this.utils.resFlowSession.resDetails.color.claddingName = this.claddings[+this.selectedCladding].item_name;
+                this.utils.resFlowSession.resDetails.color.claddingName = this.claddings[+this.selectedCladding].item_name;
                 this.moveToPage();
             } else {
                 this.errorMsg = 'Please Select Cladding and Overlay';
