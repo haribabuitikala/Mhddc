@@ -669,6 +669,15 @@ table td {
 
     sendMail(email) {
         if (this.shareEmail) {
+             let EMAIL_REGEXP = /^[a-z0-9!#$%&'*+\/=?^_`{|}~.-]+@[a-z0-9]([a-z0-9-]*[a-z0-9])?(\.[a-z0-9]([a-z0-9-]*[a-z0-9])?)*$/i;
+            if (this.shareEmail == null || this.shareEmail == undefined) {
+                return;
+            }
+            else {
+                if (EMAIL_REGEXP.test(this.shareEmail) == false) {
+                    return;
+                }
+            }
             var imageUrl;
             var d = new Date();
             var timeStamp = d.getTime();

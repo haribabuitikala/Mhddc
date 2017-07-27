@@ -178,7 +178,7 @@
                         <span [innerHTML]="details.color.base.name"></span>
                     </span>
                 </li>
-                <li *ngIf="details.color.overlay.name">
+                <li *ngIf="details.color.overlay.name && details.collectionId == 11">
                     <span>
                         <strong>Overlay Color</strong>
                         <span [innerHTML]="details.color.overlay.name"></span>
