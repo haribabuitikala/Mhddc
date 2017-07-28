@@ -188,14 +188,14 @@ export class ConstructionComponent implements OnInit {
 
 
 
-arraymove(arr, fromIndex, toIndex) {
-    var element = arr[fromIndex];
-    arr.splice(fromIndex, 1);
-    arr.splice(toIndex, 0, element);
-    return arr;
-}
+    arraymove(arr, fromIndex, toIndex) {
+        var element = arr[fromIndex];
+        arr.splice(fromIndex, 1);
+        arr.splice(toIndex, 0, element);
+        return arr;
+    }
 
-    nextBtn(path, upsellModal) {
+    nextBtn(path, upsellModal?) {
         let coreAssortment = this.isCoreAssortment;
         if (this.utils.resFlowSession.resDoorObj.product.product['item_id'] == '11') {
             coreAssortment = false;
@@ -237,7 +237,7 @@ arraymove(arr, fromIndex, toIndex) {
 
     }
 
-    prevBtn() {
+    prevBtn(url?) {
         this.utils.resFlowSession.resDoorObj.resetFromStep(3);
         this.route.navigateByUrl('/config/design');
     }
@@ -247,7 +247,7 @@ arraymove(arr, fromIndex, toIndex) {
         this.route.navigateByUrl('config/color');
     }
 
-    getModelPriceUpsell(updata) {
+    getModelPriceUpsell(updata?) {
         var currentConstruction = this.utils.resFlowSession.resDoorObj.construction.construction;
         var filtermodel = window['cObj'].construction.apiData.filter(c => { return c.ClopayModelNumber == updata.upgrade_model; });
         if (filtermodel.length > 0) {
@@ -257,7 +257,7 @@ arraymove(arr, fromIndex, toIndex) {
         return 0;
     }
 
-    updateWithUpsellPrice(data) {     
+    updateWithUpsellPrice(data?) {     
         var filtermodel = window['cObj'].construction.apiData.filter(c => { return c.ClopayModelNumber == data.upgrade_model; });
         if (filtermodel.length > 0) {
             filtermodel = filtermodel[0];

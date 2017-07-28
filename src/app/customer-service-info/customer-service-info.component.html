@@ -86,7 +86,7 @@
                    #txtPhoneNumber_ServiceSite="ngModel" required  minlength="10" placeholder="" >
             <div [hidden]="txtPhoneNumber_ServiceSite.valid || (txtPhoneNumber_ServiceSite.pristine && !customerFormServiceSite.submitted)" class="text-danger">
                 Required
-                <span *ngIf="txtPhoneNumber_ServiceSite.errors?.minlength" class="text-danger">
+                <span *ngIf="txtPhoneNumber_ServiceSite.hasError('minlength')" class="text-danger">
                     Phone # must be 
                     10 digits (inc area code)
                 </span>
@@ -99,7 +99,7 @@
                    #txtSecondaryNumber_ServiceSite="ngModel" required placeholder="">
             <div [hidden]="txtSecondaryNumber_ServiceSite.valid || (txtSecondaryNumber_ServiceSite.pristine && !customerFormServiceSite.submitted)" class="text-danger">
                 Required  
-                <span *ngIf="txtSecondaryNumber_ServiceSite.errors?.minlength" class="text-danger">
+                <span *ngIf="txtSecondaryNumber_ServiceSite.hasError('minlength')" class="text-danger">
                     Phone # must be 
                     10 digits (inc area code)
                 </span>

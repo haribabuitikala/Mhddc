@@ -99,11 +99,11 @@ export class GlassTypeComponent implements OnInit {
     this.loaded = true;
   }
 
-  nextBtn() {
+  nextBtn(url?) {
     this.route.navigateByUrl('/config/hardware');
   }
 
-  prevBtn() {
+  prevBtn(url?) {
     this.resetPrice();
     this.route.navigateByUrl('/config/topSection');
   }

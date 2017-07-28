@@ -55,7 +55,12 @@ export class ShoppingCartComponent implements OnInit {
 
     ngOnInit() {
         this.navComp.activateIcon();
-        window.location.hash.indexOf('shopping') !== -1 ? $('.content').addClass('shoppingCart') : $('.content').removeClass('shoppingCart');
+        if (window.location.hash.indexOf('shopping') !== -1) {
+            $('.content').addClass('shoppingCart');
+        } else {
+            $('.content').removeClass('shoppingCart');
+        }
+
         this.utils.resFlowSession.resDoorObj.TYPE === 'GDO' ? this.resFlow = false : this.resFlow = true;
         this.pageNo = this.utils.utilities.currPage;
         this.appComp.currScreen = 0;
@@ -90,14 +95,6 @@ export class ShoppingCartComponent implements OnInit {
         }
     }
 
-    ngAfterViewInit() {
-        // if(this.resFlowSession.cart.length === 1) {
-        //     this.toggleSection(0);
-        // } else if(this.resFlowSession.cart.length > 1) {
-        //     this.toggleSection(this.resFlowSession.cart.length-1);
-        // }
-    }
-
     getTotalCartValue() {
         let k = 0;
         this.resFlowSession.cart.forEach(function (i) {
@@ -122,7 +119,7 @@ export class ShoppingCartComponent implements OnInit {
         this.route.navigateByUrl('/doorSize');
     }
 
-    removeItem(item, index?) {
+    removeItem(item?, index?) {
         this.utils.gdoFlowSession.added = false;
         if (this.resFlow) {
             this.resFlowSession.cart.splice(index, 1);
@@ -165,7 +162,7 @@ export class ShoppingCartComponent implements OnInit {
         this.getTotalCartValue();
     }
 
-    checkout(install, diy) {
+    checkout(install, diy?) {
         if (this.utils.utilities.flow == 'residentialNavElems') {
             // this.appComp.getCheckOut(this.itemPrice);
             // this.resShoppingCartTerms.open();
@@ -192,7 +189,7 @@ export class ShoppingCartComponent implements OnInit {
         this.appComp.getCheckOut(this.itemPrice);
     }
 
-    toggleSection(i) {
+    toggleSection(i?) {
         $('#section-body-' + i).toggleClass('in');
         $('#section-header-' + i).find('.fa').toggleClass('fa-chevron-up').toggleClass('fa-chevron-down');
     }

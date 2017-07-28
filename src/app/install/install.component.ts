@@ -797,7 +797,7 @@ export class InstallComponent implements OnInit, AfterViewInit, AfterViewChecked
     }
 
 
-    navigateToSize() {
+    navigateToSize(url?) {
         this.utils.resFlowSession.resDoorObj.resetsize();
         this.navigateTo('/doorSize');
     }

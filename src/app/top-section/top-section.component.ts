@@ -63,7 +63,9 @@ export class TopSectionComponent implements OnInit {
     this.navComponent.setNavFlow('res', '');
     var topsection = this.utils.resFlowSession.resDoorObj.windows.topsection;
     if (topsection && topsection['glasstypes']) {
-      if (topsection['glasstypes'][0].item_price <= 0 || topsection['Config'] == 'GLAZ-SOL' || topsection['glasstypes'][0]['Config'] == 'GLAZ-SOL') {
+      if (topsection['glasstypes'][0].item_price <= 0 || 
+        topsection['Config'] == 'GLAZ-SOL' || 
+        topsection['glasstypes'][0]['Config'] == 'GLAZ-SOL') {
         this.navComponent.setNavFlow('res', 'hideglass');
         this.route.navigateByUrl('/config/hardware');
       } else {
@@ -88,13 +90,13 @@ export class TopSectionComponent implements OnInit {
     }
   }
 
-  prevBtn() {
+  prevBtn(url?) {
     this.resetPrice();
     this.utils.resFlowSession.resDoorObj.resetFromStep(5);
     this.route.navigateByUrl('/config/color');
   }
 
-  nextPage() {
+  nextPage(url?) {
     if (this.utils.resFlowSession.resDoorObj.product.product['item_id'] == 13 ||
       this.utils.resFlowSession.resDoorObj.product.product['item_id'] == 14 ||
       this.utils.resFlowSession.resDoorObj.product.product['item_id'] == 24) {

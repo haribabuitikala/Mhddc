@@ -81,7 +81,7 @@
                    #txtPhoneNumber_SoldTo="ngModel" required  minlength="10" placeholder="" >
             <div [hidden]="txtPhoneNumber_SoldTo.valid || (txtPhoneNumber_SoldTo.pristine && !customerFormSoldTo.submitted)" class="text-danger">
                 Required
-                <span *ngIf="txtPhoneNumber_SoldTo.errors?.minlength" class="text-danger">
+                <span *ngIf="txtPhoneNumber_SoldTo.hasError('minlength')" class="text-danger">
                     Phone # must be 
                     10 digits (inc area code)
                 </span>
@@ -94,7 +94,7 @@
                    #txtSecondaryNumber_SoldTo="ngModel" required placeholder="">
             <div [hidden]="txtSecondaryNumber_SoldTo.valid || (txtSecondaryNumber_SoldTo.pristine && !customerFormSoldTo.submitted)" class="text-danger">
                 Required  
-                <span *ngIf="txtSecondaryNumber_SoldTo.errors?.minlength" class="text-danger">
+                <span *ngIf="txtSecondaryNumber_SoldTo.hasError('minlength')" class="text-danger">
                     Phone # must be 
                     10 digits (inc area code)
                 </span>

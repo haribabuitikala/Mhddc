@@ -41,7 +41,7 @@ export class HeaderComponent implements OnInit, AfterViewChecked {
         },
             err => {
                 this.dataService.handleError();
-            })
+            });
     }
 
     homePage(path) {
