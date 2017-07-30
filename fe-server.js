@@ -3,7 +3,7 @@ var static = require('node-static');
 module.exports = function (options) {
     fePort = options.fePort;
     folder = options.folder || 'app';
-    var file = new static.Server('./' + folder);
+    var file = new static.Server('./' + folder, { headers: { gzip: true }});
     var server = require('http').createServer((request, response) => {
         var body = [];
         if (request.url.indexOf('api') >= 0) {
@@ -21,14 +21,22 @@ module.exports = function (options) {
                 });
                 response.end(body);
             } else {
-                file.serve(request, response, function (err, res) {
-                    if (err && (err.status === 404) && request.url.indexOf('.html') < 0) {
-                        file.serveFile('/index.html', 200, {}, request, response);
-                    } else {
-                        response.writeHead(200, { 'content-type': 'text/html' });
-                        response.end('Resource Not Found');
-                    }
-                });
+                if (request.url.indexOf('.gz') >= 0) {
+                    console.log('serving from gzip', request.url);
+                    file.serveFile('/' + request.url, 200, {
+                        'Content-Encoding': 'gzip'
+                    }, request, response);
+                } else {
+                    file.serve(request, response, function (err, res) {
+                        if (err && (err.status === 404) && request.url.indexOf('.html') < 0) {
+                            file.serveFile('/index.html', 200, {}, request, response);
+                        } else {
+                            response.writeHead(200, { 'content-type': 'text/html' });
+                            response.end('Resource Not Found');
+                        }
+                    });
+                }
+           
             }
         }).resume();
     }).listen(fePort, () => {
