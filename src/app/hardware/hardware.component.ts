@@ -356,7 +356,7 @@ setProductID() {
         let utils = this.utils.utilities;
         var resDoorObj = this.utils.resFlowSession.resDoorObj;
         var selectedClopayModelNumber = resDoorObj.construction.construction['ClopayModelNumber'];
-        var modelBasedProductId = selectedClopayModelNumber;
+        var modelBasedProductId = resDoorObj.product.product['item_id'];;
         if (!resDoorObj.QPB) {
             if (selectedClopayModelNumber == "HDS" || selectedClopayModelNumber == "HDSL") {
                 modelBasedProductId = '14'
