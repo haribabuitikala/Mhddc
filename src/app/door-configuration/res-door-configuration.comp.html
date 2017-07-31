@@ -125,8 +125,9 @@
     </modal-header>
     <modal-body>
         <div class="flex space-around share-btn margin-b-20">
-            <share-button class="facebook fb-icon" [button]="facebookbtn" [url]='"http://homedepot.com/garagedoors"' [title]='"Check out my Clopay Garage Door design!"'
-                [image]='socialImageUrl' [description]="fbDescription"></share-button>
+            <span class="facebook fb-icon" class="btn btn-default" (click)="getshareFBLink()"><i class="fa fa-facebook"></i></span>
+            <!--<share-button class="facebook fb-icon" [button]="facebookbtn" [url]='"http://homedepot.com/garagedoors"' [title]='"Check out my Clopay Garage Door design!"'
+                [image]='socialImageUrl' [description]="fbDescription"></share-button>-->
             <share-button class="twitter twit-icon" [button]="twitterbtn" [url]='"http://homedepot.com/garagedoors"' [title]="twitterDescription"
                 [description]="twitterDescription"></share-button>
             <share-button class="pinterest pint-icon" [button]="pintbtn" [url]='"http://homedepot.com/garagedoors"' [image]='socialImageUrl'

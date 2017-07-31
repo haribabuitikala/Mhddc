@@ -66,7 +66,7 @@ export class ResDoorConfigurationComponent implements OnInit {
         , private navComponent: NavComponent
         , private dataStore: CollectionData
         , private dataService: CollectionService
-        , private config: ConfigComponent) {
+        , private config: ConfigComponent) {        
     }
 
     setNavComponent() {
@@ -669,15 +669,6 @@ table td {
 
     sendMail(email) {
         if (this.shareEmail) {
-             let EMAIL_REGEXP = /^[a-z0-9!#$%&'*+\/=?^_`{|}~.-]+@[a-z0-9]([a-z0-9-]*[a-z0-9])?(\.[a-z0-9]([a-z0-9-]*[a-z0-9])?)*$/i;
-            if (this.shareEmail == null || this.shareEmail == undefined) {
-                return;
-            }
-            else {
-                if (EMAIL_REGEXP.test(this.shareEmail) == false) {
-                    return;
-                }
-            }
             var imageUrl;
             var d = new Date();
             var timeStamp = d.getTime();
@@ -761,13 +752,13 @@ table td {
     prevBtn(path) {
         this.route.navigateByUrl('/config/additionalOptions');
     }
-
+    shareImageName = '';
     socialshare() {
         console.log("calling social share method");
         var imageUrl;
         var d = new Date();
         var timeStamp = d.getTime();
-
+        this.shareImageName = 'SocialShare-' + timeStamp; 
         let params = {
             base64String: this.doorWithHome,//this.utils.resFlow.imgSrc,
             imagename: 'SocialShare-' + timeStamp,
@@ -788,6 +779,26 @@ table td {
                 this.dataService.handleError();
             });
     }
-
+    
+    getshareFBLink(){
+       
+        let params = {
+            imagename : this.shareImageName,
+            imageurl: this.socialImageUrl,
+            imageformat: 'jpeg',
+            title: 'Check out my Clopay Garage Door design!',
+            base64String: '',
+            description: "Door shown is the Clopay " + this.utils.resFlowSession.resDetails.collectionName.replace(/[^a-zA-Z ]/g, "") + ", Model " + this.utils.resFlowSession.resDoorObj.construction.construction['ClopayModelNumber'] + ". Design your door today!"
+            
+        }
+        this.dataService.getFBShareLink(params)
+            .subscribe(
+            res => {
+               window.open('https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(res));
+            },
+            err => {
+                this.dataService.handleError();
+            });
+    }
 
 }
