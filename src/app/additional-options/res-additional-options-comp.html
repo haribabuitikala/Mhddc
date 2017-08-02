@@ -35,7 +35,7 @@
 <div class="content additional-options" id="resDiyFlow" *ngIf="installOrDiy=='DIY'">
 <!--    <h4 class="text-orange font-size-16">Additional Options</h4>-->
     <div *ngFor="let diyQuestions  of resDiyQuestions;let i = index; let first = first; let last = last">        
-        <dl [hidden]="first">
+        <dl>
             <dd>
                 <div class="question ">
                     <p [innerHTML]="diyQuestions.item_list_text"></p>
@@ -218,5 +218,16 @@
         <!--        <img src="../../assets/images/how_to_measure-drawing.png" class="img-rounded measure margin-r-10" alt=" "
         width="304"
         height="236">-->
+    </modal-body>
+</modal>
+
+<modal #resDiyReinforcement>
+    <modal-header [show-close]="true">
+    </modal-header>
+    <modal-body class="text-left padding10">
+               <div class="col-xs-12">
+            <img src="../../assets/images/additionalOptions/sumpop2.png" alt="" />
+        </div>
+      
     </modal-body>
 </modal>

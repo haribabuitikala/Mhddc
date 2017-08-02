@@ -31,6 +31,9 @@ export class ResAdditionalOptionsComponent implements OnInit {
     @ViewChild('resDiyHangerKit') resDiyHangerKit: ModalComponent;
     @ViewChild('resDiyReleaseKit') resDiyReleaseKit: ModalComponent;
     @ViewChild('resDiyBottomWeatherSeal') resDiyBottomWeatherSeal: ModalComponent;
+    @ViewChild('resDiyReinforcement') resDiyReinforcement: ModalComponent;
+
+    
 
     pageNo;
     showMenu;
@@ -93,6 +96,7 @@ export class ResAdditionalOptionsComponent implements OnInit {
     milesAway = true;
     conversionKit = true;
     emergencyKit = true;
+    showORB = false;
 
     t = _.sumBy(this.gdoOpenerSelected, function (o) {
         return o.price * o.count
@@ -164,17 +168,24 @@ export class ResAdditionalOptionsComponent implements OnInit {
             this.resAdditionalQuestions = res;
             this.resDiyQuestions = _.filter(this.resAdditionalQuestions, ['item_type', 'DIY']);
             this.resInstallQuestions = _.filter(this.resAdditionalQuestions, ['item_type', 'INSTALL']);
+            //ORB - Operator Reinforcement Bracket(additional Option)
+            let arrDonotShowORB = JSON.stringify(this.utils.allowMods);
+            let selectedModel = resDoorObj.construction.construction['ClopayModelNumber'];
+            this.showORB = arrDonotShowORB.indexOf(selectedModel) !== -1 ? true : false;
+            if (!this.showORB) {
+                //  this.resDiyQuestions
+                //  this.resDiyQuestions.splice(indexValueOfArray,1);
+                var data = $.grep(this.resDiyQuestions, function (e) {
+                    return e.item_id != 2;
+                });
 
+                this.resDiyQuestions = data;
+            }
             //console.log("one"+JSON.stringify(this.resDiyQuestions[2].Answers[1].vinyls));
             this.vinyls = _.uniqBy(this.resDiyQuestions[2].Answers[1].vinyls, function (o) {
                 return o.item_name;
             });
             this.selectedVinyl = this.vinyls[15];
-            //console.log('resDiyQuestions' + JSON.stringify(this.resDiyQuestions));
-            //            if (this.resInstallQuestions.item_id == 7 && this.resInstallQuestions.item_id == 5) {
-            //
-            //            }
-
             if (!this.utils.resFlowSession.resDetails.isDIY && this.utils.resFlowSession.resDoorObj.product.product['item_id'] !== 16) {
                 this.installQuestionsOptions(true, this.resInstallQuestions[0]);
                 this.appComponent.updatePrice();
@@ -233,7 +244,10 @@ export class ResAdditionalOptionsComponent implements OnInit {
             this.resDiyReleaseKit.open();
         } else if (diyQuestions.item_id == 12) {
             this.resDiyBottomWeatherSeal.open();
+        } else if(diyQuestions.item_id == 2){
+            this.resDiyReinforcement.open();
         }
+
     }
 
     installQuestionsOptions(itm, obj) {
@@ -280,10 +294,10 @@ export class ResAdditionalOptionsComponent implements OnInit {
             if (this.utils.resFlowSession.resDoorObj.INSTALLTYPE === 'DIY') {
                 if (this.defaultMiles < 31) {
                     return 0;
-                } else if (this.defaultMiles >= 31 && this.defaultMiles < 51) {
+                } else if (this.defaultMiles == 31) {
                     return 3;
-                } else if (this.defaultMiles > 50) {
-                    return 3 + (this.defaultMiles - 50) * 3;
+                } else if (this.defaultMiles > 31) {
+                    return ( 3 + ((this.defaultMiles - 31) * 3));
                 }
             }
             else {
@@ -349,6 +363,12 @@ export class ResAdditionalOptionsComponent implements OnInit {
         if (itm) {
             switch (obj.item_id) {
                 case 1:
+                case 2:
+                    k.price = 18;
+                    obj.item_list_text = n + '<span class="text-orange"> $' + k.price + '</span>?';
+                    this.removeItmOptions(obj.item_id);
+                    this.itmObj.items.push(k);
+                    break;
                 case 3:
                 case 4:
                 case 11:
@@ -364,6 +384,7 @@ export class ResAdditionalOptionsComponent implements OnInit {
         } else {
             switch (obj.item_id) {
                 case 1:
+                case 2:
                 case 3:
                 case 4:
                 case 11:
