@@ -13,7 +13,7 @@
             <p class="category-type residential-garrage text-center ">{{lang.categoryOne}}</p>
         </div>
     </div>
-    <div class="col-xs-6 padding-l-7">
+    <div class="col-xs-6 padding-l-7" *ngIf="isShowGDO">
         <div class="bg-white box-shadow" (click)="navigateTo('/doorSize','gdoNavElems',4)">
             <!--        routerLink="/doorSize"-->
             <div class="../../assets/image-sec text-center padding-t-10 ptn-rel">

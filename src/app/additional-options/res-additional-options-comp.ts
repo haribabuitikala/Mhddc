@@ -276,13 +276,26 @@ export class ResAdditionalOptionsComponent implements OnInit {
 
     calculateMilesPrice() {
         if (this.utils.resFlowSession.resDoorObj.TYPE === "RES") {
-            if (this.defaultMiles < 31) {
-                return 0;
-            } else if (this.defaultMiles >= 31 && this.defaultMiles < 51) {
-                return 51;
-            } else if (this.defaultMiles > 50) {
-                return 51 + (this.defaultMiles - 50) * 3;
+            //Bug ID : 5782
+            if (this.utils.resFlowSession.resDoorObj.INSTALLTYPE === 'DIY') {
+                if (this.defaultMiles < 31) {
+                    return 0;
+                } else if (this.defaultMiles >= 31 && this.defaultMiles < 51) {
+                    return 3;
+                } else if (this.defaultMiles > 50) {
+                    return 3 + (this.defaultMiles - 50) * 3;
+                }
             }
+            else {
+                if (this.defaultMiles < 31) {
+                    return 0;
+                } else if (this.defaultMiles >= 31 && this.defaultMiles < 51) {
+                    return 51;
+                } else if (this.defaultMiles > 50) {
+                    return 51 + (this.defaultMiles - 50) * 3;
+                }
+            }
+
         } else {
             if (this.defaultMiles < 31) {
                 return 0;
