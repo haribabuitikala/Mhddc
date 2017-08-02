@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, HostListener } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AppComponent } from "../app.component";
 import { AppUtilities } from "../shared/appUtilities";
@@ -34,7 +34,7 @@ export class ResAdditionalOptionsComponent implements OnInit {
     @ViewChild('resDiyReinforcement') resDiyReinforcement: ModalComponent;
 
     
-
+    showMiles = true;
     pageNo;
     showMenu;
     data;
@@ -143,6 +143,15 @@ export class ResAdditionalOptionsComponent implements OnInit {
     }
 
     ngOnInit() {
+        if(this.utils.resFlowSession.cart && this.utils.resFlowSession.cart.length > 0 ){
+            for (let m = 0; m < this.utils.resFlowSession.cart.length; m++) {
+             let moreThan32Miles = _.findIndex(this.utils.resFlowSession.cart[m].additionalOptions.items, { id: 5 });
+             if(moreThan32Miles !== -1 ){
+                 this.showMiles = false;
+                 break;
+             }
+            }
+        }
         this.utils.resFlowSession.resDoorObj.resetadditional();
         this.installOrDiy = this.utils.resFlowSession.resDetails.isDIY ? 'DIY' : 'Installed';
 
@@ -330,19 +339,6 @@ export class ResAdditionalOptionsComponent implements OnInit {
             return el.id != id;
         });
     }
-
-    @HostListener('document:keypress', ['$event'])
-    handleKeyboardEvent(event: KeyboardEvent) {
-        console.log(event);
-        const pattern = /[0-9\+\-\ ]/;
-        //let inputChar = String.fromCharCode(event.charCode);
-        let inputChar = event.key;
-        if (!pattern.test(inputChar)) {
-            event.preventDefault();
-            console.log('KeyDown!');
-        }
-    }
-
 
     diyQuestionsOptions(itm, obj, event?) {
         this.itmObj = this.utils.resFlowSession.resDoorObj.additional;
