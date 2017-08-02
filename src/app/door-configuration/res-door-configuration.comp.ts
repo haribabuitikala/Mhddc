@@ -801,4 +801,8 @@ table td {
             });
     }
 
+    getshareHouzz(){
+        window.open('https://www.houzz.com/imageClipperUpload?imageUrl=' + encodeURIComponent(this.socialImageUrl));
+    }
+
 }
