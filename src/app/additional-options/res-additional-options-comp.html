@@ -16,7 +16,7 @@
                     <img src="../../assets/images/MedallionUpgrades_warranties.png" alt="" />
                 </div>
                 <div class="flex space-between" *ngIf="installQuestions.item_id === 5 && showMiles">
-                    <div *ngIf="installQuestions.item_id === 5 && !installQuestions.Answers[0].isdefault && showMiles">
+                    <div *ngIf=" !installQuestions.Answers[0].isdefault">
                         <p id="distance text-orange">it's <input type="number" pattern="[0-9]*" inputmode="numeric" style="width: 32px;" [(ngModel)]="defaultMiles" (blur)="updatePrice()" name="defaultMiles" oncopy="return false" onpaste="return false"
                             /> miles away</p>
                     </div>
