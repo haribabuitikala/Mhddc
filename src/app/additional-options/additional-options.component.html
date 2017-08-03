@@ -123,7 +123,7 @@
             </dd>
             <dd>
                 <div class="clearfix">
-                    <div class="col-xs-10">Is this job site within 30 drive miles of this store?</div>
+                    <div class="col-xs-10">Is this job site within 30 drive miles of this store?2</div>
                     <div class="col-xs-2 padding-0">
                         <img (click)="gdoFlowMiles.open()" class="pull-right" alt="" height="25" src="../../assets/images/info.png">
                     </div>
@@ -141,7 +141,7 @@
                     <div>
                         Distance of job site is
                         <form class="inline-block">
-                            <input type="number" pattern="^[a-zA-Z0-9]+$" (keydown)="updateDistance($event,null)" name="gdoDistance" class="gdoDistance" [(ngModel)]="distance"
+                            <input type="number" pattern="^[a-zA-Z0-9]+$" (keyup)="updateDistance($event,null)" name="gdoDistance" class="gdoDistance" [(ngModel)]="distance"
                                 disabled/>
                         </form>
                         drive miles from store
