@@ -151,16 +151,16 @@ export class ResAdditionalOptionsComponent implements OnInit {
         this.setNavComponent();
         let resDoorObj = this.utils.resFlowSession.resDoorObj;
         let dataParams = {
-            "natmarketid": this.utils.utilities.natmarketid,
+            "NatMarketID": this.utils.utilities.natmarketid,
             "localmarketid": parseInt(this.utils.utilities.localmarketid),
             "productid": resDoorObj.product.product['item_id'],
-            "wf": this.utils.utilities.wf,
-            "wi": this.utils.utilities.wi,
-            "hf": this.utils.utilities.hf,
-            "hi": this.utils.utilities.hi,
-            "model": resDoorObj.construction.construction['ClopayModelNumber'],
+            "dwidthFt": this.utils.utilities.wf,
+            "dwidthIn": this.utils.utilities.wi,
+            "dheightFt": this.utils.utilities.hf,
+            "dheightIn": this.utils.utilities.hi,
+            "clopaymodelnumber": resDoorObj.construction.construction['ClopayModelNumber'],
             "dtype": _.upperCase(this.utils.utilities.dtype),
-            "store": this.utils.utilities.storenumber,
+            "storeNumber": this.utils.utilities.storenumber,
             "colorConfig": resDoorObj.color.base['colorconfig'],
             "lang": this.utils.utilities.lang
         }
@@ -364,7 +364,7 @@ export class ResAdditionalOptionsComponent implements OnInit {
             switch (obj.item_id) {
                 case 1:
                 case 2:
-                    k.price = 18;
+                    k.price = this.calculateORBPrice(obj);
                     obj.item_list_text = n + '<span class="text-orange"> $' + k.price + '</span>?';
                     this.removeItmOptions(obj.item_id);
                     this.itmObj.items.push(k);
@@ -393,12 +393,26 @@ export class ResAdditionalOptionsComponent implements OnInit {
                     this.removeItmOptions(obj.item_id);
                     break;
                 case 5:
+                    this.defaultMiles = 31;
                     k.price = this.calculateMilesPrice();
                     this.itmObj.items.push(k);
                     break;
             }
         }
         this.appComponent.updatePrice();
+    }
+
+    calculateORBPrice(obj)
+    {
+         var orbPrice=0;
+           var orbResult = obj.Answers[1].orbdata;
+        for (var orbCount = 0; orbCount < orbResult.length; orbCount++)
+        {
+	         var orbQuantity = Number(orbResult[orbCount].quantity);
+            orbPrice += (Number(orbResult[orbCount].item_price) * Number(orbQuantity));
+        }
+
+        return orbPrice;
     }
 
     selectedVinyls(vin, diyQuestion) {
