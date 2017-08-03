@@ -40,6 +40,7 @@ import { CustomerInfoComponent } from './customer-info/customer-info.component';
 import { CustomerServiceInfoComponent } from './customer-service-info/customer-service-info.component';
 import { CartDetailsRootComponent } from './cart-details/cart-details-root.component';
 import { Four04Component } from './Four04Component';
+import { OnlyNumber } from './shared/only-numbers.directive';
 
 import {ShareButtonsModule} from 'ngx-sharebuttons';
 @NgModule({
@@ -62,7 +63,8 @@ import {ShareButtonsModule} from 'ngx-sharebuttons';
         CustomerInfoComponent,
         CustomerServiceInfoComponent,
         CartDetailsRootComponent,
-        Four04Component 
+        Four04Component,
+        OnlyNumber 
     ],
     imports: [
         BrowserModule,

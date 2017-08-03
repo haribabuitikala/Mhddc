@@ -364,6 +364,10 @@ promoCalcluatedObject =
     //3703,2217,2207,6559
     //gdoCheck = ['66502', '2217', '77840', '6559', '66604', '2207', '3703'];
     gdoCheck = ['2217', '6559', '2207', '3703'];
+    //WO # 1147296
+    gdoshutStores = ['2831'];
+    //bug id: 5781
+     allowMods = ['GR4SV','GR4LV','GR4S','GR4L','GR5SV','GR5S','HDB','HDB4','HDBF','HDGS','HDSF','HDBL','HDSL'];
 
     calculateTotalPrice() {
 

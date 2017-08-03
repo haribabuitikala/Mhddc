@@ -104,7 +104,7 @@
                 <button type="submit" class="btn btn-default box-shadow text-orange margin-r-10 bold margin-b-10 text-uppercase" (click)="sendMail(email)">Send Email
                 </button>
             </div>
-            
+
             <div *ngIf="showEmailMsg" class="text-center">
                 {{emailMsg}}
             </div>
@@ -125,45 +125,16 @@
     </modal-header>
     <modal-body>
         <div class="flex space-around share-btn margin-b-20">
-            <share-button class="facebook fb-icon" [button]="facebookbtn" [url]='"http://homedepot.com/garagedoors"' [title]='"Check out my Clopay Garage Door design!"'
-                [image]='socialImageUrl' [description]="fbDescription"></share-button>
+            <span class="facebook fb-icon" (click)="getshareFBLink()"><i class="fa fa-facebook"></i></span>
             <share-button class="twitter twit-icon" [button]="twitterbtn" [url]='"http://homedepot.com/garagedoors"' [title]="twitterDescription"
                 [description]="twitterDescription"></share-button>
             <share-button class="pinterest pint-icon" [button]="pintbtn" [url]='"http://homedepot.com/garagedoors"' [image]='socialImageUrl'
                 [title]="description" [description]="description"></share-button>
         </div>
-        <a class="houzz-share-button" data-url="http://staging-mhddc.clopay.com/" data-hzid="47027" data-locale="en-GB" data-img="http://staging-mhddc.clopay.com"
-            data-title="HDDC" data-desc="HDDC
-" data-category="Baby & Children" data-showcount="1" href="https://www.houzz.co.uk">Houzz</a>
-        <!--<div class="a2a_kit a2a_kit_size_32 a2a_default_style">
-            <a class="a2a_dd" href="https://www.addtoany.com/share"></a>
-            <a class="a2a_button_facebook"></a>
-            <a class="a2a_button_twitter"></a>
-            <a class="a2a_button_google_plus"></a>
+        <div class="flex space-around share-btn margin-b-20">
+            <span style="padding:10px 20px; border:3px solid #7bc246; border-radius:60%" (click)="getshareHouzz()"><i class="fa fa-houzz fa-3x" style="color:#7BC246" aria-hidden="true"></i></span>
         </div>
-        <script async src="https://static.addtoany.com/menu/page.js"></script>-->
-        <!--<div class="flex space-around margin-b-20">
-            <button class="flex share-button">
-                <span class="instagram"><i class="fa fa-facebook"></i></span>
-            </button>
-            <button class="flex share-button">
-                <span class="instagram"><i class="fa fa-pintrest"></i></span>
-            </button>
-            <button class="flex share-button">
-                <span class="houzz"><i class="fa fa-google"></i></span>
-           </button>
-        </div>-->
-        <!--<div class="flex space-around">
-            <button class="flex share-button">
-                <span class="instagram"><i class="fa fa-twitter"></i></span>
-            </button>
-            <button class="flex share-button">
-                <span class="instagram"><i class="fa fa-instagram"></i></span>
-            </button>
-            <button class="flex share-button">
-                <span class="houzz"><i class="fa fa-houzz"></i></span>
-            </button>
-        </div>-->
+
     </modal-body>
 </modal>
 <modal #checkoutPopup>

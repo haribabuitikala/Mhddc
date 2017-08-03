@@ -1084,6 +1084,19 @@ export class CollectionService {
         });
     }
 
+    getFBShareLink(reqData){
+        return this.http.post(this.url + 'share', reqData).map(res => {
+            try {
+                console.log(res);
+                return res.json();
+            } catch (e) {
+                return {};
+            }
+        }).finally(() => {
+            //this.utils.removeLoader();
+        });
+    }
+
     handleError() {
         this.route.navigateByUrl('/**');
     }
