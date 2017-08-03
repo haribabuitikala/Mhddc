@@ -45,7 +45,7 @@ export class GdoDoorSizeComponent implements OnInit {
     }
 
     dataParams = {
-        hf: null,
+        dheightFt: null,
         lang: this.utils.utilities.lang,
         isGDO: this.utils.utilities.isGDO,
         localmarketid: this.utils.utilities.localmarketid,
@@ -60,7 +60,7 @@ export class GdoDoorSizeComponent implements OnInit {
             this.utils.utilities.clicked = 1;
             // this is for gdo shopping cart
             this.utils.gdoFlowSession.cart[0].size.height.hf = itm;
-            this.dataParams.hf = +itm;
+            this.dataParams.dheightFt = +itm;
 
             $('body').addClass('loader');
             this.dataService.getGdoOpener(this.dataParams)
