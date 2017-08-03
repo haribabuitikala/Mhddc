@@ -3,7 +3,11 @@
     <div *ngFor="let installQuestions  of resInstallQuestions ;let i = index; let first = first; let last = last">
         <dl [hidden]="last">
             <dd>
-                <div class="question">
+                <div class="question" *ngIf="installQuestions.item_id === 5 && showMiles">
+                    <p [innerHTML]="installQuestions.item_list_text"></p>
+                    <img (click)="installQuestionsPopup(installQuestions)" height="25" src="../../assets/images/info.png">
+                </div>
+                <div class="question" *ngIf="installQuestions.item_id !== 5">
                     <p [innerHTML]="installQuestions.item_list_text"></p>
                     <img (click)="installQuestionsPopup(installQuestions)" height="25" src="../../assets/images/info.png">
                 </div>
@@ -11,11 +15,22 @@
                     <img src="../../assets/images/Medallionlogo.png" alt="" />
                     <img src="../../assets/images/MedallionUpgrades_warranties.png" alt="" />
                 </div>
-                <div class="flex space-between">
-                    <div *ngIf="installQuestions.item_id === 5 && !installQuestions.Answers[0].isdefault">
+                <div class="flex space-between" *ngIf="installQuestions.item_id === 5 && showMiles">
+                    <div *ngIf=" !installQuestions.Answers[0].isdefault">
                         <p id="distance text-orange">it's <input type="number" pattern="[0-9]*" inputmode="numeric" style="width: 32px;" [(ngModel)]="defaultMiles" (blur)="updatePrice()" name="defaultMiles" oncopy="return false" onpaste="return false"
                             /> miles away</p>
                     </div>
+                    <span></span>
+                    <div class="flex-right">
+                        <div class="text-orange">Yes</div>
+                        <label class="switch">
+                            <input type="checkbox" [(ngModel)]="installQuestions.Answers[0].isdefault" (change)="installQuestionsOptions(installQuestions.Answers[0].isdefault,installQuestions)">
+                            <div class="slider round"></div>
+                        </label>
+                        <div class="text-orange">No</div>
+                    </div>
+                </div>  
+                <div class="flex space-between" *ngIf="installQuestions.item_id !== 5">
                     <span></span>
                     <div class="flex-right">
                         <div class="text-orange">Yes</div>

@@ -1,4 +1,5 @@
 import { Component, OnInit, OnChanges } from '@angular/core';
+import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { LangEnglishService } from "../shared/english";
 import { AppComponent } from "../app.component";
@@ -30,7 +31,7 @@ export class BannerComponent implements OnInit {
         , private navComponent: NavComponent
         , private utils: AppUtilities) {
     }
-    save(form, event) {
+    save(form: NgForm) {
         event.preventDefault();
         $('body').addClass('loader');
         let len = form.value.zip.length;
