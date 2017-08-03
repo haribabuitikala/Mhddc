@@ -33,7 +33,7 @@ export class ResAdditionalOptionsComponent implements OnInit {
     @ViewChild('resDiyBottomWeatherSeal') resDiyBottomWeatherSeal: ModalComponent;
     @ViewChild('resDiyReinforcement') resDiyReinforcement: ModalComponent;
 
-    
+
     showMiles = true;
     pageNo;
     showMenu;
@@ -143,13 +143,13 @@ export class ResAdditionalOptionsComponent implements OnInit {
     }
 
     ngOnInit() {
-        if(this.utils.resFlowSession.cart && this.utils.resFlowSession.cart.length > 0 ){
+        if (this.utils.resFlowSession.cart && this.utils.resFlowSession.cart.length > 0) {
             for (let m = 0; m < this.utils.resFlowSession.cart.length; m++) {
-             let moreThan32Miles = _.findIndex(this.utils.resFlowSession.cart[m].additionalOptions.items, { id: 5 });
-             if(moreThan32Miles !== -1 ){
-                 this.showMiles = false;
-                 break;
-             }
+                let moreThan32Miles = _.findIndex(this.utils.resFlowSession.cart[m].additionalOptions.items, { id: 5 });
+                if (moreThan32Miles !== -1) {
+                    this.showMiles = false;
+                    break;
+                }
             }
         }
         this.utils.resFlowSession.resDoorObj.resetadditional();
@@ -253,7 +253,7 @@ export class ResAdditionalOptionsComponent implements OnInit {
             this.resDiyReleaseKit.open();
         } else if (diyQuestions.item_id == 12) {
             this.resDiyBottomWeatherSeal.open();
-        } else if(diyQuestions.item_id == 2){
+        } else if (diyQuestions.item_id == 2) {
             this.resDiyReinforcement.open();
         }
 
@@ -306,7 +306,7 @@ export class ResAdditionalOptionsComponent implements OnInit {
                 } else if (this.defaultMiles == 31) {
                     return 3;
                 } else if (this.defaultMiles > 31) {
-                    return ( 3 + ((this.defaultMiles - 31) * 3));
+                    return (3 + ((this.defaultMiles - 31) * 3));
                 }
             }
             else {
@@ -398,14 +398,17 @@ export class ResAdditionalOptionsComponent implements OnInit {
         this.appComponent.updatePrice();
     }
 
-    calculateORBPrice(obj)
-    {
-         var orbPrice=0;
-           var orbResult = obj.Answers[1].orbdata;
-        for (var orbCount = 0; orbCount < orbResult.length; orbCount++)
-        {
-	         var orbQuantity = Number(orbResult[orbCount].quantity);
-            orbPrice += (Number(orbResult[orbCount].item_price) * Number(orbQuantity));
+    calculateORBPrice(obj) {
+        var orbPrice = 0;
+        var orbResult = obj.Answers[1].orbdata;
+        if (orbResult.length > 0) {
+            for (var orbCount = 0; orbCount < orbResult.length; orbCount++) {
+                var orbQuantity = Number(orbResult[orbCount].quantity);
+                orbPrice += (Number(orbResult[orbCount].item_price) * Number(orbQuantity));
+            }
+        }
+        else {
+            orbPrice = obj.Answers[1].item_price;
         }
 
         return orbPrice;
