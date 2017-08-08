@@ -575,13 +575,14 @@ export class ConfigComponent implements OnInit, AfterViewInit, AfterViewChecked 
         // var hgt;
         var detailshgt = $('.inner-router').height();
         var bodyWdt = $('body').width();
+        this.details.windowPlacement = ""
 
         this.details.widthF = this.utils.resFlow.wf;
         this.details.widthI = this.utils.resFlow.wi;
         this.details.heightF = this.utils.resFlow.hf;
         this.details.heightI = this.utils.resFlow.hi;
         this.details.collectionId = this.utils.resFlowSession.resDoorObj.product.product['item_id'];
-        if(this.utils.resFlowSession.resDoorObj.windows.placement.item_description){
+        if(this.utils.resFlowSession.resDoorObj.windows.placement && !!this.utils.resFlowSession.resDoorObj.windows.placement.item_description){
             this.details.windowPlacement = this.utils.resFlowSession.resDoorObj.windows.placement.item_description;
         }
         // switch (bodyWdt) {
