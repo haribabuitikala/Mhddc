@@ -59,7 +59,7 @@
                 <div class="flex space-between" *ngIf="diyQuestions.item_id === 5 && showMiles">
                     <div *ngIf=" !diyQuestions.Answers[0].isdefault">
                         <p id="distance text-orange">it's <input type="text" (keypress)="handleKeyboardEvent($event)" [(ngModel)]="defaultMiles" (blur)="updatePrice()" name="defaultMiles" oncopy="return false" onpaste="return false"
-                            /> miles away 2</p>
+                            /> miles away</p>
                     </div>                                    
                     <span></span>
                     <div class="flex-right">
