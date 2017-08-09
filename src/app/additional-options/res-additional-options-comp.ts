@@ -76,6 +76,7 @@ export class ResAdditionalOptionsComponent implements OnInit {
     doubleDropVal;
     itmObj;
     globalPrice = 0;
+    stopMods;
     selectedVinyl = {
         heightitem_price: 0,
         heightpartid: "",
@@ -177,6 +178,8 @@ export class ResAdditionalOptionsComponent implements OnInit {
             this.resAdditionalQuestions = res;
             this.resDiyQuestions = _.filter(this.resAdditionalQuestions, ['item_type', 'DIY']);
             this.resInstallQuestions = _.filter(this.resAdditionalQuestions, ['item_type', 'INSTALL']);
+            this.stopMods = _.filter(this.resAdditionalQuestions, ['item_id', 99]);
+            this.UpdateStopMods(this.stopMods[0], this.utils.resFlowSession.resDoorObj);
             //ORB - Operator Reinforcement Bracket(additional Option)
             let arrDonotShowORB = JSON.stringify(this.utils.allowMods);
             let selectedModel = resDoorObj.construction.construction['ClopayModelNumber'];
@@ -208,6 +211,20 @@ export class ResAdditionalOptionsComponent implements OnInit {
         if (this.installOrDiy == 'Installed') {
             this.showMedImg = true;
         }
+    }
+
+    UpdateStopMods(cs, cObj) {
+        $.each(cs.Answers[1].stopMolds, function (index, value) {
+            var sm = {
+                storeNumber: value.storeNumber,
+                partId: value.partId,
+                color: value.color,
+                dimension: value.dimension,
+                qty: value.qty
+            }
+
+            cObj.stopMold.items.push(sm)
+        });
     }
 
     nextBtn(path) {

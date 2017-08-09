@@ -189,6 +189,8 @@ export class ColorComponent implements OnInit {
             this.utils.resFlowSession.resDoorObj.construction.vinyl = this.vinylOptions[+this.selectedVinyl];
             this.utils.resFlowSession.resDoorObj.construction.groove = this.grooves[+this.selectedGroove];
         }
+        
+        this.utils.resFlowSession.resDoorObj.construction.cladding = this.claddings[0];
 
         if (resObj.product && resObj.product.product['item_id'] == 30 &&
             resObj.product.product['productline'] == 'speciality') {

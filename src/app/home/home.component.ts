@@ -43,7 +43,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
         });
 
         window['selectedHome'] = this.homes[0];
-        this.utils.resFlowSession.resDoorObj.resetsize();
+      //  this.utils.resFlowSession.resDoorObj.resetsize();
         //this.app.updatePrice();
     }
 
