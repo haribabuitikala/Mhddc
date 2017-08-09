@@ -52,15 +52,31 @@
     <div *ngFor="let diyQuestions  of resDiyQuestions;let i = index; let first = first; let last = last">        
         <dl>
             <dd>
-                <div class="question ">
+                <div class="question " *ngIf="diyQuestions.item_id === 5 && showMiles">
                     <p [innerHTML]="diyQuestions.item_list_text"></p>
                     <img (click)="diyQuestionsPopup(diyQuestions)" height="25" src="../../assets/images/info.png">
                 </div>
-                <div class="flex space-between">
-                    <div *ngIf="diyQuestions.item_id === 5 && !diyQuestions.Answers[0].isdefault">
+                <div class="flex space-between" *ngIf="diyQuestions.item_id === 5 && showMiles">
+                    <div *ngIf=" !diyQuestions.Answers[0].isdefault">
                         <p id="distance text-orange">it's <input type="text" (keypress)="handleKeyboardEvent($event)" [(ngModel)]="defaultMiles" (blur)="updatePrice()" name="defaultMiles" oncopy="return false" onpaste="return false"
                             /> miles away</p>
+                    </div>                                    
+                    <span></span>
+                    <div class="flex-right">
+                        <div class="text-orange">Yes</div>
+                        <label class="switch">
+                        <input type="checkbox" [(ngModel)]="diyQuestions.Answers[0].isdefault" (change)="diyQuestionsOptions(diyQuestions.Answers[0].isdefault,diyQuestions,$event)">
+                        <div class="slider round"></div>
+                    </label>
+                        <div class="text-orange">No</div>
                     </div>
+                </div> 
+
+                <div class="question " *ngIf="diyQuestions.item_id !== 5" >
+                    <p [innerHTML]="diyQuestions.item_list_text"></p>
+                    <img (click)="diyQuestionsPopup(diyQuestions)" height="25" src="../../assets/images/info.png">
+                </div>
+                <div class="flex space-between" *ngIf="diyQuestions.item_id !== 5">                    
                     <select [ngModel]="selectedVinyl" *ngIf="diyQuestions.item_id === 1 && diyQuestions.Answers[0].isdefault" (ngModelChange)="selectedVinyls($event, diyQuestions)">
                         <option *ngFor="let vin of vinyls"  [ngValue]="vin">{{vin.item_name}}</option>
                     </select>                    
