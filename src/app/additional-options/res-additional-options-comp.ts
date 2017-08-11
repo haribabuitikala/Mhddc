@@ -281,7 +281,9 @@ export class ResAdditionalOptionsComponent implements OnInit {
         let k = {
             id: obj.item_id,
             name: obj.item_name,
-            price: obj.Answers[1].item_price
+            price: obj.Answers[1].item_price,
+            objVal: obj,
+            selectedMiles: this.defaultMiles
         }
         let n = obj.item_list_text.split('<span class="text-orange">').join('').split('</span>').join('').replace('?', '').replace('$' + k.price, '').trim();
         if (itm) {
@@ -315,6 +317,12 @@ export class ResAdditionalOptionsComponent implements OnInit {
     }
 
     calculateMilesPrice() {
+         //this.stopMods = _.filter(this.resAdditionalQuestions, ['item_id', 99]);
+       var additionalMileage = _.filter(this.utils.resFlowSession.resDoorObj.additional.items, ['id',5]);
+       if(additionalMileage)
+       {
+           additionalMileage.selectedMiles = this.defaultMiles;
+       }
         if (this.utils.resFlowSession.resDoorObj.TYPE === "RES") {
             //Bug ID : 5782
             if (this.utils.resFlowSession.resDoorObj.INSTALLTYPE === 'DIY') {
@@ -362,7 +370,8 @@ export class ResAdditionalOptionsComponent implements OnInit {
         let k = {
             id: obj.item_id,
             name: obj.item_name,
-            price: obj.Answers[1].item_price
+            price: obj.Answers[1].item_price,
+            objVal: obj
         }
         if (obj.item_id === 1) {
             if (event) {
