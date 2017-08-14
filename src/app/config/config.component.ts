@@ -712,7 +712,7 @@ export class ConfigComponent implements OnInit, AfterViewInit, AfterViewChecked 
         let count = this.utils.resFlowSession.resDoorObj.QTY;
         if (isIncrement && count < 6) {
             this.utils.resFlowSession.resDoorObj.QTY = count + 1;
-        } else if (count > 1 && count !== 6) {
+        } else if (!isIncrement && count > 1) {
             this.utils.resFlowSession.resDoorObj.QTY = count - 1;
         }
         this.quantity = this.utils.resFlowSession.resDoorObj.QTY;
