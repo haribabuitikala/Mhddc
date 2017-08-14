@@ -476,7 +476,7 @@ export class ConfigComponent implements OnInit, AfterViewInit, AfterViewChecked 
                 buildObj.constructionswaprule = dor.construction.construction.constructionswaprule;
             }
 
-            if (dor.construction.cladding != '') {
+            if (dor.construction.cladding != '' && dor.construction.cladding != null) {
                 buildObj.constructionswaprule = dor.construction.cladding.imageswaprule;
             }
             try {
