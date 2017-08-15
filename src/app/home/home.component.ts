@@ -7,6 +7,7 @@ import { CollectionData } from "../collection/collection-data";
 import { ConfigComponent } from "../config/config.component";
 import { AppComponent } from "../app.component";
 declare var $: any;
+declare var _: any;
 @Component({
     selector: 'app-home',
     templateUrl: './home.component.html',
@@ -66,7 +67,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
         });
 
         window['selectedHome'] = this.homes[0];
-      //  this.utils.resFlowSession.resDoorObj.resetsize();
+        //  this.utils.resFlowSession.resDoorObj.resetsize();
         //this.app.updatePrice();
     }
 
@@ -133,11 +134,17 @@ export class HomeComponent implements OnInit, AfterViewInit {
                 const rect = $('.home-canvas-editor').offset();
                 const mX = evt.touches[0].clientX - rect.left,
                     mY = evt.touches[0].clientY - rect.top;
-                point.css('left', (mX - this.cornerWidth / 2));
-                point.css('top', (mY - this.cornerWidth / 2));
-                p.x = mX;
-                p.y = mY;
-                this.drawDoors();
+                const nX = (mX - this.cornerWidth / 2);
+                const nY = (mY - this.cornerWidth / 2);
+                if (nX > 0 && nX < (this.canvasState.width - this.cornerWidth) &&
+                    nY > 0 && nY < this.canvasState.height - this.cornerWidth) {
+                    point.css('left', nX);
+                    point.css('top', nY);
+                    p.x = mX;
+                    p.y = mY;
+                    this.drawDoors();
+                }
+
             }
             if (evt.preventDefault) {
                 evt.preventDefault();
@@ -246,7 +253,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
                 let x1 = p0.x + (25);
                 let y1 = p0.y - (25);
 
-                let p1 = door.points.filter((p) => { return p.pin === true;})[1];
+                let p1 = door.points.filter((p) => { return p.pin === true; })[1];
                 let x2 = p1.x - (25);
                 let y2 = p1.y - (25);
 
@@ -341,7 +348,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
             var lr = points.filter((p) => {
                 if (p.type === 2) {
                     return p.order === 4;
-                } else if(p.type === 3) {
+                } else if (p.type === 3) {
                     return p.order === 5;
                 } else {
                     return p.order === 3;
@@ -367,14 +374,27 @@ export class HomeComponent implements OnInit, AfterViewInit {
 
     moveDoor = (x, y) => {
         if (this.selectedDoor) {
-            this.selectedDoor.points.forEach((p) => {
-                var newX = parseInt(p.x) + x;
-                var newY = parseInt(p.y) + y;
-                p.x = newX;
-                p.y = newY;
-            });
+            const xMax = this.canvasState.width;
+            const yMax = this.canvasState.height;
+            let xPoints = [];
+            let yPoints = [];
+            xPoints = this.selectedDoor.points.reduce((a, b) => { return [].concat(a, b.x); }, []);
+            yPoints = this.selectedDoor.points.reduce((a, b) => { return [].concat(a, b.y); }, []);
+            const isLeftAllowed = (_.min(xPoints) + x) - (this.cornerWidth / 2) >= 0;
+            const isRightAllowed = (_.max(xPoints) + x) + (this.cornerWidth / 2) < xMax;
 
-            this.drawDoors(true);
+            const isTopAllowed = (_.min(yPoints) + y) - (this.cornerWidth / 2) >= 0;
+            const isBottomtAllowed = (_.max(yPoints) + y) + (this.cornerWidth / 2) < yMax;
+
+            if (isLeftAllowed && isRightAllowed && isTopAllowed && isBottomtAllowed) {
+                this.selectedDoor.points.forEach((p) => {
+                    var newX = parseInt(p.x) + x;
+                    var newY = parseInt(p.y) + y;
+                    p.x = newX;
+                    p.y = newY;
+                });
+                this.drawDoors(true);
+            }
         }
     }
 
@@ -427,7 +447,15 @@ export class HomeComponent implements OnInit, AfterViewInit {
                 if (window.innerWidth > window.innerHeight) {
                     img.width = window.innerHeight;
                 } else {
-                    img.width = window.innerWidth;
+                    // portrait
+                    if (img.height > img.width) {
+                        // image is portrait
+                        const occupiedHeight = $('.canvas-toolbar').height() + $('.logo-header').height() + 100;
+                        img.height = window.innerHeight - occupiedHeight;
+                        // img.height = window.innerWidth;
+                    } else {
+                        img.width = window.innerWidth;
+                    }
                 }
                 $('.home-canvas-editor').append(img);
 

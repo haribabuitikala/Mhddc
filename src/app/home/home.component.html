@@ -1,20 +1,18 @@
 <h4 class="font-size-16">{{pageNo}}.Choose Your Home</h4>
 <div class="clearfix">
     <div class="stock clearfix homeportrait">
-    <div class="col-xs-4 " *ngFor="let home of homes">
-        <img [ngStyle]="{'background-image': 'url(../../assets/images/buttons_por/btn'+home._btnimage+')'}" (click)="selectHome(home, $event)"
-        />
+        <div class="col-xs-4 " *ngFor="let home of homes">
+            <img [ngStyle]="{'background-image': 'url(../../assets/images/buttons_por/btn'+home._btnimage+')'}" (click)="selectHome(home, $event)" />
+        </div>
     </div>
-</div>
 
-<div class="stock clearfix homelandscape">
-    	
-	<div class="col-xs-4 " *ngFor="let home of homes">
-        <img [ngStyle]="{'background-image': 'url(../../assets/images/buttons_land/btn'+home._btnimage+')'}" (click)="selectHome(home, $event)"
-        />
+    <div class="stock clearfix homelandscape">
+
+        <div class="col-xs-4 " *ngFor="let home of homes">
+            <img [ngStyle]="{'background-image': 'url(../../assets/images/buttons_land/btn'+home._btnimage+')'}" (click)="selectHome(home, $event)" />
+        </div>
+
     </div>
-	
-</div>
 
 
 
@@ -60,16 +58,18 @@
     <modal-body class="home-modal">
         <div class="home-canvas-editor" style="position: relative;">
         </div>
-        <div class="text-center margin-t-15">
-            <button class="btn btn-default" (click)="setDoorType(1)"> Rect </button>
-            <button class="btn btn-default" (click)="setDoorType(2)"> Arch </button>
-            <button class="btn btn-default" (click)="setDoorType(3)"> Angle </button>
-        </div>
-        <div class="text-center margin-t-15">
-            <button class="btn btn-default" [ngClass]="{'hidden' : doors.length > 6}" (click)="addDoor(1)">Add Door</button>
-            <button class="btn btn-danger" [ngClass]="{'hidden': doors.length < 2}"  (click)="removeDoor()">Remove Door</button>
-            <button class="btn btn-primary" (click)="setSelectedHome(homeImageModal, true, currScreen)"> Finished </button>
-            <button class="btn btn-danger" (click)="setSelectedHome(homeImageModal, fasle, currScreen)"> Cancel </button>
+        <div class="canvas-toolbar">
+            <div class="text-center margin-t-15">
+                <button class="btn btn-default" (click)="setDoorType(1)"> Rect </button>
+                <button class="btn btn-default" (click)="setDoorType(2)"> Arch </button>
+                <button class="btn btn-default" (click)="setDoorType(3)"> Angle </button>
+            </div>
+            <div class="text-center margin-t-15">
+                <button class="btn btn-default" [ngClass]="{'hidden' : doors.length > 6}" (click)="addDoor(1)">Add Door</button>
+                <button class="btn btn-danger" [ngClass]="{'hidden': doors.length < 2}" (click)="removeDoor()">Remove Door</button>
+                <button class="btn btn-primary" (click)="setSelectedHome(homeImageModal, true, currScreen)"> Finished </button>
+                <button class="btn btn-danger" (click)="setSelectedHome(homeImageModal, fasle, currScreen)"> Cancel </button>
+            </div>
         </div>
     </modal-body>
 </modal>
