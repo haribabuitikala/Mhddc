@@ -783,7 +783,7 @@ function writeItem(orderType) {
                                     {
                                         var useranswer = value.objVal.Answers[1];
                                         if (useranswer != '' && value.selectedMiles > 30) {                                           
-                                            var tn ;
+                                            var tn = '';
                                             if (value.selectedMiles < 31) {
                                                 tn +=  '0-30';
                                             } else if (value.selectedMiles >= 31 && value.selectedMiles < 51) {
@@ -1050,10 +1050,10 @@ function writeHeader(subTotal, taxRate, estimatedTax, grandTotal, orderType, ord
     }
     _orderHeader = "\t" + "<ORDER_HEADER>" + _newLine;
     _orderHeader += "\t\t" + "<INSTALLED>" + orderType + "</INSTALLED>" + _newLine;
-    _orderHeader += "\t\t" + "<SUBTOTAL>" + subTotal + "</SUBTOTAL>" + _newLine;
+    _orderHeader += "\t\t" + "<SUBTOTAL>" + subTotal.toFixed(2).toString() + "</SUBTOTAL>" + _newLine;
     _orderHeader += "\t\t" + "<TAXRATE>" + taxRate + "</TAXRATE>" + _newLine;
     _orderHeader += "\t\t" + "<ESTIMATEDTAX>" + estimatedTax + "</ESTIMATEDTAX>" + _newLine;
-    _orderHeader += "\t\t" + "<TOTAL>" + grandTotal + "</TOTAL>" + _newLine;
+    _orderHeader += "\t\t" + "<TOTAL>" + grandTotal.toFixed(2).toString() + "</TOTAL>" + _newLine;
     _orderHeader += "\t\t" + "<MARKETID>" + mid + "</MARKETID>" + _newLine;
     // Order Header - Store Info
     _orderHeader += "\t\t" + "<STORE_DETAILS>" + _newLine;
