@@ -196,7 +196,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
         this.doors.forEach((d) => {
             this.drawDoor(d, ctx);
         });
-
+        
         if (this.selectedDoor && updateCorners) {
             this.drawCorners(this.selectedDoor);
         }
@@ -298,33 +298,50 @@ export class HomeComponent implements OnInit, AfterViewInit {
         }
 
     }
+
     addDoor = (n?) => {
+        var $that = this;
+        let positionOfDoor = {
+            x: $that.cornerWidth,
+            y: $that.cornerWidth
+        };
+
+        let maxWidth = $that.canvasState.width - ($that.cornerWidth);
+        let widthOfDoorAllowed = positionOfDoor.x + 200;
+        if (positionOfDoor.x + 200 > $that.canvasState.width) {
+            widthOfDoorAllowed = $that.canvasState.width - ($that.cornerWidth / 2);
+        }
+
+        let maxHeightAllowed = $that.canvasState.height - ($that.cornerWidth / 2);
+        let heightOfDoorAllowed = widthOfDoorAllowed > maxHeightAllowed ? maxHeightAllowed : widthOfDoorAllowed;
+        
+
         const door = {
             id: this.doors.length,
             selected: true,
             zindex: 1,
             type: 1,
             points: [{
-                x: 100,
-                y: 100,
+                x: positionOfDoor.x,
+                y: positionOfDoor.y,
                 order: 1,
                 type: 1,
                 pin: true
             }, {
-                x: 200,
-                y: 100,
+                x: widthOfDoorAllowed - positionOfDoor.x,
+                y: positionOfDoor.y,
                 order: 2,
                 type: 1,
                 pin: true
             }, {
-                x: 200,
-                y: 200,
+                x: widthOfDoorAllowed - positionOfDoor.x,
+                y: heightOfDoorAllowed - positionOfDoor.y,
                 order: 3,
                 type: 1,
                 pin: true
             }, {
-                x: 100,
-                y: 200,
+                x: positionOfDoor.x,
+                y: heightOfDoorAllowed - positionOfDoor.y,
                 order: 4,
                 type: 1,
                 pin: true
@@ -451,8 +468,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
                     if (img.height > img.width) {
                         // image is portrait
                         const occupiedHeight = $('.canvas-toolbar').height() + $('.logo-header').height() + 100;
-                        img.height = window.innerHeight - occupiedHeight;
-                        // img.height = window.innerWidth;
+                        img.height = window.innerWidth;
                     } else {
                         img.width = window.innerWidth;
                     }
@@ -462,7 +478,21 @@ export class HomeComponent implements OnInit, AfterViewInit {
                 const imgstyles = getComputedStyle(img, 'false');
                 $that.canvasState.width = parseInt(imgstyles.width);
                 $that.canvasState.height = parseInt(imgstyles.height);
+                // It should be placed one place to add door
+                let positionOfDoor = {
+                    x: $that.cornerWidth,
+                    y: $that.cornerWidth
+                };
 
+                let maxWidth = $that.canvasState.width - ($that.cornerWidth);
+                let widthOfDoorAllowed = positionOfDoor.x + 200;
+                if (positionOfDoor.x + 200 > $that.canvasState.width) {
+                    widthOfDoorAllowed = $that.canvasState.width - ($that.cornerWidth / 2);
+                }
+
+                let maxHeightAllowed = $that.canvasState.height - ($that.cornerWidth / 2);
+                let heightOfDoorAllowed = widthOfDoorAllowed > maxHeightAllowed ? maxHeightAllowed : widthOfDoorAllowed;
+                
                 $that.doors = [];
                 const door = {
                     id: $that.doors.length,
@@ -470,26 +500,26 @@ export class HomeComponent implements OnInit, AfterViewInit {
                     zindex: 1,
                     type: 1,
                     points: [{
-                        x: 100,
-                        y: 100,
+                        x: positionOfDoor.x,
+                        y: positionOfDoor.y,
                         order: 1,
                         type: 1,
                         pin: true
                     }, {
-                        x: 200,
-                        y: 100,
+                        x: widthOfDoorAllowed - positionOfDoor.x,
+                        y: positionOfDoor.y,
                         order: 2,
                         type: 1,
                         pin: true
                     }, {
-                        x: 200,
-                        y: 200,
+                        x: widthOfDoorAllowed - positionOfDoor.x,
+                        y: heightOfDoorAllowed - positionOfDoor.y,
                         order: 3,
                         type: 1,
                         pin: true
                     }, {
-                        x: 100,
-                        y: 200,
+                        x: positionOfDoor.x,
+                        y: heightOfDoorAllowed - positionOfDoor.y,
                         order: 4,
                         type: 1,
                         pin: true
