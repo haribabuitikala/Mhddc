@@ -453,6 +453,10 @@ export class HomeComponent implements OnInit, AfterViewInit {
         });
         $('.home-canvas-editor').append(maskLayer);
     }
+
+    setattr (elem, attr?) {
+        elem[attr] = 'auto';
+    }
     handleImage(e) {
         $('.home-canvas-editor').html('');
         var reader = new FileReader();
@@ -460,6 +464,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
         $that.uploadSelectedHome.imgSrc = '';
         reader.onload = function (event) {
             var img = new Image();
+            const occupiedHeight = $('.canvas-toolbar').height() + $('.logo-header').height() + 100;
             img.onload = function () {
                 if (window.innerWidth > window.innerHeight) {
                     img.width = window.innerHeight;
@@ -467,7 +472,6 @@ export class HomeComponent implements OnInit, AfterViewInit {
                     // portrait
                     if (img.height > img.width) {
                         // image is portrait
-                        const occupiedHeight = $('.canvas-toolbar').height() + $('.logo-header').height() + 100;
                         img.height = window.innerWidth;
                     } else {
                         img.width = window.innerWidth;
@@ -475,9 +479,21 @@ export class HomeComponent implements OnInit, AfterViewInit {
                 }
                 $('.home-canvas-editor').append(img);
 
-                const imgstyles = getComputedStyle(img, 'false');
+                let imgstyles = getComputedStyle(img, 'false');
                 $that.canvasState.width = parseInt(imgstyles.width);
                 $that.canvasState.height = parseInt(imgstyles.height);
+ 
+                if ($that.canvasState.height > (window.innerHeight -  occupiedHeight)) {
+                    $('.home-canvas-editor').find('img').remove();
+                    img.height = (window.innerHeight - occupiedHeight);
+                    $that.setattr(img, 'width');
+                    img.style.width = 'inherit';
+                    $('.home-canvas-editor').append(img);
+                    imgstyles = getComputedStyle(img, 'false');
+                    $that.canvasState.width = parseInt(imgstyles.width);
+                    $that.canvasState.height = parseInt(imgstyles.height);
+
+                }
                 // It should be placed one place to add door
                 let positionOfDoor = {
                     x: $that.cornerWidth,
