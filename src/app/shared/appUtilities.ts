@@ -13,7 +13,7 @@ export class AppUtilities {
         $('body').removeClass('loader');
     }
 
-promoCalcluatedObject =
+    promoCalcluatedObject =
     {
         modelprice: 0,
         colorprice: 0,
@@ -26,7 +26,7 @@ promoCalcluatedObject =
         hinge_ins: 0,
         hinge_diy: 0,
         lockprice: 0
-        
+
     };
 
     //Promo response params
@@ -146,7 +146,7 @@ promoCalcluatedObject =
         hingePrice: 0,
         showGDoEmail: false,
         isPromoEnabled: false,
-        promoSaving : 0    
+        promoSaving: 0
         // flow of GDO: Home, Size , Openers, Order Details, Shopping Cart
     };
 
@@ -353,7 +353,7 @@ promoCalcluatedObject =
     gdoUserAnswers = [
         { "SubAnswers": [{ "answerid": null, "config": "0", "isdefault": false, "item_id": 1, "item_name": "1", "item_price": 0, "partofdoor": false }, { "answerid": null, "config": "0", "isdefault": false, "item_id": 2, "item_name": "2", "item_price": 0, "partofdoor": false }, { "answerid": null, "config": "0", "isdefault": false, "item_id": 3, "item_name": "3", "item_price": 0, "partofdoor": false }], "answerid": null, "config": "GDOI17", "isdefault": false, "item_id": 1, "item_name": "no", "item_price": 50, "partofdoor": false, "tag": "no", "QTY": 1, "qty": 1 },
         { "SubAnswers": [{ "answerid": null, "config": "0", "isdefault": false, "item_id": 1, "item_name": "1", "item_price": 0, "partofdoor": false }, { "answerid": null, "config": "0", "isdefault": false, "item_id": 2, "item_name": "2", "item_price": 0, "partofdoor": false }, { "answerid": null, "config": "0", "isdefault": false, "item_id": 3, "item_name": "3", "item_price": 0, "partofdoor": false }], "answerid": null, "config": "GDOI18", "isdefault": false, "item_id": 1, "item_name": "no", "item_price": 65, "partofdoor": false, "tag": "no", "QTY": 1, "qty": 1 },
-        {"qty":1,"QTY":1,"item_price":2.5,"fir":[{"answerid":null,"config":"xxxmil","isdefault":false,"item_id":1,"item_name":"31TO50","item_price":2.5,"partofdoor":false,"QTY":1}],"item_id":5}
+        { "qty": 1, "QTY": 1, "item_price": 2.5, "fir": [{ "answerid": null, "config": "xxxmil", "isdefault": false, "item_id": 1, "item_name": "31TO50", "item_price": 2.5, "partofdoor": false, "QTY": 1 }], "item_id": 5 }
     ]
 
     setUtils(curr, clicked) {
@@ -367,7 +367,7 @@ promoCalcluatedObject =
     //WO # 1147296
     gdoshutStores = ['2831'];
     //bug id: 5781
-     allowMods = ['GR4SV','GR4LV','GR4S','GR4L','GR5SV','GR5S','HDB','HDB4','HDBF','HDGS','HDSF','HDBL','HDSL'];
+    allowMods = ['GR4SV', 'GR4LV', 'GR4S', 'GR4L', 'GR5SV', 'GR5S', 'HDB', 'HDB4', 'HDBF', 'HDGS', 'HDSF', 'HDBL', 'HDSL'];
 
     calculateTotalPrice() {
 
@@ -446,9 +446,9 @@ promoCalcluatedObject =
     clearResFlow() {
 
     }
- //promotions
+    //promotions
     promoObject = {
-        promotionid : 0,
+        promotionid: 0,
         promotiontype: '',
         startdate: '',
         enddate: '',
@@ -461,11 +461,11 @@ promoCalcluatedObject =
         consumerHeroImage: '',
         dogEarsImageDouble: '',
         dogEarsImageSingle: '',
-        typeOfPromo : '',
-        isDogEars:false,
+        typeOfPromo: '',
+        isDogEars: false,
         isHeroGraphic: false,
         isFreeWindows: false
-      
+
     }
 
 }
@@ -543,7 +543,7 @@ export class ResidentialFlowSession {
                 install_price: 0,
                 discountPrice_install: 0,
                 diy_price: 0,
-                discountPrice_diy: 0,              
+                discountPrice_diy: 0,
                 qty: 0
             },
             stepPlate: {
@@ -560,7 +560,8 @@ export class ResidentialFlowSession {
                 discountPrice_install: 0,
                 diy_price: 0,
                 discountPrice_diy: 0,
-                qty: 0
+                qty: 0,
+                xmlqty: 0
             },
             lock: {
                 name: '',
@@ -709,8 +710,8 @@ export class ResidentialFlowSession {
                 qty: 0,
                 laborcost: 0,
                 modelNumber: '',
-                 displayModelNumber: '',
-                 discountPrice: 0
+                displayModelNumber: '',
+                discountPrice: 0
             };
             this.resDoorObj['reset' + this.resDoorObj['resetorder'][4]]();
         },
@@ -771,26 +772,27 @@ export class ResidentialFlowSession {
                 handle: {
                     name: '',
                     install_price: 0,
-                     discountPrice_install: 0,
+                    discountPrice_install: 0,
                     diy_price: 0,
-                     discountPrice_diy: 0,
+                    discountPrice_diy: 0,
                     qty: 0
                 },
                 stepPlate: {
                     name: '',
                     install_price: 0,
-                      discountPrice_install: 0,
+                    discountPrice_install: 0,
                     diy_price: 0,
-                       discountPrice_diy: 0,
+                    discountPrice_diy: 0,
                     qty: 0
                 },
                 hinge: {
                     name: '',
                     install_price: 0,
-                      discountPrice_install: 0,
+                    discountPrice_install: 0,
                     diy_price: 0,
-                       discountPrice_diy: 0,
-                    qty: 0
+                    discountPrice_diy: 0,
+                    qty: 0,
+                    xmlqty: 0
                 },
                 lock: {
                     name: '',
@@ -884,7 +886,7 @@ export class ResidentialFlowSession {
                     if (!dc) {
                         dc = obj.design.dsgn['constructions'][0];
                     }
-                   //promo
+                    //promo
                     let itemPromoPrice = 0;
                     if (dc['item_price'] && dc['item_price'] > 0) {
                         itemPromoPrice = this.GetPromoPricePerItem("models", dc['item_price']);
@@ -893,7 +895,7 @@ export class ResidentialFlowSession {
                     price[1] = price[1] + ((itemPromoPrice > 0 ? itemPromoPrice : dc['item_price'])) * count;
 
                     this.resDetails.construction.name = dc['item_name'];
-                  this.resDetails.construction.price = (itemPromoPrice > 0 ? itemPromoPrice : dc['item_price']);;
+                    this.resDetails.construction.price = (itemPromoPrice > 0 ? itemPromoPrice : dc['item_price']);;
                     this.resDetails.construction.discountPrice = dc['item_price'];
                     this.resDetails.construction.qty = count;
                     this.resDetails.construction.laborcost = dc['laborcodeprice'];
@@ -901,7 +903,7 @@ export class ResidentialFlowSession {
                     this.resDetails.construction.displayModelNumber = dc['DisplayModelNumber'];
                 } else {
                     let dc = obj.construction['construction'];
-                   //promo
+                    //promo
                     let itemPromoPrice = 0;
                     if (dc['item_price'] && dc['item_price'] > 0) {
                         itemPromoPrice = this.GetPromoPricePerItem("models", dc['item_price']);
@@ -938,12 +940,12 @@ export class ResidentialFlowSession {
 
                         itemPromoPrice = this.GetPromoPricePerItem("coloradders", bc['item_price']);
                     }
-                    price[0] = price[0] + ((itemPromoPrice > 0 ? itemPromoPrice : bc['item_price'])) * count; 
-                    price[1] = price[1] + ((itemPromoPrice > 0 ? itemPromoPrice : bc['item_price'])) * count; 
+                    price[0] = price[0] + ((itemPromoPrice > 0 ? itemPromoPrice : bc['item_price'])) * count;
+                    price[1] = price[1] + ((itemPromoPrice > 0 ? itemPromoPrice : bc['item_price'])) * count;
 
 
                     this.resDetails.color.base.name = bc['item_name'];
-                   this.resDetails.color.base.price = ((itemPromoPrice > 0 ? itemPromoPrice : bc['item_price']));
+                    this.resDetails.color.base.price = ((itemPromoPrice > 0 ? itemPromoPrice : bc['item_price']));
                     this.resDetails.color.base.discountPrice = bc['item_price'];
                     this.resDetails.color.base.qty = count;
                 }
@@ -955,7 +957,7 @@ export class ResidentialFlowSession {
                 // Calculate price for Top Section and Glasstype
                 let tsgt = obj.windows.glasstype;
                 if (tsgt && tsgt.hasOwnProperty('item_price')) {
-                   let itemPromoPrice = 0;
+                    let itemPromoPrice = 0;
                     if (tsgt['item_price'] && tsgt['item_price'] > 0) {
                         itemPromoPrice = this.GetPromoPricePerItem("windows", tsgt['item_price']);
                     }
@@ -965,7 +967,7 @@ export class ResidentialFlowSession {
 
                     this.resDetails.topSection.name = obj.windows.topsection['item_name'];
                     this.resDetails.topSection.glassType.name = tsgt['item_name'];
-                  this.resDetails.topSection.glassType.price = ((itemPromoPrice > 0 ? itemPromoPrice : tsgt['item_price']));
+                    this.resDetails.topSection.glassType.price = ((itemPromoPrice > 0 ? itemPromoPrice : tsgt['item_price']));
                     this.resDetails.topSection.glassType.discountPrice = tsgt['item_price'];
                     this.resDetails.topSection.glassType.qty = count;
                 }
@@ -1006,7 +1008,7 @@ export class ResidentialFlowSession {
                 // c.Calculate price for Hinges
                 let hhi = obj.hardware.hinge;
                 if (hhi && hhi.hasOwnProperty('item_installed_price')) {
-                   let itemInsPromoPrice = 0, itemDiyPromoPrice = 0;
+                    let itemInsPromoPrice = 0, itemDiyPromoPrice = 0;
                     if (hhi['item_installed_price'] && hhi['item_installed_price'] > 0) {
                         itemInsPromoPrice = this.GetPromoPricePerItem("hinge_ins", hhi['item_installed_price']);
                     }
@@ -1014,12 +1016,18 @@ export class ResidentialFlowSession {
                     if (hhi['item_price'] && hhi['item_price'] > 0) {
                         itemDiyPromoPrice = this.GetPromoPricePerItem("hinge_diy", hhi['item_price']);
                     }
-                    price[0] = price[0] + ((itemInsPromoPrice > 0 ? itemInsPromoPrice : hhi['item_installed_price'])) * hhi['count'] * count;
-                    price[1] = price[1] + ((itemInsPromoPrice > 0 ? itemInsPromoPrice : hhi['item_price'])) * hhi['count'] * count;
+                     var hingeQty = 0;
+                     hingeQty = this.checkForDoubleHinge(hhi);
+                    var hingeDIY = 0;
+                    var hingeIns = 0;
+                    hingeDIY = ((itemInsPromoPrice > 0 ? itemInsPromoPrice : hhi['item_price'])) * hingeQty;
+                    hingeIns = ((itemInsPromoPrice > 0 ? itemInsPromoPrice : hhi['item_installed_price'])) * hingeQty;
+                    price[0] = price[0] + hingeIns * count;
+                    price[1] = price[1] + hingeDIY * count;
 
                     this.utils.resFlowSession.resDetails.hardware.hinge.name = hhi['item_name'];
-                    this.utils.resFlowSession.resDetails.hardware.hinge.install_price = hhi['item_installed_price'];
-                    this.utils.resFlowSession.resDetails.hardware.hinge.diy_price = hhi['item_price'];
+                    this.utils.resFlowSession.resDetails.hardware.hinge.install_price = hhi['item_installed_price'] * hingeQty;
+                    this.utils.resFlowSession.resDetails.hardware.hinge.diy_price = hhi['item_price'] * hingeQty;
                     this.utils.resFlowSession.resDetails.hardware.hinge.discountPrice_install = itemInsPromoPrice;
                     this.utils.resFlowSession.resDetails.hardware.hinge.discountPrice_diy = itemDiyPromoPrice;
                     this.utils.resFlowSession.resDetails.hardware.hinge.qty = hhi['count'];
@@ -1027,7 +1035,7 @@ export class ResidentialFlowSession {
                 // d.Calculate price for Locks
                 let locksItem = obj.hardware.lock;
                 if (locksItem && locksItem.hasOwnProperty('item_installed_price')) {
-                  let itemPromoPrice = 0;
+                    let itemPromoPrice = 0;
                     if (locksItem['item_installed_price'] && locksItem['item_installed_price'] > 0) {
 
                         itemPromoPrice = this.GetPromoPricePerItem("lock", locksItem['item_installed_price']);
@@ -1122,9 +1130,23 @@ export class ResidentialFlowSession {
         }
     }
 
+    checkForDoubleHinge(selHinge) {
+        var hingeQty = selHinge['count'];
+        var makeHingeDouble = false;
+        let DoubleQtyHinge = ['0123191', '0123202', '0123104'];
+        let arrDonotShowORB = JSON.stringify(DoubleQtyHinge);
+        makeHingeDouble = arrDonotShowORB.indexOf(selHinge['Config']) !== -1 ? true : false;
+
+        if (makeHingeDouble) {
+            hingeQty = hingeQty * 2;
+        }
+        return hingeQty;
+    };
+
     resCalculateCartItemPrice(item) {
         let price;
         let count = item.construction.qty;
+        this.utils.resFlowSession.resDoorObj.QTY = count;
         item.totalPrice = 0;
         try {
             // Calculate Door price
@@ -1165,14 +1187,14 @@ export class ResidentialFlowSession {
             }
 
             //Calculate price for locks
-            if(item.hardware.lock && item.hardware.lock.price) {
+            if (item.hardware.lock && item.hardware.lock.price) {
                 item.totalPrice = item.totalPrice + item.hardware.lock.price * count;
                 item.hardware.lock.qty = count;
             }
 
             // Calculate EPA price
             if (item.isEPA) {
-                item.totalPrice = item.totalPrice + 20 ;
+                item.totalPrice = item.totalPrice + 20;
             }
 
             // Calculate Additional Options price
@@ -1205,8 +1227,8 @@ export class ResidentialFlowSession {
         return item;
     };
 
-      resCalculateCartItemPrice_Base(item) {
-      
+    resCalculateCartItemPrice_Base(item) {
+
         let count = item.construction.qty;
         let basePrice = 0;
         try {
@@ -1235,14 +1257,14 @@ export class ResidentialFlowSession {
                 // a. Calculate Handle price
                 basePrice = basePrice + item.hardware.handle.discountPrice_install * count;
                 // b. Calculate Handle price
-                basePrice = basePrice+ item.hardware.stepPlate.discountPrice_install * count;
+                basePrice = basePrice + item.hardware.stepPlate.discountPrice_install * count;
                 // c. Calculate Handle price
                 basePrice = basePrice + item.hardware.hinge.discountPrice_install * count;
             } else {
                 // a. Calculate Handle price
                 basePrice = basePrice + item.hardware.handle.discountPrice_diy * count;
                 // b. Calculate Handle price
-                basePrice = basePrice+ item.hardware.stepPlate.discountPrice_diy * count;
+                basePrice = basePrice + item.hardware.stepPlate.discountPrice_diy * count;
                 // c. Calculate Handle price
                 basePrice = basePrice + item.hardware.hinge.discountPrice_diy * count;
             }
@@ -1261,7 +1283,7 @@ export class ResidentialFlowSession {
             // Calculate Additional Options price
             item.additionalOptions.items.forEach(function (itm) {
                 if (itm.id !== 5) {
-                    basePrice = basePrice+ itm.price * count;
+                    basePrice = basePrice + itm.price * count;
                     itm.qty = count;
                 } else {
                     basePrice = basePrice + itm.price;
@@ -1294,18 +1316,18 @@ export class ResidentialFlowSession {
         this.cart.push(k);
     }
 
-     GetPromoPricePerItem(promoritemtype, itemprice) {
+    GetPromoPricePerItem(promoritemtype, itemprice) {
 
         let itemPromoPrice = 0;
         switch (promoritemtype) {
-            case "models":                
-                    itemPromoPrice = this.utils.promoCalcluatedObject.modelprice;               
+            case "models":
+                itemPromoPrice = this.utils.promoCalcluatedObject.modelprice;
                 break;
-            case "coloradders":               
-                    itemPromoPrice = this.utils.promoCalcluatedObject.colorprice;               
+            case "coloradders":
+                itemPromoPrice = this.utils.promoCalcluatedObject.colorprice;
                 break;
-            case "windows":               
-                    itemPromoPrice = this.utils.promoCalcluatedObject.windowsprice;                
+            case "windows":
+                itemPromoPrice = this.utils.promoCalcluatedObject.windowsprice;
                 break;
             case "handles_ins":
                 itemPromoPrice = this.utils.promoCalcluatedObject.handles_ins;
@@ -1326,13 +1348,13 @@ export class ResidentialFlowSession {
                 itemPromoPrice = this.utils.promoCalcluatedObject.hinge_diy;
                 break;
             case "lock":
-                itemPromoPrice = this.utils.promoCalcluatedObject.lockprice;              
+                itemPromoPrice = this.utils.promoCalcluatedObject.lockprice;
                 break;
         }
         return itemPromoPrice;
     };
 
-     calculatePromoSavings() {
+    calculatePromoSavings() {
         let doorObj = this.utils.resFlowSession.resDetails;
         let orgPrice = 0;
         let cartDiscountPrice = 0;

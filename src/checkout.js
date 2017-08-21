@@ -448,8 +448,8 @@ function writeItem(orderType) {
                         if (cs.hardware.handle != '') {
                             var hai = cs.hardware.handle.item_name;
                             var handlestr = hai.toLowerCase();
-                            if (handlestr != "none" && cs.hardware.handle.numofKits != "0") {
-                                var HandleQuant = Number(cs.hardware.handle.numofKits) * cs.QTY;
+                            if (handlestr != "none" && cs.hardware.handle.count ) {
+                                var HandleQuant = Number(cs.hardware.handle.count) * cs.QTY;
                                 var doorWidth = Number((cs.size.width.wf) * 12) + Number(cs.size.width.wi);
                                 var tenFoot = false;
                                 if (doorWidth > 120) {
@@ -479,7 +479,7 @@ function writeItem(orderType) {
                                             if (di != 1) {
                                                 dumPrice = cP(cs, cs.hardware.handle).diy;
                                             }
-                                            dumPrice = Number(cs.hardware.handle.numofKits) * dumPrice;
+                                            dumPrice = Number(cs.hardware.handle.count) * dumPrice;
                                             usp = Number(usp) + Number(dumPrice);
                                             console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! - 2')
                                             console.log(usp)
@@ -567,8 +567,8 @@ function writeItem(orderType) {
                         if (cs.hardware.stepplate != '') {
                             var hai = cs.hardware.stepplate.item_name;
                             var handlestr = hai.toLowerCase();
-                            if (handlestr != "none" && cs.hardware.stepplate.numofKits != "0") {
-                                var HandleQuant = Number(cs.hardware.stepplate.numofKits) * cs.QTY;
+                            if (handlestr != "none" && cs.hardware.stepplate.count) {
+                                var HandleQuant = Number(cs.hardware.stepplate.count) * cs.QTY;
                                 var doorWidth = Number((cs.size.width.wf) * 12) + Number(cs.size.width.wi);
                                 var tenFoot = false;
                                 if (doorWidth > 120) {
@@ -619,13 +619,7 @@ function writeItem(orderType) {
                         if (cs.hardware.hinge != '') {
                             var hai = cs.hardware.hinge.item_name;
                             var handlestr = hai.toLowerCase();
-                            if (handlestr != "none" && cs.hardware.hinge.numofKits != "0") {
-                                //var HandleQuant = Number(cs.hardware.hinge.numofKits) * cs.QTY * 2;
-                                var numofKits = cs.hardware.hinge.numofKits;
-                                if (String(numofKits).indexOf('B') > -1) {
-                                    numofKits = Number(String(numofKits).substr(0, 1));
-                                }
-                                var HandleQuant = Number(numofKits) * cs.QTY * 2;
+                            if (handlestr != "none" && cs.hardware.hinge.count) {                                
                                 var doorWidth = Number((cs.size.width.wf) * 12) + Number(cs.size.width.wi);
                                 var tenFoot = false;
                                 if (doorWidth > 120) {
@@ -636,11 +630,11 @@ function writeItem(orderType) {
                                         {
                                             if (di == 1) {
                                                 var hingeINSPrice = cP(cs, cs.hardware.hinge).install
-                                                addLineItem(cs.hardware.hinge.Config, cs.product.product.item_id + '-' + cs.hardware.hinge.item_name, HandleQuant, Number(hingeINSPrice / 2).toFixed(2));
+                                                addLineItem(cs.hardware.hinge.Config, cs.product.product.item_id + '-' + cs.hardware.hinge.item_name, checkForDoubleHinge(cs.hardware.hinge, cs.QTY), Number(cs.hardware.hinge.item_installed_price).toFixed(2));
                                                 hwInstallPrice += 1;
                                             }
                                             else {
-                                                addLineItem(cs.hardware.hinge.Config, cs.product.product.item_id + '-' + cs.hardware.hinge.item_name, HandleQuant, Number(cP(cs, cs.hardware.hinge).diy / 2).toFixed(2));
+                                                addLineItem(cs.hardware.hinge.Config, cs.product.product.item_id + '-' + cs.hardware.hinge.item_name, checkForDoubleHinge(cs.hardware.hinge, cs.QTY), Number(cs.hardware.hinge.item_price).toFixed(2));
                                             }
                                         }
                                 }
@@ -774,7 +768,7 @@ function writeItem(orderType) {
                                                     orbPrice += (Number(useranswer.orbData[orbCount].item_price) * Number(orbQuantity));
                                                     addLineItem(useranswer.orbData[orbCount].clopayHardwareId, useranswer.orbData[orbCount].item_name, orbQuantity * cs.QTY, useranswer.orbData[orbCount].item_price, 1);
                                                 }
-                                              
+
                                             }
                                         }
                                         break;
@@ -782,14 +776,14 @@ function writeItem(orderType) {
                                 case 5:
                                     {
                                         var useranswer = value.objVal.Answers[1];
-                                        if (useranswer != '' && value.selectedMiles > 30) {                                           
+                                        if (useranswer != '' && value.selectedMiles > 30) {
                                             var tn = '';
                                             if (value.selectedMiles < 31) {
-                                                tn +=  '0-30';
+                                                tn += '0-30';
                                             } else if (value.selectedMiles >= 31 && value.selectedMiles < 51) {
-                                                 tn +=  '30-50';
+                                                tn += '30-50';
                                             } else if (value.selectedMiles > 50) {
-                                                tn +=  '50+';
+                                                tn += '50+';
                                             }
                                             addLineItem("FIR330", 'Mileage ' + tn, 1, value.price, 1);
                                         }
@@ -908,8 +902,8 @@ function writeItem(orderType) {
                     try {
                         if (orderObj.cart[iq].stopMold.items.length > 0 && di == 1) {
                             var stopMoldItems = orderObj.cart[iq].stopMold.items;
-                            addLineItem(stopMoldItems[0].partId, "Stop Mold-" + stopMoldItems[0].color + "-" + stopMoldItems[0].partId, stopMoldItems[0].qty, 0);
-                            addLineItem(stopMoldItems[1].partId, "Stop Mold-" + stopMoldItems[1].color + "-" + stopMoldItems[1].partId, stopMoldItems[1].qty, 0);
+                            addLineItem(stopMoldItems[0].partId, "Stop Mold-" + stopMoldItems[0].color + "-" + stopMoldItems[0].partId, stopMoldItems[0].qty * cs.QTY, 0);
+                            addLineItem(stopMoldItems[1].partId, "Stop Mold-" + stopMoldItems[1].color + "-" + stopMoldItems[1].partId, stopMoldItems[1].qty * cs.QTY, 0);
 
                         }
                     }
@@ -1016,6 +1010,19 @@ function writeItem(orderType) {
     }
 }
 
+function checkForDoubleHinge(selHinge, doorQty) {
+    var hingeQty = selHinge.count;
+    var makeHingeDouble = false;
+    let DoubleQtyHinge = ['0123191', '0123202', '0123104'];
+    let arrDonotShowORB = JSON.stringify(DoubleQtyHinge);
+    makeHingeDouble = arrDonotShowORB.indexOf(selHinge.Config) !== -1 ? true : false;
+
+    if (makeHingeDouble) {
+        hingeQty = hingeQty * 2;
+    }
+    return hingeQty * doorQty;
+};
+
 function writeHeader(subTotal, taxRate, estimatedTax, grandTotal, orderType, orderObj) {
     console.log('writeHeader ----------------------------------')
     //var b=VsObj.userInfoArray;
@@ -1090,11 +1097,7 @@ function addLineItem(itemID, desc, quanty, price, opener) {
 		quant = 1
 	}*/
     // shankar added below lines are added, wrong quantity FIR codes.
-    if (!opnerCatch) {
-        quant = Number(cObj.QTY); // * Number(quanty) //VsObj.getNumOfHDDC(_workingItem)
-    } else {
-        quant = Number(quanty);
-    }
+   
     if (opener == 1) {
         quant = Number(quanty);
     }
