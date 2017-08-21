@@ -199,6 +199,10 @@ export class HardwareComponent implements OnInit {
               if (defaultCount == 2 && hardware.hinge['placementlist'].split(';').length > 1) {
                 this.countManager.hinge = 1;
               }
+
+              this.utils.resFlowSession.resDoorObj.hardware.hinge['count'] = this.countManager.hinge;
+              this.utils.resFlowSession.resDoorObj.hardware.hinge['placement'] = this.hingePlacements[this.countManager.hinge];
+              
               if (hardware.hinge['placement'].split(':').length > 0) {
                 hardware.hinge['count'] = parseInt(hardware.hinge['placement'].split(':')[0]);
               }
