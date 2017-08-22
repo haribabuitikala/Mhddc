@@ -96,8 +96,13 @@ getItemPrice() {
     if (!this.utils.utilities.directFlow) {
         this.itemPrice = this.utils.calculateTotalPrice();
     } else {
-        this.data = this.dataStore.gdoAdditionalDirect;
-        this.itemPrice = this.data.item_price * this.qty;
+        // Fix for avoiding binding data on remove item
+        if (this.utils.gdoFlowSession.cart.length > 0) {
+            this.data = this.dataStore.gdoAdditionalDirect;
+        }
+        if (this.data) {
+            this.itemPrice = this.data.item_price * this.qty;
+        }
     }
 }
 
