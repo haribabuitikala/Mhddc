@@ -101,7 +101,13 @@ getItemPrice() {
             this.data = this.dataStore.gdoAdditionalDirect;
         }
         if (this.data) {
-            this.itemPrice = this.data.item_price * this.qty;
+            // Better this way to calculate price in direct price to make less regression
+            this.itemPrice = (this.data.item_price * this.qty) + (
+                this.utils.utilities.singlep +
+                this.utils.utilities.doublep +
+                this.utils.utilities.kPrice +
+                this.utils.utilities.distancePrice
+            );
         }
     }
 }
