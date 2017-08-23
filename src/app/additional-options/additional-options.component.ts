@@ -83,7 +83,11 @@ export class AdditionalOptionsComponent implements OnInit {
 
 
     ngOnInit() {
-        // this.utils.resetCalc();
+        this.utils.utilities.singlep = 0;
+        this.utils.utilities.doublep = 0; 
+        this.utils.utilities.kPrice = 0;
+        this.utils.utilities.distancePrice = 0;
+        
         this.appComponent.next = 'Next';
         this.pageNo = this.utils.utilities.currPage;
         this.showMenu = this.utils.utilities.showNav;

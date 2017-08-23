@@ -58,6 +58,7 @@ export class CategoryComponent implements OnInit {
             let storeNum = this.utilities.utilities.storenumber;
             let arr = JSON.stringify(this.utilities.gdoCheck);
             this.utilities.resFlowSession.resDoorObj.TYPE = "GDO";
+            this.utilities.gdoFlowSession.added = false;
             this.utilities.gdoFlowSession.cart.push({
                 "INSTALLTYPE": "GDO",
                 "QTY": 1,

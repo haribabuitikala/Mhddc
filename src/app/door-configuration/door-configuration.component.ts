@@ -76,7 +76,12 @@ export class DoorConfigurationComponent implements OnInit {
             this.itemPrice = this.utils.calculateTotalPrice();
         } else {
             let data = this.dataStore.gdoAdditionalDirect;
-            this.itemPrice = data['item_price'] * this.qty;
+            this.itemPrice = (data['item_price'] * this.qty) + (
+                this.utils.utilities.singlep +
+                this.utils.utilities.doublep +
+                this.utils.utilities.kPrice +
+                this.utils.utilities.distancePrice
+            );
         }
         this.pageNo = this.utils.utilities.currPage;
         this.showGDoEmail = this.utils.utilities.showGDoEmail;

@@ -46,7 +46,14 @@ export class ShoppingCartComponent implements OnInit, AfterViewChecked {
 
 ngAfterViewChecked() {
     this.cdref.detectChanges();
-    this.cartlen = this.utils.gdoFlowSession.cart.length || this.utils.resFlowSession.cart.length;
+    this.cartlen = 0;
+    if (this.utils.gdoFlowSession.cart.length > 0 && this.utils.gdoFlowSession.added) {
+        this.cartlen = this.utils.gdoFlowSession.cart.length;
+    }
+    if (this.utils.resFlowSession.cart.length > 0) {
+        this.cartlen = this.utils.resFlowSession.cart.length;
+    }
+
     this.showPreTax = this.cartlen > 0 ? true : false;
     if (this.utils.resFlowSession.resDoorObj.TYPE !== 'RES') {
         this.getItemPrice();
