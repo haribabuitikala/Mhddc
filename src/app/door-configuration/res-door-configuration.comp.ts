@@ -114,6 +114,8 @@ export class ResDoorConfigurationComponent implements OnInit {
             'pinterest');
         if (document.querySelector('#homeVis canvas') && document.querySelector('#homeVis canvas')['toDataURL']) {
             this.doorWithHome = document.querySelector('#homeVis canvas')['toDataURL']();
+        } else if (document.querySelector('#doorVis canvas') && document.querySelector('#doorVis canvas')['toDataURL']) {
+            this.doorWithHome = document.querySelector('#doorVis canvas')['toDataURL']();
         }
         this.socialshare();
     }
