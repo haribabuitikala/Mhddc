@@ -66,7 +66,7 @@ export class ResDoorConfigurationComponent implements OnInit {
         , private navComponent: NavComponent
         , private dataStore: CollectionData
         , private dataService: CollectionService
-        , private config: ConfigComponent) {        
+        , private config: ConfigComponent) {
     }
 
     setNavComponent() {
@@ -112,7 +112,9 @@ export class ResDoorConfigurationComponent implements OnInit {
             'twitter');
         this.pintbtn = new ShareButton(ShareProvider.PINTEREST, '<i class="fa fa-pinterest-p"></i>',
             'pinterest');
-        this.doorWithHome = document.querySelector('#homeVis canvas')['toDataURL']();
+        if (document.querySelector('#homeVis canvas') && document.querySelector('#homeVis canvas')['toDataURL']) {
+            this.doorWithHome = document.querySelector('#homeVis canvas')['toDataURL']();
+        }
         this.socialshare();
     }
     notify(event) {
@@ -758,15 +760,16 @@ table td {
         var imageUrl;
         var d = new Date();
         var timeStamp = d.getTime();
-        this.shareImageName = 'SocialShare-' + timeStamp; 
-        let params = {
-            base64String: this.doorWithHome,//this.utils.resFlow.imgSrc,
-            imagename: 'SocialShare-' + timeStamp,
-            imageformat: 'jpeg',
-            title: 'Check out my Clopay Garage Door design!',
-            description: "Door shown is the Clopay " + this.utils.resFlowSession.resDetails.collectionName.replace(/[^a-zA-Z ]/g, "") + ", Model " + this.utils.resFlowSession.resDoorObj.construction.construction['ClopayModelNumber'] + ". Design your door today!"
-        }
-        this.dataService.getImageUrl(params)
+        this.shareImageName = 'SocialShare-' + timeStamp;
+        if (this.doorWithHome) {
+            let params = {
+                base64String: this.doorWithHome,//this.utils.resFlow.imgSrc,
+                imagename: 'SocialShare-' + timeStamp,
+                imageformat: 'jpeg',
+                title: 'Check out my Clopay Garage Door design!',
+                description: "Door shown is the Clopay " + this.utils.resFlowSession.resDetails.collectionName.replace(/[^a-zA-Z ]/g, "") + ", Model " + this.utils.resFlowSession.resDoorObj.construction.construction['ClopayModelNumber'] + ". Design your door today!"
+            }
+            this.dataService.getImageUrl(params)
             .subscribe(
             res => {
                 this.socialImageUrl = res;
@@ -778,30 +781,32 @@ table td {
             err => {
                 this.dataService.handleError();
             });
-    }
-    
-    getshareFBLink(){
+        }
        
+    }
+
+    getshareFBLink() {
+
         let params = {
-            imagename : this.shareImageName,
+            imagename: this.shareImageName,
             imageurl: this.socialImageUrl,
             imageformat: 'jpeg',
             title: 'Check out my Clopay Garage Door design!',
             base64String: '',
             description: "Door shown is the Clopay " + this.utils.resFlowSession.resDetails.collectionName.replace(/[^a-zA-Z ]/g, "") + ", Model " + this.utils.resFlowSession.resDoorObj.construction.construction['ClopayModelNumber'] + ". Design your door today!"
-            
+
         }
         this.dataService.getFBShareLink(params)
             .subscribe(
             res => {
-               window.open('https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(res));
+                window.open('https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(res));
             },
             err => {
                 this.dataService.handleError();
             });
     }
 
-    getshareHouzz(){
+    getshareHouzz() {
         window.open('https://www.houzz.com/imageClipperUpload?imageUrl=' + encodeURIComponent(this.socialImageUrl));
     }
 
