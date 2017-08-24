@@ -958,7 +958,7 @@ function writeItem(orderType) {
                         }
                     }
                     $.each(cs.additional.items, function (index, value) {
-                        if (value.useranswer != '') {
+                        if (value.useranswer && value.useranswer != '') {
                             if (Number(value.useranswer.config) != 0) {
                                 if (value.useranswer.QTY == undefined) {
                                     value.useranswer.QTY = 1;
