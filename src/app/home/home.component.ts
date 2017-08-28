@@ -43,6 +43,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
         isOrientation: false,
         canvasElem: null
     };
+    oldCanvasWidth = null;
 
     constructor(private utils: AppUtilities
         , private navComp: NavService
@@ -72,6 +73,11 @@ export class HomeComponent implements OnInit, AfterViewInit {
         window['selectedHome'] = this.homes[0];
         //  this.utils.resFlowSession.resDoorObj.resetsize();
         //this.app.updatePrice();
+
+        $(window).unbind('resize');
+        $(window).bind('resize', () => {
+            this.resetCalculateCanvas();
+        });
     }
 
     ngAfterViewInit() {
@@ -108,6 +114,26 @@ export class HomeComponent implements OnInit, AfterViewInit {
     }
 
 
+    resetDoorPoints(newWidth) {
+        if (newWidth < this.oldCanvasWidth) {
+            let changedPixels = this.oldCanvasWidth - newWidth;
+            // Better way to do is implementing corners in canvas itself
+        }
+    }
+    resetCalculateCanvas () {
+        var $that = this;
+        let canvasElem = $that.uploadSelectedHome.canvasElem
+        let canvasstyles = getComputedStyle(canvasElem, 'false');
+        $that.canvasState.width = parseInt(canvasstyles.width);
+        $that.canvasState.height = parseInt(canvasstyles.height);
+        $that.resetDoorPoints($that.canvasState.width);
+        $that.oldCanvasWidth = $that.canvasState.width;
+        $that.drawCanvasLayer();
+        $that.drawDragLayer();
+        if (this.selectedDoor) {
+            this.drawCorners(this.selectedDoor);
+        }
+    }
 
     setStyles = (elem, styles) => {
         Object.keys(styles).forEach(function (key) {
@@ -205,11 +231,12 @@ export class HomeComponent implements OnInit, AfterViewInit {
         }
     }
 
-    drawCanvasLayer = () => {
+    drawCanvasLayer = (updateCorners?) => {
+        $('.layer-canvas').remove();
         var canvas = document.createElement('CANVAS');
         canvas['width'] = this.canvasState.width;
         canvas['height'] = this.canvasState.height;
-
+        canvas.className = 'layer-canvas';
         this.setStyles(canvas, {
             position: 'absolute',
             left: 0,
@@ -220,7 +247,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
         this.canvasState['canvas'] = canvas;
 
         $('.home-canvas-editor').append(canvas);
-        this.drawDoors();
+        this.drawDoors(updateCorners);
     }
 
     setDoorType(toType) {
@@ -407,7 +434,8 @@ export class HomeComponent implements OnInit, AfterViewInit {
             const isBottomtAllowed = (_.max(yPoints) + y) + (this.cornerWidth / 2) < yMax;
 
             // Kept above code for future reference to restrict to borders or image
-            if (isLeftAllowed && isRightAllowed && isTopAllowed && isBottomtAllowed) {
+            // if (isLeftAllowed && isRightAllowed && isTopAllowed && isBottomtAllowed) {
+            if (true && true) {
                 this.selectedDoor.points.forEach((p) => {
                     var newX = parseInt(p.x) + x;
                     var newY = parseInt(p.y) + y;
@@ -428,6 +456,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
     }
 
     drawDragLayer = () => {
+        $('.drag-layer').remove();
         var maskLayer = $('<div/>');
         maskLayer.addClass('drag-layer');
         maskLayer.css({
@@ -435,7 +464,8 @@ export class HomeComponent implements OnInit, AfterViewInit {
             top: 0,
             left: 0,
             width: this.canvasState.width,
-            height: this.canvasState.height
+            height: this.canvasState.height,
+            overflow: 'hidden'
         });
 
         maskLayer.bind('touchstart', (evt) => {
@@ -466,6 +496,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
             }
         });
         $('.home-canvas-editor').append(maskLayer);
+        
     }
 
     setattr (elem, attr?) {
@@ -552,17 +583,17 @@ export class HomeComponent implements OnInit, AfterViewInit {
     
                         ctx.drawImage(img, -height / 2, -width / 2, height, width);
                     } else {
-                        //code for no orientation and gallery image
                         canvasElem['width'] = width
                         canvasElem['height'] = height;
-                        ctx.drawImage(img, 0, 0);
+                        ctx.drawImage(img, 0, 0, width, height);
                     }
                 } else {
+                    // code for no orientation and gallery image
                     width = img.width;
                     height = img.height;
                     canvasElem['width'] = width
                     canvasElem['height'] = height;
-                    ctx.drawImage(img, 0, 0);
+                    ctx.drawImage(img, 0, 0, width, height);
                 }
                 $that.uploadSelectedHome.canvasElem = canvasElem;
                 
