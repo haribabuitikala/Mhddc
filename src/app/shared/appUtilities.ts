@@ -970,6 +970,27 @@ export class ResidentialFlowSession {
                     this.resDetails.topSection.glassType.price = ((itemPromoPrice > 0 ? itemPromoPrice : tsgt['item_price']));
                     this.resDetails.topSection.glassType.discountPrice = tsgt['item_price'];
                     this.resDetails.topSection.glassType.qty = count;
+                } else {
+                    let ts = obj.windows.topsection;
+                    if (obj.design && obj.design.dsgn && obj.design.dsgn.stockdoorconstructions && ts && ts['glasstypes']) {
+                        if (ts['glasstypes'][0].GlazingConfig !== 'GLAZ-SOL') {
+                            let itemPromoPrice = 0;
+                            let tsgt = ts['glasstypes'][0];
+                            if (tsgt['item_price'] && tsgt['item_price'] > 0) {
+                                itemPromoPrice = this.GetPromoPricePerItem("windows", tsgt['item_price']);
+                            }
+
+                            price[0] = price[0] + ((itemPromoPrice > 0 ? itemPromoPrice : tsgt['item_price'])) * count;
+                            price[1] = price[1] + ((itemPromoPrice > 0 ? itemPromoPrice : tsgt['item_price'])) * count;
+
+                            this.resDetails.topSection.name = obj.windows.topsection['item_name'];
+                            this.resDetails.topSection.glassType.name = tsgt['item_name'];
+                            this.resDetails.topSection.glassType.price = ((itemPromoPrice > 0 ? itemPromoPrice : tsgt['item_price']));
+                            this.resDetails.topSection.glassType.discountPrice = tsgt['item_price'];
+                            this.resDetails.topSection.glassType.qty = count;
+                        }
+                        
+                    }
                 }
 
                 // Calculate price for Hardware

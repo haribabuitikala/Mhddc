@@ -511,6 +511,13 @@ export class ResSliderComponent implements OnInit, AfterViewInit {
                                 this.utils.resFlowSession.resDoorObj.windows.glasstype = topsection.glasstypes[0];
                                 this.config.details.glassType = topsection.glasstypes[0];
                             }
+                        } else {
+                            this.config.detailsInfo.topSection = false;
+                            this.config.details.topsection = null;
+                            this.config.detailsInfo.glassType = false;
+                            this.utils.resFlowSession.resDoorObj.windows.glasstype = '';
+                            this.utils.resFlowSession.resDoorObj.windows.topsection = '';
+                            this.utils.resFlowSession.resDoorObj['topSection'] = '';
                         }
                     }
                 }
