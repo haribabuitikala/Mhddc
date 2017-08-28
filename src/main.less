@@ -786,15 +786,19 @@ canvas.vsDoor {
 
 
 .home-choose-modal.modal {
-  overflow: hidden !important;
+  overflow-x: hidden !important;
+  overflow-y: auto;
   .modal-body {
-    overflow: hidden;
+    overflow-x: hidden !important;
+    overflow-y: auto;
     padding: 0px !important;
+    height: inherit;
+    background-color: white;
 
   }
 }
 .home-modal {
-    overflow: hidden !important;
+    //overflow: hidden !important;
     .customer-home {
       position: relative;
       overflow: hidden;

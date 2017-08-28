@@ -8,6 +8,7 @@ import { ConfigComponent } from "../config/config.component";
 import { AppComponent } from "../app.component";
 declare var $: any;
 declare var _: any;
+declare var EXIF: any;
 @Component({
     selector: 'app-home',
     templateUrl: './home.component.html',
@@ -38,7 +39,9 @@ export class HomeComponent implements OnInit, AfterViewInit {
         imgSrc: null,
         _imgwidth: 700,
         _imgheight: 500,
-        _upload: true
+        _upload: true,
+        isOrientation: false,
+        canvasElem: null
     };
 
     constructor(private utils: AppUtilities
@@ -389,7 +392,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
         }
     }
 
-    moveDoor = (x, y) => {
+    moveDoor = (x, y, evt?) => {
         if (this.selectedDoor) {
             const xMax = this.canvasState.width;
             const yMax = this.canvasState.height;
@@ -403,6 +406,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
             const isTopAllowed = (_.min(yPoints) + y) - (this.cornerWidth / 2) >= 0;
             const isBottomtAllowed = (_.max(yPoints) + y) + (this.cornerWidth / 2) < yMax;
 
+            // Kept above code for future reference to restrict to borders or image
             if (isLeftAllowed && isRightAllowed && isTopAllowed && isBottomtAllowed) {
                 this.selectedDoor.points.forEach((p) => {
                     var newX = parseInt(p.x) + x;
@@ -411,6 +415,14 @@ export class HomeComponent implements OnInit, AfterViewInit {
                     p.y = newY;
                 });
                 this.drawDoors(true);
+            }
+
+            if (evt && evt.preventDefault) {
+                evt.preventDefault();
+            }
+
+            if (evt && evt.stopPropagation) {
+                evt.stopPropagation();
             }
         }
     }
@@ -445,9 +457,11 @@ export class HomeComponent implements OnInit, AfterViewInit {
                     var cY = evt.touches[0].clientY;
                     var xMove = cX - this.startX;
                     var yMove = cY - this.startY;
-                    this.moveDoor(xMove, yMove);
+                    this.moveDoor(xMove, yMove, evt);
                     this.startX = cX;
                     this.startY = cY;
+
+                    
                 }
             }
         });
@@ -457,7 +471,120 @@ export class HomeComponent implements OnInit, AfterViewInit {
     setattr (elem, attr?) {
         elem[attr] = 'auto';
     }
+
+    doAfterHomeImageRendering() {
+        let $that = this;
+        // It should be placed one place to add door
+        let positionOfDoor = {
+            x: $that.cornerWidth,
+            y: $that.cornerWidth
+        };
+
+        let maxWidth = $that.canvasState.width - ($that.cornerWidth);
+        let widthOfDoorAllowed = positionOfDoor.x + 200;
+        if (positionOfDoor.x + 200 > $that.canvasState.width) {
+            widthOfDoorAllowed = $that.canvasState.width - ($that.cornerWidth / 2);
+        }
+
+        let maxHeightAllowed = $that.canvasState.height - ($that.cornerWidth / 2);
+        let heightOfDoorAllowed = widthOfDoorAllowed > maxHeightAllowed ? maxHeightAllowed : widthOfDoorAllowed;
+        
+        $that.doors = [];
+        const door = {
+            id: $that.doors.length,
+            selected: false,
+            zindex: 1,
+            type: 1,
+            points: [{
+                x: positionOfDoor.x,
+                y: positionOfDoor.y,
+                order: 1,
+                type: 1,
+                pin: true
+            }, {
+                x: widthOfDoorAllowed - positionOfDoor.x,
+                y: positionOfDoor.y,
+                order: 2,
+                type: 1,
+                pin: true
+            }, {
+                x: widthOfDoorAllowed - positionOfDoor.x,
+                y: heightOfDoorAllowed - positionOfDoor.y,
+                order: 3,
+                type: 1,
+                pin: true
+            }, {
+                x: positionOfDoor.x,
+                y: heightOfDoorAllowed - positionOfDoor.y,
+                order: 4,
+                type: 1,
+                pin: true
+            }]
+        };
+        $that.doors.push(door);
+        $that.drawCanvasLayer();
+        $that.drawDragLayer();
+    }
     handleImage(e) {
+        let $that = this;
+        $('.home-canvas-editor').html('');
+        var files = e.target.files;
+        var img = new Image();
+        img.onload = function () {
+            // img.style.width = '100%';
+            EXIF.getImageData(img, function () {
+                const exifData = img['exifdata'];
+                let width = exifData.PixelXDimension;
+                let height = exifData.PixelYDimension;
+                
+                var canvasElem = document.createElement('CANVAS');
+                var ctx = canvasElem['getContext']('2d');
+
+                if (exifData && exifData.Orientation) {
+                    if (exifData.Orientation === 6) {
+                        $that.uploadSelectedHome.isOrientation = true;
+                        width = exifData.PixelYDimension;
+                        height = exifData.PixelXDimension;
+                        canvasElem['width'] = width
+                        canvasElem['height'] = height;
+                        ctx.translate(width / 2, height / 2);
+                        ctx.rotate(90 * Math.PI / 180);
+    
+                        ctx.drawImage(img, -height / 2, -width / 2, height, width);
+                    } else {
+                        //code for no orientation and gallery image
+                        canvasElem['width'] = width
+                        canvasElem['height'] = height;
+                        ctx.drawImage(img, 0, 0);
+                    }
+                } else {
+                    width = img.width;
+                    height = img.height;
+                    canvasElem['width'] = width
+                    canvasElem['height'] = height;
+                    ctx.drawImage(img, 0, 0);
+                }
+                $that.uploadSelectedHome.canvasElem = canvasElem;
+                
+
+                $('.home-canvas-editor').append(canvasElem);
+                // canvasElem.style.border = '1px solid red';
+                canvasElem.style.width = '100%';
+
+                let canvasstyles = getComputedStyle(canvasElem, 'false');
+                $that.canvasState.width = parseInt(canvasstyles.width);
+                $that.canvasState.height = parseInt(canvasstyles.height);
+
+                $that.doAfterHomeImageRendering();
+                
+            });
+            e.target.value = null;
+            $that.uploadSelectedHome.imgSrc = img.src;
+        };
+        img.src = window.URL.createObjectURL(files[0]);
+    }
+
+    handleImagev1(e) {
         $('.home-canvas-editor').html('');
         var reader = new FileReader();
         var $that = this;

@@ -249,8 +249,9 @@ export class ConfigComponent implements OnInit, AfterViewInit, AfterViewChecked 
                 var nCanvas2d = nCanvas[0].getContext('2d');
                 var himg = new Image();
                 himg.onload = () => {
+                    // Need to refactor
                     if (selectedHome._upload && selectedHome._upload == true) {
-                        nCanvas2d.drawImage(himg, 0, 0, selectedHome._imgwidth, selectedHome._imgheight);
+                        nCanvas2d.drawImage(selectedHome.canvasElem, 0, 0, selectedHome._imgwidth, selectedHome._imgheight);
                         nCanvas2d.save();
                         this.drawDoors(selectedHome, nCanvas2d, );
                     } else {
@@ -267,7 +268,10 @@ export class ConfigComponent implements OnInit, AfterViewInit, AfterViewChecked 
 
                 var query = window.matchMedia("(orientation:landscape)");
                 if (selectedHome._upload && selectedHome._upload == true) {
-                    himg.src = selectedHome.imgSrc;
+                    nCanvas2d.drawImage(selectedHome.canvasElem, 0, 0, selectedHome._imgwidth, selectedHome._imgheight);
+                    nCanvas2d.save();
+                    this.drawDoors(selectedHome, nCanvas2d, );
+                    res({ canvas: nCanvas[0] });
                 } else if (query.matches) {
 
                     //himg.src = window['imgFolder'] + '/homeimages/' + selectedHome._imagelgland;
