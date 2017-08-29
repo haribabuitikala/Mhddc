@@ -194,10 +194,10 @@ export class ResAdditionalOptionsComponent implements OnInit {
                 this.resDiyQuestions = data;
             }
             //console.log("one"+JSON.stringify(this.resDiyQuestions[2].Answers[1].vinyls));
-            this.vinyls = _.uniqBy(this.resDiyQuestions[2].Answers[1].vinyls, function (o) {
+            this.vinyls = _.uniqBy(this.resDiyQuestions[1].Answers[1].vinyls, function (o) {
                 return o.item_name;
             });
-            this.selectedVinyl = this.vinyls[15];
+            this.selectedVinyl = this.vinyls[this.vinyls.length - 1];
             if (!this.utils.resFlowSession.resDetails.isDIY && this.utils.resFlowSession.resDoorObj.product.product['item_id'] !== 16) {
                 this.installQuestionsOptions(true, this.resInstallQuestions[0]);
                 this.appComponent.updatePrice();
@@ -375,7 +375,7 @@ export class ResAdditionalOptionsComponent implements OnInit {
         }
         if (obj.item_id === 1) {
             if (event) {
-                this.selectedVinyl = this.vinyls[15];
+                this.selectedVinyl = this.vinyls[this.vinyls.length - 1];
             }
             k.name = this.selectedVinyl.item_name;
             k.price = this.selectedVinyl.item_price;
@@ -387,6 +387,9 @@ export class ResAdditionalOptionsComponent implements OnInit {
                 case 1:
                 case 2:
                     k.price = this.calculateORBPrice(obj);
+                    if (obj.item_id === 1) {
+                        k.price = this.selectedVinyl.item_price;
+                    }
                     obj.item_list_text = n + '<span class="text-orange"> $' + k.price + '</span>?';
                     this.removeItmOptions(obj.item_id);
                     this.itmObj.items.push(k);
