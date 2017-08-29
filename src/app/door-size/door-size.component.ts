@@ -91,6 +91,8 @@ export class DoorSizeComponent implements OnInit {
 
             }
         });
+
+        this.utils.utilities.isCustomSize = false;
     }
 
     homeSize = "0";
@@ -326,7 +328,7 @@ export class DoorSizeComponent implements OnInit {
                 this.utils.utilities.wi,
                 this.utils.utilities.hf,
                 this.utils.utilities.hi);
-
+            this.utils.utilities.isCustomSize = true;
             if (this.isRequired) {
                 if ((this.selectedHeightFeet && this.selectedHeightFeet > 0) && this.selectedWidthFeet > 0) {
                     this.navigateTo(this.dataParams);
