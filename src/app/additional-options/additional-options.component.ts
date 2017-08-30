@@ -106,6 +106,10 @@ export class AdditionalOptionsComponent implements OnInit {
         } else {
             $('.showDetails').show();
             this.gdoConfig.itemPrice = this.utils.calculateTotalPrice();
+            let kPrice = _.sumBy(this.dataStore.gdoOpenerAccessories, function (o) {
+                return o.price * o.count;
+            });
+            this.gdoConfig.itemPrice =  this.gdoConfig.itemPrice + kPrice;
         }
         this.hidePrev = this.navComponent.subFlow ? true : false;
         if (this.appComponent) {

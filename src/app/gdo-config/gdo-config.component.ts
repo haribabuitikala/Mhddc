@@ -5,6 +5,8 @@ import { ModalComponent } from "ng2-bs3-modal/ng2-bs3-modal";
 import { CollectionData } from "../collection/collection-data";
 import { Router, NavigationEnd } from '@angular/router';
 
+declare var _:any;
+
 @Component({
     selector: 'app-gdo-config',
     templateUrl: './gdo-config.component.html',
@@ -128,6 +130,10 @@ export class GdoConfigComponent implements OnInit, OnChanges {
 
         // this.itemPrice = (this.utils.utilities.item_price * this.quantity) + this.singlep + this.doublep + this.milep;
         this.itemPrice = this.utils.updateQty(flow, this.utils.utilities.gdoOpenerQty);
+        let kPrice = _.sumBy(this.dataStore.gdoOpenerAccessories, function (o) {
+            return o.price * o.count;
+        });
+        this.itemPrice = this.itemPrice + kPrice;
         // this.itmPrice * this.quantity) +
         // (this.utils.utilities.gdoDoubleDoor + this.utils.utilities.gdoSingleDoor + this.utils.utilities.distancePrice);
         // this.utils.utilities.item_price = this.itemPrice;

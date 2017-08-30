@@ -102,6 +102,10 @@ getItemPrice() {
     this.isGdo = true;
     if (!this.utils.utilities.directFlow) {
         this.itemPrice = this.utils.calculateTotalPrice();
+        let kPrice = _.sumBy(this.dataStore.gdoOpenerAccessories, function (o) {
+            return o.price * o.count;
+        });
+        this.itemPrice = this.itemPrice + kPrice;
     } else {
         // Fix for avoiding binding data on remove item
         if (this.utils.gdoFlowSession.cart.length > 0) {
