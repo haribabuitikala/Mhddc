@@ -76,7 +76,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
 
         $(window).unbind('resize');
         $(window).bind('resize', () => {
-            this.resetCalculateCanvas();
+            this.reRenderCanvas();
         });
     }
 
@@ -240,7 +240,8 @@ export class HomeComponent implements OnInit, AfterViewInit {
         this.setStyles(canvas, {
             position: 'absolute',
             left: 0,
-            top: 0
+            top: 0,
+            border: '1px solid red'
         });
 
         this.canvasState['ctx'] = canvas['getContext']('2d');
@@ -503,7 +504,35 @@ export class HomeComponent implements OnInit, AfterViewInit {
         elem[attr] = 'auto';
     }
 
-    doAfterHomeImageRendering() {
+    log(msg) {
+        var $log = $('<div/>');
+        $log.html(msg);
+        $('.logger').append($log);
+    }
+    reRenderCanvas () {
+        $('.home-canvas-editor').html('');
+        var $that = this;
+        var canvasElem = $that.uploadSelectedHome.canvasElem;
+        $('.home-canvas-editor').append(canvasElem);
+        var oldWidth = $that.canvasState.width;
+        var oldHeight = $that.canvasState.height;
+        canvasElem.style.width = window.innerWidth;
+        $that.canvasState.width = window.innerWidth
+        $that.canvasState.height = window.innerWidth / $that.aspectRatio;
+        $that.doors.forEach((d) => {
+            d.points.forEach(p => {
+                var r = oldWidth / p.x;
+                p.x = $that.canvasState.width / r;
+
+                var h = oldHeight / p.y;
+                p.y = $that.canvasState.height / h;
+            });
+        });
+        $that.drawCanvasLayer();
+        $that.drawDragLayer();
+
+    }
+    doAfterHomeImageRendering(isNew?) {
         let $that = this;
         // It should be placed one place to add door
         let positionOfDoor = {
@@ -520,42 +549,46 @@ export class HomeComponent implements OnInit, AfterViewInit {
         let maxHeightAllowed = $that.canvasState.height - ($that.cornerWidth / 2);
         let heightOfDoorAllowed = widthOfDoorAllowed > maxHeightAllowed ? maxHeightAllowed : widthOfDoorAllowed;
         
-        $that.doors = [];
-        const door = {
-            id: $that.doors.length,
-            selected: false,
-            zindex: 1,
-            type: 1,
-            points: [{
-                x: positionOfDoor.x,
-                y: positionOfDoor.y,
-                order: 1,
+        if (isNew) {
+            $that.doors = [];
+            const door = {
+                id: $that.doors.length,
+                selected: false,
+                zindex: 1,
                 type: 1,
-                pin: true
-            }, {
-                x: widthOfDoorAllowed - positionOfDoor.x,
-                y: positionOfDoor.y,
-                order: 2,
-                type: 1,
-                pin: true
-            }, {
-                x: widthOfDoorAllowed - positionOfDoor.x,
-                y: heightOfDoorAllowed - positionOfDoor.y,
-                order: 3,
-                type: 1,
-                pin: true
-            }, {
-                x: positionOfDoor.x,
-                y: heightOfDoorAllowed - positionOfDoor.y,
-                order: 4,
-                type: 1,
-                pin: true
-            }]
-        };
-        $that.doors.push(door);
+                points: [{
+                    x: positionOfDoor.x,
+                    y: positionOfDoor.y,
+                    order: 1,
+                    type: 1,
+                    pin: true
+                }, {
+                    x: widthOfDoorAllowed - positionOfDoor.x,
+                    y: positionOfDoor.y,
+                    order: 2,
+                    type: 1,
+                    pin: true
+                }, {
+                    x: widthOfDoorAllowed - positionOfDoor.x,
+                    y: heightOfDoorAllowed - positionOfDoor.y,
+                    order: 3,
+                    type: 1,
+                    pin: true
+                }, {
+                    x: positionOfDoor.x,
+                    y: heightOfDoorAllowed - positionOfDoor.y,
+                    order: 4,
+                    type: 1,
+                    pin: true
+                }]
+            };
+            $that.doors.push(door);
+        }
+        
         $that.drawCanvasLayer();
         $that.drawDragLayer();
     }
+    aspectRatio;
     handleImage(e) {
         let $that = this;
         $('.home-canvas-editor').html('');
@@ -605,8 +638,8 @@ export class HomeComponent implements OnInit, AfterViewInit {
                 let canvasstyles = getComputedStyle(canvasElem, 'false');
                 $that.canvasState.width = parseInt(canvasstyles.width);
                 $that.canvasState.height = parseInt(canvasstyles.height);
-
-                $that.doAfterHomeImageRendering();
+                $that.aspectRatio = $that.canvasState.width / $that.canvasState.height;
+                $that.doAfterHomeImageRendering(true);
                 
             });
             e.target.value = null;
