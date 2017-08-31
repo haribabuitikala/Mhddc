@@ -48,7 +48,7 @@ export class CartDetailsComponent implements OnInit {
   calcdoors(data, val?, propName?, qtyName?) {
     if (val && propName === 'opener' && data.opener.qty >= this.utils.resFlowSession.resDoorObj.QTY) {
       console.log('dont do');
-    } else if (!val && propName === 'opener' && data.opener.qty > 1) {
+    } else if (!val && propName === 'opener' && data.opener.qty == 1) {
       console.log('dont do');
     } else {
       if (val) {
