@@ -497,6 +497,29 @@ export class ResSliderComponent implements OnInit, AfterViewInit {
                         this.utils.resFlowSession.resDoorObj.color.overlay = colors[0];
                         this.utils.resFlowSession.resDoorObj.color.base = colors[0];
                     }
+
+                    // QPB Changes for top section
+                    if (stockdoorconstructions[0] && stockdoorconstructions[0].Topsections && stockdoorconstructions[0].Topsections.length > 0) {
+                        this.utils.resFlowSession.resDoorObj.windows.topsection = stockdoorconstructions[0].Topsections[0];
+                        this.utils.resFlowSession.resDoorObj['topSection'] = stockdoorconstructions[0].Topsections[0];
+                        let topsection = stockdoorconstructions[0].Topsections[0];
+                        if (topsection && topsection.Config !== "GLAZ-SOL") {
+                            this.config.detailsInfo.topSection = true;
+                            this.config.details.topsection = topsection;
+                            if (topsection['glasstypes'] && topsection['glasstypes'].length > 0) {
+                                this.config.detailsInfo.glassType = true;
+                                this.utils.resFlowSession.resDoorObj.windows.glasstype = topsection.glasstypes[0];
+                                this.config.details.glassType = topsection.glasstypes[0];
+                            }
+                        } else {
+                            this.config.detailsInfo.topSection = false;
+                            this.config.details.topsection = null;
+                            this.config.detailsInfo.glassType = false;
+                            this.utils.resFlowSession.resDoorObj.windows.glasstype = '';
+                            this.utils.resFlowSession.resDoorObj.windows.topsection = '';
+                            this.utils.resFlowSession.resDoorObj['topSection'] = '';
+                        }
+                    }
                 }
 
                 this.designSelected = obj['item_thumbnail'];
@@ -515,6 +538,24 @@ export class ResSliderComponent implements OnInit, AfterViewInit {
                     //this.utils.resFlowSession.resDoorObj.color.overlay = obj;
                 }
 
+                // QPB Changes for top section
+                let dsgn1 = this.utils.resFlowSession.resDoorObj.design.dsgn;
+                let stockdoors1 = dsgn1['stockdoorconstructions'];
+                let construction1 = this.utils.resFlowSession.resDoorObj.construction.construction;
+                if (stockdoors1 && stockdoors1.length > 0 && construction1['Topsections'] && construction1['Topsections'].length > 0) {
+                    let topsection = construction1['Topsections'][0];
+                    this.utils.resFlowSession.resDoorObj.windows.topsection = topsection;
+                    this.utils.resFlowSession.resDoorObj['topSection'] = topsection;
+                    if (topsection && topsection.Config !== "GLAZ-SOL") {
+                        this.config.detailsInfo.topSection = true;
+                        this.config.details.topsection = topsection;
+                        if (topsection['glasstypes'] && topsection['glasstypes'].length > 0) {
+                            this.config.detailsInfo.glassType = true;
+                            this.utils.resFlowSession.resDoorObj.windows.glasstype = topsection.glasstypes[0];
+                            this.config.details.glassType = topsection.glasstypes[0];
+                        }
+                    }
+                }
                 break;
             case 'construction':
                 this.utils.resFlowSession.resDoorObj.construction.construction = obj;                        
@@ -530,6 +571,24 @@ export class ResSliderComponent implements OnInit, AfterViewInit {
                     if (this.utils.resFlowSession.resDoorObj.product.product['item_id'] == 16 && obj['colors'].length > 3) {
                         this.utils.resFlowSession.resDoorObj.color.overlay = obj['colors'][3];
                         this.utils.resFlowSession.resDoorObj.color.base = obj['colors'][3];
+                    }
+                }
+
+                // QPB Changes for top section
+                let dsgn = this.utils.resFlowSession.resDoorObj.design.dsgn;
+                let stockdoors = dsgn['stockdoorconstructions'];
+                if (stockdoors && stockdoors.length > 0 && obj.Topsections && obj.Topsections.length > 0) {
+                    let topsection = obj.Topsections[0];
+                    this.utils.resFlowSession.resDoorObj.windows.topsection = topsection;
+                    this.utils.resFlowSession.resDoorObj['topSection'] = topsection;
+                    if (topsection && topsection.Config !== "GLAZ-SOL") {
+                        this.config.detailsInfo.topSection = true;
+                        this.config.details.topsection = topsection;
+                        if (topsection['glasstypes'] && topsection['glasstypes'].length > 0) {
+                            this.config.detailsInfo.glassType = true;
+                            this.utils.resFlowSession.resDoorObj.windows.glasstype = topsection.glasstypes[0];
+                            this.config.details.glassType = topsection.glasstypes[0];
+                        }
                     }
                 }
                 break;

@@ -16,7 +16,7 @@ export class CartDetailsComponent implements OnInit {
 
   ngOnInit() {
     this.data = this.utils.resFlowSession.resDetails;
-    this.utils.utilities.promoSaving = this.utils.resFlowSession.calculatePromoSavings(); 
+    this.utils.utilities.promoSaving = this.utils.resFlowSession.calculatePromoSavings();
     this.coachman = this.utils.resFlowSession.resDoorObj.product.product['item_id'] === 11 ? true : false;
     // show doorConfig
     this.doorConfig = window.location.hash.indexOf('doorConfiguration') !== -1 ? true : false;
@@ -46,15 +46,24 @@ export class CartDetailsComponent implements OnInit {
   @Output() callPrice = new EventEmitter();
 
   calcdoors(data, val?, propName?, qtyName?) {
-    if (val) {
-      this.qty(data, val, propName, qtyName)
+    if (val && propName === 'opener' && data.opener.qty >= this.utils.resFlowSession.resDoorObj.QTY) {
+      console.log('dont do');
+    } else if (!val && propName === 'opener' && data.opener.qty == 1) {
+      console.log('dont do');
     } else {
-      this.qty(data, null, propName, qtyName)
+      if (val) {
+        this.qty(data, val, propName, qtyName)
+      } else {
+        this.qty(data, null, propName, qtyName)
+      }
+      if (propName === 'construction' && data['construction'][qtyName] < data['opener'][qtyName]) {
+        data['opener'][qtyName] = data['construction'][qtyName];
+      }
+      this.utils.resFlowSession.resCalculateCartItemPrice(data)
+      this.callPrice.emit(this.utils.resFlowSession.resCalculateCartItemPrice(data));
+      //Jyothi - Promo
+      this.utils.utilities.promoSaving = this.utils.resFlowSession.calculatePromoSavings();
     }
-    this.utils.resFlowSession.resCalculateCartItemPrice(data)
-    this.callPrice.emit(this.utils.resFlowSession.resCalculateCartItemPrice(data));
-     //Jyothi - Promo
-    this.utils.utilities.promoSaving = this.utils.resFlowSession.calculatePromoSavings();  
   }
 
   qty(item, increment?, itm?, qtyName?) {

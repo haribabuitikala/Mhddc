@@ -145,9 +145,10 @@ export class ColorComponent implements OnInit {
 
         let utils = this.utils.utilities;
         var resDoorObj = this.utils.resFlowSession.resDoorObj;
+       var modelBasedProductId =   this.setProductID();
         return {
             "dtype": 'RES',
-            "productid": resDoorObj.product.product['item_id'],
+            "productid": modelBasedProductId,
             "windcode": "W0",
             "NatMarketID": +utils.natmarketid,
             "doorcolumns": resDoorObj.design.dsgn['Columns'],
@@ -163,6 +164,23 @@ export class ColorComponent implements OnInit {
         };
     }
 
+    setProductID() {
+        let utils = this.utils.utilities;
+        var resDoorObj = this.utils.resFlowSession.resDoorObj;
+        var selectedClopayModelNumber = resDoorObj.construction.construction['ClopayModelNumber'];
+        var modelBasedProductId = resDoorObj.product.product['item_id'];
+        if (!resDoorObj.QPB) {
+            if (selectedClopayModelNumber == "HDS" || selectedClopayModelNumber == "HDSL") {
+                modelBasedProductId = '14'
+            }
+            else if (selectedClopayModelNumber == "HDB" || selectedClopayModelNumber == "HDB4" || selectedClopayModelNumber == "HDBL") {
+                modelBasedProductId= '24'
+            }
+
+        }
+        return modelBasedProductId;
+    }
+
 
     errorMsg;
     nextBtn(path, warning?) {
@@ -171,15 +189,20 @@ export class ColorComponent implements OnInit {
             this.utils.resFlowSession.resDoorObj.construction.vinyl = this.vinylOptions[+this.selectedVinyl];
             this.utils.resFlowSession.resDoorObj.construction.groove = this.grooves[+this.selectedGroove];
         }
+        
+        if (this.claddings && this.claddings.length > 1) {
+            this.utils.resFlowSession.resDoorObj.construction.cladding = this.claddings[0];
+        }
 
         if (resObj.product && resObj.product.product['item_id'] == 30 &&
             resObj.product.product['productline'] == 'speciality') {
             this.utils.resFlowSession.resDoorObj.construction.cladding = this.selectedCladding;
         }
-
+        this.utils.resFlowSession.resDetails.color.claddingName = '';
         if (this.claddings && this.claddings.length > 1) {
             if (this.selectedCladding !== "-1") {
                 this.utils.resFlowSession.resDoorObj.construction.cladding = this.claddings[+this.selectedCladding];
+                this.utils.resFlowSession.resDetails.color.claddingName = this.claddings[+this.selectedCladding].item_name;
                 this.moveToPage();
             } else {
                 this.errorMsg = 'Please Select Cladding and Overlay';

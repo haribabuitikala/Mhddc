@@ -68,18 +68,7 @@ function CheckOut(subTotal, taxRate, estimatedTax, grandTotal, _orderObj) {
             catch (e) {
                 orderType = "INSTALLED";
             }
-            break;
-        case 'COM':
-            // COMDoor
-            try {
-
-                orderType = "DIY";
-
-            }
-            catch (e) {
-                orderType = "DIY";
-            }
-            break;
+            break;      
         case 'GDO':
             //OpenerOnly
             orderType = "GDO";
@@ -130,254 +119,6 @@ function writeItem(orderType) {
             _lineItems = "\t\t\t" + "<LINEITEMS>" + _newLine;
             // alert(itemType)
             switch (itemType) {
-                case 'COM':
-                    // COMDoor
-                    if (!fiveSixtyAdd) {
-                        fiveSixtyAdd = true;
-                        //addLineItem("FIR560", "FIR560", "1", "0.00"); ;// Satya Commented as per #868538
-                    }
-                    var pid = cs.product.product.item_id
-                    var mp = '999999'
-                    var mod = getDesign(cs.construction.construction.ClopayModelNumber, cs.construction.construction)
-                    var dsg = String(cs.construction.construction.XMLDSGN).replace('vvv', '').replace('VVV', '')
-                    itemTemp += "\t\t\t" + "<ORDERED_ITEM>" + cs.construction.construction.XMLCOI + "</ORDERED_ITEM>" + _newLine;
-                    itemTemp += "\t\t\t" + "<ITEM_TYPE>" + "COM" + "</ITEM_TYPE>" + _newLine;
-                    if (pid != 116) {
-                        itemTemp += "\t\t\t" + "<DESCRIPTION>" + mod + "</DESCRIPTION>" + _newLine;
-                    }
-                    else {
-                        itemTemp += "\t\t\t" + "<DESCRIPTION>" + mod + "</DESCRIPTION>" + _newLine;
-                    }
-                    itemTemp += "\t\t\t" + "<QUANTITY>" + cs.QTY + "</QUANTITY>" + _newLine;
-                    var pp = getDoorPrice(cs, false, false, true)
-
-                    if (di == 1) {
-                        usp += Number(pp[0]) //* Number(cs.QTY)
-                        var labor = cP(cs, cs.construction.construction, 'Labor');
-                        console.log(labor)
-                        usp -= Number(labor.install)
-                        console.log(labor.install)
-                    }
-                    else {
-                        usp += pp[1] //* Number(cs.QTY)
-                    }
-
-                    itemTemp += "\t\t\t" + "<UNIT_SELLING_PRICE>xxxUSPxx</UNIT_SELLING_PRICE>" + _newLine;
-                    // Options
-                    mod = mod.replace('MODL-', '')
-                    itemTemp += "\t\t\t" + "<OPTIONS>" + _newLine;
-                    itemTemp += "\t\t\t\t" + "<MODL>MODL-" + mod + "</MODL>" + _newLine;
-                    itemTemp += "\t\t\t\t" + "<ATTRIBUTES";
-                    itemTemp += " ASSY=" + '"ASSY-CD"';
-                    itemTemp += " WD_FT=" + '"' + cs.size.width.wf + '"';
-                    itemTemp += " WD_IN=" + '"' + cs.size.width.wi + '"';
-                    itemTemp += " HT_FT=" + '"' + cs.size.height.hf + '"';
-                    itemTemp += " HT_IN=" + '"' + cs.size.height.hi + '"';
-                    itemTemp += " COLR=" + '"' + cs.color.base.colorconfig + '"';
-                    itemTemp += " INSL=" + '"' + cs.construction.construction.insulationconfig + '"';
-
-                    if (orderObj.windcode != 'W0') {
-                        itemTemp += " WIND=" + '"' + "WIND-" + orderObj.windcode + '"';
-                    }
-                    if (cs.design.dsgn != '') {
-                        itemTemp += " DSGN=" + '"' + getDesign(cs.construction.construction.XMLDSGN, cs.construction.construction) + '"';
-                    }
-
-                    try {
-                        if (cs.windows.glasstype != '') {
-                            if (cs.windows.topsection != '') {
-                                itemTemp += " GLAZ=" + '"' + cs.windows.glasstype.Config + '"';
-
-                                if (cs.windows.glasstypeSection != '' && cs.windows.glasstype.Config != "GLAZ-SOL") {
-                                    var tempGLoc = cs.windows.glasstypeSection;
-                                    tempGLoc = tempGLoc.replace("Sections", "Rows");
-                                    itemTemp += " GLOC=" + '"' + "GLOC-" + tempGLoc + '"';
-                                }
-
-                                if (cs.windows.selectedTopSection.Config != "FRAM-FV" && cs.windows.glasstype.Config != "GLAZ-SOL") {
-                                    var tempRows = Number(cs.windows.selectedGlassSection);
-                                    var sectionRows = "";
-                                    for (i = 1; i <= tempRows; i++) {
-                                        sectionRows = sectionRows + "" + (i + 1);
-                                    }
-                                    itemTemp += " GSEC=" + '"' + "GSEC-" + sectionRows + '"';
-                                }
-
-                                var fram = cs.windows.topsection.Config;
-                                var framTest = fram.substr(0, 4);
-                                var nRows = Number(cs.design.rows);
-                                if (framTest != "GLAZ") {
-                                    if (cs.windows.glasstype.Config == "FRAM-FV") {
-                                        itemTemp += " GSEC=" + '"' + "GSEC-FV";
-                                        itemTemp += " FRAM=" + '"' + fram + '"'; //Need to Check
-                                    }
-                                    else {
-                                        itemTemp += " FRAM=" + '"' + fram + '"';
-                                    }
-
-
-                                }
-
-
-                            }
-                        }
-                    }
-                    catch (e) { }
-
-                    try {
-                        if (cs.hardware.lock != '') {
-
-                            var li = cs.hardware.lock.item_name;
-                            var lockstr = li.toLowerCase();
-                            if (lockstr != "none") {
-                                var lockFIRCharge = (cP(cs, cs.hardware.lock).install - cP(cs, cs.hardware.lock).diy);
-                                var lockLessFIR = (cP(cs, cs.hardware.lock).install - lockFIRCharge);
-                                var lockINSPrice = cP(cs, cs.hardware.lock, 'Hardware').diy
-
-                                hwInstallPrice += (lockFIRCharge);
-                                usp = Number(usp) + Number(lockINSPrice);
-                            }
-                            else {
-                                itemTemp += " LOCK=LOCK-9";
-                            }
-
-                        }
-
-                        if (cs.springs != '') {
-                            itemTemp += " SPRG=" + '"' + cs.springs.springtype + '"';
-                            itemTemp += " TSIZE=" + '"TSIZ-' + cs.springs.tracksize + '"';
-                            itemTemp += " TLFT=" + '"' + cs.springs.lifttype + '"';
-                            itemTemp += " TMNT=" + '"' + cs.springs.trackmount + '"';
-
-                            if (cs.springs.roofpitch != '') {
-
-                            }
-
-                            if (cs.springs.trackradius != '') {
-                                itemTemp += " TRAD=" + '"TRAD-' + cs.springs.trackradius + '"';
-                            }
-
-                            var springPrice = cP(cs, cs.springs.spring, 'Hardware');
-                        }
-
-                        var doorWidth = Number((cs.size.width.wf) * 12) + Number(cs.size.width.wi);
-                        var doorWidthInches = Number((cs.size.width.wf) * 12) + Number(cs.size.width.wi);
-                        var doorHeightInches = Number((cs.size.height.hf) * 12) + Number(cs.size.height.hi);
-
-                        if (doorWidthInches <= 120) {
-                            if (doorHeightInches <= 96) {
-                                addLineItem("FIC730", "Commercial Delivery up to 8' Single", "1", "0");
-                            }
-                            else if (doorHeightInches <= 144) {
-                                // Height under 12'
-                                addLineItem("FIC745", "Commercial Delivery up to 12' Single", "1", "0");
-                            }
-                            else {
-                                // Height under 16'
-                                addLineItem("FIC765", "Commercial Delivery up to 12' Single", "1", "0");
-                            }
-                        }
-                        else if (doorWidthInches > 120) {
-                            if (doorHeightInches <= 96) {
-                                addLineItem("FIC735", "Commercial Delivery up to 8' Double", "1", "0");
-                            }
-                            else if (doorHeightInches <= 144) {
-                                // Height under 12'
-                                addLineItem("FIC755", "Commercial Delivery up to 12' Double", "1", "0");
-                            }
-                            else {
-                                // Height under 16'
-                                addLineItem("FIC775", "Commercial Delivery up to 12' Double", "1", "0");
-                            }
-                        }
-                    }
-                    catch (e) { }
-
-                    //Openers
-                    try {
-                        if (cs.opener.opener != '') {
-                            addLineItem(cs.opener.opener.Config, cs.opener.opener.item_name, cs.opener.opener.QTY, cs.opener.opener.item_price, 1);
-
-                            if (cs.opener.items != '') {
-                                for (var oq = 0; oq < cs.opener.items.length; oq++) {
-                                    if (Number(cs.opener.items[oq].QTY) > 0) {
-                                        addLineItem(cs.opener.items[oq].Config, cs.opener.items[oq].item_name, cs.opener.items[oq].QTY, cs.opener.items[oq].item_price, 1);
-                                    }
-                                }
-                            }
-                        }
-                    }
-                    catch (e) { }
-
-                    try {
-                        if (orderObj.extendedShaft) {
-                            var shaftCost = (((1 + Number(cs.size.width.wf)) * Number(8.21)) + Number(10.92));
-                            if (lng == "ca" || lng == "fr")
-                                shaftCost = (((1 + Number(cs.size.width.wf)) * Number(11.80)) + Number(11.80));
-
-                            if (addlTemp.length > 0) {
-                                addlTemp += ","
-                            }
-                            addlTemp += "ADDL-XSHFT";
-                            shaftCost = shaftCost.toFixed(2);
-                            usp = Number(usp) + Number(shaftCost);
-                        }
-
-                    }
-                    catch (e) { }
-
-                    try {
-                        if (orderObj.jambtype == 'Steel') {
-                            addLineItem('251', 'Steel Jamb Mounting Plates', 1, '30.00', 'need');
-                        }
-                    }
-                    catch (e) { }
-
-                    try {
-                        $.each(cs.additional.items, function (index, value) {
-                            if (value.useranswer != '' && value.item_id == 1) {
-                                addLineItem(value.useranswer.heightpartid, 'Weather Seal - ' + value.useranswer.item_name, value.useranswer.heightqty, value.useranswer.heightitem_price);
-                                addLineItem(value.useranswer.widthpartid, 'Weather Seal - ' + value.useranswer.item_name, value.useranswer.widthqty, value.useranswer.widthitem_price);
-                            }
-
-                            if (value.useranswer != '' && value.item_id == 10) {
-                                addLineItem(value.useranswer.config, value.item_name, value.useranswer.QTY, value.useranswer.item_price);
-                            }
-
-                            if (value.useranswer != '' && value.item_id == 9) {
-                                addLineItem(value.useranswer.config, value.item_name, cs.design.rows, value.useranswer.item_price);
-                            }
-
-                            if (value.useranswer != '' && value.item_id == 8) {
-                                addLineItem(value.useranswer.fir[0].config, 'Mileage 30+', Number(value.useranswer.qty) - 30, value.useranswer.item_price);
-                            }
-
-                        });
-                    }
-                    catch (e) { }
-
-
-                    console.log(usp)
-                    if (addlTemp.length != '') {
-                        var aitm = ' ADDL="' + addlTemp + '"';
-                        itemTemp += aitm;
-                    }
-                    itemTemp += " />" + _newLine;
-                    itemTemp += "\t\t\t" + "</OPTIONS>" + _newLine;
-
-
-                    _lineItems += "\t\t\t" + "</LINEITEMS>";
-                    itemTemp += _lineItems + _newLine;
-                    itemTemp += "\t\t" + "</ITEM>" + _newLine;
-                    //_orderItems += itemTemp;
-                    var r = /xxxUSPxx/gi;
-                    console.log(usp)
-                    console.log(itemTemp);
-                    _orderItems += itemTemp.replace(r, Number(usp).toFixed(2));
-
-
-                    break;
-                //End of COmmercialDoor
                 case 'RES':
                     // ResDoor
                     if (!fiveSixtyAdd) {
@@ -696,14 +437,14 @@ function writeItem(orderType) {
                         if (cs.hardware.handle != '') {
                             var hai = cs.hardware.handle.item_name;
                             var handlestr = hai.toLowerCase();
-                            if (handlestr != "none" && cs.hardware.handle.numofKits != "0") {
-                                var HandleQuant = Number(cs.hardware.handle.numofKits) * cs.QTY;
+                            if (handlestr != "none" && cs.hardware.handle.count ) {
+                                var HandleQuant = Number(cs.hardware.handle.count) * cs.QTY;
                                 var doorWidth = Number((cs.size.width.wf) * 12) + Number(cs.size.width.wi);
                                 var tenFoot = false;
                                 if (doorWidth > 120) {
                                     tenFoot = true;
                                 }
-                                switch (String(cs.hardware.handle.Config).toUpperCase()) {
+                                switch (String(cs.hardware.handle.Config.split(";")[0]).toUpperCase()) {
                                     case "LOCK-L":
                                         {
                                             itemTemp += " LOCK=" + '"LOCK-L"';
@@ -727,7 +468,7 @@ function writeItem(orderType) {
                                             if (di != 1) {
                                                 dumPrice = cP(cs, cs.hardware.handle).diy;
                                             }
-                                            dumPrice = Number(cs.hardware.handle.numofKits) * dumPrice;
+                                            dumPrice = Number(cs.hardware.handle.count) * dumPrice;
                                             usp = Number(usp) + Number(dumPrice);
                                             console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! - 2')
                                             console.log(usp)
@@ -815,8 +556,8 @@ function writeItem(orderType) {
                         if (cs.hardware.stepplate != '') {
                             var hai = cs.hardware.stepplate.item_name;
                             var handlestr = hai.toLowerCase();
-                            if (handlestr != "none" && cs.hardware.stepplate.numofKits != "0") {
-                                var HandleQuant = Number(cs.hardware.stepplate.numofKits) * cs.QTY;
+                            if (handlestr != "none" && cs.hardware.stepplate.count) {
+                                var HandleQuant = Number(cs.hardware.stepplate.count) * cs.QTY;
                                 var doorWidth = Number((cs.size.width.wf) * 12) + Number(cs.size.width.wi);
                                 var tenFoot = false;
                                 if (doorWidth > 120) {
@@ -867,13 +608,7 @@ function writeItem(orderType) {
                         if (cs.hardware.hinge != '') {
                             var hai = cs.hardware.hinge.item_name;
                             var handlestr = hai.toLowerCase();
-                            if (handlestr != "none" && cs.hardware.hinge.numofKits != "0") {
-                                //var HandleQuant = Number(cs.hardware.hinge.numofKits) * cs.QTY * 2;
-                                var numofKits = cs.hardware.hinge.numofKits;
-                                if (String(numofKits).indexOf('B') > -1) {
-                                    numofKits = Number(String(numofKits).substr(0, 1));
-                                }
-                                var HandleQuant = Number(numofKits) * cs.QTY * 2;
+                            if (handlestr != "none" && cs.hardware.hinge.count) {                                
                                 var doorWidth = Number((cs.size.width.wf) * 12) + Number(cs.size.width.wi);
                                 var tenFoot = false;
                                 if (doorWidth > 120) {
@@ -884,11 +619,11 @@ function writeItem(orderType) {
                                         {
                                             if (di == 1) {
                                                 var hingeINSPrice = cP(cs, cs.hardware.hinge).install
-                                                addLineItem(cs.hardware.hinge.Config, cs.product.product.item_id + '-' + cs.hardware.hinge.item_name, HandleQuant, Number(hingeINSPrice / 2).toFixed(2));
+                                                addLineItem(cs.hardware.hinge.Config, cs.product.product.item_id + '-' + cs.hardware.hinge.item_name, checkForDoubleHinge(cs.hardware.hinge, cs.QTY), Number(cs.hardware.hinge.item_installed_price).toFixed(2));
                                                 hwInstallPrice += 1;
                                             }
                                             else {
-                                                addLineItem(cs.hardware.hinge.Config, cs.product.product.item_id + '-' + cs.hardware.hinge.item_name, HandleQuant, Number(cP(cs, cs.hardware.hinge).diy / 2).toFixed(2));
+                                                addLineItem(cs.hardware.hinge.Config, cs.product.product.item_id + '-' + cs.hardware.hinge.item_name, checkForDoubleHinge(cs.hardware.hinge, cs.QTY), Number(cs.hardware.hinge.item_price).toFixed(2));
                                             }
                                         }
                                 }
@@ -916,13 +651,13 @@ function writeItem(orderType) {
 
                                 else {
                                     //shankar added for labor promo apply
-									try{
-                                    if ($promoIsEnable == true && lng != 'en') {
-                                        addLineItem(cs.product.product.singleinstallcode, cs.product.product.singleinstallcode, cs.QTY, Number(labor.install));
-                                    } else {
-                                        addLineItem(cs.product.product.singleinstallcode, cs.product.product.singleinstallcode, cs.QTY, cs.construction.construction.laborcodeprice);
-                                    }
-									}catch(e){}
+                                    try {
+                                        if ($promoIsEnable == true && lng != 'en') {
+                                            addLineItem(cs.product.product.singleinstallcode, cs.product.product.singleinstallcode, cs.QTY, Number(labor.install));
+                                        } else {
+                                            addLineItem(cs.product.product.singleinstallcode, cs.product.product.singleinstallcode, cs.QTY, cs.construction.construction.laborcodeprice);
+                                        }
+                                    } catch (e) { }
                                 }
                             }
                             else if (doorWidth > 120) {
@@ -971,7 +706,7 @@ function writeItem(orderType) {
                     //OPENER
                     if (di == 1) {
                         if (cs.opener.opener != '') {
-                            cs.opener.QTY = (cs.opener.QTY==undefined)? cs.opener.qty:cs.opener.QTY;
+                            cs.opener.QTY = (cs.opener.QTY == undefined) ? cs.opener.qty : cs.opener.QTY;
                             addLineItem(cs.opener.opener.Config, cs.opener.opener.item_name, cs.opener.QTY, cs.opener.opener.item_price, 1);
                             if (cs.opener.opener.Config != "FIR270") {
                                 addLineItem("FIR500", "GDO INSTALLATION - WITH DOOR AND OPENER PURCHASE", cs.opener.QTY, "0", 1);
@@ -982,8 +717,8 @@ function writeItem(orderType) {
                             //  addLineItem("FIR500", "GDO INSTALLATION - WITH DOOR AND OPENER PURCHASE", cs.opener.QTY, "0");
                             for (var i = 0; i < cs.opener.items.length; i++) {
                                 var it = cs.opener.items[i];
-                                if (it.QTY > 0) {
-                                    addLineItem(it.Config, it.item_name, it.QTY, it.item_price, 1);
+                                if (it.count > 0) {
+                                    addLineItem(it.Config, it.item_name, it.count, it.item_price, 1);
                                 }
                             }
                         }
@@ -993,11 +728,12 @@ function writeItem(orderType) {
                     try {
                         //SUMMARY
                         $.each(cs.additional.items, function (index, value) {
-                            switch (value.item_id) {
+                            switch (value.id) {
                                 case 1:
                                     {
-                                        if (value.useranswer != '' && value.useranswer.config != '0') {
-                                            var vs = value.useranswer;
+                                        var useranswer = value.objVal.Answers[1];
+                                        if (useranswer != '' && useranswer.config != '0') {
+                                            var vs = useranswer;
                                             if (vs.heightpartid != "" && vs.item_price != 0) {
                                                 addLineItem(vs.heightpartid, "Weather seal - " + vs.item_name, Number(vs.heightqty) * cs.QTY, vs.heightitem_price);
                                                 addLineItem(vs.widthpartid, "Weather seal - " + vs.item_name, Number(vs.widthqty) * cs.QTY, vs.widthitem_price);
@@ -1011,72 +747,71 @@ function writeItem(orderType) {
                                     }
                                 case 2:
                                     {
-                                        if (value.useranswer != '') {
-                                            if (Number(value.useranswer.config) != 0) {
+                                        var useranswer = value.objVal.Answers[1];
+                                        if (useranswer != '') {
+                                            if (Number(useranswer.config) != 0) {
 
                                                 var orbPrice = 0;
-                                                for (var orbCount = 0; orbCount < value.useranswer.orbData.length; orbCount++) {
-                                                    var orbQuantity = Number(value.useranswer.orbData[orbCount].quantity);
-                                                    orbPrice += (Number(value.useranswer.orbData[orbCount].item_price) * Number(orbQuantity));
-                                                    addLineItem(value.useranswer.orbData[orbCount].clopayHardwareId, value.useranswer.orbData[orbCount].item_name, orbQuantity * cs.QTY, value.useranswer.orbData[orbCount].item_price, 1);
+                                                for (var orbCount = 0; orbCount < useranswer.orbData.length; orbCount++) {
+                                                    var orbQuantity = Number(useranswer.orbData[orbCount].quantity);
+                                                    orbPrice += (Number(useranswer.orbData[orbCount].item_price) * Number(orbQuantity));
+                                                    addLineItem(useranswer.orbData[orbCount].clopayHardwareId, useranswer.orbData[orbCount].item_name, orbQuantity * cs.QTY, useranswer.orbData[orbCount].item_price, 1);
                                                 }
 
-                                                //if (value.useranswer.QTY == undefined) {
-                                                //    value.useranswer.QTY = 1;
-                                                //}
-                                                //addLineItem(value.useranswer.config, value.item_name, value.useranswer.QTY * cs.QTY, value.useranswer.item_price, 1);
                                             }
                                         }
                                         break;
                                     }
                                 case 5:
                                     {
-                                        if (value.useranswer != '' && value.qty > 30) {
-                                            $.each(value.useranswer.fir, function (index, value) {
-                                                if (value.QTY == undefined) {
-                                                    value.QTY = 1;
-                                                }
-                                                var tn = value.item_name
-                                                tn = tn.replace('1TO', '0-')
-                                                tn = tn.replace('31PLUS', '30+')
-                                                tn = tn.replace('51PLUS', '50+')
-                                                addLineItem(value.config, 'Mileage ' + tn, value.QTY, value.item_price, 1);
-                                            });
+                                        var useranswer = value.objVal.Answers[1];
+                                        if (useranswer != '' && value.selectedMiles > 30) {
+                                            var tn = '';
+                                            if (value.selectedMiles < 31) {
+                                                tn += '0-30';
+                                            } else if (value.selectedMiles >= 31 && value.selectedMiles < 51) {
+                                                tn += '30-50';
+                                            } else if (value.selectedMiles > 50) {
+                                                tn += '50+';
+                                            }
+                                            addLineItem("FIR330", 'Mileage ' + tn, 1, value.price, 1);
                                         }
                                         break;
                                     }
                                 case 7:
                                     {
-                                        if (value.useranswer != '') {
-                                            if (value.useranswer.config != '0') {
-                                                if (value.useranswer.QTY == undefined) {
-                                                    value.useranswer.QTY = 1;
+                                        var useranswer = value.objVal.Answers[1];
+                                        if (useranswer != '') {
+                                            if (useranswer.config != '0') {
+                                                if (useranswer.QTY == undefined) {
+                                                    useranswer.QTY = 1;
                                                 }
                                                 //shankar added for apply promo to medallion hardware
                                                 if ($promoIsEnable == true && lng != 'en') {
-                                                    var MH = Number(Number(value.useranswer.item_price * 0.85).toFixed(2));
+                                                    var MH = Number(Number(useranswer.item_price * 0.85).toFixed(2));
                                                     usp += MH;
                                                 } else {
-                                                    usp += value.useranswer.item_price;
+                                                    usp += useranswer.item_price;
                                                 }
                                                 console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! - 4')
                                                 console.log(usp)
                                                 if (addlTemp.length > 0) {
                                                     addlTemp += ","
                                                 }
-                                                addlTemp += value.useranswer.config;
+                                                addlTemp += useranswer.config;
                                             }
                                         }
                                         break;
                                     }
                                 case 4:
                                     {
+                                        var useranswer = value.objVal.Answers[1];
                                         // Low Headroom Conversion Kit
                                         //if (value.useranswer != '') {
-                                        if (Number(value.useranswer.config) != 0 && value.useranswer.config != undefined) {
+                                        if (Number(useranswer.config) != 0 && useranswer.config != undefined) {
                                             // shankar added config value is coming undefined, when we are not selecting any one of the options in quesion no.4,i.e i added value.useranswer.config != undefined in condition.
-                                            var cl = value.useranswer
-                                            var s5 = value.useranswer.item_price
+                                            var cl = useranswer
+                                            var s5 = useranswer.item_price
                                             if (sprngType == "SPRG-E" || sprngType == "SPRG-EC" || sprngType == "SPRG-ECE" || sprngType == "SPRG-ES") {
                                                 itemTemp += " TLFT=" + '"TLFT-LHR"';
                                             }
@@ -1085,7 +820,7 @@ function writeItem(orderType) {
                                             }
                                             itemTemp += " TRAD=" + '"' + "TRAD-0" + '"';
                                             console.log(usp)
-                                            usp = Number(usp) + Number(value.useranswer.item_price);
+                                            usp = Number(usp) + Number(useranswer.item_price);
                                             console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! - 5')
                                             console.log(usp)
                                             if (di == 1) {
@@ -1102,40 +837,43 @@ function writeItem(orderType) {
                                     break;
                                 case 999:
                                     {
-                                        if (value.useranswer != '') {
-                                            if (Number(value.useranswer.config) != 0) {
-                                                if (value.useranswer.QTY == undefined) {
-                                                    value.useranswer.QTY = 1;
+                                        var useranswer = value.objVal.Answers[1];
+                                        if (useranswer != '') {
+                                            if (Number(useranswer.config) != 0) {
+                                                if (useranswer.QTY == undefined) {
+                                                    useranswer.QTY = 1;
                                                 }
-                                                addLineItem(value.useranswer.config, 'Lead Testing', value.useranswer.QTY, value.useranswer.item_price, 1);
+                                                addLineItem(useranswer.config, 'Lead Testing', useranswer.QTY, useranswer.item_price, 1);
                                             }
                                         }
                                         break;
                                     }
                                 case 12:
                                     {
-                                        if (value.useranswer != '') {
-                                            if (Number(value.useranswer.config) != 0) {
-                                                if (value.useranswer.QTY == undefined) {
-                                                    value.useranswer.QTY = 1;
+                                        var useranswer = value.objVal.Answers[1];
+                                        if (useranswer != '') {
+                                            if (Number(useranswer.config) != 0) {
+                                                if (useranswer.QTY == undefined) {
+                                                    useranswer.QTY = 1;
                                                 }
                                                 if (orderType == 'INSTALLED') {
 
-                                                    addLineItem(value.useranswer.config, value.item_name, value.useranswer.QTY * cs.QTY, value.useranswer.firPrice, 1);
+                                                    addLineItem(useranswer.config, item_name, useranswer.QTY * cs.QTY, useranswer.firPrice, 1);
                                                 }
-                                                addLineItem(value.useranswer.seals[0].config, value.useranswer.seals[0].item_name, value.useranswer.QTY * cs.QTY, value.useranswer.seals[0].item_price, 1);
+                                                addLineItem(useranswer.seals[0].config, useranswer.seals[0].item_name, useranswer.QTY * cs.QTY, useranswer.seals[0].item_price, 1);
                                             }
                                         }
                                         break;
                                     }
                                 default:
                                     {
+
                                         if (value.useranswer != '') {
-                                            if (Number(value.useranswer.config) != 0) {
-                                                if (value.useranswer.QTY == undefined) {
-                                                    value.useranswer.QTY = 1;
+                                            if (Number(useranswer.config) != 0) {
+                                                if (useranswer.QTY == undefined) {
+                                                    useranswer.QTY = 1;
                                                 }
-                                                addLineItem(value.useranswer.config, value.item_name, value.useranswer.QTY * cs.QTY, value.useranswer.item_price, 1);
+                                                addLineItem(useranswer.config, value.item_name, useranswer.QTY * cs.QTY, useranswer.item_price, 1);
                                             }
                                         }
                                     }
@@ -1153,8 +891,8 @@ function writeItem(orderType) {
                     try {
                         if (orderObj.cart[iq].stopMold.items.length > 0 && di == 1) {
                             var stopMoldItems = orderObj.cart[iq].stopMold.items;
-                            addLineItem(stopMoldItems[0].partId, "Stop Mold-" + stopMoldItems[0].color + "-" + stopMoldItems[0].partId, stopMoldItems[0].qty, 0);
-                            addLineItem(stopMoldItems[1].partId, "Stop Mold-" + stopMoldItems[1].color + "-" + stopMoldItems[1].partId, stopMoldItems[1].qty, 0);
+                            addLineItem(stopMoldItems[0].partId, "Stop Mold-" + stopMoldItems[0].color + "-" + stopMoldItems[0].partId, stopMoldItems[0].qty * cs.QTY, 0);
+                            addLineItem(stopMoldItems[1].partId, "Stop Mold-" + stopMoldItems[1].color + "-" + stopMoldItems[1].partId, stopMoldItems[1].qty * cs.QTY, 0);
 
                         }
                     }
@@ -1209,7 +947,7 @@ function writeItem(orderType) {
                         }
                     }
                     $.each(cs.additional.items, function (index, value) {
-                        if (value.useranswer != '') {
+                        if (value.useranswer && value.useranswer != '') {
                             if (Number(value.useranswer.config) != 0) {
                                 if (value.useranswer.QTY == undefined) {
                                     value.useranswer.QTY = 1;
@@ -1261,6 +999,19 @@ function writeItem(orderType) {
     }
 }
 
+function checkForDoubleHinge(selHinge, doorQty) {
+    var hingeQty = selHinge.count;
+    var makeHingeDouble = false;
+    let DoubleQtyHinge = ['0123191', '0123202', '0123104'];
+    let arrDonotShowORB = JSON.stringify(DoubleQtyHinge);
+    makeHingeDouble = arrDonotShowORB.indexOf(selHinge.Config) !== -1 ? true : false;
+
+    if (makeHingeDouble) {
+        hingeQty = hingeQty * 2;
+    }
+    return hingeQty * doorQty;
+};
+
 function writeHeader(subTotal, taxRate, estimatedTax, grandTotal, orderType, orderObj) {
     console.log('writeHeader ----------------------------------')
     //var b=VsObj.userInfoArray;
@@ -1295,10 +1046,10 @@ function writeHeader(subTotal, taxRate, estimatedTax, grandTotal, orderType, ord
     }
     _orderHeader = "\t" + "<ORDER_HEADER>" + _newLine;
     _orderHeader += "\t\t" + "<INSTALLED>" + orderType + "</INSTALLED>" + _newLine;
-    _orderHeader += "\t\t" + "<SUBTOTAL>" + subTotal + "</SUBTOTAL>" + _newLine;
+    _orderHeader += "\t\t" + "<SUBTOTAL>" + subTotal.toFixed(2).toString() + "</SUBTOTAL>" + _newLine;
     _orderHeader += "\t\t" + "<TAXRATE>" + taxRate + "</TAXRATE>" + _newLine;
     _orderHeader += "\t\t" + "<ESTIMATEDTAX>" + estimatedTax + "</ESTIMATEDTAX>" + _newLine;
-    _orderHeader += "\t\t" + "<TOTAL>" + grandTotal + "</TOTAL>" + _newLine;
+    _orderHeader += "\t\t" + "<TOTAL>" + grandTotal.toFixed(2).toString() + "</TOTAL>" + _newLine;
     _orderHeader += "\t\t" + "<MARKETID>" + mid + "</MARKETID>" + _newLine;
     // Order Header - Store Info
     _orderHeader += "\t\t" + "<STORE_DETAILS>" + _newLine;
@@ -1335,15 +1086,11 @@ function addLineItem(itemID, desc, quanty, price, opener) {
 		quant = 1
 	}*/
     // shankar added below lines are added, wrong quantity FIR codes.
-    if (!opnerCatch) {
-        quant = Number(cObj.QTY); // * Number(quanty) //VsObj.getNumOfHDDC(_workingItem)
-    } else {
-        quant = Number(quanty);
-    }
+   
     if (opener == 1) {
         quant = Number(quanty);
     }
-    if (itemID == "FIR330" || itemID == "FIR340") {
+    if (itemID == "FIR330" || itemID == "FIR340" || itemID == "0651056") {
         quant = Number(quanty);
     }
     var p = Number(price);
@@ -1409,8 +1156,8 @@ function webTest() {
     var soapEnv = '<soap12:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/soap/envelope/"> <soap12:Body> <FlashSendPurchaseOrder xmlns="http://www.Hddcadmin.clopay.com/"> <FlashPOXML>'
     var soapEnv2 = '</FlashPOXML> </FlashSendPurchaseOrder> </soap12:Body> </soap12:Envelope>'
     var soapMessage = '<soap12:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/soap/envelope/"> <soap12:Body> <FlashSendPurchaseOrder xmlns="http://www.Hddcadmin.clopay.com/"> <FlashPOXML>' +
-      getFixedHTML(_orderPO) + '</FlashPOXML> </FlashSendPurchaseOrder> </soap12:Body> </soap12:Envelope>';
-      console.log(_orderPO);
+        getFixedHTML(_orderPO) + '</FlashPOXML> </FlashSendPurchaseOrder> </soap12:Body> </soap12:Envelope>';
+    console.log(_orderPO);
     if (_sendMe) {
         $.ajax({
             type: "POST",

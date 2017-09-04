@@ -166,13 +166,19 @@
                     <span [innerHtml]="details.constructionName"></span>
                     </span>
                 </li>
+                <li *ngIf="details.color.claddingName">
+                    <span>
+                        <strong> Cladding & Overlay </strong>
+                        <span [innerHTML]="details.color.claddingName"></span>
+                    </span>
+                </li>
                 <li *ngIf="detailsInfo.color">
                     <span>
                         <strong>Color</strong>
                         <span [innerHTML]="details.color.base.name"></span>
                     </span>
                 </li>
-                <li *ngIf="detailsInfo.overlayName">
+                <li *ngIf="details.color.overlay.name && details.collectionId == 11">
                     <span>
                         <strong>Overlay Color</strong>
                         <span [innerHTML]="details.color.overlay.name"></span>
@@ -189,6 +195,8 @@
                         <strong>Glass Type</strong>
                         <span [innerHTML]="details.topSection.glassType.name"></span>
                     </span>
+                    <span *ngIf="details.windowPlacement" [innerHTML]="details.windowPlacement"></span>
+                        
                 </li>
                 <li *ngIf="detailsInfo.Hardware">
                     <span>

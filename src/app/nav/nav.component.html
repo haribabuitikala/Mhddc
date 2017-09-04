@@ -3,14 +3,18 @@
         <ul class="padding-0">
             <li *ngFor="let step of steps" [ngClass]="{'current': step.No == activeStep, 'visited': step.visited, 'disabled': step.disabled }">
                 <div *ngIf="step.No > 0 && !step.visited" (click)="goToStep(step, true)">
-                    <img *ngIf="  step.No != activeStep" src="../../assets/images/left-nav/leftnav{{step.No}}iconNVP.png" alt="" />
-                    <img *ngIf=" step.No == activeStep" src="../../assets/images/left-nav/leftnav{{step.No}}iconCP.png" alt="" />
-                    <span class="hide">{{ step.Name }}</span>
+                    <div class="leftnavContainer">
+                        <img *ngIf="  step.No != activeStep" src="../../assets/images/left-nav/leftnav{{step.No}}iconNVP.png" alt="" />
+                    	<img *ngIf=" step.No == activeStep" src="../../assets/images/left-nav/leftnav{{step.No}}iconCP.png" alt="" />
+                        <span class="hide">{{ step.Name }}</span>
+                    </div>
                 </div>
                 <div *ngIf="step.No > 0 && step.visited" (click)="goToStep(step)">
-                    <img *ngIf="step.No != activeStep" src="../../assets/images/left-nav/leftnav{{step.No}}iconVP.png" alt="" />
-                    <img *ngIf=" step.No == activeStep" src="../../assets/images/left-nav/leftnav{{step.No}}iconCP.png" alt="" />
-                    <span class="hide">{{ step.Name }}</span>
+                    <div class="leftnavContainer">
+                        <img *ngIf="step.No != activeStep" src="../../assets/images/left-nav/leftnav{{step.No}}iconVP.png" alt="" />
+                        <img *ngIf=" step.No == activeStep" src="../../assets/images/left-nav/leftnav{{step.No}}iconCP.png" alt="" />
+                        <span class="hide">{{ step.Name }}</span>
+                    </div>
                 </div>
                 <div *ngIf="step.No == 0" (click)="home.open()">
                     <img src="../../assets/images/left-nav/leftnavHMiconVP.png" alt="" />

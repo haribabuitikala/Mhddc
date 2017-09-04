@@ -27,7 +27,7 @@ export class ResDoorConfigurationComponent implements OnInit {
     imageSrc = 'https://dev-mhddc.clopay.com/emailimages/res-1498118638696.jpeg';
     title = "";
     description = "";
-    fbDescription ="";
+    fbDescription = "";
     twitterDescription = "";
 
     pageNo;
@@ -112,7 +112,11 @@ export class ResDoorConfigurationComponent implements OnInit {
             'twitter');
         this.pintbtn = new ShareButton(ShareProvider.PINTEREST, '<i class="fa fa-pinterest-p"></i>',
             'pinterest');
-        this.doorWithHome = document.querySelector('#homeVis canvas')['toDataURL']();
+        if (document.querySelector('#homeVis canvas') && document.querySelector('#homeVis canvas')['toDataURL']) {
+            this.doorWithHome = document.querySelector('#homeVis canvas')['toDataURL']();
+        } else if (document.querySelector('#doorVis canvas') && document.querySelector('#doorVis canvas')['toDataURL']) {
+            this.doorWithHome = document.querySelector('#doorVis canvas')['toDataURL']();
+        }
         this.socialshare();
     }
     notify(event) {
@@ -661,14 +665,14 @@ table td {
         return body;
     }
 
-    closeEmailPopup(){
+    closeEmailPopup() {
         console.log("email close icon clicked");
         this.emailMsg = '';
         this.shareEmail = "";
     }
-    
+
     sendMail(email) {
-        if (this.shareEmail !== '') {
+        if (this.shareEmail) {
             var imageUrl;
             var d = new Date();
             var timeStamp = d.getTime();
@@ -734,6 +738,9 @@ table td {
                         this.dataService.handleError();
                     });
             }
+        } else {
+            this.showEmailMsg = true;
+            return;
         }
     };
 
@@ -749,31 +756,60 @@ table td {
     prevBtn(path) {
         this.route.navigateByUrl('/config/additionalOptions');
     }
-
+    shareImageName = '';
     socialshare() {
         console.log("calling social share method");
         var imageUrl;
         var d = new Date();
         var timeStamp = d.getTime();
-
-        let params = {
-            base64String: this.doorWithHome,//this.utils.resFlow.imgSrc,
-            imagename: 'SocialShare-' + timeStamp,
-            imageformat: 'jpeg'
-        }
-        this.dataService.getImageUrl(params)
+        this.shareImageName = 'SocialShare-' + timeStamp;
+        if (this.doorWithHome) {
+            let params = {
+                base64String: this.doorWithHome,//this.utils.resFlow.imgSrc,
+                imagename: 'SocialShare-' + timeStamp,
+                imageformat: 'jpeg',
+                title: 'Check out my Clopay Garage Door design!',
+                description: "Door shown is the Clopay " + this.utils.resFlowSession.resDetails.collectionName.replace(/[^a-zA-Z ]/g, "") + ", Model " + this.utils.resFlowSession.resDoorObj.construction.construction['ClopayModelNumber'] + ". Design your door today!"
+            }
+            this.dataService.getImageUrl(params)
             .subscribe(
             res => {
                 this.socialImageUrl = res;
                 this.title = "";
                 this.fbDescription = "Door shown is the Clopay " + this.utils.resFlowSession.resDetails.collectionName.replace(/[^a-zA-Z ]/g, "") + ", Model " + this.utils.resFlowSession.resDoorObj.construction.construction['ClopayModelNumber'] + ". Design your door today!";
                 this.twitterDescription = "Check out My @ClopayGarageDoor design! Door shown is the Clopay " + this.utils.resFlowSession.resDetails.collectionName.replace(/[^a-zA-Z ]/g, "") + ", Model " + this.utils.resFlowSession.resDoorObj.construction.construction['ClopayModelNumber'] + ". Design yours!";
-                this.description  = "My Clopay Garage Door design! Door shown is a Clopay " + this.utils.resFlowSession.resDetails.collectionName.replace(/[^a-zA-Z ]/g, "") + ", Model " + this.utils.resFlowSession.resDoorObj.construction.construction['ClopayModelNumber'] + ". Design your door today!";
+                this.description = "My Clopay Garage Door design! Door shown is a Clopay " + this.utils.resFlowSession.resDetails.collectionName.replace(/[^a-zA-Z ]/g, "") + ", Model " + this.utils.resFlowSession.resDoorObj.construction.construction['ClopayModelNumber'] + ". Design your door today!";
+            },
+            err => {
+                this.dataService.handleError();
+            });
+        }
+       
+    }
+
+    getshareFBLink() {
+
+        let params = {
+            imagename: this.shareImageName,
+            imageurl: this.socialImageUrl,
+            imageformat: 'jpeg',
+            title: 'Check out my Clopay Garage Door design!',
+            base64String: '',
+            description: "Door shown is the Clopay " + this.utils.resFlowSession.resDetails.collectionName.replace(/[^a-zA-Z ]/g, "") + ", Model " + this.utils.resFlowSession.resDoorObj.construction.construction['ClopayModelNumber'] + ". Design your door today!"
+
+        }
+        this.dataService.getFBShareLink(params)
+            .subscribe(
+            res => {
+                window.open('https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(res));
             },
             err => {
                 this.dataService.handleError();
             });
     }
 
+    getshareHouzz() {
+        window.open('https://www.houzz.com/imageClipperUpload?imageUrl=' + encodeURIComponent(this.socialImageUrl));
+    }
 
 }

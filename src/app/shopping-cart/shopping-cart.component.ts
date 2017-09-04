@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, Directive, Input, Output, EventEmitter, AfterViewInit } from '@angular/core';
+import { Component, OnInit, ViewChild, Directive, Input, Output, EventEmitter, AfterViewInit, AfterViewChecked, ChangeDetectorRef } from '@angular/core';
 import { ModalComponent } from "ng2-bs3-modal/ng2-bs3-modal";
 import { AppComponent } from "../app.component";
 import { Router } from '@angular/router';
@@ -15,7 +15,7 @@ declare var _: any;
     templateUrl: './shopping-cart.component.html',
     styleUrls: ['./shopping-cart.component.less', '../install//install.component.less']
 })
-export class ShoppingCartComponent implements OnInit {
+export class ShoppingCartComponent implements OnInit, AfterViewChecked {
     @ViewChild('continue') continue: ModalComponent;
     @ViewChild('resShoppingCartTerms') resShoppingCartTerms: ModalComponent;
     @ViewChild('gdoShoppingCartTerms') gdoShoppingCartTerms: ModalComponent;
@@ -44,13 +44,31 @@ export class ShoppingCartComponent implements OnInit {
     cartlen = this.utils.gdoFlowSession.cart.length || this.utils.resFlowSession.cart.length;
     showPreTax = this.cartlen > 0 ? true : false;
 
+ngAfterViewChecked() {
+    this.cdref.detectChanges();
+    this.cartlen = 0;
+    if (this.utils.gdoFlowSession.cart.length > 0 && this.utils.gdoFlowSession.added) {
+        this.cartlen = this.utils.gdoFlowSession.cart.length;
+    }
+    if (this.utils.resFlowSession.cart.length > 0) {
+        this.cartlen = this.utils.resFlowSession.cart.length;
+    }
+
+    this.showPreTax = this.cartlen > 0 ? true : false;
+    if (this.utils.resFlowSession.resDoorObj.TYPE !== 'RES') {
+        this.getItemPrice();
+    } else {
+        this.getTotalCartValue();
+    }
+}
 
 constructor(private appComp: AppComponent
     , private navComp: NavService
     , private utils: AppUtilities
     , private navComponent: NavComponent
     , private dataStore: CollectionData
-    , private route: Router) {
+    , private route: Router
+    , private cdref: ChangeDetectorRef) {
 }
 
 ngOnInit() {       
@@ -84,9 +102,24 @@ getItemPrice() {
     this.isGdo = true;
     if (!this.utils.utilities.directFlow) {
         this.itemPrice = this.utils.calculateTotalPrice();
+        let kPrice = _.sumBy(this.dataStore.gdoOpenerAccessories, function (o) {
+            return o.price * o.count;
+        });
+        this.itemPrice = this.itemPrice + kPrice;
     } else {
-        this.data = this.dataStore.gdoAdditionalDirect;
-        this.itemPrice = this.data.item_price * this.qty;
+        // Fix for avoiding binding data on remove item
+        if (this.utils.gdoFlowSession.cart.length > 0) {
+            this.data = this.dataStore.gdoAdditionalDirect;
+        }
+        if (this.data) {
+            // Better this way to calculate price in direct price to make less regression
+            this.itemPrice = (this.data.item_price * this.qty) + (
+                this.utils.utilities.singlep +
+                this.utils.utilities.doublep +
+                this.utils.utilities.kPrice +
+                this.utils.utilities.distancePrice
+            );
+        }
     }
 }
 

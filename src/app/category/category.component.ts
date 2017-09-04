@@ -1,11 +1,11 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
-import {ModalComponent} from "ng2-bs3-modal/ng2-bs3-modal";
-import {Router} from '@angular/router';
-import {LangEnglishService} from "../shared/english";
-import {AppUtilities} from "../shared/appUtilities";
-import {AppComponent} from "../app.component";
-import {CollectionService} from "../shared/data.service";
-import {CollectionData} from "../collection/collection-data";
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { ModalComponent } from "ng2-bs3-modal/ng2-bs3-modal";
+import { Router } from '@angular/router';
+import { LangEnglishService } from "../shared/english";
+import { AppUtilities } from "../shared/appUtilities";
+import { AppComponent } from "../app.component";
+import { CollectionService } from "../shared/data.service";
+import { CollectionData } from "../collection/collection-data";
 import { NavComponent } from "../nav/nav.component";
 declare var $: any;
 
@@ -19,6 +19,7 @@ export class CategoryComponent implements OnInit {
     @ViewChild('gdo') gdo: ModalComponent;
     lang;
     isService: boolean;
+    isShowGDO: boolean;
 
     constructor(private language: LangEnglishService
         , private route: Router
@@ -35,6 +36,9 @@ export class CategoryComponent implements OnInit {
         this.appComponent.currScreen = 2;
         let utils = this.utilities.utilities;
         this.appComponent.showStepIndicator = false;
+        let arrgdoshutStores = JSON.stringify(this.utilities.gdoshutStores);
+        let storeNum = this.utilities.utilities.storenumber;
+        this.isShowGDO = arrgdoshutStores.indexOf(storeNum) !== -1 ? false : true;
     }
 
     navigateTo(path, flow, count) {
@@ -54,6 +58,7 @@ export class CategoryComponent implements OnInit {
             let storeNum = this.utilities.utilities.storenumber;
             let arr = JSON.stringify(this.utilities.gdoCheck);
             this.utilities.resFlowSession.resDoorObj.TYPE = "GDO";
+            this.utilities.gdoFlowSession.added = false;
             this.utilities.gdoFlowSession.cart.push({
                 "INSTALLTYPE": "GDO",
                 "QTY": 1,

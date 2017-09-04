@@ -35,7 +35,7 @@ export class ConfigComponent implements OnInit, AfterViewInit, AfterViewChecked 
     whdata;
     openerName;
     showDetailTxt = true;
-    showType:string = '';
+    showType: string = '';
     detailsInfo = {
         construction: false,
         baseName: false,
@@ -54,7 +54,7 @@ export class ConfigComponent implements OnInit, AfterViewInit, AfterViewChecked 
 
     ngAfterViewChecked() {
         this.cdref.detectChanges();
-        this.pageTitle = this.navComponent.flowActiveStep + '.' + this.navComponent.pageTitle;        
+        this.pageTitle = this.navComponent.flowActiveStep + '.' + this.navComponent.pageTitle;
         this.showDetailTxt = window.location.hash.indexOf('doorConfiguration') !== -1 ? false : true;
         if (this.utils.resFlowSession.cart.length === 0) {
             if ([10, 11, 12, 13].indexOf(this.appComponent.activeStep) !== -1) {
@@ -96,17 +96,83 @@ export class ConfigComponent implements OnInit, AfterViewInit, AfterViewChecked 
     }
 
 
+    lerp(p1, p2, t) {
+        return {
+            x: p1.x + (p2.x - p1.x) * t,
+            y: p1.y + (p2.y - p1.y) * t
+        };
+    }
+    drawDoorToCorners(ctx, corners?, srcCanvas?) {
+        var step = 4;
+        var p1, p2, p3, p4, y1c, y2c, y1n, y2n,
+            w = srcCanvas.width - 1, // -1 to give room for the "next" points
+            h = srcCanvas.height - 1;
+
+        for (let y = 0; y < h; y += step) {
+            for (let x = 0; x < w; x += step) {
+                y1c = this.lerp(corners[0], corners[3], y / h);
+                y2c = this.lerp(corners[1], corners[2], y / h);
+                y1n = this.lerp(corners[0], corners[3], (y + step) / h);
+                y2n = this.lerp(corners[1], corners[2], (y + step) / h);
+
+                // corners of the new sub-divided cell p1 (ul) -> p2 (ur) -> p3 (br) -> p4 (bl)
+                p1 = this.lerp(y1c, y2c, x / w);
+                p2 = this.lerp(y1c, y2c, (x + step) / w);
+                p3 = this.lerp(y1n, y2n, (x + step) / w);
+                p4 = this.lerp(y1n, y2n, x / w);
+
+                ctx.drawImage(srcCanvas, x, y, step, step, p1.x, p1.y, // get most coverage for w/h:
+                    Math.ceil(Math.max(step, Math.abs(p2.x - p1.x), Math.abs(p4.x - p3.x))) + 1,
+                    Math.ceil(Math.max(step, Math.abs(p1.y - p4.y), Math.abs(p2.y - p3.y))) + 1)
+            }
+        }
+    }
+
+    drawDoorHolder(ctx, p) {
+        var x1 = +p._UL.split(',')[0];
+        var y1 = +p._UL.split(',')[1];
+
+        var x2 = +p._UR.split(',')[0];
+        var y2 = +p._UR.split(',')[1];
+
+        var x3 = +p._LR.split(',')[0];
+        var y3 = +p._LR.split(',')[1];
+
+        var x4 = +p._LL.split(',')[0];
+        var y4 = +p._LL.split(',')[1];
+
+
+        ctx.beginPath();
+        ctx.moveTo(x1, y1);
+        if (p.type === 2) {
+            const arch = p.arch.split(',');
+            ctx.quadraticCurveTo(+arch[0], +(arch[1]) - 15, x2, y2);
+        } else if (p.type === 3) {
+            const angle1 = p.angle1.split(',');
+            ctx.lineTo(+angle1[0], +angle1[1]);
+
+            const angle2 = p.angle2.split(',');
+            ctx.lineTo(+angle2[0], +angle2[1]);
+
+            ctx.lineTo(x2, y2);
+        }
+        ctx.lineTo(x3, y3);
+        ctx.lineTo(x4, y4);
+        ctx.closePath();
+        ctx.clip();
+
+    }
     drawDoors(selectedHome, nCanvas2d) {
-		
-		var query = window.matchMedia("(orientation:landscape)");
-		var points;
-			if (query.matches){
-				//points = $.makeArray(selectedHome.dcoords.pointland);
-				points = $.makeArray(selectedHome.dcoords.point);
-			}else{
-				points = $.makeArray(selectedHome.dcoords.point);
-			}
-		     points.forEach(p => {
+
+        var query = window.matchMedia("(orientation:landscape)");
+        var points;
+        if (query.matches) {
+            //points = $.makeArray(selectedHome.dcoords.pointland);
+            points = $.makeArray(selectedHome.dcoords.point);
+        } else {
+            points = $.makeArray(selectedHome.dcoords.point);
+        }
+        points.forEach(p => {
             var x1 = +p._UL.split(',')[0];
             var y1 = +p._UL.split(',')[1];
 
@@ -119,11 +185,46 @@ export class ConfigComponent implements OnInit, AfterViewInit, AfterViewChecked 
             var x4 = +p._LR.split(',')[0];
             var y4 = +p._LR.split(',')[1];
 
-            var w = x2 - (x1);
-            var h = y3 - (y1);
-
             var sConvas = document.querySelector('.vsDoor');
-            nCanvas2d.drawImage(sConvas, x1, y1, w, h);
+
+            //nCanvas2d.drawImage(sConvas, x1, y1, w, h);
+            var corners = [];
+            if (p.type === 2) {
+                const arch = p.arch.split(',');
+                y1 = +(arch[1]) + 15;
+                y2 = +(arch[1]) + 15;
+            } else if (p.type === 3) {
+                const angle1 = p.angle1.split(',');
+                y1 = +(angle1[1]);
+                const angle2 = p.angle2.split(',');
+                y2 = +(angle2[1]);
+            }
+            corners.push({
+                x: x1,
+                y: y1
+            });
+            corners.push({
+                x: x2,
+                y: y2
+            });
+            corners.push({
+                x: x4,
+                y: y4
+            });
+            corners.push({
+                x: x3,
+                y: y3
+            });
+
+            var dCanvas = $('<canvas/>');
+            dCanvas[0].setAttribute('width', selectedHome._imgwidth);
+            dCanvas[0].setAttribute('height', selectedHome._imgheight);
+            var dCanvasCtx = dCanvas[0].getContext('2d');
+            if (p.type === 2 || p.type === 3) {
+                this.drawDoorHolder(dCanvasCtx, p);
+            }
+            this.drawDoorToCorners(dCanvasCtx, corners, sConvas);
+            nCanvas2d.drawImage(dCanvas[0], 0, 0, selectedHome._imgwidth, selectedHome._imgheight);
             nCanvas2d.save();
         });
 
@@ -134,22 +235,23 @@ export class ConfigComponent implements OnInit, AfterViewInit, AfterViewChecked 
             let selectedHome = window['selectedHome'];
             if (selectedHome) {
                 var nCanvas = $('<canvas/>');
-				var query = window.matchMedia("(orientation:landscape)");
+                var query = window.matchMedia("(orientation:landscape)");
                 if (query.matches) {
-					//nCanvas[0].setAttribute('width', selectedHome._landimgwidth);
-					//nCanvas[0].setAttribute('height', selectedHome._landimgheight);
-				nCanvas[0].setAttribute('width', selectedHome._imgwidth);
-                nCanvas[0].setAttribute('height', selectedHome._imgheight);
-					
-				}else{
-				nCanvas[0].setAttribute('width', selectedHome._imgwidth);
-                nCanvas[0].setAttribute('height', selectedHome._imgheight);
-				}
+                    //nCanvas[0].setAttribute('width', selectedHome._landimgwidth);
+                    //nCanvas[0].setAttribute('height', selectedHome._landimgheight);
+                    nCanvas[0].setAttribute('width', selectedHome._imgwidth);
+                    nCanvas[0].setAttribute('height', selectedHome._imgheight);
+
+                } else {
+                    nCanvas[0].setAttribute('width', selectedHome._imgwidth);
+                    nCanvas[0].setAttribute('height', selectedHome._imgheight);
+                }
                 var nCanvas2d = nCanvas[0].getContext('2d');
                 var himg = new Image();
                 himg.onload = () => {
+                    // Need to refactor
                     if (selectedHome._upload && selectedHome._upload == true) {
-                        nCanvas2d.drawImage(himg, 0, 0, selectedHome._imgwidth, selectedHome._imgheight);
+                        nCanvas2d.drawImage(selectedHome.canvasElem, 0, 0, selectedHome._imgwidth, selectedHome._imgheight);
                         nCanvas2d.save();
                         this.drawDoors(selectedHome, nCanvas2d, );
                     } else {
@@ -163,24 +265,27 @@ export class ConfigComponent implements OnInit, AfterViewInit, AfterViewChecked 
                 himg.onerror = () => {
                     res({});
                 };
-				
-				var query = window.matchMedia("(orientation:landscape)");
+
+                var query = window.matchMedia("(orientation:landscape)");
                 if (selectedHome._upload && selectedHome._upload == true) {
-                    himg.src = selectedHome.imgSrc;
-                } else if(query.matches){
-						 
-						 //himg.src = window['imgFolder'] + '/homeimages/' + selectedHome._imagelgland;
-						  himg.src = window['imgFolder'] + '/homeimages/' + selectedHome._imagelg
-						
-					}else{
-						 himg.src = window['imgFolder'] + '/homeimages/' + selectedHome._imagelg;
-					}
+                    nCanvas2d.drawImage(selectedHome.canvasElem, 0, 0, selectedHome._imgwidth, selectedHome._imgheight);
+                    nCanvas2d.save();
+                    this.drawDoors(selectedHome, nCanvas2d, );
+                    res({ canvas: nCanvas[0] });
+                } else if (query.matches) {
+
+                    //himg.src = window['imgFolder'] + '/homeimages/' + selectedHome._imagelgland;
+                    himg.src = window['imgFolder'] + '/homeimages/' + selectedHome._imagelg
+
+                } else {
+                    himg.src = window['imgFolder'] + '/homeimages/' + selectedHome._imagelg;
+                }
             }
         });
 
     }
 
-    
+
     ngAfterViewInit() {
         $('#doorVis').DoorVisualization({
             NAME: 'configView',
@@ -191,18 +296,18 @@ export class ConfigComponent implements OnInit, AfterViewInit, AfterViewChecked 
             doneCallback: () => {
                 if (this.navComponent.flowType == 'resquick') {
                     this.isDoor = true;
-                     $('body').removeClass('loader');
+                    $('body').removeClass('loader');
                     $('#doorVis').removeClass('default-canvas-hide');
-					$(".switcher-image-sec").css('min-height', '220px');
-                            if (this.utils.utilities.doubleDoor) {
-                                var switchheight = $(".switcher-image-sec").height();
-                                var canvasdoorheight = $(".switcher-image-sec #doorVis").height();
-                                var canvasdisplayheight = $(".switcher-image-sec #doorVis canvas").height();
-                                var margintopheight = switchheight - canvasdoorheight;
-                                $(".switcher-image-sec #doorVis canvas").css({ 'margin-top': margintopheight / 2 });
-                            }
-					
-					
+                    $(".switcher-image-sec").css('min-height', '220px');
+                    if (this.utils.utilities.doubleDoor) {
+                        var switchheight = $(".switcher-image-sec").height();
+                        var canvasdoorheight = $(".switcher-image-sec #doorVis").height();
+                        var canvasdisplayheight = $(".switcher-image-sec #doorVis canvas").height();
+                        var margintopheight = switchheight - canvasdoorheight;
+                        $(".switcher-image-sec #doorVis canvas").css({ 'margin-top': margintopheight / 2 });
+                    }
+
+
                 } else {
                     this.generateDoorWithHome().then(({ canvas }) => {
                         if (canvas) {
@@ -212,7 +317,7 @@ export class ConfigComponent implements OnInit, AfterViewInit, AfterViewChecked 
                                 height: '90%',
                                 width: '90%'
                             });
-							$(".switcher-image-sec").css('min-height', '220px');
+                            $(".switcher-image-sec").css('min-height', '220px');
                             if (this.utils.utilities.doubleDoor) {
                                 var switchheight = $(".switcher-image-sec").height();
                                 var canvasdoorheight = $(".switcher-image-sec #doorVis").height();
@@ -221,7 +326,7 @@ export class ConfigComponent implements OnInit, AfterViewInit, AfterViewChecked 
                                 $(".switcher-image-sec #doorVis canvas").css({ 'margin-top': margintopheight / 2 });
                             }
                             //this.utils.removeLoader();
-                            
+
                             //this.utils.removeLoader();
                             if ($('#homeVis').hasClass('default-canvas-hide')) {
                                 //_this.isDoor
@@ -236,12 +341,12 @@ export class ConfigComponent implements OnInit, AfterViewInit, AfterViewChecked 
                                 $('body').removeClass('loader');
                             }
                         } else {
-                             $('body').removeClass('loader');
+                            $('body').removeClass('loader');
                         }
-                        
+
                     });
                 }
-                
+
             }
         });
     }
@@ -256,8 +361,8 @@ export class ConfigComponent implements OnInit, AfterViewInit, AfterViewChecked 
         path === "/config/design" ? path = "/config" : path = this.location.path();
         // this.appComponent.currScreen = this.appComponent.navElems.indexOf(path);
         this.calculatePrice();
-       // $('.switcher-box').css({ right: 28 });
-		$('.switcher-box').css({ right: 48 });
+        // $('.switcher-box').css({ right: 28 });
+        $('.switcher-box').css({ right: 48 });
 
         this.homeImage = this.utils.resFlow.selectedHome;
 
@@ -267,10 +372,10 @@ export class ConfigComponent implements OnInit, AfterViewInit, AfterViewChecked 
             $(this).hide();
             $('.switcher-box-home').show().removeClass('hide').animate({ 'right': '48', 'animation-duration': '2s' });
             $('.switcher-image').addClass('homeImage');
-			$('#homeVis , #doorVis').addClass('default-canvas-hide')
-			setTimeout(function () {
-								$('#homeVis , #doorVis').removeClass('default-canvas-hide')								
-							}, 5)
+            $('#homeVis , #doorVis').addClass('default-canvas-hide')
+            setTimeout(function () {
+                $('#homeVis , #doorVis').removeClass('default-canvas-hide')
+            }, 5)
             $this.isDoor = false;
         });
 
@@ -278,10 +383,10 @@ export class ConfigComponent implements OnInit, AfterViewInit, AfterViewChecked 
             $(this).hide();
             $('.switcher-box').show().removeClass('hide').animate({ 'right': '28', 'animation-duration': '2s' });
             $('.switcher-image').removeClass('homeImage');
-			$('#homeVis , #doorVis').addClass('default-canvas-hide')
-			setTimeout(function () {
-								$('#homeVis , #doorVis').removeClass('default-canvas-hide')								
-							}, 5)
+            $('#homeVis , #doorVis').addClass('default-canvas-hide')
+            setTimeout(function () {
+                $('#homeVis , #doorVis').removeClass('default-canvas-hide')
+            }, 5)
             $this.isDoor = true;
         });
 
@@ -299,7 +404,7 @@ export class ConfigComponent implements OnInit, AfterViewInit, AfterViewChecked 
 
         this.openerName = this.details.opener.name + (this.details.opener.items.length);
         this.quickFlow = this.navComponent.flowType == 'resquick' ? true : false;
-        
+
     }
 
     renderCanvas(obj?, targ?, elemSelector?) {
@@ -375,7 +480,7 @@ export class ConfigComponent implements OnInit, AfterViewInit, AfterViewChecked 
                 buildObj.constructionswaprule = dor.construction.construction.constructionswaprule;
             }
 
-            if (dor.construction.cladding != '') {
+            if (dor.construction.cladding != '' && dor.construction.cladding != null) {
                 buildObj.constructionswaprule = dor.construction.cladding.imageswaprule;
             }
             try {
@@ -556,7 +661,7 @@ export class ConfigComponent implements OnInit, AfterViewInit, AfterViewChecked 
             this.itemPriceInstall = this.utils.utilities.itemPriceInstall;
             this.itemPriceDY = this.utils.utilities.itemPriceDY;
             //Jyothi - Promo
-            this.utils.utilities.promoSaving = this.utils.resFlowSession.calculatePromoSavings();  
+            this.utils.utilities.promoSaving = this.utils.resFlowSession.calculatePromoSavings();
         } catch (g) {
         }
     }
@@ -575,11 +680,16 @@ export class ConfigComponent implements OnInit, AfterViewInit, AfterViewChecked 
         // var hgt;
         var detailshgt = $('.inner-router').height();
         var bodyWdt = $('body').width();
+        this.details.windowPlacement = ""
 
         this.details.widthF = this.utils.resFlow.wf;
         this.details.widthI = this.utils.resFlow.wi;
         this.details.heightF = this.utils.resFlow.hf;
         this.details.heightI = this.utils.resFlow.hi;
+        this.details.collectionId = this.utils.resFlowSession.resDoorObj.product.product['item_id'];
+        if (this.utils.resFlowSession.resDoorObj.windows.placement && !!this.utils.resFlowSession.resDoorObj.windows.placement.item_description) {
+            this.details.windowPlacement = this.utils.resFlowSession.resDoorObj.windows.placement.item_description;
+        }
         // switch (bodyWdt) {
         //     case 414:
         //         detailshgt = "18vh";
@@ -606,7 +716,7 @@ export class ConfigComponent implements OnInit, AfterViewInit, AfterViewChecked 
         let count = this.utils.resFlowSession.resDoorObj.QTY;
         if (isIncrement && count < 6) {
             this.utils.resFlowSession.resDoorObj.QTY = count + 1;
-        } else if (count > 1 && count !== 6) {
+        } else if (!isIncrement && count > 1) {
             this.utils.resFlowSession.resDoorObj.QTY = count - 1;
         }
         this.quantity = this.utils.resFlowSession.resDoorObj.QTY;

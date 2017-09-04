@@ -199,6 +199,10 @@ export class HardwareComponent implements OnInit {
               if (defaultCount == 2 && hardware.hinge['placementlist'].split(';').length > 1) {
                 this.countManager.hinge = 1;
               }
+
+              this.utils.resFlowSession.resDoorObj.hardware.hinge['count'] = this.countManager.hinge;
+              this.utils.resFlowSession.resDoorObj.hardware.hinge['placement'] = this.hingePlacements[this.countManager.hinge];
+              
               if (hardware.hinge['placement'].split(':').length > 0) {
                 hardware.hinge['count'] = parseInt(hardware.hinge['placement'].split(':')[0]);
               }
@@ -352,11 +356,28 @@ export class HardwareComponent implements OnInit {
     return false;
   }
 
+setProductID() {
+        let utils = this.utils.utilities;
+        var resDoorObj = this.utils.resFlowSession.resDoorObj;
+        var selectedClopayModelNumber = resDoorObj.construction.construction['ClopayModelNumber'];
+        var modelBasedProductId = resDoorObj.product.product['item_id'];;
+        if (!resDoorObj.QPB) {
+            if (selectedClopayModelNumber == "HDS" || selectedClopayModelNumber == "HDSL") {
+                modelBasedProductId = '14'
+            }
+            else if (selectedClopayModelNumber == "HDB" || selectedClopayModelNumber == "HDB4" || selectedClopayModelNumber == "HDBL") {
+                modelBasedProductId= '24'
+            }
+
+        }
+        return modelBasedProductId;
+    }
 
   loadData() {
     var resDoorObj = this.utils.resFlowSession.resDoorObj;
+    var modelBasedProductId =   this.setProductID();
     var params = {
-      productid: resDoorObj.product.product['item_id'],
+      productid: modelBasedProductId,
       natmarketid: this.utils.utilities.natmarketid,
       windcode: resDoorObj.product.product['windcode'],
       designid: resDoorObj.design.dsgn['item_id'],
@@ -372,6 +393,9 @@ export class HardwareComponent implements OnInit {
       dheightFt: this.utils.utilities.hf,
       dheightIn: this.utils.utilities.hi
     };
+
+
+    
 
     this.dataService.getHardware(params).subscribe(
       res => {

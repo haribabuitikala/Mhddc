@@ -83,7 +83,11 @@ export class AdditionalOptionsComponent implements OnInit {
 
 
     ngOnInit() {
-        // this.utils.resetCalc();
+        this.utils.utilities.singlep = 0;
+        this.utils.utilities.doublep = 0;
+        this.utils.utilities.kPrice = 0;
+        this.utils.utilities.distancePrice = 0;
+
         this.appComponent.next = 'Next';
         this.pageNo = this.utils.utilities.currPage;
         this.showMenu = this.utils.utilities.showNav;
@@ -102,6 +106,10 @@ export class AdditionalOptionsComponent implements OnInit {
         } else {
             $('.showDetails').show();
             this.gdoConfig.itemPrice = this.utils.calculateTotalPrice();
+            let kPrice = _.sumBy(this.dataStore.gdoOpenerAccessories, function (o) {
+                return o.price * o.count;
+            });
+            this.gdoConfig.itemPrice =  this.gdoConfig.itemPrice + kPrice;
         }
         this.hidePrev = this.navComponent.subFlow ? true : false;
         if (this.appComponent) {
@@ -229,7 +237,7 @@ export class AdditionalOptionsComponent implements OnInit {
             // this is for gdo shopping cart
             // this.utils.gdoFlowSession.cart[0].additional.items.push(this.utils.gdoOpenerAccessories);
 
-            obj["useranswer"] = this.utils.gdoUserAnswers[1];
+            obj["useranswer"] = this.utils.gdoUserAnswers[0];
             obj.QTY = 1;
             obj.qty = 1;
             // this.gdoConfig.itemPrice = this.calculateTotalPrice(this.utils.utilities.item_price, this.singleOpener, this.doubleOpener, this.mileOpenPr, this.qty);
@@ -265,7 +273,7 @@ export class AdditionalOptionsComponent implements OnInit {
             // this.utils.gdoFlowSession.cart[0].additional.items.push(k);
             // this is for gdo shopping cart
 
-            obj["useranswer"] = this.utils.gdoUserAnswers[2];
+            obj["useranswer"] = this.utils.gdoUserAnswers[1];
             obj.QTY = 1;
             obj.qty = 1;
 
@@ -302,6 +310,8 @@ export class AdditionalOptionsComponent implements OnInit {
     directDoorVal = 1;
 
     directDoor(event, flow) {
+        this.utils.utilities.singlep = 0;
+        this.utils.utilities.doublep = 0;
         let val = +event.target.value;
         this.directDoorVal = +event.target.value;
         let k = flow;
@@ -314,6 +324,10 @@ export class AdditionalOptionsComponent implements OnInit {
                 id: 0,
                 count: val //=== 1 ? val = 1 : val - 1
             };
+            let obj = this.utils.gdoFlowSession.cart[0].additional.items[0];
+            obj["useranswer"].QTY = k.count;
+            obj["useranswer"].qty = k.count;
+           
             this.utils.utilities.gdoSingleDoor = k.price;
             this.utils.utilities.singlep = 0;
         } else {
@@ -327,6 +341,9 @@ export class AdditionalOptionsComponent implements OnInit {
             };
             this.utils.utilities.gdoDoubleDoor = k.price;
             this.utils.utilities.doublep = 0;
+            let obj = this.utils.gdoFlowSession.cart[0].additional.items[0];
+            obj["useranswer"].QTY = k.count;
+            obj["useranswer"].qty = k.count;
         }
         // this.gdoConfig.itemPrice += k.price;
         // this.dataStore.gdoDirectQuestions.splice(flow, 1);

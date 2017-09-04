@@ -91,6 +91,8 @@ export class DoorSizeComponent implements OnInit {
 
             }
         });
+
+        this.utils.utilities.isCustomSize = false;
     }
 
     homeSize = "0";
@@ -120,13 +122,22 @@ export class DoorSizeComponent implements OnInit {
         this.utils.resFlow.wi = 0;
         this.utils.resFlow.hi = 0;
 
+        
+
         this.utils.utilities.wf = this.dataParams.dwidthFt;
         this.utils.utilities.wi = this.dataParams.dwidthIn;
         this.utils.utilities.hf = this.dataParams.dheightFt;
         this.utils.utilities.hi = this.dataParams.dheightIn;
 
-        this.utils.resFlowSession.resDoorObj.size.width['wf'] = this.utils.utilities[door + 'Width'];
-        this.utils.resFlowSession.resDoorObj.size.height['hf'] = this.utils.utilities[door + 'Height'];
+        // this.utils.resFlowSession.resDoorObj.size.width['wf'] = this.utils.utilities[door + 'Width'];
+        // this.utils.resFlowSession.resDoorObj.size.height['hf'] = this.utils.utilities[door + 'Height'];
+
+           this.utils.resFlowSession.resDoorObj.size.width['wf'] = this.utils.utilities.wf + '';
+            this.utils.resFlowSession.resDoorObj.size.width['wi'] = this.utils.utilities.wi + '';
+
+            this.utils.resFlowSession.resDoorObj.size.height['hf'] = this.utils.utilities.hf + '';
+            this.utils.resFlowSession.resDoorObj.size.height['hi'] = this.utils.utilities.hi + '';
+
 
 
         this.utils.resFlowSession.doorSize.door = door;
@@ -317,7 +328,7 @@ export class DoorSizeComponent implements OnInit {
                 this.utils.utilities.wi,
                 this.utils.utilities.hf,
                 this.utils.utilities.hi);
-
+            this.utils.utilities.isCustomSize = true;
             if (this.isRequired) {
                 if ((this.selectedHeightFeet && this.selectedHeightFeet > 0) && this.selectedWidthFeet > 0) {
                     this.navigateTo(this.dataParams);

@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, HostListener } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AppComponent } from "../app.component";
 import { AppUtilities } from "../shared/appUtilities";
@@ -31,7 +31,10 @@ export class ResAdditionalOptionsComponent implements OnInit {
     @ViewChild('resDiyHangerKit') resDiyHangerKit: ModalComponent;
     @ViewChild('resDiyReleaseKit') resDiyReleaseKit: ModalComponent;
     @ViewChild('resDiyBottomWeatherSeal') resDiyBottomWeatherSeal: ModalComponent;
+    @ViewChild('resDiyReinforcement') resDiyReinforcement: ModalComponent;
 
+
+    showMiles = true;
     pageNo;
     showMenu;
     data;
@@ -73,6 +76,7 @@ export class ResAdditionalOptionsComponent implements OnInit {
     doubleDropVal;
     itmObj;
     globalPrice = 0;
+    stopMods;
     selectedVinyl = {
         heightitem_price: 0,
         heightpartid: "",
@@ -93,6 +97,7 @@ export class ResAdditionalOptionsComponent implements OnInit {
     milesAway = true;
     conversionKit = true;
     emergencyKit = true;
+    showORB = false;
 
     t = _.sumBy(this.gdoOpenerSelected, function (o) {
         return o.price * o.count
@@ -139,6 +144,15 @@ export class ResAdditionalOptionsComponent implements OnInit {
     }
 
     ngOnInit() {
+        if (this.utils.resFlowSession.cart && this.utils.resFlowSession.cart.length > 0) {
+            for (let m = 0; m < this.utils.resFlowSession.cart.length; m++) {
+                let moreThan32Miles = _.findIndex(this.utils.resFlowSession.cart[m].additionalOptions.items, { id: 5 });
+                if (moreThan32Miles !== -1) {
+                    this.showMiles = false;
+                    break;
+                }
+            }
+        }
         this.utils.resFlowSession.resDoorObj.resetadditional();
         this.installOrDiy = this.utils.resFlowSession.resDetails.isDIY ? 'DIY' : 'Installed';
 
@@ -147,16 +161,16 @@ export class ResAdditionalOptionsComponent implements OnInit {
         this.setNavComponent();
         let resDoorObj = this.utils.resFlowSession.resDoorObj;
         let dataParams = {
-            "natmarketid": this.utils.utilities.natmarketid,
+            "NatMarketID": this.utils.utilities.natmarketid,
             "localmarketid": parseInt(this.utils.utilities.localmarketid),
             "productid": resDoorObj.product.product['item_id'],
-            "wf": this.utils.utilities.wf,
-            "wi": this.utils.utilities.wi,
-            "hf": this.utils.utilities.hf,
-            "hi": this.utils.utilities.hi,
-            "model": resDoorObj.construction.construction['ClopayModelNumber'],
+            "dwidthFt": this.utils.utilities.wf,
+            "dwidthIn": this.utils.utilities.wi,
+            "dheightFt": this.utils.utilities.hf,
+            "dheightIn": this.utils.utilities.hi,
+            "clopaymodelnumber": resDoorObj.construction.construction['ClopayModelNumber'],
             "dtype": _.upperCase(this.utils.utilities.dtype),
-            "store": this.utils.utilities.storenumber,
+            "storeNumber": this.utils.utilities.storenumber,
             "colorConfig": resDoorObj.color.base['colorconfig'],
             "lang": this.utils.utilities.lang
         }
@@ -164,17 +178,26 @@ export class ResAdditionalOptionsComponent implements OnInit {
             this.resAdditionalQuestions = res;
             this.resDiyQuestions = _.filter(this.resAdditionalQuestions, ['item_type', 'DIY']);
             this.resInstallQuestions = _.filter(this.resAdditionalQuestions, ['item_type', 'INSTALL']);
+            this.stopMods = _.filter(this.resAdditionalQuestions, ['item_id', 99]);
+            this.UpdateStopMods(this.stopMods[0], this.utils.resFlowSession.resDoorObj);
+            //ORB - Operator Reinforcement Bracket(additional Option)
+            let arrDonotShowORB = JSON.stringify(this.utils.allowMods);
+            let selectedModel = resDoorObj.construction.construction['ClopayModelNumber'];
+            this.showORB = arrDonotShowORB.indexOf(selectedModel) !== -1 ? true : false;
+            if (!this.showORB) {
+                //  this.resDiyQuestions
+                //  this.resDiyQuestions.splice(indexValueOfArray,1);
+                var data = $.grep(this.resDiyQuestions, function (e) {
+                    return e.item_id != 2;
+                });
 
+                this.resDiyQuestions = data;
+            }
             //console.log("one"+JSON.stringify(this.resDiyQuestions[2].Answers[1].vinyls));
-            this.vinyls = _.uniqBy(this.resDiyQuestions[2].Answers[1].vinyls, function (o) {
+            this.vinyls = _.uniqBy(this.resDiyQuestions[1].Answers[1].vinyls, function (o) {
                 return o.item_name;
             });
-            this.selectedVinyl = this.vinyls[15];
-            //console.log('resDiyQuestions' + JSON.stringify(this.resDiyQuestions));
-            //            if (this.resInstallQuestions.item_id == 7 && this.resInstallQuestions.item_id == 5) {
-            //
-            //            }
-
+            this.selectedVinyl = this.vinyls[this.vinyls.length - 1];
             if (!this.utils.resFlowSession.resDetails.isDIY && this.utils.resFlowSession.resDoorObj.product.product['item_id'] !== 16) {
                 this.installQuestionsOptions(true, this.resInstallQuestions[0]);
                 this.appComponent.updatePrice();
@@ -188,6 +211,20 @@ export class ResAdditionalOptionsComponent implements OnInit {
         if (this.installOrDiy == 'Installed') {
             this.showMedImg = true;
         }
+    }
+
+    UpdateStopMods(cs, cObj) {
+        $.each(cs.Answers[1].stopMolds, function (index, value) {
+            var sm = {
+                storeNumber: value.storeNumber,
+                partId: value.partId,
+                color: value.color,
+                dimension: value.dimension,
+                qty: value.qty
+            }
+
+            cObj.stopMold.items.push(sm)
+        });
     }
 
     nextBtn(path) {
@@ -233,7 +270,10 @@ export class ResAdditionalOptionsComponent implements OnInit {
             this.resDiyReleaseKit.open();
         } else if (diyQuestions.item_id == 12) {
             this.resDiyBottomWeatherSeal.open();
+        } else if (diyQuestions.item_id == 2) {
+            this.resDiyReinforcement.open();
         }
+
     }
 
     installQuestionsOptions(itm, obj) {
@@ -241,7 +281,9 @@ export class ResAdditionalOptionsComponent implements OnInit {
         let k = {
             id: obj.item_id,
             name: obj.item_name,
-            price: obj.Answers[1].item_price
+            price: obj.Answers[1].item_price,
+            objVal: obj,
+            selectedMiles: this.defaultMiles
         }
         let n = obj.item_list_text.split('<span class="text-orange">').join('').split('</span>').join('').replace('?', '').replace('$' + k.price, '').trim();
         if (itm) {
@@ -275,14 +317,33 @@ export class ResAdditionalOptionsComponent implements OnInit {
     }
 
     calculateMilesPrice() {
+         //this.stopMods = _.filter(this.resAdditionalQuestions, ['item_id', 99]);
+       var additionalMileage = _.filter(this.utils.resFlowSession.resDoorObj.additional.items, ['id',5]);
+       if(additionalMileage)
+       {
+           additionalMileage.selectedMiles = this.defaultMiles;
+       }
         if (this.utils.resFlowSession.resDoorObj.TYPE === "RES") {
-            if (this.defaultMiles < 31) {
-                return 0;
-            } else if (this.defaultMiles >= 31 && this.defaultMiles < 51) {
-                return 51;
-            } else if (this.defaultMiles > 50) {
-                return 51 + (this.defaultMiles - 50) * 3;
+            //Bug ID : 5782
+            if (this.utils.resFlowSession.resDoorObj.INSTALLTYPE === 'DIY') {
+                if (this.defaultMiles < 31) {
+                    return 0;
+                } else if (this.defaultMiles == 31) {
+                    return 3;
+                } else if (this.defaultMiles > 31) {
+                    return (3 + ((this.defaultMiles - 31) * 3));
+                }
             }
+            else {
+                if (this.defaultMiles < 31) {
+                    return 0;
+                } else if (this.defaultMiles >= 31 && this.defaultMiles < 51) {
+                    return 51;
+                } else if (this.defaultMiles > 50) {
+                    return 51 + (this.defaultMiles - 50) * 3;
+                }
+            }
+
         } else {
             if (this.defaultMiles < 31) {
                 return 0;
@@ -304,29 +365,17 @@ export class ResAdditionalOptionsComponent implements OnInit {
         });
     }
 
-    @HostListener('document:keypress', ['$event'])
-    handleKeyboardEvent(event: KeyboardEvent) {
-        console.log(event);
-        const pattern = /[0-9\+\-\ ]/;
-        //let inputChar = String.fromCharCode(event.charCode);
-        let inputChar = event.key;
-        if (!pattern.test(inputChar)) {
-            event.preventDefault();
-            console.log('KeyDown!');
-        }
-    }
-
-
     diyQuestionsOptions(itm, obj, event?) {
         this.itmObj = this.utils.resFlowSession.resDoorObj.additional;
         let k = {
             id: obj.item_id,
             name: obj.item_name,
-            price: obj.Answers[1].item_price
+            price: obj.Answers[1].item_price,
+            objVal: obj
         }
         if (obj.item_id === 1) {
             if (event) {
-                this.selectedVinyl = this.vinyls[15];
+                this.selectedVinyl = this.vinyls[this.vinyls.length - 1];
             }
             k.name = this.selectedVinyl.item_name;
             k.price = this.selectedVinyl.item_price;
@@ -336,10 +385,22 @@ export class ResAdditionalOptionsComponent implements OnInit {
         if (itm) {
             switch (obj.item_id) {
                 case 1:
+                case 2:
+                    k.price = this.calculateORBPrice(obj);
+                    if (obj.item_id === 1) {
+                        k.price = this.selectedVinyl.item_price;
+                    }
+                    obj.item_list_text = n + '<span class="text-orange"> $' + k.price + '</span>?';
+                    this.removeItmOptions(obj.item_id);
+                    this.itmObj.items.push(k);
+                    break;
                 case 3:
                 case 4:
                 case 11:
                 case 12:
+                 if (obj.item_id === 12 && obj.Answers[1].seals && obj.Answers[1].seals[0].item_price > 0 ) {
+                        k.price = obj.Answers[1].seals[0].item_price;
+                    }
                     obj.item_list_text = n + '<span class="text-orange"> $' + k.price + '</span>?';
                     this.removeItmOptions(obj.item_id);
                     this.itmObj.items.push(k);
@@ -351,6 +412,7 @@ export class ResAdditionalOptionsComponent implements OnInit {
         } else {
             switch (obj.item_id) {
                 case 1:
+                case 2:
                 case 3:
                 case 4:
                 case 11:
@@ -359,12 +421,29 @@ export class ResAdditionalOptionsComponent implements OnInit {
                     this.removeItmOptions(obj.item_id);
                     break;
                 case 5:
+                    this.defaultMiles = 31;
                     k.price = this.calculateMilesPrice();
                     this.itmObj.items.push(k);
                     break;
             }
         }
         this.appComponent.updatePrice();
+    }
+
+    calculateORBPrice(obj) {
+        var orbPrice = 0;
+        var orbResult = obj.Answers[1].orbdata;
+        if (orbResult.length > 0) {
+            for (var orbCount = 0; orbCount < orbResult.length; orbCount++) {
+                var orbQuantity = Number(orbResult[orbCount].quantity);
+                orbPrice += (Number(orbResult[orbCount].item_price) * Number(orbQuantity));
+            }
+        }
+        else {
+            orbPrice = obj.Answers[1].item_price;
+        }
+
+        return orbPrice;
     }
 
     selectedVinyls(vin, diyQuestion) {

@@ -3,43 +3,88 @@
     "version": "1.0.0-beta.28.3",
     "name": "hddc"
   },
-
-  "apps": [{
-    "root": "src",
-    "outDir": "dist",
-    "assets": [
-      "assets",
+  "apps": [
+    {
+      "name": "app",
+      "root": "src",
+      "outDir": "dist",
+      "assets": [  
       "favicon.ico"
-    ],
-    "index": "index.html",
-    "main": "main.ts",
-    "polyfills": "polyfills.ts",
-    "test": "test.ts",
-    "tsconfig": "tsconfig.json",
-    "prefix": "app",
-    "styles": [
-      "styles.css",
-      "main.less",
-      "../node_modules/bootstrap/dist/css/bootstrap.min.css"
-    ],
-    "scripts": [
-      "../node_modules/jquery/dist/jquery.js",
-      "../node_modules/bootstrap/js/modal.js",
-      "../node_modules/lodash/lodash.min.js"
-    ],
-    "environmentSource": "environments/environment.ts",
-    "environments": {
-      "dev": "environments/environment.ts",
-      "prod": "environments/environment.prod.ts"
-
+      ],
+      "index": "index.html",
+      "main": "main.ts",
+      "polyfills": "polyfills.ts",
+      "test": "test.ts",
+      "tsconfig": "tsconfig.json",
+      "prefix": "app",
+      "styles": [
+        "styles.css",
+        "main.less",
+        "../node_modules/bootstrap/dist/css/bootstrap.min.css",
+        "../node_modules/toastr-ng2/toastr.css",
+        "../node_modules/font-awesome/css/font-awesome.min.css"
+      ],
+      "scripts": [
+        "../node_modules/jquery/dist/jquery.js",
+        "../node_modules/bootstrap/js/modal.js",
+        "../node_modules/lodash/lodash.min.js",
+        "../src/app/jquery.visualize.js",
+        "legacy-helper.js",
+        "checkout.js",
+        "../src/app/exif.js"
+      ],
+      "environmentSource": "environments/environment.ts",
+      "environments": {
+        "dev": "environments/environment.ts",
+        "prod": "environments/environment.prod.ts",
+        "mob": "environments/environment.mob.ts"
+      }
+    },
+    {
+      "name": "withassets",
+      "root": "src",
+      "outDir": "dist",
+      "assets": [  
+        "assets",
+      "favicon.ico"
+      ],
+      "index": "index.html",
+      "main": "main.ts",
+      "polyfills": "polyfills.ts",
+      "test": "test.ts",
+      "tsconfig": "tsconfig.json",
+      "prefix": "app",
+      "styles": [
+        "styles.css",
+        "main.less",
+        "../node_modules/bootstrap/dist/css/bootstrap.min.css",
+        "../node_modules/toastr-ng2/toastr.css",
+        "../node_modules/font-awesome/css/font-awesome.min.css"
+      ],
+      "scripts": [
+        "../node_modules/jquery/dist/jquery.js",
+        "../node_modules/bootstrap/js/modal.js",
+        "../node_modules/lodash/lodash.min.js",
+        "../src/app/jquery.visualize.js",
+        "legacy-helper.js",
+        "checkout.js",
+        "../src/app/exif.js"
+      ],
+      "environmentSource": "environments/environment.ts",
+      "environments": {
+        "dev": "environments/environment.ts",
+        "prod": "environments/environment.prod.ts",
+        "mob": "environments/environment.mob.ts"
+      }
     }
-  }],
+  ],
   "e2e": {
     "protractor": {
       "config": "./protractor.conf.js"
     }
   },
-  "lint": [{
+  "lint": [
+    {
       "files": "src/**/*.ts",
       "project": "src/tsconfig.json"
     },

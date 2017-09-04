@@ -40,10 +40,10 @@
 
                         <div class="construciton-info">
                             <div [hidden]="slideitem.item_thumbnail == 'btnOtherConGallery.png'">
-                                <img (click)="detailsInfo(slideitem.DisplayModelNumber, contructionDetails)" class="nobdr" src="../../assets/images/Info-64.png"
+                                 <img *ngIf="this.utils.utilities.isPromoEnabled" src="../../assets/images/promoGraphics/{{this.utils.promoObject.dogEarsImageSingle}}"
                                     alt="">
-                                <!--<img *ngIf="this.utils.utilities.isPromoEnabled" src="../../assets/images/promoGraphics/{{this.utils.promoObject.dogEarsImageSingle}}"
-                                    alt="">-->
+                                <img (click)="detailsInfo(slideitem.DisplayModelNumber, contructionDetails)" class="nobdr" src="../../assets/images/Info-64.png"
+                                    alt="">                               
                             </div>
 
                         </div>

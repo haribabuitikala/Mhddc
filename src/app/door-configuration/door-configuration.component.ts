@@ -74,9 +74,18 @@ export class DoorConfigurationComponent implements OnInit {
         this.directFlow = this.utils.utilities.directFlow;
         if (!this.utils.utilities.directFlow) {
             this.itemPrice = this.utils.calculateTotalPrice();
+            let kPrice = _.sumBy(this.dataStore.gdoOpenerAccessories, function (o) {
+                return o.price * o.count;
+            });
+            this.itemPrice = this.itemPrice + kPrice;
         } else {
             let data = this.dataStore.gdoAdditionalDirect;
-            this.itemPrice = data['item_price'] * this.qty;
+            this.itemPrice = (data['item_price'] * this.qty) + (
+                this.utils.utilities.singlep +
+                this.utils.utilities.doublep +
+                this.utils.utilities.kPrice +
+                this.utils.utilities.distancePrice
+            );
         }
         this.pageNo = this.utils.utilities.currPage;
         this.showGDoEmail = this.utils.utilities.showGDoEmail;
@@ -121,6 +130,10 @@ export class DoorConfigurationComponent implements OnInit {
     updateQuantity(flow) {
         // this.utils.updateQty will call calculate total amount internally
         this.itemPrice = this.utils.updateQty(flow, this.utils.utilities.gdoOpenerQty);
+        let kPrice = _.sumBy(this.dataStore.gdoOpenerAccessories, function (o) {
+            return o.price * o.count;
+        });
+        this.itemPrice = this.itemPrice + kPrice;
         this.gdoConfig.itemPrice = this.itemPrice;
         this.qty = this.utils.utilities.gdoOpenerQty;
     }
