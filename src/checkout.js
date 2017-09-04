@@ -68,18 +68,7 @@ function CheckOut(subTotal, taxRate, estimatedTax, grandTotal, _orderObj) {
             catch (e) {
                 orderType = "INSTALLED";
             }
-            break;
-        case 'COM':
-            // COMDoor
-            try {
-
-                orderType = "DIY";
-
-            }
-            catch (e) {
-                orderType = "DIY";
-            }
-            break;
+            break;      
         case 'GDO':
             //OpenerOnly
             orderType = "GDO";
@@ -142,7 +131,7 @@ function writeItem(orderType) {
                     var mod = getDesign(cs.construction.construction.ClopayModelNumber, cs.construction.construction)
                     var dsg = String(cs.construction.construction.XMLDSGN).replace('vvv', '').replace('VVV', '')
                     // shankar added In below line DisplayModelNumber is added with the replace of XMLCOI
-                    itemTemp += "\t\t\t" + "<ORDERED_ITEM>" + cs.construction.construction.DisplayModelNumber + "</ORDERED_ITEM>" + _newLine;
+                    itemTemp += "\t\t\t" + "<ORDERED_ITEM>" + cs.construction.construction.XMLCOI + "</ORDERED_ITEM>" + _newLine;
                     itemTemp += "\t\t\t" + "<ITEM_TYPE>" + "RES" + "</ITEM_TYPE>" + _newLine;
                     if (pid != 116) {
                         itemTemp += "\t\t\t" + "<DESCRIPTION>" + mod + "</DESCRIPTION>" + _newLine;
