@@ -181,7 +181,14 @@ export class ResAdditionalOptionsComponent implements OnInit {
         this.dataService.getInstallDiyq(dataParams).subscribe(res => {
             this.resAdditionalQuestions = res;
             this.resDiyQuestions = _.filter(this.resAdditionalQuestions, ['item_type', 'DIY']);
-            this.resInstallQuestions = _.filter(this.resAdditionalQuestions, ['item_type', 'INSTALL']);
+            let resInstallQuestions = _.filter(this.resAdditionalQuestions, ['item_type', 'INSTALL']);
+            if (this.utils.resFlowSession.resDoorObj.product.product['item_id'] !== 9) {
+                this.resInstallQuestions = _.filter(resInstallQuestions, (itm) => {
+                    return itm['item_id'] !== 6;
+                });
+            } else {
+                this.resInstallQuestions = resInstallQuestions;
+            }
             this.stopMods = _.filter(this.resAdditionalQuestions, ['item_id', 99]);
             this.UpdateStopMods(this.stopMods[0], this.utils.resFlowSession.resDoorObj);
             //ORB - Operator Reinforcement Bracket(additional Option)
@@ -317,6 +324,9 @@ export class ResAdditionalOptionsComponent implements OnInit {
                 itm = false;
             }
         } else {
+            if(itm && obj.item_id === 6){
+                k.price = 79;
+            }
             n = obj.item_list_text.split('<span class="text-orange">').join('').split('</span>').join('').replace('?', '').replace('$' + k.price, '').trim();
         }
 
@@ -331,6 +341,10 @@ export class ResAdditionalOptionsComponent implements OnInit {
                 case 5:
                     this.removeItmOptions(obj.item_id);
                     break;
+                case 6:
+                    this.removeItmOptions(obj.item_id);
+                    this.itmObj.items.push(k);
+                    break;    
                 case 13:
                     this.removeItmOptions(obj.item_id);
                     this.itmObj.items.push(k);
@@ -349,6 +363,9 @@ export class ResAdditionalOptionsComponent implements OnInit {
                     k.price = this.calculateMilesPrice();
                     this.itmObj.items.push(k);
                     break;
+                case 6:
+                    this.removeItmOptions(obj.item_id);
+                    break;    
                 case 13:
                     this.removeItmOptions(obj.item_id);
                     break;
