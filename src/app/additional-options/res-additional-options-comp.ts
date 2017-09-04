@@ -92,6 +92,7 @@ export class ResAdditionalOptionsComponent implements OnInit {
         widthqty: 0
     };
 
+
     // options
     medallion = true;
     milesAway = true;
@@ -102,6 +103,9 @@ export class ResAdditionalOptionsComponent implements OnInit {
     t = _.sumBy(this.gdoOpenerSelected, function (o) {
         return o.price * o.count
     });
+
+    selectedLock = '';
+    selectedDIYLock = '';
 
     // for gdo the pageNo will be 3
     // for residential the pageNo will be
@@ -169,7 +173,7 @@ export class ResAdditionalOptionsComponent implements OnInit {
             "dheightFt": this.utils.utilities.hf,
             "dheightIn": this.utils.utilities.hi,
             "clopaymodelnumber": resDoorObj.construction.construction['ClopayModelNumber'],
-            "dtype": _.upperCase(this.utils.utilities.dtype),
+            "dtype": _.upperCase(this.utils.resFlowSession.orderObj.QPB ? 'qpb' : this.utils.utilities.dtype),
             "storeNumber": this.utils.utilities.storenumber,
             "colorConfig": resDoorObj.color.base['colorconfig'],
             "lang": this.utils.utilities.lang
@@ -192,6 +196,26 @@ export class ResAdditionalOptionsComponent implements OnInit {
                 });
 
                 this.resDiyQuestions = data;
+            }
+            if (this.resInstallQuestions) {
+                let lockQuestion = _.filter(this.resInstallQuestions, {
+                    item_id: 13
+                });
+                if (lockQuestion.length > 0) {
+                    if (lockQuestion[0].Answers.length > 0 && lockQuestion[0].Answers[0].isdefault) {
+                        this.selectedLock = lockQuestion[0].Answers[0];
+                    }
+                }
+            }
+            if (this.resDiyQuestions) {
+                let lockQuestion = _.filter(this.resDiyQuestions, {
+                    item_id: 13
+                });
+                if (lockQuestion.length > 0) {
+                    if (lockQuestion[0].Answers.length > 0 && lockQuestion[0].Answers[0].isdefault) {
+                        this.selectedDIYLock = lockQuestion[0].Answers[0];
+                    }
+                }
             }
             //console.log("one"+JSON.stringify(this.resDiyQuestions[2].Answers[1].vinyls));
             this.vinyls = _.uniqBy(this.resDiyQuestions[1].Answers[1].vinyls, function (o) {
@@ -276,7 +300,7 @@ export class ResAdditionalOptionsComponent implements OnInit {
 
     }
 
-    installQuestionsOptions(itm, obj) {
+    installQuestionsOptions(itm, obj, event?) {
         this.itmObj = this.utils.resFlowSession.resDoorObj.additional;
         let k = {
             id: obj.item_id,
@@ -285,7 +309,17 @@ export class ResAdditionalOptionsComponent implements OnInit {
             objVal: obj,
             selectedMiles: this.defaultMiles
         }
-        let n = obj.item_list_text.split('<span class="text-orange">').join('').split('</span>').join('').replace('?', '').replace('$' + k.price, '').trim();
+        let n: any;
+        if (obj.item_id === 13) {
+            if (!event) {
+                itm = false;
+            } else if (event && event.item_id === 32) {
+                itm = false;
+            }
+        } else {
+            n = obj.item_list_text.split('<span class="text-orange">').join('').split('</span>').join('').replace('?', '').replace('$' + k.price, '').trim();
+        }
+
         if (itm) {
             switch (obj.item_id) {
                 case 7:
@@ -296,6 +330,10 @@ export class ResAdditionalOptionsComponent implements OnInit {
                     break;
                 case 5:
                     this.removeItmOptions(obj.item_id);
+                    break;
+                case 13:
+                    this.removeItmOptions(obj.item_id);
+                    this.itmObj.items.push(k);
                     break;
             }
         } else {
@@ -311,18 +349,20 @@ export class ResAdditionalOptionsComponent implements OnInit {
                     k.price = this.calculateMilesPrice();
                     this.itmObj.items.push(k);
                     break;
+                case 13:
+                    this.removeItmOptions(obj.item_id);
+                    break;
             }
         }
         this.appComponent.updatePrice();
     }
 
     calculateMilesPrice() {
-         //this.stopMods = _.filter(this.resAdditionalQuestions, ['item_id', 99]);
-       var additionalMileage = _.filter(this.utils.resFlowSession.resDoorObj.additional.items, ['id',5]);
-       if(additionalMileage)
-       {
-           additionalMileage.selectedMiles = this.defaultMiles;
-       }
+        //this.stopMods = _.filter(this.resAdditionalQuestions, ['item_id', 99]);
+        var additionalMileage = _.filter(this.utils.resFlowSession.resDoorObj.additional.items, ['id', 5]);
+        if (additionalMileage) {
+            additionalMileage.selectedMiles = this.defaultMiles;
+        }
         if (this.utils.resFlowSession.resDoorObj.TYPE === "RES") {
             //Bug ID : 5782
             if (this.utils.resFlowSession.resDoorObj.INSTALLTYPE === 'DIY') {
@@ -380,8 +420,18 @@ export class ResAdditionalOptionsComponent implements OnInit {
             k.name = this.selectedVinyl.item_name;
             k.price = this.selectedVinyl.item_price;
         }
-
-        let n = obj.item_list_text.split('<span class="text-orange">').join('').split('</span>').join('').replace('?', '').replace('$' + k.price, '').trim().split('$')[0].trim();
+        let n: any;
+        if (obj.item_id === 13) {
+            if (!event) {
+                itm = false;
+            } else if (event && event.item_id === 32) {
+                itm = false;
+            } else if (event && !event.item_id ) {
+                itm = false;
+            }
+        } else {
+            n = obj.item_list_text.split('<span class="text-orange">').join('').split('</span>').join('').replace('?', '').replace('$' + k.price, '').trim().split('$')[0].trim();
+        }
         if (itm) {
             switch (obj.item_id) {
                 case 1:
@@ -398,7 +448,7 @@ export class ResAdditionalOptionsComponent implements OnInit {
                 case 4:
                 case 11:
                 case 12:
-                 if (obj.item_id === 12 && obj.Answers[1].seals && obj.Answers[1].seals[0].item_price > 0 ) {
+                    if (obj.item_id === 12 && obj.Answers[1].seals && obj.Answers[1].seals[0].item_price > 0) {
                         k.price = obj.Answers[1].seals[0].item_price;
                     }
                     obj.item_list_text = n + '<span class="text-orange"> $' + k.price + '</span>?';
@@ -408,6 +458,11 @@ export class ResAdditionalOptionsComponent implements OnInit {
                 case 5:
                     this.removeItmOptions(obj.item_id);
                     break;
+                case 13:
+                    this.removeItmOptions(obj.item_id);
+                    this.itmObj.items.push(k);
+                    break;
+
             }
         } else {
             switch (obj.item_id) {
@@ -425,6 +480,10 @@ export class ResAdditionalOptionsComponent implements OnInit {
                     k.price = this.calculateMilesPrice();
                     this.itmObj.items.push(k);
                     break;
+                case 13:
+                    this.removeItmOptions(obj.item_id);
+                    break;
+
             }
         }
         this.appComponent.updatePrice();

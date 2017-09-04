@@ -31,11 +31,15 @@
                     </div>
                 </div>  
                 <div class="flex space-between" *ngIf="installQuestions.item_id !== 5">
+                    <select [ngModel]="selectedLock" *ngIf="installQuestions.item_id === 13 && installQuestions.Answers[0].isdefault" (ngModelChange)="installQuestionsOptions(installQuestions.Answers[0].isdefault,installQuestions,$event)" >
+                        <option *ngFor=" let lock of installQuestions.Answers" [ngValue]="lock">{{lock.item_name}}</option>
+                    </select> 
                     <span></span>
                     <div class="flex-right">
                         <div class="text-orange">Yes</div>
                         <label class="switch">
-                            <input *ngIf="installQuestions.item_id !== 7" type="checkbox" [(ngModel)]="installQuestions.Answers[0].isdefault" (change)="installQuestionsOptions(installQuestions.Answers[0].isdefault,installQuestions)">
+                            <input *ngIf=" installQuestions.item_id === 13" type="checkbox" [(ngModel)]="installQuestions.Answers[0].isdefault" (change)="installQuestionsOptions(installQuestions.Answers[0].isdefault,installQuestions)">
+                            <input *ngIf="installQuestions.item_id !== 7 && installQuestions.item_id !== 13" type="checkbox" [(ngModel)]="installQuestions.Answers[0].isdefault" (change)="installQuestionsOptions(installQuestions.Answers[0].isdefault,installQuestions)">
                             <input *ngIf="installQuestions.item_id === 7 && utils.resFlowSession.resDoorObj.product.product['item_id'] !== 16" type="checkbox" [(ngModel)]="installQuestions.Answers[1].isdefault" (change)="installQuestionsOptions(installQuestions.Answers[1].isdefault,installQuestions)">
                             <input *ngIf="installQuestions.item_id === 7 && utils.resFlowSession.resDoorObj.product.product['item_id'] === 16" type="checkbox" [(ngModel)]="installQuestions.Answers[0].isdefault" (change)="installQuestionsOptions(installQuestions.Answers[0].isdefault,installQuestions)">
                             <div class="slider round"></div>
@@ -64,7 +68,7 @@
                     <span></span>
                     <div class="flex-right">
                         <div class="text-orange">Yes</div>
-                        <label class="switch">
+                        <label class="switch">                            
                         <input type="checkbox" [(ngModel)]="diyQuestions.Answers[0].isdefault" (change)="diyQuestionsOptions(diyQuestions.Answers[0].isdefault,diyQuestions,$event)">
                         <div class="slider round"></div>
                     </label>
@@ -79,7 +83,10 @@
                 <div class="flex space-between" *ngIf="diyQuestions.item_id !== 5">                    
                     <select [ngModel]="selectedVinyl" *ngIf="diyQuestions.item_id === 1 && diyQuestions.Answers[0].isdefault" (ngModelChange)="selectedVinyls($event, diyQuestions)">
                         <option *ngFor="let vin of vinyls"  [ngValue]="vin">{{vin.item_name}}</option>
-                    </select>                    
+                    </select>  
+                    <select [ngModel]="selectedDIYLock" *ngIf="diyQuestions.item_id === 13 && diyQuestions.Answers[0].isdefault" (ngModelChange)="diyQuestionsOptions(diyQuestions.Answers[0].isdefault,diyQuestions,$event)" >
+                        <option *ngFor=" let lock of diyQuestions.Answers" [ngValue]="lock">{{lock.item_name}}</option>
+                    </select>                   
                     <span></span>
                     <div class="flex-right">
                         <div class="text-orange">Yes</div>
