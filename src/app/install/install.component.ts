@@ -247,9 +247,13 @@ export class InstallComponent implements OnInit, AfterViewInit, AfterViewChecked
             let winCode = +this.utils.utilities.winCode.slice(1);
             this.utils.resFlowSession.orderObj.orderInstallType = "DIY";
             if (this.data.zipResults.state == 'FL' && winCode >= 6) {
-                this.checkboxFlag = false; // if user checked the checkbox and returned again
-                this.isChecked = true;
-                this.modal1.open();
+                 if (this.utils.utilities.isCustomSize) {
+                     this.navigateTo('/config/additionalOptions');
+                 } else {
+                    this.checkboxFlag = false; // if user checked the checkbox and returned again
+                    this.isChecked = true;
+                    this.modal1.open();
+                 }
             } else {
                 this.gotoNext();
             }
