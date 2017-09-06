@@ -10,9 +10,7 @@
      
       <div class="ptn-rel">
         <div class="form-control">
-          <input name="zip" minlength="5" maxlength="5" placeholder="Enter zip code" OnlyNumber="true" #zipCode="ngModel" ngModel class="zip-code" autocomplete="off" required>
-          <!--<input type="number" oncopy="return false" onpaste="return false" placeholder="{{lang.placeholder}}" minlength="5" maxlength="5" name="zip" class="zip-code" autocomplete="off"
-            (keypress)="onlyNumberKey($event)" (ngModelChange)="onChange($event)" ngModel #zipCode="ngModel" required>-->
+          <input type="text"  (keydown)="onlyNumberKeyDown($event)"  (keyup)="onlyNumberKey($event)" pattern="[0-9]{5}" inputmode="numeric" name="zip" minlength="5" maxlength="5" placeholder="Enter zip code"  #zipCode="ngModel" ngModel class="zip-code" autocomplete="off" required>
         </div>
         <span *ngIf="zipCode.errors?.required && zipCode.touched" class="error ptn-abs">
          {{lang.zipcodeMessage}}
