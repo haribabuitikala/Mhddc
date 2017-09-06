@@ -1,5 +1,6 @@
 <!doctype html>
 <html>
+
 <head>
   <meta charset="utf-8">
   <title>HDDC</title>
@@ -14,48 +15,37 @@
   <meta property="og:type" content="website">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
   <script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga'); 
-  ga('create', 'UA-104445169-1', 'auto');
- 
-</script>
+    (function (i, s, o, g, r, a, m) {
+      i['GoogleAnalyticsObject'] = r;
+      i[r] = i[r] || function () {
+        (i[r].q = i[r].q || []).push(arguments)
+      }, i[r].l = 1 * new Date();
+      a = s.createElement(o),
+        m = s.getElementsByTagName(o)[0];
+      a.async = 1;
+      a.src = g;
+      m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+    ga('create', 'UA-104445169-1', 'auto');
+  </script>
 </head>
+
 <body>
   <app-root>
-    
+    <div style="height:100%;width:100%;background-size:contain;background-image:url('/assets/core-images/Image 1.jpg');position: fixed;top:0;left:0;background-repeat: no-repeat;background-position: center center;background-color: black;z-index: 99999;">
+
+    </div>
   </app-root>
 
-  <div class="root-loader" style="color:white;z-index:9999999;background-position: center center;background-repeat: no-repeat;background-size: contain;background-image:url('/assets/core-images/Image 1.jpg');background-color:#333; position:fixed; top: 0; left:0; width:100%; height: 100%;">
-    Loading.....
-</div>
   <script>
-    window.addEventListener("load",function() {
+    window.addEventListener("load", function () {
       // Set a timeout...
-      setTimeout(function(){
+      setTimeout(function () {
         // Hide the address bar!
         window.scrollTo(0, 1);
       }, 0);
     });
-    var Images = [
-      'Image 1.jpg',  
-      'Image 2.jpg',
-      'Image 3.jpg',
-      'Image 4.jpg'
-    ],imageIndex = 0;
-    var intervalTimer = setInterval(function() {
-      if (document.querySelector('.banner-image')) {
-        clearInterval(intervalTimer);
-        document.querySelector('.root-loader').remove();
-      } else  {
-        if (imageIndex === 4) {
-          imageIndex = 0;
-        }
-        document.querySelector('.root-loader').style.backgroundImage = "url('/assets/core-images/" + Images[imageIndex] + "')";
-        imageIndex = imageIndex + 1;
-      }
-    }, 420);
   </script>
 </body>
+
 </html>
