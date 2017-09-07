@@ -94,8 +94,9 @@ export class BannerComponent implements OnInit {
         
     }
     onlyNumberKey(event) {
-        let len = event.currentTarget.value.length
-        event.currentTarget.value = event.currentTarget.value.replace(/[^0-9]/g, '');
+        let value = event.currentTarget.value;
+        value = value.replace(/[^0-9]/g, '');
+        event.currentTarget.value = value.substr(0,5);
     }
 
 onChange(value){   
