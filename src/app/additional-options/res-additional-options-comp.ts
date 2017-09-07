@@ -184,9 +184,18 @@ export class ResAdditionalOptionsComponent implements OnInit {
             let resInstallQuestions = _.filter(this.resAdditionalQuestions, ['item_type', 'INSTALL']);
             if (this.utils.resFlowSession.resDoorObj.product.product['item_id'] !== 9) {
                 this.resInstallQuestions = _.filter(resInstallQuestions, (itm) => {
-                    return itm['item_id'] !== 6;
+                    if (this.utils.resFlowSession.resDoorObj.product.product['item_id'] === 16) {
+                         if (itm['item_id'] === 6 || itm['item_id'] === 7) {
+                            return false;
+                         } else {
+                             return true;
+                         }
+                    } else {
+                        return itm['item_id'] !== 6;
+                    }
                 });
-            } else {
+            }  
+            else {
                 this.resInstallQuestions = resInstallQuestions;
             }
             this.stopMods = _.filter(this.resAdditionalQuestions, ['item_id', 99]);

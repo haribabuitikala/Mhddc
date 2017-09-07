@@ -77,21 +77,25 @@ export class BannerComponent implements OnInit {
         });
         this.getPromo();
     }
-    onlyNumberKey(event) {
+    onlyNumberKeyDown(event) {
         let len = event.currentTarget.value.length;
-        if (len === 0) $('.show-zip-results').prop('disabled', true);
-        if (event.charCode === 13) {
-            return true;
-        }
-        if (len > 4) {
-            event.preventDefault();
-        }
-        if (len === 4) {
-            $('.show-zip-results').removeAttr('disabled');
-        } else
-            $('.show-zip-results').prop('disabled', true);
-        // return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57;
+        if((event.keyCode >= 48 && event.keyCode < 58)) {
+            if (len >=5) {
+                event.preventDefault();
+            }
+        } else {
+            if (event.keyCode === 8) {
 
+            } else {
+                event.preventDefault();
+            }
+            
+        }
+        
+    }
+    onlyNumberKey(event) {
+        let len = event.currentTarget.value.length
+        event.currentTarget.value = event.currentTarget.value.replace(/[^0-9]/g, '');
     }
 
 onChange(value){   

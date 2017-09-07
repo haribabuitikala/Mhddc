@@ -11,7 +11,7 @@
                     <p [innerHTML]="installQuestions.item_list_text"></p>
                     <img (click)="installQuestionsPopup(installQuestions)" height="25" src="../../assets/images/info.png">
                 </div>
-                <div *ngIf="i===0">
+                <div *ngIf="i===0 && installQuestions.item_id === 7">
                     <img src="../../assets/images/Medallionlogo.png" alt="" />
                     <img src="../../assets/images/MedallionUpgrades_warranties.png" alt="" />
                 </div>
