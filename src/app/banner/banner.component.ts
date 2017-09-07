@@ -85,7 +85,6 @@ export class BannerComponent implements OnInit {
             }
         } else {
             if (event.keyCode === 8) {
-
             } else {
                 event.preventDefault();
             }
@@ -97,6 +96,14 @@ export class BannerComponent implements OnInit {
         let value = event.currentTarget.value;
         value = value.replace(/[^0-9]/g, '');
         event.currentTarget.value = value.substr(0,5);
+    }
+    onPasteZipcode(event) {
+        setTimeout(() => {
+            let target = event.currentTarget || event.srcElement;
+            let value = target.value;
+            value = value.replace(/[^0-9]/g, '');
+            target.value = value.substr(0,5);
+        }, 0);
     }
 
 onChange(value){   
