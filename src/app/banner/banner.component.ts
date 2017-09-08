@@ -76,6 +76,8 @@ export class BannerComponent implements OnInit {
             showStepIndicator: false
         });
         this.getPromo();
+
+        $('.exact-size-loader').remove();
     }
     onlyNumberKeyDown(event) {
         let len = event.currentTarget.value.length;

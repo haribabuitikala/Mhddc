@@ -472,7 +472,7 @@ export class InstallComponent implements OnInit, AfterViewInit, AfterViewChecked
             error => {
                 console.log(error.statusText);
                 this.reportDataNotMatched();
-                this.collection.handleError();
+                //this.collection.handleError();
             }
         );
     }
