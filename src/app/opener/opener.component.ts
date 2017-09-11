@@ -9,6 +9,7 @@ import { GdoConfigComponent } from "../gdo-config/gdo-config.component";
 import { NavComponent } from '../nav/nav.component'
 declare var _: any;
 declare var $: any;
+declare var ga:Function;
 
 @Component({
     selector: 'app-opener',
@@ -98,6 +99,7 @@ export class OpenerComponent implements OnInit {
     }
 
     nextBtn(path) {
+        ga('send', { hitType: 'event', eventCategory: 'Click', eventAction: 'Go To'+path, eventLabel: 'nextBtn' }); 
         $('body').addClass('loader');
         if (this.utils.utilities.flow === 'gdoNavElems') {
             this.utils.setUtils(3, 1);
@@ -131,6 +133,7 @@ export class OpenerComponent implements OnInit {
     }
 
     accessoriesModalNext() {
+        ga('send', { hitType: 'event', eventCategory: 'Click', eventAction: 'Clicked On Next Step button', eventLabel: 'accessoriesModalNext' }); 
         $('body').addClass('loader');
         this.route.navigateByUrl('/gdoConfig/additionalOptions');
     }

@@ -11,7 +11,7 @@ import { ToastrService } from "toastr-ng2/toastr-service";
 import { NavService } from "../nav/nav-service";
 import { NavComponent } from "../nav/nav.component";
 declare var $: any;
-
+declare var ga:Function; 
 @Component({
     selector: 'app-door-size',
     templateUrl: './door-size.component.html',
@@ -98,6 +98,7 @@ export class DoorSizeComponent implements OnInit {
     homeSize = "0";
     // set door
     setDoor(door, event) {
+        ga('send', { hitType: 'event', eventCategory: 'Click', eventAction: 'setDoor'+door+''+event, eventLabel: 'setDoor' }); 
         this.navigateErorFlag = false;
         $('.select-door').removeClass('current');
         this.utils.utilities.singleDoor = false;
@@ -305,7 +306,7 @@ export class DoorSizeComponent implements OnInit {
     };
 
     nextBtn(curr, path) {
-
+        ga('send', { hitType: 'event', eventCategory: 'Click', eventAction: 'NextBtn'+curr+''+path, eventLabel: 'nextBtn' });
         if (this.utils.utilities.wf != null && this.utils.utilities.wi != null && this.utils.utilities.hf != null && this.utils.utilities.hi != null &&
             this.utils.utilities.hf != 0) {
 

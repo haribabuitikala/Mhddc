@@ -8,6 +8,7 @@ import { CollectionService } from "../shared/data.service";
 import { CollectionData } from "../collection/collection-data";
 import { NavComponent } from "../nav/nav.component";
 declare var $: any;
+declare var ga:Function; 
 
 @Component({
     selector: 'app-category',
@@ -42,6 +43,7 @@ export class CategoryComponent implements OnInit {
     }
 
     navigateTo(path, flow, count) {
+        ga('send', { hitType: 'event', eventCategory: 'Click', eventAction: 'Go To'+path+''+flow+''+count, eventLabel: 'navigateTo' }); 
         this.utilities.utilities.flow = flow;
         flow === 'residentialNavElems' ? this.utilities.utilities.dtype = 'res' : this.utilities.utilities.dtype = 'gdo';
         this.utilities.utilities.navCount = count;
@@ -94,6 +96,7 @@ export class CategoryComponent implements OnInit {
     }
 
     gdoGoTo(path, id) {
+        ga('send', { hitType: 'event', eventCategory: 'Click', eventAction: 'Go To'+path+''+id, eventLabel: 'gdoGoTo' });
         this.utilities.utilities.isGDO = true;
         this.dataStore.gdoOpenerAccessories.length = 0;
         this.dataStore.gdoOpener = null;

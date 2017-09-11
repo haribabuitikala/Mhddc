@@ -11,7 +11,7 @@ import { CollectionService } from "../shared/data.service";
 // import { QuerySocialService } from 'social-share-ng2';
 declare var $: any;
 declare var _: any;
-
+declare var ga:Function; 
 @Component({
     selector: 'app-door-configuration',
     templateUrl: './door-configuration.component.html',
@@ -60,12 +60,14 @@ export class DoorConfigurationComponent implements OnInit {
     }
 
     setNavComponent() {
+        
         this.navComponent.renderNav({
             flowType: 'gdo',
             flowActiveStep: 4,
             currentStepUrl: '/gdoConfig/doorConfiguration',
             showStepIndicator: true,
             nextStepFn: () => {
+                
                 this.nextBtn('/shoppingCart');
             }
         });
@@ -481,6 +483,7 @@ table td {
     };
 
     nextBtn(path) {
+        ga('send', { hitType: 'event', eventCategory: 'Click', eventAction: 'Go To'+path, eventLabel: 'nextBtn' }); 
         if (this.utils.resFlowSession.resDoorObj.INSTALLTYPE === 'DIY') {
             // this.utils.resFlowSession.resDetails.totalPrice = this.utils.utilities.itemPriceDY;
         } else {

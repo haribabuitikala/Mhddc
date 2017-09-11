@@ -7,7 +7,7 @@ import { NavComponent } from "../nav/nav.component";
 import { AppUtilities } from "../shared/appUtilities";
 
 declare var _: any;
-
+declare var ga:Function;
 @Component({
   selector: 'app-hardware',
   templateUrl: './hardware.component.html',
@@ -480,6 +480,7 @@ setProductID() {
 
 
   nextBtn(path) {
+    ga('send', {hitType: 'event',eventCategory: 'Click',eventAction: 'Go To'+path,eventLabel: 'nextBtn',eventValue: 10}); 
     if (document.querySelector('.vsDoor') && document.querySelector('.vsDoor')['toDataURL']) {
       this.utils.resFlow.imgSrc = document.querySelector('.vsDoor')['toDataURL']();
     } else if (document.querySelector('#homeVis canvas') && document.querySelector('#homeVis canvas')['toDataURL']) {

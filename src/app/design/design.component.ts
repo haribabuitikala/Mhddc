@@ -124,6 +124,7 @@ export class DesignComponent implements OnInit {
     }
 
     nextBtn(path) {
+        ga('send', { hitType: 'event', eventCategory: 'Click', eventAction: 'Go To'+path, eventLabel: 'gdoGoTo' });
         this.route.navigateByUrl(path);
     }
 
