@@ -1,4 +1,4 @@
-import { Component, OnInit, OnChanges } from '@angular/core';
+import { Component, OnInit, OnChanges, ElementRef, AfterViewInit, AfterViewChecked } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { LangEnglishService } from "../shared/english";
@@ -16,9 +16,9 @@ declare var $: any;
     templateUrl: './banner.component.html',
     styleUrls: ['./banner.component.less']
 })
-export class BannerComponent implements OnInit {
+export class BannerComponent implements OnInit, OnChanges, AfterViewInit, AfterViewChecked {
     zip: any;
-    zipCode: any;
+    zipCode: any = '';
     lang: any;
 
 
@@ -29,6 +29,7 @@ export class BannerComponent implements OnInit {
         , private dataService: CollectionService
         , private dataStore: CollectionData
         , private navComponent: NavComponent
+        , private elem: ElementRef
         , private utils: AppUtilities) {
     }
     save(form: NgForm) {
@@ -67,6 +68,18 @@ export class BannerComponent implements OnInit {
         console.log('changed');
     }
 
+    ngAfterViewInit(){
+        
+    }
+
+    ngAfterViewChecked() {
+        $('.logger').html('');
+        var value = this.elem.nativeElement.querySelector('.zip-code').value;
+        value = value.replace(/[^0-9]/g, '');
+        //value = value.substr(0,5);
+        this.elem.nativeElement.querySelector('.zip-code').value = value;
+    }
+    
     ngOnInit() {
         this.utils.gdoFlowSession.cart.length = 0;
         this.utils.resFlowSession.cart.length = 0;
@@ -79,43 +92,38 @@ export class BannerComponent implements OnInit {
 
         $('.exact-size-loader').remove();
     }
-    onlyNumberKeyDown(event) {
-        let len = event.currentTarget.value.length;
-        if((event.keyCode >= 48 && event.keyCode < 58)) {
-            if (len >=5) {
-                event.preventDefault();
-            }
-        } else {
-            if (event.keyCode === 8) {
-            } else {
-                event.preventDefault();
-            }
-            
-        }
-        
+
+    clearLog() {
+        $('.logger').html('');
     }
-    onlyNumberKey(event) {
+    onlyNumberKeyDown(event) {
         let value = event.currentTarget.value;
         value = value.replace(/[^0-9]/g, '');
-        event.currentTarget.value = value.substr(0,5);
+        event.currentTarget.value = value.substring(0,5);
+    }
+    onlyNumberKey(event, form) {
+        let value = this.elem.nativeElement.querySelector('.zip-code').value;
+        value = value.replace(/[^0-9]/g, '');
+        value = value.substr(0,5);
+        this.zipCode = value;
     }
     onPasteZipcode(event) {
         setTimeout(() => {
             let target = event.currentTarget || event.srcElement;
             let value = target.value;
             value = value.replace(/[^0-9]/g, '');
-            target.value = value.substr(0,5);
+            target.value = value.substr(0, 5);
         }, 0);
     }
 
-onChange(value){   
-if (!value) {
-			//alert("123")
-			$(".form-control input").val("")
+    onChange(value) {
+        if (!value) {
+            //alert("123")
+            $(".form-control input").val("")
             $(".form-control input").focus();
-			$(".form-control input").setSelectionRange(0, 0)
+            $(".form-control input").setSelectionRange(0, 0)
         }
-}  
+    }
 
     getPromo() {
 
