@@ -1020,6 +1020,7 @@ function writeHeader(subTotal, taxRate, estimatedTax, grandTotal, orderType, ord
     var st = orderObj.locale.state
     var zip = orderObj.locale.zip
     var mid;
+    var isMobile = true;
     var ustoreTax;
     mid = orderObj.store.marketid;
     if (orderObj.store.storetax == '') {
@@ -1051,6 +1052,7 @@ function writeHeader(subTotal, taxRate, estimatedTax, grandTotal, orderType, ord
     _orderHeader += "\t\t" + "<ESTIMATEDTAX>" + estimatedTax + "</ESTIMATEDTAX>" + _newLine;
     _orderHeader += "\t\t" + "<TOTAL>" + grandTotal.toFixed(2).toString() + "</TOTAL>" + _newLine;
     _orderHeader += "\t\t" + "<MARKETID>" + mid + "</MARKETID>" + _newLine;
+    _orderHeader += "\t\t" + "<MOBILE>" + isMobile + "</MOBILE>" + _newLine;
     // Order Header - Store Info
     _orderHeader += "\t\t" + "<STORE_DETAILS>" + _newLine;
     _orderHeader += "\t\t\t" + "<STORE_NAME>" + "The Home Depot" + "</STORE_NAME>" + _newLine;
