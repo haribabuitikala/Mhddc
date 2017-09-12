@@ -9,12 +9,17 @@
     <form #form="ngForm" (ngSubmit)="save(form)" class="form-group banner-zip-search ptn-rel">
       <div class="ptn-rel">
         <div class="form-control">
-          <input type="text" (paste)="onPasteZipcode($event)"  (keydown)="onlyNumberKeyDown($event)"  (keyup)="onlyNumberKey($event)" pattern="[0-9]{5}" inputmode="numeric" name="zip" minlength="5" maxlength="5" placeholder="Enter zip code"  #zipCode="ngModel" ngModel class="zip-code" autocomplete="off" required>
+          <input type="text" name="zip" [(ngModel)]="zipCode"
+            (paste)="onPasteZipcode($event)" 
+            minlength="5" maxlength="5"
+            (keyup)="onlyNumberKey($event, form)" placeholder="Enter zip code" 
+            class="zip-code" pattern="[0-9]{5}" #zipField="ngModel" 
+            autocomplete="off" required>
         </div>
-        <span *ngIf="zipCode.errors?.required && zipCode.touched" class="error ptn-abs">
+        <span *ngIf="zipField.errors?.required && zipField.touched" class="error ptn-abs">
          {{lang.zipcodeMessage}}
         </span>
-        <span *ngIf="zipCode.errors?.minlength && zipCode.touched" class="error ptn-abs">
+        <span *ngIf="zipField.errors?.minlength && zipField.touched" class="error ptn-abs">
           {{lang.zipcodeMessage}} 
         </span>
       </div>
