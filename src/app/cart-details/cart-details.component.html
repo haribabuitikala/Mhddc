@@ -130,10 +130,10 @@
     </dl>
     <dl class="door-configuration-table" *ngIf="data.opener.QTY !== 0 && data.opener.price !== 0">
         <dd class="door-configuration-table-header">
-            Opener
+            Opener 
         </dd>
         <dd>
-            <p [innerHTML]="data.opener.name"></p>
+            <p [innerHTML]="data.opener.name  + ' (x' + data.opener.qty + ')'"></p>
             <span>{{data.opener.price | currency:'USD':true:'1.2-2'}}</span>
         </dd>
     </dl>
