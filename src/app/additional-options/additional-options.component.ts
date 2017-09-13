@@ -211,6 +211,7 @@ export class AdditionalOptionsComponent implements OnInit {
             obj.qty = 0;
             $('.gdoDistance').prop('disabled', 'disabled');
         }
+        this.utils.utilities.kPrice = this.utils.sumBy(this.dataStore.gdoOpenerAccessories);
         this.gdoConfig.itemPrice = this.utils.calculateTotalPrice(); //this.calculateTotalPrice(this.utils.utilities.item_price, this.singleOpener, this.doubleOpener, this.mileOpenPr, this.qty);
     }
 
@@ -422,6 +423,7 @@ export class AdditionalOptionsComponent implements OnInit {
         }
         this.mileOpenPr = this.distancePrice;
         this.utils.utilities.distancePrice = this.distancePrice;
+        this.utils.utilities.kPrice = this.utils.sumBy(this.dataStore.gdoOpenerAccessories);
         this.gdoConfig.itemPrice = this.utils.calculateTotalPrice();
     }
 

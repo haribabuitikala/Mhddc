@@ -186,13 +186,17 @@ updateQuantity(flow) {
     this.qty = this.utils.utilities.gdoOpenerQty;
 }
 
-updateQty(item, index, increment ?) {
+updateQty(item, index, increment?) {
     if (increment) {
         if (item.construction.qty !== 6)
             item.construction.qty = item.construction.qty + 1;
     } else {
-        if (item.construction.qty !== 1)
+        if (item.construction.qty !== 1) {
             item.construction.qty = item.construction.qty - 1;
+            if (item.opener.qty > item.construction.qty) {
+                item.opener.qty = item.construction.qty;
+            }
+        }
     }
     this.utils.resFlowSession.cart[index] = this.utils.resFlowSession.resCalculateCartItemPrice(item);
     this.utils.resFlowSession.cart[index] = this.resFlowSession.cart[index];
