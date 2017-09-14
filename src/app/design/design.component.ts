@@ -9,6 +9,7 @@ import { NavComponent } from "../nav/nav.component";
 import { DetailsComponent } from "../details/details.component";
 declare var _: any;
 declare var $: any;
+declare var ga:Function;
 
 @Component({
     selector: 'app-design',
@@ -124,7 +125,7 @@ export class DesignComponent implements OnInit {
     }
 
     nextBtn(path) {
-        ga('send', { hitType: 'event', eventCategory: 'Click', eventAction: 'Go To'+path, eventLabel: 'gdoGoTo' });
+        ga('send', { hitType: 'event', eventCategory: 'Click', eventAction: 'Go To'+path, eventLabel: 'nextBtn' });
         this.route.navigateByUrl(path);
     }
 

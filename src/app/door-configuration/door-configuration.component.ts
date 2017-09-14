@@ -69,6 +69,7 @@ export class DoorConfigurationComponent implements OnInit {
             nextStepFn: () => {
                 
                 this.nextBtn('/shoppingCart');
+                
             }
         });
     }
