@@ -8,7 +8,7 @@ import { AppUtilities } from "../shared/appUtilities";
 
 
 declare var _: any;
-
+declare var ga:Function;
 @Component({
   selector: 'app-top-section',
   templateUrl: './top-section.component.html',
@@ -60,6 +60,7 @@ export class TopSectionComponent implements OnInit {
   }
 
   nextBtn(path?, longPanel?) {
+     ga('send', { hitType: 'event', eventCategory: 'Click', eventAction: 'Go To'+path+''+longPanel, eventLabel: 'nextBtn' });
     this.navComponent.setNavFlow('res', '');
     var topsection = this.utils.resFlowSession.resDoorObj.windows.topsection;
     if (topsection && topsection['glasstypes']) {

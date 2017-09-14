@@ -7,7 +7,7 @@ import { NavComponent } from "../nav/nav.component";
 import { Router } from '@angular/router';
 
 declare var _: any;
-
+declare var ga:Function;
 @Component({
   selector: 'app-non-classic',
   templateUrl: './non-classic.component.html',
@@ -60,6 +60,7 @@ export class NonClassicComponent implements OnInit {
   }
 
   nextBtn() {
+    ga('send', { hitType: 'event', eventCategory: 'Click', eventAction: 'glass Type Choosed ', eventLabel: 'nextBtn' });
     this.route.navigateByUrl('/config/hardware');
   }
 
