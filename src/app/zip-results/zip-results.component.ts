@@ -36,6 +36,9 @@ export class ZipResultsComponent implements OnInit {
         this.utils.utilities.localmarketid = item.marketid;
         this.utils.utilities.storenumber = +item.storenumber;
         this.utils.utilities.gdoStore = item.gdo;
+        //WO # 1147296
+        this.utils.utilities.storegdo = item.storegdo;
+        
 
         // this is for resdential details
         let resDetails = this.utils.resFlowSession.resDetails;

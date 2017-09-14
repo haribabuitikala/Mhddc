@@ -35,11 +35,13 @@ export class CategoryComponent implements OnInit {
         this.isService = this.utilities.utilities.isService;
         this.appComponent.currScreen = 2;
         let utils = this.utilities.utilities;
-        this.appComponent.showStepIndicator = false;
-        let arrgdoshutStores = JSON.stringify(this.utilities.gdoshutStores);
+        this.appComponent.showStepIndicator = false;      
         let storeNum = this.utilities.utilities.storenumber;
-        this.isShowGDO = arrgdoshutStores.indexOf(storeNum) !== -1 ? false : true;
+        //WO # 1147296
+        this.isShowGDO = ((utils.storegdo.toLowerCase() === "" || utils.storegdo.toLowerCase() ===   'no') ) ? false : true;
     }
+
+    
 
     navigateTo(path, flow, count) {
         ga('send', { hitType: 'event', eventCategory: 'Click', eventAction: 'Go To'+path+''+flow+''+count, eventLabel: 'navigateTo' });
