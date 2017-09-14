@@ -8,6 +8,7 @@ import { NavComponent } from "../nav/nav.component";
 import { AppComponent } from "../app.component";
 declare var $: any;
 declare var _: any;
+declare var ga:Function;
 @Component({
     selector: 'app-collection',
     templateUrl: './collection.component.html',
@@ -172,6 +173,7 @@ export class CollectionComponent implements OnInit {
     }
 
     goToHome(speciality) {
+        ga('send', { hitType: 'event', eventCategory: 'Click', eventAction: 'Go To'+speciality, eventLabel: 'nextBtn' });
         // $('.collection-img').removeClass('selected');z
         this.utils.setLoader();
         speciality.selected = true;
@@ -280,6 +282,7 @@ export class CollectionComponent implements OnInit {
     }
 
     quickShip() {
+        ga('send', { hitType: 'event', eventCategory: 'Click', eventAction: 'To See QUICKSHIP DOORS', eventLabel: 'quickShip' });
         this.appComponent.setLoader(true);
         let utils = this.utils.utilities;
         let labour = this.utils.resFlowSession.resDoorObj;
