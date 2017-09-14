@@ -659,7 +659,7 @@ export class ResSliderComponent implements OnInit, AfterViewInit {
                     }
                 },
                 err => {
-                    this.dataService.handleError();
+                   // this.dataService.handleError();
                 });
         } else {
             if (itemtype === "models") {
