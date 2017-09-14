@@ -9,6 +9,7 @@ import { ModalComponent } from "ng2-bs3-modal/ng2-bs3-modal";
 import { CollectionService } from "../shared/data.service";
 
 declare var _: any;
+declare var ga:Function;
 @Component({
     selector: 'app-construction',
     templateUrl: './construction.component.html',
@@ -196,6 +197,7 @@ arraymove(arr, fromIndex, toIndex) {
 }
 
     nextBtn(path, upsellModal) {
+          ga('send', { hitType: 'event', eventCategory: 'Click', eventAction: 'Go To'+path+''+upsellModal, eventLabel: 'nextBtn' }); 
         let coreAssortment = this.isCoreAssortment;
         if (this.utils.resFlowSession.resDoorObj.product.product['item_id'] == '11') {
             coreAssortment = false;

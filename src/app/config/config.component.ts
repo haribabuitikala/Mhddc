@@ -5,6 +5,7 @@ import { AppUtilities } from "../shared/appUtilities";
 import { NavComponent } from "../nav/nav.component";
 declare var $: any;
 declare var _: any;
+declare var ga:Function;
 @Component({
     selector: 'app-config',
     templateUrl: './config.component.html',
@@ -673,6 +674,7 @@ export class ConfigComponent implements OnInit, AfterViewInit, AfterViewChecked 
     }
 
     openDetailsModal(detailsModal) {
+         ga('send', { hitType: 'event', eventCategory: 'Click', eventAction: 'Open Details modal'+detailsModal, eventLabel: 'openDetailsModal' });
         var pos = $('.res-config').offset();
         var linearhgt = $('.res-config').outerHeight();
         var header = $('.logo-header').outerHeight();

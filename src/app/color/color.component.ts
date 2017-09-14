@@ -8,7 +8,7 @@ import { AppComponent } from "../app.component";
 import { AppUtilities } from "../shared/appUtilities";
 
 declare var _: any;
-
+declare var ga:Function;
 @Component({
     selector: 'app-color',
     templateUrl: './color.component.html',
@@ -184,6 +184,7 @@ export class ColorComponent implements OnInit {
 
     errorMsg;
     nextBtn(path, warning?) {
+        ga('send', { hitType: 'event', eventCategory: 'Click', eventAction: 'Go To'+path+''+warning, eventLabel: 'gdoGoTo' });
         let resObj = this.utils.resFlowSession.resDoorObj;
         if (this.utils.resFlowSession.resDoorObj.product.product['item_id'] == 9) {
             this.utils.resFlowSession.resDoorObj.construction.vinyl = this.vinylOptions[+this.selectedVinyl];

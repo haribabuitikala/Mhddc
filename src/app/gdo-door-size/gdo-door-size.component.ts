@@ -7,6 +7,7 @@ import { CollectionData } from "../collection/collection-data";
 import { NavComponent } from '../nav/nav.component'
 import { NavService } from "../nav/nav-service";
 declare var $: any;
+declare var ga:Function;
 
 @Component({
     selector: 'app-gdo-door-size',
@@ -55,6 +56,7 @@ export class GdoDoorSizeComponent implements OnInit {
     };
 
     goTo(itm) {
+        ga('send', { hitType: 'event', eventCategory: 'Click', eventAction: 'Go To'+itm, eventLabel: 'goTo' });
         if (itm > 0) {
             this.utils.utilities.currPage = 2;
             this.utils.utilities.clicked = 1;

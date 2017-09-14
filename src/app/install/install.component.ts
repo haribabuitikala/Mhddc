@@ -14,7 +14,7 @@ import { EscapeHtmlPipe } from "../shared/html-entitiy";
 
 declare var _: any;
 declare var $: any;
-
+declare var ga:Function;
 @Component({
     selector: 'app-install',
     templateUrl: './install.component.html',
@@ -287,6 +287,7 @@ export class InstallComponent implements OnInit, AfterViewInit, AfterViewChecked
         }
     }
     leadTestValue(buttonValue) {
+        ga('send', { hitType: 'event', eventCategory: 'Click', eventAction: 'Go To'+buttonValue, eventLabel: 'leadTestValue' })
         if (buttonValue == "YES") {
             this.epa.open();
 
@@ -296,6 +297,7 @@ export class InstallComponent implements OnInit, AfterViewInit, AfterViewChecked
         }
     }
     epaValue(epaStatus) {
+        ga('send', { hitType: 'event', eventCategory: 'Click', eventAction: 'Go To'+epaStatus, eventLabel: 'leadTestValue' })
         if (epaStatus == 'learn') {
             this.leadTest.close();
             this.epa.close();
