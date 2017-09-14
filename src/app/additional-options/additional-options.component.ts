@@ -211,8 +211,16 @@ export class AdditionalOptionsComponent implements OnInit {
             obj.qty = 0;
             $('.gdoDistance').prop('disabled', 'disabled');
         }
-        this.utils.utilities.kPrice = this.utils.sumBy(this.dataStore.gdoOpenerAccessories);
+        let kPrice = _.sumBy(this.dataStore.gdoDirectQuestions, function (o) {
+            return o.price;
+        });
+        this.utils.utilities.kPrice = kPrice;
         this.gdoConfig.itemPrice = this.utils.calculateTotalPrice(); //this.calculateTotalPrice(this.utils.utilities.item_price, this.singleOpener, this.doubleOpener, this.mileOpenPr, this.qty);
+        
+        let aPrice = _.sumBy(this.dataStore.gdoOpenerAccessories, function (o) {
+            return o.price * o.count;
+        });
+        this.gdoConfig.itemPrice =  this.gdoConfig.itemPrice + aPrice;
     }
 
     singleOpener = 0;
@@ -423,7 +431,10 @@ export class AdditionalOptionsComponent implements OnInit {
         }
         this.mileOpenPr = this.distancePrice;
         this.utils.utilities.distancePrice = this.distancePrice;
-        this.utils.utilities.kPrice = this.utils.sumBy(this.dataStore.gdoOpenerAccessories);
+        let kPrice = _.sumBy(this.dataStore.gdoDirectQuestions, function (o) {
+            return o.price;
+        });
+        this.utils.utilities.kPrice = kPrice;
         this.gdoConfig.itemPrice = this.utils.calculateTotalPrice();
     }
 
