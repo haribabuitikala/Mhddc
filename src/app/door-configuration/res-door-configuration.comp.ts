@@ -277,7 +277,7 @@ export class ResDoorConfigurationComponent implements OnInit {
 
             if (resData.hardware.hinge.price !== 0 && resData.hardware.hinge.name !== 'None') {
                 itemHead = "Hinge";
-                itemValue = resData.hardware.hinge.name + ' (x' + resData.hardware.hinge.qty + ' Per Door)';
+                itemValue = resData.hardware.hinge.name + " (x" + resData.hardware.hinge.qty + " Pair Per Door)";
                 itemPrice = this.covertToUSD((resData.isDIY ? resData.hardware.hinge.diy_price : resData.hardware.hinge.install_price) * resData.hardware.hinge.qty);
                 temptr = ` <tr class="tabletr">
                     <td class="allfontMediumOrangeColor">${itemHead}</td>
