@@ -1,7 +1,8 @@
-import { Component, Input, OnInit, OnChanges, AfterViewChecked, ChangeDetectorRef } from '@angular/core';
+import { Component, Input, OnInit, OnChanges, AfterViewChecked, ChangeDetectorRef, ViewChild, HostListener } from '@angular/core';
 import { Location } from '@angular/common';
 import { Router, ActivatedRoute, NavigationEnd } from '@angular/router';
 import { AppUtilities } from "./shared/appUtilities";
+import { ModalComponent } from "ng2-bs3-modal/ng2-bs3-modal";
 import { NavComponent } from "./nav/nav.component";
 declare var $: any;
 declare var ga:Function; 
@@ -13,7 +14,7 @@ declare var ga:Function;
     providers: [NavComponent]
 })
 export class AppComponent implements OnInit, AfterViewChecked, OnChanges {
-
+    @ViewChild('homeredirect') modal: ModalComponent;
     showStepIndicator = false;
     steps = [];
     activeStep = -1;
@@ -62,7 +63,20 @@ constructor(private route: Router
     // this is for checking whether Install or Diy selected for routing to appropriate screen
     selectedInstallDiy: string;
 
+    @HostListener('window:popstate', ['$event'])
+    onPopState(event) {
+        console.log('Back button pressed -- Nav');
+           this.openModal();     
+    }
 
+    openModal() {
+        this.modal.open();
+    }
+
+    goToHome() {
+        this.modal.close();
+        this.route.navigateByUrl('/banner');
+    }
 
     ngOnChanges() {
         this.currScreen = this.app.utilities.currScreen;
