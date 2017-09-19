@@ -93,6 +93,7 @@ export class CategoryComponent implements OnInit {
     }
 
     showModal() {
+        ga('send', { hitType: 'event', eventCategory: 'Click', eventAction: 'Go To Service & repair', eventLabel: 'showModal' });
         this.modal.open();
     }
 
