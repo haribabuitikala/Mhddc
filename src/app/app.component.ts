@@ -5,7 +5,7 @@ import { AppUtilities } from "./shared/appUtilities";
 import { ModalComponent } from "ng2-bs3-modal/ng2-bs3-modal";
 import { NavComponent } from "./nav/nav.component";
 declare var $: any;
-declare var ga:Function; 
+declare var ga:Function;
 
 @Component({
     selector: 'app-root',
@@ -37,22 +37,22 @@ export class AppComponent implements OnInit, AfterViewChecked, OnChanges {
 
     // }
 
-    
-constructor(private route: Router 
-      , private location: Location        
-      , private app: AppUtilities        
-      , private nav: NavComponent        
-      , private activeRoute: ActivatedRoute        
-      , private cdref: ChangeDetectorRef) {        
-      route.events.subscribe(r => {            
-           if (r instanceof NavigationEnd) {                
-               console.log('flow Data ', app.resFlowSession.resDoorObj);                
-               window['cObj'] = app.resFlowSession.resDoorObj;            
-            }            
-             ga('set', 'page', r.url);            
-             ga('send', 'pageview')       
-            });     
+
+    constructor(private route: Router
+        , private location: Location
+        , private app: AppUtilities
+        , private nav: NavComponent
+        , private activeRoute: ActivatedRoute
+        , private cdref: ChangeDetectorRef) {
+        route.events.subscribe(r => {
+            if (r instanceof NavigationEnd) {
+                console.log('flow Data ', app.resFlowSession.resDoorObj);
+                window['cObj'] = app.resFlowSession.resDoorObj;
             }
+            ga('set', 'page', r.url);
+            ga('send', 'pageview')
+        });
+    }
 
 
     prev: string = 'Prev';
@@ -65,8 +65,9 @@ constructor(private route: Router
 
     @HostListener('window:popstate', ['$event'])
     onPopState(event) {
-        console.log('Back button pressed -- Nav');
-           this.openModal();     
+        if (this.location.path() !== '/banner') {
+            this.openModal();
+        }
     }
 
     openModal() {
@@ -206,7 +207,7 @@ constructor(private route: Router
         }
         let gdoObj = this.app.gdoFlowSession;
         if (this.app.utilities.isGDO) {
-        gdoObj.cart[0].additional.items = this.app.gdoOpenerAccessories;
+            gdoObj.cart[0].additional.items = this.app.gdoOpenerAccessories;
         }
 
         let Obj = this.app.utilities.isGDO === true ? gdoObj : resObj;
