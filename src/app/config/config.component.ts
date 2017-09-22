@@ -674,7 +674,7 @@ export class ConfigComponent implements OnInit, AfterViewInit, AfterViewChecked 
     }
 
     openDetailsModal(detailsModal) {
-         ga('send', { hitType: 'event', eventCategory: 'Click', eventAction: 'Open Details modal'+detailsModal, eventLabel: 'openDetailsModal' });
+         ga('send', { hitType: 'event', eventCategory: 'Click', eventAction: 'AllScreens-ViewDetails-GD'+detailsModal, eventLabel: 'openDetailsModal' });
         var pos = $('.res-config').offset();
         var linearhgt = $('.res-config').outerHeight();
         var header = $('.logo-header').outerHeight();

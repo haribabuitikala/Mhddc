@@ -173,7 +173,7 @@ export class CollectionComponent implements OnInit {
     }
 
     goToHome(speciality) {
-        ga('send', { hitType: 'event', eventCategory: 'Click', eventAction: 'Go To'+speciality, eventLabel: 'nextBtn' });
+        ga('send', { hitType: 'event', eventCategory: 'Click', eventAction: 'CollectionScreen'+speciality, eventLabel: 'goToHome' });
         // $('.collection-img').removeClass('selected');z
         this.utils.setLoader();
         speciality.selected = true;
@@ -282,7 +282,7 @@ export class CollectionComponent implements OnInit {
     }
 
     quickShip() {
-        ga('send', { hitType: 'event', eventCategory: 'Click', eventAction: 'To See QUICKSHIP DOORS', eventLabel: 'quickShip' });
+        ga('send', { hitType: 'event', eventCategory: 'Click', eventAction: 'CollectionScreen-QuickShip', eventLabel: 'quickShip' });
         this.appComponent.setLoader(true);
         let utils = this.utils.utilities;
         let labour = this.utils.resFlowSession.resDoorObj;
