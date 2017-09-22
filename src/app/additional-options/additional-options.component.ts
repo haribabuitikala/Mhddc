@@ -234,7 +234,7 @@ export class AdditionalOptionsComponent implements OnInit {
         if (itm.srcElement.checked === true) {
             this.singleDrop = true;
             this.singleOpener = 50;
-            this.utils.utilities.singlep = 50;
+            // this.utils.utilities.singlep = 50;
 
             let k = {
                 name: "Single Door New Opener Installation Kit. This is required when no Opener is currently installed on door less than 10' wide.",
@@ -261,6 +261,10 @@ export class AdditionalOptionsComponent implements OnInit {
             obj.qty = 0;
 
         }
+        let kPrice = _.sumBy(this.dataStore.gdoDirectQuestions, function (o) {
+            return o.price;
+        });
+        this.utils.utilities.kPrice = kPrice;
         this.gdoConfig.itemPrice = this.utils.calculateTotalPrice();
 
     }
@@ -270,7 +274,7 @@ export class AdditionalOptionsComponent implements OnInit {
         if (itm.srcElement.checked === true) {
             this.doubleDrop = true;
             this.doubleOpener = 65;
-            this.utils.utilities.doublep = 65;
+            // this.utils.utilities.doublep = 65;
             // this.gdoConfig.itemPrice = this.calculateTotalPrice(this.utils.utilities.item_price, this.singleOpener, this.doubleOpener, this.mileOpenPr, 1);
             let k = {
                 name: "Double Door New Opener Installation Kit. This is required when no Opener is currently installed on door less than 10' wide.",
@@ -295,6 +299,10 @@ export class AdditionalOptionsComponent implements OnInit {
             obj.QTY = 0;
             obj.qty = 0;
         }
+        let kPrice = _.sumBy(this.dataStore.gdoDirectQuestions, function (o) {
+            return o.price;
+        });
+        this.utils.utilities.kPrice = kPrice;
         this.gdoConfig.itemPrice = this.utils.calculateTotalPrice();
     }
 
@@ -351,8 +359,10 @@ export class AdditionalOptionsComponent implements OnInit {
             this.utils.utilities.gdoDoubleDoor = k.price;
             this.utils.utilities.doublep = 0;
             let obj = this.utils.gdoFlowSession.cart[0].additional.items[0];
-            obj["useranswer"].QTY = k.count;
-            obj["useranswer"].qty = k.count;
+            if (obj['useranswer'] && obj['useranswer']['QTY'] && obj['useranswer']['qty']) {
+                obj["useranswer"].QTY = k.count;
+                obj["useranswer"].qty = k.count;
+            }
         }
         // this.gdoConfig.itemPrice += k.price;
         // this.dataStore.gdoDirectQuestions.splice(flow, 1);

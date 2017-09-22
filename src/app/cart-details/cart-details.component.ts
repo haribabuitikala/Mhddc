@@ -13,6 +13,7 @@ export class CartDetailsComponent implements OnInit {
   data;
   coachman;
   doorConfig;
+  hingePlacement;
 
   ngOnInit() {
     this.data = this.utils.resFlowSession.resDetails;
@@ -30,6 +31,7 @@ export class CartDetailsComponent implements OnInit {
     try {
       if (hardware.hinge && hardware.hinge['placement'].indexOf(':') >= 0) {
         this.data.hardware.hinge.qty = parseInt(hardware.hinge['placement'].split(':')[0]);
+        this.hingePlacement = hardware.hinge['placement'].split(':')[0];
       }
 
       if (hardware.handle && hardware.handle['placement'].indexOf(':') >= 0) {

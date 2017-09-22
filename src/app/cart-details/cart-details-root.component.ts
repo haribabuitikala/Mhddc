@@ -11,7 +11,12 @@ export class CartDetailsRootComponent implements OnInit {
   @Input() Item;
   data;
   itemPrice = this.utils.resFlowSession.cart[0].totalPrice;
+  hingePlacement;
   ngOnInit() {
     this.data = this.Item || this.utils.resFlowSession.resDoorObj;
+    let placement = this.utils.resFlowSession.resDoorObj.hardware.hinge['placement'];
+    if (placement) {
+      this.hingePlacement = placement.split(':')[0];
+    }
   }
 }
