@@ -142,7 +142,7 @@
             Opener Accessories
         </dd>
         <dd *ngFor="let itm of data.opener.items">
-            <p [innerHTML]="itm.name"></p>
+            <p [innerHTML]="itm.name + ' (x' + itm.qty + ')'"></p>
             <span>{{itm.price | currency:'USD':true:'1.2-2'}}</span>
         </dd>
     </dl>
