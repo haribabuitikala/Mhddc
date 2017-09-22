@@ -52,6 +52,8 @@ export class ConfigComponent implements OnInit, AfterViewInit, AfterViewChecked 
     isDoor = true;
     quickFlow = false;
     basep;
+    resDoorObj;
+    hingePlacement = 0;
 
     ngAfterViewChecked() {
         this.cdref.detectChanges();
@@ -711,6 +713,8 @@ export class ConfigComponent implements OnInit, AfterViewInit, AfterViewChecked 
         //     "max-height": detailshgt
         // })
         // this.details['designName'] = this.utils.resFlowSession.resDoorObj.design.dsgn['item_name'];
+        this.resDoorObj = this.utils.resFlowSession.resDoorObj;
+        this.hingePlacement = this.resDoorObj.hardware.hinge.placement.split(':')[0];
         detailsModal.open();
     }
 

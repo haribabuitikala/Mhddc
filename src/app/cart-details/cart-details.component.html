@@ -105,7 +105,7 @@
         </dd>
         <dd *ngIf="data.hardware.hinge.price !== 0 && data.hardware.hinge.name && data.hardware.hinge.name !== 'None'">
             <!-- <p [innerHTML]="data.hardware.hinge.name + ' (x' + data.hardware.hinge.qty * data.construction.qty + ')'"></p> -->
-            <p [innerHTML]="data.hardware.hinge.name + ' (x' + data.hardware.hinge.qty + ' Pair Per Door)'"></p>
+            <p [innerHTML]="data.hardware.hinge.name + ' (x' + hingePlacement + ' Pair Per Door)'"></p>
             <span>{{(data.isDIY ? data.hardware.hinge.diy_price : data.hardware.hinge.install_price) * data.hardware.hinge.qty  | currency:'USD':true:'1.2-2'}}</span>
         </dd>
     </dl>
