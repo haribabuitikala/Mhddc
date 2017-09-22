@@ -482,7 +482,7 @@ table td {
     };
 
     nextBtn(path) {
-         ga('send', { hitType: 'event', eventCategory: 'Click', eventAction: 'Go To'+path, eventLabel: 'nextBtn' });
+         
         if (this.utils.resFlowSession.resDoorObj.INSTALLTYPE === 'DIY') {
             // this.utils.resFlowSession.resDetails.totalPrice = this.utils.utilities.itemPriceDY;
         } else {
@@ -490,11 +490,13 @@ table td {
         }
 
         if (this.utils.utilities.flow === 'gdoNavElems') {
+            ga('send', { hitType: 'event', eventCategory: 'Click', eventAction: 'Summary-AddToCart-GD', eventLabel: 'nextBtn' });
             this.utils.setUtils(5, 1);
             $('.shop-count').text('1');
             this.utils.gdoFlowSession.added = true;
             this.goTo(path)
         } else {
+            ga('send', { hitType: 'event', eventCategory: 'Click', eventAction: 'F&I-GDO-AddToCart', eventLabel: 'nextBtn' });
             this.goTo(path)
         }
     }

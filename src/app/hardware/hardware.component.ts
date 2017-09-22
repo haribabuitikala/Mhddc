@@ -480,7 +480,7 @@ setProductID() {
 
 
   nextBtn(path) {
-    ga('send', {hitType: 'event',eventCategory: 'Click',eventAction: 'Go To'+path,eventLabel: 'nextBtn',eventValue: 10});
+    ga('send', {hitType: 'event',eventCategory: 'Click',eventAction: 'NextStep-Hardware-GD' ,eventLabel: 'nextBtn'});
     if (document.querySelector('.vsDoor') && document.querySelector('.vsDoor')['toDataURL']) {
       this.utils.resFlow.imgSrc = document.querySelector('.vsDoor')['toDataURL']();
     } else if (document.querySelector('#homeVis canvas') && document.querySelector('#homeVis canvas')['toDataURL']) {

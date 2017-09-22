@@ -56,7 +56,7 @@ export class GdoDoorSizeComponent implements OnInit {
     };
 
     goTo(itm) {
-        ga('send', { hitType: 'event', eventCategory: 'Click', eventAction: 'Go To'+itm, eventLabel: 'goTo' });
+        ga('send', { hitType: 'event', eventCategory: 'Click', eventAction: 'GDO-SizeSelection', eventLabel: 'goTo' });
         if (itm > 0) {
             this.utils.utilities.currPage = 2;
             this.utils.utilities.clicked = 1;

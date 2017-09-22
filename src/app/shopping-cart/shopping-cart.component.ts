@@ -203,33 +203,33 @@ updateQty(item, index, increment?) {
 }
 
 checkout(install, diy) {
-    ga('send', { hitType: 'event', eventCategory: 'Click', eventAction: 'Go To'+install+''+diy, eventLabel: 'checkout' });
+    ga('send', { hitType: 'event', eventCategory: 'Click', eventAction: 'F&I-GDO-AddToCart', eventLabel: 'checkout' });
     if (this.utils.utilities.flow == 'residentialNavElems') {
         // this.appComp.getCheckOut(this.itemPrice);
         // this.resShoppingCartTerms.open();
         this.utils.resFlowSession.resDoorObj.INSTALLTYPE === "Installed" ? install.open() : diy.open();
 
     } else {
-         ga('send', { hitType: 'event', eventCategory: 'Click', eventAction: 'Declined ', eventLabel: 'checkout' });
+         ga('send', { hitType: 'event', eventCategory: 'Click', eventAction: 'Terms&Conditions-Decline-GD', eventLabel: 'checkout' });
         // this.appComp.getCheckOut(this.itemPrice);
         this.gdoShoppingCartTerms.open();
     }
 }
 
 secureRedirection() {
-     ga('send', { hitType: 'event', eventCategory: 'Click', eventAction: 'T&C Accepted ', eventLabel: 'secureRedirection' });
+     ga('send', { hitType: 'event', eventCategory: 'Click', eventAction: 'Terms&Conditions-Accept-GD', eventLabel: 'secureRedirection' });
     this.resShoppingCartTerms.close();
     this.resShoppingCartTerms.close();
     this.secureRedirectionTerms.open();
 }
 
 goToHome() {
-     ga('send', { hitType: 'event', eventCategory: 'Click', eventAction: 'Declined ', eventLabel: 'goToHome' });
+     ga('send', { hitType: 'event', eventCategory: 'Click', eventAction: 'PaymentGateway-Decline-GD ', eventLabel: 'goToHome' });
     this.route.navigateByUrl('/banner');
 }
 
 goToCustomerInfo() {
-    ga('send', { hitType: 'event', eventCategory: 'Click', eventAction: 'GO TO OK ', eventLabel: 'goToCustomerInfo' });
+    ga('send', { hitType: 'event', eventCategory: 'Click', eventAction: 'goToCustomerInfo', eventLabel: 'goToCustomerInfo' });
     // this.route.navigateByUrl('/customer-info');
     this.appComp.getCheckOut(this.itemPrice);
 }

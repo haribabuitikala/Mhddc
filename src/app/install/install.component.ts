@@ -228,6 +228,7 @@ export class InstallComponent implements OnInit, AfterViewInit, AfterViewChecked
 
 
     nextBtn(path) {
+         ga('send', { hitType: 'event', eventCategory: 'Click', eventAction: 'DIY/Install-ProceedInstall-GD', eventLabel: 'nextBtn' })
         //Best place to set collection name in quickship flow
         if (this.appComponent.flowType == 'resquick') {
             let construction = this.utils.resFlowSession.resDoorObj.construction.construction;
@@ -287,7 +288,7 @@ export class InstallComponent implements OnInit, AfterViewInit, AfterViewChecked
         }
     }
     leadTestValue(buttonValue) {
-        ga('send', { hitType: 'event', eventCategory: 'Click', eventAction: 'Go To'+buttonValue, eventLabel: 'leadTestValue' })
+        ga('send', { hitType: 'event', eventCategory: 'Click', eventAction: 'Lead-'+buttonValue+'-GD', eventLabel: 'leadTestValue' })
         if (buttonValue == "YES") {
             this.epa.open();
 
@@ -297,7 +298,7 @@ export class InstallComponent implements OnInit, AfterViewInit, AfterViewChecked
         }
     }
     epaValue(epaStatus) {
-        ga('send', { hitType: 'event', eventCategory: 'Click', eventAction: 'Go To'+epaStatus, eventLabel: 'leadTestValue' })
+        ga('send', { hitType: 'event', eventCategory: 'Click', eventAction: 'epaValue', eventLabel: 'epaValue' })
         if (epaStatus == 'learn') {
             this.leadTest.close();
             this.epa.close();

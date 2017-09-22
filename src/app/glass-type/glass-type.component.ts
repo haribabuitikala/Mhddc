@@ -8,6 +8,7 @@ import { Router } from '@angular/router';
 
 declare var _: any;
 declare var $: any;
+declare var ga:Function;
 
 @Component({
   selector: 'app-glass-type',
@@ -100,6 +101,7 @@ export class GlassTypeComponent implements OnInit {
   }
 
   nextBtn() {
+     ga('send', { hitType: 'event', eventCategory: 'Click', eventAction: 'NextStep-GlassType-GD', eventLabel: 'gdoGoTo' });
     this.route.navigateByUrl('/config/hardware');
   }
 

@@ -98,7 +98,7 @@ export class DoorSizeComponent implements OnInit {
     homeSize = "0";
     // set door
     setDoor(door, event) {
-        ga('send', { hitType: 'event', eventCategory: 'Click', eventAction: 'setDoor'+door+''+event, eventLabel: 'setDoor' }); 
+        ga('send', { hitType: 'event', eventCategory: 'Click', eventAction: 'Size-'+door+'CarGD', eventLabel: 'setDoor' }); 
         this.navigateErorFlag = false;
         $('.select-door').removeClass('current');
         this.utils.utilities.singleDoor = false;
@@ -306,7 +306,7 @@ export class DoorSizeComponent implements OnInit {
     };
 
     nextBtn(curr, path) {
-        ga('send', { hitType: 'event', eventCategory: 'Click', eventAction: 'NextBtn'+curr+''+path, eventLabel: 'nextBtn' });
+        ga('send', { hitType: 'event', eventCategory: 'Click', eventAction: 'Size-ExactNextStepGD', eventLabel: 'nextBtn' });
         if (this.utils.utilities.wf != null && this.utils.utilities.wi != null && this.utils.utilities.hf != null && this.utils.utilities.hi != null &&
             this.utils.utilities.hf != 0) {
 

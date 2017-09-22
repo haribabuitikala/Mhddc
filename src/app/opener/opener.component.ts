@@ -98,7 +98,7 @@ export class OpenerComponent implements OnInit {
     }
 
     nextBtn(path) {
-        ga('send', { hitType: 'event', eventCategory: 'Click', eventAction: 'Go To'+path, eventLabel: 'nextBtn' });
+        ga('send', { hitType: 'event', eventCategory: 'Click', eventAction: 'NextStep-F&I-GDO', eventLabel: 'nextBtn' });
         $('body').addClass('loader');
         if (this.utils.utilities.flow === 'gdoNavElems') {
             this.utils.setUtils(3, 1);
@@ -132,7 +132,7 @@ export class OpenerComponent implements OnInit {
     }
 
     accessoriesModalNext() {
-        ga('send', { hitType: 'event', eventCategory: 'Click', eventAction: 'Clicked On Next Step button', eventLabel: 'accessoriesModalNext' });
+        ga('send', { hitType: 'event', eventCategory: 'Click', eventAction: 'NextStep-F&I-GDOAccessories', eventLabel: 'accessoriesModalNext' });
         $('body').addClass('loader');
         this.route.navigateByUrl('/gdoConfig/additionalOptions');
     }
