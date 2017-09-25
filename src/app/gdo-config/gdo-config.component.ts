@@ -139,6 +139,7 @@ export class GdoConfigComponent implements OnInit, OnChanges {
         // this.utils.utilities.item_price = this.itemPrice;
         // this.utils.utilities.gdoOpenerQty = this.quantity;
         this.quantity = this.utils.utilities.gdoOpenerQty;
+        this.utils.gdoFlowSession.cart[0].QTY = this.quantity;
     }
 
 
