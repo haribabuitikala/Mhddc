@@ -229,7 +229,7 @@ goToHome() {
 }
 
 goToCustomerInfo() {
-    ga('send', { hitType: 'event', eventCategory: 'Click', eventAction: 'goToCustomerInfo', eventLabel: 'goToCustomerInfo' });
+    ga('send', { hitType: 'event', eventCategory: 'Click', eventAction: 'PaymentGateway-OK-GD', eventLabel: 'goToCustomerInfo' });
     // this.route.navigateByUrl('/customer-info');
     this.appComp.getCheckOut(this.itemPrice);
 }

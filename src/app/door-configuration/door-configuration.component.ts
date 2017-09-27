@@ -490,13 +490,13 @@ table td {
         }
 
         if (this.utils.utilities.flow === 'gdoNavElems') {
-            ga('send', { hitType: 'event', eventCategory: 'Click', eventAction: 'Summary-AddToCart-GD', eventLabel: 'nextBtn' });
+            ga('send', { hitType: 'event', eventCategory: 'Click', eventAction: 'F&I-GDO-AddToCart', eventLabel: 'nextBtn' });
             this.utils.setUtils(5, 1);
             $('.shop-count').text('1');
             this.utils.gdoFlowSession.added = true;
             this.goTo(path)
         } else {
-            ga('send', { hitType: 'event', eventCategory: 'Click', eventAction: 'F&I-GDO-AddToCart', eventLabel: 'nextBtn' });
+           // ga('send', { hitType: 'event', eventCategory: 'Click', eventAction: 'F&I-GDO-AddToCart', eventLabel: 'nextBtn' });
             this.goTo(path)
         }
     }

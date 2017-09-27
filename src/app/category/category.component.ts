@@ -49,7 +49,7 @@ export class CategoryComponent implements OnInit {
         flow === 'residentialNavElems' ? this.utilities.utilities.dtype = 'res' : this.utilities.utilities.dtype = 'gdo';
         this.utilities.utilities.navCount = count;
         if (flow === 'residentialNavElems') {
-            ga('send', { hitType: 'event', eventCategory: 'Click', eventAction: 'ProgramSelectionScreen_ResiGD'+count, eventLabel: 'navigateTo' });
+            ga('send', { hitType: 'event', eventCategory: 'Click', eventAction: 'ProgramSelectionScreen_ResiGD', eventLabel: 'navigateTo' });
             this.utilities.utilities.isGDO = false;
             this.utilities.utilities.currPage = 1;
             this.utilities.utilities.currScreen += 1;
@@ -58,7 +58,7 @@ export class CategoryComponent implements OnInit {
             this.utilities.resFlowSession.resDoorObj.TYPE = "RES";
             this.route.navigateByUrl(path);
         } else {
-            ga('send', { hitType: 'event', eventCategory: 'Click', eventAction: 'ProgramSelectionScreen_GDO'+count, eventLabel: 'navigateTo' });
+            ga('send', { hitType: 'event', eventCategory: 'Click', eventAction: 'ProgramSelectionScreen_GDO', eventLabel: 'navigateTo' });
             let zipCode = this.utilities.utilities.zipCode;
             let storeNum = this.utilities.utilities.storenumber;
             let arr = JSON.stringify(this.utilities.gdoCheck);
