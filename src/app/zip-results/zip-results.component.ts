@@ -7,6 +7,7 @@ import {AppUtilities} from "../shared/appUtilities";
 import {CollectionData} from "../collection/collection-data";
 import {CollectionService} from "../shared/data.service";
 import {ToastrService} from "toastr-ng2/toastr-service";
+import { NavComponent } from "../nav/nav.component";
 declare var $: any;
 
 @Component({
@@ -26,6 +27,7 @@ export class ZipResultsComponent implements OnInit {
         , private utils: AppUtilities
         , private dataService: CollectionService
         , private toastr: ToastrService
+        , private navComponent: NavComponent
         , private dataStore: CollectionData) {
     }
 
@@ -71,7 +73,9 @@ export class ZipResultsComponent implements OnInit {
         //this.getData();
         this.lang = this.language.getzipResults();
         this.results = this.dataStore.zipResults;
-
+        this.navComponent.renderNav({
+            showStepIndicator: false
+        });
     }
 
 

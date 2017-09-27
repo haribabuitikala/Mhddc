@@ -9,7 +9,7 @@
         {{itemPrice | currency:'USD':true:'1.2-2'}}
     </span>
 </p>
-<div *ngIf="!resFlow && data" class="div-border div-border-radius tile padding10 margin-b-10 checkout">
+<div *ngIf="!resFlow && data && utils.gdoFlowSession.added" class="div-border div-border-radius tile padding10 margin-b-10 checkout">
     <p class="shopping-cart-gallery-info " *ngIf="!showDirect">{{openerType}} Door Operator (Installed)</p>
     <div class="clearfix clearfix margin-b-10">
         <span class="col-xs-9" *ngIf="!showDirect">{{gdoOpenerTxt}}</span>
@@ -76,7 +76,7 @@
     </div>
 </div>
 
-<div *ngIf="utils.gdoFlowSession.added > 0 && isGdo">
+<div *ngIf="utils.gdoFlowSession.added && isGdo">
     <div class="flex space-between margin-t-10 subsection margin-b-20">
         <button class="btn btn-default text-orange" (click)="removeItem(data, i)">REMOVE ITEM</button>
         <div class="flex">

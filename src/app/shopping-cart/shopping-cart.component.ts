@@ -164,9 +164,10 @@ removeItem(item, index) {
         this.showPreTax = this.resFlowSession.cart.length > 0 ? true : false;
         this.getTotalCartValue();
     } else {
-        this.utils.gdoFlowSession.cart.splice(index, 1);
+        // Fix under browser back button functionality possible regression
+        //this.utils.gdoFlowSession.cart.splice(index, 1);
         $('.shop-count').text(this.resFlowSession.cart.length);
-        this.dataStore.gdoOpenerAccessories.length = 0;
+        //this.dataStore.gdoOpenerAccessories.length = 0;
         this.utils.utilities.gdoOpenerText = '';
         this.showGdo = true;
         this.showPreTax = false;

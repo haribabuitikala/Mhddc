@@ -1,11 +1,12 @@
 import { Component, Input, OnInit, OnChanges, AfterViewChecked, ChangeDetectorRef, ViewChild, HostListener } from '@angular/core';
 import { Location } from '@angular/common';
-import { Router, ActivatedRoute, NavigationEnd } from '@angular/router';
+import { Router, ActivatedRoute, NavigationEnd, NavigationStart } from '@angular/router';
 import { AppUtilities } from "./shared/appUtilities";
 import { ModalComponent } from "ng2-bs3-modal/ng2-bs3-modal";
 import { NavComponent } from "./nav/nav.component";
+import { NavService } from "./nav/nav-service";
 declare var $: any;
-declare var ga:Function;
+declare var ga: Function;
 
 @Component({
     selector: 'app-root',
@@ -22,36 +23,93 @@ export class AppComponent implements OnInit, AfterViewChecked, OnChanges {
 
     noDIYs = [30, 16, 9];
 
-    // constructor(private route: Router
-    //     , private location: Location
-    //     , private app: AppUtilities
-    //     , private nav: NavComponent
-    //     , private activeRoute: ActivatedRoute
-    //     , private cdref: ChangeDetectorRef) {
-    //     route.events.subscribe(r => {
-    //         if (r instanceof NavigationEnd) {
-    //             console.log('flow Data ', app.resFlowSession.resDoorObj);
-    //             window['cObj'] = app.resFlowSession.resDoorObj;
-    //         }
-    //     })
 
-    // }
+    // Need to find better way to do this, 
+    // it is not recommended approach to fix back button functionality in browser
+    // for time concern it is implemented in this way, 
+    // can be handled in better way using server session and proper url definitions.
+    browserHistory = [];
+    configSteps = [];
+    resFlowPageList = [
+        '/',
+        '/banner',
+        '/category',
+        '/doorSize',
+        '/collection',
+        '/home'
+    ];
+    checkBackrestriction(url) {
+        if ((this.resFlowPageList.indexOf(url) >= 0 || url.indexOf('/config') >= 0) && url.indexOf('/shoppingCart') < 0) {
+            return true;
+        }
 
+        return false;
+    }
+    pushHistory(url) {
+        var foundIndex;
+        for(var i = 0; i < this.configSteps.length; i++) {
+            if(this.configSteps[i].url === url) {
+                foundIndex = i;
+                this.configSteps[i].enabled = true;
+            }
+        }
+        if (url === '/') {
+            this.browserHistory = [];    
+        }
+
+        if (url === '/doorSize') {
+            for(var i = 0; i < this.configSteps.length; i++) {
+                if (i > 3) {
+                    this.configSteps[i].enabled = false;
+                }
+            }
+        }
+ 
+        this.browserHistory.push(url);
+    }
+    stayInPage() {
+        this.modal.close();
+        var currentPage = this.browserHistory[this.browserHistory.length - 1];
+        var previousPage = this.browserHistory[this.browserHistory.length - 2];
+        if (this.checkBackrestriction(this.route.url)) {
+            if (previousPage.indexOf('gdoConfig') < 0 && previousPage.indexOf('shoppingCart') < 0) {
+                var configSteps = this.configSteps.filter(r => r.enabled === true).map(s => s.url);
+                if (configSteps.indexOf(currentPage) === configSteps.indexOf(previousPage) - 1) {
+                } else {
+                    if (configSteps[configSteps.indexOf(previousPage) - 1]) {
+                        this.route.navigateByUrl(configSteps[configSteps.indexOf(previousPage) - 1]);
+                    } else {
+                        this.route.navigateByUrl('/');
+                    }
+                }
+            }
+           
+        } else {
+            if (previousPage === '/banner') {
+                this.route.navigateByUrl('/');
+            }
+        }
+    }
+    // End of the browser back functionality
 
     constructor(private route: Router
         , private location: Location
         , private app: AppUtilities
         , private nav: NavComponent
+        , private navservice: NavService
         , private activeRoute: ActivatedRoute
         , private cdref: ChangeDetectorRef) {
         route.events.subscribe(r => {
             if (r instanceof NavigationEnd) {
-                console.log('flow Data ', app.resFlowSession.resDoorObj);
                 window['cObj'] = app.resFlowSession.resDoorObj;
+                this.pushHistory(r.url);
             }
+ 
             ga('set', 'page', r.url);
             ga('send', 'pageview')
         });
+
+        this.configSteps = navservice.getResFlowSteps();
     }
 
 
@@ -62,13 +120,14 @@ export class AppComponent implements OnInit, AfterViewChecked, OnChanges {
     currScreen;
     // this is for checking whether Install or Diy selected for routing to appropriate screen
     selectedInstallDiy: string;
-
     @HostListener('window:popstate', ['$event'])
     onPopState(event) {
         if (this.location.path() !== '/banner') {
+            this.modal.close();
             this.openModal();
         }
     }
+
 
     openModal() {
         this.modal.open();
@@ -78,6 +137,8 @@ export class AppComponent implements OnInit, AfterViewChecked, OnChanges {
         this.modal.close();
         this.route.navigateByUrl('/banner');
     }
+
+    
 
     ngOnChanges() {
         this.currScreen = this.app.utilities.currScreen;
@@ -217,7 +278,6 @@ export class AppComponent implements OnInit, AfterViewChecked, OnChanges {
             if (window['CheckOut']) {
                 var ttt = window['CheckOut'](price, 0, 0, price, Obj);
 
-                console.log('ttt ', ttt);
             }
         } catch (r) {
             //swallow

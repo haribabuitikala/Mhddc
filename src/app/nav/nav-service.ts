@@ -54,7 +54,38 @@ export class NavService {
     currentActiveEl;
 
     activateIcon() {
-        
+
+    }
+
+    getResFlowSteps() {
+        var steps = [];
+        [
+            '/',
+            '/banner',
+            '/category',
+            '/doorSize',
+            '/collection',
+            '/home',
+            '/config/design',
+            '/config/construction',
+            '/config/color',
+            '/config/topSection',
+            '/config/glassType',
+            '/config/nonClassic',
+            '/config/hardware',
+            '/config/lock',
+            '/config/install',
+            '/config/opener',
+            '/config/openerSelected',
+            '/config/additionalOptions',
+            '/config/doorConfiguration'
+        ].forEach(s => {
+            steps.push({
+                url: s,
+                enabled: false
+            });
+        });
+        return steps;
     }
 
 }
