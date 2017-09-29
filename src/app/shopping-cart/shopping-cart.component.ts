@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild, Directive, Input, Output, EventEmitter, AfterViewInit, AfterViewChecked, ChangeDetectorRef } from '@angular/core';
 import { ModalComponent } from "ng2-bs3-modal/ng2-bs3-modal";
 import { AppComponent } from "../app.component";
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { NavService } from "../nav/nav-service";
 import { NavComponent } from "../nav/nav.component";
 import { AppUtilities } from "../shared/appUtilities";
@@ -20,6 +20,7 @@ export class ShoppingCartComponent implements OnInit, AfterViewChecked {
     @ViewChild('resShoppingCartTerms') resShoppingCartTerms: ModalComponent;
     @ViewChild('gdoShoppingCartTerms') gdoShoppingCartTerms: ModalComponent;
     @ViewChild('secureRedirectionTerms') secureRedirectionTerms: ModalComponent;
+    @ViewChild('installTerms') installTerms: ModalComponent;
     @Input() IsModal: boolean = false;
     @Output() closeModal = new EventEmitter();
     pageNo;
@@ -68,7 +69,9 @@ constructor(private appComp: AppComponent
     , private navComponent: NavComponent
     , private dataStore: CollectionData
     , private route: Router
+    , private activatedRoute: ActivatedRoute
     , private cdref: ChangeDetectorRef) {
+        //route.
 }
 
 ngOnInit() {       
@@ -96,8 +99,21 @@ ngOnInit() {
     } else {
         this.getTotalCartValue();
     }
+
+    if(this.activatedRoute.snapshot.data["openmodal"]) {
+        ga('send', { hitType: 'event', eventCategory: 'Click', eventAction: 'F&I-GDO-AddToCart', eventLabel: 'checkout' });
+        if (this.utils.utilities.flow == 'residentialNavElems') {
+            this.utils.resFlowSession.resDoorObj.INSTALLTYPE === "Installed" ? this.installTerms.open() : this.resShoppingCartTerms.open();
+        } else {
+            ga('send', { hitType: 'event', eventCategory: 'Click', eventAction: 'Terms&Conditions-Decline-GD', eventLabel: 'checkout' });
+            this.gdoShoppingCartTerms.open();
+        }
+    }
 }
 
+redirectToShoppingCart(){
+    this.route.navigateByUrl('/shoppingCart');
+}
 getItemPrice() {
     this.isGdo = true;
     if (!this.utils.utilities.directFlow) {
@@ -204,17 +220,8 @@ updateQty(item, index, increment?) {
 }
 
 checkout(install, diy) {
-    ga('send', { hitType: 'event', eventCategory: 'Click', eventAction: 'F&I-GDO-AddToCart', eventLabel: 'checkout' });
-    if (this.utils.utilities.flow == 'residentialNavElems') {
-        // this.appComp.getCheckOut(this.itemPrice);
-        // this.resShoppingCartTerms.open();
-        this.utils.resFlowSession.resDoorObj.INSTALLTYPE === "Installed" ? install.open() : diy.open();
-
-    } else {
-         ga('send', { hitType: 'event', eventCategory: 'Click', eventAction: 'Terms&Conditions-Decline-GD', eventLabel: 'checkout' });
-        // this.appComp.getCheckOut(this.itemPrice);
-        this.gdoShoppingCartTerms.open();
-    }
+    this.route.navigateByUrl('/shoppingCart/confirm');
+  
 }
 
 secureRedirection() {

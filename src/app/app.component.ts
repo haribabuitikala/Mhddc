@@ -57,13 +57,6 @@ export class AppComponent implements OnInit, AfterViewChecked, OnChanges {
             this.browserHistory = [];    
         }
 
-        if (url === '/doorSize') {
-            for(var i = 0; i < this.configSteps.length; i++) {
-                if (i > 3) {
-                    this.configSteps[i].enabled = false;
-                }
-            }
-        }
  
         this.browserHistory.push(url);
     }
@@ -72,12 +65,13 @@ export class AppComponent implements OnInit, AfterViewChecked, OnChanges {
         var currentPage = this.browserHistory[this.browserHistory.length - 1];
         var previousPage = this.browserHistory[this.browserHistory.length - 2];
         if (this.checkBackrestriction(this.route.url)) {
-            if (previousPage.indexOf('gdoConfig') < 0 && previousPage.indexOf('shoppingCart') < 0) {
+            if (previousPage.indexOf('gdoDoorSize') < 0 && previousPage.indexOf('gdoConfig') < 0 && previousPage.indexOf('shoppingCart') < 0) {
                 var configSteps = this.configSteps.filter(r => r.enabled === true).map(s => s.url);
                 if (configSteps.indexOf(currentPage) === configSteps.indexOf(previousPage) - 1) {
                 } else {
-                    if (configSteps[configSteps.indexOf(previousPage) - 1]) {
-                        this.route.navigateByUrl(configSteps[configSteps.indexOf(previousPage) - 1]);
+                    var pageToNavigate = configSteps[configSteps.indexOf(previousPage) - 1]
+                    if (pageToNavigate) {
+                        this.route.navigateByUrl(pageToNavigate);
                     } else {
                         this.route.navigateByUrl('/');
                     }
