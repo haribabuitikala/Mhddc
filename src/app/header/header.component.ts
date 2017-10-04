@@ -37,6 +37,8 @@ export class HeaderComponent implements OnInit, AfterViewChecked {
                 if (window.location.href.indexOf('zipResults') >= 0) {
                     this.showCartIcon = false;
                 }
+
+                this.modal.close();
             }
         },
             err => {

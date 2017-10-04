@@ -245,6 +245,7 @@ arraymove(arr, fromIndex, toIndex) {
     }
 
     moveNext() {
+        ga('send', { hitType: 'event', eventCategory: 'Click', eventAction:'ProactiveUpsell-NoThanks-Continue', eventLabel: 'nextBtn' }); 
         this.upsell.close();
         this.route.navigateByUrl('config/color');
     }

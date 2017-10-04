@@ -25,6 +25,7 @@ export const appRoutes: Routes = [
     { path: 'collection', component: CollectionComponent },
     { path: 'home', component: HomeComponent },
     { path: 'shoppingCart', component: ShoppingCartComponent },
+    { path: 'shoppingCart/confirm', component: ShoppingCartComponent, data: { 'openmodal': true } },
     { path: 'customer-info', component: CustomerInfoComponent },
     { path: 'customer-service-info', component: CustomerServiceInfoComponent },
     { path: 'thankyou', component: ThankyouComponent },

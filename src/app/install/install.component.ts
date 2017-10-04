@@ -202,6 +202,7 @@ export class InstallComponent implements OnInit, AfterViewInit, AfterViewChecked
         this.selectedType = txt;
         this.appComponent.selectedInstallDiy = txt;
         if (txt == 'DIY') {
+             ga('send', { hitType: 'event', eventCategory: 'Click', eventAction: 'DIY/Install-ProceedDIY-GD', eventLabel: 'nextBtn' })
             this.utils.resFlowSession.resDoorObj.INSTALLTYPE = "DIY";
             this.utils.resFlowSession.resDetails.INSTALLTYPE = "DIY";
             this.utils.resFlowSession.resDetails.isDIY = true;
@@ -210,6 +211,7 @@ export class InstallComponent implements OnInit, AfterViewInit, AfterViewChecked
             // this.exactDoorsize.open();
         }
         if (txt == 'Installed') {
+             ga('send', { hitType: 'event', eventCategory: 'Click', eventAction: 'DIY/Install-ProceedInstall-GD', eventLabel: 'nextBtn' })
             this.utils.resFlowSession.resDoorObj.INSTALLTYPE = "Installed";
             this.utils.resFlowSession.resDetails.INSTALLTYPE = "Installed";
             this.utils.resFlowSession.resDetails.isDIY = false;
@@ -228,7 +230,7 @@ export class InstallComponent implements OnInit, AfterViewInit, AfterViewChecked
 
 
     nextBtn(path) {
-         ga('send', { hitType: 'event', eventCategory: 'Click', eventAction: 'DIY/Install-ProceedInstall-GD', eventLabel: 'nextBtn' })
+       
         //Best place to set collection name in quickship flow
         if (this.appComponent.flowType == 'resquick') {
             let construction = this.utils.resFlowSession.resDoorObj.construction.construction;
@@ -298,7 +300,7 @@ export class InstallComponent implements OnInit, AfterViewInit, AfterViewChecked
         }
     }
     epaValue(epaStatus) {
-        ga('send', { hitType: 'event', eventCategory: 'Click', eventAction: 'epaValue', eventLabel: 'epaValue' })
+       
         if (epaStatus == 'learn') {
             this.leadTest.close();
             this.epa.close();
@@ -309,9 +311,11 @@ export class InstallComponent implements OnInit, AfterViewInit, AfterViewChecked
             this.leadTest.open();
         } else {
             if (this.checkValue == true) {
+                 ga('send', { hitType: 'event', eventCategory: 'Click', eventAction: 'Lead-Yes-OkButton-GD', eventLabel: 'epaValue' })
                 this.utils.resFlowSession.resDoorObj.isEPA = true;
                 this.navigateTo('/config/opener');
             } else {
+                 ga('send', { hitType: 'event', eventCategory: 'Click', eventAction: 'Lead-Yes-OkButton-GD', eventLabel: 'epaValue' })
                 this.utils.resFlowSession.resDoorObj.isEPA = false;
             }
         }

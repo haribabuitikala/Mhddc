@@ -173,7 +173,7 @@ export class CollectionComponent implements OnInit {
     }
 
     goToHome(speciality) {
-        ga('send', { hitType: 'event', eventCategory: 'Click', eventAction: 'CollectionScreen'+speciality, eventLabel: 'goToHome' });
+        ga('send', { hitType: 'event', eventCategory: 'Click', eventAction: 'CollectionScreen'+speciality.item_name, eventLabel: 'goToHome' });
         // $('.collection-img').removeClass('selected');z
         this.utils.setLoader();
         speciality.selected = true;

@@ -5,6 +5,7 @@ import { CollectionService } from "../shared/data.service";
 import { NavComponent } from "../nav/nav.component";
 import { ConfigComponent } from "../config/config.component";
 import { AppUtilities } from "../shared/appUtilities";
+import { AppComponent } from '../app.component';
 
 
 declare var _: any;
@@ -20,6 +21,7 @@ export class TopSectionComponent implements OnInit {
     , private route: Router
     , private config: ConfigComponent
     , private utils: AppUtilities
+    , private app: AppComponent
     , private navComponent: NavComponent
     , private dataService: CollectionService) {
   }
@@ -66,6 +68,8 @@ export class TopSectionComponent implements OnInit {
     if (topsection && topsection['glasstypes']) {
       if (topsection['glasstypes'][0].item_price <= 0 || topsection['Config'] == 'GLAZ-SOL' || topsection['glasstypes'][0]['Config'] == 'GLAZ-SOL') {
         this.navComponent.setNavFlow('res', 'hideglass');
+        this.app.configSteps[10].enabled = false;
+        this.app.configSteps[11].enabled = false;
         this.route.navigateByUrl('/config/hardware');
       } else {
         var modelString = "HDP20, HDP13,HDG,2050,HDS,HDB,HDB4";
@@ -85,6 +89,7 @@ export class TopSectionComponent implements OnInit {
 
       }
     } else {
+      this.app.configSteps[11].enabled = true;
       this.route.navigateByUrl('/config/nonClassic');
     }
   }
@@ -99,8 +104,10 @@ export class TopSectionComponent implements OnInit {
     if (this.utils.resFlowSession.resDoorObj.product.product['item_id'] == 13 ||
       this.utils.resFlowSession.resDoorObj.product.product['item_id'] == 14 ||
       this.utils.resFlowSession.resDoorObj.product.product['item_id'] == 24) {
-      this.route.navigateByUrl('/config/glassType');
+        this.app.configSteps[10].enabled = true;
+        this.route.navigateByUrl('/config/glassType');
     } else {
+      this.app.configSteps[11].enabled = true;
       this.route.navigateByUrl('/config/nonClassic');
     }
   }
