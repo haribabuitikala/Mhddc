@@ -169,18 +169,18 @@ export class AppUtilities {
         imgSrc: ''
     };
 
-    gdoFlowSession = {
-
+   gdoFlowSession = {
         windcode: this.utilities.winCode,
         zipcode: "",
         cart: [],
         locale: "",
         orderInstallType: "GDO",
         items: 1,
-        store: "",
+        store: "",       
         added: false
-    }
+    };
 
+//For direct install
     gdoOpenerAccessories = [
         {
             "Answers": [
@@ -306,12 +306,12 @@ export class AppUtilities {
                     "SubAnswers": [
                         {
                             "answerid": null,
-                            "config": "xxxmil",
-                            "isdefault": false,
-                            "item_id": 1,
-                            "item_name": "31TO50",
-                            "item_price": 2.50,
-                            "partofdoor": false
+						    "config": "xxxmil",
+						    "isdefault": false,
+						    "item_id": 1,
+						    "item_name": "Mileage 30+",
+						    "item_price": 2.5,
+						    "partofdoor": false
                         },
                         {
                             "answerid": null,
@@ -348,14 +348,69 @@ export class AppUtilities {
             "item_type": "GDO",
             "QTY": 0,
             "qty": 0,
-            "useranswer": ""
-        }
+            "useranswer": []
+        },
+        {
+		"Answers": [
+			{
+				"SubAnswers": [
+					{
+						"answerid": null,
+						"config": "FIR330",
+						"isdefault": false,
+						"item_id": 1,
+						"item_name": "31TO50",
+						"item_price": 51,
+						"partofdoor": false
+					},
+					{
+						"answerid": null,
+						"config": "FIR340",
+						"isdefault": false,
+						"item_id": 1,
+						"item_name": "51PLUS",
+						"item_price": 3,
+						"partofdoor": false
+					}
+				],
+				"answerid": null,
+				"config": "FIR340",
+				"isdefault": false,
+				"item_id": 1,
+				"item_name": "no",
+				"item_price": 3,
+				"partofdoor": false
+			},
+			{
+				"SubAnswers": [],
+				"answerid": null,
+				"config": "0",
+				"isdefault": false,
+				"item_id": 2,
+				"item_name": "yes",
+				"item_price": 0,
+				"partofdoor": false
+			}
+		],
+		"item_id": 56,
+		"item_list_text": "yyyy miles from store (xxxx)",
+		"item_name": "Mileage Charges",
+		"item_type": "GDO",
+        "QTY": 0,
+        "qty": 0,
+        "useranswer": []
+	}
     ]
     gdoUserAnswers = [
         { "SubAnswers": [{ "answerid": null, "config": "0", "isdefault": false, "item_id": 1, "item_name": "1", "item_price": 0, "partofdoor": false }, { "answerid": null, "config": "0", "isdefault": false, "item_id": 2, "item_name": "2", "item_price": 0, "partofdoor": false }, { "answerid": null, "config": "0", "isdefault": false, "item_id": 3, "item_name": "3", "item_price": 0, "partofdoor": false }], "answerid": null, "config": "GDOI17", "isdefault": false, "item_id": 1, "item_name": "no", "item_price": 50, "partofdoor": false, "tag": "no", "QTY": 1, "qty": 1 },
         { "SubAnswers": [{ "answerid": null, "config": "0", "isdefault": false, "item_id": 1, "item_name": "1", "item_price": 0, "partofdoor": false }, { "answerid": null, "config": "0", "isdefault": false, "item_id": 2, "item_name": "2", "item_price": 0, "partofdoor": false }, { "answerid": null, "config": "0", "isdefault": false, "item_id": 3, "item_name": "3", "item_price": 0, "partofdoor": false }], "answerid": null, "config": "GDOI18", "isdefault": false, "item_id": 1, "item_name": "no", "item_price": 65, "partofdoor": false, "tag": "no", "QTY": 1, "qty": 1 },
-        { "qty": 1, "QTY": 1, "item_price": 2.5, "fir": [{ "answerid": null, "config": "xxxmil", "isdefault": false, "item_id": 1, "item_name": "31TO50", "item_price": 2.5, "partofdoor": false, "QTY": 1 }], "item_id": 5 }
+        { "qty": 1, "QTY": 1, "item_price": 2.5, "fir": [{ "answerid": null, "config": "xxxmil", "isdefault": false, "item_id": 1, "item_name": "Mileage 30+", "item_price": 2.5, "partofdoor": false, "QTY": 1 }], "item_id": 5 },
+        { "qty": 1, "QTY": 1, "item_price": 51, "fir": [{ "answerid": null, "config": "FIR330", "isdefault": false, "item_id": 1, "item_name": "31TO50", "item_price": 51, "partofdoor": false, "QTY": 1 },{ "answerid": null, "config": "FIR340", "isdefault": false, "item_id": 1, "item_name": "51PLUS", "item_price": 3, "partofdoor": false, "QTY": 1 }], "item_id": 5 }
     ]
+
+  
+
+ 
 
     setUtils(curr, clicked) {
         this.utilities.currPage = curr;

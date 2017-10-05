@@ -938,11 +938,12 @@ function writeItem(orderType) {
                         addLineItem(cs.opener.opener.railextenderconfig, cs.opener.opener.railextendertext, cs.QTY, cs.opener.opener.railextenderprice);
                         addLineItem("FIR580", "FIR580", cs.QTY, "0.00");
                     }
-                    for (var i = 0; i < cs.opener.items.length; i++) {
-                        var it = cs.opener.items[i];
-                        if (it.QTY > 0) {
+                    for (var i = 0; i < cs.SelectedOpeners.length; i++) {
+                        var it = cs.SelectedOpeners[i];
+                        if (it.count && it.count > 0) {
                             //Commented below line for WO# 688398
-                            addLineItem(it.Config, it.item_name, Number(it.QTY * cs.QTY), it.item_price, 1);
+                           // addLineItem(it.Config, it.item_name, Number(it.QTY * cs.QTY), it.item_price, 1);
+                            addLineItem(it.config, it.name, Number(it.count * cs.QTY), it.price, 1);
                             //addLineItem(it.Config, it.item_name, Number(it.QTY), it.item_price, 1);
                         }
                     }
@@ -955,7 +956,7 @@ function writeItem(orderType) {
 
                                 if (value.item_id != 56) {
                                     //Commented below line for WO# 688398
-                                    //addLineItem(value.useranswer.config, value.item_name, value.useranswer.QTY * cs.QTY, value.useranswer.item_price, 1);
+                                    //addLineItem (value.useranswer.config, value.item_name, value.useranswer.QTY * cs.QTY, value.useranswer.item_price, 1);
                                     addLineItem(value.useranswer.config, value.item_name, value.useranswer.QTY, value.useranswer.item_price, 1);
                                 }
                                 else {
@@ -964,7 +965,12 @@ function writeItem(orderType) {
 
                                     // Added nuphani - 07/19/2013	 Trackit # 685250
                                     for (var i = 0; i < value.useranswer.fir.length; i++) {
-                                        addLineItem(value.useranswer.fir[i].config, value.item_name + " " + value.useranswer.fir[i].item_name, value.useranswer.fir[i].QTY, value.useranswer.fir[i].item_price, 1);
+                                      //  addLineItem(value.useranswer.fir[i].config, value.item_name + " " + value.useranswer.fir[i].item_name, value.useranswer.fir[i].QTY, value.useranswer.fir[i].item_price, 1);
+                                      if(value.useranswer.fir[i].config == 'xxxmil'){		
+											addLineItem(value.useranswer.fir[i].config, value.useranswer.fir[i].item_name, value.useranswer.fir[i].QTY, value.useranswer.fir[i].item_price, 1);	//Sridhar added for #1188905
+										}else{
+											addLineItem(value.useranswer.fir[i].config, value.item_name + " " + value.useranswer.fir[i].item_name, value.useranswer.fir[i].QTY, value.useranswer.fir[i].item_price, 1);	
+										}
                                     }
                                     // Added nuphani - 07/19/2013	 Trackit # 685250
                                 }
@@ -973,6 +979,7 @@ function writeItem(orderType) {
                         //}
                     });
 
+                    //For Miles
 
 
                     _lineItems += "\t\t\t" + "</LINEITEMS>";

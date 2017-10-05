@@ -46,6 +46,7 @@ export class GdoUpdateComponent implements OnInit {
             name: obj.item_name,
             price: obj.item_price,
             count: this.quantity,
+            config: obj.Config,
             totalPrice: obj.item_price * this.quantity,
             id: id
         };
