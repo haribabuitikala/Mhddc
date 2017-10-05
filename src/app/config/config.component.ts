@@ -714,7 +714,9 @@ export class ConfigComponent implements OnInit, AfterViewInit, AfterViewChecked 
         // })
         // this.details['designName'] = this.utils.resFlowSession.resDoorObj.design.dsgn['item_name'];
         this.resDoorObj = this.utils.resFlowSession.resDoorObj;
-        this.hingePlacement = this.resDoorObj.hardware.hinge.placement.split(':')[0];
+        if(this.resDoorObj.hardware.hinge.placement){
+            this.hingePlacement = this.resDoorObj.hardware.hinge.placement.split(':')[0];           
+        }
         detailsModal.open();
     }
 
