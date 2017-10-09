@@ -121,7 +121,7 @@ getItemPrice() {
         let kPrice = _.sumBy(this.dataStore.gdoOpenerAccessories, function (o) {
             return o.price * o.count;
         });
-        this.itemPrice = this.itemPrice + kPrice;
+        this.itemPrice = this.itemPrice + (kPrice * this.utils.utilities.gdoOpenerQty);
     } else {
         // Fix for avoiding binding data on remove item
         if (this.utils.gdoFlowSession.cart.length > 0) {
@@ -198,7 +198,8 @@ gdoContinue() {
 
 updateQuantity(flow) {
     this.itemPrice = this.utils.updateQty(flow, this.utils.utilities.gdoOpenerQty);
-    this.baseItmPrice = this.utils.utilities.item_price * this.utils.utilities.gdoOpenerQty;
+    //this.baseItmPrice = this.utils.utilities.item_price * this.utils.utilities.gdoOpenerQty;
+    this.baseItmPrice = this.utils.utilities.item_price;
     this.qty = this.utils.utilities.gdoOpenerQty;
 }
 

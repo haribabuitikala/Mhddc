@@ -88,6 +88,9 @@ export class DoorConfigurationComponent implements OnInit {
                 this.utils.utilities.distancePrice
             );
         }
+        // Fix for gdo flow back button from shopping cart
+        this.utils.gdoFlowSession.added = false;
+        $('.shop-count').text('0');
         this.pageNo = this.utils.utilities.currPage;
         this.showGDoEmail = this.utils.utilities.showGDoEmail;
 
@@ -135,7 +138,8 @@ export class DoorConfigurationComponent implements OnInit {
         let kPrice = _.sumBy(this.dataStore.gdoOpenerAccessories, function (o) {
             return o.price * o.count;
         });
-        this.itemPrice = this.itemPrice + kPrice;
+         this.itemPrice = this.itemPrice + (kPrice * this.utils.utilities.gdoOpenerQty);
+        //this.itemPrice = this.itemPrice + kPrice;
         this.gdoConfig.itemPrice = this.itemPrice;
         this.qty = this.utils.utilities.gdoOpenerQty;
     }
