@@ -146,11 +146,11 @@
             <span>{{itm.price | currency:'USD':true:'1.2-2'}}</span>
         </dd>
     </dl>
-    <dl class="door-configuration-table" *ngIf="data.additionalOptions.items.length > 0">
+    <dl class="door-configuration-table" *ngIf="selectedAdditionalOptions.length > 0" >
         <dd class="door-configuration-table-header">
             Additional Options
         </dd>
-        <dd *ngFor="let itm of data.additionalOptions.items">
+        <dd *ngFor="let itm of selectedAdditionalOptions" >
             <p [innerHTML]="itm.name"></p>
             <span>{{itm.price * itm.qty | currency:'USD':true:'1.2-2'}}</span>
         </dd>

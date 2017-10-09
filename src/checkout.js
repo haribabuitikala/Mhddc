@@ -68,7 +68,7 @@ function CheckOut(subTotal, taxRate, estimatedTax, grandTotal, _orderObj) {
             catch (e) {
                 orderType = "INSTALLED";
             }
-            break;      
+            break;
         case 'GDO':
             //OpenerOnly
             orderType = "GDO";
@@ -437,7 +437,7 @@ function writeItem(orderType) {
                         if (cs.hardware.handle != '') {
                             var hai = cs.hardware.handle.item_name;
                             var handlestr = hai.toLowerCase();
-                            if (handlestr != "none" && cs.hardware.handle.count ) {
+                            if (handlestr != "none" && cs.hardware.handle.count) {
                                 var HandleQuant = Number(cs.hardware.handle.count) * cs.QTY;
                                 var doorWidth = Number((cs.size.width.wf) * 12) + Number(cs.size.width.wi);
                                 var tenFoot = false;
@@ -608,7 +608,7 @@ function writeItem(orderType) {
                         if (cs.hardware.hinge != '') {
                             var hai = cs.hardware.hinge.item_name;
                             var handlestr = hai.toLowerCase();
-                            if (handlestr != "none" && cs.hardware.hinge.count) {                                
+                            if (handlestr != "none" && cs.hardware.hinge.count) {
                                 var doorWidth = Number((cs.size.width.wf) * 12) + Number(cs.size.width.wi);
                                 var tenFoot = false;
                                 if (doorWidth > 120) {
@@ -732,7 +732,7 @@ function writeItem(orderType) {
                                 case 1:
                                     {
                                         var useranswer = value.objVal.Answers[1];
-                                        if (useranswer != '' && useranswer.config != '0') {
+                                        if (value.isSelected && useranswer != '' && useranswer.config != '0') {
                                             var vs = useranswer;
                                             if (vs.heightpartid != "" && vs.item_price != 0) {
                                                 addLineItem(vs.heightpartid, "Weather seal - " + vs.item_name, Number(vs.heightqty) * cs.QTY, vs.heightitem_price);
@@ -748,7 +748,7 @@ function writeItem(orderType) {
                                 case 2:
                                     {
                                         var useranswer = value.objVal.Answers[1];
-                                        if (useranswer != '') {
+                                        if (value.isSelected && useranswer != '') {
                                             if (Number(useranswer.config) != 0) {
 
                                                 var orbPrice = 0;
@@ -765,7 +765,7 @@ function writeItem(orderType) {
                                 case 5:
                                     {
                                         var useranswer = value.objVal.Answers[1];
-                                        if (useranswer != '' && value.selectedMiles > 30) {
+                                        if (value.isSelected && useranswer != '' && value.selectedMiles > 30) {
                                             var tn = '';
                                             if (value.selectedMiles < 31) {
                                                 tn += '0-30';
@@ -781,7 +781,7 @@ function writeItem(orderType) {
                                 case 7:
                                     {
                                         var useranswer = value.objVal.Answers[1];
-                                        if (useranswer != '') {
+                                        if (value.isSelected && useranswer != '') {
                                             if (useranswer.config != '0') {
                                                 if (useranswer.QTY == undefined) {
                                                     useranswer.QTY = 1;
@@ -808,7 +808,7 @@ function writeItem(orderType) {
                                         var useranswer = value.objVal.Answers[1];
                                         // Low Headroom Conversion Kit
                                         //if (value.useranswer != '') {
-                                        if (Number(useranswer.config) != 0 && useranswer.config != undefined) {
+                                        if (value.isSelected && Number(useranswer.config) != 0 && useranswer.config != undefined) {
                                             // shankar added config value is coming undefined, when we are not selecting any one of the options in quesion no.4,i.e i added value.useranswer.config != undefined in condition.
                                             var cl = useranswer
                                             var s5 = useranswer.item_price
@@ -837,8 +837,8 @@ function writeItem(orderType) {
                                     break;
                                 case 999:
                                     {
-                                        var useranswer = value.objVal.Answers[1];
-                                        if (useranswer != '') {
+                                        var useranswer = value.objVal;
+                                        if (value.isSelected && useranswer != '') {
                                             if (Number(useranswer.config) != 0) {
                                                 if (useranswer.QTY == undefined) {
                                                     useranswer.QTY = 1;
@@ -851,7 +851,7 @@ function writeItem(orderType) {
                                 case 12:
                                     {
                                         var useranswer = value.objVal.Answers[1];
-                                        if (useranswer != '') {
+                                        if (value.isSelected && useranswer != '') {
                                             if (Number(useranswer.config) != 0) {
                                                 if (useranswer.QTY == undefined) {
                                                     useranswer.QTY = 1;
@@ -868,7 +868,7 @@ function writeItem(orderType) {
                                 default:
                                     {
 
-                                        if (value.useranswer != '') {
+                                        if (value.isSelected && value.useranswer != '') {
                                             if (Number(useranswer.config) != 0) {
                                                 if (useranswer.QTY == undefined) {
                                                     useranswer.QTY = 1;
@@ -899,7 +899,15 @@ function writeItem(orderType) {
                     catch (e) { }
 
                     if (addlTemp.length != '') {
-                        var aitm = ' ADDL="' + addlTemp + '"';
+                        var aitm = "";
+                        if (cs.construction.groove != undefined && cs.construction.groove != '') {
+                            if (cs.construction.groove.centergrooveconfig != undefined && cs.construction.groove.centergrooveconfig != 'CNONE') {
+                                aitm = ' ADDL="' + cs.construction.groove.centergrooveconfig + ',';
+                                aitm += '' + addlTemp + '"';
+                            }
+                        } else {
+                            aitm += ' ADDL="' + addlTemp + '"';
+                        }
                         itemTemp += aitm;
                     }
                     itemTemp += " />" + _newLine;
@@ -942,7 +950,7 @@ function writeItem(orderType) {
                         var it = cs.SelectedOpeners[i];
                         if (it.count && it.count > 0) {
                             //Commented below line for WO# 688398
-                           // addLineItem(it.Config, it.item_name, Number(it.QTY * cs.QTY), it.item_price, 1);
+                            // addLineItem(it.Config, it.item_name, Number(it.QTY * cs.QTY), it.item_price, 1);
                             addLineItem(it.config, it.name, Number(it.count * cs.QTY), it.price, 1);
                             //addLineItem(it.Config, it.item_name, Number(it.QTY), it.item_price, 1);
                         }
@@ -965,12 +973,12 @@ function writeItem(orderType) {
 
                                     // Added nuphani - 07/19/2013	 Trackit # 685250
                                     for (var i = 0; i < value.useranswer.fir.length; i++) {
-                                      //  addLineItem(value.useranswer.fir[i].config, value.item_name + " " + value.useranswer.fir[i].item_name, value.useranswer.fir[i].QTY, value.useranswer.fir[i].item_price, 1);
-                                      if(value.useranswer.fir[i].config == 'xxxmil'){		
-											addLineItem(value.useranswer.fir[i].config, value.useranswer.fir[i].item_name, value.useranswer.fir[i].QTY, value.useranswer.fir[i].item_price, 1);	//Sridhar added for #1188905
-										}else{
-											addLineItem(value.useranswer.fir[i].config, value.item_name + " " + value.useranswer.fir[i].item_name, value.useranswer.fir[i].QTY, value.useranswer.fir[i].item_price, 1);	
-										}
+                                        //  addLineItem(value.useranswer.fir[i].config, value.item_name + " " + value.useranswer.fir[i].item_name, value.useranswer.fir[i].QTY, value.useranswer.fir[i].item_price, 1);
+                                        if (value.useranswer.fir[i].config == 'xxxmil') {
+                                            addLineItem(value.useranswer.fir[i].config, value.useranswer.fir[i].item_name, value.useranswer.fir[i].QTY, value.useranswer.fir[i].item_price, 1);	//Sridhar added for #1188905
+                                        } else {
+                                            addLineItem(value.useranswer.fir[i].config, value.item_name + " " + value.useranswer.fir[i].item_name, value.useranswer.fir[i].QTY, value.useranswer.fir[i].item_price, 1);
+                                        }
                                     }
                                     // Added nuphani - 07/19/2013	 Trackit # 685250
                                 }
@@ -1095,7 +1103,7 @@ function addLineItem(itemID, desc, quanty, price, opener) {
 		quant = 1
 	}*/
     // shankar added below lines are added, wrong quantity FIR codes.
-   
+
     if (opener == 1) {
         quant = Number(quanty);
     }

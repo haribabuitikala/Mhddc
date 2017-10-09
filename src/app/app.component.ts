@@ -259,7 +259,14 @@ export class AppComponent implements OnInit, AfterViewChecked, OnChanges {
             if (resObj.cart[i].windows.placement == null) {
                 resObj.cart[i].windows.placement = '';
             }
+ 
+             if (resObj.cart[i].isEPA) {
+                resObj.cart[i].additional.items[0].isSelected = true;
+            }
         }
+
+
+
         let gdoObj = this.app.gdoFlowSession;
         // if (this.app.utilities.isGDO) {
         //     gdoObj.cart[0].additional.items = this.app.gdoOpenerAccessories;

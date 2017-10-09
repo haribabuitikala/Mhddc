@@ -169,18 +169,18 @@ export class AppUtilities {
         imgSrc: ''
     };
 
-   gdoFlowSession = {
+    gdoFlowSession = {
         windcode: this.utilities.winCode,
         zipcode: "",
         cart: [],
         locale: "",
         orderInstallType: "GDO",
         items: 1,
-        store: "",       
+        store: "",
         added: false
     };
 
-//For direct install
+    //For direct install
     gdoOpenerAccessories = [
         {
             "Answers": [
@@ -306,12 +306,12 @@ export class AppUtilities {
                     "SubAnswers": [
                         {
                             "answerid": null,
-						    "config": "xxxmil",
-						    "isdefault": false,
-						    "item_id": 1,
-						    "item_name": "Mileage 30+",
-						    "item_price": 2.5,
-						    "partofdoor": false
+                            "config": "xxxmil",
+                            "isdefault": false,
+                            "item_id": 1,
+                            "item_name": "Mileage 30+",
+                            "item_price": 2.5,
+                            "partofdoor": false
                         },
                         {
                             "answerid": null,
@@ -351,66 +351,66 @@ export class AppUtilities {
             "useranswer": []
         },
         {
-		"Answers": [
-			{
-				"SubAnswers": [
-					{
-						"answerid": null,
-						"config": "FIR330",
-						"isdefault": false,
-						"item_id": 1,
-						"item_name": "31TO50",
-						"item_price": 51,
-						"partofdoor": false
-					},
-					{
-						"answerid": null,
-						"config": "FIR340",
-						"isdefault": false,
-						"item_id": 1,
-						"item_name": "51PLUS",
-						"item_price": 3,
-						"partofdoor": false
-					}
-				],
-				"answerid": null,
-				"config": "FIR340",
-				"isdefault": false,
-				"item_id": 1,
-				"item_name": "no",
-				"item_price": 3,
-				"partofdoor": false
-			},
-			{
-				"SubAnswers": [],
-				"answerid": null,
-				"config": "0",
-				"isdefault": false,
-				"item_id": 2,
-				"item_name": "yes",
-				"item_price": 0,
-				"partofdoor": false
-			}
-		],
-		"item_id": 56,
-		"item_list_text": "yyyy miles from store (xxxx)",
-		"item_name": "Mileage Charges",
-		"item_type": "GDO",
-        "QTY": 0,
-        "qty": 0,
-        "useranswer": []
-	}
+            "Answers": [
+                {
+                    "SubAnswers": [
+                        {
+                            "answerid": null,
+                            "config": "FIR330",
+                            "isdefault": false,
+                            "item_id": 1,
+                            "item_name": "31TO50",
+                            "item_price": 51,
+                            "partofdoor": false
+                        },
+                        {
+                            "answerid": null,
+                            "config": "FIR340",
+                            "isdefault": false,
+                            "item_id": 1,
+                            "item_name": "51PLUS",
+                            "item_price": 3,
+                            "partofdoor": false
+                        }
+                    ],
+                    "answerid": null,
+                    "config": "FIR340",
+                    "isdefault": false,
+                    "item_id": 1,
+                    "item_name": "no",
+                    "item_price": 3,
+                    "partofdoor": false
+                },
+                {
+                    "SubAnswers": [],
+                    "answerid": null,
+                    "config": "0",
+                    "isdefault": false,
+                    "item_id": 2,
+                    "item_name": "yes",
+                    "item_price": 0,
+                    "partofdoor": false
+                }
+            ],
+            "item_id": 56,
+            "item_list_text": "yyyy miles from store (xxxx)",
+            "item_name": "Mileage Charges",
+            "item_type": "GDO",
+            "QTY": 0,
+            "qty": 0,
+            "useranswer": []
+        }
     ]
     gdoUserAnswers = [
         { "SubAnswers": [{ "answerid": null, "config": "0", "isdefault": false, "item_id": 1, "item_name": "1", "item_price": 0, "partofdoor": false }, { "answerid": null, "config": "0", "isdefault": false, "item_id": 2, "item_name": "2", "item_price": 0, "partofdoor": false }, { "answerid": null, "config": "0", "isdefault": false, "item_id": 3, "item_name": "3", "item_price": 0, "partofdoor": false }], "answerid": null, "config": "GDOI17", "isdefault": false, "item_id": 1, "item_name": "no", "item_price": 50, "partofdoor": false, "tag": "no", "QTY": 1, "qty": 1 },
         { "SubAnswers": [{ "answerid": null, "config": "0", "isdefault": false, "item_id": 1, "item_name": "1", "item_price": 0, "partofdoor": false }, { "answerid": null, "config": "0", "isdefault": false, "item_id": 2, "item_name": "2", "item_price": 0, "partofdoor": false }, { "answerid": null, "config": "0", "isdefault": false, "item_id": 3, "item_name": "3", "item_price": 0, "partofdoor": false }], "answerid": null, "config": "GDOI18", "isdefault": false, "item_id": 1, "item_name": "no", "item_price": 65, "partofdoor": false, "tag": "no", "QTY": 1, "qty": 1 },
         { "qty": 1, "QTY": 1, "item_price": 2.5, "fir": [{ "answerid": null, "config": "xxxmil", "isdefault": false, "item_id": 1, "item_name": "Mileage 30+", "item_price": 2.5, "partofdoor": false, "QTY": 1 }], "item_id": 5 },
-        { "qty": 1, "QTY": 1, "item_price": 51, "fir": [{ "answerid": null, "config": "FIR330", "isdefault": false, "item_id": 1, "item_name": "31TO50", "item_price": 51, "partofdoor": false, "QTY": 1 },{ "answerid": null, "config": "FIR340", "isdefault": false, "item_id": 1, "item_name": "51PLUS", "item_price": 3, "partofdoor": false, "QTY": 1 }], "item_id": 5 }
+        { "qty": 1, "QTY": 1, "item_price": 51, "fir": [{ "answerid": null, "config": "FIR330", "isdefault": false, "item_id": 1, "item_name": "31TO50", "item_price": 51, "partofdoor": false, "QTY": 1 }, { "answerid": null, "config": "FIR340", "isdefault": false, "item_id": 1, "item_name": "51PLUS", "item_price": 3, "partofdoor": false, "QTY": 1 }], "item_id": 5 }
     ]
 
-  
 
- 
+
+
 
     setUtils(curr, clicked) {
         this.utilities.currPage = curr;
@@ -419,7 +419,7 @@ export class AppUtilities {
 
     //3703,2217,2207,6559
     //gdoCheck = ['66502', '2217', '77840', '6559', '66604', '2207', '3703'];
-    gdoCheck = ['2217', '6559', '2207', '3703'];    
+    gdoCheck = ['2217', '6559', '2207', '3703'];
     //bug id: 5781
     allowMods = ['GR4SV', 'GR4LV', 'GR4S', 'GR4L', 'GR5SV', 'GR5S', 'HDB', 'HDB4', 'HDBF', 'HDGS', 'HDSF', 'HDBL', 'HDSL'];
 
@@ -1043,7 +1043,7 @@ export class ResidentialFlowSession {
                             this.resDetails.topSection.glassType.discountPrice = tsgt['item_price'];
                             this.resDetails.topSection.glassType.qty = count;
                         }
-                        
+
                     }
                 }
 
@@ -1091,8 +1091,8 @@ export class ResidentialFlowSession {
                     if (hhi['item_price'] && hhi['item_price'] > 0) {
                         itemDiyPromoPrice = this.GetPromoPricePerItem("hinge_diy", hhi['item_price']);
                     }
-                     var hingeQty = 0;
-                     hingeQty = this.checkForDoubleHinge(hhi);
+                    var hingeQty = 0;
+                    hingeQty = this.checkForDoubleHinge(hhi);
                     var hingeDIY = 0;
                     var hingeIns = 0;
                     hingeDIY = ((itemInsPromoPrice > 0 ? itemInsPromoPrice : hhi['item_price'])) * hingeQty;
@@ -1159,7 +1159,7 @@ export class ResidentialFlowSession {
                 // Calculate price for Additional Options    
                 if (obj.additional.items.length > 0) {
                     _.forEach(obj.additional.items, (item) => {
-                        if (item.hasOwnProperty('price')) {
+                        if (item.isSelected) {
                             if (item.id !== 5) {
                                 price[0] = price[0] + item['price'] * count;
                                 price[1] = price[1] + item['price'] * count;
@@ -1167,7 +1167,10 @@ export class ResidentialFlowSession {
                                     id: item['id'],
                                     name: item['name'],
                                     price: item['price'],
-                                    qty: count
+                                    qty: count,
+                                    objVal: item,
+                                    selectedMiles: item['selectedMiles'],
+                                    isSelected: item['isSelected']
                                 });
                             } else {
                                 price[0] = price[0] + item['price'];
@@ -1176,9 +1179,24 @@ export class ResidentialFlowSession {
                                     id: item['id'],
                                     name: item['name'],
                                     price: item['price'],
-                                    qty: 1
+                                    qty: 1,
+                                    objVal: item,
+                                    selectedMiles: item['selectedMiles'],
+                                    isSelected: item['isSelected']
                                 });
                             }
+                        }
+                        else
+                        {
+                            this.resDetails.additionalOptions.items.push({
+                                    id: item['id'],
+                                    name: item['name'],
+                                    price: item['price'],
+                                    qty: 1,
+                                    objVal: item,
+                                    selectedMiles: item['selectedMiles'],
+                                    isSelected: item['isSelected']
+                                });
                         }
                     })
                 }

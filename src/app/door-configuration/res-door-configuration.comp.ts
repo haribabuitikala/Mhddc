@@ -365,7 +365,7 @@ export class ResDoorConfigurationComponent implements OnInit {
 
 
         //Additional options
-        if (resData.additionalOptions.items.length > 0) {
+        if (resData.additionalOptions.items.length > 0 && resData.additionalOptions.items.filter(function(s) { return s.isSelected = true; }).length > 0) {
             itemHead = "Additional Options";
             itemValue = "";
             itemPrice = "";
@@ -376,11 +376,9 @@ export class ResDoorConfigurationComponent implements OnInit {
                 </tr>`;
 
             fromColorBody += temptr;
-
-
-            $.each(resData.additionalOptions.items, function (arrayID, additionalOption) {
-                //  alert( key + ": " + value );
-
+            $.each(resData.additionalOptions.items, function (arrayID, additionalOption) { 
+                if(additionalOption.isSelected)              
+                {
                 itemHead = "";
                 itemValue = additionalOption.name;
                 itemPrice = Number(additionalOption.price * additionalOption.qty).toLocaleString('en-US', { style: 'currency', currency: 'USD' });
@@ -389,17 +387,11 @@ export class ResDoorConfigurationComponent implements OnInit {
                     <td class="allfontMedium">${itemValue}</td>
                     <td class="allfontMedium">${itemPrice}</td>
                 </tr>`;
-
                 fromColorBody += temptr;
-
-
+                }
             });
-
             //Sub Total
-
         };
-
-
         return fromColorBody;
     };
 

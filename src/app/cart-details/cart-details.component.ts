@@ -14,9 +14,26 @@ export class CartDetailsComponent implements OnInit {
   coachman;
   doorConfig;
   hingePlacement;
-
+  selectedAdditionalOptions;
   ngOnInit() {
     this.data = this.utils.resFlowSession.resDetails;
+    // if (this.data.isEPA) {
+    //   this.data.additionalOptions.items[0].isSelected = true;
+    //   // $.each(this.data.additionalOptions.items, function (index, value) {
+    //   //   //  alert( key + ": " + value );
+    //   //   if (value.id === 999) {
+    //   //     value.isSelected = true;          
+    //   //   }
+    //   // });     
+
+    // }
+    // else
+    // {
+    //    this.data.additionalOptions.items[0].isSelected = false;
+    // }
+
+    this.selectedAdditionalOptions = this.data.additionalOptions.items.filter(function (s) { return s.isSelected === true && s.id !== 999; });
+
     this.utils.utilities.promoSaving = this.utils.resFlowSession.calculatePromoSavings();
     this.coachman = this.utils.resFlowSession.resDoorObj.product.product['item_id'] === 11 ? true : false;
     // show doorConfig
