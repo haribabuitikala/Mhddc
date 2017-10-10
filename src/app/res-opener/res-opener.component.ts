@@ -9,7 +9,7 @@ import { NavComponent } from '../nav/nav.component'
 import { ConfigComponent } from "../config/config.component";
 import { AppComponent } from "../app.component";
 declare var _: any;
-
+declare var ga:Function;
 @Component({
     selector: 'res-opener',
     templateUrl: './res-opener.component.html',
@@ -95,6 +95,7 @@ export class ResOpenerComponent implements OnInit {
 
     additionalItems = [];
     nextBtn(path) {
+        ga('send', { hitType: 'event', eventCategory: 'Click', eventAction: 'NextStep-GDOpener-GD', eventLabel: 'nextBtn' }); 
         if (this.utils.resFlowSession.resDoorObj.opener.opener && this.utils.resFlowSession.resDoorObj.opener.opener != '') {
             let openerParams = {
                 natmarketid: +this.utils.utilities.natmarketid,
@@ -138,6 +139,7 @@ export class ResOpenerComponent implements OnInit {
     }
 
     accessoriesModalNext() {
+        ga('send', { hitType: 'event', eventCategory: 'Click', eventAction: 'NextStep-GDOAccessories-GD', eventLabel: 'accessoriesModalNext' }); 
         this.route.navigateByUrl('/config/additionalOptions');
     }
 

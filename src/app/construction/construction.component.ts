@@ -136,6 +136,7 @@ export class ConstructionComponent implements OnInit {
                     item_thumbnail: 'btnOtherConGallery.png',
                     action: 'add',
                     clickAction: () => {
+                        ga('send', { hitType: 'event', eventCategory: 'Click', eventAction: 'ConstructionScreen-OtherOptions-GD', eventLabel: 'Other Construction' }); 
                         this.data.length = 0;
                         this.data = _.chunk(res, 2);
                         this.isCoreAssortment = false;
@@ -169,6 +170,7 @@ export class ConstructionComponent implements OnInit {
                     item_thumbnail: 'btnOtherConGallery.png',
                     action: 'add',
                     clickAction: () => {
+                        ga('send', { hitType: 'event', eventCategory: 'Click', eventAction: 'ConstructionScreen-OtherOptions-GD', eventLabel: 'Other Construction' }); 
                         this.data.length = 0;
                         this.data = _.chunk(res, 2);
                         this.isCoreAssortment = false;
@@ -260,7 +262,8 @@ arraymove(arr, fromIndex, toIndex) {
         return 0;
     }
 
-    updateWithUpsellPrice(data) {     
+    updateWithUpsellPrice(data) {  
+        ga('send', { hitType: 'event', eventCategory: 'Click', eventAction:'ProactiveUpsell-Upgrade'+data.upgrade_model, eventLabel: 'updateWithUpsellPrice' });    
         var filtermodel = window['cObj'].construction.apiData.filter(c => { return c.ClopayModelNumber == data.upgrade_model; });
         if (filtermodel.length > 0) {
             filtermodel = filtermodel[0];

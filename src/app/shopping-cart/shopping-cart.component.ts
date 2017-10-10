@@ -112,6 +112,7 @@ ngOnInit() {
 }
 
 redirectToShoppingCart(){
+    ga('send', { hitType: 'event', eventCategory: 'Click', eventAction: 'Terms&Conditions-Decline-GD', eventLabel: 'redirectToShoppingCart' }); 
     this.route.navigateByUrl('/shoppingCart');
 }
 getItemPrice() {
@@ -221,6 +222,7 @@ updateQty(item, index, increment?) {
 }
 
 checkout(install, diy) {
+    ga('send', { hitType: 'event', eventCategory: 'Click', eventAction: 'ShoppingCart-CheckOutNow-GD', eventLabel: 'checkout' });
     this.route.navigateByUrl('/shoppingCart/confirm');
   
 }

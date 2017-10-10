@@ -501,7 +501,6 @@ table td {
             this.utils.gdoFlowSession.added = true;
             this.goTo(path)
         } else {
-           // ga('send', { hitType: 'event', eventCategory: 'Click', eventAction: 'F&I-GDO-AddToCart', eventLabel: 'nextBtn' });
             this.goTo(path)
         }
     }

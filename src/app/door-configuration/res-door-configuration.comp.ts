@@ -10,7 +10,7 @@ import { CollectionService } from "../shared/data.service";
 import { ShareButton, ShareProvider, ShareArgs } from 'ngx-sharebuttons';
 declare var $: any;
 declare var _: any;
-
+declare var ga:Function;
 @Component({
     selector: 'res-door-configuration',
     templateUrl: './res-door-configuration.comp.html',
@@ -740,6 +740,7 @@ table td {
     };
 
     nextBtn(path) {
+        ga('send', { hitType: 'event', eventCategory: 'Click', eventAction: 'Summary-AddToCart-GD', eventLabel: 'nextBtn' }); 
         this.utils.resFlowSession.addToCart();
         $('#shop-count').text(this.utils.resFlowSession.cart.length);
         this.route.navigateByUrl(path)
