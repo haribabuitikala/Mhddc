@@ -117,6 +117,7 @@ export class ResDoorConfigurationComponent implements OnInit {
         } else if (document.querySelector('#doorVis canvas') && document.querySelector('#doorVis canvas')['toDataURL']) {
             this.doorWithHome = document.querySelector('#doorVis canvas')['toDataURL']();
         }
+        this.config.renderCanvas();
         this.socialshare();
     }
     notify(event) {

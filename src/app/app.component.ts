@@ -47,17 +47,17 @@ export class AppComponent implements OnInit, AfterViewChecked, OnChanges {
     }
     pushHistory(url) {
         var foundIndex;
-        for(var i = 0; i < this.configSteps.length; i++) {
-            if(this.configSteps[i].url === url) {
+        for (var i = 0; i < this.configSteps.length; i++) {
+            if (this.configSteps[i].url === url) {
                 foundIndex = i;
                 this.configSteps[i].enabled = true;
             }
         }
         if (url === '/') {
-            this.browserHistory = [];    
+            this.browserHistory = [];
         }
 
- 
+
         this.browserHistory.push(url);
     }
     stayInPage() {
@@ -76,10 +76,36 @@ export class AppComponent implements OnInit, AfterViewChecked, OnChanges {
                         this.route.navigateByUrl('/');
                     }
                 }
+            } else {
+                if (previousPage === '/gdoConfig/additionalOptions/alreadyexistsgdo') {
+                    if (currentPage === '/gdoConfig/doorConfiguration') {
+                        this.route.navigateByUrl('/category');
+                    }
+                } else if (previousPage === '/gdoConfig/additionalOptions') {
+                    if (currentPage === '/gdoConfig/doorConfiguration') {
+                        this.route.navigateByUrl('/gdoConfig/opener');
+                    }
+                }
             }
-           
+
         } else {
-            if (previousPage === '/banner') {
+            if (previousPage === '/gdoConfig/additionalOptions/alreadyexistsgdo') {
+                if (currentPage === '/gdoConfig/doorConfiguration') {
+                    this.route.navigateByUrl('/category');
+                }
+            }  else if (previousPage === '/gdoConfig/additionalOptions') {
+                if (currentPage === '/gdoConfig/doorConfiguration') {
+                    this.route.navigateByUrl('/gdoConfig/opener');
+                }
+            } else if (previousPage === '/category') {
+                if (currentPage === '/gdoConfig/doorConfiguration') {
+                    this.route.navigateByUrl('/banner');
+                }
+            } else if (previousPage === '/gdoConfig/opener') {
+                if (currentPage === '/gdoConfig/additionalOptions') {
+                    this.route.navigateByUrl('/gdoDoorSize');
+                }
+            } else if (previousPage === '/banner') {
                 this.route.navigateByUrl('/');
             }
         }
@@ -98,7 +124,7 @@ export class AppComponent implements OnInit, AfterViewChecked, OnChanges {
                 window['cObj'] = app.resFlowSession.resDoorObj;
                 this.pushHistory(r.url);
             }
- 
+
             ga('set', 'page', r.url);
             ga('send', 'pageview')
         });
@@ -132,7 +158,7 @@ export class AppComponent implements OnInit, AfterViewChecked, OnChanges {
         this.route.navigateByUrl('/banner');
     }
 
-    
+
 
     ngOnChanges() {
         this.currScreen = this.app.utilities.currScreen;

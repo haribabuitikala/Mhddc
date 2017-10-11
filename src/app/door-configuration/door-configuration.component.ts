@@ -121,7 +121,7 @@ export class DoorConfigurationComponent implements OnInit {
         });
         this.utils.gdoFlowSession.cart[0].SelectedOpeners = this.gdoOpeners;
 
-        var k = this.pageNo + '.Your Opener Configuration';
+        var k = '4.Your Opener Configuration';
         $('#visualize-header').html(k);
 
 

@@ -119,7 +119,7 @@ export class AdditionalOptionsComponent implements OnInit {
         this.dataStore.gdoDirectQuestions = [];
         this.utils.utilities.distancePrice = 0;
 
-        var k = this.pageNo + '.Additional Options';
+        var k = '3.Additional Options';
         $('#visualize-header').html(k);
         this.utils.gdoFlowSession.cart[0].additional.items = this.utils.gdoOpenerAccessories;
         // this.utils.utilities.kPrice = _.sumBy(this.dataStore.gdoOpenerAccessories, function (o) {
