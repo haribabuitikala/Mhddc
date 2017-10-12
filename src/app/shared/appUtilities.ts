@@ -293,8 +293,8 @@ export class AppUtilities {
                 }
             ],
             "item_id": 18,
-            "item_list_text": "Double Door New Opener Installation Kit. This is required when no Opener is currently installed on door less than 10' wide.",
-            "item_name": "Double Door New Opener Installation Kit. This is required when no Opener is currently installed on door less than 10' wide.",
+            "item_list_text": "Double Door New Opener Installation Kit. This is required when no Opener is currently installed on door over 10' wide.",
+            "item_name": "Double Door New Opener Installation Kit. This is required when no Opener is currently installed on door over 10' wide.",
             "item_type": "GDO",
             "QTY": 0,
             "qty": 0,

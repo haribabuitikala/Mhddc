@@ -324,19 +324,18 @@ function writeItem(orderType) {
                         }
                     }
                     catch (e) { }
-                    if (cs.windows.glasstype != '') {
-                        if (cs.windows.topsection != '') {
-                            var fram = cs.windows.topsection.Config;
+                    if (cs.topSection && cs.topSection.Config != '') {                        
+                            var fram = cs.topSection.Config;
                             var framTest = fram.substr(0, 4);
                             if (framTest != "GLAZ") {
-                                if (cs.windows.glasstype.Config == "GLAZ-IR8L") {
+                                if (cs.topSection.glasstypes && cs.topSection.glasstypes.count > 0 &&  cs.topSection.glasstypes[0].Config == "GLAZ-IR8L") {
                                     if (topSectionEx1.indexOf(cs.windows.glasstype.item_id) > -1) {
                                         itemTemp += " FRAM=" + '"' + "FRAM-F9RO" + '"';
                                     }
-                                    else if (topSectionEx2.indexOf(String(cs.windows.topsection.item_id)) > -1) {
+                                    else if (topSectionEx2.indexOf(String(cs.topSection.item_id)) > -1) {
                                         itemTemp += " FRAM=" + '"' + "FRAM-OS501" + '"';
                                     }
-                                    else if (topSectionEx3.indexOf(String(cs.windows.topsection.item_id)) > -1) {
+                                    else if (topSectionEx3.indexOf(String(cs.topSection.glasstypes[0].item_id)) > -1) {
                                         itemTemp += " FRAM=" + '"' + "FRAM-OCAT" + '"';
                                     }
                                     else {
@@ -347,11 +346,11 @@ function writeItem(orderType) {
                                     itemTemp += " FRAM=" + '"' + fram + '"';
                                 }
                             }
-                            itemTemp += " GLAZ=" + '"' + cs.windows.glasstype.Config + '"';
-                            if (cs.windows.placement != '' && cs.windows.glasstype.Config != "GLAZ-SOL") {
+                            itemTemp += " GLAZ=" + '"' + cs.topSection.glasstypes[0].Config + '"';
+                            if (cs.windows.placement != '' && cs.topSection.glasstypes[0].Config != "GLAZ-SOL") {
                                 itemTemp += " GSEC=" + '"' + "GSEC-" + cs.windows.placement.Config + '"';
                             }
-                        }
+                       
                     }
                     if (orderObj.windcode != 'W0') {
                         itemTemp += " WIND=" + '"' + "WIND-" + orderObj.windcode + '"';
