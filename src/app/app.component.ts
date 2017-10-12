@@ -7,7 +7,8 @@ import { NavComponent } from "./nav/nav.component";
 import { NavService } from "./nav/nav-service";
 declare var $: any;
 declare var ga: Function;
-
+declare var lng: 'en';
+declare var isMobile: boolean;
 @Component({
     selector: 'app-root',
     templateUrl: './app.component.html',
@@ -135,6 +136,7 @@ export class AppComponent implements OnInit, AfterViewChecked, OnChanges {
 
     prev: string = 'Prev';
     next: string = 'Next';
+    isMobile: boolean = true;
 
     flow: string = this.app.utilities.flow;
     currScreen;
@@ -158,7 +160,18 @@ export class AppComponent implements OnInit, AfterViewChecked, OnChanges {
         this.route.navigateByUrl('/banner');
     }
 
-
+    checkDesktop() {
+     if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+       if ($(window).width() <= 800) {
+             this.isMobile = true;
+        } else {
+        this.isMobile = false;
+        }
+     } else {
+         this.isMobile = false;        
+     }
+      return this.isMobile;
+    }
 
     ngOnChanges() {
         this.currScreen = this.app.utilities.currScreen;
@@ -170,6 +183,11 @@ export class AppComponent implements OnInit, AfterViewChecked, OnChanges {
     }
 
     ngOnInit() {
+        this.checkDesktop();    
+         if(this.isMobile) {
+            console.log("Mobile = ", this.isMobile);
+           window.location.href = "http://dev-hddchtml.clopay.com/shell.html";
+        }
         $('body').removeClass('loader');
         if (!this.app.utilities.zipCode && this.location.path() !== '/banner') {
             this.route.navigateByUrl('/');

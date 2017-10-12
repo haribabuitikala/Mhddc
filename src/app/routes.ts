@@ -12,9 +12,10 @@ import {ShoppingCartComponent} from "./shopping-cart/shopping-cart.component";
 import {CustomerInfoComponent} from './customer-info/customer-info.component';
 import {CustomerServiceInfoComponent} from './customer-service-info/customer-service-info.component';
 import { Four04Component } from './Four04Component';
-
+import {AppComponent} from './app.component';
 
 export const appRoutes: Routes = [
+    { path: '**', component: AppComponent },
     { path: 'banner', component: BannerComponent },
     {
         path: 'zipResults/:zip',
