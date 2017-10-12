@@ -15,7 +15,7 @@ import { Four04Component } from './Four04Component';
 import {AppComponent} from './app.component';
 
 export const appRoutes: Routes = [
-    { path: '**', component: AppComponent },
+    // { path: '**', component: AppComponent },
     { path: 'banner', component: BannerComponent },
     {
         path: 'zipResults/:zip',
