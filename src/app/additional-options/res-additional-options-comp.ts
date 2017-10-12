@@ -106,6 +106,7 @@ export class ResAdditionalOptionsComponent implements OnInit {
 
     selectedLock = '';
     selectedDIYLock = '';
+    isQBP = false;
 
     // for gdo the pageNo will be 3
     // for residential the pageNo will be
@@ -252,6 +253,11 @@ export class ResAdditionalOptionsComponent implements OnInit {
         if (this.installOrDiy == 'Installed') {
             this.showMedImg = true;
         }
+
+        this.isQBP = false;
+        if (this.utils.resFlowSession.resDoorObj.product.product['stockdoorconstructions']) {
+            this.isQBP = true;
+        }
     }
 
     UpdateStopMods(cs, cObj) {
@@ -379,6 +385,7 @@ export class ResAdditionalOptionsComponent implements OnInit {
                 itm = false;
             } else if (event && event.item_id === 32) {
                 itm = false;
+                k.isSelected = false;
             }
         } else {
             if (itm && obj.item_id === 6) {
