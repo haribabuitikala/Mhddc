@@ -202,6 +202,7 @@ updateQuantity(flow) {
     //this.baseItmPrice = this.utils.utilities.item_price * this.utils.utilities.gdoOpenerQty;
     this.baseItmPrice = this.utils.utilities.item_price;
     this.qty = this.utils.utilities.gdoOpenerQty;
+    this.utils.gdoFlowSession.cart[0].QTY = this.qty;
 }
 
 updateQty(item, index, increment?) {

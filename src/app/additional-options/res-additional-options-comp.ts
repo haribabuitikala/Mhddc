@@ -489,6 +489,7 @@ export class ResAdditionalOptionsComponent implements OnInit {
 
     updatePrice() {
         let k = _.findIndex(this.itmObj.items, { id: 5 });
+         this.itmObj.items[k].selectedMiles = this.defaultMiles;
         this.itmObj.items[k].price = this.calculateMilesPrice();
         this.appComponent.updatePrice();
     }

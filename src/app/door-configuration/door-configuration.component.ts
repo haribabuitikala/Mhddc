@@ -142,6 +142,7 @@ export class DoorConfigurationComponent implements OnInit {
         //this.itemPrice = this.itemPrice + kPrice;
         this.gdoConfig.itemPrice = this.itemPrice;
         this.qty = this.utils.utilities.gdoOpenerQty;
+        this.utils.gdoFlowSession.cart[0].QTY = this.qty;
     }
     emailBody = this.utils.gdoFlowSession;
     genItems(j, obj) {
