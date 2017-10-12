@@ -39,9 +39,10 @@
                         <div class="construction-model" [hidden]="slideitem.item_thumbnail == 'btnOtherConGallery.png'">Model {{slideitem.DisplayModelNumber}}</div>
 
                         <div class="construciton-info">
-                            <div [hidden]="slideitem.item_thumbnail == 'btnOtherConGallery.png'">
-                                 <img *ngIf="this.utils.utilities.isPromoEnabled" src="../../assets/images/promoGraphics/{{this.utils.promoObject.dogEarsImageSingle}}"
+                            <img class="promo-align" *ngIf="this.utils.utilities.isPromoEnabled" src="../../assets/images/promoGraphics/{{this.utils.promoObject.dogEarsImageSingle}}"
                                     alt="">
+                            <div [hidden]="slideitem.item_thumbnail == 'btnOtherConGallery.png'">
+                                 
                                 <img (click)="detailsInfo(slideitem.DisplayModelNumber, contructionDetails)" class="nobdr" src="../../assets/images/Info-64.png"
                                     alt="">                               
                             </div>
