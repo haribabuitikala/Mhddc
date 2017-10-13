@@ -136,7 +136,7 @@ export class ConstructionComponent implements OnInit {
                     item_thumbnail: 'btnOtherConGallery.png',
                     action: 'add',
                     clickAction: () => {
-                        ga('send', { hitType: 'event', eventCategory: 'Click', eventAction: 'ConstructionScreen-OtherOptions-GD', eventLabel: 'Other Construction' }); 
+                        ga('send', { hitType: 'Construction', eventCategory: 'Construction', eventAction: 'ConstructionScreen-OtherOptions-GD', eventLabel: 'Other Construction' }); 
                         this.data.length = 0;
                         this.data = _.chunk(res, 2);
                         this.isCoreAssortment = false;
@@ -170,7 +170,7 @@ export class ConstructionComponent implements OnInit {
                     item_thumbnail: 'btnOtherConGallery.png',
                     action: 'add',
                     clickAction: () => {
-                        ga('send', { hitType: 'event', eventCategory: 'Click', eventAction: 'ConstructionScreen-OtherOptions-GD', eventLabel: 'Other Construction' }); 
+                        ga('send', { hitType: 'event', eventCategory: 'Construction', eventAction: 'ConstructionScreen-OtherOptions-GD', eventLabel: 'Other Construction' }); 
                         this.data.length = 0;
                         this.data = _.chunk(res, 2);
                         this.isCoreAssortment = false;
@@ -199,7 +199,7 @@ arraymove(arr, fromIndex, toIndex) {
 }
 
     nextBtn(path, upsellModal) {
-          ga('send', { hitType: 'event', eventCategory: 'Click', eventAction:'NextStep-Construction-GD', eventLabel: 'nextBtn' }); 
+          ga('send', { hitType: 'event', eventCategory: 'Construction', eventAction:'NextStep-Construction-GD', eventLabel: 'nextBtn' }); 
         let coreAssortment = this.isCoreAssortment;
         if (this.utils.resFlowSession.resDoorObj.product.product['item_id'] == '11') {
             coreAssortment = false;
@@ -247,7 +247,7 @@ arraymove(arr, fromIndex, toIndex) {
     }
 
     moveNext() {
-        ga('send', { hitType: 'event', eventCategory: 'Click', eventAction:'ProactiveUpsell-NoThanks-Continue', eventLabel: 'nextBtn' }); 
+        ga('send', { hitType: 'event', eventCategory: 'upsellModal', eventAction:'ProactiveUpsell-NoThanks-Continue', eventLabel: 'nextBtn' }); 
         this.upsell.close();
         this.route.navigateByUrl('config/color');
     }
@@ -263,7 +263,7 @@ arraymove(arr, fromIndex, toIndex) {
     }
 
     updateWithUpsellPrice(data) {  
-        ga('send', { hitType: 'event', eventCategory: 'Click', eventAction:'ProactiveUpsell-Upgrade'+data.upgrade_model, eventLabel: 'updateWithUpsellPrice' });    
+        ga('send', { hitType: 'event', eventCategory: 'upsellModal', eventAction:'ProactiveUpsell-Upgrade'+data.upgrade_model, eventLabel: 'updateWithUpsellPrice' });    
         var filtermodel = window['cObj'].construction.apiData.filter(c => { return c.ClopayModelNumber == data.upgrade_model; });
         if (filtermodel.length > 0) {
             filtermodel = filtermodel[0];

@@ -95,7 +95,7 @@ export class ResOpenerComponent implements OnInit {
 
     additionalItems = [];
     nextBtn(path) {
-        ga('send', { hitType: 'event', eventCategory: 'Click', eventAction: 'NextStep-GDOpener-GD', eventLabel: 'nextBtn' }); 
+        ga('send', { hitType: 'event', eventCategory: 'Opener', eventAction: 'NextStep-GDOpener-GD', eventLabel: 'nextBtn' }); 
         if (this.utils.resFlowSession.resDoorObj.opener.opener && this.utils.resFlowSession.resDoorObj.opener.opener != '') {
             let openerParams = {
                 natmarketid: +this.utils.utilities.natmarketid,
@@ -139,7 +139,7 @@ export class ResOpenerComponent implements OnInit {
     }
 
     accessoriesModalNext() {
-        ga('send', { hitType: 'event', eventCategory: 'Click', eventAction: 'NextStep-GDOAccessories-GD', eventLabel: 'accessoriesModalNext' }); 
+        ga('send', { hitType: 'event', eventCategory: 'Opener', eventAction: 'NextStep-GDOAccessories-GD', eventLabel: 'accessoriesModalNext' }); 
         this.route.navigateByUrl('/config/additionalOptions');
     }
 

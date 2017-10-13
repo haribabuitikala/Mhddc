@@ -741,7 +741,7 @@ table td {
     };
 
     nextBtn(path) {
-        ga('send', { hitType: 'event', eventCategory: 'Click', eventAction: 'Summary-AddToCart-GD', eventLabel: 'nextBtn' }); 
+        ga('send', { hitType: 'event', eventCategory: 'Summary', eventAction: 'Summary-AddToCart-GD', eventLabel: 'nextBtn' }); 
         this.utils.resFlowSession.addToCart();
 
         let k = _.cloneDeep(this.utils.resFlowSession.resDoorObj);
