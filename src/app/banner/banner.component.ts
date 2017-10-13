@@ -10,8 +10,6 @@ import { CollectionData } from "../collection/collection-data";
 import { NavComponent } from "../nav/nav.component";
 
 declare var $: any;
-declare var lng: 'en';
-declare var isMobile: true;
 
 @Component({
     selector: 'app-banner',
@@ -66,11 +64,10 @@ export class BannerComponent implements OnInit, OnChanges, AfterViewInit, AfterV
                 $('body').removeClass('loader');
             });
     }
-     isMobile: boolean = true;
     ngOnChanges() {
         console.log('changed');
     }
-     
+
     ngAfterViewInit(){
         
     }
@@ -83,24 +80,7 @@ export class BannerComponent implements OnInit, OnChanges, AfterViewInit, AfterV
         this.elem.nativeElement.querySelector('.zip-code').value = value;
     }
     
-    checkDesktop() {
-       if (/Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
-      if ($(window).width() <= 800) {
-           this.isMobile = true;
-      } else {
-     this.isMobile = false;
-      }
-      }
-      return this.isMobile;
-    }
-      
-    
     ngOnInit() {
-          this.checkDesktop();    
-         if(this.isMobile) {
-           console.log("Mobile = ", this.isMobile);
-          window.location.href = "http://dev-hddchtml.clopay.com/shell.html";
-      }
         this.utils.gdoFlowSession.cart.length = 0;
         this.utils.resFlowSession.cart.length = 0;
         this.appComponent.currScreen = 0;
