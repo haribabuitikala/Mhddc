@@ -366,7 +366,7 @@ export class ConfigComponent implements OnInit, AfterViewInit, AfterViewChecked 
         this.calculatePrice();
         // $('.switcher-box').css({ right: 28 });
         $('.switcher-box').css({ right: 48 });
-
+        ga('send', { hitType: 'event', eventCategory: 'AllScreens', eventAction: 'AllScreens-ViewHome-GD', eventLabel: 'switcher-box-home' }); 
         this.homeImage = this.utils.resFlow.selectedHome;
 
 
