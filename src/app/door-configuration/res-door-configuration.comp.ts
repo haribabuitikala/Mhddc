@@ -743,6 +743,11 @@ table td {
     nextBtn(path) {
         ga('send', { hitType: 'event', eventCategory: 'Click', eventAction: 'Summary-AddToCart-GD', eventLabel: 'nextBtn' }); 
         this.utils.resFlowSession.addToCart();
+
+        let k = _.cloneDeep(this.utils.resFlowSession.resDoorObj);
+        k.itemNumber = this.utils.cartItems.length;
+        this.utils.cartItems.push(k);
+
         $('#shop-count').text(this.utils.resFlowSession.cart.length);
         this.route.navigateByUrl(path)
     }

@@ -259,6 +259,7 @@ export class AppComponent implements OnInit, AfterViewChecked, OnChanges {
     getCheckOut(price) {
         this.app.resFlowSession.orderObj.cart.push(this.app.resFlowSession.resDoorObj);
         let resObj = this.app.resFlowSession.orderObj;
+        resObj.cart = this.app.cartItems;
         let qpbProduct;
         try {
             if (this.app.resFlowSession.resDoorObj.product.apiData && this.app.resFlowSession.resDoorObj.product.apiData['filter']) {
@@ -282,7 +283,7 @@ export class AppComponent implements OnInit, AfterViewChecked, OnChanges {
                 }
             }
 
-            if (resObj.cart[i].windows.placement == null) {
+            if (resObj.cart[i].windows && resObj.cart[i].windows.placement == null) {
                 resObj.cart[i].windows.placement = '';
             }
  

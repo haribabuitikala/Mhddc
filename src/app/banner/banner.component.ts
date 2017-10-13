@@ -91,18 +91,19 @@ export class BannerComponent implements OnInit, OnChanges, AfterViewInit, AfterV
      this.isMobile = false;
       }
       }
-      return this.isMobile;
+     // return this.isMobile;
     }
       
     
     ngOnInit() {
-          this.checkDesktop();    
-         if(this.isMobile) {
-           console.log("Mobile = ", this.isMobile);
-          window.location.href = "http://dev-hddchtml.clopay.com/shell.html";
-      }
+    //       this.checkDesktop();    
+    //      if(!this.isMobile) {
+    //        console.log("Mobile = ", this.isMobile);
+    //       window.location.href = "http://dev-hddchtml.clopay.com/shell.html";
+    //   }
         this.utils.gdoFlowSession.cart.length = 0;
         this.utils.resFlowSession.cart.length = 0;
+        this.utils.cartItems.length = 0;
         this.appComponent.currScreen = 0;
         this.lang = this.localize.getBanner();
         this.navComponent.renderNav({

@@ -177,6 +177,7 @@ removeItem(item, index) {
     if (this.resFlow) {
         this.resFlowSession.cart.splice(index, 1);
         this.utils.resFlowSession.cart = this.resFlowSession.cart;
+        this.utils.cartItems.splice(index, 1);
         $('.shop-count').text(this.resFlowSession.cart.length);
         this.showPreTax = this.resFlowSession.cart.length > 0 ? true : false;
         this.getTotalCartValue();
@@ -219,6 +220,11 @@ updateQty(item, index, increment?) {
     }
     this.utils.resFlowSession.cart[index] = this.utils.resFlowSession.resCalculateCartItemPrice(item);
     this.utils.resFlowSession.cart[index] = this.resFlowSession.cart[index];
+    if (this.utils.cartItems[index]) {
+        this.utils.cartItems[index].qty = item.construction.qty;
+        this.utils.cartItems[index].QTY = item.construction.qty;
+    }
+
     this.getTotalCartValue();
 }
 

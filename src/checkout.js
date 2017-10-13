@@ -677,7 +677,7 @@ function writeItem(orderType) {
                         if (hwInstallPrice > 0) {
                             //var hwprice:Number = hwInstallPrice,fir550, "hardware", 1);
                             //addLineItem("FIR550","FIR550","1",hwprice.toString());
-                            addLineItem("FIR550", "FIR550", "1", "0.00");
+                            addLineItem("FIR550", "FIR550", cs.QTY, "0.00");
                         }
                     }
                     else {
@@ -1168,8 +1168,8 @@ function webTest() {
     }
 
     // added urls 
-    var _CheckOutURL = 'https://test-hddcpgate.clopay.com/mCheckOut.aspx';
-    var _WSURL = 'https://test-hddccsr.clopay.com/FlashService/FlashService.asmx';
+    var _CheckOutURL = 'https://staging-hddcpgate.clopay.com/mCheckOut.aspx';
+    var _WSURL = 'https://staging-hddccsr.clopay.com/FlashService/FlashService.asmx';
 
     //ASSEMBLE PO
     _orderPO = "<DOCUMENT>" + _newLine;

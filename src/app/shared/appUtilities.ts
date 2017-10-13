@@ -151,6 +151,7 @@ export class AppUtilities {
         // flow of GDO: Home, Size , Openers, Order Details, Shopping Cart
     };
 
+    cartItems = [];
     quickStockInfo = {
         productids: null,
         stockgroupid: null,
