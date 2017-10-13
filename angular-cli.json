@@ -37,7 +37,8 @@
       "environments": {
         "dev": "environments/environment.ts",
         "prod": "environments/environment.prod.ts",
-        "mob": "environments/environment.mob.ts"
+        "mob": "environments/environment.mob.ts",
+        "test": "environments/environment.test.ts"
       }
     },
     {
@@ -74,7 +75,8 @@
       "environments": {
         "dev": "environments/environment.ts",
         "prod": "environments/environment.prod.ts",
-        "mob": "environments/environment.mob.ts"
+        "mob": "environments/environment.mob.ts",
+         "test": "environments/environment.test.ts"
       }
     }
   ],
