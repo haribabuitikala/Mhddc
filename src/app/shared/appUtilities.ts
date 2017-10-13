@@ -1293,11 +1293,13 @@ export class ResidentialFlowSession {
 
             // Calculate Additional Options price
             item.additionalOptions.items.forEach(function (itm) {
-                if (itm.id !== 5) {
-                    item.totalPrice = item.totalPrice + itm.price * count;
-                    itm.qty = count;
-                } else {
-                    item.totalPrice = item.totalPrice + itm.price;
+                if (itm.isSelected) {
+                    if (itm.id !== 5) {
+                        item.totalPrice = item.totalPrice + itm.price * count;
+                        itm.qty = count;
+                    } else {
+                        item.totalPrice = item.totalPrice + itm.price;
+                    }
                 }
             });
 
