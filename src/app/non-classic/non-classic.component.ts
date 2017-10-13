@@ -60,7 +60,7 @@ export class NonClassicComponent implements OnInit {
   }
 
   nextBtn() {
-    ga('send', { hitType: 'event', eventCategory: 'Click', eventAction: 'NextStep-GlassType-GD ', eventLabel: 'nextBtn' });
+    ga('send', { hitType: 'event', eventCategory: 'GlassType', eventAction: 'NextStep-GlassType-GD ', eventLabel: 'nextBtn' });
     this.route.navigateByUrl('/config/hardware');
   }
 

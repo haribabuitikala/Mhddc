@@ -372,7 +372,7 @@ export class ConfigComponent implements OnInit, AfterViewInit, AfterViewChecked 
 
         var $this = this;
         $('.switcher-box').on('click tap', function () {
-            ga('send', { hitType: 'event', eventCategory: 'Click', eventAction: 'AllScreens-ViewHome-GD', eventLabel: 'switcher-box-home' }); 
+            ga('send', { hitType: 'event', eventCategory: 'AllScreens', eventAction: 'AllScreens-ViewHome-GD', eventLabel: 'switcher-box-home' }); 
             $(this).hide();
             $('.switcher-box-home').show().removeClass('hide').animate({ 'right': '48', 'animation-duration': '2s' });
             $('.switcher-image').addClass('homeImage');
@@ -384,7 +384,7 @@ export class ConfigComponent implements OnInit, AfterViewInit, AfterViewChecked 
         });
 
         $('.switcher-box-home').on('click tap', function () {
-            ga('send', { hitType: 'event', eventCategory: 'Click', eventAction: 'AllScreens-ViewDoor-GD', eventLabel: 'switcher-box-home' }); 
+            ga('send', { hitType: 'event', eventCategory: 'AllScreens', eventAction: 'AllScreens-ViewDoor-GD', eventLabel: 'switcher-box-home' }); 
             $(this).hide();
             $('.switcher-box').show().removeClass('hide').animate({ 'right': '28', 'animation-duration': '2s' });
             $('.switcher-image').removeClass('homeImage');
@@ -678,7 +678,7 @@ export class ConfigComponent implements OnInit, AfterViewInit, AfterViewChecked 
     }
 
     openDetailsModal(detailsModal) {
-         ga('send', { hitType: 'event', eventCategory: 'Click', eventAction: 'AllScreens-ViewDetails-GD'+detailsModal, eventLabel: 'openDetailsModal' });
+         ga('send', { hitType: 'event', eventCategory: 'AllScreens', eventAction: 'AllScreens-ViewDetails-GD', eventLabel: 'openDetailsModal' });
         var pos = $('.res-config').offset();
         var linearhgt = $('.res-config').outerHeight();
         var header = $('.logo-header').outerHeight();

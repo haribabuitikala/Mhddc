@@ -62,7 +62,7 @@ export class TopSectionComponent implements OnInit {
   }
 
   nextBtn(path?, longPanel?) {
-     ga('send', { hitType: 'event', eventCategory: 'Click', eventAction: 'NextStep-TopSection-GD', eventLabel: 'nextBtn' });
+     ga('send', { hitType: 'event', eventCategory: 'TopSection', eventAction: 'NextStep-TopSection-GD', eventLabel: 'nextBtn' });
     this.navComponent.setNavFlow('res', '');
     var topsection = this.utils.resFlowSession.resDoorObj.windows.topsection;
     if (topsection && topsection['glasstypes']) {

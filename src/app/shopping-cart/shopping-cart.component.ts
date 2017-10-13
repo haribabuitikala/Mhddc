@@ -101,18 +101,18 @@ ngOnInit() {
     }
 
     if(this.activatedRoute.snapshot.data["openmodal"]) {
-        ga('send', { hitType: 'event', eventCategory: 'Click', eventAction: 'F&I-GDO-AddToCart', eventLabel: 'checkout' });
+        ga('send', { hitType: 'event', eventCategory: 'Shopping cart', eventAction: 'F&I-GDO-AddToCart', eventLabel: 'checkout' });
         if (this.utils.utilities.flow == 'residentialNavElems') {
             this.utils.resFlowSession.resDoorObj.INSTALLTYPE === "Installed" ? this.installTerms.open() : this.resShoppingCartTerms.open();
         } else {
-            ga('send', { hitType: 'event', eventCategory: 'Click', eventAction: 'Terms&Conditions-Decline-GD', eventLabel: 'checkout' });
+            ga('send', { hitType: 'event', eventCategory: 'Shopping cart', eventAction: 'Terms&Conditions-Decline-GD', eventLabel: 'checkout' });
             this.gdoShoppingCartTerms.open();
         }
     }
 }
 
 redirectToShoppingCart(){
-    ga('send', { hitType: 'event', eventCategory: 'Click', eventAction: 'Terms&Conditions-Decline-GD', eventLabel: 'redirectToShoppingCart' }); 
+    ga('send', { hitType: 'event', eventCategory: 'Shopping cart', eventAction: 'Terms&Conditions-Decline-GD', eventLabel: 'redirectToShoppingCart' }); 
     this.route.navigateByUrl('/shoppingCart');
 }
 getItemPrice() {
@@ -223,25 +223,25 @@ updateQty(item, index, increment?) {
 }
 
 checkout(install, diy) {
-    ga('send', { hitType: 'event', eventCategory: 'Click', eventAction: 'ShoppingCart-CheckOutNow-GD', eventLabel: 'checkout' });
+    ga('send', { hitType: 'event', eventCategory: 'Shopping cart', eventAction: 'ShoppingCart-CheckOutNow-GD', eventLabel: 'checkout' });
     this.route.navigateByUrl('/shoppingCart/confirm');
   
 }
 
 secureRedirection() {
-     ga('send', { hitType: 'event', eventCategory: 'Click', eventAction: 'Terms&Conditions-Accept-GD', eventLabel: 'secureRedirection' });
+     ga('send', { hitType: 'event', eventCategory: 'Shopping cart', eventAction: 'Terms&Conditions-Accept-GD', eventLabel: 'secureRedirection' });
     this.resShoppingCartTerms.close();
     this.resShoppingCartTerms.close();
     this.secureRedirectionTerms.open();
 }
 
 goToHome() {
-     ga('send', { hitType: 'event', eventCategory: 'Click', eventAction: 'PaymentGateway-Decline-GD ', eventLabel: 'goToHome' });
+     ga('send', { hitType: 'event', eventCategory: 'Shopping cart', eventAction: 'PaymentGateway-Decline-GD ', eventLabel: 'goToHome' });
     this.route.navigateByUrl('/banner');
 }
 
 goToCustomerInfo() {
-    ga('send', { hitType: 'event', eventCategory: 'Click', eventAction: 'PaymentGateway-OK-GD', eventLabel: 'goToCustomerInfo' });
+    ga('send', { hitType: 'event', eventCategory: 'Shopping cart', eventAction: 'PaymentGateway-OK-GD', eventLabel: 'goToCustomerInfo' });
     // this.route.navigateByUrl('/customer-info');
     this.appComp.getCheckOut(this.itemPrice);
 }

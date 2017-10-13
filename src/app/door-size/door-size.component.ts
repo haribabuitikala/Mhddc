@@ -99,11 +99,11 @@ export class DoorSizeComponent implements OnInit {
     // set door
     setDoor(door, event) {
          if (door=='singleDoor') {
-               ga('send', { hitType: 'event', eventCategory: 'Click', eventAction: 'Size-SingleCarGD', eventLabel: 'setDoor' }); 
+               ga('send', { hitType: 'event', eventCategory: 'Size', eventAction: 'Size-SingleCarGD', eventLabel: 'setDoor' }); 
             } else {
-                ga('send', { hitType: 'event', eventCategory: 'Click', eventAction: 'Size-DoubleCarGD', eventLabel: 'setDoor' }); 
+                ga('send', { hitType: 'event', eventCategory: 'Size', eventAction: 'Size-DoubleCarGD', eventLabel: 'setDoor' }); 
             }
-        //ga('send', { hitType: 'event', eventCategory: 'Click', eventAction: 'Size-'+door+'CarGD', eventLabel: 'setDoor' }); 
+        
         this.navigateErorFlag = false;
         $('.select-door').removeClass('current');
         this.utils.utilities.singleDoor = false;
@@ -311,7 +311,7 @@ export class DoorSizeComponent implements OnInit {
     };
 
     nextBtn(curr, path) {
-        ga('send', { hitType: 'event', eventCategory: 'Click', eventAction: 'Size-ExactNextStepGD', eventLabel: 'nextBtn' });
+        ga('send', { hitType: 'event', eventCategory: 'Size', eventAction: 'Size-ExactNextStepGD', eventLabel: 'nextBtn' });
         if (this.utils.utilities.wf != null && this.utils.utilities.wi != null && this.utils.utilities.hf != null && this.utils.utilities.hi != null &&
             this.utils.utilities.hf != 0) {
 
