@@ -36,7 +36,7 @@
                     </select> 
                     <span class="text-orange" *ngIf="installQuestions.item_id === 6 && installQuestions.Answers[0].isdefault">$79.00</span>
                     <span></span>
-                    <div class="flex-right">
+                    <div class="flex-right" [ngClass]="{ 'hidden': isQBP && installQuestions.item_id === 13 && installQuestions.Answers[0].isdefault }">
                         <div class="text-orange">Yes</div>
                         <label class="switch">
                             <input *ngIf=" installQuestions.item_id === 13" type="checkbox" [(ngModel)]="installQuestions.Answers[0].isdefault" (change)="installQuestionsOptions(installQuestions.Answers[0].isdefault,installQuestions)">

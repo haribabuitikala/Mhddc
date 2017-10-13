@@ -765,15 +765,28 @@ function writeItem(orderType) {
                                     {
                                         var useranswer = value.objVal.Answers[1];
                                         if (value.isSelected && useranswer != '' && value.selectedMiles > 30) {
-                                            var tn = '';
-                                            if (value.selectedMiles < 31) {
-                                                tn += '0-30';
-                                            } else if (value.selectedMiles >= 31 && value.selectedMiles < 51) {
-                                                tn += '30-50';
-                                            } else if (value.selectedMiles > 50) {
-                                                tn += '50+';
+                                            // var tn = '';
+                                            // if (value.selectedMiles < 31) {
+                                            //     tn += '0-30';
+                                            // } else if (value.selectedMiles >= 31 && value.selectedMiles < 51) {
+                                            //     tn += '30-50';
+                                            // } else if (value.selectedMiles > 50) {
+                                            //     tn += '50+';
+                                            // }
+                                            // addLineItem("FIR330", 'Mileage ' + tn, 1, value.price, 1);
+
+                                            if(value.selectedMiles > 30)
+                                            {
+                                             addLineItem(useranswer.SubAnswers[1].config, 'Mileage 30-50', 1, useranswer.SubAnswers[1].item_price, 1);
                                             }
-                                            addLineItem("FIR330", 'Mileage ' + tn, 1, value.price, 1);
+
+                                            if(value.selectedMiles > 50)
+                                            {
+                                                var qty = value.selectedMiles - 50;
+                                               addLineItem(useranswer.SubAnswers[2].config, 'Mileage 50+', qty, useranswer.SubAnswers[2].item_price, 1);
+                                            }
+
+
                                         }
                                         break;
                                     }
