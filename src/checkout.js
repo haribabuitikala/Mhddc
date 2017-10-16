@@ -907,13 +907,13 @@ function writeItem(orderType) {
                                     }
                                 default:
                                     {
-
-                                        if (value.isSelected && value.useranswer != '') {
+                                        var useranswer = value.objVal.Answers[1];
+                                        if (value.isSelected && useranswer != '') {
                                             if (Number(useranswer.config) != 0) {
                                                 if (useranswer.QTY == undefined) {
                                                     useranswer.QTY = 1;
                                                 }
-                                                addLineItem(useranswer.config, value.item_name, useranswer.QTY * cs.QTY, useranswer.item_price, 1);
+                                                addLineItem(useranswer.config, value.name, useranswer.QTY * cs.QTY, useranswer.item_price, 1);
                                             }
                                         }
                                     }
