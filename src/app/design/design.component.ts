@@ -124,7 +124,7 @@ export class DesignComponent implements OnInit {
     }
 
     nextBtn(path) {
-         ga('send', { hitType: 'event', eventCategory: 'Click', eventAction: 'NextStep-DoorDesign-GD', eventLabel: 'nextBtn' });
+         ga('send', { hitType: 'event', eventCategory: 'Design', eventAction: 'NextStep-DoorDesign-GD', eventLabel: 'nextBtn' });
         this.route.navigateByUrl(path);
     }
 

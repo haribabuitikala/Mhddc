@@ -35,8 +35,12 @@
                         <option *ngFor=" let lock of installQuestions.Answers" [ngValue]="lock">{{lock.item_name}}</option>
                     </select> 
                     <span class="text-orange" *ngIf="installQuestions.item_id === 6 && installQuestions.Answers[0].isdefault">$79.00</span>
+                    <div *ngIf=" installQuestions.Answers[0].isdefault">
+                        <span class="text-orange" *ngIf="installQuestions.item_id === 4">$87.00</span>
+                    </div>
                     <span></span>
                     <div class="flex-right" [ngClass]="{ 'hidden': isQBP && installQuestions.item_id === 13 && installQuestions.Answers[0].isdefault }">
+
                         <div class="text-orange">Yes</div>
                         <label class="switch">
                             <input *ngIf=" installQuestions.item_id === 13" type="checkbox" [(ngModel)]="installQuestions.Answers[0].isdefault" (change)="installQuestionsOptions(installQuestions.Answers[0].isdefault,installQuestions)">
@@ -81,6 +85,9 @@
                     <p [innerHTML]="diyQuestions.item_list_text"></p>
                     <img (click)="diyQuestionsPopup(diyQuestions)" height="25" src="../../assets/images/info.png">
                 </div>
+                <div *ngIf=" diyQuestions.Answers[0].isdefault">
+                        <span class="text-orange" *ngIf="diyQuestions.item_id === 4">$87.00</span>
+                    </div>
                 <div class="flex space-between" *ngIf="diyQuestions.item_id !== 5">                    
                     <select [ngModel]="selectedVinyl" *ngIf="diyQuestions.item_id === 1 && diyQuestions.Answers[0].isdefault" (ngModelChange)="selectedVinyls($event, diyQuestions)">
                         <option *ngFor="let vin of vinyls"  [ngValue]="vin">{{vin.item_name}}</option>
