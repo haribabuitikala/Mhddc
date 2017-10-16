@@ -1080,10 +1080,10 @@ export class ResidentialFlowSession {
                 if (hs && hs.hasOwnProperty('item_installed_price')) {
                     price[0] = price[0] + hs['item_installed_price'] * hs['count'] * count;
                     price[1] = price[1] + hs['item_price'] * hs['count'] * count;
-
+                    // Updated to calculate handle price with quantity
                     this.utils.resFlowSession.resDetails.hardware.stepPlate.name = hs['item_name'];
-                    this.utils.resFlowSession.resDetails.hardware.stepPlate.install_price = hs['item_installed_price'];
-                    this.utils.resFlowSession.resDetails.hardware.stepPlate.diy_price = hs['item_price'];
+                    this.utils.resFlowSession.resDetails.hardware.stepPlate.install_price = hs['item_installed_price'] * hs['count'];
+                    this.utils.resFlowSession.resDetails.hardware.stepPlate.diy_price = hs['item_price'] * hs['count'];
                     this.utils.resFlowSession.resDetails.hardware.stepPlate.qty = hs['count'];
                 }
                 // c.Calculate price for Hinges
