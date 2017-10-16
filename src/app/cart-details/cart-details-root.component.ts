@@ -12,11 +12,13 @@ export class CartDetailsRootComponent implements OnInit {
   data;
   itemPrice = this.utils.resFlowSession.cart[0].totalPrice;
   hingePlacement;
+  selectedAdditionalOptions;
   ngOnInit() {
     this.data = this.Item || this.utils.resFlowSession.resDoorObj;
     let placement = this.utils.resFlowSession.resDoorObj.hardware.hinge['placement'];
     if (placement) {
       this.hingePlacement = placement.split(':')[0];
     }
+    this.selectedAdditionalOptions = this.data.additionalOptions.items.filter(function (s) { return s.isSelected === true && s.id !== 999; });
   }
 }
