@@ -34,7 +34,7 @@
 
 <div class="margin-t-20 margin-b-20" *ngIf="showVinyl">
     <label>Select a Vinyl Seal:</label>
-    <select [(ngModel)]="selectedVinyl" class="form-control" name="color-vinyl">
+    <select [(ngModel)]="selectedVinyl" class="form-control" name="color-vinyl" (change)="updatePrice()">
         <option *ngFor="let vinyl of vinylOptions; let index = index" [attr.value]="index" [innerHTML]="vinyl.item_name"></option>
     </select>
 </div>

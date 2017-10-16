@@ -722,9 +722,19 @@ export class ConfigComponent implements OnInit, AfterViewInit, AfterViewChecked 
         this.additionaloptions = this.details.additionalOptions.items.filter(a =>  {
             return a.isSelected === true;
         });
+        this.vynlName = '';
+        this.grooveName = '';
+        if (this.resDoorObj.construction && this.resDoorObj.construction.vinyl && this.resDoorObj.construction.vinyl.item_name) {
+            this.vynlName = this.resDoorObj.construction.vinyl.item_name;
+        }
+        if (this.resDoorObj.construction && this.resDoorObj.construction.groove && this.resDoorObj.construction.groove.item_name) {
+            this.grooveName = this.resDoorObj.construction.groove.item_name;
+        }
         detailsModal.open();
     }
     additionaloptions = [];
+    vynlName = '';
+    grooveName = '';
 
     updateQuantity(isIncrement?) {
         let count = this.utils.resFlowSession.resDoorObj.QTY;

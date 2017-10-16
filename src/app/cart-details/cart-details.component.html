@@ -70,6 +70,14 @@
             <p [innerHTML]="data.color.base.name"></p>
             <span>{{data.color.base.price * data.color.base.qty  | currency:'USD':true:'1.2-2'}}</span>
         </dd>
+        <dd *ngIf="data.construction.vinyl.item_name">
+            <p [innerHTML]="data.construction.vinyl.item_name"></p>
+            <span>{{data.construction.vinyl.item_price  | currency:'USD':true:'1.2-2'}}</span>
+        </dd>
+        <dd *ngIf="data.construction.groove.item_name">
+            <p [innerHTML]="data.construction.groove.item_name"></p>
+            <span>{{data.construction.groove.item_price  | currency:'USD':true:'1.2-2'}}</span>
+        </dd>
     </dl>
     <dl class="door-configuration-table" *ngIf="data.topSection.name !== ''">
         <dd class="door-configuration-table-header">

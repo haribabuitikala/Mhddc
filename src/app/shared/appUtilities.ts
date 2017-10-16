@@ -567,7 +567,9 @@ export class ResidentialFlowSession {
             laborcost: 0,
             modelNumber: '',
             displayModelNumber: '',
-            discountPrice: 0
+            discountPrice: 0,
+            vinyl: {},
+            groove: {}
         },
         color: {
             overlay: {
@@ -766,7 +768,9 @@ export class ResidentialFlowSession {
                 laborcost: 0,
                 modelNumber: '',
                 displayModelNumber: '',
-                discountPrice: 0
+                discountPrice: 0,
+                vinyl: {},
+                groove: {}
             };
             this.resDoorObj['reset' + this.resDoorObj['resetorder'][4]]();
         },
@@ -955,7 +959,8 @@ export class ResidentialFlowSession {
                     this.resDetails.construction.qty = count;
                     this.resDetails.construction.laborcost = dc['laborcodeprice'];
                     this.resDetails.construction.modelNumber = dc['ClopayModelNumber'];
-                    this.resDetails.construction.displayModelNumber = dc['DisplayModelNumber'];
+                    this.resDetails.construction.displayModelNumber = dc['DisplayModelNumber'];                 
+
                 } else {
                     let dc = obj.construction['construction'];
                     //promo
@@ -974,7 +979,7 @@ export class ResidentialFlowSession {
                     this.resDetails.construction.modelNumber = dc['ClopayModelNumber'];
                     this.resDetails.construction.displayModelNumber = dc['DisplayModelNumber'];
                 }
-
+                
                 // Calculate price for Overlay Color
                 let oc = obj.color.overlay;
                 if (oc && oc.hasOwnProperty('item_price') && obj.product.product['item_id'] !== 16) {
@@ -1202,10 +1207,19 @@ export class ResidentialFlowSession {
                     })
                 }
 
+                this.resDetails.construction.vinyl = {};
+                this.resDetails.construction.groove = {};
                 if (obj.product.product['item_id'] == 9) {
                     if (obj.construction.groove['item_price']) {
                         price[0] = price[0] + obj.construction.groove['item_price']
                         price[1] = price[1] + obj.construction.groove['item_price']
+                    }
+             
+                    if (obj.construction.vinyl) {
+                        this.resDetails.construction.vinyl = obj.construction.vinyl;
+                    }
+                    if (obj.construction.groove) {
+                        this.resDetails.construction.groove = obj.construction.groove;
                     }
                 }
             }
@@ -1248,6 +1262,14 @@ export class ResidentialFlowSession {
                 item.totalPrice = item.totalPrice + count * (item.construction.price + item.construction.laborcost);
             } else {
                 item.totalPrice = item.totalPrice + count * item.construction.price;
+            }
+
+            if (item.construction.vinyl && item.construction.vinyl.item_price) {
+                item.totalPrice = item.totalPrice + item.construction.vinyl.item_price * count;
+            }
+
+            if (item.construction.groove && item.construction.groove.item_price) {
+                item.totalPrice = item.totalPrice + item.construction.groove.item_price * count;
             }
 
             // Calculate color price 
