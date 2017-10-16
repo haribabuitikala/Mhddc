@@ -113,6 +113,10 @@ ngOnInit() {
 
 redirectToShoppingCart(){
     ga('send', { hitType: 'event', eventCategory: 'Shopping cart', eventAction: 'Terms&Conditions-Decline-GD', eventLabel: 'redirectToShoppingCart' }); 
+    if (this.IsModal) {
+        this.closeModal.next();
+        this.installTerms.close();
+    }
     this.route.navigateByUrl('/shoppingCart');
 }
 getItemPrice() {
@@ -230,8 +234,17 @@ updateQty(item, index, increment?) {
 
 checkout(install, diy) {
     ga('send', { hitType: 'event', eventCategory: 'Shopping cart', eventAction: 'ShoppingCart-CheckOutNow-GD', eventLabel: 'checkout' });
-    this.route.navigateByUrl('/shoppingCart/confirm');
-  
+    if (this.IsModal) {
+        ga('send', { hitType: 'event', eventCategory: 'Shopping cart', eventAction: 'F&I-GDO-AddToCart', eventLabel: 'checkout' });
+        if (this.utils.utilities.flow == 'residentialNavElems') {
+            this.utils.resFlowSession.resDoorObj.INSTALLTYPE === "Installed" ? this.installTerms.open() : this.resShoppingCartTerms.open();
+        } else {
+            ga('send', { hitType: 'event', eventCategory: 'Shopping cart', eventAction: 'Terms&Conditions-Decline-GD', eventLabel: 'checkout' });
+            this.gdoShoppingCartTerms.open();
+        }
+    } else {
+        this.route.navigateByUrl('/shoppingCart/confirm');
+    }
 }
 
 secureRedirection() {
