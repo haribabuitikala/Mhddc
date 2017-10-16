@@ -80,9 +80,11 @@ export class BannerComponent implements OnInit, OnChanges, AfterViewInit, AfterV
         this.elem.nativeElement.querySelector('.zip-code').value = value;
     }
     
+
     ngOnInit() {
         this.utils.gdoFlowSession.cart.length = 0;
         this.utils.resFlowSession.cart.length = 0;
+        this.utils.cartItems.length = 0;
         this.appComponent.currScreen = 0;
         this.lang = this.localize.getBanner();
         this.navComponent.renderNav({

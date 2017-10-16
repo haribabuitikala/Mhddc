@@ -719,8 +719,12 @@ export class ConfigComponent implements OnInit, AfterViewInit, AfterViewChecked 
         if(this.resDoorObj.hardware.hinge.placement){
             this.hingePlacement = this.resDoorObj.hardware.hinge.placement.split(':')[0];           
         }
+        this.additionaloptions = this.details.additionalOptions.items.filter(a =>  {
+            return a.isSelected === true;
+        });
         detailsModal.open();
     }
+    additionaloptions = [];
 
     updateQuantity(isIncrement?) {
         let count = this.utils.resFlowSession.resDoorObj.QTY;

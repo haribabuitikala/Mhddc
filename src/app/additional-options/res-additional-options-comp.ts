@@ -165,6 +165,20 @@ export class ResAdditionalOptionsComponent implements OnInit {
         this.pageNo = this.utils.utilities.currPage;
         this.setNavComponent();
         let resDoorObj = this.utils.resFlowSession.resDoorObj;
+        var colorConfigParam = '';
+        var pid = Number(resDoorObj.product.product['item_id']);
+
+
+        if ((pid == 16 || pid == 9)) {
+            colorConfigParam = 'COLR-WH'
+        }
+        else if (pid == 30)  // stop mold(canyon limted edition) added for US in addition with CA roll out #1141591 
+        {
+            colorConfigParam = resDoorObj.color.base['colorconfig'].replace(/[0-9]/g, '');
+        }
+        else {
+            colorConfigParam = resDoorObj.color.base['colorconfig']
+        }
         let dataParams = {
             "NatMarketID": this.utils.utilities.natmarketid,
             "localmarketid": parseInt(this.utils.utilities.localmarketid),
@@ -176,7 +190,7 @@ export class ResAdditionalOptionsComponent implements OnInit {
             "clopaymodelnumber": resDoorObj.construction.construction['ClopayModelNumber'],
             "dtype": _.upperCase(this.utils.resFlowSession.orderObj.QPB ? 'qpb' : this.utils.utilities.dtype),
             "storeNumber": this.utils.utilities.storenumber,
-            "colorConfig": resDoorObj.color.overlay['colorconfig'] ? resDoorObj.color.overlay['colorconfig'] : resDoorObj.color.base['colorconfig'],
+            "colorConfig": colorConfigParam,
             "lang": this.utils.utilities.lang
         }
         this.dataService.getInstallDiyq(dataParams).subscribe(res => {
@@ -496,7 +510,7 @@ export class ResAdditionalOptionsComponent implements OnInit {
 
     updatePrice() {
         let k = _.findIndex(this.itmObj.items, { id: 5 });
-         this.itmObj.items[k].selectedMiles = this.defaultMiles;
+        this.itmObj.items[k].selectedMiles = this.defaultMiles;
         this.itmObj.items[k].price = this.calculateMilesPrice();
         this.appComponent.updatePrice();
     }
@@ -523,6 +537,7 @@ export class ResAdditionalOptionsComponent implements OnInit {
             }
             k.name = this.selectedVinyl.item_name;
             k.price = this.selectedVinyl.item_price;
+            k.selectedMiles = this.selectedVinyl.item_id;
         }
         let n: any;
         if (obj.item_id === 13) {

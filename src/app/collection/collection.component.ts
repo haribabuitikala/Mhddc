@@ -129,11 +129,12 @@ export class CollectionComponent implements OnInit {
 
         if (this.utils.resFlowSession.cart.length > 0) {
             if (this.utils.resFlowSession.resDoorObj.INSTALLTYPE === 'Installed') {
+                // Changes have possible regression
                 this.specialCollections = _.filter(_.filter(this.collections, ['productline', 'speciality']), function(o){
-                    return [9, 16, 31].indexOf(o.item_id) > -1;
+                    return true;
                 });
                 this.popularCollections = _.filter(_.filter(this.collections, ['productline', 'popular']),function(o){
-                    return o.item_id == 30;
+                    return true;
                 });
             } else {
                 this.specialCollections = _.reject(_.filter(this.collections, ['productline', 'speciality']), function(o){

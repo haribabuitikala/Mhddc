@@ -109,7 +109,7 @@ export class AdditionalOptionsComponent implements OnInit {
             let kPrice = _.sumBy(this.dataStore.gdoOpenerAccessories, function (o) {
                 return o.price * o.count;
             });
-            this.gdoConfig.itemPrice =  this.gdoConfig.itemPrice + kPrice;
+            this.gdoConfig.itemPrice = this.gdoConfig.itemPrice + kPrice;
         }
         this.hidePrev = this.navComponent.subFlow ? true : false;
         if (this.appComponent) {
@@ -172,7 +172,7 @@ export class AdditionalOptionsComponent implements OnInit {
     flow = 'non-direct';
 
     showDistance(itm, flow) {
-       // let obj = this.utils.gdoFlowSession.cart[0].additional.items[2];
+        // let obj = this.utils.gdoFlowSession.cart[0].additional.items[2];
 
         if (itm.srcElement.checked === false) {
             this.distance = 31;
@@ -188,34 +188,50 @@ export class AdditionalOptionsComponent implements OnInit {
                 this.gdoConfig.itemPrice = this.gdoConfig.itemPrice + 2.50;
                 this.gdoConfig.distancePrice = 2.50;
                 obj["useranswer"] = this.utils.gdoUserAnswers[2];
-                obj["useranswer"].fir[0].QTY =   1;       
+                obj["useranswer"].fir[0].QTY = 1;
                 obj.QTY = 1;
                 obj.qty = 1;
 
-               
+
             }
             else {
-                 let obj = this.utils.gdoFlowSession.cart[0].additional.items[3];
-                this.flow = 'non-direct';
-                this.utils.utilities.distancePrice = 51;
-                this.distancePrice = 51;
-                this.gdoConfig.itemPrice = this.gdoConfig.itemPrice + 51;
-                this.gdoConfig.distancePrice = 51;
-               
-                let thirtyFifty, fiftyPlus, flatMiles;                         
-                thirtyFifty =  obj.Answers[0].SubAnswers[0];
-                fiftyPlus = obj.Answers[0].SubAnswers[1];
-                let firList = [];
-                 thirtyFifty.QTY = 1;
-                firList.push(thirtyFifty)
-                 // obj["useranswer"] = this.utils.gdoUserAnswers[3];
-                 obj["useranswer"] = { 'qty': 1, 'QTY': 1, 'item_price':this.distancePrice, 'fir': firList, 'item_id': 5 };
-                 obj.QTY = 1;
-                 obj.qty = 1;
+
+                var openerType = this.utils.gdoFlowSession.cart[0].opener.opener.brand;
+                if (openerType.toLowerCase() === "chamberlain") {
+                    let obj = this.utils.gdoFlowSession.cart[0].additional.items[3];
+                    this.flow = 'non-direct';
+                    this.utils.utilities.distancePrice = 51;
+                    this.distancePrice = 51;
+                    this.gdoConfig.itemPrice = this.gdoConfig.itemPrice + 51;
+                    this.gdoConfig.distancePrice = 51;
+
+                    let thirtyFifty, fiftyPlus, flatMiles;
+                    thirtyFifty = obj.Answers[0].SubAnswers[0];
+                    fiftyPlus = obj.Answers[0].SubAnswers[1];
+                    let firList = [];
+                    thirtyFifty.QTY = 1;
+                    firList.push(thirtyFifty)
+                    // obj["useranswer"] = this.utils.gdoUserAnswers[3];
+                    obj["useranswer"] = { 'qty': 1, 'QTY': 1, 'item_price': this.distancePrice, 'fir': firList, 'item_id': 5 };
+                    obj.QTY = 1;
+                    obj.qty = 1;
+                } else {
+                    let obj = this.utils.gdoFlowSession.cart[0].additional.items[2];
+                    this.flow = 'non-direct';
+                    this.utils.utilities.distancePrice = 2.5;
+                    this.distancePrice = 2.5;
+                    this.gdoConfig.itemPrice = this.gdoConfig.itemPrice + 2.50;
+                    this.gdoConfig.distancePrice = 2.50;
+                    obj["useranswer"] = this.utils.gdoUserAnswers[2];
+                    obj["useranswer"].fir[0].QTY = 1;
+                    obj.QTY = 1;
+                    obj.qty = 1;
+                }
+
             }
             $('.gdoDistance').removeAttr('disabled');
             this.showDistancePrice = false;
-        } else {            
+        } else {
             this.distance = '';
             this.gdoConfig.showDistance = false;
             this.utils.utilities.distancePrice = 0;
@@ -225,11 +241,11 @@ export class AdditionalOptionsComponent implements OnInit {
             obj["useranswer"] = "";
             obj.QTY = 0;
             obj.qty = 0;
-            let obj1= this.utils.gdoFlowSession.cart[0].additional.items[3];
+            let obj1 = this.utils.gdoFlowSession.cart[0].additional.items[3];
             obj1["useranswer"] = "";
             obj1.QTY = 0;
             obj1.qty = 0;
-           
+
             $('.gdoDistance').prop('disabled', 'disabled');
         }
         let kPrice = _.sumBy(this.dataStore.gdoDirectQuestions, function (o) {
@@ -237,11 +253,11 @@ export class AdditionalOptionsComponent implements OnInit {
         });
         this.utils.utilities.kPrice = kPrice;
         this.gdoConfig.itemPrice = this.utils.calculateTotalPrice(); //this.calculateTotalPrice(this.utils.utilities.item_price, this.singleOpener, this.doubleOpener, this.mileOpenPr, this.qty);
-        
+
         let aPrice = _.sumBy(this.dataStore.gdoOpenerAccessories, function (o) {
             return o.price * o.count;
         });
-        this.gdoConfig.itemPrice =  this.gdoConfig.itemPrice + aPrice;
+        this.gdoConfig.itemPrice = this.gdoConfig.itemPrice + aPrice;
     }
 
     singleOpener = 0;
@@ -365,7 +381,7 @@ export class AdditionalOptionsComponent implements OnInit {
             let obj = this.utils.gdoFlowSession.cart[0].additional.items[0];
             obj["useranswer"].QTY = k.count;
             obj["useranswer"].qty = k.count;
-           
+
             this.utils.utilities.gdoSingleDoor = k.price;
             this.utils.utilities.singlep = 0;
         } else {
@@ -436,58 +452,79 @@ export class AdditionalOptionsComponent implements OnInit {
 
     updateDistance(itm, flow) {
         this.utils.utilities.distance = +itm.target.value;
-        let miles = +itm.target.value;      
+        let miles = +itm.target.value;
         if (flow === 'direct') {
             let obj = this.utils.gdoFlowSession.cart[0].additional.items[2];
             let k = miles - 31;
             if (k >= 0) {
-                this.distancePrice = (k * 2.50) + 2.50;     
+                this.distancePrice = (k * 2.50) + 2.50;
                 obj["useranswer"] = [];
                 obj["useranswer"] = this.utils.gdoUserAnswers[2];
-                obj["useranswer"].fir[0].QTY =    k + 1;       
+                obj["useranswer"].fir[0].QTY = k + 1;
                 obj["useranswer"].QTY = k + 1;
                 obj["useranswer"].qty = k + 1;
                 // this.mileOpenPr = this.distancePrice;
             }
             else {
                 obj["useranswer"] = [];
-                this.distancePrice = 0;              
+                this.distancePrice = 0;
                 obj.QTY = 0;
                 obj.qty = 0;
             }
 
         } else {
-            let k = miles - 50;
-             let firList = [];
-              let thirtyFifty, fiftyPlus, flatMiles;             
-             let obj = this.utils.gdoFlowSession.cart[0].additional.items[3];
-              thirtyFifty =  obj.Answers[0].SubAnswers[0];
-              fiftyPlus = obj.Answers[0].SubAnswers[1];
-              if(miles > 50)
-              {
-                  fiftyPlus.QTY = (miles - 50);
-                   firList.push(fiftyPlus)
-              }
-               if(miles > 30)
-              {
-                  thirtyFifty.QTY = 1;
-                  firList.push(thirtyFifty)
-              }
-            
-            if (k >= 0) {
-                this.distancePrice = (k * 3) + 51;
-                obj.QTY = k + 1;
-                obj.qty = k + 1;
-                // this.mileOpenPr = this.distancePrice;
-                 obj["useranswer"] = { 'qty': 1, 'QTY': 1, 'item_price':this.distancePrice, 'fir': firList, 'item_id': 5 };
-            } else {
-                this.distancePrice = 0;
-                 obj.QTY = 0;
-                 obj.qty = 0;
-                // this.mileOpenPr = this.distancePrice;
-                 obj["useranswer"] = [];
+            var openerType = this.utils.gdoFlowSession.cart[0].opener.opener.brand;
+            if (openerType.toLowerCase() === "chamberlain") {
+                let k = miles - 50;
+                let firList = [];
+                let thirtyFifty, fiftyPlus, flatMiles;
+                let obj = this.utils.gdoFlowSession.cart[0].additional.items[3];
+                thirtyFifty = obj.Answers[0].SubAnswers[0];
+                fiftyPlus = obj.Answers[0].SubAnswers[1];
+                if (miles > 50) {
+                    fiftyPlus.QTY = (miles - 50);
+                    firList.push(fiftyPlus)
+                }
+                if (miles > 30) {
+                    thirtyFifty.QTY = 1;
+                    firList.push(thirtyFifty)
+                }
+
+                if (k >= 0) {
+                    this.distancePrice = (k * 3) + 51;
+                    obj.QTY = k + 1;
+                    obj.qty = k + 1;
+                    // this.mileOpenPr = this.distancePrice;
+                    obj["useranswer"] = { 'qty': 1, 'QTY': 1, 'item_price': this.distancePrice, 'fir': firList, 'item_id': 5 };
+                } else {
+                    this.distancePrice = 0;
+                    obj.QTY = 0;
+                    obj.qty = 0;
+                    // this.mileOpenPr = this.distancePrice;
+                    obj["useranswer"] = [];
+                }
             }
-           
+            else {
+                let obj = this.utils.gdoFlowSession.cart[0].additional.items[2];
+                let k = miles - 31;
+                if (k >= 0) {
+                    this.distancePrice = (k * 2.50) + 2.50;
+                    obj["useranswer"] = [];
+                    obj["useranswer"] = this.utils.gdoUserAnswers[2];
+                    obj["useranswer"].fir[0].QTY = k + 1;
+                    obj["useranswer"].QTY = k + 1;
+                    obj["useranswer"].qty = k + 1;
+                    // this.mileOpenPr = this.distancePrice;
+                }
+                else {
+                    obj["useranswer"] = [];
+                    this.distancePrice = 0;
+                    obj.QTY = 0;
+                    obj.qty = 0;
+                }
+            }
+
+
         }
         this.mileOpenPr = this.distancePrice;
         this.utils.utilities.distancePrice = this.distancePrice;

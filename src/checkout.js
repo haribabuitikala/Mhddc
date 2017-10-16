@@ -128,10 +128,10 @@ function writeItem(orderType) {
                     var pid = cs.product.product.item_id
                     var mp = '999999'
                     //Added by shankar below line, change ClopayModelNumber as DisplayModelNumber
-                    var mod = getDesign(cs.construction.construction.ClopayModelNumber, cs.construction.construction)
+                    var mod = getDesign(cs.construction.construction.DisplayModelNumber, cs.construction.construction)
                     var dsg = String(cs.construction.construction.XMLDSGN).replace('vvv', '').replace('VVV', '')
                     // shankar added In below line DisplayModelNumber is added with the replace of XMLCOI
-                    itemTemp += "\t\t\t" + "<ORDERED_ITEM>" + cs.construction.construction.XMLCOI + "</ORDERED_ITEM>" + _newLine;
+                    itemTemp += "\t\t\t" + "<ORDERED_ITEM>" + cs.construction.construction.DisplayModelNumber + "</ORDERED_ITEM>" + _newLine;
                     itemTemp += "\t\t\t" + "<ITEM_TYPE>" + "RES" + "</ITEM_TYPE>" + _newLine;
                     if (pid != 116) {
                         itemTemp += "\t\t\t" + "<DESCRIPTION>" + mod + "</DESCRIPTION>" + _newLine;
@@ -324,18 +324,19 @@ function writeItem(orderType) {
                         }
                     }
                     catch (e) { }
-                    if (cs.topSection && cs.topSection.Config != '') {                        
-                            var fram = cs.topSection.Config;
+                    if (cs.windows.glasstype != '') {
+                        if (cs.windows.topsection != '') {
+                            var fram = cs.windows.topsection.Config;
                             var framTest = fram.substr(0, 4);
                             if (framTest != "GLAZ") {
-                                if (cs.topSection.glasstypes && cs.topSection.glasstypes.count > 0 &&  cs.topSection.glasstypes[0].Config == "GLAZ-IR8L") {
+                                if (cs.windows.glasstype.Config == "GLAZ-IR8L") {
                                     if (topSectionEx1.indexOf(cs.windows.glasstype.item_id) > -1) {
                                         itemTemp += " FRAM=" + '"' + "FRAM-F9RO" + '"';
                                     }
-                                    else if (topSectionEx2.indexOf(String(cs.topSection.item_id)) > -1) {
+                                    else if (topSectionEx2.indexOf(String(cs.windows.topsection.item_id)) > -1) {
                                         itemTemp += " FRAM=" + '"' + "FRAM-OS501" + '"';
                                     }
-                                    else if (topSectionEx3.indexOf(String(cs.topSection.glasstypes[0].item_id)) > -1) {
+                                    else if (topSectionEx3.indexOf(String(cs.windows.topsection.item_id)) > -1) {
                                         itemTemp += " FRAM=" + '"' + "FRAM-OCAT" + '"';
                                     }
                                     else {
@@ -346,11 +347,11 @@ function writeItem(orderType) {
                                     itemTemp += " FRAM=" + '"' + fram + '"';
                                 }
                             }
-                            itemTemp += " GLAZ=" + '"' + cs.topSection.glasstypes[0].Config + '"';
-                            if (cs.windows.placement != '' && cs.topSection.glasstypes[0].Config != "GLAZ-SOL") {
+                            itemTemp += " GLAZ=" + '"' + cs.windows.glasstype.Config + '"';
+                            if (cs.windows.placement != '' && cs.windows.glasstype.Config != "GLAZ-SOL") {
                                 itemTemp += " GSEC=" + '"' + "GSEC-" + cs.windows.placement.Config + '"';
                             }
-                       
+                        }
                     }
                     if (orderObj.windcode != 'W0') {
                         itemTemp += " WIND=" + '"' + "WIND-" + orderObj.windcode + '"';
@@ -363,7 +364,7 @@ function writeItem(orderType) {
                             itemTemp += " DSGN=" + '"' + cs.construction.construction.XMLDSGN + '"';
                         }
                         else {
-                            itemTemp += " DSGN=" + '"' + cs.construction.cladding.CladdingOverlayconfig + '"';
+                            itemTemp += " DSGN=" + '"' + cs.construction.construction.claddingoverlays[0].CladdingOverlayconfig + '"';
                         }
                     }
                     if (cs.hardware.lock != '') {
@@ -437,6 +438,9 @@ function writeItem(orderType) {
                             var hai = cs.hardware.handle.item_name;
                             var handlestr = hai.toLowerCase();
                             if (handlestr != "none" && cs.hardware.handle.count) {
+                                if (Number(cs.hardware.handle.defaultkit) && Number(cs.hardware.handle.defaultkit) === 2 && Number(cs.hardware.handle.count) === 1) {
+                                    cs.hardware.handle.count = 2;
+                                }
                                 var HandleQuant = Number(cs.hardware.handle.count) * cs.QTY;
                                 var doorWidth = Number((cs.size.width.wf) * 12) + Number(cs.size.width.wi);
                                 var tenFoot = false;
@@ -556,6 +560,9 @@ function writeItem(orderType) {
                             var hai = cs.hardware.stepplate.item_name;
                             var handlestr = hai.toLowerCase();
                             if (handlestr != "none" && cs.hardware.stepplate.count) {
+                                if (Number(cs.hardware.stepplate.defaultkit) && Number(cs.hardware.stepplate.defaultkit) === 2 && Number(cs.hardware.stepplate.count) === 1) {
+                                    cs.hardware.stepplate.count = 2;
+                                }
                                 var HandleQuant = Number(cs.hardware.stepplate.count) * cs.QTY;
                                 var doorWidth = Number((cs.size.width.wf) * 12) + Number(cs.size.width.wi);
                                 var tenFoot = false;
@@ -607,7 +614,17 @@ function writeItem(orderType) {
                         if (cs.hardware.hinge != '') {
                             var hai = cs.hardware.hinge.item_name;
                             var handlestr = hai.toLowerCase();
-                            if (handlestr != "none" && cs.hardware.hinge.count) {
+                            if (handlestr != "none" && cs.hardware.hinge.count != "0") {
+                                if (Number(cs.hardware.hinge.defaultkit) && Number(cs.hardware.hinge.defaultkit) === 2 && Number(cs.hardware.hinge.count) === 1) {
+                                    cs.hardware.hinge.count = 2;
+                                }
+                                //var HandleQuant = Number(cs.hardware.hinge.numofKits) * cs.QTY * 2;
+                                var numofKits = cs.hardware.hinge.count;
+                                if (String(numofKits).indexOf('B') > -1) {
+                                    numofKits = Number(String(numofKits).substr(0, 1));
+                                }
+                                //var HandleQuant = Number(numofKits) * cs.QTY * 2;		// sridhar removed WO#1156372
+                                var HandleQuant = setHingeQtyValue(handlestr, cs.hardware.hinge, Number(numofKits), cs.QTY);		// sridhar added WO#1156372
                                 var doorWidth = Number((cs.size.width.wf) * 12) + Number(cs.size.width.wi);
                                 var tenFoot = false;
                                 if (doorWidth > 120) {
@@ -617,12 +634,24 @@ function writeItem(orderType) {
                                     default:
                                         {
                                             if (di == 1) {
-                                                var hingeINSPrice = cP(cs, cs.hardware.hinge).install
-                                                addLineItem(cs.hardware.hinge.Config, cs.product.product.item_id + '-' + cs.hardware.hinge.item_name, checkForDoubleHinge(cs.hardware.hinge, cs.QTY), Number(cs.hardware.hinge.item_installed_price).toFixed(2));
+                                                var hingeINSPrice = cP(cs, cs.hardware.hinge).install;
+                                                if (cs.hardware.hinge.Config == '0123191' || cs.hardware.hinge.Config == '0123202' || cs.hardware.hinge.Config == '0123104') {
+                                                    addLineItem(cs.hardware.hinge.Config, cs.product.product.item_id + '-' + cs.hardware.hinge.item_name, HandleQuant, Number(hingeINSPrice / 2).toFixed(2));
+                                                } else {
+                                                    addLineItem(cs.hardware.hinge.Config, cs.product.product.item_id + '-' + cs.hardware.hinge.item_name, HandleQuant, Number(hingeINSPrice).toFixed(2));
+                                                }
+                                                //removed as per WO#1156372
+                                                //addLineItem(cs.hardware.hinge.Config, cs.product.product.item_id + '-' + cs.hardware.hinge.item_name, HandleQuant, Number(hingeINSPrice).toFixed(2));	// sridhar added WO#1156372
                                                 hwInstallPrice += 1;
                                             }
                                             else {
-                                                addLineItem(cs.hardware.hinge.Config, cs.product.product.item_id + '-' + cs.hardware.hinge.item_name, checkForDoubleHinge(cs.hardware.hinge, cs.QTY), Number(cs.hardware.hinge.item_price).toFixed(2));
+                                                if (cs.hardware.hinge.Config == '0123191' || cs.hardware.hinge.Config == '0123202' || cs.hardware.hinge.Config == '0123104') {
+                                                    addLineItem(cs.hardware.hinge.Config, cs.product.product.item_id + '-' + cs.hardware.hinge.item_name, HandleQuant, Number(cP(cs, cs.hardware.hinge).diy / 2).toFixed(2));
+                                                } else {
+                                                    addLineItem(cs.hardware.hinge.Config, cs.product.product.item_id + '-' + cs.hardware.hinge.item_name, HandleQuant, Number(cP(cs, cs.hardware.hinge).diy).toFixed(2));
+                                                }
+                                                //removed as per WO#1156372
+                                                //addLineItem(cs.hardware.hinge.Config, cs.product.product.item_id + '-' + cs.hardware.hinge.item_name, HandleQuant, Number(cP(cs, cs.hardware.hinge).diy).toFixed(2));	// sridhar added WO#1156372
                                             }
                                         }
                                 }
@@ -677,7 +706,7 @@ function writeItem(orderType) {
                         if (hwInstallPrice > 0) {
                             //var hwprice:Number = hwInstallPrice,fir550, "hardware", 1);
                             //addLineItem("FIR550","FIR550","1",hwprice.toString());
-                            addLineItem("FIR550", "FIR550", "1", "0.00");
+                            addLineItem("FIR550", "FIR550", cs.QTY, "0.00");
                         }
                     }
                     else {
@@ -686,18 +715,18 @@ function writeItem(orderType) {
                         var doorHeight = Number((cs.size.height.hf) * 12) + Number(cs.size.height.hi);
                         if (doorWidth <= 120) {
                             if (doorHeight < 99) {
-                                addLineItem("FIR800", "SINGLE CAR DOOR DELIVERY CHARGE", "1", "0");
+                                addLineItem("FIR800", "SINGLE CAR DOOR DELIVERY CHARGE", cs.QTY, "0");
                             } else {
                                 // Extended Height over 8' 3"
-                                addLineItem("FIR920", "SINGLE CAR DOOR DELIVERY CHARGE", "1", "0");
+                                addLineItem("FIR920", "SINGLE CAR DOOR DELIVERY CHARGE", cs.QTY, "0");
                             }
                         }
                         else if (doorWidth > 120) {
                             if (doorHeight < 99) {
-                                addLineItem("FIR670", "DOUBLE CAR DOOR DELIVERY CHARGE", "1", "0");
+                                addLineItem("FIR670", "DOUBLE CAR DOOR DELIVERY CHARGE",cs.QTY, "0");
                             } else {
                                 // Extended Height over 8' 3"
-                                addLineItem("FIR930", "DOUBLE CAR DOOR DELIVERY CHARGE", "1", "0");
+                                addLineItem("FIR930", "DOUBLE CAR DOOR DELIVERY CHARGE", cs.QTY, "0");
                             }
                         }
                     }
@@ -731,15 +760,19 @@ function writeItem(orderType) {
                                 case 1:
                                     {
                                         var useranswer = value.objVal.Answers[1];
-                                        if (value.isSelected && useranswer != '' && useranswer.config != '0') {
-                                            var vs = useranswer;
-                                            if (vs.heightpartid != "" && vs.item_price != 0) {
-                                                addLineItem(vs.heightpartid, "Weather seal - " + vs.item_name, Number(vs.heightqty) * cs.QTY, vs.heightitem_price);
-                                                addLineItem(vs.widthpartid, "Weather seal - " + vs.item_name, Number(vs.widthqty) * cs.QTY, vs.widthitem_price);
-                                            } else {
-                                                addLineItem(vs.heightpartid, "Weather seal - " + vs.item_name, Number(vs.heightqty) * cs.QTY, '0');
-                                                addLineItem(vs.widthpartid, "Weather seal - " + vs.item_name, Number(vs.widthqty) * cs.QTY, '0');
-
+                                        if (value.isSelected && useranswer != '' && value.selectedMiles && value.selectedMiles > 0) {
+                                            var selectedVynl = value.objVal.Answers[1].vinyls.filter(function (s) { return s.item_id === value.selectedMiles; });
+                                            var vs = selectedVynl;
+                                            if (vs && vs.length > 0) {
+                                                selectedVynl = vs[0];
+                                                if (selectedVynl.heightpartid != "" && selectedVynl.item_price != 0) {
+                                                    addLineItem(selectedVynl.heightpartid, "Weather seal - " + selectedVynl.item_name, Number(selectedVynl.heightqty) * cs.QTY, selectedVynl.heightitem_price);
+                                                    addLineItem(selectedVynl.widthpartid, "Weather seal - " + selectedVynl.item_name, Number(selectedVynl.widthqty) * cs.QTY, selectedVynl.widthitem_price);
+                                                }
+                                                else {
+                                                    addLineItem(selectedVynl.heightpartid, "Weather seal - " + selectedVynl.item_name, Number(selectedVynl.heightqty) * cs.QTY, '0');
+                                                    addLineItem(selectedVynl.widthpartid, "Weather seal - " + selectedVynl.item_name, Number(selectedVynl.widthqty) * cs.QTY, '0');
+                                                }
                                             }
                                         }
                                         break
@@ -765,27 +798,22 @@ function writeItem(orderType) {
                                     {
                                         var useranswer = value.objVal.Answers[1];
                                         if (value.isSelected && useranswer != '' && value.selectedMiles > 30) {
-                                            // var tn = '';
-                                            // if (value.selectedMiles < 31) {
-                                            //     tn += '0-30';
-                                            // } else if (value.selectedMiles >= 31 && value.selectedMiles < 51) {
-                                            //     tn += '30-50';
-                                            // } else if (value.selectedMiles > 50) {
-                                            //     tn += '50+';
-                                            // }
-                                            // addLineItem("FIR330", 'Mileage ' + tn, 1, value.price, 1);
-
-                                            if(value.selectedMiles > 30)
-                                            {
-                                             addLineItem(useranswer.SubAnswers[1].config, 'Mileage 30-50', 1, useranswer.SubAnswers[1].item_price, 1);
+                                            if (cs.INSTALLTYPE === "DIY") {
+                                                if (value.selectedMiles > 30) {
+                                                    var qty = value.selectedMiles - 30;
+                                                    addLineItem(useranswer.SubAnswers[0].config, 'Mileage 30+', qty, useranswer.SubAnswers[0].item_price, 1);
+                                                }
                                             }
+                                            else {
+                                                if (value.selectedMiles > 30) {
+                                                    addLineItem(useranswer.SubAnswers[1].config, 'Mileage 30-50', 1, useranswer.SubAnswers[1].item_price, 1);
+                                                }
 
-                                            if(value.selectedMiles > 50)
-                                            {
-                                                var qty = value.selectedMiles - 50;
-                                               addLineItem(useranswer.SubAnswers[2].config, 'Mileage 50+', qty, useranswer.SubAnswers[2].item_price, 1);
+                                                if (value.selectedMiles > 50) {
+                                                    var qty = value.selectedMiles - 50;
+                                                    addLineItem(useranswer.SubAnswers[2].config, 'Mileage 50+', qty, useranswer.SubAnswers[2].item_price, 1);
+                                                }
                                             }
-
 
                                         }
                                         break;
@@ -879,13 +907,13 @@ function writeItem(orderType) {
                                     }
                                 default:
                                     {
-
-                                        if (value.isSelected && value.useranswer != '') {
+                                        var useranswer = value.objVal.Answers[1];
+                                        if (value.isSelected && useranswer != '') {
                                             if (Number(useranswer.config) != 0) {
                                                 if (useranswer.QTY == undefined) {
                                                     useranswer.QTY = 1;
                                                 }
-                                                addLineItem(useranswer.config, value.item_name, useranswer.QTY * cs.QTY, useranswer.item_price, 1);
+                                                addLineItem(useranswer.config, value.name, useranswer.QTY * cs.QTY, useranswer.item_price, 1);
                                             }
                                         }
                                     }
