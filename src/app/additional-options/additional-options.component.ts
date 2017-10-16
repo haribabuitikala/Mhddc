@@ -533,6 +533,10 @@ export class AdditionalOptionsComponent implements OnInit {
         });
         this.utils.utilities.kPrice = kPrice;
         this.gdoConfig.itemPrice = this.utils.calculateTotalPrice();
+        let aPrice = _.sumBy(this.dataStore.gdoOpenerAccessories, function (o) {
+            return o.price * o.count;
+        });
+        this.gdoConfig.itemPrice = this.gdoConfig.itemPrice + aPrice;
     }
 
 }

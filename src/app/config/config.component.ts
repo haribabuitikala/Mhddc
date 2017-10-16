@@ -746,4 +746,14 @@ export class ConfigComponent implements OnInit, AfterViewInit, AfterViewChecked 
         this.quantity = this.utils.resFlowSession.resDoorObj.QTY;
         this.calculatePrice();
     }
+
+    getAdditionalOptionDisplayTerm(item) {
+        if (item.id === 5) {
+            return 'Delivery ' + item.selectedMiles + ' miles from store';
+        } else if (item.id === 1) {
+            return 'Perimeter Weather Seal:' + item.name;
+        } else {
+            return item.name;
+        }
+    }
 }
