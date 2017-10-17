@@ -636,23 +636,25 @@ function writeItem(orderType) {
                                         {
                                             if (di == 1) {
                                                 var hingeINSPrice = cP(cs, cs.hardware.hinge).install;
-                                                if (cs.hardware.hinge.Config == '0123191' || cs.hardware.hinge.Config == '0123202' || cs.hardware.hinge.Config == '0123104') {
-                                                    addLineItem(cs.hardware.hinge.Config, cs.product.product.item_id + '-' + cs.hardware.hinge.item_name, HandleQuant, Number(hingeINSPrice / 2).toFixed(2));
-                                                } else {
-                                                    addLineItem(cs.hardware.hinge.Config, cs.product.product.item_id + '-' + cs.hardware.hinge.item_name, HandleQuant, Number(hingeINSPrice).toFixed(2));
-                                                }
+                                                // if (cs.hardware.hinge.Config == '0123191' || cs.hardware.hinge.Config == '0123202' || cs.hardware.hinge.Config == '0123104') {
+                                                //     addLineItem(cs.hardware.hinge.Config, cs.product.product.item_id + '-' + cs.hardware.hinge.item_name, HandleQuant, Number(hingeINSPrice / 2).toFixed(2));
+                                                // } else {
+                                                //     addLineItem(cs.hardware.hinge.Config, cs.product.product.item_id + '-' + cs.hardware.hinge.item_name, HandleQuant, Number(hingeINSPrice).toFixed(2));
+                                                // }
                                                 //removed as per WO#1156372
                                                 //addLineItem(cs.hardware.hinge.Config, cs.product.product.item_id + '-' + cs.hardware.hinge.item_name, HandleQuant, Number(hingeINSPrice).toFixed(2));	// sridhar added WO#1156372
+                                                addLineItem(cs.hardware.hinge.Config, cs.product.product.item_id + '-' + cs.hardware.hinge.item_name, HandleQuant, Number(hingeINSPrice).toFixed(2));
                                                 hwInstallPrice += 1;
                                             }
                                             else {
-                                                if (cs.hardware.hinge.Config == '0123191' || cs.hardware.hinge.Config == '0123202' || cs.hardware.hinge.Config == '0123104') {
-                                                    addLineItem(cs.hardware.hinge.Config, cs.product.product.item_id + '-' + cs.hardware.hinge.item_name, HandleQuant, Number(cP(cs, cs.hardware.hinge).diy / 2).toFixed(2));
-                                                } else {
-                                                    addLineItem(cs.hardware.hinge.Config, cs.product.product.item_id + '-' + cs.hardware.hinge.item_name, HandleQuant, Number(cP(cs, cs.hardware.hinge).diy).toFixed(2));
-                                                }
+                                                // if (cs.hardware.hinge.Config == '0123191' || cs.hardware.hinge.Config == '0123202' || cs.hardware.hinge.Config == '0123104') {
+                                                //     addLineItem(cs.hardware.hinge.Config, cs.product.product.item_id + '-' + cs.hardware.hinge.item_name, HandleQuant, Number(cP(cs, cs.hardware.hinge).diy / 2).toFixed(2));
+                                                // } else {
+                                                //     addLineItem(cs.hardware.hinge.Config, cs.product.product.item_id + '-' + cs.hardware.hinge.item_name, HandleQuant, Number(cP(cs, cs.hardware.hinge).diy).toFixed(2));
+                                                // }
                                                 //removed as per WO#1156372
                                                 //addLineItem(cs.hardware.hinge.Config, cs.product.product.item_id + '-' + cs.hardware.hinge.item_name, HandleQuant, Number(cP(cs, cs.hardware.hinge).diy).toFixed(2));	// sridhar added WO#1156372
+                                                 addLineItem(cs.hardware.hinge.Config, cs.product.product.item_id + '-' + cs.hardware.hinge.item_name, HandleQuant, Number(cP(cs, cs.hardware.hinge).diy).toFixed(2));
                                             }
                                         }
                                 }
