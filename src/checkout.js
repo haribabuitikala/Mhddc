@@ -447,7 +447,8 @@ function writeItem(orderType) {
                                 if (doorWidth > 120) {
                                     tenFoot = true;
                                 }
-                                switch (String(cs.hardware.handle.Config.split(";")[0]).toUpperCase()) {
+
+                                switch (String(cs.hardware.handle.Config).toUpperCase()) {
                                     case "LOCK-L":
                                         {
                                             itemTemp += " LOCK=" + '"LOCK-L"';
@@ -723,7 +724,7 @@ function writeItem(orderType) {
                         }
                         else if (doorWidth > 120) {
                             if (doorHeight < 99) {
-                                addLineItem("FIR670", "DOUBLE CAR DOOR DELIVERY CHARGE",cs.QTY, "0");
+                                addLineItem("FIR670", "DOUBLE CAR DOOR DELIVERY CHARGE", cs.QTY, "0");
                             } else {
                                 // Extended Height over 8' 3"
                                 addLineItem("FIR930", "DOUBLE CAR DOOR DELIVERY CHARGE", cs.QTY, "0");
@@ -1287,3 +1288,14 @@ function getDesign(s, a) {
     }
     return s
 }
+
+function setHingeQtyValue(hingeName,hingeObj,noOfKits,orderQty) {	
+	var crntHingeVal = Number(1);
+	if(hingeObj.Config == '0123191' || hingeObj.Config == '0123202' || hingeObj.Config == '0123104'){
+		crntHingeVal = Number(Number(noOfKits) * orderQty * 2);
+	}else{
+		crntHingeVal = Number(noOfKits) * Number(orderQty);
+	}
+	return crntHingeVal;
+}
+
