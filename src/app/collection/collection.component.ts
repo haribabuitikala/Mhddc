@@ -173,8 +173,13 @@ export class CollectionComponent implements OnInit {
         return (this.selected && this.selected.item_id === itm.item_id) ? true : false;
     }
 
+    removeJunkChar(text){
+		var _text = text.toString();
+		return $("<div />").html(_text).text();
+	} 
+
     goToHome(speciality) {
-        ga('send', { hitType: 'event', eventCategory: 'Collection', eventAction: 'CollectionScreen'+speciality.item_name, eventLabel: 'goToHome' });
+        ga('send', { hitType: 'event', eventCategory: 'Collection', eventAction: this.removeJunkChar('CollectionScreen'+speciality.item_name), eventLabel: 'goToHome' });
         // $('.collection-img').removeClass('selected');z
         this.utils.setLoader();
         speciality.selected = true;

@@ -263,7 +263,7 @@ arraymove(arr, fromIndex, toIndex) {
     }
 
     updateWithUpsellPrice(data) {  
-        ga('send', { hitType: 'event', eventCategory: 'upsellModal', eventAction:'ProactiveUpsell-Upgrade'+data.upgrade_model, eventLabel: 'updateWithUpsellPrice' });    
+        ga('send', { hitType: 'event', eventCategory: 'upsellModal', eventAction:'ProactiveUpsell-Upgrade'+data.upgrade_order, eventLabel: 'updateWithUpsellPrice' });    
         var filtermodel = window['cObj'].construction.apiData.filter(c => { return c.ClopayModelNumber == data.upgrade_model; });
         if (filtermodel.length > 0) {
             filtermodel = filtermodel[0];
