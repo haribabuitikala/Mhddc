@@ -10,6 +10,8 @@ import { CollectionData } from "../collection/collection-data";
 import { NavComponent } from "../nav/nav.component";
 
 declare var $: any;
+declare var lng: 'en';
+declare var isMobile: boolean;
 
 @Component({
     selector: 'app-banner',
@@ -32,6 +34,7 @@ export class BannerComponent implements OnInit, OnChanges, AfterViewInit, AfterV
         , private elem: ElementRef
         , private utils: AppUtilities) {
     }
+    isMobile: boolean = true;
     save(form: NgForm) {
         event.preventDefault();
         $('body').addClass('loader');
@@ -64,6 +67,8 @@ export class BannerComponent implements OnInit, OnChanges, AfterViewInit, AfterV
                 $('body').removeClass('loader');
             });
     }
+ 
+
     ngOnChanges() {
         console.log('changed');
     }
@@ -79,9 +84,24 @@ export class BannerComponent implements OnInit, OnChanges, AfterViewInit, AfterV
         //value = value.substr(0,5);
         this.elem.nativeElement.querySelector('.zip-code').value = value;
     }
+     checkDesktop() {
+    if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+       if ($(window).width() <= 800) {
+            this.isMobile = true;
+        } else {
+        this.isMobile = false;
+        }
+    } 
+    return this.isMobile;
+    }
     
 
     ngOnInit() {
+        //   this.checkDesktop();    
+        // if(this.isMobile) {
+        //     console.log("Mobile = ", this.isMobile);
+        //   window.location.href = "http://dev-hddchtml.clopay.com/shell.html";
+        // }
         this.utils.gdoFlowSession.cart.length = 0;
         this.utils.resFlowSession.cart.length = 0;
         this.utils.cartItems.length = 0;
