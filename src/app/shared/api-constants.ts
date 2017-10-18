@@ -4,7 +4,7 @@ import { environment } from './../../environments/environment';
 @Injectable()
 export class ApiConstants {
     constants = {
-        url: 'http://dev-mhddcapi.clopay.com/api/'
+        url: 'http://test-mhddcapi.clopay.com/api/'
     };
 
     constructor(){

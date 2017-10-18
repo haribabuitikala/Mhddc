@@ -178,6 +178,43 @@ export class CollectionComponent implements OnInit {
 		return $("<div />").html(_text).text();
 	} 
 
+    getPromoImage(product) {
+        let imgUrl = '../../assets/images/promoGraphics/' + this.utils.promoObject.dogEarsImageSingle;
+        if (this.utils.promoObject.typeOfPromo === 'R') {
+             switch (product.item_id.toString()) {
+                case "30": {
+                    imgUrl = '../../assets/images/promoGraphics/' + "18.4.png";
+                    break;
+                }
+                case "31": {
+                    imgUrl = '../../assets/images/promoGraphics/' + "20.4.png";
+                    break;
+                }
+                case "13": {
+                    imgUrl = '../../assets/images/promoGraphics/' + "6.3-18.4.png";
+                    break;
+                }
+                case "14": {
+                    imgUrl = '../../assets/images/promoGraphics/' + "6.3-18.4.png";
+                    break;
+                }
+                case "24": {
+                    imgUrl = '../../assets/images/promoGraphics/' + "6.3-18.4.png";
+                    break;
+                }
+                case "12": {
+                    imgUrl = '../../assets/images/promoGraphics/' + "6.3-18.4.png";
+                    break;
+                }
+                case "170": {
+                    imgUrl = '../../assets/images/promoGraphics/' + "6.3-18.4.png";
+                    break;
+                }
+                default:
+            }
+        }
+        return imgUrl;
+    }
     goToHome(speciality) {
         ga('send', { hitType: 'event', eventCategory: 'Collection', eventAction: this.removeJunkChar('CollectionScreen'+speciality.item_name), eventLabel: 'goToHome' });
         // $('.collection-img').removeClass('selected');z

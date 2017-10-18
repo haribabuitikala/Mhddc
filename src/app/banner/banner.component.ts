@@ -97,11 +97,11 @@ export class BannerComponent implements OnInit, OnChanges, AfterViewInit, AfterV
     
 
     ngOnInit() {
-          this.checkDesktop();    
-        if(this.isMobile) {
-            console.log("Mobile = ", this.isMobile);
-          window.location.href = "http://dev-hddchtml.clopay.com/shell.html";
-        }
+        //   this.checkDesktop();    
+        // if(this.isMobile) {
+        //     console.log("Mobile = ", this.isMobile);
+        //   window.location.href = "http://dev-hddchtml.clopay.com/shell.html";
+        // }
         this.utils.gdoFlowSession.cart.length = 0;
         this.utils.resFlowSession.cart.length = 0;
         this.utils.cartItems.length = 0;
