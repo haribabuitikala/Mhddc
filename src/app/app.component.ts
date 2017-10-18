@@ -276,6 +276,9 @@ export class AppComponent implements OnInit, AfterViewChecked, OnChanges {
         }
 
         for (var i = 0; i < resObj.cart.length; i++) {
+            if (resObj.cart[i].opener && this.app.resFlowSession.cart[i].opener) {
+                resObj.cart[i].opener.qty = this.app.resFlowSession.cart[i].opener.qty;
+            }
             if (resObj.QPB === true) {
                 resObj.cart[i].product.product.QPB = true;
                 if (qpbProduct) {
