@@ -80,7 +80,18 @@ export class ResSliderComponent implements OnInit, AfterViewInit {
                             if(k.length > 0) {
                                 this.saveSelected(k[0]);    
                             } else {
-                                this.saveSelected(this.data[0][0]);
+                                // Need to refactor inorder to find exact slide number, below code only meant for second slide as it is production change 
+                                if (this.cname === 'glasstype' && this.data[1] && this.data[1].length > 0) {
+                                    let ks = _.filter(this.data[1], ['isdefault', true]);
+                                    if (ks.length > 0) {
+                                        this.slideIndex = 1;
+                                        this.saveSelected(ks[0]);
+                                    } else {
+                                        this.saveSelected(this.data[0][0]);
+                                    }
+                                } else {
+                                    this.saveSelected(this.data[0][0]);
+                                }
                             }
                         }
                     }
@@ -92,6 +103,10 @@ export class ResSliderComponent implements OnInit, AfterViewInit {
         this.renderSlider();
         this.imageUrl = location.href.indexOf('localhost:4200') >= 0 ? 'http://localhost:3435/images/' + this.folder : '../../assets/images/' + this.folder;
         this.getModelCategory(this.construction);
+        // Need refactoring to check proper slide index and for all sliders
+        if (this.slideIndex > 0 && this.cname === 'glasstype') {
+            this.sliderLeft = -(this.slideIndex * this.slideWidth);
+        }
     }
 
     getModelCategory(obj) {
