@@ -9,7 +9,7 @@
 <div *ngIf="popular">
     <div class="tile margin-t-10 ptn-rel" *ngFor="let popular of popularCollections" [ngClass]="{ 'selected': (isSelected(popular) || popular.selected)}">
          <div class="ad-sec margin-t-10" style="float:right;" >
-           <img *ngIf="this.utils.utilities.isPromoEnabled"  src="getPromoImage(popular)" alt="">
+           <img *ngIf="this.utils.utilities.isPromoEnabled"   src="{{getPromoImage(popular)}}" alt="">
         </div>
         <div class="collection-img" (click)="goToHome(popular)">
             <img src="../../assets/images/collection/{{popular.imageUrl}}" alt=""/>
@@ -25,7 +25,7 @@
 <div *ngIf="speciality">
     <div class="tile margin-t-10 ptn-rel" *ngFor="let speciality of specialCollections" [ngClass]="{ 'selected': (isSelected(speciality) || speciality.selected)}">
         <div class="ad-sec margin-t-10" style="float:right;" >
-           <img *ngIf="this.utils.utilities.isPromoEnabled"  src="getPromoImage(popular)" alt="">
+           <img *ngIf="this.utils.utilities.isPromoEnabled"  src="{{getPromoImage(speciality)}}" alt="">
         </div>
         <div class="collection-img" (click)="goToHome(speciality)">
             <img src="../../assets/images/collection/{{speciality.imageUrl}}" alt=""/>

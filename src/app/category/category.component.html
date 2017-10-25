@@ -1,6 +1,6 @@
 <h4 class="font-size-16  padding-l-20  padding-t-10 text-orange">Design Your Garage Door</h4>
-<div class="ad-sec margin-t-10 box-shadow">
-    <img  alt="" src="../../assets/images/AdBannerMobile.png">
+<div class="ad-sec margin-t-10 box-shadow" *ngIf="this.utilities.utilities.isPromoEnabled">
+  <img *ngIf="this.utilities.utilities.isPromoEnabled"  src="../../assets/images/promoGraphics/{{this.utilities.promoObject.storeHeroImage}}" alt="">
 </div>
 <div class="category-sec clearfix font-size-13 ">
     <div class="col-xs-6 padding-r-7 show-category">
