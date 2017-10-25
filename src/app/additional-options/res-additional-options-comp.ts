@@ -411,6 +411,7 @@ export class ResAdditionalOptionsComponent implements OnInit {
         if (itm) {
             switch (obj.item_id) {
                 case 7:
+                    obj.item_list_text = n + '<span class="text-orange"> $' + k.price + '</span>?';
                     this.removeItmOptions(obj.item_id);
                     this.itmObj.items.push(k);
                     break;
@@ -442,6 +443,7 @@ export class ResAdditionalOptionsComponent implements OnInit {
                 case 7:
                     this.removeItmOptions(obj.item_id);
                     this.itmObj.items.push(k);
+                    obj.item_list_text = n + '</span>?';
                     break;
                 case 4:
                     this.removeItmOptions(obj.item_id);

@@ -903,8 +903,16 @@ function writeItem(orderType) {
 
                                                     addLineItem(useranswer.config, item_name, useranswer.QTY * cs.QTY, useranswer.firPrice, 1);
                                                 }
-                                                addLineItem(useranswer.seals[0].config, useranswer.seals[0].item_name, useranswer.QTY * cs.QTY, useranswer.seals[0].item_price, 1);
+                                                //addLineItem(useranswer.seals[0].config, useranswer.seals[0].item_name, useranswer.QTY * cs.QTY, useranswer.seals[0].item_price, 1);
                                             }
+                                            if (orderType == 'DIY'){
+													var astragalQty = Number(cs.size.width.wf);
+													if(Number(cs.size.width.wi) > 0)
+														astragalQty++;
+													for(var i=0; i<cs.QTY;i++){
+													addLineItem(useranswer.seals[0].config, useranswer.seals[0].item_name, astragalQty, useranswer.seals[0].item_price, 1);
+													}
+												}
                                         }
                                         break;
                                     }
