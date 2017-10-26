@@ -231,9 +231,6 @@ export class DoorConfigurationComponent implements OnInit {
 
         return (temptr);
     };
-
-
-
     shareGDOEmail() {
         if (this.shareEmailTxt !== undefined) {
             var data = this.emailBody;
@@ -252,7 +249,7 @@ export class DoorConfigurationComponent implements OnInit {
             var opnerAcc = this.renderAccesoriesDiv();
             var distDiv = this.renderDistance();
             var totalBody = this.renderTotalDiv();
-            var appInstance = "http://dev-mhddc.clopay.com";
+            var appInstance = this.utils.appUrl;
             var body = `
 <!DOCTYPE HTML>
 <html>

@@ -12,7 +12,7 @@ export class AppUtilities {
     removeLoader() {
         $('body').removeClass('loader');
     }
-
+    appUrl = 'http://test-mhddc.clopay.com';
     promoCalcluatedObject =
     {
         modelprice: 0,
