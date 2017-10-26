@@ -140,6 +140,14 @@ export class InstallComponent implements OnInit, AfterViewInit, AfterViewChecked
         }
 
         this.flowType = this.navComponent.flowType;
+        // To reset previous selected values in additional options
+        this.utils.resFlowSession.resDoorObj['additional'] = {
+            "items": []
+        };
+        this.utils.resFlowSession.resDetails.additionalOptions = {
+            items: []
+        };
+        this.utils.resFlowSession.resCalculatePrice();
         this.installPrice = this.utils.utilities.itemPriceInstall;
         this.diyPrice = this.utils.utilities.itemPriceDY;
 
