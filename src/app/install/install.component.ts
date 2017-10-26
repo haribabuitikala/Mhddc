@@ -150,6 +150,9 @@ export class InstallComponent implements OnInit, AfterViewInit, AfterViewChecked
         this.utils.resFlowSession.resDoorObj.isEPA = false;
         this.utils.resFlowSession.resDetails.isEPA = false;
         this.utils.resFlowSession.resCalculatePrice();
+        if (this.appComponent.flowType == 'resquick') {
+            this.config.calculatePrice();
+        }
         this.installPrice = this.utils.utilities.itemPriceInstall;
         this.diyPrice = this.utils.utilities.itemPriceDY;
 

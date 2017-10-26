@@ -83,6 +83,7 @@ export class ConfigComponent implements OnInit, AfterViewInit, AfterViewChecked 
         }
 
         if (this.navComponent.flowType == 'resquick') {
+            this.showType = '';
             if (this.navComponent.flowActiveStep > 6) {
                 if (this.utils.resFlowSession.resDoorObj.INSTALLTYPE === 'Installed') {
                     this.showType = 'Installed';
