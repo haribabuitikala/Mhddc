@@ -357,20 +357,20 @@ export class AppUtilities {
                     "SubAnswers": [
                         {
                             "answerid": null,
-                            "config": "FIR330",
+                            "config": "FIR330G",
                             "isdefault": false,
                             "item_id": 1,
                             "item_name": "31TO50",
-                            "item_price": 51,
+                            "item_price": 45,
                             "partofdoor": false
                         },
                         {
                             "answerid": null,
-                            "config": "FIR340",
+                            "config": "FIR340G",
                             "isdefault": false,
                             "item_id": 1,
                             "item_name": "51PLUS",
-                            "item_price": 3,
+                            "item_price": 2.5,
                             "partofdoor": false
                         }
                     ],
