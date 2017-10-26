@@ -547,6 +547,7 @@ export class ResAdditionalOptionsComponent implements OnInit {
                 itm = false;
             } else if (event && event.item_id === 32) {
                 itm = false;
+                 k.isSelected = false;
             } else if (event && !event.item_id) {
                 itm = false;
             }
