@@ -487,7 +487,7 @@ export class ResDoorConfigurationComponent implements OnInit {
         var fromColorBody = this.buildBodyFromColor(resData);
         var promoBodyText = this.renderPromoDiv();
         var totalBody = this.renderTotalDiv(resData);
-        var appInstance = "http://dev-mhddc.clopay.com";
+        var appInstance = this.utils.appUrl;
         var body = `
 <!DOCTYPE HTML>
 <html>
