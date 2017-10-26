@@ -160,7 +160,7 @@ export class ResAdditionalOptionsComponent implements OnInit {
         }
         this.utils.resFlowSession.resDoorObj.resetadditional();
         this.installOrDiy = this.utils.resFlowSession.resDetails.isDIY ? 'DIY' : 'Installed';
-
+        this.utils.resFlowSession.resCalculatePrice();
         this.appComponent.next = 'Next';
         this.pageNo = this.utils.utilities.currPage;
         this.setNavComponent();

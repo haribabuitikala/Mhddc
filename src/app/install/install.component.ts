@@ -147,6 +147,8 @@ export class InstallComponent implements OnInit, AfterViewInit, AfterViewChecked
         this.utils.resFlowSession.resDetails.additionalOptions = {
             items: []
         };
+        this.utils.resFlowSession.resDoorObj.isEPA = false;
+        this.utils.resFlowSession.resDetails.isEPA = false;
         this.utils.resFlowSession.resCalculatePrice();
         this.installPrice = this.utils.utilities.itemPriceInstall;
         this.diyPrice = this.utils.utilities.itemPriceDY;
