@@ -200,7 +200,7 @@ export class AdditionalOptionsComponent implements OnInit {
                 if (openerType.toLowerCase() === "chamberlain") {
                     let obj = this.utils.gdoFlowSession.cart[0].additional.items[3];
                     this.flow = 'non-direct';
-                    this.utils.utilities.distancePrice = 45;
+                    this.utils.utilities.distancePrice = 51;
                     this.distancePrice = 51;
                     this.gdoConfig.itemPrice = this.gdoConfig.itemPrice + 51;
                     this.gdoConfig.distancePrice = 51;
@@ -491,7 +491,7 @@ export class AdditionalOptionsComponent implements OnInit {
                 }
 
                 if (k >= 0) {
-                    this.distancePrice = (k * 2.5) + 45;
+                    this.distancePrice = (k * 3) + 51;
                     obj.QTY = k + 1;
                     obj.qty = k + 1;
                     // this.mileOpenPr = this.distancePrice;

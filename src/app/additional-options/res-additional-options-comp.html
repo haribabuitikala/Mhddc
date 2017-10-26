@@ -95,10 +95,12 @@
                     <select [ngModel]="selectedDIYLock" *ngIf="diyQuestions.item_id === 13 && diyQuestions.Answers[0].isdefault" (ngModelChange)="diyQuestionsOptions(diyQuestions.Answers[0].isdefault,diyQuestions,$event)" >
                         <option *ngFor=" let lock of diyQuestions.Answers" [ngValue]="lock">{{lock.item_name}}</option>
                     </select> 
+                    <!--<div class="flex-right" [ngClass]="{ 'hidden': isQBP && diyQuestions.item_id === 13 && diyQuestions.Answers[0].isdefault }">-->
                     <div *ngIf=" diyQuestions.Answers[0].isdefault">
                         <span class="text-orange" *ngIf="diyQuestions.item_id === 3">$20.90</span>
                     </div>                  
                     <span></span>
+                    <div class="flex-right" [ngClass]="{ 'hidden': isQBP && diyQuestions.item_id === 13 && diyQuestions.Answers[0].isdefault }">
                     <div class="flex-right">
                         <div class="text-orange">Yes</div>
                         <label class="switch">
@@ -106,6 +108,7 @@
                         <div class="slider round"></div>
                     </label>
                         <div class="text-orange">No</div>
+                    </div>
                     </div>
                 </div> 
             </dd>
