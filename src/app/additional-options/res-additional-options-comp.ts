@@ -161,6 +161,9 @@ export class ResAdditionalOptionsComponent implements OnInit {
         this.utils.resFlowSession.resDoorObj.resetadditional();
         this.installOrDiy = this.utils.resFlowSession.resDetails.isDIY ? 'DIY' : 'Installed';
         this.utils.resFlowSession.resCalculatePrice();
+        if (this.appComponent.flowType == 'resquick') {
+            this.config.calculatePrice();
+        }
         this.appComponent.next = 'Next';
         this.pageNo = this.utils.utilities.currPage;
         this.setNavComponent();
@@ -246,6 +249,7 @@ export class ResAdditionalOptionsComponent implements OnInit {
                 if (lockQuestion.length > 0) {
                     if (lockQuestion[0].Answers.length > 0 && lockQuestion[0].Answers[0].isdefault) {
                         this.selectedDIYLock = lockQuestion[0].Answers[0];
+                        this.diyQuestionsOptions(true, lockQuestion[0]);
                     }
                 }
             }
@@ -543,11 +547,20 @@ export class ResAdditionalOptionsComponent implements OnInit {
         }
         let n: any;
         if (obj.item_id === 13) {
+            if (event) {
+                k.name = event.item_name;
+                k.price = event.item_price;
+            } else if (obj.Answers[0].isdefault) {
+                k.name = obj.Answers[0].item_name;
+                k.price = obj.Answers[0].item_price;
+            } 
             if (!event) {
                 itm = false;
             } else if (event && event.item_id === 32) {
-                itm = false;
-                 k.isSelected = false;
+                // itm = false;
+                // k.isSelected = false;
+                k.price = event.item_price;
+                k.name = event.item_name;
             } else if (event && !event.item_id) {
                 itm = false;
             }
