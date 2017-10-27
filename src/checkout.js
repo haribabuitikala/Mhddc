@@ -916,9 +916,19 @@ function writeItem(orderType) {
                                         }
                                         break;
                                     }
-                                default:
+
+                                    case 13:
                                     {
+                                       
+                                        break;
+                                    }
+                                   
+                                    
+                                default:
+                                    {    
+                                   
                                         var useranswer = value.objVal.Answers[1];
+                                       
                                         if (value.isSelected && useranswer != '') {
                                             if (Number(useranswer.config) != 0) {
                                                 if (useranswer.QTY == undefined) {
