@@ -11,6 +11,7 @@ import { LangEnglishService } from "../shared/english";
 import { CollectionData } from "../collection/collection-data";
 import { CollectionService } from "../shared/data.service";
 import { EscapeHtmlPipe } from "../shared/html-entitiy";
+import { ServiceWidth } from '../shared/SharedWidth.service';
 
 declare var _: any;
 declare var $: any;
@@ -30,7 +31,8 @@ export class InstallComponent implements OnInit, AfterViewInit, AfterViewChecked
         , private sizes: SizeList
         , private language: LangEnglishService
         , private data: CollectionData
-        , private collection: CollectionService) {
+        , private collection: CollectionService
+        , private _sharedWidth : ServiceWidth) {
     }
     @ViewChild('exactDoorsize') exactDoorsize: ModalComponent;
     @ViewChild('leadTest') leadTest: ModalComponent;
@@ -802,6 +804,9 @@ export class InstallComponent implements OnInit, AfterViewInit, AfterViewChecked
             size.wi = this.rObj.size.width.wi;
             size.hf = this.rObj.size.height.hf;
             size.hi = this.rObj.size.height.hi;
+            var roundofWidth = Math.ceil(size.wi);
+            roundofWidth = roundofWidth>0?parseInt(size.wf.toString())+1:parseInt(size.wf.toString());
+            this._sharedWidth.setwidth(roundofWidth);
 
             // Not sure about this lines somehow we ended up using utilities sizes instead of resObject
             // Need to refactor the logic

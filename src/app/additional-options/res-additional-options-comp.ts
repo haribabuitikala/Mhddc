@@ -8,6 +8,8 @@ import { CollectionData } from "../collection/collection-data";
 import { CollectionService } from "../shared/data.service";
 import { ConfigComponent } from "../config/config.component";
 import { ModalComponent } from "ng2-bs3-modal/ng2-bs3-modal";
+import { ServiceWidth } from '../shared/SharedWidth.service';
+
 declare var $: any;
 declare var _: any;
 
@@ -118,7 +120,8 @@ export class ResAdditionalOptionsComponent implements OnInit {
         , private activeRoute: ActivatedRoute
         , private config: ConfigComponent
         , private navComponent: NavComponent
-        , private dataService: CollectionService) {
+        , private dataService: CollectionService
+        , private _sharedWidth : ServiceWidth) {
     }
 
     setNavComponent() {
@@ -598,7 +601,8 @@ export class ResAdditionalOptionsComponent implements OnInit {
                     if (obj.item_id === 12 && obj.Answers[1].seals && obj.Answers[1].seals[0].item_price > 0) {
                         k.price = obj.Answers[1].seals[0].item_price;
                     }
-                    obj.item_list_text = n + '<span class="text-orange"> $' + k.price + '</span>?';
+                    var width = this._sharedWidth.getwidth();
+                    obj.item_list_text = n + '<span class="text-orange"> $' +(k.price*width).toFixed(1)+ '</span>?';
                     this.removeItmOptions(obj.item_id);
                     this.itmObj.items.push(k);
                     break;
