@@ -160,7 +160,7 @@
         </dd>
         <dd *ngFor="let itm of selectedAdditionalOptions" >
             <p [innerHTML]="itm.name"></p>
-            <span>{{itm.price * itm.qty | currency:'USD':true:'1.2-2'}}</span>
+            <span>{{itm.price  | currency:'USD':true:'1.2-2'}}</span>
         </dd>
     </dl>
     <div *ngIf="additional">

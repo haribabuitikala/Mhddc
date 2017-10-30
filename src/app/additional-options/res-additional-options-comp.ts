@@ -601,8 +601,13 @@ export class ResAdditionalOptionsComponent implements OnInit {
                     if (obj.item_id === 12 && obj.Answers[1].seals && obj.Answers[1].seals[0].item_price > 0) {
                         k.price = obj.Answers[1].seals[0].item_price;
                     }
+                
+                        if(Number(this.utils.resFlowSession.resDoorObj.size.width.wi) > 0)
+                        obj.item_list_text = n + '<span class="text-orange"> $' +(k.price*(Number(this.utils.resFlowSession.resDoorObj.size.width.wf)+1)).toFixed(2)+ '</span>?';
+                    else
+                        obj.item_list_text = n + '<span class="text-orange"> $' +(k.price*(Number(this.utils.resFlowSession.resDoorObj.size.width.wf))).toFixed(2)+ '</span>?'; 
                    
-                    obj.item_list_text = n + '<span class="text-orange"> $' +k.price.toFixed(1)+ '</span>?';
+                   // obj.item_list_text = n + '<span class="text-orange"> $' +k.price.toFixed(1)+ '</span>?';
                     this.removeItmOptions(obj.item_id);
                     this.itmObj.items.push(k);
                     break;

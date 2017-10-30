@@ -33,7 +33,14 @@ export class CartDetailsComponent implements OnInit {
     // }
 
     this.selectedAdditionalOptions = this.data.additionalOptions.items.filter(function (s) { return s.isSelected === true && s.id !== 999; });
-
+      for(var i=0; i<this.selectedAdditionalOptions.length; i++){
+      if(this.selectedAdditionalOptions[i].id == 12){
+        if(this.data.widthI > 0)
+          this.selectedAdditionalOptions[i].price = this.selectedAdditionalOptions[i].price * (Number(this.data.widthF) + 1);
+        else
+          this.selectedAdditionalOptions[i].price = this.selectedAdditionalOptions[i].price * Number( this.data.widthF);
+      }
+    } 
     this.utils.utilities.promoSaving = this.utils.resFlowSession.calculatePromoSavings();
     this.coachman = this.utils.resFlowSession.resDoorObj.product.product['item_id'] === 11 ? true : false;
     // show doorConfig

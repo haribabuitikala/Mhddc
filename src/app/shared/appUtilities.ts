@@ -1167,8 +1167,20 @@ export class ResidentialFlowSession {
                     _.forEach(obj.additional.items, (item) => {
                         if (item.isSelected) {
                             if (item.id !== 5) {
-                                price[0] = price[0] + item['price'] * count;
-                                price[1] = price[1] + item['price'] * count;
+                                 if(item.id == 12){
+                                    if(Number(cObj.size.width.wi) > 0){
+                                        price[0] = price[0] + (item['price']*(Number(cObj.size.width.wf)+1)) * count;
+                                        price[1] = price[1] + (item['price']*(Number(cObj.size.width.wf)+1)) * count;
+                                    }else{
+                                        price[0] = price[0] + (item['price']*(Number(cObj.size.width.wf))) * count;
+                                        price[1] = price[1] + (item['price']*(Number(cObj.size.width.wf))) * count;
+                                    }
+                                }else{
+                                     price[0] = price[0] + item['price'] * count;
+                                     price[1] = price[1] + item['price'] * count;
+                                } 
+                                // price[0] = price[0] + item['price'] * count;
+                                // price[1] = price[1] + item['price'] * count;
                                 this.resDetails.additionalOptions.items.push({
                                     id: item['id'],
                                     name: item['name'],
