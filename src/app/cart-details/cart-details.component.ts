@@ -33,12 +33,12 @@ export class CartDetailsComponent implements OnInit {
     // }
 
     this.selectedAdditionalOptions = this.data.additionalOptions.items.filter(function (s) { return s.isSelected === true && s.id !== 999; });
-      for(var i=0; i<this.selectedAdditionalOptions.length; i++){
+     for(var i=0; i<this.selectedAdditionalOptions.length; i++){
       if(this.selectedAdditionalOptions[i].id == 12){
-        if(this.data.widthI > 0)
-          this.selectedAdditionalOptions[i].price = this.selectedAdditionalOptions[i].price * (Number(this.data.widthF) + 1);
+        if(Number(this.utils.utilities.wi) > 0)
+          this.selectedAdditionalOptions[i].price = this.selectedAdditionalOptions[i].price * (Number(this.utils.utilities.wf) + 1)
         else
-          this.selectedAdditionalOptions[i].price = this.selectedAdditionalOptions[i].price * Number( this.data.widthF);
+          this.selectedAdditionalOptions[i].price = this.selectedAdditionalOptions[i].price * (Number(this.utils.utilities.wf))
       }
     } 
     this.utils.utilities.promoSaving = this.utils.resFlowSession.calculatePromoSavings();
