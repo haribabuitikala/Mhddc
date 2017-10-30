@@ -41,7 +41,7 @@ import { CustomerServiceInfoComponent } from './customer-service-info/customer-s
 import { CartDetailsRootComponent } from './cart-details/cart-details-root.component';
 import { Four04Component } from './Four04Component';
 import { OnlyNumber } from './shared/only-numbers.directive';
-import { ServiceWidth } from'./shared/SharedWidth.service';
+
 
 import {ShareButtonsModule} from 'ngx-sharebuttons';
 @NgModule({
@@ -91,8 +91,8 @@ import {ShareButtonsModule} from 'ngx-sharebuttons';
         CollectionData,
         NavService,
         ApiConstants,
-        GdoOpener,
-        ServiceWidth
+        GdoOpener
+      
     ],
     bootstrap: [AppComponent]
 })
