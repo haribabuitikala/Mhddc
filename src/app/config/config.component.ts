@@ -760,6 +760,9 @@ export class ConfigComponent implements OnInit, AfterViewInit, AfterViewChecked 
             return 'Delivery ' + item.selectedMiles + ' miles from store';
         } else if (item.id === 1) {
             return 'Perimeter Weather Seal:' + item.name;
+           }
+            else if (item.id === 12) {
+            return   item.name + '(Per Door)';
         } else {
             return item.name;
         }

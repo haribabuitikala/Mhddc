@@ -34,6 +34,12 @@ export class CartDetailsComponent implements OnInit {
 
     this.selectedAdditionalOptions = this.data.additionalOptions.items.filter(function (s) { return s.isSelected === true && s.id !== 999; });
      for(var i=0; i<this.selectedAdditionalOptions.length; i++){
+
+        if(this.selectedAdditionalOptions[i].id == 12 &&  this.selectedAdditionalOptions[i].name=="Bottom Weather Seal")
+        {
+        this.selectedAdditionalOptions[i].name="Bottom Weather Seal (Per Door)"
+        }
+
       if(this.selectedAdditionalOptions[i].id == 12){
         if(Number(this.utils.utilities.wi) > 0)
           this.selectedAdditionalOptions[i].price = this.selectedAdditionalOptions[i].price * (Number(this.utils.utilities.wf) + 1)
