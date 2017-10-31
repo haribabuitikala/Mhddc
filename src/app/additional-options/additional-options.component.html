@@ -331,7 +331,8 @@
         <p style="text-indent: 40px;">
             Greater than 50 miles from store - flat rate of $51 + $3.00 for every drive mile over 50
         </p> -->
-       <img src="../../assets/images/web-GDO/SumpopGDODeliveryChamberlainMobile.png" height="350px">              
+       <img *ngIf="chamberlianImg" src="../../assets/images/web-GDO/SumpopGDODeliveryChamberlainMobile.png" height="350px"> 
+       <img *ngIf="genieImg" src="../../assets/images/web-GDO/SumpopGDODeliveryGenieMobile.png" height="350px">              
         
     </modal-body>
-</modal>
+</modal> 

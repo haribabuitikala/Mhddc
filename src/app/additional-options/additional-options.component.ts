@@ -30,6 +30,8 @@ export class AdditionalOptionsComponent implements OnInit {
     showDistancePrice;
     directFlow = this.utils.utilities.directFlow;
     hidePrev = false;
+    chamberlianImg = false;
+    genieImg = false;
     singleDrop = false;
     doubleDrop = false;
     gdoFlowManualDoorInfo = false;
@@ -83,6 +85,14 @@ export class AdditionalOptionsComponent implements OnInit {
 
 
     ngOnInit() {
+        if(this.utils.utilities.openerType == "Chamberlain"){
+            this.chamberlianImg = true;
+            this.genieImg = false;
+        }else{
+            this.chamberlianImg= false;
+            this.genieImg = true;
+        } 
+
         this.utils.utilities.singlep = 0;
         this.utils.utilities.doublep = 0;
         this.utils.utilities.kPrice = 0;
