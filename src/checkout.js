@@ -372,8 +372,8 @@ function writeItem(orderType) {
                             var li = cs.hardware.lock.item_name;
                             var lockstr = li.toLowerCase();
                             if (lockstr != "none") {
-                                var lockFIRCharge = (cP(cs, cs.hardware.lock).install - cP(cs, cs.hardware.lock).diy);
-                                var lockLessFIR = (cP(cs, cs.hardware.lock).install - lockFIRCharge);
+                               var lockFIRCharge = (cP(cs, cs.hardware.lock,'lock').install - cP(cs, cs.hardware.lock,'lock').diy);
+                                var lockLessFIR = (cP(cs, cs.hardware.lock,'lock').install - lockFIRCharge);
                                 var lockINSPrice = cP(cs, cs.hardware.lock, 'Hardware').diy
 
                                 hwInstallPrice += (lockFIRCharge);
@@ -468,9 +468,9 @@ function writeItem(orderType) {
                                                 addlTemp += "ADDL-2ESCU";
                                             }
 
-                                            var dumPrice = cP(cs, cs.hardware.handle).install;
+                                            var dumPrice = cP(cs, cs.hardware.handle, 'handle').install;
                                             if (di != 1) {
-                                                dumPrice = cP(cs, cs.hardware.handle).diy;
+                                                dumPrice = cP(cs, cs.hardware.handle,'handle').diy;
                                             }
                                             dumPrice = Number(cs.hardware.handle.count) * dumPrice;
                                             usp = Number(usp) + Number(dumPrice);
@@ -505,9 +505,9 @@ function writeItem(orderType) {
                                             else {
                                                 addlTemp += "ADDL-2ESCU";
                                             }
-                                            var dumPrice = cP(cs, cs.hardware.handle).install
+                                           var dumPrice = cP(cs, cs.hardware.handle,'handle').install
                                             if (di != 1) {
-                                                dumPrice = cP(cs, cs.hardware.handle).diy //cs.hardware.handle.item_price;
+                                                dumPrice = cP(cs, cs.hardware.handle,'handle').diy //cs.hardware.handle.item_price;
                                             }
                                             dumPrice = HandleQuant * dumPrice;
                                             usp = Number(usp) + Number(dumPrice);
@@ -522,8 +522,8 @@ function writeItem(orderType) {
                                             var widthFt = Number(cs.size.width.wf) * 12;
                                             var widthIn = Number(cs.size.width.wi);
                                             var uWidth = Number(widthFt) + Number(widthIn);
-                                            var handleInstallPrice = cP(cs, cs.hardware.handle).install;
-                                            var handleDIYPrice = cP(cs, cs.hardware.handle).diy;
+                                            var handleInstallPrice = cP(cs, cs.hardware.handle,'handle').install;
+                                            var handleDIYPrice = cP(cs, cs.hardware.handle,'handle').diy;
                                             if (cs.hardware.handle.item_id == 14) {
                                                 if (HandleQuant > 0 && pid == 12 && uWidth >= 178 && uWidth <= 228) {
                                                     HandleQuant = HandleQuant - 1;
@@ -577,8 +577,8 @@ function writeItem(orderType) {
                                             var widthFt = Number(cs.size.width.wf) * 12;
                                             var widthIn = Number(cs.size.width.wi);
                                             var uWidth = Number(widthFt) + Number(widthIn);
-                                            var stepPlateInstallPrice = cP(cs, cs.hardware.stepplate).install;
-                                            var stepPlateDIYPrice = cP(cs, cs.hardware.stepplate).diy;
+                                            var stepPlateInstallPrice = cP(cs, cs.hardware.stepplate,'stepplate').install;
+                                            var stepPlateDIYPrice = cP(cs, cs.hardware.stepplate,'stepplate').diy;
                                             if (cs.hardware.stepplate.item_id == 17) {
                                                 if (HandleQuant > 0 && pid == 12 && uWidth >= 178 && uWidth <= 238) {
                                                     HandleQuant = HandleQuant - 1;
@@ -626,6 +626,7 @@ function writeItem(orderType) {
                                 }
                                 //var HandleQuant = Number(numofKits) * cs.QTY * 2;		// sridhar removed WO#1156372
                                 var HandleQuant = setHingeQtyValue(handlestr, cs.hardware.hinge, Number(numofKits), cs.QTY);		// sridhar added WO#1156372
+                                var onlyHingeQty = getHingeQtyValue(handlestr, cs.hardware.hinge, Number(numofKits));
                                 var doorWidth = Number((cs.size.width.wf) * 12) + Number(cs.size.width.wi);
                                 var tenFoot = false;
                                 if (doorWidth > 120) {
@@ -635,26 +636,16 @@ function writeItem(orderType) {
                                     default:
                                         {
                                             if (di == 1) {
-                                                var hingeINSPrice = cP(cs, cs.hardware.hinge).install;
-                                                // if (cs.hardware.hinge.Config == '0123191' || cs.hardware.hinge.Config == '0123202' || cs.hardware.hinge.Config == '0123104') {
-                                                //     addLineItem(cs.hardware.hinge.Config, cs.product.product.item_id + '-' + cs.hardware.hinge.item_name, HandleQuant, Number(hingeINSPrice / 2).toFixed(2));
-                                                // } else {
-                                                //     addLineItem(cs.hardware.hinge.Config, cs.product.product.item_id + '-' + cs.hardware.hinge.item_name, HandleQuant, Number(hingeINSPrice).toFixed(2));
-                                                // }
-                                                //removed as per WO#1156372
-                                                //addLineItem(cs.hardware.hinge.Config, cs.product.product.item_id + '-' + cs.hardware.hinge.item_name, HandleQuant, Number(hingeINSPrice).toFixed(2));	// sridhar added WO#1156372
+                                                var hingeINSPrice = cP(cs, cs.hardware.hinge,'hinge').install;    
+                                                hingeINSPrice = hingeINSPrice/onlyHingeQty;                                            
                                                 addLineItem(cs.hardware.hinge.Config, cs.product.product.item_id + '-' + cs.hardware.hinge.item_name, HandleQuant, Number(hingeINSPrice).toFixed(2));
                                                 hwInstallPrice += 1;
                                             }
-                                            else {
-                                                // if (cs.hardware.hinge.Config == '0123191' || cs.hardware.hinge.Config == '0123202' || cs.hardware.hinge.Config == '0123104') {
-                                                //     addLineItem(cs.hardware.hinge.Config, cs.product.product.item_id + '-' + cs.hardware.hinge.item_name, HandleQuant, Number(cP(cs, cs.hardware.hinge).diy / 2).toFixed(2));
-                                                // } else {
-                                                //     addLineItem(cs.hardware.hinge.Config, cs.product.product.item_id + '-' + cs.hardware.hinge.item_name, HandleQuant, Number(cP(cs, cs.hardware.hinge).diy).toFixed(2));
-                                                // }
-                                                //removed as per WO#1156372
-                                                //addLineItem(cs.hardware.hinge.Config, cs.product.product.item_id + '-' + cs.hardware.hinge.item_name, HandleQuant, Number(cP(cs, cs.hardware.hinge).diy).toFixed(2));	// sridhar added WO#1156372
-                                                 addLineItem(cs.hardware.hinge.Config, cs.product.product.item_id + '-' + cs.hardware.hinge.item_name, HandleQuant, Number(cP(cs, cs.hardware.hinge).diy).toFixed(2));
+                                            else {   
+                                                 var hingeDiyPrice = cP(cs, cs.hardware.hinge,'hinge').diy;    
+                                                 hingeDiyPrice = hingeDiyPrice/onlyHingeQty;                                             
+                                                // addLineItem(cs.hardware.hinge.Config, cs.product.product.item_id + '-' + cs.hardware.hinge.item_name, HandleQuant, Number(cP(cs, cs.hardware.hinge,'hinge').diy).toFixed(2));
+                                                 addLineItem(cs.hardware.hinge.Config, cs.product.product.item_id + '-' + cs.hardware.hinge.item_name, HandleQuant, Number(hingeDiyPrice).toFixed(2));
                                             }
                                         }
                                 }
@@ -1315,6 +1306,16 @@ function setHingeQtyValue(hingeName,hingeObj,noOfKits,orderQty) {
 		crntHingeVal = Number(Number(noOfKits) * orderQty * 2);
 	}else{
 		crntHingeVal = Number(noOfKits) * Number(orderQty);
+	}
+	return crntHingeVal;
+};
+
+function getHingeQtyValue(hingeName,hingeObj,noOfKits) {	
+	var crntHingeVal = Number(1);
+	if(hingeObj.Config == '0123191' || hingeObj.Config == '0123202' || hingeObj.Config == '0123104'){
+		crntHingeVal = Number(Number(noOfKits)  * 2);
+	}else{
+		crntHingeVal = Number(noOfKits) ;
 	}
 	return crntHingeVal;
 }

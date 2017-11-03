@@ -48,6 +48,7 @@
                 <div [innerHTML]="data.collectionName"></div>
                 <div>{{data.widthF}}'{{data.widthI}}'' X {{data.heightF}}'{{data.heightI}}'' - ({{data.INSTALLTYPE}})</div>
             </div>
+             <span *ngIf="data.isPromoEnabled" style="color:black;text-decoration:line-through"><span style="color: #FA9900" id="ogPrice">   ${{this.utils.resFlowSession.resCalculateCartItemPrice_Base_Promo(data)}}</span> was </span>
             <span>{{data.totalPrice | currency:'USD':true:'1.2-2'}}</span>
             <span><i class="fa fa-chevron-down"></i></span>
         </div>

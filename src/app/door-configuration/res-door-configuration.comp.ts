@@ -743,11 +743,12 @@ table td {
     nextBtn(path) {
         ga('send', { hitType: 'event', eventCategory: 'Summary', eventAction: 'Summary-AddToCart-GD', eventLabel: 'nextBtn' }); 
         this.utils.resFlowSession.addToCart();
-
         let k = _.cloneDeep(this.utils.resFlowSession.resDoorObj);
         k.itemNumber = this.utils.cartItems.length;
+        k.isPromoEnabled = this.utils.utilities.isPromoEnabled;
+        k.promoObject = this.utils.promoObject;
+        k.resDetails = this.utils.resFlowSession.resDetails;  
         this.utils.cartItems.push(k);
-
         $('#shop-count').text(this.utils.resFlowSession.cart.length);
         this.route.navigateByUrl(path)
     }

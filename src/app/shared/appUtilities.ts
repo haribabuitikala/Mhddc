@@ -1057,7 +1057,7 @@ export class ResidentialFlowSession {
                 // a.Calculate price for Handles
                 let hh = obj.hardware.handle;
                 if (hh && hh.hasOwnProperty('item_installed_price')) {
-                    let itemInsPromoPrice = 0, itemDiyPromoPrice = 0;
+                   let itemInsPromoPrice = 0, itemDiyPromoPrice = 0;
                     if (hh['item_installed_price'] && hh['item_installed_price'] > 0) {
                         itemInsPromoPrice = this.GetPromoPricePerItem("handles_ins", hh['item_installed_price']);
                     }
@@ -1069,26 +1069,61 @@ export class ResidentialFlowSession {
                     price[1] = price[1] + ((itemDiyPromoPrice > 0 ? itemDiyPromoPrice : hh['item_price'])) * hh['count'] * count;
 
                     this.utils.resFlowSession.resDetails.hardware.handle.name = hh['item_name'];
-                    this.utils.resFlowSession.resDetails.hardware.handle.install_price = hh['item_installed_price'];
-                    this.utils.resFlowSession.resDetails.hardware.handle.discountPrice_install = itemInsPromoPrice;
-                    this.utils.resFlowSession.resDetails.hardware.handle.diy_price = hh['item_price'];
-                    this.utils.resFlowSession.resDetails.hardware.handle.discountPrice_diy = itemDiyPromoPrice;
+                    this.utils.resFlowSession.resDetails.hardware.handle.install_price = (itemInsPromoPrice > 0 ? itemInsPromoPrice : hh['item_installed_price']);
+                    this.utils.resFlowSession.resDetails.hardware.handle.discountPrice_install = hh['item_installed_price'];
+                    this.utils.resFlowSession.resDetails.hardware.handle.diy_price = (itemDiyPromoPrice > 0 ? itemDiyPromoPrice : hh['item_price']);
+                    this.utils.resFlowSession.resDetails.hardware.handle.discountPrice_diy = hh['item_price'];
                     this.utils.resFlowSession.resDetails.hardware.handle.qty = hh['count'];
                 }
                 // b.Calculate price for Stepplate
                 let hs = obj.hardware.stepplate;
                 if (hs && hs.hasOwnProperty('item_installed_price')) {
-                    price[0] = price[0] + hs['item_installed_price'] * hs['count'] * count;
-                    price[1] = price[1] + hs['item_price'] * hs['count'] * count;
-                    // Updated to calculate handle price with quantity
+                   // price[0] = price[0] + hs['item_installed_price'] * hs['count'] * count;
+                    // price[1] = price[1] + hs['item_price'] * hs['count'] * count;
+                    let itemInsPromoPrice = 0, itemDiyPromoPrice = 0;
+                    if (hs['item_installed_price'] && hs['item_installed_price'] > 0) {
+                        itemInsPromoPrice = this.GetPromoPricePerItem("stepplates_ins", hs['item_installed_price']);
+                    }
+
+                    if (hs['item_price'] && hs['item_price'] > 0) {
+                        itemDiyPromoPrice = this.GetPromoPricePerItem("stepplates_diy", hs['item_price']);
+                    }
+                    price[0] = price[0] + ((itemInsPromoPrice > 0 ? itemInsPromoPrice : hs['item_installed_price'])) * hs['count'] * count;
+                    price[1] = price[1] + ((itemDiyPromoPrice > 0 ? itemDiyPromoPrice : hs['item_price'])) * hs['count'] * count;
+
                     this.utils.resFlowSession.resDetails.hardware.stepPlate.name = hs['item_name'];
-                    this.utils.resFlowSession.resDetails.hardware.stepPlate.install_price = hs['item_installed_price'] * hs['count'];
-                    this.utils.resFlowSession.resDetails.hardware.stepPlate.diy_price = hs['item_price'] * hs['count'];
+                    this.utils.resFlowSession.resDetails.hardware.stepPlate.install_price = (itemInsPromoPrice > 0 ? itemInsPromoPrice : hs['item_installed_price']);
+                    this.utils.resFlowSession.resDetails.hardware.stepPlate.discountPrice_install = hs['item_installed_price'];
+                    this.utils.resFlowSession.resDetails.hardware.stepPlate.diy_price = (itemDiyPromoPrice > 0 ? itemDiyPromoPrice : hs['item_price']);
+                    this.utils.resFlowSession.resDetails.hardware.stepPlate.discountPrice_diy = hs['item_price'];
                     this.utils.resFlowSession.resDetails.hardware.stepPlate.qty = hs['count'];
                 }
                 // c.Calculate price for Hinges
                 let hhi = obj.hardware.hinge;
                 if (hhi && hhi.hasOwnProperty('item_installed_price')) {
+                    // let itemInsPromoPrice = 0, itemDiyPromoPrice = 0;
+                    // if (hhi['item_installed_price'] && hhi['item_installed_price'] > 0) {
+                    //     itemInsPromoPrice = this.GetPromoPricePerItem("hinge_ins", hhi['item_installed_price']);
+                    // }
+
+                    // if (hhi['item_price'] && hhi['item_price'] > 0) {
+                    //     itemDiyPromoPrice = this.GetPromoPricePerItem("hinge_diy", hhi['item_price']);
+                    // }
+                    // var hingeQty = 0;
+                    // hingeQty = this.checkForDoubleHinge(hhi);
+                    // var hingeDIY = 0;
+                    // var hingeIns = 0;
+                    // hingeDIY = ((itemInsPromoPrice > 0 ? itemInsPromoPrice : hhi['item_price'])) * hingeQty;
+                    // hingeIns = ((itemInsPromoPrice > 0 ? itemInsPromoPrice : hhi['item_installed_price'])) * hingeQty;
+                    // price[0] = price[0] + hingeIns * count;
+                    // price[1] = price[1] + hingeDIY * count;
+
+                    // this.utils.resFlowSession.resDetails.hardware.hinge.name = hhi['item_name'];
+                    // this.utils.resFlowSession.resDetails.hardware.hinge.install_price = hhi['item_installed_price'] * hingeQty;
+                    // this.utils.resFlowSession.resDetails.hardware.hinge.diy_price = hhi['item_price'] * hingeQty;
+                    // this.utils.resFlowSession.resDetails.hardware.hinge.discountPrice_install = itemInsPromoPrice;
+                    // this.utils.resFlowSession.resDetails.hardware.hinge.discountPrice_diy = itemDiyPromoPrice;
+                    // this.utils.resFlowSession.resDetails.hardware.hinge.qty = hhi['count'];
                     let itemInsPromoPrice = 0, itemDiyPromoPrice = 0;
                     if (hhi['item_installed_price'] && hhi['item_installed_price'] > 0) {
                         itemInsPromoPrice = this.GetPromoPricePerItem("hinge_ins", hhi['item_installed_price']);
@@ -1101,16 +1136,18 @@ export class ResidentialFlowSession {
                     hingeQty = this.checkForDoubleHinge(hhi);
                     var hingeDIY = 0;
                     var hingeIns = 0;
-                    hingeDIY = ((itemInsPromoPrice > 0 ? itemInsPromoPrice : hhi['item_price'])) * hingeQty;
+                    hingeDIY = ((itemDiyPromoPrice > 0 ? itemDiyPromoPrice : hhi['item_price'])) * hingeQty;
                     hingeIns = ((itemInsPromoPrice > 0 ? itemInsPromoPrice : hhi['item_installed_price'])) * hingeQty;
                     price[0] = price[0] + hingeIns * count;
                     price[1] = price[1] + hingeDIY * count;
 
                     this.utils.resFlowSession.resDetails.hardware.hinge.name = hhi['item_name'];
-                    this.utils.resFlowSession.resDetails.hardware.hinge.install_price = hhi['item_installed_price'] * hingeQty;
-                    this.utils.resFlowSession.resDetails.hardware.hinge.diy_price = hhi['item_price'] * hingeQty;
-                    this.utils.resFlowSession.resDetails.hardware.hinge.discountPrice_install = itemInsPromoPrice;
-                    this.utils.resFlowSession.resDetails.hardware.hinge.discountPrice_diy = itemDiyPromoPrice;
+                    //  this.utils.resFlowSession.resDetails.hardware.hinge.install_price = hhi['item_installed_price'] * hingeQty;
+                    this.utils.resFlowSession.resDetails.hardware.hinge.install_price = ((itemInsPromoPrice > 0 ? itemInsPromoPrice : hhi['item_installed_price'])) * hingeQty;
+                    // this.utils.resFlowSession.resDetails.hardware.hinge.diy_price = hhi['item_price'] * hingeQty;
+                    this.utils.resFlowSession.resDetails.hardware.hinge.diy_price = ((itemDiyPromoPrice > 0 ? itemDiyPromoPrice : hhi['item_price'])) * hingeQty;
+                    this.utils.resFlowSession.resDetails.hardware.hinge.discountPrice_install = hhi['item_installed_price'] * hingeQty;
+                    this.utils.resFlowSession.resDetails.hardware.hinge.discountPrice_diy =  hhi['item_price'] * hingeQty ;
                     this.utils.resFlowSession.resDetails.hardware.hinge.qty = hhi['count'];
                 }
                 // d.Calculate price for Locks
@@ -1357,6 +1394,183 @@ export class ResidentialFlowSession {
         return item;
     };
 
+    resCalculateCartItemPrice_Base_Promo(item) {
+
+        let count = item.construction.qty;
+        let basePrice = 0;
+        try {
+            // Calculate Door price
+            if (!item.isDIY) {
+                basePrice = basePrice + count * (item.construction.discountPrice + item.construction.laborcost);
+            } else {
+                basePrice = basePrice + count * item.construction.discountPrice;
+            }
+
+            // Calculate color price 
+            // a. Calculate Overlay price
+            basePrice = basePrice + item.color.overlay.price * count;
+            item.color.overlay.qty = count;
+            // b. Calculate Base price
+            basePrice = basePrice + item.color.base.price * count;
+            item.color.base.qty = count;
+
+            // Calculate Top Section price
+            basePrice = basePrice + item.topSection.glassType.discountPrice * count;
+            item.topSection.glassType.qty = count;
+
+            // Calculate Hardware price
+            // For Installed
+            if (!item.isDIY) {
+                // a. Calculate Handle price
+                basePrice = basePrice + item.hardware.handle.discountPrice_install * count;
+                // b. Calculate Handle price
+                basePrice = basePrice + item.hardware.stepPlate.discountPrice_install * count;
+                // c. Calculate Handle price
+                basePrice = basePrice + item.hardware.hinge.discountPrice_install * count;
+            } else {
+                // a. Calculate Handle price
+                basePrice = basePrice + item.hardware.handle.discountPrice_diy * count;
+                // b. Calculate Handle price
+                basePrice = basePrice + item.hardware.stepPlate.discountPrice_diy * count;
+                // c. Calculate Handle price
+                basePrice = basePrice + item.hardware.hinge.discountPrice_diy * count;
+            }
+
+            //Calculate price for locks
+            if (item.hardware.lock && item.hardware.lock.price) {
+                basePrice = basePrice + item.hardware.lock.discountPrice * count;
+                item.hardware.lock.qty = count;
+            }
+
+            // Calculate EPA price
+            if (item.isEPA) {
+                basePrice = basePrice + 20;
+            }
+
+            // // Calculate Additional Options price
+            // item.additionalOptions.items.forEach(function (itm) {
+            //     if (itm.id !== 5) {
+            //         basePrice = basePrice + itm.price * count;
+            //         itm.qty = count;
+            //     } else {
+            //         basePrice = basePrice + itm.price;
+            //     }
+            // });
+
+            // // Calculate price for Openers
+            // let op = item.opener;
+            // if (op && op.price) {
+            //     basePrice = basePrice + (op.price * op.qty);
+            // }
+
+            // // Calculate price for Optional Openers
+            // if (item.opener.items.length > 0) {
+            //     _.forEach(item.opener.items, (openeritem) => {
+            //         basePrice = basePrice + openeritem['price'] * openeritem['qty'];
+            //     });
+            // }
+
+        }
+        catch (e) {
+            console.log(e);
+        }
+        return basePrice;
+    }
+
+    resCalculateCartItemPrice_Promo(item) {
+        let price;
+        let count = item.construction.qty;
+        this.utils.resFlowSession.resDoorObj.QTY = count;
+        item.totalPrice = 0;
+        try {
+            // Calculate Door price
+            if (!item.isDIY) {
+                item.totalPrice = item.totalPrice + count * (item.construction.price + item.construction.laborcost);
+            } else {
+                item.totalPrice = item.totalPrice + count * item.construction.price;
+            }
+
+            if (item.construction.vinyl && item.construction.vinyl.item_price) {
+                item.totalPrice = item.totalPrice + item.construction.vinyl.item_price * count;
+            }
+
+            if (item.construction.groove && item.construction.groove.item_price) {
+                item.totalPrice = item.totalPrice + item.construction.groove.item_price * count;
+            }
+
+            // Calculate color price 
+            // a. Calculate Overlay price
+            item.totalPrice = item.totalPrice + item.color.overlay.price * count;
+            item.color.overlay.qty = count;
+            // b. Calculate Base price
+            item.totalPrice = item.totalPrice + item.color.base.price * count;
+            item.color.base.qty = count;
+
+            // Calculate Top Section price
+            item.totalPrice = item.totalPrice + item.topSection.glassType.price * count;
+            item.topSection.glassType.qty = count;
+
+            // Calculate Hardware price
+            // For Installed
+            if (!item.isDIY) {
+                // a. Calculate Handle price
+                item.totalPrice = item.totalPrice + item.hardware.handle.install_price * count;
+                // b. Calculate Handle price
+                item.totalPrice = item.totalPrice + item.hardware.stepPlate.install_price * count;
+                // c. Calculate Handle price
+                item.totalPrice = item.totalPrice + item.hardware.hinge.install_price * count;
+            } else {
+                // a. Calculate Handle price
+                item.totalPrice = item.totalPrice + item.hardware.handle.diy_price * count;
+                // b. Calculate Handle price
+                item.totalPrice = item.totalPrice + item.hardware.stepPlate.diy_price * count;
+                // c. Calculate Handle price
+                item.totalPrice = item.totalPrice + item.hardware.hinge.diy_price * count;
+            }
+
+            //Calculate price for locks
+            if (item.hardware.lock && item.hardware.lock.price) {
+                item.totalPrice = item.totalPrice + item.hardware.lock.price * count;
+                item.hardware.lock.qty = count;
+            }
+
+            // Calculate EPA price
+            if (item.isEPA) {
+                item.totalPrice = item.totalPrice + 20;
+            }
+
+            // // Calculate Additional Options price
+            // item.additionalOptions.items.forEach(function (itm) {
+            //     if (itm.isSelected) {
+            //         if (itm.id !== 5) {
+            //             item.totalPrice = item.totalPrice + itm.price * count;
+            //             itm.qty = count;
+            //         } else {
+            //             item.totalPrice = item.totalPrice + itm.price;
+            //         }
+            //     }
+            // });
+
+            // // Calculate price for Openers
+            // let op = item.opener;
+            // if (op && op.price) {
+            //     item.totalPrice = item.totalPrice + (op.price * op.qty);
+            // }
+
+            // // Calculate price for Optional Openers
+            // if (item.opener.items.length > 0) {
+            //     _.forEach(item.opener.items, (openeritem) => {
+            //         item.totalPrice = item.totalPrice + openeritem['price'] * openeritem['qty'];
+            //     });
+            // }
+
+        }
+        catch (e) {
+            console.log(e);
+        }
+        return item;
+    };
+
     resCalculateCartItemPrice_Base(item) {
 
         let count = item.construction.qty;
@@ -1443,6 +1657,7 @@ export class ResidentialFlowSession {
     addToCart() {
         let k = _.cloneDeep(this.resDetails);
         k.itemNumber = this.cart.length;
+        k.isPromoEnabled = this.utils.utilities.isPromoEnabled;
         this.cart.push(k);
     }
 
@@ -1488,8 +1703,8 @@ export class ResidentialFlowSession {
         let doorObj = this.utils.resFlowSession.resDetails;
         let orgPrice = 0;
         let cartDiscountPrice = 0;
-        orgPrice = this.utils.resFlowSession.resCalculateCartItemPrice_Base(doorObj);
-        cartDiscountPrice = this.utils.resFlowSession.resCalculateCartItemPrice(doorObj).totalPrice;
+        orgPrice = this.utils.resFlowSession.resCalculateCartItemPrice_Base_Promo(doorObj);
+        cartDiscountPrice = this.utils.resFlowSession.resCalculateCartItemPrice_Promo(doorObj).totalPrice;
         return (orgPrice - cartDiscountPrice);
     };
 
