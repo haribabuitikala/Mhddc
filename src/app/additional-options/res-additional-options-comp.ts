@@ -542,7 +542,31 @@ export class ResAdditionalOptionsComponent implements OnInit {
         }
         if (obj.item_id === 1) {
             if (event) {
-                this.selectedVinyl = this.vinyls[this.vinyls.length - 1];
+             var colorName = this.utils.resFlowSession.resDetails.color.base.name
+            if(colorName == "Standard White") 
+                  colorName = "white"; 
+              else if(colorName == "Chocolate (Painted)") 
+                  colorName = "chocolate"; 
+              else if(colorName == "Glacier White (High Contrast)") 
+                  colorName = "Glacier White"; 
+              else if(colorName.indexOf('Medium Finish') != -1) 
+                  colorName = "Medium Finish"; 
+              else if(colorName.indexOf('Cherry Finish') != -1) 
+                  colorName = "Cherry Finish"; 
+              else if(colorName.indexOf('Dark Finish') != -1) 
+                  colorName = "Dark Finish"; 
+              else if(colorName.indexOf('Walnut Finish') != -1) 
+                  colorName = "Walnut Finish"; 
+              else if(colorName == "Grey") 
+                  colorName = "Gray"; 
+		 for(var i=0; i<this.vinyls.length; i++)
+                {                   
+                    if(this.vinyls[i].item_name.toLowerCase() == colorName.toLowerCase())
+                    {
+                        this.selectedVinyl = this.vinyls[i];
+                    }
+                }
+                // this.selectedVinyl = this.vinyls[this.vinyls.length - 1];
             }
             k.name = this.selectedVinyl.item_name;
             k.price = this.selectedVinyl.item_price;

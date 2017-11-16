@@ -1707,6 +1707,25 @@ export class ResidentialFlowSession {
         cartDiscountPrice = this.utils.resFlowSession.resCalculateCartItemPrice_Promo(doorObj).totalPrice;
         return (orgPrice - cartDiscountPrice);
     };
+   removeAcrylicGlassMarkt18(apiData){   
+  if(this.utils.utilities.localmarketid == '18'){ 
+    for (var i = 0; i < apiData.length; i++) { 
+      for (var k = 0; k < apiData[i].glasstypes.length; k++) { 
+        if(apiData[i].glasstypes[k].item_id == 7 && apiData[i].glasstypes.length == 1){ 
+          apiData.splice(i,1); 
+          i=i-1; 
+        } 
+        if(apiData[i].glasstypes[k].item_id == 7 && apiData[i].glasstypes.length > 1){ 
+          apiData[i].glasstypes.splice(k,1); 
+          k=k-1; 
+        } 
+      } 
+    } 
+  } 
+}
+
+
+
 
     constructor(private utils: AppUtilities) {
 

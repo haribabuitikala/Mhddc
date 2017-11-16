@@ -31,13 +31,16 @@ export class TopSectionComponent implements OnInit {
   folder = 'top-section/slider';
 
   ngOnInit() {
+
+    var topsectionData = this.utils.resFlowSession.resDoorObj.windows.apiData;
+    this.utils.resFlowSession.removeAcrylicGlassMarkt18(topsectionData);
     this.utils.resFlowSession.resDoorObj.resetwindows();
     this.startProcess();
   }
 
   startProcess() {
-
-
+    var topsectionData = this.utils.resFlowSession.resDoorObj.windows.apiData;
+    this.utils.resFlowSession.removeAcrylicGlassMarkt18(topsectionData);
     // setting the details info
     let detailsInfo = this.config.detailsInfo;
     detailsInfo.topSection = true;

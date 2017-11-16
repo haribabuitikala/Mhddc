@@ -351,6 +351,7 @@ export class ResSliderComponent implements OnInit, AfterViewInit {
         if (obj.clickAction) {
             obj.clickAction();
         } else {
+            
             //$('._slide-items img', this.myElem.nativeElement).removeClass('current');
             // this.gdoConfig.itemPrice = obj.item_price * this.utils.utilities.gdoOpenerQty;
             // this.utils.utilities.item_price = obj.item_price;
@@ -368,8 +369,10 @@ export class ResSliderComponent implements OnInit, AfterViewInit {
                 this.config.homeImage = obj.item_thumbnail;
             }
             if (this.cname === 'construction') {
+                
                 this.detailsInfo(obj.DisplayModelNumber);
             }
+            
             this.dataStore[this.category] = obj[this.category];
 
             // this.details.details.designName = obj.item_name;
