@@ -1,5 +1,15 @@
 <div class="checkout">
-    <p [innerHTML]="data.collectionName"></p>
+    <!--<p [innerHTML]="data.collectionName"></p>-->
+         <div *ngIf="data.construction.displayModelNumber=='HDP20' || data.construction.displayModelNumber=='HDP13' || data.construction.displayModelNumber=='HDPL20'  || data.construction.displayModelNumber=='HDPL13'  || data.construction.displayModelNumber=='HDG'  || data.construction.displayModelNumber=='HDGL'  || data.construction.displayModelNumber=='2050' || data.construction.displayModelNumber=='2053'">                       
+                        <p>Classic™ Collection - Premium Series</p> 
+         </div>
+    
+         <div *ngIf="data.construction.displayModelNumber=='HDS' || data.construction.displayModelNumber=='HDSL' || data.construction.displayModelNumber=='190'">            
+                        <p>Classic™ Collection - Value Series</p> 
+         </div>
+          <div *ngIf="data.construction.displayModelNumber=='HDB' || data.construction.displayModelNumber=='HDBL' || data.construction.displayModelNumber=='HDB4'  || data.construction.displayModelNumber=='75'  || data.construction.displayModelNumber=='84A'  || data.construction.displayModelNumber=='190'  || data.construction.displayModelNumber=='75L'">            
+                        <p>Classic™ Collection - Value Plus Series</p> 
+         </div>
 
     <dl class="door-configuration-table">
         <dd class="door-configuration-table-header">
@@ -7,8 +17,8 @@
         </dd>
         <dd>
             <p [innerHTML]="data.construction.displayModelNumber"></p>
-            <span *ngIf="!data.isDIY">{{(data.construction.price + data.construction.laborcost) * data.construction.qty | currency:'USD':true:'1.2-2'}}</span>
-            <span *ngIf="data.isDIY">{{data.construction.price * data.construction.qty | currency:'USD':true:'1.2-2'}}</span>
+            <span *ngIf="!data.isDIY">{{(data.construction.price + data.construction.laborcost) | currency:'USD':true:'1.2-2'}}</span>
+            <span *ngIf="data.isDIY">{{data.construction.price  | currency:'USD':true:'1.2-2'}}</span>
         </dd>
     </dl>
     <dl class="door-configuration-table">
