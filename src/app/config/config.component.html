@@ -141,25 +141,11 @@
                         {{details.windcode}}
                     </span>
                 </li>
-
-                <li *ngIf="details.construction.displayModelNumber=='HDP20' || details.construction.displayModelNumber=='HDP13' || details.construction.displayModelNumber=='HDPL20' || details.construction.displayModelNumber=='HDPL13' || details.construction.displayModelNumber=='HDG' || details.construction.displayModelNumber=='HDGL' || details.construction.displayModelNumber=='2050' || details.construction.displayModelNumber=='2053' ">
-                    <span>
-                        <strong> Collection </strong>
-                        <span><p>Classic™ Collection - Premium Series</p></span>
-                    </span>
-                </li>
-
-                <li *ngIf="details.construction.displayModelNumber=='HDS' || details.construction.displayModelNumber=='HDSL' || details.construction.displayModelNumber=='190'">
-                    <span>
-                        <strong> Collection </strong>
-                        <span><p>Classic™ Collection - Value Series</p></span>
-                    </span>
-                </li>
-                 <li *ngIf="details.construction.displayModelNumber=='HDB' || details.construction.displayModelNumber=='HDBL' || details.construction.displayModelNumber=='HDB4' || details.construction.displayModelNumber=='75' || details.construction.displayModelNumber=='84A' || details.construction.displayModelNumber=='75L'">
-                    <span>
-                        <strong> Collection </strong>
-                        <span><p>Classic™ Collection - Value Plus Series</p></span>
-                    </span>
+                 <li >
+                     <span>
+                         <strong> Collection </strong>
+                         <span [innerHtml]="details.collectionName"></span>
+                     </span>
                 </li>
                 <li *ngIf="details.designName">
                     <span><strong> Design </strong>

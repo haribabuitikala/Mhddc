@@ -704,6 +704,20 @@ export class ConfigComponent implements OnInit, AfterViewInit, AfterViewChecked 
         if (this.utils.resFlowSession.resDoorObj.windows.placement && !!this.utils.resFlowSession.resDoorObj.windows.placement.item_description) {
             this.details.windowPlacement = this.utils.resFlowSession.resDoorObj.windows.placement.item_description;
         }
+
+     if(this.details.construction.displayModelNumber=='HDP20' || this.details.construction.displayModelNumber=='HDP13' || this.details.construction.displayModelNumber=='HDPL20'  || this.details.construction.displayModelNumber=='HDPL13'  || this.details.construction.displayModelNumber=='HDG'  || this.details.construction.displayModelNumber=='HDGL'  || this.details.construction.displayModelNumber=='2050' || this.details.construction.displayModelNumber=='2053'){
+       this.details.collectionName="Classic™ Collection - Premium Series";
+      }
+      
+      else if(this.details.construction.displayModelNumber=='HDS' || this.details.construction.displayModelNumber=='HDSL' || this.details.construction.displayModelNumber=='190'){
+       this.details.collectionName="Classic™ Collection - Value Series";
+      }
+       else if(this.details.construction.displayModelNumber=='HDB' || this.details.construction.displayModelNumber=='HDBL' ||this.details.construction.displayModelNumber=='HDB4'  || this.details.construction.displayModelNumber=='75'  || this.details.construction.displayModelNumber=='84A'  ||this.details.construction.displayModelNumber=='190'  ||this.details.construction.displayModelNumber=='75L'){
+        this.details.collectionName="Classic™ Collection - Value Plus Series";
+      }
+       else{
+      this.details.collectionName;
+      };
         // switch (bodyWdt) {
         //     case 414:
         //         detailshgt = "18vh";
