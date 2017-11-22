@@ -442,7 +442,25 @@ export class ResDoorConfigurationComponent implements OnInit {
         var resData = this.utils.resFlowSession.resDetails;
         var data = this.emailData;
         var resObj = this.utils.resFlowSession.resDoorObj;
+        var premiumseries = this.utils.resFlowSession.resDetails.construction.displayModelNumber;        
+        
         var product = resObj.product.product['item_name'];
+        if((!resData.isDIY)||(resData.isDIY)){
+        if(premiumseries=='HDP20' || premiumseries=='HDP13' || premiumseries=='HDPL20'  || premiumseries=='HDPL13'  || premiumseries=='HDG'  || premiumseries=='HDGL'  || premiumseries=='2050' || premiumseries=='2053'){
+       product="Classic&#153; Collection - Premium Series";
+      }
+      
+      else if(premiumseries=='HDS' || premiumseries=='HDSL' || premiumseries=='190'){
+       product="Classic&#153; Collection - Value Plus Series";
+      }
+       else if(premiumseries=='HDB' || premiumseries=='HDBL' ||premiumseries=='HDB4'  || premiumseries=='75'  || premiumseries=='84A'  ||premiumseries=='190'  ||premiumseries=='75L'){
+        product="Classic&#153; Collection - Value Series";
+      }
+       else{
+         product;
+      };
+    }
+        
         var size = this.utils.resFlow
         var collectionName = data.collectionName;
         var constructionMdlNo = data.construction.modelNumber;
@@ -674,10 +692,21 @@ table td {
                 imagename: 'res-' + timeStamp,
                 imageformat: 'jpeg'
             }
-
+             var premiumseries = this.utils.resFlowSession.resDetails.construction.displayModelNumber;
             var resObj = this.utils.resFlowSession.resDoorObj;
             var productName = this.decodeHtml(resObj.product.product['item_name'] + "(" + resObj.INSTALLTYPE + ")");
-
+             if(premiumseries=='HDP20' || premiumseries=='HDP13' || premiumseries=='HDPL20'  || premiumseries=='HDPL13'  || premiumseries=='HDG'  || premiumseries=='HDGL'  || premiumseries=='2050' || premiumseries=='2053'){
+                 productName="Classic&#153; Collection - Premium Series";
+                 }     
+                  else if(premiumseries=='HDS' || premiumseries=='HDSL' || premiumseries=='190'){
+                  productName="Classic&#153; Collection - Value Plus Series";
+                 }
+                  else if(premiumseries=='HDB' || premiumseries=='HDBL' ||premiumseries=='HDB4'  || premiumseries=='75'  || premiumseries=='84A'  ||premiumseries=='190'  ||premiumseries=='75L'){
+                   productName="Classic&#153; Collection - Value Series";
+                  }
+                   else{
+                     productName;
+                      };
             if (this.doorWithHomeUrl) {
                 imageUrl = this.doorWithHomeUrl;
                 var shareImage = `<img src="${imageUrl}"  />`;
