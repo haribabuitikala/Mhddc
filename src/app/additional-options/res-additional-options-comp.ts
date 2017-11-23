@@ -542,7 +542,35 @@ export class ResAdditionalOptionsComponent implements OnInit {
         }
         if (obj.item_id === 1) {
             if (event) {
-             var colorName = this.utils.resFlowSession.resDetails.color.base.name
+                var colorName = this.utils.resFlowSession.resDetails.color.base.name
+              var overlaycolor = this.utils.resFlowSession.resDetails.color.overlay.name
+               if(this.utils.resFlowSession.resDoorObj.product.product['item_id']==11){
+                 if(overlaycolor == "Standard White") 
+                  overlaycolor = "white"; 
+              else if(overlaycolor == "Chocolate (Painted)") 
+                  overlaycolor = "chocolate"; 
+              else if(overlaycolor == "Glacier White (High Contrast)") 
+                  overlaycolor = "Glacier White"; 
+              else if(overlaycolor.indexOf('Medium Finish') != -1) 
+                  overlaycolor = "Medium Finish"; 
+              else if(overlaycolor.indexOf('Cherry Finish') != -1) 
+                  overlaycolor = "Cherry Finish"; 
+              else if(overlaycolor.indexOf('Dark Finish') != -1) 
+                  overlaycolor = "Dark Finish"; 
+              else if(overlaycolor.indexOf('Walnut Finish') != -1) 
+                  overlaycolor = "Walnut Finish"; 
+              else if(overlaycolor == "Grey") 
+                  overlaycolor = "Gray"; 
+		 for(var i=0; i<this.vinyls.length; i++)
+                {                   
+                    if(this.vinyls[i].item_name.toLowerCase() == overlaycolor.toLowerCase())
+                    {
+                        this.selectedVinyl = this.vinyls[i];
+                    }
+                }
+               } 
+             
+    else{
             if(colorName == "Standard White") 
                   colorName = "white"; 
               else if(colorName == "Chocolate (Painted)") 
@@ -568,6 +596,8 @@ export class ResAdditionalOptionsComponent implements OnInit {
                 }
                 // this.selectedVinyl = this.vinyls[this.vinyls.length - 1];
             }
+            }
+            
             k.name = this.selectedVinyl.item_name;
             k.price = this.selectedVinyl.item_price;
             k.selectedMiles = this.selectedVinyl.item_id;
