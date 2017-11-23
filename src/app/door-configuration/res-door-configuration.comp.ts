@@ -789,6 +789,21 @@ table td {
     socialshare() {
         console.log("calling social share method");
         var imageUrl;
+        var premiumseries = this.utils.resFlowSession.resDetails.construction.displayModelNumber;
+        var product = this.utils.resFlowSession.resDetails.collectionName;
+        if (premiumseries == 'HDP20' || premiumseries == 'HDP13' || premiumseries == 'HDPL20' || premiumseries == 'HDPL13' || premiumseries == 'HDG' || premiumseries == 'HDGL' || premiumseries == '2050' || premiumseries == '2053') {
+            product = "Classic&#153; Collection - Premium Series";
+        }
+
+        else if (premiumseries == 'HDS' || premiumseries == 'HDSL' || premiumseries == '190') {
+            product = "Classic&#153; Collection - Value Plus Series";
+        }
+        else if (premiumseries == 'HDB' || premiumseries == 'HDBL' || premiumseries == 'HDB4' || premiumseries == '75' || premiumseries == '84A' || premiumseries == '190' || premiumseries == '75L') {
+            product = "Classic&#153; Collection - Value Series";
+        }
+        else {
+            product;
+        };
         var d = new Date();
         var timeStamp = d.getTime();
         this.shareImageName = 'SocialShare-' + timeStamp;
@@ -798,16 +813,16 @@ table td {
                 imagename: 'SocialShare-' + timeStamp,
                 imageformat: 'jpeg',
                 title: 'Check out my Clopay Garage Door design!',
-                description: "Door shown is the Clopay " + this.utils.resFlowSession.resDetails.collectionName.replace(/[^a-zA-Z ]/g, "") + ", Model " + this.utils.resFlowSession.resDoorObj.construction.construction['ClopayModelNumber'] + ". Design your door today!"
+                description: "Door shown is the Clopay " + product.replace(/[^a-zA-Z ]/g, "") + ", Model " + this.utils.resFlowSession.resDoorObj.construction.construction['ClopayModelNumber'] + ". Design your door today!"
             }
             this.dataService.getImageUrl(params)
             .subscribe(
             res => {
                 this.socialImageUrl = res;
                 this.title = "";
-                this.fbDescription = "Door shown is the Clopay " + this.utils.resFlowSession.resDetails.collectionName.replace(/[^a-zA-Z ]/g, "") + ", Model " + this.utils.resFlowSession.resDoorObj.construction.construction['ClopayModelNumber'] + ". Design your door today!";
-                this.twitterDescription = "Check out My @ClopayGarageDoor design! Door shown is the Clopay " + this.utils.resFlowSession.resDetails.collectionName.replace(/[^a-zA-Z ]/g, "") + ", Model " + this.utils.resFlowSession.resDoorObj.construction.construction['ClopayModelNumber'] + ". Design yours!";
-                this.description = "My Clopay Garage Door design! Door shown is a Clopay " + this.utils.resFlowSession.resDetails.collectionName.replace(/[^a-zA-Z ]/g, "") + ", Model " + this.utils.resFlowSession.resDoorObj.construction.construction['ClopayModelNumber'] + ". Design your door today!";
+                this.fbDescription = "Door shown is the Clopay " + product.replace(/[^a-zA-Z ]/g, "") + ", Model " + this.utils.resFlowSession.resDoorObj.construction.construction['ClopayModelNumber'] + ". Design your door today!";
+                this.twitterDescription = "Check out My @ClopayGarageDoor design! Door shown is the Clopay " + product.replace(/[^a-zA-Z ]/g, "") + ", Model " + this.utils.resFlowSession.resDoorObj.construction.construction['ClopayModelNumber'] + ". Design yours!";
+                this.description = "My Clopay Garage Door design! Door shown is a Clopay " + product.replace(/[^a-zA-Z ]/g, "") + ", Model " + this.utils.resFlowSession.resDoorObj.construction.construction['ClopayModelNumber'] + ". Design your door today!";
             },
             err => {
                 this.dataService.handleError();
@@ -817,14 +832,28 @@ table td {
     }
 
     getshareFBLink() {
+            var premiumseries = this.utils.resFlowSession.resDetails.construction.displayModelNumber;
+             var product = this.utils.resFlowSession.resDetails.collectionName;
+        if (premiumseries == 'HDP20' || premiumseries == 'HDP13' || premiumseries == 'HDPL20' || premiumseries == 'HDPL13' || premiumseries == 'HDG' || premiumseries == 'HDGL' || premiumseries == '2050' || premiumseries == '2053') {
+            product = "Classic&#153; Collection - Premium Series";
+        }
 
+        else if (premiumseries == 'HDS' || premiumseries == 'HDSL' || premiumseries == '190') {
+            product = "Classic&#153; Collection - Value Plus Series";
+        }
+        else if (premiumseries == 'HDB' || premiumseries == 'HDBL' || premiumseries == 'HDB4' || premiumseries == '75' || premiumseries == '84A' || premiumseries == '190' || premiumseries == '75L') {
+            product = "Classic&#153; Collection - Value Series";
+        }
+        else {
+            product;
+        };
         let params = {
             imagename: this.shareImageName,
             imageurl: this.socialImageUrl,
             imageformat: 'jpeg',
             title: 'Check out my Clopay Garage Door design!',
             base64String: '',
-            description: "Door shown is the Clopay " + this.utils.resFlowSession.resDetails.collectionName.replace(/[^a-zA-Z ]/g, "") + ", Model " + this.utils.resFlowSession.resDoorObj.construction.construction['ClopayModelNumber'] + ". Design your door today!"
+            description: "Door shown is the Clopay " + product.replace(/[^a-zA-Z ]/g, "") + ", Model " + this.utils.resFlowSession.resDoorObj.construction.construction['ClopayModelNumber'] + ". Design your door today!"
 
         }
         this.dataService.getFBShareLink(params)
