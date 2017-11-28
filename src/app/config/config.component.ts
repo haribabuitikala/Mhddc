@@ -2,6 +2,7 @@ import { Component, OnInit, AfterViewInit, ChangeDetectorRef, AfterViewChecked }
 import { AppComponent } from "../app.component";
 import { Location } from '@angular/common';
 import { AppUtilities } from "../shared/appUtilities";
+import { CollectionService } from "../shared/data.service";
 import { NavComponent } from "../nav/nav.component";
 declare var $: any;
 declare var _: any;
@@ -17,14 +18,16 @@ export class ConfigComponent implements OnInit, AfterViewInit, AfterViewChecked 
         , private location: Location
         , public navComponent: NavComponent
         , private cdref: ChangeDetectorRef
-        , private utils: AppUtilities) {
+        , private utils: AppUtilities
+        , private collection: CollectionService
+       ) {
 
         appComponent.subscribeToPrice(() => {
             this.calculatePrice();
         });
 
     }
-
+    data;
     homeImage;
     pageTitle;
     loaded = false;
@@ -363,6 +366,20 @@ export class ConfigComponent implements OnInit, AfterViewInit, AfterViewChecked 
     }
 
     ngOnInit() {
+        this.collection.getZipCodeExceptions().subscribe(
+                        res => {
+                this.data = res;
+                console.log(this.data);
+                this.utils.removeLoader();
+            },
+            error => {
+                this.utils.removeLoader();
+            }
+        )
+
+
+
+        
         // set the curr screen
         this.basep = 0;
         if (this.utils.resFlowSession.resDoorObj.design.apiData) {
