@@ -42,6 +42,16 @@ export class CollectionService {
                 this.utils.removeLoader();
             })
     }
+   
+   getZipCodeExceptions(){
+        this.utils.setLoader();
+        return this.http.get(this.url + 'ZipcodeExceptions/')
+            .map(res => res.json())
+            .finally(() => {
+                this.utils.removeLoader();
+            })
+
+   }
 
     //    this is for gdo opener
     getGdoOpener(obj) {
